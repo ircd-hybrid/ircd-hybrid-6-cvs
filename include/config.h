@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.33 1999/03/28 06:29:42 lusky Exp $
+ * $Id: config.h,v 1.34 1999/03/29 04:54:01 lusky Exp $
  */
 
 #ifndef	__config_include__
@@ -750,7 +750,7 @@
  * DEFAULT_SERVER_SPLIT_RECOVERY_TIME - determines how long to delay split
  * status after resyncing
  */
-#define DEFAULT_SERVER_SPLIT_RECOVERY_TIME 5
+#define DEFAULT_SERVER_SPLIT_RECOVERY_TIME 1
 
 /* LIMIT_UH
  * If this is defined, Y line limit is made against the actual
