@@ -20,7 +20,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)res.c	2.34 03 Nov 1993 (C) 1992 Darren Reed";
-static  char *rcs_version = "$Id: res.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static  char *rcs_version = "$Id: res.c,v 1.2 1998/09/22 22:27:13 db Exp $";
 #endif
 
 #undef	DEBUG	/* because there is a lot of debug code in here :-) */
@@ -236,7 +236,7 @@ time_t	timeout_query_list(time_t now)
 	      {
 	      case ASYNC_CLIENT :
 #ifdef SHOW_HEADERS
-		send(cptr->fd, REPORT_FAIL_DNS, R_fail_dns, 0);
+		sendheader(cptr, REPORT_FAIL_DNS, R_fail_dns);
 #endif
 		ClearDNS(cptr);
 		if (!DoingAuth(cptr))

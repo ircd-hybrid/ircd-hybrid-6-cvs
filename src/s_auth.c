@@ -19,7 +19,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)s_auth.c	1.17 17 Oct 1993 (C) 1992 Darren Reed";
-static char *rcs_version = "$Id: s_auth.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static char *rcs_version = "$Id: s_auth.c,v 1.2 1998/09/22 22:27:14 db Exp $";
 #endif
 
 #include "struct.h"
@@ -80,7 +80,7 @@ void	start_auth(aClient *cptr)
       return;
     }
 #ifdef SHOW_HEADERS
-  send(cptr->fd, REPORT_DO_ID, R_do_id, 0);
+  sendheader(cptr, REPORT_DO_ID, R_do_id);
 #endif
   set_non_blocking(cptr->authfd, cptr);
 
@@ -126,7 +126,7 @@ void	start_auth(aClient *cptr)
       if (!DoingDNS(cptr))
 	SetAccess(cptr);
 #ifdef SHOW_HEADERS
-      send(cptr->fd, REPORT_FAIL_ID, R_fail_id, 0);
+      sendheader(cptr, REPORT_FAIL_ID, R_fail_id);
 #endif
       return;
     }
@@ -205,7 +205,7 @@ static void authsenderr(aClient *cptr)
   cptr->authfd = -1;
   ClearStartAuth(cptr);
 #ifdef SHOW_HEADERS
-  send(cptr->fd, REPORT_FAIL_ID, R_fail_id, 0);
+  sendheader(cptr, REPORT_FAIL_ID, R_fail_id);
 #endif
 
   if (!DoingDNS(cptr))
@@ -286,7 +286,7 @@ void	read_authports(aClient *cptr)
     }
 #ifdef SHOW_HEADERS
   else
-    send(cptr->fd, REPORT_FIN_ID, R_fin_id, 0);
+    sendheader(cptr, REPORT_FIN_ID, R_fin_id);
 #endif
 
   ircstp->is_asuc++;

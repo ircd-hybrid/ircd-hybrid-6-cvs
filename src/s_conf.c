@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.4 1998/09/21 04:19:35 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.5 1998/09/22 22:27:15 db Exp $";
 #endif
 
 #include "struct.h"
@@ -2911,9 +2911,9 @@ static void clear_dlines()
  * inputs	- pointer to aConfItem 
  *		with following setup
  *
- *		- host ip banned as string
- *		- reason for ban
- *	
+ *		- host ip as string
+ *		- reason
+ *
  * output	- none
  * side effects	- none
 */

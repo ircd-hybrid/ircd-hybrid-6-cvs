@@ -25,7 +25,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.2 1998/09/22 22:27:17 db Exp $";
 
 #endif
 
@@ -3750,7 +3750,7 @@ int	m_umode(aClient *cptr,
 
   if ((sptr->flags & FLAGS_NCHANGE) && !IsSetOperN(sptr))
     {
-      sendto_one(sptr,":%s NOTICE %s :*** You need oper and T flag for +n",
+      sendto_one(sptr,":%s NOTICE %s :*** You need oper and N flag for +n",
 		 me.name,parv[0]);
       sptr->flags &= ~FLAGS_NCHANGE; /* only tcm's really need this */
     }

@@ -22,7 +22,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.5 1998/09/22 01:52:25 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.6 1998/09/22 22:27:11 db Exp $";
 #endif
 
 #include "struct.h"
@@ -2105,7 +2105,9 @@ int	m_knock(aClient *cptr,
    * -Dianora
    */
 
-  if( (sptr->last_knock + KNOCK_DELAY) > NOW)
+  /* opers are not flow controlled here */
+
+  if( !IsAnOper(sptr) && (sptr->last_knock + KNOCK_DELAY) > NOW)
     {
       sendto_one(sptr,":%s NOTICE %s :*** Notice -- Wait %d seconds before another knock",
 		 me.name,
@@ -2132,6 +2134,14 @@ int	m_knock(aClient *cptr,
     {
       sendto_one(sptr, err_str(ERR_CANNOTSENDTOCHAN), me.name, parv[0],
 		 name);
+      return 0;
+    }
+
+  if (IsMember(sptr, chptr))
+    {
+      sendto_one(sptr,":%s NOTICE %s :*** Notice -- You are on channel already!",
+		 me.name,
+		 sptr->name);
       return 0;
     }
 
@@ -2192,8 +2202,11 @@ int	m_topic(aClient *cptr,
 
       if (!chptr)
 	{
-	  sendto_one(sptr, rpl_str(RPL_NOTOPIC),
-		     me.name, parv[0], name);
+	  if (!IsChannelName(name))
+            sendto_one(sptr, rpl_str(ERR_NOSUCHCHANNEL), me.name, parv[0],
+               name);
+          else
+            sendto_one(sptr, rpl_str(RPL_NOTOPIC), me.name, parv[0], name);
 	  return 0;
 	}
 
