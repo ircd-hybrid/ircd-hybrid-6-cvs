@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.225 2000/10/05 00:13:06 lusky Exp $
+ *  $Id: s_user.c,v 1.226 2000/10/21 06:36:15 lusky Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -751,12 +751,14 @@ static int register_user(aClient *cptr, aClient *sptr,
               
               if(aconf->port)
                 {
-                  ServerStats->is_ref++;
-                  sendto_realops_flags(FLAGS_REJ,
-                                     "X-line Rejecting [%s] [%s], user %s",
-                                     sptr->info,
-                                     reason,
-                                     get_client_name(cptr, FALSE));
+                  if (aconf->port == 1)
+                    {
+                      sendto_realops_flags(FLAGS_REJ,
+                                           "X-line Rejecting [%s] [%s], user %s",
+                                           sptr->info,
+                                           reason,
+                                           get_client_name(cptr, FALSE));
+                    }
                   ServerStats->is_ref++;      
                   return exit_client(cptr, sptr, &me, "Bad user info");
                 }

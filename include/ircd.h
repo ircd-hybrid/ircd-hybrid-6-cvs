@@ -19,7 +19,7 @@
  *
  * "ircd.h". - Headers file.
  *
- * $Id: ircd.h,v 1.16 2000/04/11 02:16:33 lusky Exp $
+ * $Id: ircd.h,v 1.17 2000/10/21 06:36:08 lusky Exp $
  *
  */
 #ifndef INCLUDED_ircd_h
@@ -113,6 +113,7 @@ extern int            debuglevel;
 extern int            debugtty;
 extern char*          creation;
 extern char*          generation;
+extern char*          platform;
 extern char*          infotext[];
 extern char*          serno;
 extern char*          version;

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h.dist,v 1.75 2000/09/14 05:21:57 lusky Exp $
+ * $Id: config.h.dist,v 1.76 2000/10/21 06:36:08 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -283,7 +283,7 @@
  */
 #define BOTCHECK
 
-/* X_LINES_OPER_ONLY - Allow only local opers to see these stats
+/* x_LINES_OPER_ONLY - Allow only local opers to see these stats
  *
  *  Any one with an F line can almost always get on the server, as
  *  some file descriptors are reserved for people with this F line
@@ -292,6 +292,14 @@
 #define B_LINES_OPER_ONLY
 #define E_LINES_OPER_ONLY
 #define F_LINES_OPER_ONLY
+#undef  I_LINES_OPER_ONLY
+#undef  K_LINES_OPER_ONLY
+#undef  P_LINES_OPER_ONLY
+
+/* SPOOF_NOTICE - See a notice when a user connects with a
+ * spoofed I: line
+ */
+#define SPOOF_NOTICE
 
 /* STATS_NOTICE - See a notice when a user does a /stats
  *

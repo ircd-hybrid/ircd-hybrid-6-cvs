@@ -34,7 +34,7 @@
  *                mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.181 2000/10/05 00:13:04 lusky Exp $
+ * $Id: channel.c,v 1.182 2000/10/21 06:36:12 lusky Exp $
  */
 #include "channel.h"
 #include "client.h"
@@ -3554,8 +3554,6 @@ int     m_kick(struct Client *cptr,
 
   if (!(who = find_chasing(sptr, user, &chasing)))
     {
-      sendto_one(sptr, form_str(ERR_NOSUCHNICK),
-                 me.name, parv[0], user, name);
       return(0);
     }
 
