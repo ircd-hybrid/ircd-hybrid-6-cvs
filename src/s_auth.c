@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.11 1999/07/07 02:19:00 db Exp $
+ *   $Id: s_auth.c,v 1.12 1999/07/07 02:39:32 db Exp $
  */
 #include "s_auth.h"
 #include "struct.h"
@@ -391,11 +391,13 @@ void read_auth_reply(struct AuthRequest* auth)
       if( (s = GetValidIdent(buf)) )
 	{
 	  t = auth->client->username;
-	  count = USERLEN;
-	  for (; *s && count; s++, count--)
+	  for (count = USERLEN; *s && count; s++)
 	    {
 	      if (!isspace(*s) && *s != ':' && *s != '@')
-		*t++ = *s;
+		{
+		  *t++ = *s;
+		  count--;
+		}
 	    }
 	  *t = '\0';
 	}
