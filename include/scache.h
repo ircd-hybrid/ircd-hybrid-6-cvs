@@ -1,5 +1,5 @@
 /************************************************************************
- *   IRC - Internet Relay Chat, include/ircd.h
+ *   IRC - Internet Relay Chat, include/scache.h
  *   Copyright (C) 1992 Darren Reed
  *
  *   This program is free software; you can redistribute it and/or modify
@@ -17,34 +17,17 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * "ircd.h". - Headers file.
+ * "scache.h". - Headers file.
  *
- * $Id: ircd.h,v 1.2 1999/07/22 02:44:21 db Exp $
+ * $Id: scache.h,v 1.1 1999/07/22 02:44:22 db Exp $
  *
  */
-#ifndef INCLUDED_ircd_h
-#define INCLUDED_ircd_h
-#ifndef INCLUDED_sys_types_h
-#include <sys/types.h>
-#define INCLUDED_sys_types_h
-#endif
+#ifndef INCLUDED_scache_h
+#define INCLUDED_scache_h
 
-struct Client;
-
-extern void     report_error_on_tty(const char* message);
-extern  int     debuglevel;
-extern  int     debugtty;
-extern  char*   debugmode;
-extern  time_t  check_fdlists (time_t);
-extern struct Counter Count;
-extern time_t NOW;
-extern time_t nextconnect;
-extern time_t nextping;
-extern time_t timeofday;
-extern struct Client* GlobalClientList;
-extern struct Client  me;
-extern struct Client* local[];
-extern int    bootopt;
-extern int    cold_start;
+extern void        clear_scache_hash_table(void);
+extern const char* find_or_add(const char* name);
+extern void        count_scache(int *,unsigned long *);
+extern void        list_scache(struct Client *, struct Client *,int, char **);
 
 #endif

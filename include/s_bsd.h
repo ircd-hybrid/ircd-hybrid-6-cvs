@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_bsd.h,v 1.7 1999/07/21 05:45:05 tomh Exp $
+ *   $Id: s_bsd.h,v 1.8 1999/07/22 02:44:21 db Exp $
  *
  */
 #ifndef INCLUDED_s_bsd_h
@@ -52,7 +52,7 @@ extern int   read_message (time_t, struct FDList*);
 extern void  report_error(const char* message, const char* who, int error);
 extern int   set_non_blocking(int fd);
 extern int   set_sock_buffers(int fd, int size);
-
+extern int   send_queued(struct Client*);
 
 #endif /* INCLUDED_s_bsd_h */
 

@@ -20,8 +20,9 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.56 1999/07/22 02:06:23 db Exp $
+ *  $Id: s_misc.c,v 1.57 1999/07/22 02:44:25 db Exp $
  */
+#include "s_misc.h"
 #include "s_conf.h"
 #include "struct.h"
 #include "res.h"
@@ -45,8 +46,6 @@
 extern aClient *local_cptr_list;
 extern aClient *oper_cptr_list;
 extern aClient *serv_cptr_list;
-
-char *show_capabilities(aClient *);
 
 extern char *oper_privs(aClient *, int);        /* defined in s_conf.c */
 
@@ -344,9 +343,9 @@ void serv_info(aClient *cptr,char *name)
  * side effects - build up string representing capabilities of server listed
  */
 
-char *show_capabilities(aClient *acptr)
+char *show_capabilities(struct Client *acptr)
 {
-  static char        msgbuf[BUFSIZE];
+  static char     msgbuf[BUFSIZE];
   register        struct Capability *cap;
 
   strcpy(msgbuf,"TS ");

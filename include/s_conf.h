@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.30 1999/07/21 23:12:10 db Exp $
+ * $Id: s_conf.h,v 1.31 1999/07/22 02:44:22 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.31  1999/07/22 02:44:22  db
+ * - built m_gline.h, scache.h , moved more stuff from h.h
+ *
  * Revision 1.30  1999/07/21 23:12:10  db
  * - more h.h pruning
  *
@@ -311,6 +314,8 @@ extern  void    flush_temp_klines(void);
 extern  void    report_temp_klines(struct Client *);
 extern  int     is_address(char *,unsigned long *,unsigned long *); 
 extern  int     rehash (struct Client *, struct Client *, int);
+
+extern aConfItem *temporary_klines;
 
 typedef struct
 {

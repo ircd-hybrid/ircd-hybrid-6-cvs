@@ -1,5 +1,5 @@
 /************************************************************************
- *   IRC - Internet Relay Chat, include/h.h
+ *   IRC - Internet Relay Chat, include/s_user.h
  *   Copyright (C) 1992 Darren Reed
  *
  *   This program is free software; you can redistribute it and/or modify
@@ -19,10 +19,7 @@
  *
  * "s_user.h". - Headers file.
  *
- * Most of the externs and prototypes thrown in here to 'cleanup' things.
- * -avalon
- *
- * $Id: s_user.h,v 1.4 1999/07/21 22:36:10 db Exp $
+ * $Id: s_user.h,v 1.5 1999/07/22 02:44:22 db Exp $
  *
  */
 #ifndef INCLUDED_s_user_h
