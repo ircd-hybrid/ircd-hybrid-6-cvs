@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.51 2001/12/04 04:47:45 androsyn Exp $
+ *   $Id: s_auth.c,v 1.52 2001/12/04 07:44:37 androsyn Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -193,7 +193,6 @@ static void auth_dns_callback(void* vptr, adns_answer* reply)
      sendheader(auth->client, REPORT_FAIL_DNS);
   }
   MyFree(reply);
-  MyFree(auth->client->dns_query);
     
   auth->client->dns_query = NULL;
   auth->client->host[HOSTLEN] = '\0';

@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.223 2001/12/04 06:40:33 db Exp $
+ *  $Id: s_conf.c,v 1.224 2001/12/04 07:44:37 androsyn Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -156,6 +156,7 @@ static void conf_dns_callback(void* vptr, adns_answer *reply)
   aconf->dns_pending = 0;
   if (reply->status == adns_s_ok)
     aconf->ipnum.s_addr = reply->rrs.addr->addr.inet.sin_addr.s_addr;
+  MyFree(reply);
 }
 
 /*

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.143 2001/12/04 06:40:33 db Exp $
+ *  $Id: s_bsd.c,v 1.144 2001/12/04 07:44:37 androsyn Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -185,6 +185,7 @@ static void connect_dns_callback(void* vptr, adns_answer* reply)
   aconf->dns_pending = 0;
   if (reply && reply->status == adns_s_ok) {
     aconf->ipnum.s_addr = reply->rrs.addr->addr.inet.sin_addr.s_addr;
+    MyFree(reply);
     connect_server(aconf, 0, NULL);
   }
   else
