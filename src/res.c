@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.36 1999/07/19 00:57:26 tomh Exp $
+ * $Id: res.c,v 1.37 1999/07/19 01:00:33 tomh Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
@@ -254,8 +254,8 @@ static  struct  resinfo {
  * From bind 8.3, these aren't in earlier versions of bind
  *
  */
-extern u_int16_t  _getshort(const u_char *);
-extern u_int32_t  _getlong(const u_char *);
+extern u_short  _getshort(const u_char *);
+extern u_long   _getlong(const u_char *);
 /*
  * int
  * res_isourserver(ina)
