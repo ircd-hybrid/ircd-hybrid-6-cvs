@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_trace.c,v 1.8 2001/07/16 10:41:23 leeh Exp $
+ *   $Id: m_trace.c,v 1.9 2001/07/16 11:16:06 leeh Exp $
  */
 #include "m_commands.h"
 #include "class.h"
@@ -310,13 +310,17 @@ int m_trace(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       switch(acptr->status)
         {
         case STAT_CONNECTING:
+#ifdef HIDE_SERVERS_IPS	
 	  name = get_client_name(acptr, MASK_IP);
+#endif
           sendto_one(sptr, form_str(RPL_TRACECONNECTING), me.name,
                      parv[0], c_class, name);
           cnt++;
           break;
         case STAT_HANDSHAKE:
+#ifdef HIDE_SERVERS_IPS	
 	  name = get_client_name(acptr, MASK_IP);
+#endif	  
           sendto_one(sptr, form_str(RPL_TRACEHANDSHAKE), me.name,
                      parv[0], c_class, name);
           cnt++;

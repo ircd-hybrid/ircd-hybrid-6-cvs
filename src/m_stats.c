@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_stats.c,v 1.15 2001/06/16 11:22:10 leeh Exp $
+ *  $Id: m_stats.c,v 1.16 2001/07/16 11:16:05 leeh Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "class.h"       /* report_classes */
@@ -215,7 +215,8 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 
           /* Don't trust opers not on this server */
 #ifdef HIDE_SERVERS_IPS
-          if(MyClient(sptr) && IsAnOper(sptr) && !IsServer(acptr))
+          if(MyClient(sptr) && IsAnOper(sptr) && !IsServer(acptr) &&
+	    !IsConnecting(acptr) && !IsHandshake(acptr))
 #else	  
           if(MyClient(sptr) && IsAnOper(sptr))
 #endif	 
@@ -234,7 +235,8 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
               }
             else
               {
-                if(IsIPHidden(acptr) || IsServer(acptr))
+                if(IsIPHidden(acptr) || IsServer(acptr) ||
+		   IsConnecting(acptr) || IsHandshake(acptr))
                   sendto_one(sptr, Lformat, me.name,
                      RPL_STATSLINKINFO, parv[0],
                      get_client_name(acptr, MASK_IP),
