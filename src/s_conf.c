@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.236 2002/02/17 05:58:13 lusky Exp $
+ *  $Id: s_conf.c,v 1.237 2002/04/28 08:13:02 androsyn Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -155,7 +155,7 @@ static void conf_dns_callback(void* vptr, adns_answer *reply)
 {
   struct ConfItem* aconf = (struct ConfItem*) vptr;
   aconf->dns_pending = 0;
-  if (reply->status == adns_s_ok)
+  if (reply && (reply->status == adns_s_ok))
     aconf->ipnum.s_addr = reply->rrs.addr->addr.inet.sin_addr.s_addr;
   MyFree(reply);
 }
