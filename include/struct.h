@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.11 1998/10/27 23:40:47 db Exp $
+ * $Id: struct.h,v 1.12 1998/11/17 16:01:52 db Exp $
  */
 
 #ifndef	__struct_include__
@@ -429,6 +429,7 @@ struct	ConfItem
 #define	CONF_BLINE		0x10000
 #define	CONF_DLINE		0x20000
 #define CONF_XLINE		0x40000
+#define CONF_ULINE		0x80000
 
 #define	CONF_OPS		(CONF_OPERATOR | CONF_LOCOP)
 #define	CONF_SERVER_MASK	(CONF_CONNECT_SERVER | CONF_NOCONNECT_SERVER)

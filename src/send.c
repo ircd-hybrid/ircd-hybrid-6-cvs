@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)send.c	2.32 2/28/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: send.c,v 1.12 1998/11/16 16:37:13 db Exp $";
+static char *rcs_version = "$Id: send.c,v 1.13 1998/11/17 16:01:59 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1786,22 +1786,25 @@ va_dcl
 #endif
         return;
 }
- 
+
+#ifdef SLAVE_SERVERS 
+extern aConfItem *u_conf;
+
 int sendto_slaves(char *message,
 		  aClient *cptr,
 		  aClient *sptr,
 		  int parc,
-		  char *parv)
+		  char *parv[])
   {
     aClient *acptr;
     aConfItem *aconf;
 
-    for(aconf = u_conf; aconf; aconf= conf->next)
+    for(aconf = u_conf; aconf; aconf= aconf->next)
       {
 	acptr = find_client(aconf->name, NULL);
 	if(acptr && IsServer(acptr))
 	  {
-	    if(argc > 2)
+	    if(parc > 2)
 	      sendto_one(acptr,":%s %s %s %s %s %s",me.name,
 			 aconf->name,
 			 message,
@@ -1818,3 +1821,4 @@ int sendto_slaves(char *message,
 	  }
       }
   }
+#endif

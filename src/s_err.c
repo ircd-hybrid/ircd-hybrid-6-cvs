@@ -27,7 +27,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)s_err.c	1.11 5/17/93 (C) 1992 Darren Reed";
-static char *rcs_version = "$Id: s_err.c,v 1.5 1998/10/11 18:42:59 db Exp $";
+static char *rcs_version = "$Id: s_err.c,v 1.6 1998/11/17 16:01:55 db Exp $";
 #endif
 
 static	char	numbuff[512];
@@ -282,7 +282,7 @@ static	char *	replies[] = {
 /* 243 RPL_STATSOLINE, */	":%s 243 %s %c %s * %s %s %d",
 /* 244 RPL_STATSHLINE, */	":%s 244 %s %c %s * %s %d %d", 
 /* 245 RPL_STATSSLINE, */	":%s 245 %s %c %s * %s %d %d", 
-/* 246 */	(char *)NULL,
+/* 246 RPL_STATSULINE, */	":%s 246 %s %s %s",
 /* 247 */	(char *)NULL,
 /* 248 */	(char *)NULL,
 /* 249 */	(char *)NULL,
