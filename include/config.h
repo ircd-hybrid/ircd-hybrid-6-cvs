@@ -16,11 +16,10 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.54 1999/07/01 20:35:10 db Exp $
+ * $Id: config.h,v 1.55 1999/07/03 08:13:07 tomh Exp $
  */
-
-#ifndef	__config_include__
-#define	__config_include__
+#ifndef INCLUDED_config_h
+#define INCLUDED_config_h
 
 #include "setup.h"
 
@@ -1063,4 +1062,4 @@ error CLIENT_FLOOD undefined.
 
 #define CONFIG_H_LEVEL_6
 
-#endif /* __config_include__ */
+#endif /* INCLUDED_config_h */

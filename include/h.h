@@ -23,7 +23,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.25 1999/07/03 05:06:38 tomh Exp $
+ * $Id: h.h,v 1.26 1999/07/03 08:13:08 tomh Exp $
  *
  */
 
@@ -74,26 +74,6 @@ extern	aClient	*find_person (char *, aClient *);
 extern	aClient	*find_server (char *, aClient *);
 extern	aClient	*find_service (char *, aClient *);
 extern	aClient	*find_userhost (char *, char *, aClient *, int *);
-
-extern struct hostent* conf_dns_lookup(aConfItem* aconf);
-extern	int	  attach_conf (aClient *, aConfItem *);
-extern	aConfItem *attach_confs (aClient*, char *, int);
-extern	aConfItem *attach_confs_host (aClient*, char *, int);
-extern	int	  attach_Iline (aClient *, struct hostent *,char *,
-				char *,char **);
-extern	aConfItem *conf;
-extern  aConfItem *find_me (void);
-extern  aConfItem *find_admin (void);
-extern	aConfItem *count_cnlines (Link *);
-extern	void	  det_confs_butmask (aClient *, int);
-extern	int	  detach_conf (aClient *, aConfItem *);
-extern	aConfItem *det_confs_butone (aClient *, aConfItem *);
-extern	aConfItem *find_conf (Link *, char*, int);
-extern	aConfItem *find_conf_exact (char *, char *, char *, int);
-extern	aConfItem *find_conf_host (Link *, char *, int);
-extern	aConfItem *find_conf_ip (Link *, char *, char *, int);
-extern	aConfItem *find_conf_name (char *, int);
-extern	aConfItem *find_kill (aClient *);
 
 #ifdef  GLINES
 extern  aConfItem *find_gkill (aClient *);
