@@ -1,3 +1,32 @@
+ievil       2003/06/14 19:23:44 EDT	(20030614_2)
+
+  Modified files:
+    include              channel.h client.h config.h config.h.dist 
+                         m_commands.h m_info.h msg.h s_conf.h 
+    src                  Makefile.in channel.c m_mode.c m_who.c 
+                         m_whois.c s_conf.c s_user.c 
+  Log:
+  Must god help us all. For here is OperSpy....
+  
+  Revision  Changes    Path
+  1.38      +7 -2      ircd-hybrid-6/include/channel.h
+  1.68      +16 -5     ircd-hybrid-6/include/client.h
+  1.162     +34 -0     ircd-hybrid-6/include/config.h
+  1.138     +46 -0     ircd-hybrid-6/include/config.h.dist
+  1.9       +2 -0      ircd-hybrid-6/include/m_commands.h
+  1.29      +12 -0     ircd-hybrid-6/include/m_info.h
+  1.24      +2 -0      ircd-hybrid-6/include/msg.h
+  1.67      +2 -0      ircd-hybrid-6/include/s_conf.h
+  1.73      +3 -0      ircd-hybrid-6/src/Makefile.in
+  1.241     +26 -5     ircd-hybrid-6/src/channel.c
+  1.2       +21 -2     ircd-hybrid-6/src/m_mode.c
+  1.6       +32 -3     ircd-hybrid-6/src/m_who.c
+  1.12      +39 -2     ircd-hybrid-6/src/m_whois.c
+  1.245     +41 -1     ircd-hybrid-6/src/s_conf.c
+  1.257     +9 -1      ircd-hybrid-6/src/s_user.c
+
+
+
 ievil       2003/06/14 15:48:20 EDT	(20030614_1)
 
   Modified files:
