@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.33 1999/07/03 08:07:08 tomh Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.34 1999/07/03 15:39:31 db Exp $";
 #endif
 
 #include "s_conf.h"
@@ -90,7 +90,7 @@ char	*date(time_t clock)
   if (!clock) 
     time(&clock);
   gm = gmtime(&clock);
-  bcopy((char *)gm, (char *)&gmbuf, sizeof(gmbuf));
+  memcpy((void *)&gmbuf, (void *)gm, sizeof(gmbuf));
   gm = &gmbuf;
   lt = localtime(&clock);
 
@@ -127,7 +127,7 @@ char    *smalldate(time_t clock)
   if (!clock)
     time(&clock);
   gm = gmtime(&clock);
-  bcopy((char *)gm, (char *)&gmbuf, sizeof(gmbuf));
+  memcpy((void *)&gmbuf, (void *)gm, sizeof(gmbuf));
   gm = &gmbuf; 
   lt = localtime(&clock);
   
@@ -938,7 +938,7 @@ void	tstats(aClient *cptr,char *name)
   struct	stats	tmp;
 
   sp = &tmp;
-  bcopy((char *)ircstp, (char *)sp, sizeof(*sp));
+  memcpy((void *)sp, (void *)ircstp, sizeof(*sp));
   for (i = 0; i < highest_fd; i++)
     {
       if (!(acptr = local[i]))

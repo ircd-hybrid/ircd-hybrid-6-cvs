@@ -1,7 +1,7 @@
 /*
  * irc2.7.2/ircd/res.h (C)opyright 1992 Darren Reed.
  *
- * $Id: res.h,v 1.5 1999/07/03 08:18:22 tomh Exp $
+ * $Id: res.h,v 1.6 1999/07/03 15:39:28 db Exp $
  */
 #ifndef	INCLUDED_res_h
 #define INCLUDED_res_h
@@ -11,11 +11,16 @@
 #define INCLUDED_sys_types_h
 #endif
 
+#ifndef INCLUDED_netdb_h
+#include <netdb.h>           /* struct hostent under bsd */
+#define INCLUDED_netdb_h
+#endif
+
 struct Client;
 
 struct DNSQuery {
   void* vptr;               /* pointer used by callback to identify request */
-  void (*callback)(void* vptr, struct hostent* hp);  /* callback to call */
+  void (*callback)(void* , struct hostent* );  /* callback to call */
 };
 
 extern void get_res(void);

@@ -19,7 +19,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)s_auth.c	1.17 17 Oct 1993 (C) 1992 Darren Reed";
-static char *rcs_version = "$Id: s_auth.c,v 1.7 1999/07/01 21:40:18 db Exp $";
+static char *rcs_version = "$Id: s_auth.c,v 1.8 1999/07/03 15:39:30 db Exp $";
 #endif
 
 #include "struct.h"
@@ -101,7 +101,7 @@ void	start_auth(aClient *cptr)
       return;
     }
 
-  bcopy((char *)&cptr->ip, (char *)&sock.sin_addr,
+  memcpy((void *)&sock.sin_addr, (void *)&cptr->ip,
 	sizeof(struct in_addr));
   
   sock.sin_port = htons(113);

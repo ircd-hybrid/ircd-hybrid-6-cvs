@@ -25,7 +25,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)dbuf.c	2.16 20 Oct 1993 (C) 1990 Markku Savela";
-static char *rcs_version = "$Id: dbuf.c,v 1.3 1999/06/25 11:59:52 db Exp $";
+static char *rcs_version = "$Id: dbuf.c,v 1.4 1999/07/03 15:39:30 db Exp $";
 #endif
 
 #include <stdio.h>
@@ -203,7 +203,7 @@ int	dbuf_put(dbuf *dyn,char *buf,int length)
 	}
       if (chunk > length)
 	chunk = length;
-      bcopy(buf, d->data + off, chunk);
+      memcpy(d->data + off, buf, chunk);
       length -= chunk;
       buf += chunk;
       off = 0;
@@ -269,7 +269,7 @@ int	dbuf_get(dbuf *dyn,char *buf,int length)
     {
       if (chunk > length)
 	chunk = length;
-      bcopy(b, buf, (int)chunk);
+      memcpy(buf, b, (int)chunk);
       (void)dbuf_delete(dyn, chunk);
       buf += chunk;
       length -= chunk;

@@ -26,7 +26,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.106 1999/07/03 08:07:09 tomh Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.107 1999/07/03 15:39:31 db Exp $";
 
 #endif
 
@@ -965,10 +965,15 @@ static int valid_username( anUser *user )
    * -Dianora
    */
   
-  if(!isalnum(user->username[0]))
-    {
-      return ( NO );
-    }
+  p = user->username;
+
+  /* ignored unidented */
+
+  if(*p == '~')
+    p++;
+
+  if( !isalnum(*p))
+    return ( NO );
 
   return ( YES );
 }
