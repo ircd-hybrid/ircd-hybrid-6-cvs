@@ -1,3 +1,21 @@
+ievil       2003/06/06 06:08:05 EDT	(20030606_9)
+
+  Modified files:
+    include              s_serv.h 
+    src                  .depend m_kline.c m_unkline.c s_serv.c 
+  Log:
+  applied patch from Lee H. to give remote kline and unkline CAPS.
+  need to look thru the issues with this and slave servers!
+  
+  Revision  Changes    Path
+  1.16      +4 -1      ircd-hybrid-6/include/s_serv.h
+  1.51      +19 -2     ircd-hybrid-6/src/.depend
+  1.78      +26 -15    ircd-hybrid-6/src/m_kline.c
+  1.52      +9 -0      ircd-hybrid-6/src/m_unkline.c
+  1.231     +2 -0      ircd-hybrid-6/src/s_serv.c
+
+
+
 ievil       2003/06/06 05:35:20 EDT	(20030606_8)
 
   Added files:
