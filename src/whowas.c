@@ -16,9 +16,11 @@
 *   along with this program; if not, write to the Free Software
 *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 *
-*   $Id: whowas.c,v 1.27 1999/07/25 06:52:25 tomh Exp $
+*   $Id: whowas.c,v 1.28 1999/07/25 17:09:07 db Exp $
 */
 #include "struct.h"
+#include "ircd_defs.h"
+#include "whowas.h"
 #include "common.h"
 #include "numeric.h"
 #include "ircd.h"
@@ -32,12 +34,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-/*
- * Whowas hash table size
- *
- * used in whowas.c
- */
-#define WW_MAX 65536
 
 /* internally defined function */
 static void add_whowas_to_clist(aWhowas **,aWhowas *);

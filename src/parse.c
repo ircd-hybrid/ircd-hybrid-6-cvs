@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.30 1999/07/25 11:43:07 db Exp $
+ *   $Id: parse.c,v 1.31 1999/07/25 17:09:06 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -374,6 +374,9 @@ int parse(aClient *cptr, char *buffer, char *bufend)
         {
 	  /* Never BAD CODE again */
 
+	  while(*s == ' ')	/* tabs are not considered space */
+	    s++;
+
           if (*s == ':')
             {
               /*
@@ -385,18 +388,13 @@ int parse(aClient *cptr, char *buffer, char *bufend)
             }
 	  else
 	    {
-	      if (i >= paramcount)
+	      para[i++] = s;
+	      if (i > paramcount)
 		{
-		  para[i++] = s;
 		  break;
 		}
 	      else
 		{
-		  while(*s == ' ')	/* tabs are not considered space */
-		    s++;
-
-		  para[i++] = s;
-
 		  /* scan for end of string, either ' ' or '\0' */
 		  while (IsNonEOS(*s))
 		    s++;

@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.146 1999/07/24 07:59:01 tomh Exp $
+ *  $Id: s_conf.c,v 1.147 1999/07/25 17:09:06 db Exp $
  */
 #include "s_conf.h"
 #include "listener.h"
@@ -1881,6 +1881,7 @@ static void initconf(FBFILE* file, int use_include)
 
       for (;;) /* Fake loop, that I can use break here --msa */
         {
+	  /* host field */
           if ((tmp = getfield(NULL)) == NULL)
             break;
           /*from comstud*/
@@ -1888,10 +1889,12 @@ static void initconf(FBFILE* file, int use_include)
             tmp = set_conf_flags(aconf, tmp);
           DupString(aconf->host, tmp);
 
+	  /* pass field */
           if ((tmp = getfield(NULL)) == NULL)
             break;
           DupString(aconf->passwd, tmp);
 
+	  /* user field */
           if ((tmp = getfield(NULL)) == NULL)
             break;
           /*from comstud */
@@ -1900,6 +1903,7 @@ static void initconf(FBFILE* file, int use_include)
             tmp = set_conf_flags(aconf, tmp);
           DupString(aconf->user, tmp);
 
+	  /* port field */
           if(aconf->status & CONF_OPERATOR)
             {
               Debug((DEBUG_DEBUG,"Setting defaults for oper"));
@@ -1928,6 +1932,7 @@ static void initconf(FBFILE* file, int use_include)
 
           Debug((DEBUG_DEBUG,"aconf->port %x",aconf->port));
 
+	  /* class field */
           if ((tmp = getfield(NULL)) == NULL)
             break;
           Debug((DEBUG_DEBUG,"class tmp = %s",tmp));
