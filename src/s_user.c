@@ -26,7 +26,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.98 1999/06/29 20:34:36 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.99 1999/06/29 20:42:44 db Exp $";
 
 #endif
 
@@ -977,13 +977,14 @@ static int valid_username( anUser *user )
     }
 
   /* 
-   * reject single character usernames which aren't alphabetic 
+   * reject usernames that don't start with an alphanum
    * i.e. reject jokers who have '-@somehost' or '.@somehost'
+   * or "-hi-@somehost", "h-----@somehost" would still be accepted.
    *
    * -Dianora
    */
   
-  if((user->username[1] == '\0') && !isalpha(user->username[0]))
+  if(!isalnum(user->username[0]))
     {
       return ( NO );
     }
