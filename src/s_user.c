@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.64 1999/03/27 21:32:32 lusky Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.65 1999/03/28 06:29:46 lusky Exp $";
 
 #endif
 
@@ -130,6 +130,11 @@ void free_fludees(aClient *);
 #ifdef ANTI_SPAMBOT
 int spam_time = MIN_JOIN_LEAVE_TIME;
 int spam_num = MAX_JOIN_LEAVE_COUNT;
+#endif
+
+#if defined(SPLIT_PONG) && (defined(NO_CHANOPS_WHEN_SPLIT) || \
+	defined(PRESERVE_CHANNEL_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT))
+extern int got_server_pong;
 #endif
 
 /*
@@ -3358,6 +3363,12 @@ int	m_pong(aClient *cptr,
   destination = parv[2];
   cptr->flags &= ~FLAGS_PINGSENT;
   sptr->flags &= ~FLAGS_PINGSENT;
+
+#if defined(SPLIT_PONG) && (defined(NO_CHANOPS_WHEN_SPLIT) || \
+	defined(PRESERVE_CHANNEL_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT))
+  if (IsServer(cptr))
+    got_server_pong = YES;
+#endif
 
   /* Now attempt to route the PONG, comstud pointed out routable PING
    * is used for SPING.  routable PING should also probably be left in

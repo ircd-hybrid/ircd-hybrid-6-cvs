@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.82 1999/03/27 21:32:31 lusky Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.83 1999/03/28 06:29:45 lusky Exp $";
 #endif
 
 
@@ -89,6 +89,9 @@ extern time_t server_split_time;	/* defined in channel.c */
 extern int server_split_recovery_time;	/* defined in channel.c */
 extern int split_smallnet_size;		/* defined in channel.c */
 extern int split_smallnet_users;	/* defined in channel.c */
+#ifdef SPLIT_PONG
+extern int got_server_pong;		/* defined in channel.c */
+#endif /* SPLIT_PONG */
 #endif
 #if defined(PRESERVE_CHANNEL_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT)
 extern void remove_empty_channels();	/* defined in channel.c */
@@ -1252,6 +1255,13 @@ int	m_server_estab(aClient *cptr)
 		(100.0*(float)cptr->zip->out->total_out) /
 		(float)cptr->zip->out->total_in);
 #endif /* ZIP_LINKS */
+
+#if defined(SPLIT_PONG) && (defined(NO_CHANOPS_WHEN_SPLIT) || \
+	defined(PRESERVE_CHANNEL_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT))
+  sendto_one(cptr, "PING :%s", me.name);
+  if (server_was_split)
+    got_server_pong = NO;
+#endif
 
   return 0;
 }

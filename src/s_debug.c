@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_debug.c	2.28 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *version = "$Id: s_debug.c,v 1.5 1998/11/25 23:44:55 db Exp $";
+static char *rcs_version = "$Id: s_debug.c,v 1.6 1999/03/28 06:29:45 lusky Exp $";
 #endif
 
 #include "struct.h"

@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.71 1999/03/27 21:32:30 lusky Exp $";
+static char *rcs_version="$Id: channel.c,v 1.72 1999/03/28 06:29:44 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -56,6 +56,9 @@ time_t server_split_time;
 int server_split_recovery_time = (DEFAULT_SERVER_SPLIT_RECOVERY_TIME * 60);
 int split_smallnet_size = SPLIT_SMALLNET_SIZE;
 int split_smallnet_users = SPLIT_SMALLNET_USER_SIZE;
+#ifdef SPLIT_PONG
+int got_server_pong=NO;
+#endif /* SPLIT_PONG */
 static void check_still_split();
 #define USE_ALLOW_OP
 #endif
@@ -2383,8 +2386,11 @@ static void check_still_split()
 {
   if((server_split_time + server_split_recovery_time) < NOW)
     {
-      if((Count.server > split_smallnet_size) &&
-	 (Count.total > split_smallnet_users))
+      if((Count.server >= split_smallnet_size) &&
+#ifdef SPLIT_PONG
+	 (got_server_pong == YES) &&
+#endif
+	 (Count.total >= split_smallnet_users))
 	{
 	  /* server hasn't been split for a while.
 	   * -Dianora

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.32 1999/03/27 21:32:28 lusky Exp $
+ * $Id: config.h,v 1.33 1999/03/28 06:29:42 lusky Exp $
  */
 
 #ifndef	__config_include__
@@ -735,6 +735,16 @@
  * counting down the SERVER_SPLIT_RECOVERY_TIME
  */
 #define SPLIT_SMALLNET_USER_SIZE 10000
+
+/*
+ * SPLIT_PONG will send a PING to a server after the connect burst.
+ * It will stay in "split" mode until it receives a PONG in addition
+ * to meeting the other conditions.  This is very useful for true
+ * leafs, less useful for "clustered" servers.  If this is enabled,
+ * you should be able to crank DEFAULT_SERVER_SPLIT_RECOVERY_TIME
+ * down to 1.
+ */
+#define SPLIT_PONG
 
 /*
  * DEFAULT_SERVER_SPLIT_RECOVERY_TIME - determines how long to delay split
