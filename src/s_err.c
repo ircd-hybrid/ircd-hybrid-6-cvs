@@ -27,7 +27,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)s_err.c	1.11 5/17/93 (C) 1992 Darren Reed";
-static char *rcs_version = "$Id: s_err.c,v 1.8 1998/12/02 08:43:51 db Exp $";
+static char *rcs_version = "$Id: s_err.c,v 1.9 1998/12/08 18:58:45 db Exp $";
 #endif
 
 static	char	numbuff[512];
@@ -535,13 +535,15 @@ static	char *	replies[] = {
 /* 474 ERR_BANNEDFROMCHAN, */	":%s 474 %s %s :Cannot join channel (+b)",
 /* 475 ERR_BADCHANNELKEY, */	":%s 475 %s %s :Cannot join channel (+k)",
 /* 476 ERR_BADCHANMASK, */	":%s 476 %s %s :Bad Channel Mask",
-#ifdef NO_JOIN_ON_SPLIT
-/* 477 ERR_NOJOINSPLIT */	":%s 477 %s %s :Cannot join channel on split",
-#else
-/* 477 */	(char *)NULL,
-#endif
+/* 477 ERR_MODELESS, */		":%s 477 %s %s :Channel does not support modes",
 /* 478 ERR_BANLISTFULL, */	":%s 478 %s :Channel ban list is full",
+
+#ifdef NO_JOIN_ON_SPLIT
+/* 479 ERR_NOJOINSPLIT */	":%s 479 %s %s :Cannot join channel on split",
+#else
 /* 479 */	(char *)NULL,
+#endif
+
 /* 480 */	(char *)NULL,
 /* 481 ERR_NOPRIVILEGES, */
 		":%s 481 %s :Permission Denied- You're not an IRC operator",

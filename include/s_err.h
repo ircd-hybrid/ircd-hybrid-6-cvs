@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: s_err.h,v 1.8 1998/12/02 08:43:50 db Exp $
+ * $Id: s_err.h,v 1.9 1998/12/08 18:58:44 db Exp $
  *
  */
 
@@ -520,13 +520,15 @@ static	char *	replies[] = {
 /* 474 ERR_BANNEDFROMCHAN, */	":%s 474 %s %s :Cannot join channel (+b)",
 /* 475 ERR_BADCHANNELKEY, */	":%s 475 %s %s :Cannot join channel (+k)",
 /* 476 ERR_BADCHANMASK, */	":%s 476 %s %s :Bad Channel Mask",
-#ifdef NO_JOIN_ON_SPLIT
-/* 477 ERR_NOJOINSPLIT, */	":%s 477 %s %s :Cannot join channel on split",
-#else
-/* 477 */	(char *)NULL,
-#endif
+/* 477 ERR_MODELESS, */		":%s 477 %s %s :Channel does not support modes",
 /* 478 ERR_BANLISTFULL, */	":%s 478 %s :Channel ban list is full",
+
+#ifdef NO_JOIN_ON_SPLIT
+/* 479 ERR_NOJOINSPLIT, */	":%s 479 %s %s :Cannot join channel on split",
+#else
 /* 479 */	(char *)NULL,
+#endif
+
 /* 480 */	(char *)NULL,
 /* 481 ERR_NOPRIVILEGES, */
 		":%s 481 %s :I don't THINK so, homez... you ain't got what it takes. (IRC operator)",

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: numeric.h,v 1.5 1998/12/02 08:43:49 db Exp $
+ * $Id: numeric.h,v 1.6 1998/12/08 18:58:43 db Exp $
  */
 #ifdef TOPIC_INFO
 # define RPL_TOPICWHOTIME 333
@@ -319,10 +319,12 @@
 #define ERR_BANNEDFROMCHAN   474
 #define	ERR_BADCHANNELKEY    475
 #define	ERR_BADCHANMASK      476
-#ifdef NO_JOIN_ON_SPLIT
-#define ERR_NOJOINSPLIT	     477
-#endif
+#define ERR_MODELESS	     477	/* ircu numeric -db */
 #define ERR_BANLISTFULL	     478	/* I stole the numeric from ircu -db */
+
+#ifdef NO_JOIN_ON_SPLIT
+#define ERR_NOJOINSPLIT	     479
+#endif
 
 #define ERR_NOPRIVILEGES     481
 #define ERR_CHANOPRIVSNEEDED 482
