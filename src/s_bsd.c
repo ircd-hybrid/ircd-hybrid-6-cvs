@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.127 2000/11/18 19:11:13 lusky Exp $
+ *  $Id: s_bsd.c,v 1.128 2000/12/22 01:05:03 lusky Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -459,7 +459,7 @@ static int connect_inet(struct ConfItem *aconf, struct Client *cptr)
   if (!set_sock_buffers(cptr->fd, READBUF_SIZE))
     report_error(SETBUF_ERROR_MSG, get_client_name(cptr, TRUE), errno);
 
-  if (connect(cptr->fd, (const struct sockaddr*) &sin, sizeof(sin)) && 
+  if (connect(cptr->fd, (struct sockaddr*) &sin, sizeof(sin)) && 
       errno != EINPROGRESS)
     {
       int errtmp = errno; /* other system calls may eat errno */
