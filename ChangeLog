@@ -1,3 +1,16 @@
+androsyn    2003/04/06 17:42:04 EDT	(20030406_1)
+
+  Modified files:
+    src                  s_auth.c 
+  Log:
+  The case is inverted on this test.  Take a peek at the example clients in
+  the adns source distribution and you'll see what I mean :)
+  
+  Revision  Changes    Path
+  1.54      +1 -1      ircd-hybrid-6/src/s_auth.c
+
+
+
 androsyn    2003/04/06 17:10:38 EDT	(20030406_0)
 
   Modified files:
