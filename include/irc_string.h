@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: irc_string.h,v 1.12 1999/07/31 01:54:09 tomh Exp $
+ *   $Id: irc_string.h,v 1.13 1999/09/04 20:21:08 lusky Exp $
  */
 #ifndef INCLUDED_irc_string_h
 #define INCLUDED_irc_string_h
@@ -105,6 +105,7 @@ extern const unsigned int CharAttrs[];
 #define HOST_C    0x800
 #define NONEOS_C 0x1000
 #define SERV_C   0x2000
+#define EOL_C    0x4000
 
 #define IsHostChar(c)   (CharAttrs[(unsigned char)(c)] & HOST_C)
 #define IsUserChar(c)   (CharAttrs[(unsigned char)(c)] & USER_C)
@@ -129,5 +130,6 @@ extern const unsigned int CharAttrs[];
                                            (CNTRL_C | ALPHA_C | DIGIT_C)))
 
 #define IsNonEOS(c) (CharAttrs[(unsigned char)(c)] & NONEOS_C)
+#define IsEol(c) (CharAttrs[(unsigned char)(c)] & EOL_C)
 
 #endif /* INCLUDED_irc_string_h */
