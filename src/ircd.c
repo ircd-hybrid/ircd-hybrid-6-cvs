@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.94 1999/07/21 03:08:19 db Exp $
+ * $Id: ircd.c,v 1.95 1999/07/21 03:28:52 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -54,6 +54,7 @@
 #include <unistd.h>
 #endif /* SETUID_ROOT */
 
+#define MIN_CONN_FREQ 300
 
 #ifdef  REJECT_HOLD
 int reject_held_fds = 0;
@@ -173,9 +174,8 @@ static	time_t	try_connections(time_t currenttime)
 	  continue;
 	}
 
-      confrq = get_con_freq(cltmp);
-      if( confrq < 300 )
-	confrq = 300;
+      if( (confrq = get_con_freq(cltmp)) < MIN_CONN_FREQ )
+	confrq = MIN_CONN_FREQ;
 
       aconf->hold = currenttime + confrq;
       /*
