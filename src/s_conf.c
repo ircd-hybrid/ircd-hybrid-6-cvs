@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.232 2001/12/15 02:42:04 db Exp $
+ *  $Id: s_conf.c,v 1.233 2001/12/15 16:24:09 leeh Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -2999,7 +2999,7 @@ show_temp_klines(aClient *sptr, struct ConfItem * tklist)
             reason = "No Reason";
 
 	  sendto_one(sptr,form_str(RPL_STATSKLINE), me.name,
-                       sptr->name, 'k' , host, user, reason, "");
+                       sptr->name, 'k' , host, user, reason);
 
           last_list_ptr = kill_list_ptr;
           kill_list_ptr = kill_list_ptr->next;

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.49 2001/12/12 21:56:34 leeh Exp $
+ *  $Id: m_gline.c,v 1.50 2001/12/15 16:24:09 leeh Exp $
  */
 #include "m_commands.h"
 #include "m_gline.h"
@@ -753,7 +753,7 @@ void report_glines(aClient *sptr)
                 reason = "No Reason";
 
               sendto_one(sptr,form_str(RPL_STATSKLINE), me.name,
-                         sptr->name, 'G' , host, name, reason, "");
+                         sptr->name, 'G' , host, name, reason);
 
               last_list_ptr = kill_list_ptr;
               kill_list_ptr = kill_list_ptr->next;
