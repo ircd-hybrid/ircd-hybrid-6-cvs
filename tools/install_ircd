@@ -1,6 +1,6 @@
 #!/bin/sh
 # IRCD INSTALL SCRIPT
-# $Id: install_ircd,v 1.9 2001/07/03 21:52:19 wcampbel Exp $
+# $Id: install_ircd,v 1.10 2003/05/15 04:13:32 db Exp $
 #
 # Completely re-written by FlashMan <chuegen@quadrunner.com> 981231
 # Wow.  The old version was *very* messy and had boatloads of redundancy.
@@ -140,16 +140,16 @@ if [ ! -f ${DPATH}viconf ]; then
   echo installing viconf as ${DPATH}viconf${EXESUFFIX}
   $INSTALL_SH -c tools/viconf${EXESUFFIX} ${DPATH}viconf${EXESUFFIX}
   rm -f ${DPATH}vimotd${EXESUFFIX} ${DPATH}viklines${EXESUFFIX}
-  ln ${DPATH}viconf${EXESUFFIX} ${DPATH}vimotd${EXESUFFIX}
-  ln ${DPATH}viconf${EXESUFFIX} ${DPATH}viklines${EXESUFFIX};
+  ln -s ${DPATH}viconf${EXESUFFIX} ${DPATH}vimotd${EXESUFFIX}
+  ln -s ${DPATH}viconf${EXESUFFIX} ${DPATH}viklines${EXESUFFIX};
 else
    echo installing viconf as ${DPATH}viconf${EXESUFFIX}
    echo previous viconf saved as viconf${EXESUFFIX}.old
    mv ${DPATH}viconf${EXESUFFIX} ${DPATH}viconf${EXESUFFIX}.old
    $INSTALL_SH -c tools/viconf${EXESUFFIX} ${DPATH}viconf${EXESUFFIX}
    rm -f ${DPATH}vimotd${EXESUFFIX} ${DPATH}viklines${EXESUFFIX}
-   ln ${DPATH}viconf${EXESUFFIX} ${DPATH}vimotd${EXESUFFIX}
-   ln ${DPATH}viconf${EXESUFFIX} ${DPATH}viklines${EXESUFFIX};
+   ln -s ${DPATH}viconf${EXESUFFIX} ${DPATH}vimotd${EXESUFFIX}
+   ln -s ${DPATH}viconf${EXESUFFIX} ${DPATH}viklines${EXESUFFIX};
 fi
 
 # install ircd.8
