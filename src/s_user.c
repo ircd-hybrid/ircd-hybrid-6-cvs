@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.175 1999/07/22 22:01:03 db Exp $
+ *  $Id: s_user.c,v 1.176 1999/07/23 02:34:13 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -66,18 +66,6 @@ static int valid_hostname(const char* hostname);
 static int valid_username(const char* username);
 static void report_and_set_user_flags( aClient *, aConfItem * );
 static int tell_user_off(aClient *,char **);
-
-/* LINKLIST */ 
-extern aClient *local_cptr_list;
-extern aClient *oper_cptr_list;
-extern aClient *serv_cptr_list;
- 
-extern void outofmemory(void);         /* defined in list.c */
-
-
-#ifdef REJECT_HOLD
-extern int reject_held_fds;             /* defined in ircd.c */
-#endif
 
 static char buf[BUFSIZE], buf2[BUFSIZE];
 
