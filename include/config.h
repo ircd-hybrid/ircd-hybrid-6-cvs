@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.69 1999/10/14 01:05:38 lusky Exp $
+ * $Id: config.h,v 1.70 1999/10/18 03:31:13 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -503,7 +503,8 @@
  * NO_JOIN_ON_SPLIT
  *
  * When this is defined, users will not be allowed to join channels
- * that were present before a split.
+ * that were present before a split. THIS IS BROKEN - DO NOT USE
+ * ON A PRODUCTION SERVER --Rodder
  */
 #undef NO_JOIN_ON_SPLIT
 

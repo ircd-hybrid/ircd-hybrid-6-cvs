@@ -1,7 +1,7 @@
 /*
  * dline_conf.c
  *
- * $Id: dline_conf.c,v 1.34 1999/09/11 03:50:22 lusky Exp $
+ * $Id: dline_conf.c,v 1.35 1999/10/18 03:31:17 lusky Exp $
  */
 #include "dline_conf.h"
 #include "class.h"
@@ -682,6 +682,9 @@ aConfItem* match_ip_Kline(unsigned long ip, const char* name)
   /* rules are simple, Iline wins by default, K beats I, E beats K and I */
   for( scan=node->conf; scan; scan=scan->next)
     {
+      if (scan->ip != (ip & scan->ip_mask))
+        continue; /* Not even in the same ball park */
+
       if (scan->flags & CONF_FLAGS_E_LINED)  /* Eline */
         if (match(scan->user,name)) return scan; /* instant win! */
 
