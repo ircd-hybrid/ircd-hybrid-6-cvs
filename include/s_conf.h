@@ -21,9 +21,16 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.22 1999/07/18 17:50:52 db Exp $
+ * $Id: s_conf.h,v 1.23 1999/07/19 09:05:14 tomh Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.23  1999/07/19 09:05:14  tomh
+ * Work on char attributes for nick names, changed isvalid macro
+ * Const correctness changes
+ * Fixed file close bug on successful read
+ * Header cleanups
+ * Checked all strncpy_irc usage added terminations where needed
+ *
  * Revision 1.22  1999/07/18 17:50:52  db
  * - more header cleanups
  *
@@ -242,7 +249,9 @@ extern char *oper_privs_as_string(struct Client *, int);
 extern int rehash_dump(struct Client *);
 extern int find_q_line(char*, char*, char *);
 extern struct ConfItem* find_special_conf(char *,int );
-extern struct ConfItem* find_is_klined(char*, char *,unsigned long);
+extern struct ConfItem* find_is_klined(const char* host, 
+                                       const char* name,
+                                       unsigned long ip);
 extern void   GetPrintableaConfItem(struct ConfItem *,
 				    char **, char **, char **,
 				    char **, int *);

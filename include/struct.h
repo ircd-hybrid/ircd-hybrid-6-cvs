@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.61 1999/07/18 00:17:44 tomh Exp $
+ * $Id: struct.h,v 1.62 1999/07/19 09:05:15 tomh Exp $
  */
 #ifndef	INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -464,7 +464,6 @@ extern struct Capability captab[];
 
 #define	BadPtr(x) (!(x) || (*(x) == '\0'))
 
-#define	isvalid(c) (((c) >= 'A' && (c) <= '~') || isdigit(c) || (c) == '-')
 
 /* used in SetMode() in channel.c and m_umode() in s_msg.c */
 
