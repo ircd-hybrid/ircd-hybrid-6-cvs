@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.40 1999/07/01 16:13:30 db Exp $
+ * $Id: struct.h,v 1.41 1999/07/01 18:26:06 db Exp $
  */
 #ifndef	INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -1064,6 +1064,8 @@ typedef struct
 {
   int maxclients;	/* max clients allowed */
   int autoconn;		/* autoconn enabled for all servers? */
+  int noisy_htm;        /* noisy htm or not ? */
+  int lifesux;
 
 #ifdef IDLE_CHECK
   int idletime;

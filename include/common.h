@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: common.h,v 1.5 1999/07/01 16:13:29 db Exp $
+ * $Id: common.h,v 1.6 1999/07/01 18:26:05 db Exp $
  */
 
 #ifndef	__common_include__
@@ -120,6 +120,8 @@ extern struct SLink *find_user_link(/* struct SLink *, struct Client * */);
 
 
 #define MAXCLIENTS GlobalSetOptions.maxclients
+#define NOISYHTM   GlobalSetOptions.noisy_htm
+#define LIFESUX    GlobalSetOptions.lifesux
 #define AUTOCONN   GlobalSetOptions.autoconn
 #define IDLETIME   GlobalSetOptions.idletime
 #define FLUDNUM    GlobalSetOptions.fludnum

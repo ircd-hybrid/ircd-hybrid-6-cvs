@@ -26,7 +26,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.101 1999/07/01 16:54:13 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.102 1999/07/01 18:26:08 db Exp $";
 
 #endif
 
@@ -83,7 +83,6 @@ extern void outofmemory(void);         /* defined in list.c */
 #ifdef MAXBUFFERS
 extern void reset_sock_opts();
 #endif
-extern int lifesux;
 
 #ifdef REJECT_HOLD
 extern int reject_held_fds;		/* defined in ircd.c */
