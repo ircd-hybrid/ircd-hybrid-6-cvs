@@ -23,7 +23,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.23 1999/06/30 03:20:50 db Exp $
+ * $Id: h.h,v 1.24 1999/07/01 16:13:30 db Exp $
  *
  */
 
@@ -45,7 +45,6 @@ extern fdlist serv_fdlist;
 extern fdlist busycli_fdlist;
 extern fdlist default_fdlist;
 extern fdlist oper_fdlist;
-extern	int	MAXCLIENTS;
 extern	struct	Counter	Count;
 
 extern	time_t	NOW;
@@ -338,7 +337,6 @@ void remove_one_ip(unsigned long);
 
 
 #ifdef FLUD
-int	check_for_ctcp();
 int	check_for_flood();
 void	free_fluders();
 void	free_fludees();

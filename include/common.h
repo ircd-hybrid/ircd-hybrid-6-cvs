@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: common.h,v 1.4 1999/06/25 11:59:46 db Exp $
+ * $Id: common.h,v 1.5 1999/07/01 16:13:29 db Exp $
  */
 
 #ifndef	__common_include__
@@ -117,5 +117,21 @@ extern char *strtoken (char **, char *, char *);
 
 extern void flush_connections();
 extern struct SLink *find_user_link(/* struct SLink *, struct Client * */);
+
+
+#define MAXCLIENTS GlobalSetOptions.maxclients
+#define AUTOCONN   GlobalSetOptions.autoconn
+#define IDLETIME   GlobalSetOptions.idletime
+#define FLUDNUM    GlobalSetOptions.fludnum
+#define FLUDTIME   GlobalSetOptions.fludtime
+#define FLUDBLOCK  GlobalSetOptions.fludblock
+#define DRONETIME  GlobalSetOptions.dronetime
+#define DRONECOUNT GlobalSetOptions.dronecount
+#define SPLITDELAY GlobalSetOptions.server_split_recovery_time
+#define SPLITNUM   GlobalSetOptions.split_smallnet_size
+#define SPLITUSERS GlobalSetOptions.split_smallnet_users
+#define SPAMNUM    GlobalSetOptions.spam_num
+#define SPAMTIME   GlobalSetOptions.spam_time
+#define SPAMMSGS   GlobalSetOptions.spambot_privmsg_count
 
 #endif /* __common_include__ */

@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.19 1999/06/26 12:24:10 db Exp $
+ * $Id: res.c,v 1.20 1999/07/01 16:13:35 db Exp $
  */
 #include "res.h"
 #include "struct.h"
@@ -26,13 +26,6 @@
 
 #undef	DEBUG	/* because there is a lot of debug code in here :-) */
 extern  void    debug();
-
-#if 0
-extern	int	dn_expand (char *, char *, char *, char *, int);
-extern	int	dn_skipname (char *, char *);
-extern	int	res_mkquery (int, char *, int, int, char *, int,
-				   struct rrec *, char *, int);
-#endif
 
 #define MAXPACKET	1024
 #define MAXALIASES	35
@@ -152,7 +145,8 @@ static	struct	resinfo {
  */
 static void start_resolver(void)
 {
-  char  sparemsg[80];
+  char sparemsg[80];
+
   /*
    * close the spare file descriptor so res_init can read resolv.conf
    * successfully. Needed on Solaris
@@ -220,7 +214,6 @@ int restart_resolver(void)
  */
 void add_local_domain(char* hname, int size)
 {
-  char	sparemsg[80];
   /* try to fix up unqualified names */
   if (!strchr(hname, '.')) {
     if (!(_res.options & RES_INIT))
