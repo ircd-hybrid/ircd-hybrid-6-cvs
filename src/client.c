@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.2 1999/07/11 21:09:38 tomh Exp $
+ *  $Id: client.c,v 1.3 1999/07/11 23:02:54 tomh Exp $
  */
 #include "client.h"
 #include "struct.h"
@@ -84,6 +84,19 @@ int check_registered(aClient* client)
       return -1;
     }
   return 0;
+}
+
+/*
+ * release_client_dns_reply - remove client dns_reply references
+ *
+ */
+void release_client_dns_reply(struct Client* client)
+{
+  assert(0 != client);
+  if (client->dns_reply) {
+    --client->dns_reply->ref_count;
+    client->dns_reply = 0;
+  }
 }
 
 /*
