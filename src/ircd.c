@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.152 2001/12/07 04:01:55 jdc Exp $
+ * $Id: ircd.c,v 1.153 2001/12/08 05:10:22 jdc Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -289,7 +289,7 @@ static void bad_command(void)
  * -k filename - specify k:line file
  * -l filename - specify log file
  * -n          - do not fork, run in foreground
- * -v          - print version and exit
+ * -v          - print daemon version and exit
  * -x          - set debug level, if compiled for debug logging
  */
 static void parse_command_line(int argc, char* argv[])
@@ -327,7 +327,7 @@ static void parse_command_line(int argc, char* argv[])
       bootDaemon = 0; 
       break;
     case 'v':
-      printf("ircd %s\n\tzlib %s\n\tircd_dir: %s\n", version,
+      printf("ircd %s\n\tzlib %s\n\tircd_dir: %s\n", ircd_version,
 #ifndef ZIP_LINKS
              "not used",
 #else

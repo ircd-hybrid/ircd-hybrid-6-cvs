@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.240 2001/11/30 08:00:22 db Exp $
+ *  $Id: s_user.c,v 1.241 2001/12/08 05:10:22 jdc Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -773,18 +773,18 @@ static int register_user(aClient *cptr, aClient *sptr,
       sendto_one(sptr, form_str(RPL_WELCOME), me.name, nick, nick);
       /* This is a duplicate of the NOTICE but see below...*/
       sendto_one(sptr, form_str(RPL_YOURHOST), me.name, nick,
-                 get_listener_name(sptr->listener), version);
+                 get_listener_name(sptr->listener), ircd_version);
       
       /*
       ** Don't mess with this one - IRCII needs it! -Avalon
       */
       sendto_one(sptr,
                  "NOTICE %s :*** Your host is %s, running version %s",
-                 nick, get_listener_name(sptr->listener), version);
+                 nick, get_listener_name(sptr->listener), ircd_version);
       
       sendto_one(sptr, form_str(RPL_CREATED),me.name,nick,creation);
       sendto_one(sptr, form_str(RPL_MYINFO), me.name, parv[0],
-                 me.name, version);
+                 me.name, ircd_version);
       /* Increment the total number of clients since (re)start */
       Count.totalrestartcount++;
       show_lusers(sptr, sptr, 1, parv);

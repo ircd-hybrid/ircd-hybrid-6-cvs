@@ -1,5 +1,5 @@
 /************************************************************************
- *   IRC - Internet Relay Chat, src/m_version.c
+ *   IRC - Internet Relay Chat, src/m_trace.c
  *   Copyright (C) 1990 Jarkko Oikarinen and
  *                      University of Oulu, Computing Center
  *
@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_trace.c,v 1.9 2001/07/16 11:16:06 leeh Exp $
+ *   $Id: m_trace.c,v 1.10 2001/12/08 05:10:22 jdc Exp $
  */
 #include "m_commands.h"
 #include "class.h"
@@ -140,10 +140,10 @@ int m_trace(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
         ac2ptr = next_client_double(GlobalClientList, tname);
         if (ac2ptr)
           sendto_one(sptr, form_str(RPL_TRACELINK), me.name, parv[0],
-                     version, debugmode, tname, ac2ptr->from->name);
+                     ircd_version, debugmode, tname, ac2ptr->from->name);
         else
           sendto_one(sptr, form_str(RPL_TRACELINK), me.name, parv[0],
-                     version, debugmode, tname, "ac2ptr_is_NULL!!");
+                     ircd_version, debugmode, tname, "ac2ptr_is_NULL!!");
         return 0;
       }
     case HUNTED_ISME:

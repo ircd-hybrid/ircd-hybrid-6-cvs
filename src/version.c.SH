@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# $Id: version.c.SH,v 1.24 2001/06/04 15:23:39 jdc Exp $ 
+# $Id: version.c.SH,v 1.25 2001/12/08 05:10:22 jdc Exp $
 
 spitshell=cat
 package=IRC
@@ -55,7 +55,7 @@ $spitshell >version.c <<!SUB!THIS!
 
 char *generation = "$generation";
 char *creation = "$creation";
-char *version = PATCHLEVEL;
+char *ircd_version = PATCHLEVEL;
 char *serno = SERIALNUM;
 char *platform = "$uname";
 
@@ -74,7 +74,7 @@ char *infotext[] =
 
 IFS='
 '
-for i in `grep -v '^$Id' ../Hybrid-team |tr -d '"'` ; do
+for i in `cat ../Hybrid-team | tr -d '"'` ; do
 echo "  \"$i\"," >> version.c
 done
 $spitshell >>version.c <<!SUB!THISTOO!
