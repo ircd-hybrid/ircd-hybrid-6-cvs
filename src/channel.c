@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.201 2001/07/04 12:02:43 jdc Exp $
+ * $Id: channel.c,v 1.202 2001/07/05 04:04:43 db Exp $
  */
 #include "channel.h"
 #include "client.h"
@@ -2262,8 +2262,7 @@ int     m_join(struct Client *cptr,
 
 
 #ifdef NO_JOIN_ON_SPLIT
-      if (server_was_split && MyClient(sptr) && (*name != '&') &&
-          !IsAnOper(sptr))
+      if (server_was_split && MyClient(sptr) && (*name != '&'))
         {
               sendto_one(sptr, form_str(ERR_UNAVAILRESOURCE),
                          me.name, parv[0], name);
