@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.142 1999/07/16 09:36:05 db Exp $
+ *   $Id: s_serv.c,v 1.143 1999/07/16 09:57:56 db Exp $
  */
 
 #define CAPTAB
@@ -3169,7 +3169,7 @@ int	m_rehash(aClient *cptr,
       else if(irccmp(parv[1],"dump") == 0)
 	{
 	  sendto_ops("%s is dumping conf file",parv[0]);
-	  rehash_dump(sptr,parv[0]);
+	  rehash_dump(sptr);
 	  found = YES;
 	}
       else if(irccmp(parv[1],"dlines") == 0)

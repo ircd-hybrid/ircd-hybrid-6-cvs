@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.38 1999/07/16 02:40:34 db Exp $
+ * $Id: h.h,v 1.39 1999/07/16 09:57:53 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -93,7 +93,6 @@ extern  void	report_glines(aClient *);	/* defined in m_gline.c */
 
 extern	int	find_restrict (aClient *);
 extern	int	rehash (aClient *, aClient *, int);
-extern  int	rehash_dump (aClient *,char *);
 extern  int     lock_kline_file ();
 extern  void    report_error_on_tty(const char* message); /* ircd.c */
 
