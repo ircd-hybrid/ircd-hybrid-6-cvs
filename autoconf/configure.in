@@ -1,4 +1,4 @@
-dnl $Id: configure.in,v 1.17 2001/07/10 12:40:21 jdc Exp $
+dnl $Id: configure.in,v 1.18 2001/07/18 03:09:59 lusky Exp $
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(include/class.h)
 
@@ -28,7 +28,7 @@ AC_CHECK_FUNC(crypt,, AC_CHECK_LIB(descrypt, crypt,,AC_CHECK_LIB(crypt, crypt,,)
 
 dnl Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS(sys/param.h unistd.h errno.h string.h stdlib.h stddef.h getopt.h) 
+AC_CHECK_HEADERS(sys/param.h unistd.h errno.h string.h stdlib.h stddef.h getopt.h crypt.h) 
 
 dnl Check for stdarg.h - if we can't find it, halt configure
 AC_CHECK_HEADER(stdarg.h, , AC_MSG_ERROR(** stdarg.h could not be found - ircd-hybrid will not compile without it **))

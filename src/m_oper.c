@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_oper.c,v 1.12 2001/07/18 03:00:30 bill Exp $
+ *   $Id: m_oper.c,v 1.13 2001/07/18 03:10:00 lusky Exp $
  */
 
 #include "m_commands.h"
@@ -38,6 +38,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#if defined(CRYPT_OPER_PASSWORD) && defined(HAVE_CRYPT_H)
+#include <crypt.h>
+#endif
 
 /*
  * m_functions execute protocol messages on this server:
@@ -163,7 +166,7 @@ int m_oper(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 
   /* passwd may be NULL pointer. Head it off at the pass... */
   if (password && *aconf->passwd)
-    encr = (char *)crypt(password, aconf->passwd);
+    encr = crypt(password, aconf->passwd);
   else
     encr = "";
 #else
