@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.117 2001/07/05 04:21:22 greg Exp $
+ * $Id: config.h,v 1.118 2001/07/05 04:44:53 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -732,6 +732,16 @@
  * can be chanopped, but cannot chanop anyone else.
  */
 #define LITTLE_I_LINES
+
+/* -----------------  approved on EFnet section -------------------- 
+ *
+ * if you are not an efnet admin, you might want to undefine some of
+ * these.. -db
+ */
+
+/* If this is defined, hack ops is simply not allowed at all
+ */
+#define NO_HACK_OPS
 
 /* ----------------- not approved on EFnet section -------------------- 
  *

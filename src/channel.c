@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.202 2001/07/05 04:04:43 db Exp $
+ * $Id: channel.c,v 1.203 2001/07/05 04:44:58 db Exp $
  */
 #include "channel.h"
 #include "client.h"
@@ -3674,12 +3674,17 @@ int     m_sjoin(struct Client *cptr,
     tstosend = oldts;
   else if (newts < oldts)
     {
+#ifdef NO_HACK_OPS
+      keep_our_modes = NO;
+      chptr->channelts = tstosend = newts;
+#else
       if (doesop)
         keep_our_modes = NO;
       if (haveops && !doesop)
           tstosend = oldts;
       else
         chptr->channelts = tstosend = newts;
+#endif
     }
   else
     {

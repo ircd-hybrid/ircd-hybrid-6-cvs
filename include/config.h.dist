@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h.dist,v 1.100 2001/07/02 03:04:14 db Exp $
+ * $Id: config.h.dist,v 1.101 2001/07/05 04:44:54 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -405,6 +405,7 @@
 
 #undef CRYPT_LINKS             /* allow encrypted server-server links */
 #define CRYPT_LINKS_CNPREFIX '@'
+#define CRYPT_LINKS_CIPHERPREFIX ','
 #define CRYPT_LINKS_PRIVATEKEYFILE "private.key"
 
 /* USE_EGD -  if your system does not have *random devices and you want to
@@ -709,6 +710,16 @@
  * can be chanopped, but cannot chanop anyone else.
  */
 #define LITTLE_I_LINES
+
+/* -----------------  approved on EFnet section -------------------- 
+ *
+ * if you are not an efnet admin, you might want to undefine some of
+ * these.. -db
+ */
+
+/* If this is defined, hack ops is simply not allowed at all
+ */
+#define NO_HACK_OPS
 
 /* ----------------- not approved on EFnet section -------------------- 
  *
