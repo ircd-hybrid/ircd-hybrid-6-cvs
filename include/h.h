@@ -23,7 +23,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.6 1998/10/17 21:06:49 lusky Exp $
+ * $Id: h.h,v 1.7 1998/10/18 05:12:42 lusky Exp $
  *
  */
 
@@ -150,6 +150,7 @@ extern	int	dgets (int, char *, int);
 extern	char	*inetntoa (char *);
 extern	void	ircsprintf ();
 extern	int	dbufalloc, dbufblocks, debuglevel, errno, h_errno;
+extern	int	maxdbufalloc, maxdbufblocks;
 extern	int	highest_fd, debuglevel, portnum, debugtty, maxusersperchannel;
 extern	int	readcalls, udpfd, resfd;
 extern	aClient	*add_connection (aClient *, int);

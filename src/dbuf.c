@@ -25,7 +25,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)dbuf.c	2.16 20 Oct 1993 (C) 1990 Markku Savela";
-static char *rcs_version = "$Id: dbuf.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static char *rcs_version = "$Id: dbuf.c,v 1.2 1998/10/18 05:12:44 lusky Exp $";
 #endif
 
 #include <stdio.h>
@@ -39,7 +39,7 @@ static char *rcs_version = "$Id: dbuf.c,v 1.1 1998/09/17 14:25:04 db Exp $";
 #define	valloc malloc
 #endif
 
-int	dbufalloc = 0, dbufblocks = 0;
+int	dbufalloc = 0, dbufblocks = 0, maxdbufalloc = 0, maxdbufblocks = 0;
 static	dbufbuf	*freelist = NULL;
 
 /* This is a dangerous define because a broken compiler will set DBUFSIZ
@@ -68,6 +68,7 @@ void dbuf_init()
   for(;i<INITIAL_DBUFS-1;i++,dbp++,dbufblocks++) dbp->next = (dbp+1);
   dbp->next = NULL;
   dbufblocks++;
+  maxdbufblocks = dbufblocks;
 }
 #endif
 /*
@@ -84,6 +85,9 @@ static dbufbuf *dbuf_alloc()
 #endif
 
   dbufalloc++;
+  if (dbufalloc > maxdbufalloc)
+    maxdbufalloc = dbufalloc;
+
   if ( (dbptr = freelist) )
     {
       freelist = freelist->next;
@@ -105,6 +109,8 @@ static dbufbuf *dbuf_alloc()
     num = 1;
 
   dbufblocks += num;
+  if (dbufblocks > maxdbufblocks)
+    maxdbufblocks = dbufblocks;
 
   dbptr = (dbufbuf *)valloc(num*sizeof(dbufbuf));
   if (!dbptr)
@@ -120,9 +126,12 @@ static dbufbuf *dbuf_alloc()
   return dbptr;
 #else
   dbufblocks++;
+  if (dbufblocks > maxdbufblocks)
+      maxdbufblocks = dbufblocks;
   return (dbufbuf *)MyMalloc(sizeof(dbufbuf));
 #endif
 }
+
 /*
 ** dbuf_free - return a dbufbuf structure to the freelist
 */
