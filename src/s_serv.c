@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.223 2001/07/10 12:40:36 jdc Exp $
+ *   $Id: s_serv.c,v 1.224 2001/07/22 23:22:44 db Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -305,16 +305,29 @@ time_t try_connections(time_t currenttime)
         }
       if (!(con_conf->flags & CONF_FLAGS_ALLOW_AUTO_CONN))
         {
+#ifdef HIDE_SERVERS_IPS
+          sendto_realops("Connection to %s not activated, autoconn is off.",
+			 con_conf->name);
+          sendto_realops("WARNING AUTOCONN on %s is disabled",
+			 con_conf->name);
+#else
           sendto_realops("Connection to %s[%s] not activated, autoconn is off.",
-                     con_conf->name, con_conf->host);
+			 con_conf->name, con_conf->host);
           sendto_realops("WARNING AUTOCONN on %s[%s] is disabled",
-                     con_conf->name, con_conf->host);
+			 con_conf->name, con_conf->host);
+#endif
         }
       else
         {
+#ifdef HIDE_SERVERS_IPS
+          if (connect_server(con_conf, 0, 0))
+            sendto_realops("Connection to %s activated.",
+			   con_conf->name);
+#else
           if (connect_server(con_conf, 0, 0))
             sendto_realops("Connection to %s[%s] activated.",
-                       con_conf->name, con_conf->host);
+			   con_conf->name, con_conf->host);
+#endif
         }
     }
   Debug((DEBUG_NOTICE,"Next connection check : %s", myctime(next)));
