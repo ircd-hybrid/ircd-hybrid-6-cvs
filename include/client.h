@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.2 1999/07/08 07:35:04 tomh Exp $
+ * $Id: client.h,v 1.3 1999/07/08 07:40:29 tomh Exp $
  */
 #ifndef	INCLUDED_client_h
 #define INCLUDED_client_h
@@ -48,17 +48,8 @@
 #include "dbuf.h"
 #endif
 
-#define	HOSTLEN		63	/* Length of hostname.  Updated to         */
-				/* comply with RFC1123                     */
 #define HOSTIPLEN	15	/* Length of dotted quad form of IP	   */
 				/* - Dianora 				   */
-#define	NICKLEN		9	/* Necessary to put 9 here instead of 10
-				 * if s_msg.c/m_nick has been corrected.
-				 * This preserves compatibility with old
-				 * servers --msa
-				 */
-#define	USERLEN		10
-#define	REALLEN	 	50
 #define	PASSWDLEN 	20
 #define IDLEN		12	/* this is the maximum length, not the actual
 				   generated length; DO NOT CHANGE! */
