@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.81 2003/10/13 11:33:13 ievil Exp $
+ *  $Id: s_misc.c,v 1.82 2005/03/25 11:19:11 ievil Exp $
  */
 #include "s_misc.h"
 #include "channel.h"
@@ -241,7 +241,7 @@ void show_isupport(aClient *cptr, char *name)
                         mode_e ? "e" : "",
                         mode_I ? "I" : "");
 
-  ircsprintf(features2, "CHANTYPES=#& PREFIX=(ov)@+ %s NETWORK=%s CASEMAPPING=rfc1459 MAP",
+  ircsprintf(features2, "CHANTYPES=#& PREFIX=(ov)@+ %s NETWORK=%s CASEMAPPING=rfc1459 MAP ETRACE SINFO",
                         cbmodes,
                         NETWORK_NAME);
 
