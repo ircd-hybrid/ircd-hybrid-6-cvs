@@ -23,7 +23,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.15 1999/05/15 21:02:37 db Exp $
+ * $Id: h.h,v 1.16 1999/05/15 21:04:27 db Exp $
  *
  */
 
@@ -101,7 +101,6 @@ extern  aConfItem *find_is_glined(char *,char *);
 extern  aConfItem *find_is_klined(char *,char *,unsigned long);
 
 /* hash d lines */
-extern int is_address(char *, unsigned long *, unsigned long *);
 unsigned long host_name_to_ip(char *, unsigned long *);
 extern aConfItem *find_dkill(aClient *cptr);
 
