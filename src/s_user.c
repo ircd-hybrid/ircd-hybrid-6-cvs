@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.137 1999/07/16 11:57:33 db Exp $
+ *  $Id: s_user.c,v 1.138 1999/07/16 22:56:39 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -122,7 +122,7 @@ extern BlockHeap *free_Links;
 
 static void announce_fluder(aClient *,aClient *,aChannel *,int );
 struct fludbot *remove_fluder_reference(struct fludbot **,aClient *);
-Link *remove_fludee_reference(Link **,void *);
+static Link *remove_fludee_reference(Link **,void *);
 static int check_for_ctcp(char *);
 static int check_for_flud(aClient *,aClient *,aChannel *,int);
 void free_fluders(aClient *,aChannel *);
@@ -3883,7 +3883,8 @@ struct fludbot *remove_fluder_reference(struct fludbot **fluders,
  
  
 /* Another function to unravel my mind. */
-Link *remove_fludee_reference(Link **fludees,void *fludee)
+static Link *
+remove_fludee_reference(Link **fludees,void *fludee)
 {       
   Link *current, *prev, *next; 
 

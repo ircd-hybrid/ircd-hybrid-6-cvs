@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.143 1999/07/16 09:57:56 db Exp $
+ *   $Id: s_serv.c,v 1.144 1999/07/16 22:56:38 db Exp $
  */
 
 #define CAPTAB
@@ -1382,14 +1382,14 @@ static	void	report_configured_links(aClient *sptr,int mask)
 	    else
 	      sendto_one(sptr, form_str(p->rpl_stats), me.name,
 			 sptr->name, p->conf_char,
-			 user, host, name,
+			 host, name,
 			 "0",
 			 get_conf_class(tmp), "");
 	  }
 	else
 	  sendto_one(sptr, form_str(p->rpl_stats), me.name,
 		     sptr->name, p->conf_char,
-		     user, host, name, port,
+		     host, name, port,
 		     get_conf_class(tmp));
       }
   return;
