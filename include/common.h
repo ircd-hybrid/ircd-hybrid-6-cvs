@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: common.h,v 1.11 1999/07/19 02:24:52 db Exp $
+ * $Id: common.h,v 1.12 1999/07/20 00:01:36 tomh Exp $
  */
 #ifndef	INCLUDED_common_h
 #define INCLUDED_common_h
@@ -37,9 +37,8 @@
 #undef FALSE
 #endif
 
-#define FALSE (0)
-#define TRUE  (!FALSE)
-
+#define FALSE  0
+#define TRUE   1
 #define HIDEME 2
 
 /* Blah. I use these a lot. -Dianora */
@@ -54,14 +53,6 @@
 #endif
 
 #define NO  0
-
-#ifdef FOREVER
-#undef FOREVER
-#endif
-
-#define FOREVER for(;;)
-/* -Dianora */
-
 
 /* Just blindly define our own MIN/MAX macro */
 
@@ -85,7 +76,7 @@ typedef struct
 {
   int mode;
   char letter;
-}FLAG_ITEM;
+} FLAG_ITEM;
 
 
 /*
@@ -94,6 +85,8 @@ typedef struct
 /*
  * ZZZ - These can go away slowly as they are rewritten.
  * calm down Tom.
+ * heh :) --Bleep
+ *
  */
 #define MAXCLIENTS GlobalSetOptions.maxclients
 #define NOISYHTM   GlobalSetOptions.noisy_htm
@@ -111,4 +104,4 @@ typedef struct
 #define SPAMNUM    GlobalSetOptions.spam_num
 #define SPAMTIME   GlobalSetOptions.spam_time
 
-#endif /* __common_include__ */
+#endif /* INCLUDED_common_h */
