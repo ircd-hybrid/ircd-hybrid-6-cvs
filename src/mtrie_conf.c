@@ -56,7 +56,7 @@
 #endif
 
 #ifndef lint
-static char *version="$Id: mtrie_conf.c,v 1.13 1998/12/21 06:57:22 db Exp $";
+static char *version="$Id: mtrie_conf.c,v 1.14 1998/12/21 16:49:19 db Exp $";
 #endif /* lint */
 
 #define MAXPREFIX (HOSTLEN+USERLEN+15)
@@ -1641,14 +1641,11 @@ void add_to_ip_ilines(aConfItem *aconf)
 
 static aConfItem *find_matching_ip_i_line(unsigned long host_ip)
 {
-  unsigned long host_ip_host_order;
   aConfItem *aconf;
-
-  host_ip_host_order = ntohl(host_ip);
 
   for( aconf = ip_i_lines; aconf; aconf = aconf->next)
     {
-      if((host_ip_host_order & aconf->ip_mask) == aconf->ip)
+      if((host_ip & aconf->ip_mask) == aconf->ip)
 	return(aconf);
     }
   return((aConfItem *)NULL);
