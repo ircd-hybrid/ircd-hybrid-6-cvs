@@ -1,5 +1,5 @@
 /*
- * $Id: adns.c,v 1.4 2001/12/08 09:04:04 lusky Exp $
+ * $Id: adns.c,v 1.5 2001/12/09 18:16:56 lusky Exp $
  * adns.c  functions to enter libadns 
  *
  * Written by Aaron Sethman <androsyn@ratbox.org>
@@ -153,9 +153,12 @@ void dns_do_callbacks(void)
 #ifndef USE_POLL
 static void do_adns_select(void)
 {
-	struct timeval *tv, tvbuf;
+	struct timeval tvbuf;
 	int maxfd = 2;
 	fd_set readfds, writefds, exceptfds;
+
+	tvbuf.tv_sec = 0;
+	tvbuf.tv_usec = 0;
 	FD_ZERO(&readfds);
 	FD_ZERO(&writefds);
 	FD_ZERO(&exceptfds);

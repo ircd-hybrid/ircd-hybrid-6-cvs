@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.157 2001/12/08 18:25:11 jdc Exp $
+ * $Id: ircd.c,v 1.158 2001/12/09 18:16:56 lusky Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -719,11 +719,6 @@ int main(int argc, char *argv[])
    */
   setup_corefile();
 
-  /*
-   * Check if daemon is already running
-   */
-  check_pidfile();
-
   /* 
    * set initialVMTop before we allocate any memory
    */
@@ -790,6 +785,11 @@ int main(int argc, char *argv[])
       perror("chdir");
       exit(-1);
     }
+
+  /*
+   * Check if daemon is already running
+   */
+  check_pidfile();
 
   init_sys(bootDaemon);
   init_log(logFileName);

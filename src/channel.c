@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.224 2001/12/08 18:33:02 db Exp $
+ * $Id: channel.c,v 1.225 2001/12/09 18:16:56 lusky Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -695,7 +695,7 @@ static  void    send_mode_list(struct Client *cptr,
 {
   Link  *lp;
   char  *cp, *name;
-  int   count = 0, send = 0;
+  int   count = 0, dosend = 0;
   
   cp = modebuf + strlen(modebuf);
   if (*parabuf) /* mode +l or +k xx */
@@ -715,14 +715,14 @@ static  void    send_mode_list(struct Client *cptr,
           *cp = '\0';
         }
       else if (*parabuf)
-        send = 1;
+        dosend = 1;
       if (count == 3)
-        send = 1;
-      if (send)
+        dosend = 1;
+      if (dosend)
         {
           sendto_one(cptr, ":%s MODE %s %s %s",
                      me.name, chname, modebuf, parabuf);
-          send = 0;
+          dosend = 0;
           *parabuf = '\0';
           cp = modebuf;
           *cp++ = '+';

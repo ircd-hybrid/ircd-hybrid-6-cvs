@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.144 2001/12/04 07:44:37 androsyn Exp $
+ *  $Id: s_bsd.c,v 1.145 2001/12/09 18:16:57 lusky Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -1019,10 +1019,11 @@ int read_message(time_t delay, unsigned char mask)        /* mika */
             }
         }
       
-      if (ResolverFileDescriptor >= 0)
+/*      if (ResolverFileDescriptor >= 0)
         {
           FD_SET(ResolverFileDescriptor, read_set);
         }
+*/
       wait.tv_sec = IRCD_MIN(delay2, delay);
       wait.tv_usec = usec;
 
@@ -1050,12 +1051,13 @@ int read_message(time_t delay, unsigned char mask)        /* mika */
   /*
    * Check the name resolver
    */
-
+/*
   if (-1 < ResolverFileDescriptor && 
       FD_ISSET(ResolverFileDescriptor, read_set)) {
     get_res();
     --nfds;
   }
+*/
   /*
    * Check the auth fd's
    */
