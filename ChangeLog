@@ -1,3 +1,16 @@
+ievil       2003/10/13 13:16:13 EDT	(20031013_16)
+
+  Modified files:
+    src                  s_serv.c 
+  Log:
+  Removed some fancy checking that was way wrong... Let's keep it simple
+  stupid. For now ... :) I'll replace this again soon.
+  
+  Revision  Changes    Path
+  1.238     +1 -2      ircd-hybrid-6/src/s_serv.c
+
+
+
 ievil       2003/10/13 12:55:58 EDT	(20031013_15)
 
   Modified files:
