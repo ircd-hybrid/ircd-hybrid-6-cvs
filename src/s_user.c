@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.218 2000/05/26 03:57:39 lusky Exp $
+ *  $Id: s_user.c,v 1.219 2000/06/07 03:23:14 lusky Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -1327,7 +1327,7 @@ int m_nick(aClient *cptr, aClient *sptr, int parc, char *parv[])
    * parc == 9 on a normal TS style server-to-server NICK
    *      introduction
    */
-  if ((parc > 4) && (parc < 9))
+  if ((IsServer(sptr)) && (parc < 9))
     {
       /*
        * We got the wrong number of params. Someone is trying

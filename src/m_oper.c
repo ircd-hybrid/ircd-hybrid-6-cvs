@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_oper.c,v 1.5 1999/08/25 22:58:21 lusky Exp $
+ *   $Id: m_oper.c,v 1.6 2000/06/07 03:23:14 lusky Exp $
  */
 
 #include "m_commands.h"
@@ -238,7 +238,7 @@ int m_oper(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
                  IsOper(sptr) ? 'O' : 'o');
       send_umode_out(cptr, sptr, old);
       sendto_one(sptr, form_str(RPL_YOUREOPER), me.name, parv[0]);
-      sendto_one(sptr, ":%s NOTICE %s:*** Oper privs are %s",me.name,parv[0],
+      sendto_one(sptr, ":%s NOTICE %s :*** Oper privs are %s",me.name,parv[0],
                  operprivs);
 
       SendMessageFile(sptr, &ConfigFileEntry.opermotd);

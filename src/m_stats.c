@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_stats.c,v 1.2 1999/07/30 20:10:52 tomh Exp $
+ *  $Id: m_stats.c,v 1.3 2000/06/07 03:23:14 lusky Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "class.h"       /* report_classes */
@@ -256,7 +256,7 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       break;
 
     case 'B' : case 'b' :
-      sendto_one(sptr,":%s NOTICE %s Use stats I instead", me.name, parv[0]);
+      sendto_one(sptr,":%s NOTICE %s :Use stats I instead", me.name, parv[0]);
       break;
 
     case 'D': case 'd':
@@ -270,11 +270,11 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       break;
 
     case 'E' : case 'e' :
-      sendto_one(sptr,":%s NOTICE %s Use stats I instead", me.name, parv[0]);
+      sendto_one(sptr,":%s NOTICE %s :Use stats I instead", me.name, parv[0]);
       break;
 
     case 'F' : case 'f' :
-      sendto_one(sptr,":%s NOTICE %s Use stats I instead", me.name, parv[0]);
+      sendto_one(sptr,":%s NOTICE %s :Use stats I instead", me.name, parv[0]);
       break;
 
     case 'G': case 'g' :
