@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: irc_string.c,v 1.10 2001/12/10 02:56:28 jdc Exp $
+ *  $Id: irc_string.c,v 1.11 2004/10/13 00:53:36 ievil Exp $
  */
 #include "irc_string.h"
 #include "list.h"
@@ -36,15 +36,16 @@
  *
  *
  * Thu Nov 24 18:22:48 1986 
+ *
+ * Localisation of times -Hwy
  */
 const char* myctime(time_t value)
 {
   static char buf[32];
-  char*       p;
+  struct tm *ltm = localtime(&value);
+  static char *gcc_sucks = "%c";
 
-  strcpy(buf, ctime(&value));
-  if ((p = strchr(buf, '\n')) != NULL)
-    *p = '\0';
+  strftime(buf, 32, gcc_sucks, ltm);
   return buf;
 }
 

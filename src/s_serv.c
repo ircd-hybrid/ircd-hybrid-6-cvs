@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.239 2004/05/23 21:07:01 ievil Exp $
+ *   $Id: s_serv.c,v 1.240 2004/10/13 00:53:36 ievil Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -508,6 +508,12 @@ static void sendnick_TS(struct Client *cptr, struct Client *acptr)
                  acptr->hopcount + 1, acptr->tsinfo, ubuf,
                  acptr->username, acptr->host,
                  acptr->user->server, acptr->info);
+#ifdef PROPAGATE_AWAY
+#ifdef BURST_AWAY
+      if (acptr->user->away)
+        sendto_one(cptr, ":%s AWAY :%s", acptr->name, acptr->user->away);
+#endif
+#endif
     }
 }
 

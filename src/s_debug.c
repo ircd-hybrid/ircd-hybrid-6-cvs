@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.61 2003/08/16 19:58:36 ievil Exp $
+ *   $Id: s_debug.c,v 1.62 2004/10/13 00:53:36 ievil Exp $
  */
 #include "s_debug.h"
 #include "channel.h"
@@ -179,23 +179,23 @@ void send_usage(aClient *cptr, char *nick)
 
 
   sendto_one(cptr,
-             ":%s %d %s :CPU Secs %d:%d User %d:%d System %d:%d",
+            ":%s %d %s :CPU Secs %ld:%d User %ld:%d System %ld:%d",
              me.name, RPL_STATSDEBUG, nick, secs/60, secs%60,
              rus.ru_utime.tv_sec/60, rus.ru_utime.tv_sec%60,
              rus.ru_stime.tv_sec/60, rus.ru_stime.tv_sec%60);
-  sendto_one(cptr, ":%s %d %s :RSS %ld ShMem %d Data %d Stack %d",
+  sendto_one(cptr, ":%s %d %s :RSS %ld ShMem %ld Data %ld Stack %ld",
              me.name, RPL_STATSDEBUG, nick, rus.ru_maxrss,
              rus.ru_ixrss / rup, rus.ru_idrss / rup,
              rus.ru_isrss / rup);
-  sendto_one(cptr, ":%s %d %s :Swaps %d Reclaims %d Faults %d",
+  sendto_one(cptr, ":%s %d %s :Swaps %ld Reclaims %ld Faults %ld",
              me.name, RPL_STATSDEBUG, nick, rus.ru_nswap,
              rus.ru_minflt, rus.ru_majflt);
-  sendto_one(cptr, ":%s %d %s :Block in %d out %d",
+  sendto_one(cptr, ":%s %d %s :Block in %ld out %ld",
              me.name, RPL_STATSDEBUG, nick, rus.ru_inblock,
              rus.ru_oublock);
-  sendto_one(cptr, ":%s %d %s :Msg Rcv %d Send %d",
+  sendto_one(cptr, ":%s %d %s :Msg Rcv %ld Send %ld",
              me.name, RPL_STATSDEBUG, nick, rus.ru_msgrcv, rus.ru_msgsnd);
-  sendto_one(cptr, ":%s %d %s :Signals %d Context Vol. %d Invol %d",
+  sendto_one(cptr, ":%s %d %s :Signals %ld Context Vol. %ld Invol %ld",
              me.name, RPL_STATSDEBUG, nick, rus.ru_nsignals,
              rus.ru_nvcsw, rus.ru_nivcsw);
 

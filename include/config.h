@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.173 2004/06/13 21:08:00 ievil Exp $
+ * $Id: config.h,v 1.174 2004/10/13 00:53:33 ievil Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -751,6 +751,20 @@
  
 #undef  WHOISACTUALLY
 
+/* PART_MESSAGES - PART can include a comment, IRCnet and Dalnet style
+ * The message will get ignored by servers that do not understand...
+ * H6+tXi, H6+ins, H7, H6.3+fr all support this.
+ * Credits:  toot
+ */
+#define PART_MESSAGES
+
+/* PROPAGATE_AWAY - Propogate AWAY messages to (and from) other servers.
+ * This allows users to see you marked as AWAY on distant servers, without
+ * resorting to using remote WHOIS.  This is standard in Hybrid 7 and
+ * csircd 1.14, so it should be available to Syldra users as well.
+ */
+#define PROPAGATE_AWAY
+
 /* ----------------- not approved on EFnet section --------------------
  *
  * if you are not an efnet admin - we recommend you enable most of these.. 
@@ -829,6 +843,14 @@
  *
  */
 #undef RESTRICT_LOCOP
+
+/* BURST_AWAY - If AWAY messages are propagated, then burst them to a
+ * connecting server as well.  Hybrid 7 does NOT do this.
+ *
+ * NOTE:  This will increase your burst size.
+ */
+#undef BURST_AWAY
+
 
 /* -------------- END NOT APPROVED ON EFNET SECTION --------------------- */
 

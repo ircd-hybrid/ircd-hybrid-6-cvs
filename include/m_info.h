@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.32 2004/05/23 16:16:54 ievil Exp $
+ * $Id: m_info.h,v 1.33 2004/10/13 00:53:33 ievil Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -94,6 +94,13 @@ Info MyInformation[] = {
 #endif /* BAN_INFO */
 
   { "BUFFERPOOL", "", BUFFERPOOL, "Maximum size of all SendQs" },
+
+#ifdef BURST_AWAY
+  { "BURST_AWAY", "ON", 0, "Send AWAY messages on burst" },
+#else
+  { "BURST_AWAY", "OFF", 0, "Send AWAY messages on burst" },
+#endif
+
 
 #ifdef CHANMODE_E
   { "CHANMODE_E", "ON", 0, "Enable channel mode +e" },
@@ -547,6 +554,13 @@ Info MyInformation[] = {
 #endif /* P_LINES_OPER_ONLY */
 
   { "PACE_WAIT", "", PACE_WAIT, "Minimum Delay between uses of certain commands" },
+
+#ifdef PART_MESSAGES
+  { "PART_MESSAGES", "ON", 0, "Allow PART comments" },
+#else
+  { "PART_MESSAGES", "OFF", 0, "Allow PART comments" },
+#endif
+
   { "PORTNUM", "", PORTNUM, "Default /connect port if not in ircd.conf" },
 
 #ifdef PPATH
@@ -554,6 +568,12 @@ Info MyInformation[] = {
 #else
   { "PPATH", "NONE", 0, "Path to Pid File" },
 #endif /* PPATH */
+
+#ifdef PROPAGATE_AWAY
+  { "PROPAGATE_AWAY", "ON", 0, "Propagate AWAY messages to other servers" },
+#else
+  { "PROPAGATE_AWAY", "OFF", 0, "Propagate AWAY messages to other servers" },
+#endif
 
 #ifdef REJECT_HOLD
   { "REJECT_HELD_MAX", "", REJECT_HELD_MAX, "Maximum number of FD's used by REJECT_HOLD" },
