@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: ircd_defs.h,v 1.7 1999/07/22 06:33:26 tomh Exp $
+ * $Id: ircd_defs.h,v 1.8 2001/06/25 00:50:01 db Exp $
  *
  * ircd_defs.h - Global size definitions for record entries used
  * througout ircd. Please think 3 times before adding anything to this
@@ -28,7 +28,7 @@
 #ifndef INCLUDED_config_h
 #include "config.h"
 #endif
-#if !defined(CONFIG_H_LEVEL_6)
+#if !defined(CONFIG_H_LEVEL_6_1)
 #  error Incorrect config.h for this revision of ircd.
 #endif
 
