@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.25 1999/01/20 05:56:04 db Exp $
+ * $Id: struct.h,v 1.26 1999/01/20 06:03:39 db Exp $
  */
 
 #ifndef	__struct_include__
@@ -812,7 +812,6 @@ struct SLink
 struct Channel
 {
   struct	Channel *nextch, *prevch, *hnextch;
-  int	hashv;		/* raw hash value */
   Mode	mode;
   char	topic[TOPICLEN+1];
 #ifdef TOPIC_INFO
