@@ -1,7 +1,7 @@
 #
 # Makefile.in for ircd/src
 #
-# $Id: Makefile.in,v 1.20 1999/07/11 05:10:55 tomh Exp $
+# $Id: Makefile.in,v 1.21 1999/07/11 18:51:27 tomh Exp $
 #
 CC = @CC@
 RM = @RM@
@@ -131,5 +131,5 @@ clean:
 distclean: clean
 	${RM} -f Makefile version.c.last .depend
 
--include .depend
+include .depend
 
