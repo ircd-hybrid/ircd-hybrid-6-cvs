@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.1 1998/09/17 14:25:03 db Exp $
+ * $Id: config.h,v 1.2 1998/09/19 21:12:34 db Exp $
  */
 
 #ifndef	__config_include__
@@ -973,7 +973,7 @@
  * to make your client server very sluggish.
  * You usually shouldn't need this. -Dianora
 */
-#define DEBUGMODE               /* define DEBUGMODE to enable debugging mode.*/
+#undef DEBUGMODE               /* define DEBUGMODE to enable debugging mode.*/
 
 /* DEBUG_NO_FORK is used to stop the daemon from doing a fork(), makes it
  * easier for gdb. You won't need this unless you are planning on

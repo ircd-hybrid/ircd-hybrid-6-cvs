@@ -55,7 +55,7 @@
 #endif
 
 #ifndef lint
-static char *version="$Id: mtrie_conf.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static char *version="$Id: mtrie_conf.c,v 1.2 1998/09/19 21:12:38 db Exp $";
 #endif /* lint */
 
 #define MAXPREFIX (HOSTLEN+USERLEN+10)
@@ -707,7 +707,7 @@ aConfItem *find_matching_mtrie_conf(char *host,char *user,
       if(iline_aconf && (iline_aconf->status & (CONF_ELINE|CONF_KILL)))
 	return(iline_aconf);
     }
-  else	/* There IS no trie */
+  else
     {
       iline_aconf= find_wild_card_iline(user);
 

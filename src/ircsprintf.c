@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #ifndef lint
-static char *rcs_version = "$Id: ircsprintf.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static char *rcs_version = "$Id: ircsprintf.c,v 1.2 1998/09/19 21:12:37 db Exp $";
 #endif
 
 #ifndef USE_VARARGS
@@ -71,6 +71,10 @@ va_dcl
 		*wp++ = 'l'; *wp++ = '}'; *wp++ = '\0';
 	      }
 	    rp = inp[++i];                  /* get the next parameter */
+	    break;
+	  case 'c':
+	    *wp++ = (char)rp;
+	    rp = inp[++i];
 	    break;
 	  case 'd':
 	    {
