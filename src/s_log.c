@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_log.c,v 1.2 1999/07/31 08:23:03 tomh Exp $
+ *   $Id: s_log.c,v 1.3 1999/07/31 16:37:13 tomh Exp $
  */
 #include "s_log.h"
 #include "irc_string.h"
@@ -68,7 +68,7 @@ static int open_log(const char* filename)
 
 void close_log(void)
 {
-  if (-1 == logFile) {
+  if (-1 < logFile) {
     close(logFile);
     logFile = -1;
   }
@@ -111,6 +111,12 @@ void init_log(void)
 #ifdef USE_SYSLOG
   openlog("ircd", LOG_PID | LOG_NDELAY, LOG_FACILITY);
 #endif
+}
+
+void set_log_level(int level)
+{
+  if (L_ERROR < level && level <= L_DEBUG)
+    logLevel = level;
 }
 
 
