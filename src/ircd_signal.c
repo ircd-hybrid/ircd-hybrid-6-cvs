@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd_signal.c,v 1.4 2001/12/08 07:06:13 lusky Exp $
+ * $Id: ircd_signal.c,v 1.5 2002/04/15 23:13:02 lusky Exp $
  */
 #include "ircd_signal.h"
 #include "ircd.h"         /* dorehash */
@@ -81,12 +81,14 @@ void setup_signals(void)
   sigemptyset(&act.sa_mask);
   sigaddset(&act.sa_mask, SIGPIPE);
   sigaddset(&act.sa_mask, SIGALRM);
+  sigaddset(&act.sa_mask, SIGTRAP);
 
 # ifdef SIGWINCH
   sigaddset(&act.sa_mask, SIGWINCH);
   sigaction(SIGWINCH, &act, 0);
 # endif
   sigaction(SIGPIPE, &act, 0);
+  sigaction(SIGTRAP, &act, 0);
 
   act.sa_handler = dummy_handler;
   sigaction(SIGALRM, &act, 0);
