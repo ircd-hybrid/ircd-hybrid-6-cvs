@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.241 2003/05/05 02:39:08 db Exp $
+ *  $Id: s_conf.c,v 1.242 2003/06/06 08:56:36 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -3416,7 +3416,7 @@ int m_testline(aClient *cptr, aClient *sptr, int parc, char *parv[])
                 {
                   get_printable_conf(aconf, &name, &host, &pass, &user, &port);
                   sendto_one(sptr, 
-                         ":%s NOTICE %s :D-line host [%s] pass [%s]",
+                         ":%s NOTICE %s :D-line host [%s] reason [%s]",
                          me.name, parv[0], 
                          host,
                          pass);
@@ -3447,7 +3447,7 @@ int m_testline(aClient *cptr, aClient *sptr, int parc, char *parv[])
           if(aconf->status & CONF_KILL) 
             {
               sendto_one(sptr, 
-                         ":%s NOTICE %s :K-line name [%s] host [%s] pass [%s]",
+                         ":%s NOTICE %s :K-line ident [%s] host [%s] reason [%s]",
                          me.name, parv[0], 
                          user,
                          host,
@@ -3456,7 +3456,7 @@ int m_testline(aClient *cptr, aClient *sptr, int parc, char *parv[])
           else if(aconf->status & CONF_CLIENT)
             {
               sendto_one(sptr,
-":%s NOTICE %s :I-line mask [%s] prefix [%s] name [%s] host [%s] port [%d] class [%d]",
+":%s NOTICE %s :I-line mask [%s] prefix [%s] ident [%s] host [%s] port [%d] class [%d]",
                          me.name, parv[0], 
                          name,
                          show_iline_prefix(sptr,aconf,user),
@@ -3469,7 +3469,7 @@ int m_testline(aClient *cptr, aClient *sptr, int parc, char *parv[])
               if(aconf)
                 {
                   sendto_one(sptr, 
-                     ":%s NOTICE %s :k-line name [%s] host [%s] pass [%s]",
+                     ":%s NOTICE %s :k-line ident [%s] host [%s] reason [%s]",
                              me.name, parv[0], 
                              aconf->user,
                              aconf->host,
