@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.58 1998/12/29 01:19:05 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.59 1998/12/31 00:17:33 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1083,6 +1083,14 @@ static  void     set_mode(aClient *cptr,
 
 	  if (!(who = find_chasing(sptr, arg, NULL)))
 	    break;
+
+	  /* there is always the remote possibility of picking up
+	   * a bogus user, be nasty to core for that. -Dianora
+	   */
+
+	  if (!who->user)
+	    break;
+
 	  /* no more of that mode bouncing crap */
 	  if (!IsMember(who, chptr))
 	    {
@@ -1132,7 +1140,7 @@ static  void     set_mode(aClient *cptr,
 
 	  *mbufw++ = plus;
 	  *mbufw++ = c;
-	  strcpy(pbufw, arg);
+	  strcpy(pbufw, who->name);
 	  pbufw += strlen(pbufw);
 	  *pbufw++ = ' ';
 	  len += tmp + 1;
