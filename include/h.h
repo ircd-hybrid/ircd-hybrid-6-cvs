@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.48 1999/07/18 17:50:51 db Exp $
+ * $Id: h.h,v 1.49 1999/07/18 18:03:52 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -108,7 +108,6 @@ extern	int	send_queued (aClient *);
 /*VARARGS*/
 extern  void    send_capabilities(aClient *,int);
 extern  int	is_address(char *,unsigned long *,unsigned long *); 
-extern  void	do_include_conf();
 extern	aConfItem	*match_Dline(unsigned long);
 extern	int	show_lusers(aClient *, aClient *, int, char **);
 extern	int	nickkilldone(aClient*, aClient*, int, char**, time_t, char*);

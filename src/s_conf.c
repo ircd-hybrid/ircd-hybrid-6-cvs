@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.132 1999/07/18 16:36:48 db Exp $
+ *  $Id: s_conf.c,v 1.133 1999/07/18 18:03:54 db Exp $
  */
 #include "s_conf.h"
 #include "listener.h"
@@ -62,6 +62,7 @@ int safe_write(aClient *,const char *, int, char *);
 /* internally defined functions */
 
 static void lookup_confhost(aConfItem* aconf);
+static void do_include_conf(void);
 static int     SplitUserHost( aConfItem * );
 
 static FBFILE*  openconf(const char* filename);
@@ -2364,7 +2365,7 @@ static int SplitUserHost(aConfItem *aconf)
  * -Dianora
  */
 
-void do_include_conf()
+static void do_include_conf(void)
 {
   FBFILE* file=0;
   aConfItem *nextinclude;
