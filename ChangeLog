@@ -1,3 +1,16 @@
+ievil       2004/04/08 21:13:34 EDT	(20040409_2)
+
+  Added files:
+    contrib              README 
+  Log:
+  Some things do not fit into the mainstream. So I'll keep misc patches
+  here so ppl can select to use them if they want.  :)
+  
+  Revision  Changes    Path
+  1.1       +12 -0     ircd-hybrid-6/contrib/README (new)
+
+
+
 ievil       2004/04/08 21:12:28 EDT	(20040409_1)
 
   ircd-hybrid-6/contrib - New directory
