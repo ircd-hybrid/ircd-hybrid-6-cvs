@@ -22,7 +22,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.34 1998/12/01 21:53:58 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.35 1998/12/02 05:21:13 db Exp $";
 #endif
 
 #include "struct.h"
@@ -2859,7 +2859,6 @@ int	m_knock(aClient *cptr,
    */
 
   /* opers are not flow controlled here */
-
   if( !IsAnOper(sptr) && (sptr->last_knock + KNOCK_DELAY) > NOW)
     {
       sendto_one(sptr,":%s NOTICE %s :*** Notice -- Wait %d seconds before another knock",
@@ -2883,13 +2882,15 @@ int	m_knock(aClient *cptr,
       return 0;
     }
 
-  if (is_banned(sptr, chptr))
+  /* don't allow a knock if the user is banned, or the channel is private */
+  if (is_banned(sptr, chptr) || (chptr->mode.mode & MODE_PRIVATE))
     {
       sendto_one(sptr, err_str(ERR_CANNOTSENDTOCHAN), me.name, parv[0],
 		 name);
       return 0;
     }
 
+  /* if the user is already on channel, then a knock is pointless! */
   if (IsMember(sptr, chptr))
     {
       sendto_one(sptr,":%s NOTICE %s :*** Notice -- You are on channel already!",
