@@ -1,7 +1,7 @@
 /*
  * dline_conf.c
  *
- * $Id: dline_conf.c,v 1.20 1999/07/15 10:53:16 db Exp $
+ * $Id: dline_conf.c,v 1.21 1999/07/17 02:31:58 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -775,7 +775,7 @@ void walk_the_dlines(aClient *sptr, struct ip_subtree *tree)
       GetPrintableaConfItem(scan, &name, &host, &pass, &user, &port);
 
       sendto_one(sptr, form_str(RPL_STATSDLINE), me.name,
-		 sptr->name, c, name, pass);
+		 sptr->name, c, host, pass);
     }
   walk_the_dlines(sptr, tree->right);
 }

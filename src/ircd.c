@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.79 1999/07/16 04:53:13 tomh Exp $
+ * $Id: ircd.c,v 1.80 1999/07/17 02:31:58 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -188,7 +188,7 @@ void restart(char *mesg)
   was_here = YES;
 
 #ifdef	USE_SYSLOG
-  syslog(LOG_WARNING, "Restarting Server because: %s, sbrk(0)-etext: %ld",
+  (void)syslog(LOG_WARNING, "Restarting Server because: %s, sbrk(0)-etext: %ld",
      mesg,(u_long)sbrk((size_t)0)-(u_long)sbrk0);
 #endif
   if (bootopt & BOOT_STDERR)
@@ -885,17 +885,15 @@ int	main(int argc, char *argv[])
 
 #ifdef KPATH
   ConfigFileEntry.klinefile = KLINEFILE;         /* Server kline file */
-
-#ifdef DLINES_IN_KPATH
-  ConfigFileEntry.dlinefile = KLINEFILE;
 #else
-  ConfigFileEntry.dlinefile = CONFIGFILE;
-#endif
+	ConfigFileEntry.klinefile = CONFIGFILE;
+#endif /* KPATH */
 
+#ifdef DLPATH
+	ConfigFileEntry.dlinefile = DLPATH;
 #else
-   ConfigFileEntry.klinefile = CONFIGFILE;
-   ConfigFileEntry.dlinefile = CONFIGFILE;
-#endif
+	ConfigFileEntry.dlinefile = CONFIGFILE;
+#endif /* DLPATH */
 
 #ifdef GLINES
    ConfigFileEntry.glinefile = GLINEFILE;

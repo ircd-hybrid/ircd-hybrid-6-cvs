@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.138 1999/07/16 22:56:39 db Exp $
+ *  $Id: s_user.c,v 1.139 1999/07/17 02:32:00 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -3854,6 +3854,7 @@ static void announce_fluder(
 /* This is really just a "convenience" function.  I can only keep three or
 ** four levels of pointer dereferencing straight in my head.  This removes
 ** an entry in a fluders list.  Use this when working on a fludees list :) */
+
 struct fludbot *remove_fluder_reference(struct fludbot **fluders,
 					aClient *fluder)
 {

@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.121 1999/07/16 11:57:33 db Exp $
+ *  $Id: s_conf.c,v 1.122 1999/07/17 02:31:59 db Exp $
  */
 #include "s_conf.h"
 #include "listener.h"
