@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: msg.h,v 1.7 1999/05/15 22:00:40 lusky Exp $
+ * $Id: msg.h,v 1.8 1999/06/22 01:01:38 db Exp $
  */
 
 #ifndef	__msg_include__
@@ -76,9 +76,7 @@
 #define	MSG_DNS      "DNS"	/* DNS  -> DNSS */
 #define MSG_OPERWALL "OPERWALL" /* OPERWALL */
 #define MSG_KLINE    "KLINE"    /* KLINE */
-#ifdef UNKLINE
 #define MSG_UNKLINE  "UNKLINE"	/* UNKLINE */
-#endif
 #define MSG_DLINE    "DLINE"	/* DLINE */
 #define	MSG_HTM      "HTM"	/* HTM */
 #define MSG_SET      "SET"	/* SET */
@@ -290,9 +288,7 @@ struct Message msgtab[] = {
   { MSG_OPERWALL, m_operwall,0, MAXPARA, 1, 0, 0, 0L },
   { MSG_CLOSE,   m_close,    0, MAXPARA, 1, 0, 0, 0L },
   { MSG_KLINE,   m_kline,    0, MAXPARA, 1, 0, 0, 0L },
-#ifdef UNKLINE 
   { MSG_UNKLINE, m_unkline,  0, MAXPARA, 1, 0, 0, 0L },
-#endif
   { MSG_DLINE,   m_dline,    0, MAXPARA, 1, 0, 0, 0L },
   { MSG_GLINE,   m_gline,    0, MAXPARA, 1, 0, 0, 0L },
   { MSG_HASH,    m_hash,     0, MAXPARA, 1, 0, 0, 0L },

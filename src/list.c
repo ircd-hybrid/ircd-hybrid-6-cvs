@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)list.c	2.22 15 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: list.c,v 1.11 1999/06/12 15:42:58 db Exp $";
+static char *rcs_version = "$Id: list.c,v 1.12 1999/06/22 01:01:41 db Exp $";
 #endif
 
 #include "struct.h"
@@ -539,8 +539,8 @@ void free_conf(aConfItem *aconf)
   if (aconf->passwd)
     memset((void *)aconf->passwd, 0, strlen(aconf->passwd));
   MyFree(aconf->passwd);
+  MyFree(aconf->user);
   MyFree(aconf->name);
-  MyFree(aconf->mask);
   MyFree((char *)aconf);
   return;
 }

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: sys.h,v 1.8 1999/06/12 15:42:57 db Exp $
+ * $Id: sys.h,v 1.9 1999/06/22 01:01:39 db Exp $
  */
 
 #ifndef	__sys_include__
@@ -78,6 +78,9 @@ extern	char	*rindex (char *, char);
 #endif
 
 #define MyFree(x)       if ((x) != NULL) free(x)
+
+#define err_str(x) form_str(x)
+#define rpl_str(x) form_str(x)
 
 #define DEBUG_BLOCK_ALLOCATOR
 #ifdef DEBUG_BLOCK_ALLOCATOR

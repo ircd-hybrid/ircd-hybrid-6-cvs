@@ -19,7 +19,7 @@
 
 #ifndef	lint
 static char sccsid[] = "@(#)class.c	1.4 28 Jun 1993 (C) 1990 Darren Reed";
-static char *rcs_version = "$Id: class.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static char *rcs_version = "$Id: class.c,v 1.2 1999/06/22 01:01:41 db Exp $";
 #endif
 
 #include "struct.h"
@@ -205,7 +205,7 @@ void	report_classes(aClient *sptr)
   Reg aClass *cltmp;
 
   for (cltmp = FirstClass(); cltmp; cltmp = NextClass(cltmp))
-    sendto_one(sptr, rpl_str(RPL_STATSYLINE), me.name, sptr->name,
+    sendto_one(sptr, form_str(RPL_STATSYLINE), me.name, sptr->name,
 	       'Y', Class(cltmp), PingFreq(cltmp), ConFreq(cltmp),
 	       MaxLinks(cltmp), MaxSendq(cltmp));
 }
