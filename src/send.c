@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)send.c	2.32 2/28/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: send.c,v 1.18 1998/12/05 07:37:26 db Exp $";
+static char *rcs_version = "$Id: send.c,v 1.19 1998/12/11 02:49:35 sean Exp $";
 #endif
 
 #include "struct.h"
@@ -145,7 +145,7 @@ static	int	send_message(aClient *to, char *msg, int len)
       if (IsClient(to))
 	to->flags |= FLAGS_SENDQEX;
 	if (IsDoingList(to))
-	      return dead_link(to, "Max Sendq exceeded while doing /list");
+	      return dead_link(to, "Local kill by /list (so many channels!)");
 	else
 	      return dead_link(to, "Max Sendq exceeded");
     }
