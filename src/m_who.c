@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_who.c,v 1.2 2000/11/21 06:49:31 lusky Exp $
+ *   $Id: m_who.c,v 1.3 2000/11/24 17:36:30 lusky Exp $
  */
 
 #include "m_commands.h"
@@ -111,10 +111,15 @@ static  void    do_who(struct Client *sptr,
     lp = find_user_link(repchan->members, acptr);
   if (lp != NULL)
     {
-      if (lp->flags & CHFL_CHANOP)
-        *p++ = '@';
-      else if (lp->flags & CHFL_VOICE)
-        *p++ = '+';
+#ifdef HIDE_OPS
+      if(is_chan_op(sptr,repchan))
+#endif
+	{
+	  if (lp->flags & CHFL_CHANOP)
+	    *p++ = '@';
+	  else if (lp->flags & CHFL_VOICE)
+	    *p++ = '+';
+	}
     }
   *p = '\0';
   sendto_one(sptr, form_str(RPL_WHOREPLY), me.name, sptr->name,

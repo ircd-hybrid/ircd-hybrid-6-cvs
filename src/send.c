@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.95 2000/11/18 19:11:16 lusky Exp $
+ *   $Id: send.c,v 1.96 2000/11/24 17:36:31 lusky Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -758,6 +758,63 @@ sendto_channel_butserv(aChannel *chptr, aClient *from,
   for (lp = chptr->members; lp; lp = lp->next)
     if (MyConnect(acptr = lp->value.cptr))
       vsendto_prefix_one(acptr, from, pattern, args);
+  
+  va_end(args);
+} /* sendto_channel_butserv() */
+
+/*
+ * sendto_channel_chanops_butserv
+ *
+ * Send a message to all members of a channel that are connected to this
+ * server.
+ */
+
+void
+sendto_channel_chanops_butserv(aChannel *chptr, aClient *from, 
+                       const char *pattern, ...)
+
+{
+  va_list args;
+  register Link *lp;
+  register aClient *acptr;
+
+  va_start(args, pattern);
+
+  for (lp = chptr->members; lp; lp = lp->next)
+    if (MyConnect(acptr = lp->value.cptr))
+      if(is_chan_op(acptr,chptr))
+	{
+	  vsendto_prefix_one(acptr, from, pattern, args);
+	}
+
+  
+  va_end(args);
+} /* sendto_channel_butserv() */
+/*
+ * sendto_channel_chanops_butserv
+ *
+ * Send a message to all members of a channel that are connected to this
+ * server.
+ */
+
+void
+sendto_channel_non_chanops_butserv(aChannel *chptr, aClient *from, 
+                       const char *pattern, ...)
+
+{
+  va_list args;
+  register Link *lp;
+  register aClient *acptr;
+
+  va_start(args, pattern);
+
+  for (lp = chptr->members; lp; lp = lp->next)
+    if (MyConnect(acptr = lp->value.cptr))
+      if(!is_chan_op(acptr,chptr))
+	{
+	  vsendto_prefix_one(acptr, from, pattern, args);
+	}
+
   
   va_end(args);
 } /* sendto_channel_butserv() */

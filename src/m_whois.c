@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_whois.c,v 1.5 2000/11/21 06:49:31 lusky Exp $
+ *   $Id: m_whois.c,v 1.6 2000/11/24 17:36:30 lusky Exp $
  */
 
 #include "m_commands.h"
@@ -248,10 +248,15 @@ int     m_whois(struct Client *cptr,
                     }
 
 		  found_mode = user_channel_mode(acptr, chptr);
-		  if(found_mode & CHFL_CHANOP)
-                    *(buf + len++) = '@';
-                  else if (found_mode & CHFL_VOICE)
-                    *(buf + len++) = '+';
+#ifdef HIDE_OPS
+		  if(is_chan_op(sptr,chptr))
+#endif
+		    {
+		      if(found_mode & CHFL_CHANOP)
+			*(buf + len++) = '@';
+		      else if (found_mode & CHFL_VOICE)
+			*(buf + len++) = '+';
+		    }
                   if (len)
                     *(buf + len) = '\0';
                   (void)strcpy(buf + len, chptr->chname);
@@ -386,10 +391,15 @@ int     m_whois(struct Client *cptr,
                       len = 0;
                     }
 		  found_mode = user_channel_mode(acptr, chptr);
-                  if (found_mode & CHFL_CHANOP)
-                    *(buf + len++) = '@';
-                  else if (found_mode & CHFL_VOICE)
-                    *(buf + len++) = '+';
+#ifdef HIDE_OPS
+                  if(is_chan_op(sptr,chptr))
+#endif
+		     {
+		       if (found_mode & CHFL_CHANOP)
+			 *(buf + len++) = '@';
+		       else if (found_mode & CHFL_VOICE)
+			 *(buf + len++) = '+';
+		     }
                   if (len)
                     *(buf + len) = '\0';
                   (void)strcpy(buf + len, chptr->chname);

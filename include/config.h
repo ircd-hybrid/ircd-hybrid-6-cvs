@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.87 2000/11/21 06:49:22 lusky Exp $
+ * $Id: config.h,v 1.88 2000/11/24 17:36:24 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -118,12 +118,17 @@
 #define HPATH   "opers.txt"
 #define OPATH   "opers.motd"
 
+/* HIDE_OPS
+ * Define this to prevent non chanops from seeing what ops a channel has
+ */
+#undef HIDE_OPS
+
 /* SERVERHIDE
  * Define this to prevent users from seeing what server a user is on.
  * It also hide IP address in STATS commands and various notices, disables
  * TRACE and LTRACE, and prevents hunting by nickname for nonopers.
  */
-#undef SERVERHIDE
+#define SERVERHIDE
 
 /* NETWORK_NAME
  * Displayed in place of the servername when SERVERHIDE is enabled
