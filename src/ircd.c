@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.110 1999/07/27 01:35:14 tomh Exp $
+ * $Id: ircd.c,v 1.111 1999/07/27 03:01:49 tomh Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -1177,7 +1177,7 @@ static void initialize_global_set_options(void)
 
   MAXCLIENTS = MAX_CLIENTS;
   NOISYHTM = NOISY_HTM;
-  AUTOCONN = 1;
+  GlobalSetOptions.autoconn = 1;
 
 #ifdef FLUD
   FLUDNUM = FLUD_NUM;
