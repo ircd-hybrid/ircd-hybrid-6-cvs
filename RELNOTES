@@ -1,4 +1,4 @@
-$Id: RELNOTES,v 1.22 2004/04/10 04:42:42 ievil Exp $
+$Id: RELNOTES,v 1.23 2004/06/12 00:23:27 ievil Exp $
 
 This is the current release version of ircd-hybrid-6.
 
@@ -15,6 +15,7 @@ DISCUSSION: There is a mailing list for discussion of hybrid issues,
  done than ranting on #TZ.
 
 Questions/comments directed to ircd-hybrid@the-project.org
+
 
 ircd-hybrid-6.4.2 Release Notes
 -------------------------------
