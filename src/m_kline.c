@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.78 2003/06/06 10:08:03 ievil Exp $
+ *   $Id: m_kline.c,v 1.79 2003/06/11 13:20:14 ievil Exp $
  */
 #include "m_commands.h"
 #include "m_kline.h"
@@ -494,7 +494,7 @@ m_kline(struct Client *cptr,
       if (IsServer(cptr))
         {
           if(parc == 6)
-             sendto_match_cap_servs(NULL, sptr, CAP_KLN,":%s KLINE %s %s %s %s :%s",
+             sendto_match_cap_servs(NULL, cptr, CAP_KLN,":%s KLINE %s %s %s %s :%s",
                                     parv[0], parv[1], parv[2], parv[3],parv[4], parv[5]);
           return 0;
         }

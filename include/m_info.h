@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.26 2002/11/28 04:17:59 db Exp $
+ * $Id: m_info.h,v 1.27 2003/06/11 13:20:12 ievil Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -237,6 +237,12 @@ Info MyInformation[] = {
 #else
   { "GLINE_TIME", "NONE", 0, "Expire Time for Glines" },
 #endif /* GLINE_TIME */
+
+#ifdef GLINE_REASON_FIRST
+  { "GLINE_REASON_FIRST", "ON", 0, "Use the first GLINE reason as trigger reason" },
+#else
+  { "GLINE_REASON_FIRST", "OFF", 0, "Use the first GLINE reason as trigger reason" },
+#endif /* GLINE_REASON_FIRST */
 
 #ifdef GLINEFILE
   { "GLINEFILE", GLINEFILE, 0, "Path to G-line File" },
@@ -500,6 +506,12 @@ Info MyInformation[] = {
   { "OPER_IDLE", "OFF", 0, "Allow Operators to remain idle" },
 #endif /* OPER_IDLE */
 
+#ifdef OPER_JUPE_BYPASS
+  { "OPER_JUPE_BYPASS", "ON", 0, "Allow opers to bypass channel jupes" },
+#else
+  { "OPER_JUPE_BYPASS", "OFF", 0, "Allow opers to bypass channel jupes" },
+#endif /* OPER_JUPE_BYPASS */
+
 #ifdef ANTI_SPAMBOT
   { "OPER_SPAM_COUNTDOWN", "", OPER_SPAM_COUNTDOWN, "Anti SpamBot Parameter" },
 #endif /* ANTI_SPAMBOT */
@@ -595,6 +607,12 @@ Info MyInformation[] = {
   { "SHOW_INVISIBLE_LUSERS", "OFF", 0, "Show Invisible Clients in LUSERS" },
 #endif /* SHOW_INVISIBLE_LUSERS */
 
+#ifdef SHOW_REMOTE_WHOIS
+  { "SHOW_REMOTE_WHOIS", "ON", 0, "Allow opers to see remote whois" },
+#else
+  { "SHOW_REMOTE_WHOIS", "OFF", 0, "Allow opers to see remote whois" },
+#endif /* SHOW_REMOTE_WHOIS */
+
 #ifdef SLAVE_SERVERS
   { "SLAVE_SERVERS", "ON", 0, "Send LOCOPS and K-lines to U: lined Servers" },
 #else
@@ -620,6 +638,12 @@ Info MyInformation[] = {
 #ifdef SPLIT_SMALLNET_USER_SIZE
   { "SPLIT_SMALLNET_USER_SIZE", "", SPLIT_SMALLNET_USER_SIZE, "Normal amount of Users" },
 #endif /* SPLIT_SMALLNET_USER_SIZE */
+
+#ifdef SPOOF_IP
+  { "SPOOF_IP", "ON", 0, "Allow numeric ip spoofing" },
+#else
+  { "SPOOF_IP", "OFF", 0, "Allow numeric ip spoofing" },
+#endif /* SPOOF_IP */
 
 #ifdef SPOOF_NOTICE
   { "SPOOF_NOTICE", "ON", 0, "Show Operators when a Client connects with a spoofed I" },

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_whois.c,v 1.9 2003/05/04 17:52:45 db Exp $
+ *   $Id: m_whois.c,v 1.10 2003/06/11 13:20:14 ievil Exp $
  */
 
 #include "m_commands.h"
@@ -285,7 +285,11 @@ int     m_whois(struct Client *cptr,
                        me.name, parv[0], name);
 #ifdef WHOIS_NOTICE
           if ((MyOper(acptr)) && ((acptr)->umodes & FLAGS_SPY) &&
-              (MyConnect(sptr)) && (IsPerson(sptr)) && (acptr != sptr))
+#ifndef SHOW_REMOTE_WHOIS
+              (MyConnect(sptr)) && (IsPerson(sptr)) &&
+#endif
+             (acptr != sptr))
+              
             sendto_one(acptr,
                        ":%s NOTICE %s :*** Notice -- %s (%s@%s) is doing a /whois on you.",
                        me.name, acptr->name, parv[0], sptr->username,
@@ -428,7 +432,11 @@ int     m_whois(struct Client *cptr,
                        me.name, parv[0], name);
 #ifdef WHOIS_NOTICE
           if ((MyOper(acptr)) && ((acptr)->umodes & FLAGS_SPY) &&
-              (MyConnect(sptr)) && (IsPerson(sptr)) && (acptr != sptr))
+#ifndef SHOW_REMOTE_WHOIS
+              (MyConnect(sptr)) && (IsPerson(sptr)) &&
+#endif
+             (acptr != sptr))
+
             sendto_one(acptr,
                        ":%s NOTICE %s :*** Notice -- %s (%s@%s) is doing a /whois on you.",
                        me.name, acptr->name, parv[0], sptr->username,
