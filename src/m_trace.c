@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_trace.c,v 1.5 2001/06/17 23:51:22 greg Exp $
+ *   $Id: m_trace.c,v 1.6 2001/06/20 16:22:55 db Exp $
  */
 #include "m_commands.h"
 #include "class.h"
@@ -342,14 +342,10 @@ int m_trace(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
                            me.name,
                            parv[0], c_class,
                            name,
-#if (defined SERVERHIDE) || (defined HIDE_SERVERS_IPS)
-                           "255.255.255.255",
-#else
 #ifndef SPOOF_NOTICE
                            IsIPHidden(acptr)?"255.255.255.255":ip,
 #else
                            IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"255.255.255.255":ip),
-#endif
 #endif
                            now - acptr->lasttime,
                            (acptr->user)?(now - acptr->user->last):0);
