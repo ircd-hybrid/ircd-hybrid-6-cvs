@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_bsd.h,v 1.3 1999/07/11 21:09:35 tomh Exp $
+ *   $Id: s_bsd.h,v 1.4 1999/07/13 22:32:33 tomh Exp $
  *
  */
 #ifndef INCLUDED_s_bsd_h
@@ -32,27 +32,27 @@ struct hostent;
 struct FDList;
 struct DNSReply;
 
-extern int	highest_fd;
-extern int	readcalls;
-extern void     add_connection(struct Client* client, int);
-extern void	add_listener (struct ConfItem* listener_conf);
-extern	int	check_client (struct Client* client, char *,char **);
-extern	int	check_server (struct Client* client, 
-                              struct DNSReply* dns_reply,
-			      struct ConfItem* c_line, 
-                              struct ConfItem* n_line, int);
-extern	int	check_server_init (struct Client *);
-extern	void	close_connection (struct Client *);
-extern	void	close_listeners ();
-extern	int	connect_server(struct ConfItem* conf, struct Client* cptr, 
-                               struct DNSReply* dns_reply);
-extern	void	get_my_name (struct Client *, char *, int);
-extern	int	get_sockerr (struct Client *);
-extern	int	inetport (struct Client *, int, unsigned long);
-extern	void	init_sys();
-extern	int	read_message (time_t, struct FDList*);
-extern	void	report_error(const char* message, struct Client* client);
-extern	void	set_non_blocking (int, struct Client *);
+extern int   highest_fd;
+extern int   readcalls;
+extern void  add_connection(struct Client* client, int);
+extern void  add_listener (struct ConfItem* listener_conf);
+extern int   check_client (struct Client* client, char *,char **);
+extern int   check_server (struct Client* client, 
+                           struct DNSReply* dns_reply,
+                           struct ConfItem* c_line, 
+                           struct ConfItem* n_line, int);
+extern int   check_server_init (struct Client *);
+extern void  close_connection (struct Client *);
+extern void  close_listeners ();
+extern int   connect_server(struct ConfItem* conf, struct Client* cptr, 
+                            struct DNSReply* dns_reply);
+extern void  get_my_name (struct Client *, char *, int);
+extern int   inetport (struct Client *, int, unsigned long);
+extern void  init_sys();
+extern int   read_message (time_t, struct FDList*);
+extern void  report_error(const char* message, const char* who, int error);
+/* extern int   get_sockerr(int fd);  */
+extern void  set_non_blocking (int, struct Client *);
 
 #endif /* INCLUDED_s_bsd_h */
 

@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.35 1999/07/12 05:39:01 tomh Exp $
+ * $Id: h.h,v 1.36 1999/07/13 22:32:32 tomh Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -94,7 +94,7 @@ extern	int	find_restrict (aClient *);
 extern	int	rehash (aClient *, aClient *, int);
 extern  int	rehash_dump (aClient *,char *);
 extern  int     lock_kline_file ();
-extern  void    report_error_on_tty(char *);
+extern  void    report_error_on_tty(const char* message); /* ircd.c */
 
 extern  void    clear_scache_hash_table(void);
 extern  char    *find_or_add(char *);
