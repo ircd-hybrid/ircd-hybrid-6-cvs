@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h.dist,v 1.142 2004/10/13 00:53:33 ievil Exp $
+ * $Id: config.h.dist,v 1.143 2004/10/13 03:09:45 ievil Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -917,6 +917,12 @@
  * query and for a DNS answer to be retrieved.
  */
 #define CONNECTTIMEOUT   30     /* Recommended value: 30 */
+
+/* AUTH_CONNECTTIMEOUT
+ * Number of seconds to wait for a identd response..
+ */
+#define AUTH_CONNECTTIMEOUT 30 /* Recommended value: 30 */
+
 
 /* KILLCHASETIMELIMIT -
  * Max time from the nickname change that still causes KILL

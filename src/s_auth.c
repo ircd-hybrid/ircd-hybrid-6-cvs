@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.57 2003/06/24 03:57:16 ievil Exp $
+ *   $Id: s_auth.c,v 1.58 2004/10/13 03:09:47 ievil Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -107,7 +107,7 @@ static struct AuthRequest* make_auth_request(struct Client* client)
   memset(request, 0, sizeof(struct AuthRequest));
   request->fd      = -1;
   request->client  = client;
-  request->timeout = CurrentTime + CONNECTTIMEOUT;
+  request->timeout = CurrentTime + AUTH_CONNECTTIMEOUT;
   return request;
 }
 
