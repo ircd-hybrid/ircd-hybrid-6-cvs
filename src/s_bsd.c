@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.112 1999/08/01 18:13:42 tomh Exp $
+ *  $Id: s_bsd.c,v 1.113 1999/08/01 19:31:56 tomh Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -1101,11 +1101,13 @@ int read_message(time_t delay, unsigned char mask)        /* mika */
     if (FD_ISSET(i, write_set)) {
       --nfds;
       if (IsConnecting(cptr)) {
-        if (!completed_connection(cptr))
+        if (!completed_connection(cptr)) {
           exit_client(cptr, cptr, &me, "Lost C/N Line");
-        send_queued(cptr);
-        if (!IsDead(cptr))
           continue;
+        }
+        send_queued(cptr);
+          if (!IsDead(cptr))
+            continue;
       }
       else {
         /*
@@ -1383,8 +1385,10 @@ int read_message(time_t delay, unsigned char mask)
       if (rw)
         {
           if (IsConnecting(cptr)) {
-            if (!completed_connection(cptr))
+            if (!completed_connection(cptr)) {
               exit_client(cptr, cptr, &me, "Lost C/N Line");
+              continue;
+            }
             send_queued(cptr);
             if (!IsDead(cptr))
               continue;
