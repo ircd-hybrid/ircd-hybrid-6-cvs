@@ -1,3 +1,21 @@
+ievil       2003/06/30 08:58:16 EDT	(20030630_0)
+
+  Modified files:
+    src                  s_user.c 
+  Log:
+  Old MacDonald had a farm yia yia oooh.. and on that farm he had a p.. yia yia
+  oooh... And that farm that couldn't have two..... shrug.. Oh well. I've been
+  getting senile and blind it seems. Duplicate "p" entry in the table smashes
+  the mode settings... Thanks to Grievah for noticing. Fixed. And tested with
+  all umode's in telnet.. ALL respond correctly now.. Bad Bad Bad ievil!!!
+  
+  Submitted by:   ievil
+  
+  Revision  Changes    Path
+  1.261     +0 -1      ircd-hybrid-6/src/s_user.c
+
+
+
 lusky       2003/06/29 16:49:01 EDT	(20030629_0)
 
   Modified files:
