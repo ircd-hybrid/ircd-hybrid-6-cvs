@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: numeric.h,v 1.12 1999/06/26 23:46:44 db Exp $
+ * $Id: numeric.h,v 1.13 1999/07/18 03:22:57 db Exp $
  */
 #ifdef TOPIC_INFO
 # define RPL_TOPICWHOTIME 333
@@ -152,6 +152,12 @@
 #define RPL_STATSQLINE       217
 #define RPL_STATSYLINE       218
 #define RPL_ENDOFSTATS       219
+/* note ircu uses 217 for STATSPLINE frip. conflict
+ * as RPL_STATSQLINE was used in old 2.8 for Q line 
+ * I'm going to steal 220 for now *sigh*
+ * -Dianora
+ */
+#define RPL_STATSPLINE       220
 
 #define RPL_UMODEIS          221
 
