@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.44 1999/07/03 05:06:39 tomh Exp $
+ * $Id: struct.h,v 1.45 1999/07/03 05:11:41 db Exp $
  */
 #ifndef	INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -1002,14 +1002,6 @@ extern struct Capability captab[];
 
 #define	MATCH_SERVER  1
 #define	MATCH_HOST    2
-
-/* used for async dns values */
-
-#define	ASYNC_NONE	(-1)
-#define	ASYNC_CLIENT	0
-#define	ASYNC_CONNECT	1
-#define	ASYNC_CONF	2
-#define	ASYNC_SERVER	3
 
 /* misc variable externs */
 
