@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: class.c,v 1.13 1999/08/01 06:47:18 tomh Exp $
+ *   $Id: class.c,v 1.14 2000/02/01 00:44:11 lusky Exp $
  */
 #include "class.h"
 #include "client.h"
@@ -27,6 +27,7 @@
 #include "s_conf.h"
 #include "send.h"
 #include "struct.h"
+#include "s_debug.h"
 
 #define BAD_CONF_CLASS          -1
 #define BAD_PING                -2
@@ -167,7 +168,7 @@ aClass  *find_class(int cclass)
 
 void    check_class()
 {
-  aClass *cltmp, *cltmp2;
+  struct Class *cltmp, *cltmp2;
 
   Debug((DEBUG_DEBUG, "Class check:"));
 
@@ -175,7 +176,7 @@ void    check_class()
     {
       Debug((DEBUG_DEBUG,
              "Class %d : CF: %d PF: %d ML: %d LI: %d SQ: %ld",
-             Class(cltmp), ConFreq(cltmp), PingFreq(cltmp),
+             ClassType(cltmp), ConFreq(cltmp), PingFreq(cltmp),
              MaxLinks(cltmp), Links(cltmp), MaxSendq(cltmp)));
       if (MaxLinks(cltmp) < 0)
         {
@@ -215,7 +216,7 @@ long    get_sendq(aClient *cptr)
 {
   int   sendq = MAXSENDQLENGTH, retc = BAD_CLIENT_CLASS;
   Link  *tmp;
-  aClass        *cl;
+  struct Class        *cl;
 
   if (cptr && !IsMe(cptr)  && (cptr->confs))
     for (tmp = cptr->confs; tmp; tmp = tmp->next)

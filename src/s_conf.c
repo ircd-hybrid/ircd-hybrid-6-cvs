@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.179 2000/01/02 22:41:01 lusky Exp $
+ *  $Id: s_conf.c,v 1.180 2000/02/01 00:44:12 lusky Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -39,6 +39,7 @@
 #include "s_log.h"
 #include "send.h"
 #include "struct.h"
+#include "s_debug.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -2456,7 +2457,8 @@ static void initconf(FBFILE* file, int use_include)
           Debug((DEBUG_NOTICE,
                  "Read Init: (%d) (%s) (%s) (%s) (%d) (%d)",
                  aconf->status, aconf->host, aconf->passwd,
-                 aconf->user, aconf->port, Class(aconf)));
+                 aconf->user, aconf->port,
+		 ConfClassType(aconf)));
           aconf->next = ConfigItemList;
           ConfigItemList = aconf;
         }

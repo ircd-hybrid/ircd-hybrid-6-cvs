@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_error.c,v 1.1 1999/07/29 07:11:48 tomh Exp $
+ *   $Id: m_error.c,v 1.2 2000/02/01 00:44:11 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -28,6 +28,7 @@
 #include "ircd.h"
 #include "numeric.h"
 #include "send.h"
+#include "s_debug.h"
 
 /*
  * m_functions execute protocol messages on this server:
