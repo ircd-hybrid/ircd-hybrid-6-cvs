@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.80 1999/07/30 20:14:05 tomh Exp $
+ * $Id: struct.h,v 1.81 1999/07/30 21:31:56 db Exp $
  */
 #ifndef INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -140,15 +140,6 @@ extern unsigned long tsdms;
 #define TMNO
 #define TMPRINT
 #endif
-
-#ifdef FLUD
-struct fludbot {
-        struct Client   *fluder;
-        int             count;
-        time_t          first_msg, last_msg;
-        struct fludbot  *next;
-};
-#endif /* FLUD */
 
 
 #endif /* INCLUDED_struct_h */
