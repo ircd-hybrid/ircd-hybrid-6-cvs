@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.50 2001/06/06 22:11:09 db Exp $
+ *   $Id: s_debug.c,v 1.51 2001/06/10 00:28:29 db Exp $
  */
 #include "s_debug.h"
 #include "channel.h"
@@ -87,6 +87,9 @@ const char serveropts[] = {
 #endif
 #ifdef  CRYPT_LINK_PASSWORD
   'P',
+#endif
+#ifdef  IGNORE_BOGUS_TS
+  'T',
 #endif
 #ifdef  USE_SYSLOG
   'Y',
