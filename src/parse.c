@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.36 1999/07/30 20:10:52 tomh Exp $
+ *   $Id: parse.c,v 1.37 1999/07/31 03:41:53 db Exp $
  */
 #include "parse.h"
 #include "channel.h"
@@ -277,14 +277,13 @@ int parse(aClient *cptr, char *buffer, char *bufend)
 	  else
 	    {
 	      para[i++] = s;
+              if (i > paramcount)
+                {
+                  break;
+                }
               /* scan for end of string, either ' ' or '\0' */
               while (IsNonEOS(*s))
                 s++;
-              if (i > paramcount)
-                {
-                  *s = '\0';
-                  break;
-                }
 	    }
         }
     }

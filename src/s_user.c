@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.199 1999/07/31 02:42:56 tomh Exp $
+ *  $Id: s_user.c,v 1.200 1999/07/31 03:41:53 db Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -44,10 +44,8 @@
 #include "send.h"
 #include "struct.h"
 #include "whowas.h"
+#include "flud.h"
 
-#ifdef FLUD
-#include "blalloc.h"
-#endif /* FLUD */
 #ifdef ANTI_DRONE_FLOOD
 #include "dbuf.h"
 #endif
