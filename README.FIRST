@@ -1,6 +1,6 @@
 ircd-hybrid-6 README
 --------------------
-$Id: README.FIRST,v 1.4 1999/08/03 04:42:50 lusky Exp $
+$Id: README.FIRST,v 1.5 2000/06/08 05:22:29 lusky Exp $
 
 If you don't read this first, we won't help you.
 :-)
@@ -18,8 +18,8 @@ TRANSLATION: You *MUST* fix your conf before upgrading from hybrid-5.
 LOTS OF THINGS HAVE CHANGED IN CONFIG.H.  PLEASE READ THROUGH IT.
 
 There is now a mailing list for general discussion of Hybrid.  To subscribe
-to the Hybrid List, send email to hybrid-request@the-project.org with
-the subject "subscribe".
+to the Hybrid List, send email to listmanager@the-project.org with
+a single line in the body containing "subscribe hybrid".
 
 SOLARIS USERS: this code appears to tickle a bug in gcc and egcs ONLY
 on 64-bit Solaris7.  You must compile on a 32bit kernel, then you
