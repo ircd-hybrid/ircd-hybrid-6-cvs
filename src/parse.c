@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.44 2001/06/16 11:22:11 leeh Exp $
+ *   $Id: parse.c,v 1.45 2001/07/02 02:17:56 db Exp $
  */
 #include "parse.h"
 #include "channel.h"
@@ -503,8 +503,6 @@ static  int     cancel_clients(aClient *cptr,
    * kill all possible points that are causing confusion here,
    * I'm not sure I've got this all right...
    * - avalon
-   *
-   * knowing avalon, probably not.
    */
 
   /*
