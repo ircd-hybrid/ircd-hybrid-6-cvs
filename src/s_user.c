@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.198 1999/07/31 01:24:34 tomh Exp $
+ *  $Id: s_user.c,v 1.199 1999/07/31 02:42:56 tomh Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -2442,15 +2442,14 @@ int m_kill(aClient *cptr, aClient *sptr, int parc, char *parv[])
 
 
 /*
+ * user_mode - set get current users mode
+ *
  * m_umode() added 15/10/91 By Darren Reed.
  * parv[0] - sender
  * parv[1] - username to change mode for
  * parv[2] - modes to change
  */
-int     m_umode(aClient *cptr,
-                aClient *sptr,
-                int parc,
-                char *parv[])
+int user_mode(aClient *cptr, aClient *sptr, int parc, char *parv[])
 {
   int   flag;
   int   i;

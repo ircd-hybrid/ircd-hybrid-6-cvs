@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_commands.h,v 1.2 1999/07/30 03:25:46 db Exp $
+ * $Id: m_commands.h,v 1.3 1999/07/31 02:44:44 tomh Exp $
  */
 #ifndef INCLUDED_m_commands_h
 #define INCLUDED_m_commands_h
@@ -82,7 +82,6 @@ extern int m_time(struct Client *,struct Client *,int, char **);
 extern int m_names(struct Client *,struct Client *,int,char **);
 
 extern int m_lusers(struct Client *,struct Client *,int, char **);
-extern int m_umode(struct Client *,struct Client *,int,char **);
 extern int m_close(struct Client *,struct Client *,int,char **);
 
 extern int m_whowas(struct Client *,struct Client *,int,char **);
