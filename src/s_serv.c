@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.80 1999/03/19 04:40:37 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.81 1999/03/24 00:13:38 db Exp $";
 #endif
 
 
@@ -3032,6 +3032,9 @@ int     m_locops(aClient *cptr,
 	{
 	  slave_oper = parv[1];
 
+	  parc--;
+	  parv++;
+
 	  if ((acptr = hash_find_client(slave_oper,(aClient *)NULL)))
 	    {
 	      if(!IsPerson(acptr))
@@ -3040,17 +3043,17 @@ int     m_locops(aClient *cptr,
 	  else
 	    return 0;
 
-	  if(parv[2])
+	  if(parv[1])
 	    {
-	      message = parv[2];
+	      message = parv[1];
 	      send_operwall(acptr, "SLOCOPS", message);
 	    }
 	  else
 	    return 0;
 #ifdef HUB
-	  sendto_slaves(sptr,"LOCOPS",sptr->name,parc,parv);
+	  sendto_slaves(sptr,"LOCOPS",slave_oper,parc,parv);
 #endif
-
+	  return 0;
 	}
     }
   else
@@ -3069,7 +3072,6 @@ int     m_locops(aClient *cptr,
                  me.name, parv[0], "LOCOPS");
       return 0;
     }
-
 
   if(MyConnect(sptr) && IsAnOper(sptr))
     {

@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.28 1999/02/01 05:45:55 db Exp $
+ * $Id: struct.h,v 1.29 1999/03/24 00:13:36 db Exp $
  */
 
 #ifndef	__struct_include__
@@ -246,6 +246,7 @@ typedef struct	MessageFileItem aMessageFile;
 #define FLAGS2_IDLE_LINED   0x10000
 #endif
 #define FLAGS2_ALREADY_EXITED	0x20000 /* kludge grrrr */
+#define FLAGS2_IP_SPOOFING	0x40000
 
 /* for sendto_ops_lev */
 #define CCONN_LEV	1
@@ -332,7 +333,7 @@ typedef struct	MessageFileItem aMessageFile;
  */
 #define IsRestricted(x)		((x)->flags2 & FLAGS2_RESTRICTED)
 #define SetRestricted(x)	((x)->flags2 |= FLAGS2_RESTRICTED)
-#define ClearDoingList(x)        ((x)->flags2 &= ~FLAGS2_DOINGLIST)
+#define ClearDoingList(x)	((x)->flags2 &= ~FLAGS2_DOINGLIST)
 #define SetDoingList(x)         ((x)->flags2 |= FLAGS2_DOINGLIST)
 #define IsDoingList(x)		((x)->flags2 & FLAGS2_DOINGLIST)
 #define IsElined(x)		((x)->flags2 & FLAGS2_E_LINED)
@@ -341,6 +342,7 @@ typedef struct	MessageFileItem aMessageFile;
 #define SetBlined(x)		((x)->flags2 |= FLAGS2_B_LINED)
 #define IsFlined(x)		((x)->flags2 & FLAGS2_F_LINED)
 #define SetFlined(x)		((x)->flags2 |= FLAGS2_F_LINED)
+#define IsIPSpoof(x)		((x)->flags2 & FLAGS2_IP_SPOOFING)
 
 #ifdef IDLE_CHECK
 #define SetIdlelined(x)		((x)->flags2 |= FLAGS2_IDLE_LINED)
