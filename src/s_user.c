@@ -26,7 +26,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.97 1999/06/29 01:45:29 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.98 1999/06/29 20:34:36 db Exp $";
 
 #endif
 
@@ -109,7 +109,7 @@ static int user_modes[]		= { FLAGS_OPER, 'o',
 
 /* internally defined functions */
 #ifdef BOTCHECK
-static int botreject(char *, aClient *, char *);
+static int botreject(char *);
 static int rejecting_bot(aClient *, int, char **);
 #endif
 
@@ -612,7 +612,7 @@ static	int	register_user(aClient *cptr,
       report_and_set_user_flags(sptr, aconf);
 
 #ifdef BOTCHECK
-      isbot = botreject(bottemp,cptr,nick);
+      isbot = botreject(bottemp);
 #endif
 
       /* Limit clients */
@@ -3947,7 +3947,7 @@ void	send_umode_out(aClient *cptr,
  **   Reject a bot based on a fake hostname...
  **           -Taner
  **/
-static int botreject(char *host,aClient *sptr,char *nick)
+static int botreject(char *host)
 {
 
 /*
