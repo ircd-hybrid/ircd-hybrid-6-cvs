@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.18 1999/01/30 18:35:24 db Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.19 1999/02/16 06:04:42 db Exp $";
 #endif
 
 #include <sys/time.h>
@@ -49,6 +49,8 @@ static char *rcs_version = "$Id: s_misc.c,v 1.18 1999/01/30 18:35:24 db Exp $";
 #include <time.h>
 #endif
 #include "h.h"
+#include "fdlist.h"
+extern fdlist serv_fdlist;
 
 /* LINKLIST */
 extern aClient *local_cptr_list;
@@ -418,6 +420,7 @@ char	*comment	/* Reason for the exit */
 #endif
       if (IsAnOper(sptr))
 	{
+	  delfrom_fdlist(sptr->fd, &oper_fdlist);
           /* LINKLIST */
           /* oh for in-line functions... */
           {
@@ -470,6 +473,7 @@ char	*comment	/* Reason for the exit */
       if (IsServer(sptr))
 	{
 	  Count.myserver--;
+	  delfrom_fdlist(sptr->fd, &serv_fdlist);
 
           /* LINKLIST */
           /* oh for in-line functions... */
