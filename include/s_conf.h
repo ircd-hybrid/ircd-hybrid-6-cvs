@@ -21,9 +21,14 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.7 1999/07/09 06:55:45 tomh Exp $
+ * $Id: s_conf.h,v 1.8 1999/07/11 02:44:17 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.8  1999/07/11 02:44:17  db
+ * - redid motd handling completely. most of the motd handling is now
+ *   done in motd.c
+ *   motd handling includes, motd, oper motd, help file
+ *
  * Revision 1.7  1999/07/09 06:55:45  tomh
  * Changed resolver code to use reference counting instead of blind hostent
  * removal. This will ensure that if a client resolved we will always get
@@ -62,6 +67,9 @@
 #endif
 #ifndef INCLUDED_ircd_defs_h
 #include "ircd_defs.h"
+#endif
+#ifndef INCLUDED_motd_h
+#include "motd.h"
 #endif
 
 struct Client;
@@ -171,11 +179,6 @@ extern struct ConfItem* find_conf_ip (struct SLink *, char *, char *, int);
 extern struct ConfItem* find_conf_name (char *, int);
 extern struct ConfItem* find_kill (struct Client *);
 
-typedef struct MessageFileItem
-{
-  char	line[MESSAGELINELEN];
-  struct MessageFileItem *next;
-}aMessageFile;
 
 typedef struct
 {
@@ -188,20 +191,9 @@ typedef struct
   char	*glinefile;
 #endif
 
-#ifdef OPER_MOTD
-  aMessageFile *opermotd;
-  char oper_motd_last_changed_date[MAX_DATE_STRING];
-#endif
-
-  aMessageFile *motd;
-  char motd_last_changed_date[MAX_DATE_STRING];
-
-#ifdef AMOTD
-  aMessageFile *amotd;
-#endif
-
-  aMessageFile *helpfile;
-
+  MessageFile helpfile;
+  MessageFile motd;
+  MessageFile opermotd;
 }ConfigFileEntryType;
 
 

@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.101 1999/07/10 20:24:59 tomh Exp $
+ *  $Id: s_conf.c,v 1.102 1999/07/11 02:44:19 db Exp $
  */
 #include "s_conf.h"
 #include "class.h"
@@ -2753,7 +2753,7 @@ void report_temp_klines(aClient *sptr)
 /* get_oper_privs
  *
  * inputs        - default privs
- *                 - privs as string
+ *               - privs as string
  * output        - default privs as modified by privs string
  * side effects -
  *
@@ -2766,7 +2766,7 @@ int get_oper_privs(int int_privs,char *privs)
 
   while(*privs)
     {
-      if(*privs == 'O')                        /* allow global kill */
+      if(*privs == 'O')                     /* allow global kill */
         int_privs |= CONF_OPER_GLOBAL_KILL;
       else if(*privs == 'o')                /* disallow global kill */
         int_privs &= ~CONF_OPER_GLOBAL_KILL;
@@ -2797,9 +2797,9 @@ int get_oper_privs(int int_privs,char *privs)
       else if(*privs == 'h')                /* disallow rehash */
         int_privs &= ~CONF_OPER_REHASH;
       else if(*privs == 'D')
-        int_privs |= CONF_OPER_DIE;        /* allow die */
+        int_privs |= CONF_OPER_DIE;         /* allow die */
       else if(*privs == 'd')
-        int_privs &= ~CONF_OPER_DIE;         /* disallow die */
+        int_privs &= ~CONF_OPER_DIE;        /* disallow die */
       privs++;
     }
 

@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: ircd_defs.h,v 1.2 1999/07/08 07:40:29 tomh Exp $
+ * $Id: ircd_defs.h,v 1.3 1999/07/11 02:44:16 db Exp $
  *
  * ircd_defs.h - Global size definitions for record entries used
  * througout ircd. Please think 3 times before adding anything to this
@@ -52,8 +52,6 @@
 #define	MAXBANLENGTH	1024
 
 #define OPERWALL_LEN    400	/* can be truncated on other servers */
-
-#define MESSAGELINELEN	90
 
 #define	USERHOST_REPLYLEN	(NICKLEN+HOSTLEN+USERLEN+5)
 #define MAX_DATE_STRING 32      /* maximum string length for a date string */
