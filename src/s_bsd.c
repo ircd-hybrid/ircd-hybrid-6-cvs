@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.8 1998/10/16 04:22:29 lusky Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.9 1998/10/16 05:51:38 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -220,6 +220,7 @@ void	report_error(char *text,aClient *cptr)
     {
 	fprintf(stderr, text, host, strerror(errtmp));
 	fprintf(stderr, "\n");
+	fflush(stderr);
     }
 }
 
@@ -559,7 +560,6 @@ void	init_sys()
     (void)close(0);	/* fd 0 opened by inetd */
     local[0] = NULL;
     }
-
   resfd = init_resolver(0x1f);
   return;
 }

@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.15 1998/10/16 04:22:30 lusky Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.16 1998/10/16 05:51:39 lusky Exp $";
 #endif
 
 
@@ -5159,7 +5159,7 @@ int	m_rehash(aClient *cptr,
               ircsprintf(sparemsg,"invalid spare_fd %d",spare_fd);
               restart(sparemsg);
             }
-	  return 0;
+/*(	  return 0;
 	  restart_resolver();	/* re-read /etc/resolv.conf AGAIN?
 				   and close/re-open res socket */
 	  found = YES;
