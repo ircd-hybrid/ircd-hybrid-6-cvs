@@ -17,21 +17,22 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.40 1999/07/31 02:57:27 tomh Exp $
+ *   $Id: s_debug.c,v 1.41 1999/07/31 04:13:54 tomh Exp $
  */
-#include "struct.h"
-#include "s_conf.h"
+#include "s_debug.h"
+#include "channel.h"
 #include "class.h"
-#include "list.h"
-#include "dbuf.h"
-#include "res.h"
-#include "send.h"
-#include "scache.h"
-#include "numeric.h"
 #include "common.h"
+#include "dbuf.h"
 #include "hash.h"
 #include "ircd.h"
-#include "channel.h"
+#include "list.h"
+#include "numeric.h"
+#include "res.h"
+#include "s_conf.h"
+#include "scache.h"
+#include "send.h"
+#include "struct.h"
 
 #include <string.h>
 #include <stdarg.h>

@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.82 1999/07/31 04:05:49 db Exp $
+ * $Id: struct.h,v 1.83 1999/07/31 04:13:52 tomh Exp $
  */
 #ifndef INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -81,21 +81,6 @@ typedef struct  Zdata   aZdata;
 #define BOOT_TTY        16
 #define BOOT_STDERR     128
 
-/*
- * defined debugging levels
- */
-#define DEBUG_FATAL  0
-#define DEBUG_ERROR  1  /* report_error() and other errors that are found */
-#define DEBUG_NOTICE 3
-#define DEBUG_DNS    4  /* used by all DNS related routines - a *lot* */
-#define DEBUG_INFO   5  /* general usful info */
-#define DEBUG_NUM    6  /* numerics */
-#define DEBUG_SEND   7  /* everything that is sent out */
-#define DEBUG_DEBUG  8  /* anything to do with debugging, ie unimportant :) */
-#define DEBUG_MALLOC 9  /* malloc/free calls */
-#define DEBUG_LIST  10  /* debug list use */
-
-
 /* general link structure used for chains */
 
 struct SLink
@@ -113,7 +98,6 @@ struct SLink
   } value;
   int   flags;
 };
-
 
 
 /* misc variable externs */
