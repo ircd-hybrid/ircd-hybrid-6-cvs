@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.171 1999/08/20 00:54:10 lusky Exp $
+ *  $Id: s_conf.c,v 1.172 1999/08/26 03:34:21 lusky Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -2311,7 +2311,8 @@ static void initconf(FBFILE* file, int use_include)
             {
               aconf->flags |= CONF_FLAGS_DO_IDENTD;
               *p = '\0';
-              strncpy_irc(aconf->user,aconf->host,USERLEN);	      
+	      MyFree(aconf->user);
+	      DupString(aconf->user,aconf->host);
               p++;
               strncpy_irc(aconf->host,p, HOSTLEN );      
             }
