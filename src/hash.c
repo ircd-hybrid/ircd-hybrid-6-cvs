@@ -20,7 +20,7 @@
 #ifndef lint
 static char sccsid[] = "@(#)hash.c	2.10 03 Jul 1993 (C) 1991 Darren Reed";
 
-static char *rcs_version = "$Id: hash.c,v 1.9 1999/06/25 11:59:53 db Exp $";
+static char *rcs_version = "$Id: hash.c,v 1.10 1999/06/25 22:11:32 db Exp $";
 #endif
 
 #include "struct.h"
@@ -33,6 +33,11 @@ static char *rcs_version = "$Id: hash.c,v 1.9 1999/06/25 11:59:53 db Exp $";
 
 #include <sys/stat.h>
 #include <fcntl.h>
+
+/* New hash code */
+/*
+ * Contributed by James L. Davis
+ */
 
 int HASHSIZE = U_MAX;
 int CHANNELHASHSIZE = CH_MAX;
@@ -50,10 +55,10 @@ static	aHashEntry	channelTable[CH_MAX];
 #endif
 
 /*
-
-look in whowas.c for the missing ...[WW_MAX]; entry
-  - Dianora
-*/
+ *
+ * look in whowas.c for the missing ...[WW_MAX]; entry
+ *   - Dianora
+ */
 
 /*
  * Hashing.
