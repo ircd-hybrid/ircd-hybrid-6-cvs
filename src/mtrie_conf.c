@@ -43,7 +43,7 @@
  *
  * Diane Bruce -db (db@db.net)
  *
- * $Id: mtrie_conf.c,v 1.66 1999/12/29 03:28:49 lusky Exp $
+ * $Id: mtrie_conf.c,v 1.67 2000/04/11 03:13:40 lusky Exp $
  */
 #include "mtrie_conf.h"
 #include "class.h"
@@ -1431,7 +1431,7 @@ void report_mtrie_conf_links(aClient *sptr, int flags)
 
           sendto_one(sptr, form_str(RPL_STATSKLINE), me.name,
                      sptr->name, 'K', host,
-                     name, pass);
+                     user, pass);
           if(p)
             *p = '|';
         }
