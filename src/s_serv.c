@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.201 1999/07/29 14:04:13 sean Exp $
+ *   $Id: s_serv.c,v 1.202 1999/07/29 14:28:51 sean Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -2031,9 +2031,12 @@ int     m_trace(struct Client *cptr,
   if (doall)
    {
     for (acptr = GlobalClientList; acptr; acptr = acptr->next)
+     {
 #ifdef  SHOW_INVISIBLE_LUSERS
       if (IsPerson(acptr))
-        link_u[acptr->from->fd]++;
+        {
+          link_u[acptr->from->fd]++;
+        }
 #else
       if (IsPerson(acptr) &&
         (!IsInvisible(acptr) || IsAnOper(sptr)))
@@ -2041,15 +2044,15 @@ int     m_trace(struct Client *cptr,
           link_u[acptr->from->fd]++;
         }
 #endif
+      else
+        {
+          if (IsServer(acptr))
+            {
+              link_s[acptr->from->fd]++;
+            }
+        }
+     }
    }
-  else
-    {
-      if (IsServer(acptr))
-      {
-        link_s[acptr->from->fd]++;
-      }
-    }
-
   /* report all direct connections */
   for (i = 0; i <= highest_fd; i++)
     {
