@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.33 1999/05/04 04:41:44 db Exp $
+ * $Id: struct.h,v 1.34 1999/05/05 03:11:23 db Exp $
  */
 
 #ifndef	__struct_include__
@@ -930,6 +930,10 @@ extern struct Capability captab[];
 
 #if defined(PRESERVE_CHANNEL_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT)
 #define MODE_SPLIT	0x1000
+#endif
+
+#ifdef JUPE_CHANNEL
+#define MODE_JUPED	0x2000
 #endif
 
 /*

@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.48 1999/04/18 01:47:27 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.49 1999/05/05 03:11:25 db Exp $";
 #endif
 
 #include "struct.h"
@@ -2046,6 +2046,39 @@ int 	initconf(int opt, int fd,int use_include)
       else if (aconf->status & CONF_QUARANTINED_NICK)
 	{
 	  dontadd = 1;
+#ifdef JUPE_CHANNEL
+	  if(aconf->host[0] == '#')
+	    {
+	      aChannel *chptr;
+	      int len;
+
+	      if(chptr = find_channel(aconf->host, (aChannel *)NULL))
+		chptr->mode.mode |= MODE_JUPED;
+	      else
+		{
+		  /* create a zero user channel, marked as MODE_JUPED
+		   * which just place holds the channel down.
+		   */
+
+		  len = strlen(aconf->host);
+		  chptr = (aChannel *)MyMalloc(sizeof(aChannel) + len);
+		  memset((void *)chptr, 0, sizeof(aChannel));
+		  strncpyzt(chptr->chname, aconf->host, len+1);
+		  chptr->mode.mode = MODE_JUPED;
+		  if (channel)
+		    channel->prevch = chptr;
+		  chptr->prevch = NULL;
+		  chptr->nextch = channel;
+		  channel = chptr;
+		  /* JIC */
+		  chptr->channelts = NOW;
+		  (void)add_to_channel_hash_table(aconf->host, chptr);
+		  Count.chan++;
+		}
+	      if(aconf->passwd)
+		strncpyzt(chptr->topic, aconf->passwd, sizeof(chptr->topic));
+	    }
+#endif
 	  MyFree(aconf->name);
 	  aconf->name = aconf->host;
 	  aconf->host = (char *)NULL;

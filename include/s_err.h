@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: s_err.h,v 1.15 1999/03/15 20:58:25 db Exp $
+ * $Id: s_err.h,v 1.16 1999/05/05 03:11:22 db Exp $
  *
  */
 
@@ -524,7 +524,7 @@ static	char *	replies[] = {
 /* 477 ERR_MODELESS, */		":%s 477 %s %s :Channel does not support modes",
 /* 478 ERR_BANLISTFULL, */	":%s 478 %s :Channel ban list is full",
 
-/* 479 */	(char *)NULL,
+/* 479 ERR_JUPEDCHAN, */	":%s 479 %s :Channel is locally juped",
 /* 480 */	(char *)NULL,
 /* 481 ERR_NOPRIVILEGES, */
 		":%s 481 %s :I don't THINK so, homez... you ain't got what it takes. (IRC operator)",

@@ -27,7 +27,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)s_err.c	1.11 5/17/93 (C) 1992 Darren Reed";
-static char *rcs_version = "$Id: s_err.c,v 1.15 1999/03/15 20:58:29 db Exp $";
+static char *rcs_version = "$Id: s_err.c,v 1.16 1999/05/05 03:11:25 db Exp $";
 #endif
 
 static	char	numbuff[512];
@@ -538,7 +538,7 @@ static	char *	replies[] = {
 /* 477 ERR_MODELESS, */		":%s 477 %s %s :Channel does not support modes",
 /* 478 ERR_BANLISTFULL, */	":%s 478 %s :Channel ban list is full",
 
-/* 479 */	(char *)NULL,
+/* 479 ERR_JUPEDCHAN, */	":%s 479 %s :Channel is locally juped",
 /* 480 */	(char *)NULL,
 /* 481 ERR_NOPRIVILEGES, */
 		":%s 481 %s :Permission Denied- You're not an IRC operator",

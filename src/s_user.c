@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.68 1999/05/04 04:41:46 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.69 1999/05/05 03:11:25 db Exp $";
 
 #endif
 
@@ -557,6 +557,10 @@ static	int	register_user(aClient *cptr,
 #ifdef REJECT_HOLD
 		SetRejectHold(cptr);
 #ifdef KLINE_WITH_REASON
+		p = strchr(reason, '|');
+		if(p)
+		  *p = '\0';
+
 		sendto_one(sptr, ":%s NOTICE %s :*** K-lined for %s",
 			   me.name,cptr->name,reason);
 #else
@@ -568,6 +572,10 @@ static	int	register_user(aClient *cptr,
 		ircstp->is_ref++;
 
 #ifdef KLINE_WITH_REASON
+		p = strchr(reason, '|');
+		if(p)
+		  *p = '\0';
+
 		return exit_client(cptr, sptr, &me, reason);
 #else
 		return exit_client(cptr, sptr, &me, "K-lined");
@@ -764,6 +772,11 @@ static	int	register_user(aClient *cptr,
 #ifdef REJECT_HOLD
 	  SetRejectHold(cptr);
 #ifdef KLINE_WITH_REASON
+
+	  p = strchr(reason, '|');
+	  if(p)
+	    *p = '\0';
+
 	  sendto_one(sptr, ":%s NOTICE %s :*** G-lined for %s",
 		     me.name,cptr->name,reason);
 #else
@@ -775,6 +788,10 @@ static	int	register_user(aClient *cptr,
 	  ircstp->is_ref++;
 
 #ifdef KLINE_WITH_REASON
+	  p = strchr(reason, '|');
+	  if(p)
+	    *p = '\0';
+
 	  return exit_client(cptr, sptr, &me, reason);
 #else
 	  return exit_client(cptr, sptr, &me, "G-lined");
