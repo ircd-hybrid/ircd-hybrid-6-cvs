@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)list.c	2.22 15 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: list.c,v 1.5 1998/12/19 05:41:04 db Exp $";
+static char *rcs_version = "$Id: list.c,v 1.6 1999/02/01 05:45:59 db Exp $";
 #endif
 
 #include "struct.h"
@@ -192,7 +192,6 @@ aClient	*make_client(aClient *from)
       /* cptr->buffer[0] = '\0'; */
       /* cptr->username[0] = '\0'; */
       cptr->authfd = -1;
-      return (cptr);
     }
   else
     { /* from is not NULL */
@@ -215,8 +214,8 @@ aClient	*make_client(aClient *from)
       cptr->status = STAT_UNKNOWN;
       cptr->fd = -1;
       (void)strcpy(cptr->username, "unknown");
-      return (cptr);
     }
+  return (cptr);
 }
 
 void free_client(aClient *cptr)

@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.31 1999/01/30 18:07:31 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.32 1999/02/01 05:45:57 db Exp $";
 #endif
 
 #include "struct.h"
@@ -796,7 +796,20 @@ static	time_t	check_pings(time_t currenttime)
 	  (void)ircsprintf(ping_time_out_buffer,
 			    "Ping timeout: %d seconds",
 			    currenttime - cptr->lasttime);
-	  (void)exit_client(cptr, cptr, &me, ping_time_out_buffer );
+
+	  /* ugh. this is horrible.
+	   * but I can get away with this hack because of the
+	   * block allocator, and right now,I want to find out
+	   * just exactly why occasional already bit cleared errors
+	   * are still happening
+	   */
+	  if(cptr->flags2 & FLAGS2_ALREADY_EXITED)
+	    {
+	      sendto_realops("Client already exited doing ping timeout %X",cptr);
+	    }
+	  else
+	    (void)exit_client(cptr, cptr, &me, ping_time_out_buffer );
+	  cptr->flags2 |= FLAGS2_ALREADY_EXITED;
 	}
       else
 #if defined(SEND_FAKE_KILL_TO_CLIENT) && defined(IDLE_CHECK)
@@ -804,10 +817,34 @@ static	time_t	check_pings(time_t currenttime)
 	  if (fakekill)
 	    sendto_prefix_one(cptr, cptr, ":AutoKILL KILL %s :(%s)",
 	    cptr->name, dying_clients_reason[die_index]);
-	  (void)exit_client(cptr, cptr, &me, dying_clients_reason[die_index]);
+	  /* ugh. this is horrible.
+	   * but I can get away with this hack because of the
+	   * block allocator, and right now,I want to find out
+	   * just exactly why occasional already bit cleared errors
+	   * are still happening
+	   */
+	  if(cptr->flags2 & FLAGS2_ALREADY_EXITED)
+	    {
+	      sendto_realops("Client already exited %X",cptr);
+	    }
+	  else
+	    (void)exit_client(cptr, cptr, &me, dying_clients_reason[die_index]);
+	  cptr->flags2 |= FLAGS2_ALREADY_EXITED;
         }
 #else 
-        (void)exit_client(cptr, cptr, &me, dying_clients_reason[die_index]);
+	  /* ugh. this is horrible.
+	   * but I can get away with this hack because of the
+	   * block allocator, and right now,I want to find out
+	   * just exactly why occasional already bit cleared errors
+	   * are still happening
+	   */
+	  if(cptr->flags2 & FLAGS2_ALREADY_EXITED)
+	    {
+	      sendto_realops("Client already exited %X",cptr);
+	    }
+	  else
+	    (void)exit_client(cptr, cptr, &me, dying_clients_reason[die_index]);
+	  cptr->flags2 |= FLAGS2_ALREADY_EXITED;	  
 #endif /* SEND_FAKE_KILL_TO_CLIENT && IDLE_CHECK */
     }
 

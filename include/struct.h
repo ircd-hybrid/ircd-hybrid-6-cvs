@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.27 1999/01/21 05:48:34 db Exp $
+ * $Id: struct.h,v 1.28 1999/02/01 05:45:55 db Exp $
  */
 
 #ifndef	__struct_include__
@@ -245,6 +245,7 @@ typedef struct	MessageFileItem aMessageFile;
 #ifdef IDLE_CHECK
 #define FLAGS2_IDLE_LINED   0x10000
 #endif
+#define FLAGS2_ALREADY_EXITED	0x20000 /* kludge grrrr */
 
 /* for sendto_ops_lev */
 #define CCONN_LEV	1
