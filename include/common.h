@@ -16,9 +16,9 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: common.h,v 1.12 1999/07/20 00:01:36 tomh Exp $
+ * $Id: common.h,v 1.13 1999/07/21 05:45:00 tomh Exp $
  */
-#ifndef	INCLUDED_common_h
+#ifndef INCLUDED_common_h
 #define INCLUDED_common_h
 #ifndef INCLUDED_sys_types_h
 #include <sys/types.h>
@@ -56,8 +56,8 @@
 
 /* Just blindly define our own MIN/MAX macro */
 
-#define IRCD_MAX(a, b)	((a) > (b) ? (a) : (b))
-#define IRCD_MIN(a, b)	((a) < (b) ? (a) : (b))
+#define IRCD_MAX(a, b)  ((a) > (b) ? (a) : (b))
+#define IRCD_MIN(a, b)  ((a) < (b) ? (a) : (b))
 
 /*
  * irc_string.h contains character comparison and conversion macros and

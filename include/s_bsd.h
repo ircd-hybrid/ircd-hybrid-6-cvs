@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_bsd.h,v 1.6 1999/07/20 07:48:28 tomh Exp $
+ *   $Id: s_bsd.h,v 1.7 1999/07/21 05:45:05 tomh Exp $
  *
  */
 #ifndef INCLUDED_s_bsd_h
@@ -26,7 +26,7 @@
 #define INCLUDED_sys_types_h
 #endif
 
-#define READBUF_SIZE    16384	/* used in s_bsd *AND* s_zip.c ! */
+#define READBUF_SIZE    16384   /* used in s_bsd *AND* s_zip.c ! */
 
 struct Client;
 struct ConfItem;

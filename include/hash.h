@@ -16,9 +16,9 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: hash.h,v 1.5 1999/07/20 13:52:45 sean Exp $
+ *   $Id: hash.h,v 1.6 1999/07/21 05:45:02 tomh Exp $
  */
-#ifndef	INCLUDED_hash_h
+#ifndef INCLUDED_hash_h
 #define INCLUDED_hash_h
 #ifndef INCLUDED_sys_types_h
 #include <sys/types.h>
@@ -69,7 +69,7 @@ extern struct Client* hash_find_client(const char* name,
 extern struct Client* hash_find_server(const char* name, 
                                        struct Client* client);
 
-#endif	/* INCLUDED_hash_h */
+#endif  /* INCLUDED_hash_h */
 
 
 

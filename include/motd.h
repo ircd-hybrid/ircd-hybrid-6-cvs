@@ -1,7 +1,7 @@
 /*
  * motd.h
  *
- * $Id: motd.h,v 1.4 1999/07/18 00:17:44 tomh Exp $
+ * $Id: motd.h,v 1.5 1999/07/21 05:45:03 tomh Exp $
  */
 #ifndef INCLUDED_motd_h
 #define INCLUDED_motd_h
@@ -11,7 +11,7 @@
 #define INCLUDED_limits_h
 #endif
 
-#define MESSAGELINELEN 89	
+#define MESSAGELINELEN 89       
 
 typedef enum {
   USER_MOTD,
@@ -21,7 +21,7 @@ typedef enum {
 
 typedef struct MessageFileLineStruct
 {
-  char	line[MESSAGELINELEN + 1];
+  char  line[MESSAGELINELEN + 1];
   struct MessageFileLineStruct *next;
 }MessageFileLine;
 
