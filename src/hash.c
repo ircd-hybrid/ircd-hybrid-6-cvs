@@ -20,7 +20,7 @@
 #ifndef lint
 static char sccsid[] = "@(#)hash.c	2.10 03 Jul 1993 (C) 1991 Darren Reed";
 
-static char *rcs_version = "$Id: hash.c,v 1.11 1999/07/04 08:51:36 tomh Exp $";
+static char *rcs_version = "$Id: hash.c,v 1.12 1999/07/08 00:36:27 db Exp $";
 #endif
 
 #include "struct.h"
@@ -453,7 +453,7 @@ int	m_hash(aClient *cptr,aClient *sptr,int parc,char *parv[])
   char  result_buf[256];
   aHashEntry	*table;
   char  hash_log_file[256];
-  int   out;
+  int   out = 0;
   char timebuffer[MAX_DATE_STRING];
   struct tm *tmptr;
 
