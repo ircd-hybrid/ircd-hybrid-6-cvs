@@ -1,5 +1,5 @@
 /*
- * parse.c: $Id: parse.c,v 1.2 2001/12/04 16:12:11 androsyn Exp $
+ * parse.c: $Id: parse.c,v 1.3 2002/01/28 04:26:09 androsyn Exp $
  *  
  */
 /*
@@ -115,7 +115,7 @@ adns_status adns__findlabel_next(findlabel_state *fls,
 }
 
 adns_status adns__parse_domain(adns_state ads, int serv, adns_query qu,
-			       vbuf *vb, adns_queryflags flags,
+			       vbuf *vb, parsedomain_flags flags,
 			       const byte *dgram, int dglen, int *cbyte_io, int max) {
   findlabel_state fls;
   
