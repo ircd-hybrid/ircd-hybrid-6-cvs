@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.93 1999/05/13 03:10:46 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.94 1999/05/15 22:00:42 lusky Exp $";
 #endif
 
 
@@ -4100,17 +4100,19 @@ int     m_gline(aClient *cptr,
 		int parc,
 		char *parv[])
 {
-  char buffer[512];
   char *oper_name;		/* nick of oper requesting GLINE */
   char *oper_username;		/* username of oper requesting GLINE */
   char *oper_host;		/* hostname of oper requesting GLINE */
   char *oper_server;		/* server of oper requesting GLINE */
   char *user, *host;		/* user and host of GLINE "victim" */
   char *reason;			/* reason for "victims" demise */
+#ifdef GLINES
+  char buffer[512];
   char *current_date;
   char tempuser[USERLEN+2];
   char temphost[HOSTLEN+1];
   aConfItem *aconf;
+#endif
 
   if(!IsServer(sptr)) /* allow remote opers to apply g lines */
     {

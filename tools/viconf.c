@@ -24,7 +24,7 @@
 #endif
 
 #ifndef lint
-static char *rcs_version="$Id: viconf.c,v 1.3 1999/01/19 02:23:19 khuon Exp $";
+static char *rcs_version="$Id: viconf.c,v 1.4 1999/05/15 22:00:44 lusky Exp $";
 #endif /* lint */
 
 int main(int argc, char *argv[])
@@ -108,4 +108,5 @@ int main(int argc, char *argv[])
 #else
   printf("LOCKFILE not defined in config.h\n");
 #endif
+  return 0;
 }

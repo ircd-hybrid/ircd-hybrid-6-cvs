@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.41 1999/05/09 08:19:27 lusky Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.42 1999/05/15 22:00:41 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -101,7 +101,7 @@ struct	Counter	Count;
 
 time_t	NOW;
 aClient me;			/* That's me */
-aClient *client = &me;		/* Pointer to beginning of Client list */
+aClient *client;		/* Pointer to beginning of Client list */
 #ifdef  LOCKFILE
 extern  time_t  pending_kline_time;
 extern	struct pkl *pending_klines;
@@ -920,6 +920,7 @@ int	main(int argc, char *argv[])
 
   aConfItem *aconf;
 
+  client = &me;          /* Pointer to beginning of Client list */
   cold_start = YES;		/* set when server first starts up */
 
   if((timeofday = time(NULL)) == -1)

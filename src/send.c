@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)send.c	2.32 2/28/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: send.c,v 1.30 1999/05/15 14:40:32 db Exp $";
+static char *rcs_version = "$Id: send.c,v 1.31 1999/05/15 22:00:43 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -280,7 +280,10 @@ static	int	send_message(aClient *to, char *msg, int len)
 int	send_queued(aClient *to)
 {
   char	*msg;
-  int	len, rlen, more = NO;
+  int	len, rlen;
+#ifdef ZIP_LINKS
+  int	more = NO;
+#endif
 
   /*
   ** Once socket is marked dead, we cannot start writing to it,
