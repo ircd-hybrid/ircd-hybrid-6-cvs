@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.55 2004/05/23 15:23:30 ievil Exp $
+ *  $Id: m_gline.c,v 1.56 2004/06/13 04:47:51 ievil Exp $
  */
 #include "m_commands.h"
 #include "m_gline.h"
@@ -557,7 +557,7 @@ static void log_gline(aClient *sptr,
     return;
 
   if (strchr(host, ':'))
-    ircsprintf(buffer, "# IPv6 Host, invalid (%s@%s) [%s]", user,host,
+    ircsprintf(buffer, "# IPv6 Host, invalid (%s@%s) [%s]\n", user,host,
 #ifdef GLINE_REASON_FIRST
                gline_pending_ptr->reason1
 #else
