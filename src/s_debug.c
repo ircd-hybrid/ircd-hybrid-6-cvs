@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.24 1999/07/18 19:53:04 tomh Exp $
+ *   $Id: s_debug.c,v 1.25 1999/07/19 00:14:49 tomh Exp $
  */
 #include "struct.h"
 #include "s_conf.h"
@@ -26,6 +26,7 @@
 #include "res.h"
 #include "send.h"
 
+#include <string.h>
 #include <stdarg.h>
 #include <errno.h>
 
@@ -155,8 +156,6 @@ char	serveropts[] = {
 #define ssize_t unsigned int
 #endif
 
-/* extern char *sys_errlist[]; */
-
 static	char	debugbuf[1024];
 
 void
@@ -221,7 +220,7 @@ void	send_usage(aClient *cptr, char *nick)
   if (getrusage(RUSAGE_SELF, &rus) == -1)
     {
       sendto_one(cptr,":%s NOTICE %s :Getruseage error: %s.",
-		 me.name, nick, sys_errlist[errno]);
+		 me.name, nick, strerror(errno));
       return;
     }
   secs = rus.ru_utime.tv_sec + rus.ru_stime.tv_sec;

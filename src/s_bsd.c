@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.72 1999/07/18 23:27:21 tomh Exp $
+ *  $Id: s_bsd.c,v 1.73 1999/07/19 00:14:48 tomh Exp $
  */
 #include "s_bsd.h"
 #include "listener.h"
@@ -51,10 +51,12 @@
 #include <sys/resource.h>
 #include <sys/param.h>    /* NOFILE */
 #include <arpa/inet.h>
+
 #if defined(SOL20) 
 #include <sys/filio.h>
 #include <sys/select.h>
 #endif
+
 /*
  * Stuff for poll()
  */
