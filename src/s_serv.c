@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.48 1998/12/21 16:49:21 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.49 1998/12/23 05:17:31 db Exp $";
 #endif
 
 
@@ -1937,7 +1937,7 @@ static REPORT_STRUCT report_array[] = {
 
 static	void	report_configured_links(aClient *sptr,int mask)
 {
-  static	char	null[] = "<NULL>";
+  static char null[] = "<NULL>";
   aConfItem *tmp;
   REPORT_STRUCT *p;
   int   port;
