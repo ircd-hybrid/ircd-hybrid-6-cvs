@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: common.h,v 1.13 1999/07/21 05:45:00 tomh Exp $
+ * $Id: common.h,v 1.14 1999/07/23 05:05:30 tomh Exp $
  */
 #ifndef INCLUDED_common_h
 #define INCLUDED_common_h
@@ -67,7 +67,6 @@
 #include "irc_string.h"
 #endif
 
-extern void flush_connections();
 extern struct SLink *find_user_link(/* struct SLink *, struct Client * */);
 
 /* argh where should this go? */

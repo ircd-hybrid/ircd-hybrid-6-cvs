@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.65 1999/07/22 06:33:27 tomh Exp $
+ * $Id: struct.h,v 1.66 1999/07/23 05:05:32 tomh Exp $
  */
 #ifndef INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -51,12 +51,6 @@
 # ifndef INCLUDED_syslog_h
 #  include <syslog.h>
 #  define INCLUDED_syslog_h
-# endif
-# if defined( HAVE_SYS_SYSLOG_H )
-#  ifndef INCLUDED_sys_syslog_h
-#   include <sys/syslog.h>
-#   define INCLUDED_sys_syslog_h
-#  endif
 # endif
 #endif
 
