@@ -1,3 +1,17 @@
+ievil       2005/03/25 06:23:57 EST	(20050325_2)
+
+  Modified files:
+    src                  m_sinfo.c 
+  Log:
+  Bug reported by Lars Inge Gutterud about m_sinfo.c breaking whenever
+  NO_CREATE_ON_SPLIT (NEED_SPLIT_CODE) or similar is undef'd. Added a
+  error reply aswell.
+  
+  Revision  Changes    Path
+  1.2       +11 -0     ircd-hybrid-6/src/m_sinfo.c
+
+
+
 ievil       2005/03/25 06:21:34 EST	(20050325_1)
 
   Modified files:
