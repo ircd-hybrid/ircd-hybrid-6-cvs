@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.50 1999/07/07 05:37:02 tomh Exp $
+ * $Id: struct.h,v 1.51 1999/07/08 04:31:55 tomh Exp $
  */
 #ifndef	INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -44,9 +44,6 @@
 # if defined( HAVE_SYS_SYSLOG_H )
 #  include <sys/syslog.h>
 # endif
-#endif
-#ifdef	pyr
-#include <sys/time.h>
 #endif
 
 #include "zlib.h"
@@ -577,9 +574,6 @@ struct Client
   struct	in_addr	ip;	/* keep real ip# too */
   unsigned short	port;	/* and the remote port# too :-) */
   struct	hostent	*hostp;
-#ifdef	pyr
-  struct	timeval	lw;
-#endif
 #ifdef ANTI_NICK_FLOOD
   time_t	last_nick_change;
   int		number_of_nick_changes;
