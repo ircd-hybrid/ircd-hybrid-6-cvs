@@ -1,3 +1,19 @@
+ievil       2003/10/13 14:46:32 EDT	(20031013_17)
+
+  Modified files:
+    include              numeric.h 
+    src                  m_map.c m_set.c 
+  Log:
+  m_map fixes - octal version decimal
+  m_set fixes - forgot to add MAXBANS to the list of options
+  
+  Revision  Changes    Path
+  1.24      +2 -2      ircd-hybrid-6/include/numeric.h
+  1.3       +2 -1      ircd-hybrid-6/src/m_map.c
+  1.12      +1 -1      ircd-hybrid-6/src/m_set.c
+
+
+
 ievil       2003/10/13 13:16:13 EDT	(20031013_16)
 
   Modified files:
