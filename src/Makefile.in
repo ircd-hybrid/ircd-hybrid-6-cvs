@@ -1,7 +1,7 @@
 #
 # Makefile.in for ircd/src
 #
-# $Id: Makefile.in,v 1.56 1999/12/29 03:28:47 lusky Exp $
+# $Id: Makefile.in,v 1.57 2000/02/06 22:53:22 lusky Exp $
 #
 CC = @CC@
 RM = @RM@
@@ -97,7 +97,7 @@ SRCS = \
 	s_zip.c \
 	scache.c \
 	send.c \
-        sprintf_irc.c \
+	sprintf_irc.c \
 	whowas.c
 
 #
