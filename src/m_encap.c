@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_encap.c,v 1.1 2003/06/12 23:05:56 ievil Exp $
+ *   $Id: m_encap.c,v 1.2 2003/06/24 03:14:32 ievil Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -30,6 +30,7 @@
 #include "s_serv.h"
 #include "parse.h"
 #include "msg.h"
+#include <string.h>
 
 /* ms_encap()
  *
@@ -42,7 +43,8 @@ int ms_encap(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 {
   char buffer[BUFSIZE], *ptr = buffer;
   unsigned int cur_len = 0, len, i;
-  int paramcount, mpara = 0;
+/*  int paramcount, mpara = 0;
+ */
   struct Message *mptr;
 
   if (!IsServer(cptr))
@@ -53,7 +55,7 @@ int ms_encap(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
     len = strlen(parv[i]) + 1;
 
     if ((cur_len + len) >= sizeof(buffer))
-      return;
+      return 0;
 
     ircsprintf(ptr, "%s ", parv[i]);
     cur_len += len;
@@ -78,7 +80,7 @@ int ms_encap(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 
   mptr = tree_parse(parv[2]);
   if ((mptr == NULL) || (mptr->cmd == NULL))
-    return;
+    return 0;
 
   mptr->bytes += strlen(buffer);
 

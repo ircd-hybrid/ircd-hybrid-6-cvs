@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.116 2003/06/12 23:05:56 ievil Exp $
+ *   $Id: send.c,v 1.117 2003/06/24 03:14:32 ievil Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -936,8 +936,8 @@ sendto_match_cap_servs_butone(aClient *from, aClient *one, const char *mask,
 {
   aClient *cptr;
   va_list args;
-  char buf[BUFSIZE];
-
+/*  char buf[BUFSIZE];
+ */
   va_start(args, pattern);
 
   for(cptr = serv_cptr_list; cptr; cptr = cptr->next_server_client)
