@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: listener.c,v 1.1 1999/07/15 08:47:36 tomh Exp $
+ *  $Id: listener.c,v 1.2 1999/07/15 09:00:17 tomh Exp $
  */
 #include "listener.h"
 #include "s_bsd.h"
@@ -336,7 +336,6 @@ void accept_connection(struct Listener* listener)
   /*
    * check conf for ip address access
    */
-#if 0
   if (!conf_connect_allowed(addr.sin_addr)) {
     ircstp->is_ref++;
 #ifdef REPORT_DLINE_TO_USER
@@ -345,7 +344,6 @@ void accept_connection(struct Listener* listener)
     close(fd);
     return;
   }
-#endif
   ircstp->is_ac++;
   nextping = timeofday;
 

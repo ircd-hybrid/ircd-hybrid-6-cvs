@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.110 1999/07/15 08:47:39 tomh Exp $
+ *  $Id: s_conf.c,v 1.111 1999/07/15 09:00:17 tomh Exp $
  */
 #include "s_conf.h"
 #include "listener.h"
@@ -2393,14 +2393,11 @@ static void lookup_confhost(aConfItem* aconf)
  */
 int conf_connect_allowed(struct in_addr addr)
 {
-  aConfItem *aconf;
-
-  aconf = match_Dline(ntohl((unsigned long)addr.s_addr));
+  aConfItem *aconf = match_Dline(ntohl((unsigned long)addr.s_addr));
 
   if (aconf && !IsConfElined(aconf))
-    return 1;
-  else
     return 0;
+  return 1;
 }
 
 /*
