@@ -17,13 +17,12 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: sprintf_irc.c,v 1.5 1999/07/15 08:47:43 tomh Exp $
+ *   $Id: sprintf_irc.c,v 1.6 1999/07/17 22:02:24 db Exp $
  */
 #include <stdio.h>
 
 #include "send.h"
 #include "common.h"
-#include "sys.h"
 
 #include <stdarg.h>
 

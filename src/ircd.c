@@ -17,12 +17,11 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.85 1999/07/17 14:08:33 db Exp $
+ * $Id: ircd.c,v 1.86 1999/07/17 22:02:23 db Exp $
  */
 #include "struct.h"
 #include "common.h"
 #include "dline_conf.h"
-#include "sys.h"
 #include "numeric.h"
 #include "msg.h"
 #include "res.h"

@@ -16,11 +16,10 @@
 *   along with this program; if not, write to the Free Software
 *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 *
-*   $Id: whowas.c,v 1.15 1999/07/17 07:56:02 tomh Exp $
+*   $Id: whowas.c,v 1.16 1999/07/17 22:02:24 db Exp $
 */
 #include "struct.h"
 #include "common.h"
-#include "sys.h"
 #include "numeric.h"
 #include "h.h"
 #include "send.h"
