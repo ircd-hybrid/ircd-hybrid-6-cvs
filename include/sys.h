@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: sys.h,v 1.9 1999/06/22 01:01:39 db Exp $
+ * $Id: sys.h,v 1.10 1999/06/27 19:25:03 tomh Exp $
  */
 
 #ifndef	__sys_include__
@@ -32,9 +32,6 @@
 #include <sys/param.h>
 
 #include "zlib.h"
-
-/*#include "cdefs.h"
-#include "bitypes.h"*/
 
 #if defined( HAVE_UNISTD_H )
 #include <unistd.h>
