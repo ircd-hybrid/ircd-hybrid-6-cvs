@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.26 1999/06/03 02:03:50 db Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.27 1999/06/03 02:40:57 lusky Exp $";
 #endif
 
 #include <sys/time.h>
@@ -722,7 +722,7 @@ static	void recurse_remove_clients(aClient *sptr, char *comment)
   if (!sptr->serv)	/* oooops. uh this is actually a major bug */
     return;
 
-  while (acptr = sptr->serv->servers)
+  while ( (acptr = sptr->serv->servers) )
     {
       recurse_remove_clients(acptr, comment);
       /*
@@ -733,7 +733,7 @@ static	void recurse_remove_clients(aClient *sptr, char *comment)
       exit_one_client(NULL, acptr, &me, me.name);
     }
 
-  while (acptr = sptr->serv->users)
+  while ( (acptr = sptr->serv->users) )
     {
       acptr->flags |= FLAGS_KILLED;
       exit_one_client(NULL, acptr, &me, comment);
