@@ -1,3 +1,15 @@
+ievil       2004/04/08 21:07:47 EDT	(20040409_0)
+
+  Modified files:
+    .                    ChangeLog 
+  Log:
+  removed the bogus commit
+  
+  Revision  Changes    Path
+  1.722     +0 -20     ircd-hybrid-6/ChangeLog
+
+
+
 
 lusky       2004/03/18 00:32:47 EST	(20040318_2)
 
