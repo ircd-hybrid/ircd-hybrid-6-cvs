@@ -65,7 +65,7 @@
 #endif
 
 #ifndef lint
-static char *rcs_version = "$Id: inet_addr.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static char *rcs_version = "$Id: inet_addr.c,v 1.1.1.1 1998/09/17 14:25:04 db Exp $";
 #endif /* lint */
 
 /* this is a compatibility routine, not needed on recent BSD releases */

@@ -34,7 +34,7 @@ Typical usage:
 #define YES 1
 #define NO 0
 
-static char *version="$Id: fixklines.c,v 1.1 1998/09/17 14:25:05 db Exp $";
+static char *version="$Id: fixklines.c,v 1.1.1.1 1998/09/17 14:25:05 db Exp $";
 
 char linebuf[MAXLINE];
 void read_write_klines(char *,char *);

@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.1.1.1 1998/09/17 14:25:04 db Exp $";
 #endif
 
 #include <sys/time.h>

@@ -23,7 +23,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.1 1998/09/17 14:25:03 db Exp $
+ * $Id: h.h,v 1.1.1.1 1998/09/17 14:25:03 db Exp $
  *
  */
 

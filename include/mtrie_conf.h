@@ -1,4 +1,4 @@
-/* $Id: mtrie_conf.h,v 1.1 1998/09/17 14:25:04 db Exp $ */
+/* $Id: mtrie_conf.h,v 1.1.1.1 1998/09/17 14:25:04 db Exp $ */
 /* This one is my trademark no? -db */
 #ifndef FOREVER
 #define FOREVER for(;;)

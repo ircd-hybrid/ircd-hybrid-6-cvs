@@ -19,11 +19,11 @@
  */
 
 /*
- * $Id: sock.h,v 1.1 1998/09/17 14:25:03 db Exp $
+ * $Id: sock.h,v 1.1.1.1 1998/09/17 14:25:03 db Exp $
  *
  * $Log: sock.h,v $
- * Revision 1.1  1998/09/17 14:25:03  db
- * Initial revision
+ * Revision 1.1.1.1  1998/09/17 14:25:03  db
+ * Initial ircd-hybrid-6 cvs tree
  *
  * Revision 1.1.1.1  1997/09/29 15:35:23  db
  * CVS tree of ircd-hybrid-5

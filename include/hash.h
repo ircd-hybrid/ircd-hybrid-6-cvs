@@ -18,7 +18,7 @@
  */
 
 /*
-$Id: hash.h,v 1.1 1998/09/17 14:25:03 db Exp $
+$Id: hash.h,v 1.1.1.1 1998/09/17 14:25:03 db Exp $
  */
 /* This is all DOUGH_HASH now - Dianora */
 

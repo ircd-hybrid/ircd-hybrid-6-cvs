@@ -20,7 +20,7 @@
 #if defined(LIBC_SCCS) && !defined(lint)
 static char sccsid[] = "@(#)res_comp.c	6.18 (Berkeley) 6/27/90";
 
-static char *rcs_version = "$Id: res_comp.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static char *rcs_version = "$Id: res_comp.c,v 1.1.1.1 1998/09/17 14:25:04 db Exp $";
 #endif /* LIBC_SCCS and not lint */
 
 #include <sys/types.h>

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: sys.h,v 1.1 1998/09/17 14:25:03 db Exp $
+ * $Id: sys.h,v 1.1.1.1 1998/09/17 14:25:03 db Exp $
  */
 
 #ifndef	__sys_include__

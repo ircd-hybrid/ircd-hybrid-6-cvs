@@ -55,7 +55,7 @@
 #endif
 
 #ifndef lint
-static char *version="$Id: mtrie_conf.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static char *version="$Id: mtrie_conf.c,v 1.1.1.1 1998/09/17 14:25:04 db Exp $";
 #endif /* lint */
 
 #define MAXPREFIX (HOSTLEN+USERLEN+10)

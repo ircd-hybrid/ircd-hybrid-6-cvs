@@ -19,7 +19,7 @@
 
 #ifndef	lint
 static char sccsid[] = "@(#)class.c	1.4 28 Jun 1993 (C) 1990 Darren Reed";
-static char *rcs_version = "$Id: class.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static char *rcs_version = "$Id: class.c,v 1.1.1.1 1998/09/17 14:25:04 db Exp $";
 #endif
 
 #include "struct.h"

@@ -27,7 +27,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)s_err.c	1.11 5/17/93 (C) 1992 Darren Reed";
-static char *rcs_version = "$Id: s_err.c,v 1.1 1998/09/17 14:25:05 db Exp $";
+static char *rcs_version = "$Id: s_err.c,v 1.1.1.1 1998/09/17 14:25:05 db Exp $";
 #endif
 
 static	char	numbuff[512];

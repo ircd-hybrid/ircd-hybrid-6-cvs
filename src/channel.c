@@ -22,7 +22,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.1.1.1 1998/09/17 14:25:04 db Exp $";
 #endif
 
 #include "struct.h"
