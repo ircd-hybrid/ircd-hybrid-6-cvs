@@ -22,7 +22,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)res.c	2.34 03 Nov 1993 (C) 1992 Darren Reed";
-static  char *rcs_version = "$Id: res.c,v 1.8 1998/12/10 06:14:05 db Exp $";
+static  char *rcs_version = "$Id: res.c,v 1.9 1998/12/10 17:23:31 db Exp $";
 #endif
 
 #undef	DEBUG	/* because there is a lot of debug code in here :-) */
@@ -561,7 +561,7 @@ static	int	proc_answer(ResRQ *rptr,
       else
 	cp += (n + QFIXEDSZ);
   /*
-   * proccess each answer sent to us blech.
+   * process each answer sent to us blech.
    */
   while (hptr->ancount-- > 0 && cp && cp < eob)
     {
