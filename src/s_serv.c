@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.96 1999/05/27 01:30:59 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.97 1999/05/28 01:10:32 db Exp $";
 #endif
 
 
@@ -3946,9 +3946,13 @@ int     m_kline(aClient *cptr,
 	 }
        host = cidr_form_host;
     }
+  else
+    {
+      ip = 0L;
+    }
 
 #ifdef NON_REDUNDANT_KLINES
-  if( (aconf = find_is_klined(host,user,0L)) )
+  if( (aconf = find_matching_mtrie_conf(host,user,(unsigned long)ip)) )
      {
        char *reason;
 
