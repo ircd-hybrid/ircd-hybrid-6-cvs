@@ -34,7 +34,7 @@
  *		  mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.125 1999/07/20 04:39:23 tomh Exp $
+ * $Id: channel.c,v 1.126 1999/07/20 08:57:25 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -79,6 +79,7 @@ static  void	clear_bans_exceptions(aClient *,aChannel *);
 static	int     is_banned (aClient *, aChannel *);
 static	void	set_mode (aClient *, aClient *, aChannel *, int, char **);
 static	void	sub1_from_channel (aChannel *);
+
 
 int	check_channel_name(const char* name);
 void	del_invite (aClient *, aChannel *);
