@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.145 2001/12/07 04:13:26 jdc Exp $
+ * $Id: config.h,v 1.146 2001/12/07 04:16:29 jdc Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -434,7 +434,7 @@
  * Note that you may have to increase your sendQ size between server
  * if you have problems during particularly heavy bursts
  */
-#undef ZIP_LINKS
+#define ZIP_LINKS
 
 /* NO_DEFAULT_INVISIBLE - clients not +i by default
  * When defined, your users will not automatically be attributed with user
