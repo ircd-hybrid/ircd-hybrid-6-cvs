@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h.dist,v 1.126 2001/12/07 04:26:15 db Exp $
+ * $Id: config.h.dist,v 1.127 2001/12/07 05:09:27 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -225,13 +225,6 @@
  * strongly discouraged on public networks
  */
 #undef  ALLOW_DOT_IN_IDENT
-
-/* MAX_MULTI_MESSAGES
- * Maximum number of recipients to a PRIVMSG.  Any more than
- * MAX_MULTI_MESSAGES will not be sent.  If MAX_MULTI_MESSAGES is 1, then
- * any PRIVMSG with a ',' in the target will be rejected.
- */
-#define MAX_MULTI_MESSAGES 2
 
 /* WARN_NO_NLINE
  * Define this if you want ops to get noticed about "things" trying to

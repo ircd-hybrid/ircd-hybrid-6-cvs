@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: messages_cust.tab,v 1.19 2001/12/04 16:27:35 db Exp $
+ * $Id: messages_cust.tab,v 1.20 2001/12/07 05:09:31 db Exp $
  *
  */
 /* 
@@ -448,7 +448,7 @@ static  char *  replies[] = {
 /* 405 ERR_TOOMANYCHANNELS, */  ":%s 405 %s %s :You have joined too many channels",
 /* 406 ERR_WASNOSUCHNICK, */    ":%s 406 %s %s :There was no such nickname",
 /* 407 ERR_TOOMANYTARGETS, */
-                ":%s 407 %s %s :Too many recipients. Only %d processed",
+                ":%s 407 %s %s :Duplicate recipients. No message delivered.",
 /* 408 */       NULL,
 /* 409 ERR_NOORIGIN, */         ":%s 409 %s :No origin specified",
 /* 410 */       NULL,

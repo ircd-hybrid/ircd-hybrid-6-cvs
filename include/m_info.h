@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.24 2001/12/07 04:51:32 wcampbel Exp $
+ * $Id: m_info.h,v 1.25 2001/12/07 05:09:27 db Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -402,8 +402,6 @@ Info MyInformation[] = {
 #ifdef ANTI_SPAMBOT
   { "MAX_JOIN_LEAVE_COUNT", "", MAX_JOIN_LEAVE_COUNT, "Anti SpamBot Parameter" },
 #endif /* ANTI_SPAMBOT */
-
-  { "MAX_MULTI_MESSAGES", "", MAX_MULTI_MESSAGES, "Maximum targets per PRIVMSG" },
 
 #ifdef ANTI_NICK_FLOOD
   { "MAX_NICK_CHANGES", "", MAX_NICK_CHANGES, "Maximum Nick Changes Allowed" },
