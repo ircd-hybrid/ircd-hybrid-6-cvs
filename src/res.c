@@ -22,7 +22,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)res.c	2.34 03 Nov 1993 (C) 1992 Darren Reed";
-static  char *rcs_version = "$Id: res.c,v 1.7 1998/11/12 02:32:11 db Exp $";
+static  char *rcs_version = "$Id: res.c,v 1.8 1998/12/10 06:14:05 db Exp $";
 #endif
 
 #undef	DEBUG	/* because there is a lot of debug code in here :-) */
@@ -570,15 +570,25 @@ static	int	proc_answer(ResRQ *rptr,
 
       if (n <= 0)
 	break;
-      cp += n;
+
+      /* With Address arithemetic you have to be very anal
+       * this code was not working on alpha due to that
+       * (spotted by rodder/jailbird/dianora)
+       */
+
+      cp = (char *)((unsigned long)cp + (unsigned long)n);
       type = (int)_getshort(cp);
-      cp += sizeof(short);
+
+      cp = (char *)((unsigned long)cp + (unsigned long)sizeof(short));
       class = (int)_getshort(cp);
-      cp += sizeof(short);
+
+      cp = (char *)((unsigned long)cp + (unsigned long)sizeof(short));
       rptr->ttl = _getlong(cp);
-      cp += sizeof(rptr->ttl);
+
+      cp = (char *)((unsigned long)cp + (unsigned long)sizeof(rptr->ttl));
       dlen =  (int)_getshort(cp);
-      cp += sizeof(short);
+
+      cp = (char *)((unsigned long)cp + (unsigned long)sizeof(short));
       /* Wait to set rptr->type until we verify this structure */
       
       len = strlen(hostbuf);
