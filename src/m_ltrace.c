@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_ltrace.c,v 1.9 2001/12/08 05:10:22 jdc Exp $
+ *   $Id: m_ltrace.c,v 1.10 2003/01/01 15:20:40 ievil Exp $
  */
 #include "m_commands.h"
 #include "class.h"
@@ -153,8 +153,7 @@ int     m_ltrace(struct Client *cptr,
     }
 
 
-  if(MyClient(sptr))
-    sendto_realops_flags(FLAGS_SPY, "ltrace requested by %s (%s@%s) [%s]",
+  sendto_realops_flags(FLAGS_SPY, "ltrace requested by %s (%s@%s) [%s]",
                        sptr->name, sptr->username, sptr->host,
                        sptr->user->server);
 
@@ -189,7 +188,16 @@ int     m_ltrace(struct Client *cptr,
           sendto_one(sptr, form_str(RPL_TRACEOPERATOR),
                      me.name, parv[0], c_class,
                      name,
-                     IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"255.255.255.255":ip),
+#if (defined SERVERHIDE) || (defined HIDE_SERVERS_IPS)
+                     "255.255.255.255",
+#else
+#ifdef HIDE_SPOOF_IPS
+                             IsIPSpoof(acptr) ? "255.255.255.255" : ip,
+#else
+                             IsAnOper(sptr) ? ip :
+                             (IsIPSpoof(acptr) ? "255.255.255.255" : ip),
+#endif
+#endif
                      now - acptr->lasttime,
                      (acptr->user)?(now - acptr->user->last):0);
         }
@@ -271,7 +279,16 @@ int     m_ltrace(struct Client *cptr,
                            form_str(RPL_TRACEOPERATOR),
                            me.name, parv[0], c_class,
                            name, 
-                           IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"255.255.255.255":ip), 
+#if (defined SERVERHIDE) || (defined HIDE_SERVERS_IPS)
+                     "255.255.255.255",
+#else
+#ifdef HIDE_SPOOF_IPS
+                             IsIPSpoof(acptr) ? "255.255.255.255" : ip,
+#else
+                             IsAnOper(sptr) ? ip :
+                             (IsIPSpoof(acptr) ? "255.255.255.255" : ip),
+#endif
+#endif
                            now - acptr->lasttime,
                            (acptr->user)?(now - acptr->user->last):0);
               cnt++;
