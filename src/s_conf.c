@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.118 1999/07/16 09:36:03 db Exp $
+ *  $Id: s_conf.c,v 1.119 1999/07/16 09:40:46 db Exp $
  */
 #include "s_conf.h"
 #include "listener.h"
@@ -114,8 +114,6 @@ typedef struct ip_entry
 }IP_ENTRY;
 
 static IP_ENTRY *ip_hash_table[IP_HASH_SIZE];
-
-extern void zap_Dlines();
 
 static int hash_ip(unsigned long);
 
