@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: s_serv.h,v 1.4 1999/07/27 01:36:45 tomh Exp $
+ * $Id: s_serv.h,v 1.5 1999/07/28 05:00:41 tomh Exp $
  *
  */
 #ifndef INCLUDED_serv_h
@@ -102,6 +102,7 @@ extern void   send_capabilities(struct Client* client, int use_zip);
 extern int    hunt_server(struct Client* cptr, struct Client* sptr,
                           char* command, int server, int parc, char** parv);
 extern int    server_estab(struct Client* cptr);
+extern int    check_server(struct Client* server);
 extern time_t try_connections(time_t currenttime);
 
 #endif /* INCLUDED_s_serv_h */
