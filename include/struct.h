@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.32 1999/04/30 03:42:13 db Exp $
+ * $Id: struct.h,v 1.33 1999/05/04 04:41:44 db Exp $
  */
 
 #ifndef	__struct_include__
@@ -653,6 +653,11 @@ struct Client
   int	channel_privmsgs; /* Count how many times client privmsgs a channel*/
   int	person_privmsgs;  /* Count how many times client privmsgs a person */
   struct Client *last_client_messaged; /* who was privmsg'ed last time */
+#endif
+#ifdef ANTI_DRONE_FLOOD
+  time_t first_received_message_time;
+  int	 received_number_of_privmsgs;
+  int	drone_noticed;
 #endif
   char	buffer[BUFSIZE]; /* Incoming message buffer */
 #ifdef ZIP_LINKS
