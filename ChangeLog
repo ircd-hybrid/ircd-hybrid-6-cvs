@@ -1,3 +1,17 @@
+ievil       2003/05/05 12:38:38 EDT	(20030505_2)
+
+  Modified files:
+    adns                 .depend 
+    src                  .depend 
+  Log:
+  updated depends.
+  
+  Revision  Changes    Path
+  1.3       +0 -1      ircd-hybrid-6/adns/.depend
+  1.49      +8 -7      ircd-hybrid-6/src/.depend
+
+
+
 ievil       2003/05/05 09:25:47 EDT	(20030505_1)
 
   Modified files:
