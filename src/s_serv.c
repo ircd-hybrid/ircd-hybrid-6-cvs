@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.62 1999/01/21 05:48:37 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.63 1999/01/21 22:38:35 db Exp $";
 #endif
 
 
@@ -1181,7 +1181,12 @@ int	m_server_estab(aClient *cptr)
 		  sendnick_TS(cptr, acptr);
 	      }
 	  }
-	send_channel_modes(cptr, chptr);
+#if defined(PRESERVE_CHANNEL_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT)
+	/* don't send 0 user channels on rejoin (Mortiis)
+	 */
+	if(chptr->users != 0)
+#endif
+	  send_channel_modes(cptr, chptr);
       }
     /*
     ** also send out those that are not on any channel

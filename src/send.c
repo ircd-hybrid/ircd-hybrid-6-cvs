@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)send.c	2.32 2/28/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: send.c,v 1.25 1998/12/24 00:03:52 db Exp $";
+static char *rcs_version = "$Id: send.c,v 1.26 1999/01/21 22:38:36 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1836,8 +1836,8 @@ va_dcl
         ** more than 5 every 5 seconds.  -orabidoo
         */
 	/*
-	th+hybrid servers always do TS_WARNINGS -Dianora
-	*/
+	 * hybrid servers always do TS_WARNINGS -Dianora
+	 */
         now = time(NULL);
         if (now - last < 5)
             {
