@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.74 1999/07/13 01:43:00 db Exp $
+ * $Id: ircd.c,v 1.75 1999/07/13 03:23:11 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -244,8 +244,7 @@ void	server_reboot()
   close(1);
   if ((bootopt & BOOT_CONSOLE) || isatty(0))
     close(0);
-  if (!(bootopt & BOOT_OPER))
-    execv(MYNAME, myargv);
+  execv(MYNAME, myargv);
 #ifdef USE_SYSLOG
   /* Have to reopen since it has been closed above */
 
@@ -972,16 +971,9 @@ int	main(int argc, char *argv[])
 	case 'c':
 	  bootopt |= BOOT_CONSOLE;
 	  break;
-	case 'q':
-	  bootopt |= BOOT_QUICK;
-	  break;
 	case 'd' :
 	  (void)setuid((uid_t)uid);
 	  ConfigFileEntry.dpath = p;
-	  break;
-	case 'o': /* Per user local daemon... */
-	  (void)setuid((uid_t)uid);
-	  bootopt |= BOOT_OPER;
 	  break;
 #ifdef CMDLINE_CONFIG
 	case 'f':
@@ -1164,21 +1156,7 @@ normal user.\n");
   add_to_client_hash_table(me.name, &me);
 
   check_class();
-#if 0
-  /*
-   * XXX - this is temporarily broken by the changes to the auth code
-   */
-  if (bootopt & BOOT_OPER)
-    {
-      aClient *tmp = add_connection(&me, 0);
-      
-      if (!tmp)
-	exit(1);
-      SetMaster(tmp);
-    }
-  else
-#endif
-    write_pidfile();
+  write_pidfile();
 
   Debug((DEBUG_NOTICE,"Server ready..."));
   if (bootopt & BOOT_STDERR)
