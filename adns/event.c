@@ -1,5 +1,5 @@
 /*
- * event.c: $Id: event.c,v 1.5 2001/12/04 16:12:11 androsyn Exp $
+ * event.c: $Id: event.c,v 1.6 2002/01/28 04:30:31 androsyn Exp $
  *  
  */
 /*
@@ -90,7 +90,6 @@ static void tcp_connected(adns_state ads, struct timeval now) {
 void adns__tcp_tryconnect(adns_state ads, struct timeval now) {
   int r, fd, tries;
   struct sockaddr_in addr;
-  struct protoent *proto;
 
   for (tries=0; tries<ads->nservers; tries++) {
     switch (ads->tcpstate) {
@@ -108,9 +107,7 @@ void adns__tcp_tryconnect(adns_state ads, struct timeval now) {
     assert(!ads->tcprecv.used);
     assert(!ads->tcprecv_skip);
 
-    proto= getprotobyname("tcp");
-    if (!proto) { adns__diag(ads,-1,0,"unable to find protocol no. for TCP !"); return; }
-    fd= socket(AF_INET,SOCK_STREAM,proto->p_proto);
+    fd= socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
     if (fd<0) {
       adns__diag(ads,-1,0,"cannot create TCP socket: %s",strerror(errno));
       return;
