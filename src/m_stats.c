@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_stats.c,v 1.12 2001/06/06 05:03:18 db Exp $
+ *  $Id: m_stats.c,v 1.13 2001/06/13 16:15:32 db Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "class.h"       /* report_classes */
@@ -285,6 +285,12 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       break;
 
     case 'G': case 'g' :
+      if (!IsAnOper(sptr))
+        {
+          ignore_request++;
+          valid_stats++;
+          break;
+        }
 #ifdef GLINES
       report_glines(sptr);
       valid_stats++;
@@ -403,6 +409,12 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       break;
 
     case 'R' : case 'r' :
+      if (!IsAnOper(sptr))
+	{
+	  ignore_request++;
+	  valid_stats++;
+	  break;
+	}
       send_usage(sptr,parv[0]);
       valid_stats++;
       break;
