@@ -19,7 +19,7 @@
  *
  * "ircd.h". - Headers file.
  *
- * $Id: ircd.h,v 1.18 2000/12/31 00:11:55 lusky Exp $
+ * $Id: ircd.h,v 1.19 2001/06/16 15:47:02 db Exp $
  *
  */
 #ifndef INCLUDED_ircd_h
@@ -146,7 +146,7 @@ extern int reject_held_fds;
 extern size_t   get_maxrss(void);
 
 /* 1800 == half an hour
- * if clock set back more than this lenght of time
+ * if clock set back more than this length of time
  * complain
  */
 #define MAX_SETBACK_TIME 1800

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.132 2001/06/16 11:22:11 leeh Exp $
+ *  $Id: s_bsd.c,v 1.133 2001/06/16 15:47:06 db Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -615,7 +615,7 @@ int connect_server(struct ConfItem* aconf,
    * Attach config entries to client here rather than in
    * completed_connection. This to avoid null pointer references
    */
-  if (!attach_cn_lines(cptr, aconf->host))
+  if (!attach_cn_lines(cptr, aconf->name, aconf->host))
     {
       sendto_realops("Host %s is not enabled for connecting:no C/N-line",
                  aconf->host);

@@ -21,9 +21,15 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.45 2000/12/01 06:28:47 lusky Exp $
+ * $Id: s_conf.h,v 1.46 2001/06/16 15:47:02 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.46  2001/06/16 15:47:02  db
+ * - ok fixed a "dropped c line" bug. the problem was, both the hostname
+ *   and servername have to match in attach_cn_lines, thats because
+ *   you could have two servers on the same ip with different server names
+ * - also fixed a minor typo here and there
+ *
  * Revision 1.45  2000/12/01 06:28:47  lusky
  * added Gline Exemption flag ('_') to Ilines
  *
@@ -377,8 +383,9 @@ extern int              attach_conf(struct Client*, struct ConfItem *);
 extern int              attach_confs(struct Client* client, 
                                      const char* name, int statmask);
 extern int              attach_cn_lines(struct Client* client, 
-                                        const char* host);
-extern int              attach_Iline(struct Client* client, 
+                                        const char *name,
+					const char *host);
+extern int              attach_Iline(struct Client *client, 
                                      const char* username, char** reason);
 extern struct ConfItem* find_me(void);
 extern struct ConfItem* find_admin(void);
