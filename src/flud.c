@@ -20,16 +20,17 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: flud.c,v 1.2 1999/07/30 21:52:30 db Exp $
+ *   $Id: flud.c,v 1.3 1999/07/31 01:24:34 tomh Exp $
  */
-#include "m_commands.h"
+#include "flud.h"
 #include "client.h"
+#include "irc_string.h"
 #include "ircd.h"
+#include "list.h"
 #include "numeric.h"
-#include "s_serv.h"
+// #include "s_serv.h"
 #include "send.h"
 #include "channel.h"
-#include "flud.h"
 #include "struct.h"
 #include "blalloc.h"
 #include "s_stats.h"
