@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.75 2002/11/28 04:18:01 db Exp $
+ *  $Id: s_misc.c,v 1.76 2003/06/24 05:30:48 ievil Exp $
  */
 #include "s_misc.h"
 #include "channel.h"
@@ -149,7 +149,7 @@ void serv_info(aClient *cptr,char *name)
   aClient        *acptr;
 
   sendK = receiveK = 0;
-  j = 1;
+  j = 0;
 
   for(acptr = serv_cptr_list; acptr; acptr = acptr->next_server_client)
     {
@@ -187,7 +187,7 @@ void serv_info(aClient *cptr,char *name)
     }
 
   sendto_one(cptr, ":%s %d %s :%u total server%s",
-             me.name, RPL_STATSDEBUG, name, --j, (j==1)?"":"s");
+             me.name, RPL_STATSDEBUG, name, j, (j==1)?"":"s");
 
   sendto_one(cptr, ":%s %d %s :Sent total : %7.2f %s",
              me.name, RPL_STATSDEBUG, name, _GMKv(sendK), _GMKs(sendK));

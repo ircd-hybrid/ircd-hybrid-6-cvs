@@ -1,5 +1,5 @@
 /*
- * transmit.c: $Id: transmit.c,v 1.5 2002/02/06 04:56:09 androsyn Exp $
+ * transmit.c: $Id: transmit.c,v 1.6 2003/06/24 05:30:46 ievil Exp $
  *  
  */
 /*
@@ -99,7 +99,15 @@ adns_status adns__mkquery(adns_state ads, vbuf *vb, int *id_r,
 	if (!(flags & adns_qf_quoteok_query)) return adns_s_querydomaininvalid;
 	if (ctype_digit(p[0])) {
 	  if (ctype_digit(p[1]) && ctype_digit(p[2])) {
-	    c= (*p++ - '0')*100 + (*p++ - '0')*10 + (*p++ - '0');
+            c  = (*p - '0') * 100;
+            p++;
+            c += (*p - '0')*10;
+            p++;
+            c += (*p - '0');
+            p++;
+/*	    c= (*p++ - '0')*100 + (*p++ - '0')*10 + (*p++ - '0'); 
+ * Bad code removed and fixed
+ */
 	    if (c >= 256) return adns_s_querydomaininvalid;
 	  } else {
 	    return adns_s_querydomaininvalid;
