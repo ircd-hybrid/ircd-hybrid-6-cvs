@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.42 1998/12/21 00:47:41 lusky Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.43 1998/12/21 01:28:18 db Exp $";
 
 #endif
 
@@ -2025,7 +2025,7 @@ static	int	m_message(aClient *cptr,
     }
 
   /*
-  ** channel msg?
+  ** @# type of channel msg?
   */
 
   if(*nick == '@')
@@ -2084,11 +2084,11 @@ static	int	m_message(aClient *cptr,
 		}
 	      return -1;
 	    }
-	  else {
-	    sendto_channel_type_notice(cptr, chptr, type,
-				parv[2]);
-
-	  }
+	  else
+	    {
+	      sendto_channel_type_notice(cptr, chptr, type,
+					 parv[2]);
+	    }
 #ifdef ANTI_SPAMBOT_EXTRA
 	  if( MyConnect(sptr) && spambot_privmsg_count &&
 	      ((sptr->person_privmsgs - sptr->channel_privmsgs)
@@ -2115,7 +2115,7 @@ static	int	m_message(aClient *cptr,
     }
 
   /*
-  ** channel msg ?
+  ** plain old channel msg ?
   */
   if (IsPerson(sptr) && (chptr = find_channel(nick, NullChn)))
     {
@@ -2170,7 +2170,7 @@ static	int	m_message(aClient *cptr,
   if(!IsAnOper(sptr))
     {
       sendto_one(sptr, err_str(ERR_NOSUCHNICK),
-		 me.name, parv[0], cmd);
+		 me.name, parv[0], nick);
       return -1;
     }
 	
