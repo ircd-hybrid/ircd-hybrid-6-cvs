@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.221 2000/06/09 03:48:23 lusky Exp $
+ *  $Id: s_user.c,v 1.222 2000/06/26 23:07:32 lusky Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -794,7 +794,7 @@ static int register_user(aClient *cptr, aClient *sptr,
     {
       sendto_ops("Ghost killed: %s on invalid server %s",
                  sptr->name, sptr->user->server);
-      sendto_one(cptr,":%s KILL %s: %s (Ghosted, %s doesn't exist)",
+      sendto_one(cptr,":%s KILL %s :%s (Ghosted, %s doesn't exist)",
                  me.name, sptr->name, me.name, user->server);
       sptr->flags |= FLAGS_KILLED;
       return exit_client(NULL, sptr, &me, "Ghost");
