@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.50 1999/07/18 19:46:04 tomh Exp $
+ * $Id: h.h,v 1.51 1999/07/19 02:24:53 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -190,10 +190,8 @@ void remove_one_ip(unsigned long);
 
 
 #ifdef FLUD
-int	check_for_flood();
 void	free_fluders();
 void	free_fludees();
-#define MyFludConnect(x)	(((x)->fd >= 0) || ((x)->fd == -2))
 #endif /* FLUD */
 
 #ifdef ANTI_SPAMBOT

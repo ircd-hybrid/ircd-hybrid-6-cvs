@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.18 1999/07/18 23:27:20 tomh Exp $
+ *  $Id: client.c,v 1.19 1999/07/19 02:24:56 db Exp $
  */
 #include "client.h"
 #include "struct.h"
@@ -42,9 +42,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sys/stat.h>
-#if 0
-#include <sys/time.h>
-#endif
+
 
 /* 
  * Number of aClient structures to preallocate at a time
@@ -276,7 +274,7 @@ static void release_client_state(struct Client* cptr)
     }
 
 #ifdef FLUD
-  if (MyFludConnect(cptr))
+  if (MyConnect(cptr))
     free_fluders(cptr, NULL);
   free_fludees(cptr);
 #endif

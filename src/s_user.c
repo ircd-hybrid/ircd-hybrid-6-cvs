@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.148 1999/07/18 23:35:16 db Exp $
+ *  $Id: s_user.c,v 1.149 1999/07/19 02:24:56 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -1857,7 +1857,7 @@ static	int	m_message(aClient *cptr,
 	sptr->user->last = timeofday;
 #endif
 #ifdef FLUD
-      if(!notice && MyFludConnect(acptr))
+      if(!notice && MyConnect(acptr))
 	if(check_for_ctcp(parv[2]))
 	  if(check_for_flud(sptr, acptr, NULL, 1))
 	    return 0;
@@ -3901,7 +3901,7 @@ check_for_flud(aClient *fluder,	/* fluder, client being fluded */
   if((cptr == NULL) && (chptr == NULL))
     return 0;
   
-  if(cptr && !MyFludConnect(cptr))
+  if(cptr && !MyConnect(cptr))
     {
       sendto_ops("check_for_flud() called for non-local client");
       return 0;
@@ -4074,7 +4074,7 @@ void free_fluders(aClient *cptr, aChannel *chptr)
       return;
     }    
  
-  if(cptr && !MyFludConnect(cptr))  
+  if(cptr && !MyConnect(cptr))  
     return;
                 
   if(cptr)        
@@ -4115,7 +4115,7 @@ void free_fludees(aClient *badguy)
 	remove_fluder_reference(&fludees->value.chptr->fluders, badguy);
       else
 	{
-	  if(!MyFludConnect(fludees->value.cptr))
+	  if(!MyConnect(fludees->value.cptr))
 	    sendto_ops("free_fludees() encountered non-local client");
 	  else
 	    remove_fluder_reference(&fludees->value.cptr->fluders, badguy);
