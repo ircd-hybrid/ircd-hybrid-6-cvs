@@ -1,3 +1,21 @@
+ievil       2004/05/23 12:33:57 EDT	(20040523_11)
+
+  Modified files:
+    src                  m_encap.c 
+  Added files:
+    include              m_encap.h 
+  Log:
+  Added my ACL's for ENCAP support...  ;) Now we will pass anything,
+  and only handle what's in the ACL... Quite simple and generic
+  implementation by myself. And to the ppl out there who think I
+  can't code on my own.... I can .. just look at it ;)
+  
+  Revision  Changes    Path
+  1.1       +44 -0     ircd-hybrid-6/include/m_encap.h (new)
+  1.3       +18 -9     ircd-hybrid-6/src/m_encap.c
+
+
+
 ievil       2004/05/23 12:25:23 EDT	(20040523_10)
 
   Modified files:
