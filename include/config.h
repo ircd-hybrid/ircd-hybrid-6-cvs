@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.151 2001/12/19 23:02:02 leeh Exp $
+ * $Id: config.h,v 1.152 2002/01/04 04:00:58 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -985,6 +985,10 @@
 
 #if !defined(CLIENT_FLOOD)
 #error CLIENT_FLOOD undefined.
+#endif
+
+#if !defined(HAVE_LIBZ) && defined(ZIP_LINKS)
+#error ZIP_LINKS defined put ZLIB not found.  Undef ZIP_LINKS or install ZLIB
 #endif
 
 #ifdef DEBUGMODE
