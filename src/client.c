@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.65 2001/07/10 12:40:31 jdc Exp $
+ *  $Id: client.c,v 1.66 2001/07/16 02:18:49 leeh Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -1095,6 +1095,15 @@ const char* get_client_name(struct Client* client, int showip)
     {
       if (!irccmp(client->name, client->host))
         return client->name;
+
+#ifdef HIDE_SERVERS_IPS
+      if(IsServer(client))
+      {
+        ircsprintf(nbuf, "%s[%s@255.255.255.255]", client->name,
+	           client->username);
+        return nbuf;
+      }
+#endif
 
       /* And finally, let's get the host information, ip or name */
       switch (showip)

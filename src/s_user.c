@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.234 2001/07/02 03:18:43 db Exp $
+ *  $Id: s_user.c,v 1.235 2001/07/16 02:18:49 leeh Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -1748,7 +1748,7 @@ int m_nick(aClient *cptr, aClient *sptr, int parc, char *parv[])
       sendto_serv_butone(NULL, /* Kill new from incoming link */
 			 ":%s KILL %s :%s (%s <- %s(%s))",
 			 me.name, acptr->name, me.name, acptr->from->name,
-#ifndef HIDE_SERVERS_IP
+#ifndef HIDE_SERVERS_IPS
 			 get_client_name(cptr, FALSE), sptr->name);
 #else
 			 cptr->name, sptr->name);
