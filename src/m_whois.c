@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_whois.c,v 1.12 2003/06/14 23:23:42 ievil Exp $
+ *   $Id: m_whois.c,v 1.13 2003/06/17 21:46:41 ievil Exp $
  */
 
 #include "m_operspylog.h"
@@ -131,6 +131,7 @@ int     m_whois(struct Client *cptr,
   int whois_len = 4;
 
 #ifdef OPERSPY
+  char osnuh[NICKLEN + 1 + USERLEN + 1 + HOSTLEN + 1];
   int OperSpyWhois = 0;
 #endif
 
@@ -339,10 +340,20 @@ int     m_whois(struct Client *cptr,
                        CurrentTime - user->last,
                        acptr->firsttime);
           sendto_one(sptr, form_str(RPL_ENDOFWHOIS), me.name, parv[0], parv[1]);
-#ifdef OPERSPY
 
+#ifdef OPERSPY
           if (OperSpyWhois)
-             operspy_log(cptr, "WHOIS", nick);
+	    { 
+	      if !MyConnect(acptr)
+	        {
+                   ircsprintf(osnuh,"%s!%s@%s %s", acptr->name, acptr->username, 
+	                             acptr->host, acptr->user->server);
+	        }
+	      else
+                ircsprintf(osnuh,"%s!%s@%s", acptr->name, acptr->username,
+                                 acptr->host);
+              operspy_log(cptr, "WHOIS", osnuh);
+	    }
 #endif
           return 0;
           /*      continue; */

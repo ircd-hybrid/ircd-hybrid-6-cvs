@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_operspylog.c,v 1.2 2003/06/14 23:36:41 ievil Exp $
+ *   $Id: m_operspylog.c,v 1.3 2003/06/17 21:46:41 ievil Exp $
  */
 
 #include "m_operspylog.h"
@@ -77,7 +77,7 @@ void operspy_log(struct Client *cptr, const char *command, const char *target)
     ircsprintf(oper_name, "%s!%s@%s",
                cptr->name, cptr->username, cptr->host);
                
-    sendto_match_cap_servs_butone(&me, 0, "*", CAP_ENCAP, "ENCAP * OPERSPY %s :%s",command, target);
+    sendto_match_cap_servs_butone(cptr, 0, "*", CAP_ENCAP, "ENCAP * OPERSPY %s :%s",command, target);
 /*    sendto_match_servs(cptr, "*", CAP_ENCAP, "ENCAP * OPERSPY %s :%s",
  *                      command, target);
  */
@@ -96,7 +96,7 @@ void operspy_log(struct Client *cptr, const char *command, const char *target)
     ircsprintf(oper_name, "%s!%s@%s{%s}",
                cptr->name, cptr->username, cptr->host, cptr->user->server);
 #ifdef FNAME_OPERSPYRLOG
-    if ((logfile = open(FNAME_OPERSPYLOG, O_WRONLY|O_APPEND)) != -1)
+    if ((logfile = open(FNAME_OPERSPYRLOG, O_WRONLY|O_APPEND)) != -1)
       {
         ircsprintf(buf, "[%s] OPERSPY %s %s %s\n",
                    current_date, oper_name, command, target);

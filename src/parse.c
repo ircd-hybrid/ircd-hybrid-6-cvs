@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.50 2003/06/12 23:05:56 ievil Exp $
+ *   $Id: parse.c,v 1.51 2003/06/17 21:46:41 ievil Exp $
  */
 #include "parse.h"
 #include "channel.h"
@@ -721,6 +721,11 @@ static int     do_numeric(
           ** with numerics which can happen with nick collisions.
           ** - Avalon
           */
+
+	  /* comstud ircd hack, it bounces +a modes */
+	  if((atoi(numeric) == ERR_UMODEUNKNOWNFLAG) && MyClient(acptr))
+	    return 0;
+
           if (!IsMe(acptr) && IsPerson(acptr))
             sendto_prefix_one(acptr, sptr,":%s %s %s%s",
                               parv[0], numeric, nick, buffer);
