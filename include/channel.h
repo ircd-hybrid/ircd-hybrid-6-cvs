@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: channel.h,v 1.30 2001/07/01 18:59:35 greg Exp $
+ * $Id: channel.h,v 1.31 2001/07/01 20:17:41 greg Exp $
  */
 
 #ifndef INCLUDED_channel_h
@@ -64,7 +64,6 @@ struct Channel
   struct SLink*   invites;
   struct SLink*   banlist;
   struct SLink*   exceptlist;
-  struct SLink*   denylist;
   int             num_bed;  /* number of bans+exceptions+denies */
   time_t          channelts;
 #ifdef FLUD
