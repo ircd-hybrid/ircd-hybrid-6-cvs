@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.17 1998/11/30 13:16:58 db Exp $
+ * $Id: struct.h,v 1.18 1998/12/01 03:27:42 db Exp $
  */
 
 #ifndef	__struct_include__
@@ -521,7 +521,7 @@ struct	User
   int	joined;		/* number of channels joined */
   char	username[USERLEN+1];
   char	host[HOSTLEN+1];
-  char	id[IDLEN+1];
+  char	id[IDLEN+1];	/* for future use *hint* */
   char	*server;	/* pointer to scached server name */
   /*
   ** In a perfect world the 'server' name
