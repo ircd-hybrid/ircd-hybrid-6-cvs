@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.190 2001/06/06 06:56:32 db Exp $
+ * $Id: channel.c,v 1.191 2001/06/06 15:52:10 davidt Exp $
  */
 #include "channel.h"
 #include "client.h"
@@ -3801,6 +3801,9 @@ int     m_sjoin(struct Client *cptr,
   register      char *s, *s0;
   static        char numeric[16], sjbuf[BUFSIZE];
   char  *mbuf = modebuf, *t = sjbuf, *p;
+
+  /* wipe sjbuf so we don't use old nicks if we get an empty SJOIN */
+  *sjbuf = '\0';
 
   if (IsClient(sptr) || parc < 5)
     return 0;
