@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.158 1999/07/20 03:25:04 db Exp $
+ *  $Id: s_user.c,v 1.159 1999/07/20 03:32:23 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -1922,7 +1922,7 @@ static	int	m_message(aClient *cptr,
 		{
 		  if(acptr->drone_noticed == 0) /* tiny FSM */
 		    {
-		      sendto_ops_flags(FLAGS_REJ,
+		      sendto_ops_flags(FLAGS_BOTS,
 			     "Possible Drone Flooder %s [%s@%s] on %s target: %s",
 				     sptr->name, sptr->username,
 				     sptr->host,
@@ -1940,7 +1940,7 @@ static	int	m_message(aClient *cptr,
 		    {
 		      if(acptr->drone_noticed == 1) /* tiny FSM */
 			{
-			  sendto_ops_flags(FLAGS_REJ,
+			  sendto_ops_flags(FLAGS_BOTS,
 			 "ANTI_DRONE_FLOOD SendQ protection activated for %s",
 					 acptr->name);
 

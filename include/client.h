@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.27 1999/07/20 03:25:02 db Exp $
+ * $Id: client.h,v 1.28 1999/07/20 03:32:21 db Exp $
  */
 #ifndef	INCLUDED_client_h
 #define INCLUDED_client_h
@@ -358,16 +358,17 @@ struct Client
 #define	SEND_UMODES  (FLAGS_INVISIBLE | FLAGS_OPER | FLAGS_WALLOP)
 #define	ALL_UMODES   (SEND_UMODES | FLAGS_SERVNOTICE | FLAGS_CCONN | \
                       FLAGS_REJ | FLAGS_SKILL | FLAGS_FULL | FLAGS_SPY | \
-                      FLAGS_NCHANGE | FLAGS_OPERWALL | FLAGS_DEBUG)
+                      FLAGS_NCHANGE | FLAGS_OPERWALL | FLAGS_DEBUG | \
+                      FLAGS_BOTS)
 
 #ifndef OPER_UMODES
 #define OPER_UMODES  (FLAGS_OPER | FLAGS_WALLOP | FLAGS_SERVNOTICE | \
-                      FLAGS_SPY | FLAGS_OPERWALL | FLAGS_DEBUG)
+                      FLAGS_SPY | FLAGS_OPERWALL | FLAGS_DEBUG | FLAGS_BOTS)
 #endif /* OPER_UMODES */
 
 #ifndef LOCOP_UMODES
 #define LOCOP_UMODES (FLAGS_LOCOP | FLAGS_WALLOP | FLAGS_SERVNOTICE | \
-                      FLAGS_SPY | FLAGS_DEBUG)
+                      FLAGS_SPY | FLAGS_DEBUG | FLAGS_BOTS)
 #endif /* LOCOP_UMODES */
 
 #define	FLAGS_ID     (FLAGS_NEEDID | FLAGS_GOTID)
