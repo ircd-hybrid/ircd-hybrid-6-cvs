@@ -1,4 +1,4 @@
-$Id: RELNOTES,v 1.21 2004/03/18 05:32:46 lusky Exp $
+$Id: RELNOTES,v 1.22 2004/04/10 04:42:42 ievil Exp $
 
 This is the current release version of ircd-hybrid-6.
 
@@ -16,16 +16,21 @@ DISCUSSION: There is a mailing list for discussion of hybrid issues,
 
 Questions/comments directed to ircd-hybrid@the-project.org
 
-ircd-hybrid-6.4.2rc1 Release Notes
-----------------------------------
-o Fixed misc typos and possible overflows
+ircd-hybrid-6.4.2 Release Notes
+-------------------------------
 o Added I-line CANFLOOD
-o Changed LOCOPS to match RESTRICT_LOCOPS changes
 o Added MAP command
-o Improved STATS v
 o Added MAXBANS and MAXTKLINE to SET command
+o Added oper umode +l to give LOCOPS to only that flag
+o Changed LOCOPS to match RESTRICT_LOCOPS changes
+o Improved STATS v
+o Improved WHOIS notifications
+o Improved GLINES - reporting and first step of changes
 o Fixed a possible core in whois operspy usage
 o Fixed a problem with +I propogation
+o Fixed misc typos and possible overflows
+o Fixed possible security problem/leakage in m_info
+
 
 ircd-hybrid-6.4.1 Release Notes
 -------------------------------
