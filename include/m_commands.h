@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_commands.h,v 1.3 1999/07/31 02:44:44 tomh Exp $
+ * $Id: m_commands.h,v 1.4 2001/06/04 05:07:12 db Exp $
  */
 #ifndef INCLUDED_m_commands_h
 #define INCLUDED_m_commands_h
@@ -97,5 +97,8 @@ extern int m_hash(struct Client *,struct Client *,int,char **);
 extern int m_dns(struct Client *,struct Client *,int,char **);
 extern int m_htm(struct Client *,struct Client *,int,char **);
 extern int m_set(struct Client *,struct Client *,int,char **);
-
+#ifdef CRYPT_LINKS
+extern int m_cryptserv(struct Client *,struct Client *,int,char **);
+extern int m_cryptauth(struct Client *,struct Client *,int,char **);
+#endif
 #endif /* INCLUDED_m_commands_h */

@@ -20,13 +20,16 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_capab.c,v 1.1 1999/07/28 06:57:56 tomh Exp $
+ *   $Id: m_capab.c,v 1.2 2001/06/04 05:07:17 db Exp $
  */
 #include "m_commands.h"
 #include "client.h"
 #include "irc_string.h"
 #include "s_serv.h"
-
+#ifdef CRYPT_LINKS
+#include "s_crypt.h"
+#include <string.h>
+#endif
 #include <assert.h>
 
 /*
@@ -115,8 +118,15 @@ int m_capab(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
               break;
             }
          }
-    }
-  
+#ifdef CRYPT_LINKS
+      if (!strncmp(s, "ENC:", 4)) {
+	if (cptr->ciphers)
+	  free(cptr->ciphers);
+	cptr->ciphers = (char *) malloc(strlen(s)-3);
+	strcpy(cptr->ciphers, s+4);
+      }
+#endif
+    }  
   return 0;
 }
 

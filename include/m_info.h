@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.6 2000/11/24 18:51:13 lusky Exp $
+ * $Id: m_info.h,v 1.7 2001/06/04 05:07:13 db Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -677,6 +677,11 @@ Info MyInformation[] = {
   { "ZIP_LINKS", "OFF", 0, "Compress Server to Server Links" },
 #endif /* ZIP_LINKS */
 
+#ifdef CRYPT_LINKS
+  { "CRYPT_LINKS", "ON", 0, "Encrypt Server to Server Links" },
+#else
+  { "CRYPT_LINKS", "OFF", 0, "Encrypt Server to Server Links" },
+#endif /* CRYPT_LINKS */
   /*
    * since we don't want to include the world here, NULL probably
    * isn't defined by the time we read this, just use plain 0 instead

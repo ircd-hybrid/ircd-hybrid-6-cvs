@@ -16,10 +16,10 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_zip.c,v 1.24 2000/11/24 18:24:37 lusky Exp $
+ *   $Id: s_zip.c,v 1.25 2001/06/04 05:07:19 db Exp $
  */
-#include "s_zip.h"
 #include "client.h"
+#include "s_zip.h"
 #include "irc_string.h"
 #include "packet.h"
 #include "s_bsd.h"
