@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.221 2001/12/06 20:56:12 leeh Exp $
+ * $Id: channel.c,v 1.222 2001/12/08 02:13:17 db Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -2823,9 +2823,11 @@ int     m_knock(struct Client *cptr,
                int parc,
                char *parv[])
 {
-  struct Channel      *chptr;
   char  *p, *name;
+#ifdef USE_KNOCK
+  struct Channel      *chptr;
   int local = 0;
+#endif
 
   /* anti flooding code,
    * I did have this in parse.c with a table lookup
@@ -2834,7 +2836,6 @@ int     m_knock(struct Client *cptr,
    *
    * -Dianora
    */
-  static time_t last_used=0L;
 
   if(IsServer(sptr))
     return 0;
