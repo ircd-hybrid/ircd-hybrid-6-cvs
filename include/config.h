@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.169 2004/05/23 15:27:20 ievil Exp $
+ * $Id: config.h,v 1.170 2004/05/23 16:10:01 ievil Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -752,6 +752,12 @@
  */
 
 #define DEFAULT_MAXTKLINE (60*48)
+
+/* WHOISACTUALLY
+ * Gives the real ip address back for users on a whois 
+ */
+ 
+#undef WHOISACTUALLY
 
 /* ----------------- not approved on EFnet section --------------------
  *

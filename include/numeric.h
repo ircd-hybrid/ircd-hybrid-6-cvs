@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: numeric.h,v 1.25 2004/05/23 14:22:44 ievil Exp $
+ * $Id: numeric.h,v 1.26 2004/05/23 16:10:02 ievil Exp $
  */
 #ifndef INCLUDED_numeric_h
 #define INCLUDED_numeric_h
@@ -245,6 +245,8 @@ extern const char* form_str(int);
 
 #define RPL_NOTOPIC          331
 #define RPL_TOPIC            332
+
+#define RPL_WHOISACTUALLY    338  /* From Ratbox - whois actually in whois reply */
 
 #define RPL_INVITING         341
 #define RPL_SUMMONING        342
