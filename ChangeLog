@@ -1,3 +1,17 @@
+ievil       2003/06/06 05:30:16 EDT	(20030606_7)
+
+  Modified files:
+    src                  Makefile.in m_unkline.c 
+  Log:
+  first commit in the split of m_unkline.
+  :
+  
+  Revision  Changes    Path
+  1.71      +2 -0      ircd-hybrid-6/src/Makefile.in
+  1.51      +0 -285    ircd-hybrid-6/src/m_unkline.c
+
+
+
 ievil       2003/06/06 05:18:45 EDT	(20030606_6)
 
   Modified files:
