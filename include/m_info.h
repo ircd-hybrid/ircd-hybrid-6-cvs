@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.9 2001/06/06 22:11:07 db Exp $
+ * $Id: m_info.h,v 1.10 2001/06/08 21:22:50 db Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -132,7 +132,10 @@ Info MyInformation[] = {
 #endif /* CRYPT_LINKS */
 
 #ifdef CRYPT_LINKS
+#if 0
+  /* CRYPT_LINKS_CNPREFIX is a char, not a char *, it'll core */
   { "CRYPT_LINKS_CNPREFIX", CRYPT_LINKS_CNPREFIX, 0, "Prefix in C/N Lines For a Public Key Filename" },
+#endif
   { "CRYPT_LINKS_PRIVATEKEYFILE", CRYPT_LINKS_PRIVATEKEYFILE, 0, "Path to the Private Key File" },
 #endif /* CRYPT_LINKS */
 

@@ -1,4 +1,4 @@
-# $Id: Makefile.in,v 1.13 2001/06/07 18:51:22 kreator Exp $
+# $Id: Makefile.in,v 1.14 2001/06/08 21:22:54 db Exp $
 
 CC=@CC@
 RM=@RM@
@@ -48,6 +48,8 @@ distclean: clean
 
 install: build
 	@echo "Please do a make install from the top level directory"
+
+depend:
 
 # DO NOT DELETE
 
