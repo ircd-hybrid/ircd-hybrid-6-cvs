@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.38 1999/07/25 18:01:47 tomh Exp $
+ *   $Id: s_debug.c,v 1.39 1999/07/27 20:21:00 wnder Exp $
  */
 #include "struct.h"
 #include "s_conf.h"
@@ -356,6 +356,12 @@ void count_memory(aClient *cptr,char *nick)
         {
           chb++;
           chbm += (strlen(link->value.cp)+1+sizeof(Link));
+        #ifdef BAN_INFO
+        	if (link->value.banptr->banstr)
+        		chbm += strlen(link->value.banptr->banstr);
+        	if (link->value.banptr->who)
+        		chbm += strlen(link->value.banptr->who);
+        #endif /* BAN_INFO */
         }
     }
 
