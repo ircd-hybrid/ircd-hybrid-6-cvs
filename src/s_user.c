@@ -25,7 +25,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.20 1998/11/17 16:01:58 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.21 1998/11/20 22:16:23 db Exp $";
 
 #endif
 
@@ -670,6 +670,14 @@ static	int	register_user(aClient *cptr,
 	  return exit_client(cptr, sptr, &me, "Bad Password");
 	}
       memset((void *)sptr->passwd,0, sizeof(sptr->passwd));
+
+      /* If this user is being spoofed, tell them so */
+      if(IsConfDoSpoofIp(aconf))
+	{
+	  sendto_one(sptr,
+	      ":%s NOTICE %s :*** Spoofing your IP. congrats.",
+		     me.name,parv[0]);
+	}
 
       /* If this user is in the exception class, Set it "E lined" */
       if(IsConfElined(aconf))

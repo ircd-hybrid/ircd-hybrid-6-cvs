@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.32 1998/11/18 03:01:19 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.33 1998/11/20 22:16:22 db Exp $";
 #endif
 
 
@@ -5528,6 +5528,8 @@ int	m_trace(aClient *cptr,
 
   if(!IsAnOper(sptr))
     {
+      /* pacing for /trace is problemmatical */
+#ifdef 0
       if((last_used + PACE_WAIT) > NOW)
         {
           return 0;
@@ -5536,6 +5538,7 @@ int	m_trace(aClient *cptr,
         {
           last_used = NOW;
         }
+#endif
 
       if (parv[1] && !index(parv[1],'.') && (index(parv[1], '*')
           || index(parv[1], '?'))) /* bzzzt, no wildcard nicks for nonopers */

@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.13 1998/11/18 02:19:15 db Exp $
+ * $Id: struct.h,v 1.14 1998/11/20 22:16:17 db Exp $
  */
 
 #ifndef	__struct_include__
@@ -451,6 +451,7 @@ struct	ConfItem
 #define CONF_FLAGS_DO_IDENTD		0x0100
 #define CONF_FLAGS_ALLOW_AUTO_CONN	0x0200
 #define CONF_FLAGS_ZIP_LINK		0x0400
+#define CONF_FLAGS_SPOOF_IP		0x0800
 
 #ifdef LITTLE_I_LINES
 #define CONF_FLAGS_LITTLE_I_LINE	0x8000
@@ -485,6 +486,7 @@ struct Zdata {
 #define IsConfBlined(x)		((x)->flags & CONF_FLAGS_B_LINED)
 #define IsConfFlined(x)		((x)->flags & CONF_FLAGS_F_LINED)
 #define IsConfDoIdentd(x)	((x)->flags & CONF_FLAGS_DO_IDENTD)
+#define IsConfDoSpoofIp(x)	((x)->flags & CONF_FLAGS_SPOOF_IP)
 #ifdef LITTLE_I_LINES
 #define IsConfLittleI(x)	((x)->flags & CONF_FLAGS_LITTLE_I_LINE)
 #endif
