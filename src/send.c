@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.89 2000/05/17 04:17:26 lusky Exp $
+ *   $Id: send.c,v 1.90 2000/05/17 04:28:39 lusky Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -1245,7 +1245,7 @@ vsendto_prefix_one(register aClient *to, register aClient *from,
     } /* if (user) */
 
   *sendbuf = ':';
-  strncpy(sendbuf + 1, par, sizeof(sendbuf) - 2);
+  strncpy_irc(sendbuf + 1, par, sizeof(sendbuf) - 2);
 
   parlen = strlen(par) + 1;
   sendbuf[parlen++] = ' ';
