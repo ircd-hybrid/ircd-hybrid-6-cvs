@@ -1,6 +1,6 @@
 ircd-hybrid-6 README
 --------------------
-$Id: README.FIRST,v 1.15 2002/02/02 15:52:17 db Exp $
+$Id: README.FIRST,v 1.16 2003/06/06 08:45:16 ievil Exp $
 
 If you don't read this first, we won't help you.
 :-)
@@ -31,7 +31,7 @@ egcs ONLY on 64-bit Solaris7.  gcc-2.95 and SunPro C on 64bit should
 work fine, and any gcc or SunPro compiler on 32bit.
 
 SUPPORTED PLATFORMS: this code should compile without any warnings
-on Cygwin 1.3.6, FreeBSD 3.x/4.x, RedHat 4.2/6.1/7.1, and Solaris 8/sparc.
-Please let us know if you find otherwise.  It probably does not compile on
-AIX, HPUX, or IRIX.
+on Cygwin 1.3.6, FreeBSD 3.x/4.x, RedHat 4.2/6.1/7.1, AIX 5.1/5.2 (gcc, not
+IBM's xlc compiler) and Solaris 8/sparc. Please let us know if you find 
+otherwise.  It probably does not compile on HPUX, or IRIX.
 
