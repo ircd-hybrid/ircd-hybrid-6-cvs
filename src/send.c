@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)send.c	2.32 2/28/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: send.c,v 1.20 1998/12/20 17:58:57 db Exp $";
+static char *rcs_version = "$Id: send.c,v 1.21 1998/12/20 18:32:03 db Exp $";
 #endif
 
 #include "struct.h"
@@ -544,7 +544,7 @@ va_dcl
 			    p3, p4, p5, p6, p7, p8); */
 
 	  sendto_prefix_one(acptr, from, pattern, p1, p2,
-			    lp.value.cptr.name, p4, p5, p6, p7, p8);
+			    lp->value.cptr->name, p4, p5, p6, p7, p8);
 # endif
 #ifdef USE_SENTALONG
 	  sentalong[i] = 1;
@@ -569,7 +569,7 @@ va_dcl
 				p1, p2, p3, p4,
 				p5, p6, p7, p8); */
 	      sendto_prefix_one(acptr, from, pattern, p1, p2,
-				lp.value.cptr.name, p4, p5, p6, p7, p8);
+				lp->value.cptr->name, p4, p5, p6, p7, p8);
 # endif
 #ifdef USE_SENTALONG
 	      sentalong[i] = 1;
