@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.41 1998/12/21 00:33:38 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.42 1998/12/21 00:47:41 lusky Exp $";
 
 #endif
 
@@ -1922,8 +1922,6 @@ static	int	m_message(aClient *cptr,
   /*  nick = strtoken(&p, parv[1], ",");*/
   nick = parv[1];
 
-  sptr->since += 4;
-    
 #ifdef EXTRA_BOT_NOTICES
   if (MyConnect(sptr)) /* don't check for remote bots */
     {
