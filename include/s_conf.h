@@ -21,9 +21,14 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.12 1999/07/15 02:45:07 db Exp $
+ * $Id: s_conf.h,v 1.13 1999/07/15 22:26:43 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.13  1999/07/15 22:26:43  db
+ * - fixed core bug in m_kline.c, probably should add extra sanity test there
+ *   REDUNDANT_KLINES was using aconf->name instead of aconf->user
+ * - cleaning up conf file generation etc.
+ *
  * Revision 1.12  1999/07/15 02:45:07  db
  * - added conf_connect_allowed()
  *
@@ -197,6 +202,7 @@ extern struct ConfItem* find_kill (struct Client *);
 extern int conf_connect_allowed(struct in_addr addr);
 
 typedef enum {
+  CONF_TYPE,
   KLINE_TYPE,
   DLINE_TYPE
 }KlineType;
@@ -210,6 +216,7 @@ extern void write_kline_or_dline_to_conf_and_notice_opers(
 							  char *,
 							  char *
 							  );
+extern char *get_conf_name(KlineType);
 
 typedef struct
 {

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.17 1999/07/15 08:47:37 tomh Exp $
+ *   $Id: m_kline.c,v 1.18 1999/07/15 22:26:45 db Exp $
  */
 #include "struct.h"
 
@@ -381,7 +381,7 @@ int     m_kline(aClient *cptr,
 			me.name,
 			parv[0],
 			user,host,
-			aconf->name,aconf->host,reason);
+			aconf->user,aconf->host,reason);
 	   return 0;
 	 }
      }
