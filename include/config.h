@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.83 2000/09/02 03:42:07 lusky Exp $
+ * $Id: config.h,v 1.84 2000/09/14 05:21:56 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -168,6 +168,12 @@
  * undef'ing it will allow hostnames with _ or / to connect
  */
 #define RFC1035_ANAL
+
+/* ALLOW_DOT_IN_IDENT
+ * Defining this will allow periods in ident replies.  Use of this is
+ * strongly discouraged on public networks
+ */
+#undef ALLOW_DOT_IN_IDENT
 
 /* MAX_MULTI_MESSAGES
  * Maximum number of recipients to a PRIVMSG.  Any more than MAX_MULTI_MESSAGES

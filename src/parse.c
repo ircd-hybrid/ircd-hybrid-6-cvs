@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.39 2000/06/10 02:45:37 lusky Exp $
+ *   $Id: parse.c,v 1.40 2000/09/14 05:22:02 lusky Exp $
  */
 #include "parse.h"
 #include "channel.h"
@@ -317,7 +317,7 @@ int parse(aClient *cptr, char *buffer, char *bufend)
       sendto_one(from,
                  ":%s %d %s %s :Register first.",
                  me.name, ERR_NOTREGISTERED,
-                 from->name, ch);
+                 BadPtr(from->name) ? "*" : from->name, ch);
       return -1;
     }
 
