@@ -4,11 +4,13 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.21 1999/07/03 05:06:42 tomh Exp $
+ * $Id: res.c,v 1.22 1999/07/03 08:22:53 tomh Exp $
  */
 #include "res.h"
 #include "sys.h"
 #include "numeric.h"
+
+#include "struct.h"
 #include "h.h"
 #include "common.h"
 
