@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.21 1998/11/27 07:33:22 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.22 1998/11/28 03:28:46 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1575,7 +1575,8 @@ int 	initconf(int opt, int fd,int use_include)
 	  break;
 
 	case 'd':
-	  aconf->status = (CONF_DLINE|CONF_ELINE);
+	  aconf->status = CONF_DLINE;
+	  aconf->flags = CONF_FLAGS_E_LINED;
 	  break;
 	case 'D': /* Deny lines (immediate refusal) */
 	  aconf->status = CONF_DLINE;
@@ -1883,7 +1884,7 @@ int 	initconf(int opt, int fd,int use_include)
 	{
 	  dontadd = 1;
 	  DupString(aconf->mask,aconf->host);
-	  if(aconf->status & CONF_ELINE)
+	  if(aconf->flags & CONF_FLAGS_E_LINED)
 	    add_dline(aconf);
 	  else
 	    add_Dline(aconf);
