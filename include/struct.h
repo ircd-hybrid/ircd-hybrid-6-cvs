@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.53 1999/07/08 06:55:27 tomh Exp $
+ * $Id: struct.h,v 1.54 1999/07/08 07:35:04 tomh Exp $
  */
 #ifndef	INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -40,12 +40,6 @@
 #define INCLUDED_netinet_in_h
 #endif
 
-#if defined(HAVE_STDDEF_H)
-# ifndef INCLUDED_stddef_h
-#  include <stddef.h>
-#  define INCLUDED_stddef_h
-# endif
-#endif
 #ifdef ORATIMING
 # ifndef INCLUDED_sys_time_h
 #  include <sys/time.h>

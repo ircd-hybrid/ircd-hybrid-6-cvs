@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.1 1999/07/08 06:55:27 tomh Exp $
+ * $Id: client.h,v 1.2 1999/07/08 07:35:04 tomh Exp $
  */
 #ifndef	INCLUDED_client_h
 #define INCLUDED_client_h
@@ -34,6 +34,12 @@
 #ifndef INCLUDED_netinet_in_h
 #include <netinet/in.h>      /* in_addr */
 #define INCLUDED_netinet_in_h
+#endif
+#if defined(HAVE_STDDEF_H)
+# ifndef INCLUDED_stddef_h
+#  include <stddef.h>        /* offsetof */
+#  define INCLUDED_stddef_h
+# endif
 #endif
 #ifndef INCLUDED_ircd_defs_h
 # include "ircd_defs.h"
