@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)list.c	2.22 15 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: list.c,v 1.4 1998/10/15 04:17:54 db Exp $";
+static char *rcs_version = "$Id: list.c,v 1.5 1998/12/19 05:41:04 db Exp $";
 #endif
 
 #include "struct.h"
@@ -38,6 +38,7 @@ extern int BlockHeapGarbageCollect(BlockHeap *);
 extern int server_was_split;
 extern time_t server_split_time;
 extern int server_split_recovery_time;
+extern int split_smallnet_size;
 #endif
 
 /* locally defined functions */
@@ -344,7 +345,7 @@ void remove_client_from_list(aClient *cptr)
 #if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
       defined(NO_JOIN_ON_SPLIT)
 
-	if(Count.server < SPLIT_SMALLNET_SIZE)
+	if(Count.server < split_smallnet_size)
 	  {
 	    server_was_split = YES;
 	    server_split_time = NOW;
