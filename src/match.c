@@ -22,10 +22,10 @@
  * Cleanup of collapse and match
  * Moved static calls variable to match
  * Added asserts for null pointers
- * $Id: match.c,v 1.10 1999/07/15 08:47:37 tomh Exp $
+ * $Id: match.c,v 1.11 1999/07/18 07:00:28 tomh Exp $
  *
  */
-#include "match.h"
+#include "irc_string.h"
 #include <assert.h>
 
 /*

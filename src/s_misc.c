@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.51 1999/07/18 01:27:54 db Exp $
+ *  $Id: s_misc.c,v 1.52 1999/07/18 07:00:30 tomh Exp $
  */
 #include "s_conf.h"
 #include "struct.h"
@@ -36,22 +36,9 @@
 #include <fcntl.h>
 #include <netdb.h>
 #include <sys/stat.h>
-#include <sys/time.h>
-
-#if !defined(ULTRIX) && !defined(SGI) && !defined(sequent) && \
-    !defined(__convex__)
-# include <sys/param.h>
-#endif
-#if defined(AIX) || defined(SVR3)
-# include <time.h>
-#endif
-#ifdef HPUX
-#include <unistd.h>
-#endif
-#ifdef DYNIXPTX
-#include <sys/types.h>
+#include <sys/param.h>
 #include <time.h>
-#endif
+#include <unistd.h>
 
 /* LINKLIST */
 extern aClient *local_cptr_list;
@@ -140,7 +127,7 @@ char *smalldate(time_t clock)
  * Make a small YYYYMMDD formatted string suitable for a
  * dated file stamp. 
  */
-char    *small_file_date(time_t clock)
+char* small_file_date(time_t clock)
 {
   static  char    timebuffer[MAX_DATE_STRING];
   struct tm *tmptr;
@@ -152,31 +139,6 @@ char    *small_file_date(time_t clock)
   return timebuffer;
 }
 #endif
-
-/**
- ** myctime()
- **   This is like standard ctime()-function, but it zaps away
- **   the newline from the end of that string. Also, it takes
- **   the time value as parameter, instead of pointer to it.
- **   Note that it is necessary to copy the string to alternate
- **   buffer (who knows how ctime() implements it, maybe it statically
- **   has newline there and never 'refreshes' it -- zapping that
- **   might break things in other places...)
- **
- **/
-/* Thu Nov 24 18:22:48 1986 */
-
-char        *myctime(time_t value)
-{
-  static        char        buf[28];
-  char        *p;
-
-  (void)strcpy(buf, ctime(&value));
-  if ((p = (char *)strchr(buf, '\n')) != NULL)
-    *p = '\0';
-
-  return buf;
-}
 
 /*
  * Return wildcard name of my server name according to given config entry

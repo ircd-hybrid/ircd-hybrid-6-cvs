@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.153 1999/07/18 03:45:04 db Exp $
+ *   $Id: s_serv.c,v 1.154 1999/07/18 07:00:31 tomh Exp $
  */
 
 #define CAPTAB
@@ -3358,7 +3358,7 @@ int	m_trace(aClient *cptr,
                               /* lets also do this for opers tracing nicks */
     {
       const char* name;
-      char*       ip;
+      const char* ip;
       int         c_class;
 
       acptr = hash_find_client(tname,(aClient *)NULL);
@@ -3436,7 +3436,7 @@ int	m_trace(aClient *cptr,
   for (i = 0; i <= highest_fd; i++)
     {
       const char* name;
-      char*       ip;
+      const char* ip;
       int         c_class;
       
       if (!(acptr = local[i])) /* Local Connection? */
@@ -3450,7 +3450,7 @@ int	m_trace(aClient *cptr,
       if (!dow && irccmp(tname, acptr->name))
 	continue;
       name = get_client_name(acptr, FALSE);
-      ip = inetntoa((char*) &acptr->ip);
+      ip = inetntoa((const char*) &acptr->ip);
 
       c_class = get_client_class(acptr);
       
@@ -3642,7 +3642,7 @@ int	m_ltrace(aClient *cptr,
   for (i = 0; i <= highest_fd; i++)
     {
       const char* name;
-      char*       ip;
+      const char* ip;
       int         c_class;
       
       if (!(acptr = local[i])) /* Local Connection? */
@@ -3656,7 +3656,7 @@ int	m_ltrace(aClient *cptr,
       if (!dow && irccmp(tname, acptr->name))
 	continue;
       name = get_client_name(acptr, FALSE);
-      ip = inetntoa((char*) &acptr->ip);
+      ip = inetntoa((const char*) &acptr->ip);
 
       c_class = get_client_class(acptr);
       

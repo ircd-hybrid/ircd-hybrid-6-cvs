@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: motd.c,v 1.8 1999/07/18 00:17:49 tomh Exp $
+ *   $Id: motd.c,v 1.9 1999/07/18 07:00:29 tomh Exp $
  */
 
 #include "channel.h"
@@ -35,6 +35,7 @@
 #include "s_conf.h"
 #include "numeric.h"
 #include "client.h"
+#include "irc_string.h"
 
 #include <string.h>
 #include <stdlib.h>

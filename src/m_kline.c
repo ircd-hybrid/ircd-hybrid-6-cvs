@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.25 1999/07/18 00:17:48 tomh Exp $
+ *   $Id: m_kline.c,v 1.26 1999/07/18 07:00:27 tomh Exp $
  */
 
 #include "struct.h"
@@ -136,7 +136,7 @@ static int
 LockedFile(const char *filename)
 
 {
-	const char lockpath[PATH_MAX + 1];
+	char lockpath[PATH_MAX + 1];
 	char buffer[1024];
 	FBFILE *fileptr;
 	int killret;

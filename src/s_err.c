@@ -19,10 +19,11 @@
  *
  *	I kind of modernized this code a bit. -Dianora
  *
- *   $Id: s_err.c,v 1.28 1999/07/18 03:45:04 db Exp $
+ *   $Id: s_err.c,v 1.29 1999/07/18 07:00:30 tomh Exp $
  */
 #include "struct.h"
 #include "numeric.h"
+#include "irc_string.h"
 #include "h.h"
 
 

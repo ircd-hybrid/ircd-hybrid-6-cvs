@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.128 1999/07/18 00:17:50 tomh Exp $
+ *  $Id: s_conf.c,v 1.129 1999/07/18 07:00:29 tomh Exp $
  */
 #include "s_conf.h"
 #include "listener.h"
@@ -1043,10 +1043,8 @@ aConfItem *attach_confs_host(aClient *cptr,char *host,int statmask)
 /*
  * find a conf entry which matches the hostname and has the same name.
  */
-aConfItem *find_conf_exact(char *name,
-                           char *user,
-                           char *host,
-                           int statmask)
+aConfItem* find_conf_exact(const char* name, const char* user, 
+                           const char* host, int statmask)
 {
   aConfItem *tmp;
 
@@ -1061,7 +1059,7 @@ aConfItem *find_conf_exact(char *name,
       ** of the configuration.
       */
       if (!match(tmp->host, host) || !match(tmp->user,user)
-          || strcasecmp(tmp->name,name) )
+          || strcasecmp(tmp->name, name) )
         continue;
       if (tmp->status & (CONF_OPERATOR|CONF_LOCOP))
         {
@@ -1073,7 +1071,7 @@ aConfItem *find_conf_exact(char *name,
       else
         return tmp;
     }
-  return((aConfItem *)NULL);
+  return NULL;
 }
 
 /*

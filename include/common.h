@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: common.h,v 1.9 1999/07/15 08:47:29 tomh Exp $
+ * $Id: common.h,v 1.10 1999/07/18 07:00:23 tomh Exp $
  */
 #ifndef	INCLUDED_common_h
 #define INCLUDED_common_h
@@ -24,15 +24,6 @@
 #include <sys/types.h>
 #define INCLUDED_sys_types_h
 #endif
-
-#if 0 /* XXX - is this needed? */
-#if defined( HAVE_PARAM_H )
-#ifndef INCLUDED_sys_param_h
-#include <sys/param.h>
-#define INCLUDED_sys_param_h
-#endif
-#endif
-#endif /* 0 */
 
 #ifndef NULL
 #define NULL 0
@@ -71,52 +62,18 @@
 #define FOREVER for(;;)
 /* -Dianora */
 
-#if !defined(STDC_HEADERS)
-char	*malloc(), *calloc();
-void	free();
-#else
-#ifdef MALLOCH
-#include MALLOCH
-#endif
-#endif
-#if !defined( HAVE_STRTOK )
-extern	char	*strtok (char *, char *); 
-#endif
-#if !defined( HAVE_STRTOKEN )
-extern	char	*strtoken (char **, char *, char *);
-#endif
-#if !defined( HAVE_INET_ADDR )
-extern unsigned long inet_addr (char *);
-#endif
-
-#if !defined(HAVE_INET_NTOA) || !defined(HAVE_INET_NETOF)
-#include <netinet/in.h>
-#endif
-
-#if !defined( HAVE_INET_NTOA )
-extern char *inet_ntoa (struct in_addr);
-#endif
-
-#if !defined( HAVE_INET_NETOF )
-extern int inet_netof (struct in_addr);
-#endif
-
-extern char *myctime (time_t);
-extern char *strtoken (char **, char *, char *);
 
 /* Just blindly define our own MIN/MAX macro */
 
 #define IRCD_MAX(a, b)	((a) > (b) ? (a) : (b))
 #define IRCD_MIN(a, b)	((a) < (b) ? (a) : (b))
 
-#define DupString(x,y) do{x=MyMalloc(strlen(y)+1);(void)strcpy(x,y);}while(0)
-
 /*
- * match.h contains character comparison and conversion macros and
- * string comparison functions
+ * irc_string.h contains character comparison and conversion macros and
+ * string functions
  */
-#ifndef INCLUDED_match_h
-#include "match.h"
+#ifndef INCLUDED_irc_string_h
+#include "irc_string.h"
 #endif
 
 extern void flush_connections();

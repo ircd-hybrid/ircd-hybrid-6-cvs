@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.42 1999/07/18 00:17:44 tomh Exp $
+ * $Id: h.h,v 1.43 1999/07/18 07:00:24 tomh Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -102,11 +102,6 @@ extern void        count_scache(int *,u_long *);
 extern void        list_scache(aClient *, aClient *,int, char **);
 
 extern void     dummy(int signo);
-extern void*    MyMalloc(size_t size);
-extern void*    MyRealloc(void* p, size_t size);
-/* MyFree is defined as a macro in ircd_defs.h */
-/* extern  void     MyFree(void* p); */
-
 extern	char	*debugmode, *configfile, *sbrk0;
 extern  char    *klinefile;
 extern  char	*dlinefile;
@@ -115,9 +110,6 @@ extern	char	*glinefile;
 #endif
 extern	char*   getfield(char *);
 extern  char    *form_str (int);
-/* extern	char	*strerror (int); */
-extern	char	*inetntoa (char *);
-extern	void	ircsprintf ();
 extern	int	dbufalloc, dbufblocks, debuglevel, errno, h_errno;
 extern	int	maxdbufalloc, maxdbufblocks;
 extern	int	highest_fd, debuglevel, portnum, debugtty, maxusersperchannel;
@@ -153,7 +145,7 @@ extern	int	deliver_it (aClient *, char *, int);
 extern	int	check_registered (aClient *);
 extern	int	check_registered_user (aClient *);
 extern const char* my_name_for_link(const char* name, aConfItem* conf);
-extern	char	*myctime (time_t), *date (time_t);
+extern  char*   date(time_t);
 extern	void	initstats (void), tstats (aClient *, char *);
 extern	void	serv_info (aClient *, char *);
 
