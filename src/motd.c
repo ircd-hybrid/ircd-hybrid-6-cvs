@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: motd.c,v 1.22 1999/08/25 22:58:22 lusky Exp $
+ *   $Id: motd.c,v 1.23 2001/06/06 13:19:31 leeh Exp $
  */
 #include "motd.h"
 #include "ircd.h"
@@ -50,6 +50,10 @@ extern ConfigFileEntryType ConfigFileEntry; /* defined in ircd.c */
 int m_motd(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 {
   static time_t last_used = 0;
+
+  /* uhh.. servers should not send a motd request.. */
+  if(IsServer(sptr))
+      return 0;
 
   if(!IsAnOper(sptr))
     {
