@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)list.c	2.22 15 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: list.c,v 1.7 1999/04/17 23:18:14 lusky Exp $";
+static char *rcs_version = "$Id: list.c,v 1.8 1999/04/30 03:42:14 db Exp $";
 #endif
 
 #include "struct.h"
@@ -344,7 +344,11 @@ void remove_client_from_list(aClient *cptr)
 #if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
       defined(NO_JOIN_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT_SIMPLE)
 
-	if(Count.server < split_smallnet_size)
+	/* Don't bother checking for a split, if split code
+	 * is deactivated with server_split_recovery_time == 0
+	 */
+
+	if(server_split_recovery_time && (Count.server < split_smallnet_size))
 	  {
 	    if (!server_was_split)
 	      {

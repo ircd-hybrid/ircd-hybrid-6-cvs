@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.31 1999/04/18 01:47:26 db Exp $
+ * $Id: struct.h,v 1.32 1999/04/30 03:42:13 db Exp $
  */
 
 #ifndef	__struct_include__
@@ -839,7 +839,7 @@ struct Channel
   struct fludbot *fluders;
 #endif
 #if defined(PRESERVE_CHANNEL_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT)
-  struct Channel *next_empty_channel;
+  struct Channel *last_empty_channel, *next_empty_channel;
 #endif
   char	chname[1];
 };
