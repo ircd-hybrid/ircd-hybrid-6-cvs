@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.251 2004/10/13 00:53:35 ievil Exp $
+ * $Id: channel.c,v 1.252 2005/03/25 11:27:20 ievil Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -195,20 +195,26 @@ static int add_id(struct Client *cptr, struct Channel *chptr, char *banid, int t
   /*  only check for matching bans if the klines are from the local server
    *  fixes possible desync  
    */
-  if (IsServer(cptr))
-  {
-    for (tmp = *list; tmp; tmp = tmp->next)
-      if (irccmp(BANSTR(tmp), banid) == 0)
-        return -1;
-  }
-
+/*  if (IsServer(cptr))
+ * {
+ *   for (tmp = *list; tmp; tmp = tmp->next)
+ *     if (irccmp(BANSTR(tmp), banid) == 0)
+ *       return -1;
+ * }
+ * -- removed -- fixed one desync created another. fixed below. tnx E
+ */
 
   if (MyClient(cptr))
   {
     for (tmp = *list; tmp; tmp = tmp->next)
       if (match(BANSTR(tmp), banid))
         return -1;
+  } else {
+    for (tmp = *list; tmp; tmp = tmp->next)
+      if (irccmp(BANSTR(tmp), banid) == 0)
+        return -1;
   }
+
   tmp = make_link();
   memset(tmp, 0, sizeof(Link));
   tmp->flags = type;
