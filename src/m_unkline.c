@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_unkline.c,v 1.39 2000/11/18 19:11:12 lusky Exp $
+ *   $Id: m_unkline.c,v 1.40 2001/06/06 05:25:10 db Exp $
  */
 #include "m_commands.h"
 #include "channel.h"
@@ -71,7 +71,7 @@ int m_unkline (aClient *cptr,aClient *sptr,int parc,char *parv[])
   int   pairme = NO;
   char  buf[BUFSIZE];
   char  buff[BUFSIZE];  /* matches line definition in s_conf.c */
-  char  temppath[256];
+  char  temppath[BUFSIZE];
 
   const char  *filename;                /* filename to use for unkline */
 
@@ -80,7 +80,8 @@ int m_unkline (aClient *cptr,aClient *sptr,int parc,char *parv[])
   int   error_on_write = NO;
   mode_t oldumask;
 
-  ircsprintf(temppath, "%s.tmp", ConfigFileEntry.klinefile);
+  ircsprintf(temppath, "%s%s.tmp", ConfigFileEntry.dpath,
+	     ConfigFileEntry.klinefile);
   
   if (check_registered(sptr))
     {
