@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: irc_string.h,v 1.13 1999/09/04 20:21:08 lusky Exp $
+ *   $Id: irc_string.h,v 1.14 2000/07/20 03:58:22 lusky Exp $
  */
 #ifndef INCLUDED_irc_string_h
 #define INCLUDED_irc_string_h
@@ -60,7 +60,7 @@ extern char* strncpy_irc(char* s1, const char* s2, size_t n);
  * clean_string - cleanup control and high ascii characters
  * -Dianora
  */
-extern char* clean_string(char* dest, const char* src, size_t len);
+extern char* clean_string(char* dest, const unsigned char* src, size_t len);
 
 extern const char* myctime(time_t);
 extern char*       strtoken(char** save, char* str, char* fs);

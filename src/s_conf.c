@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.183 2000/06/12 04:36:00 lusky Exp $
+ *  $Id: s_conf.c,v 1.184 2000/07/20 03:58:23 lusky Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -2249,6 +2249,7 @@ static void initconf(FBFILE* file, int use_include)
               sendto_realops("Bad O/o line host %s", aconf->host);
               free_conf(aconf);
               aconf = NULL;
+	      continue;
             }
         }
 
