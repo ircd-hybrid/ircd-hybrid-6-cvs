@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.79 1999/09/04 20:21:15 lusky Exp $
+ *   $Id: send.c,v 1.80 1999/09/04 21:46:26 lusky Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -309,7 +309,7 @@ send_message(aClient *to, char *msg, int len)
 */
 int send_queued(aClient *to)
 {
-  char *msg;
+  const char *msg;
   int len, rlen;
 #ifdef ZIP_LINKS
   int more = NO;
