@@ -4,7 +4,7 @@
  * Owner:  Wohali (Joan Touzet)
  *
  * Modified 2001/11/29 for mmap() support by Aaron Sethman <androsyn@ratbox.org>
- * $Id: blalloc.c,v 1.21 2001/12/08 08:50:13 jdc Exp $
+ * $Id: blalloc.c,v 1.22 2001/12/08 08:53:46 jdc Exp $
  */
 #include "config.h"
 #include "blalloc.h"
@@ -59,10 +59,6 @@ static void *get_block(size_t size)
 }
 #endif /* MAP_ANON */
 
-void initBlockHeap(void)
-{
-    return;
-}
 static void free_block(void *ptr, size_t size)
 {
     munmap(ptr, size);
@@ -70,6 +66,10 @@ static void free_block(void *ptr, size_t size)
 
 #else /* HAVE_MMAP */
 
+void initBlockHeap(void)
+{
+    return;
+}
 static void *get_block(size_t size)
 {
     return(MyMalloc(size));
