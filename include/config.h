@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.66 1999/07/22 01:29:48 db Exp $
+ * $Id: config.h,v 1.67 1999/08/01 04:59:52 tomh Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -926,27 +926,7 @@
  */
 #undef CHROOTDIR
 
-/*
- * NOTE: On some systems, valloc() causes many problems.
- */
-#undef  VALLOC                  /* Define this if you have valloc(3) */
-
-
 /* ------------------------- END CONFIGURATION SECTION -------------------- */
-#ifdef __EMX__
-#  undef IRC_UID
-#  undef IRC_GID
-#  undef USE_SYSLOG /* OS/2 doesn't have syslog */
-#endif
-
-#ifdef APOLLO
-#define RESTARTING_SYSTEMCALLS
-#endif                            /* read/write are restarted after signals
-                                     defining this 1, gets siginterrupt call
-                                     compiled, which attempts to remove this
-                                     behaviour (apollo sr10.1/bsd4.3 needs
-                                     this) */
-
 #define MAX_CLIENTS INIT_MAXCLIENTS
 
 #if defined(CLIENT_FLOOD) && ((CLIENT_FLOOD > 8000) || (CLIENT_FLOOD < 512))

@@ -21,7 +21,7 @@
  * see the header file (dbuf.h).
  *
  *
- * $Id: dbuf.c,v 1.12 1999/07/30 06:40:11 tomh Exp $
+ * $Id: dbuf.c,v 1.13 1999/08/01 04:59:55 tomh Exp $
  */
 #include "dbuf.h"
 #include "common.h"
@@ -54,18 +54,19 @@ static dbufbuf* freelist = NULL;
 
 void dbuf_init()
 {
-  int i=0;
-  dbufbuf *dbp;
+  int      i = 0;
+  dbufbuf* dbp;
 
-  freelist = (dbufbuf *)valloc(sizeof(dbufbuf)*INITIAL_DBUFS);
-  if (!freelist) return; /* screw this if it doesn't work */
+  freelist = (dbufbuf*) MyMalloc(sizeof(dbufbuf) * INITIAL_DBUFS);
+  if (!freelist) 
+    return; /* screw this if it doesn't work */
   dbp = freelist;
 
-  for(;i<INITIAL_DBUFS-1;i++,dbp++,dbufblocks++)
-    dbp->next = (dbp+1);
+  for (; i < INITIAL_DBUFS - 1; ++i, ++dbp, ++dbufblocks)
+    dbp->next = (dbp + 1);
 
   dbp->next = NULL;
-  dbufblocks++;
+  ++dbufblocks;
   maxdbufblocks = dbufblocks;
 }
 

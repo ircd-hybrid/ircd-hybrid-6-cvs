@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_log.c,v 1.3 1999/07/31 16:37:13 tomh Exp $
+ *   $Id: s_log.c,v 1.4 1999/08/01 04:59:57 tomh Exp $
  */
 #include "s_log.h"
 #include "irc_string.h"
@@ -46,6 +46,7 @@ static int sysLogLevel[] = {
   LOG_ERR,
   LOG_WARNING,
   LOG_NOTICE,
+  LOG_INFO,
   LOG_INFO,
   LOG_INFO
 };
@@ -105,9 +106,9 @@ void log(int priority, const char* fmt, ...)
   write_log(buf);
 }
   
-void init_log(void)
+void init_log(const char* filename)
 {
-  open_log(LPATH);
+  open_log(filename);
 #ifdef USE_SYSLOG
   openlog("ircd", LOG_PID | LOG_NDELAY, LOG_FACILITY);
 #endif

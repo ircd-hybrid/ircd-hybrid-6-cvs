@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_bsd.h,v 1.11 1999/07/28 05:37:03 tomh Exp $
+ *   $Id: s_bsd.h,v 1.12 1999/08/01 04:59:52 tomh Exp $
  *
  */
 #ifndef INCLUDED_s_bsd_h
@@ -42,10 +42,11 @@ extern const char* const SETBUF_ERROR_MSG;
 extern void  add_connection(struct Listener* listener, int fd);
 extern int   check_client(struct Client* client, char *,char **);
 extern void  close_connection(struct Client* client);
+extern void  close_all_connections(void);
 extern int   connect_server(struct ConfItem* conf, struct Client* cptr, 
                             struct DNSReply* dns_reply);
 extern void  get_my_name(struct Client *, char *, int);
-extern void  init_sys();
+extern void  init_netio(void);
 extern int   read_message (time_t timeout, unsigned char mask);
 extern void  report_error(const char* message, const char* who, int error);
 extern int   set_non_blocking(int fd);

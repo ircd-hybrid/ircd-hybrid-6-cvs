@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.205 1999/07/31 13:15:49 db Exp $
+ *  $Id: s_user.c,v 1.206 1999/08/01 04:59:57 tomh Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -72,8 +72,6 @@ static int valid_hostname(const char* hostname);
 static int valid_username(const char* username);
 static void report_and_set_user_flags( aClient *, aConfItem * );
 static int tell_user_off(aClient *,char **);
-
-static char buf[BUFSIZE], buf2[BUFSIZE];
 
 /* table of ascii char letters to corresponding bitmask */
 
@@ -1804,6 +1802,7 @@ int user_mode(aClient *cptr, aClient *sptr, int parc, char *parv[])
   aClient *acptr;
   int   what, setflags;
   int   badflag = NO;   /* Only send one bad flag notice -Dianora */
+  char  buf[BUFSIZE];
 
   what = MODE_ADD;
 
@@ -1965,11 +1964,8 @@ int user_mode(aClient *cptr, aClient *sptr, int parc, char *parv[])
  * send the MODE string for user (user) to connection cptr
  * -avalon
  */
-void    send_umode(aClient *cptr,
-                   aClient *sptr,
-                   int old,
-                   int sendmask,
-                   char *umode_buf)
+void send_umode(aClient *cptr, aClient *sptr, int old, int sendmask,
+                char *umode_buf)
 {
   int   i;
   int flag;
@@ -2027,11 +2023,12 @@ void    send_umode(aClient *cptr,
  * extra argument evenTS no longer needed with TS only th+hybrid
  * server -Dianora
  */
-void    send_umode_out(aClient *cptr,
+void send_umode_out(aClient *cptr,
                        aClient *sptr,
                        int old)
 {
   aClient *acptr;
+  char buf[BUFSIZE];
 
   send_umode(NULL, sptr, old, SEND_UMODES, buf);
 
