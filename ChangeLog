@@ -1,3 +1,21 @@
+ievil       2003/10/13 07:38:40 EDT	(20031013_10)
+
+  Modified files:
+    include              client.h 
+    src                  m_locops.c s_conf.c s_user.c send.c 
+  Log:
+  updated and change LOCOPS usage to better reflect changes towards
+  RESTRICT_LOCOPS.
+  
+  Revision  Changes    Path
+  1.74      +28 -24    ircd-hybrid-6/include/client.h
+  1.5       +2 -2      ircd-hybrid-6/src/m_locops.c
+  1.249     +4 -0      ircd-hybrid-6/src/s_conf.c
+  1.268     +2 -1      ircd-hybrid-6/src/s_user.c
+  1.119     +43 -0     ircd-hybrid-6/src/send.c
+
+
+
 ievil       2003/10/13 07:33:15 EDT	(20031013_9)
 
   Modified files:
