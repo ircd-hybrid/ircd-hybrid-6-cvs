@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.129 2001/08/05 13:07:53 jdc Exp $
+ * $Id: config.h,v 1.130 2001/08/05 18:47:28 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -304,11 +304,6 @@
  * However, the client will still see the real reason upon connect attempts.
  */
 #define KLINE_WITH_CONNECTION_CLOSED
-
-/* NON_REDUNDANT_KLINES - If you want the server to flag and not apply
- * redundant klines
- */
-#define NON_REDUNDANT_KLINES
 
 /* BOTCHECK - rudimentary bot checking
  */

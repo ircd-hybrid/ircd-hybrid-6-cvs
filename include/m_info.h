@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.15 2001/07/10 12:40:28 jdc Exp $
+ * $Id: m_info.h,v 1.16 2001/08/05 18:47:28 db Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -418,12 +418,6 @@ Info MyInformation[] = {
 #endif /* NETWORK_DESC */
 
   { "NICKNAMEHISTORYLENGTH", "", NICKNAMEHISTORYLENGTH, "Size of WHOWAS Array" },
-
-#ifdef NON_REDUNDANT_KLINES
-  { "NON_REDUNDANT_KLINES", "ON", 0, "Check for and Disallow Redundant K-lines" },
-#else
-  { "NON_REDUNDANT_KLINES", "OFF", 0, "Check for and Disallow Redundant K-lines" },
-#endif /* NON_REDUNDANT_KLINES */
 
 #ifdef NO_CHANOPS_ON_SPLIT
   { "NO_CHANOPS_ON_SPLIT", "ON", 0, "Do not Allow Channel Ops During a NetSplit" },

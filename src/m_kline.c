@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.60 2001/08/05 17:04:19 leeh Exp $
+ *   $Id: m_kline.c,v 1.61 2001/08/05 18:47:29 db Exp $
  */
 #include "m_commands.h"
 #include "m_kline.h"
@@ -683,7 +683,6 @@ m_kline(aClient *cptr,
       ip = 0L;
     }
 
-#ifdef NON_REDUNDANT_KLINES
   if( (aconf = is_klined(host,user,(unsigned long)ip)) )
      {
        char *nrkreason;
@@ -703,7 +702,6 @@ m_kline(aClient *cptr,
            return 0;
          }
      }
-#endif
 
   current_date = smalldate((time_t) 0);
 
@@ -1161,7 +1159,6 @@ m_dline(aClient *cptr, aClient *sptr, int parc, char *parv[])
         }
     }
 
-#ifdef NON_REDUNDANT_KLINES
   if( (aconf = match_Dline(ip_host)) )
      {
        char *nrkreason;
@@ -1181,7 +1178,6 @@ m_dline(aClient *cptr, aClient *sptr, int parc, char *parv[])
       return 0;
        
      }
-#endif
 
   current_date = smalldate((time_t) 0);
 
