@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.127 1999/08/01 17:24:03 tomh Exp $
+ * $Id: ircd.c,v 1.128 1999/12/29 03:28:48 lusky Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -370,13 +370,12 @@ static time_t io_loop(time_t delay)
                  CurrentTime, lasttimeofday);
       report_error(to_send, me.name, 0);
     }
-  else if ((lasttimeofday + 60) < CurrentTime)
+  else if ((lasttimeofday + TS_MAX_DELTA) < CurrentTime)
     {
-      ircsprintf(to_send,
-                 "System clock was reset into the future - (%d+60 > %d)",
-                 CurrentTime, lasttimeofday);
-      report_error(to_send, me.name, 0);
-      sync_channels(CurrentTime - lasttimeofday);
+      log(L_ERROR, "Clock Failure (%d)", errno);
+      sendto_ops("Clock set back more than %d seconds, TS can be corrupted",
+        TS_MAX_DELTA);
+      restart("Clock Failure");
     }
 
   /*
