@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.32 1998/12/06 06:16:24 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.33 1998/12/07 07:33:36 db Exp $";
 
 #endif
 
@@ -2903,13 +2903,14 @@ int	m_quit(aClient *cptr,
 	   * be trying to exit with a spam message.
 	   */
 
-	  if(sptr->last_join_time &&
+	  if(sptr->last_join_time && !IsElined(sptr) &&
 	     !(sptr->person_privmsgs | sptr->channel_privmsgs))
 	    {
-	      sendto_realops("Possible spambot exiting %s [%s@%s] [%s]",
-			     sptr->name, sptr->user->username,
-			     sptr->user->host,
-			     comment);
+	      sendto_realops_lev(REJ_LEV,
+				 "Possible spambot exiting %s [%s@%s] [%s]",
+				 sptr->name, sptr->user->username,
+				 sptr->user->host,
+				 comment);
 	    }
 	}
 #endif
