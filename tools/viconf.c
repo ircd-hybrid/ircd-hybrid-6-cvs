@@ -1,7 +1,7 @@
 /*
  * viconf.c
  *
- * $Id: viconf.c,v 1.10 1999/09/08 03:42:39 lusky Exp $
+ * $Id: viconf.c,v 1.11 2000/10/26 03:22:04 lusky Exp $
  */
 #include <stdio.h>
 #include <unistd.h>
@@ -37,7 +37,7 @@ static char lockpath[PATH_MAX + 1];
 
 int main(int argc, char *argv[])
 {
-  char *ed, *p, *filename = MPATH;
+  char *ed, *p, *filename = CPATH;
 
   if( chdir(DPATH) < 0 )
     {
