@@ -1,7 +1,20 @@
-ircd-hybrid-6.3 Release Notes
----------------------------
-$Id: RELNOTES,v 1.14 2002/01/14 13:35:30 db Exp $
+ircd-hybrid-6.3.1 Release Notes
+-------------------------------
+$Id: RELNOTES,v 1.15 2002/04/18 02:54:47 lusky Exp $
 
+This is a minor bugfix release
+
+o Fixed missing SystemTime initializations in adns
+o Fixed a small memory leak from rehashing
+o Fixed a leak of hidden server IPs when auto connects are disabled
+o Fixed SIGTRAP handling so you can detach gdb on FreeBSD without crashing
+o Changed LUSERS to be paced by WHOIS_WAIT instead of PACE_WAIT
+
+
+
+
+ircd-hybrid-6.3 Release Notes
+-----------------------------
 There have been a number of changes done since 6.0 release.
 
 Administrator level
