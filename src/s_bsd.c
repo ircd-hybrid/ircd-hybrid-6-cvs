@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.129 2000/12/31 00:12:01 lusky Exp $
+ *  $Id: s_bsd.c,v 1.130 2001/06/03 21:53:19 greg Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -996,6 +996,8 @@ int read_message(time_t delay, unsigned char mask)        /* mika */
             {
                FD_SET(i, read_set);
             }
+          else parse_client_queued(cptr);
+		/* bubye annoying bug. *squish* -gnp */
 
           if (DBufLength(&cptr->sendQ) || IsConnecting(cptr)
 #ifdef ZIP_LINKS
@@ -1264,6 +1266,8 @@ int read_message(time_t delay, unsigned char mask)
 
       if (DBufLength(&cptr->recvQ) < 4088)
         PFD_SETR(i);
+      else parse_client_queued(cptr);
+      /* you go squish now. -gnp */
       
       if (DBufLength(&cptr->sendQ) || IsConnecting(cptr)
 #ifdef ZIP_LINKS
