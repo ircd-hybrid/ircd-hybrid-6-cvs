@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.23 1999/01/14 07:46:38 chuegen Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.24 1999/01/23 03:11:32 db Exp $";
 #endif
 
 #include "struct.h"
@@ -31,7 +31,6 @@ static char *rcs_version = "$Id: s_bsd.c,v 1.23 1999/01/14 07:46:38 chuegen Exp 
 #include "numeric.h"
 #include "patchlevel.h"
 #include <sys/types.h>
-/* DEBUG */
 #include <sys/stat.h>
 #include <sys/socket.h>
 #include <sys/file.h>
@@ -325,7 +324,7 @@ int	inetport(aClient *cptr, int port, u_long bind_addr)
 
   cptr->port = (int)ntohs(server.sin_port);
 /* If the operating system has a define for SOMAXCONN, use it, otherwise
-   use HYBRID_SOMAXCONN -Dianora
+ *   use HYBRID_SOMAXCONN -Dianora
 */
 
 #ifdef SOMAXCONN

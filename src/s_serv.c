@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.64 1999/01/22 04:24:22 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.65 1999/01/23 03:11:33 db Exp $";
 #endif
 
 
@@ -49,6 +49,7 @@ static char *rcs_version = "$Id: s_serv.c,v 1.64 1999/01/22 04:24:22 db Exp $";
 #include <time.h>
 #endif
 #include <sys/stat.h>
+#include <sys/socket.h>
 #include <fcntl.h>
 #include "h.h"
 #if defined( HAVE_STRING_H )
@@ -1774,7 +1775,13 @@ int	m_info(aClient *cptr,
 	sendto_one(sptr, rpl_str(RPL_INFO),
                 me.name, parv[0], outstr);
 #endif
-	ircsprintf(outstr,"HARD_FDLIMIT_=%d HYBRID_SOMAXCONN=%d",HARD_FDLIMIT_,HYBRID_SOMAXCONN);
+#ifdef SOMAXCONN
+	ircsprintf(outstr,"HARD_FDLIMIT_=%d SOMAXCONN=%d",
+		   HARD_FDLIMIT_,SOMAXCONN);
+#else
+	ircsprintf(outstr,"HARD_FDLIMIT_=%d HYBRID_SOMAXCONN=%d",
+		   HARD_FDLIMIT_,HYBRID_SOMAXCONN);
+#endif
 	sendto_one(sptr, rpl_str(RPL_INFO),
 		me.name, parv[0], outstr);
 	ircsprintf(outstr,"PACE_WAIT=%d MAXIMUM_LINKS=%d",PACE_WAIT,MAXIMUM_LINKS);
