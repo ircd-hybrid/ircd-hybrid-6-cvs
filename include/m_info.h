@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.12 2001/06/25 00:56:06 db Exp $
+ * $Id: m_info.h,v 1.13 2001/07/02 03:04:14 db Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -667,12 +667,6 @@ Info MyInformation[] = {
 #else
   { "USE_LOGFILE", "OFF", 0, "Log Errors to LPATH" },
 #endif /* USE_LOGFILE */
-
-#ifdef USE_RCS
-  { "USE_RCS", "ON", 0, "Use \"ci\" to Keep RCS Control" },
-#else
-  { "USE_RCS", "OFF", 0, "Use \"ci\" to Keep RCS Control" },
-#endif /* USE_RCS */
 
 #ifdef USE_SYSLOG
   { "USE_SYSLOG", "ON", 0, "Log Errors to syslog file" },

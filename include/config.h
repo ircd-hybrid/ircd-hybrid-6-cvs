@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.113 2001/06/25 02:29:02 greg Exp $
+ * $Id: config.h,v 1.114 2001/07/02 03:04:13 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -999,13 +999,6 @@
  * You usually shouldn't need this. -Dianora
 */
 #undef DEBUGMODE               /* define DEBUGMODE to enable debugging mode.*/
-
-/*
- * viconf option, if USE_RCS is defined, viconf will use rcs "ci"
- * to keep the conf file  under RCS control.
- */
-#define USE_RCS
-
 
 /* ------------------------- END CONFIGURATION SECTION -------------------- */
 #define MAX_CLIENTS INIT_MAXCLIENTS
