@@ -56,7 +56,7 @@
 #endif
 
 #ifndef lint
-static char *version="$Id: mtrie_conf.c,v 1.24 1999/03/24 00:13:37 db Exp $";
+static char *version="$Id: mtrie_conf.c,v 1.25 1999/03/25 18:49:16 db Exp $";
 #endif /* lint */
 
 #define MAXPREFIX (HOSTLEN+USERLEN+15)
@@ -953,6 +953,9 @@ static int sortable(char *tokenized,char *p)
 
   d = tokenized;
 
+  if((*p == '*') && (*(p+1) == '\0'))	/* special case a single'*' */
+    return(-2);	
+
 
   FOREVER
     {
@@ -973,7 +976,7 @@ static int sortable(char *tokenized,char *p)
 
 	case 1:
 	  if(*p == '\0')	
-	    return(-2);		/* followed by null terminator is special */
+	    return(-1);		/* followed by null terminator is sortable */
 	  else if(*p == '*')	/* '*' followed by another '*' is unsortable */
 	    return(0);
 	  else if(*p == '.')	/* this is a "*.foo" type kline */

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.29 1999/03/17 19:20:35 db Exp $
+ * $Id: config.h,v 1.30 1999/03/25 18:49:15 db Exp $
  */
 
 #ifndef	__config_include__
@@ -342,7 +342,7 @@
  * being KLINED very little difference, but you have been forewarned
  *
  */
-#undef KLINE_WITH_REASON
+#define KLINE_WITH_REASON
 
 /*
  * If KLINE_WITH_CONNECTION_CLOSED is defined and KLINE_WITH_REASON
