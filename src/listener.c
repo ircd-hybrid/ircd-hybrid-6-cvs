@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: listener.c,v 1.18 1999/10/10 03:43:01 lusky Exp $
+ *  $Id: listener.c,v 1.19 2001/07/16 19:32:05 leeh Exp $
  */
 #include "listener.h"
 #include "client.h"
@@ -103,7 +103,11 @@ void show_ports(struct Client* sptr)
                  sptr->name,
                  'P',
                  listener->port,
+#ifdef HIDE_SERVERS_IPS
+		 me.name,
+#else		 
                  listener->name,
+#endif		 
                  listener->ref_count,
                  (listener->active)?"active":"disabled");
     }
