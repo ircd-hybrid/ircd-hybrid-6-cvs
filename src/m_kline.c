@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.66 2001/12/10 02:56:28 jdc Exp $
+ *   $Id: m_kline.c,v 1.67 2001/12/10 06:29:29 db Exp $
  */
 #include "m_commands.h"
 #include "m_kline.h"
@@ -761,7 +761,8 @@ m_kline(struct Client *cptr,
 		 reason,
 		 current_date);
       DupString(aconf->passwd, buffer );
-      DupString(aconf->oper_reason, oper_reason);
+      if (oper_reason != NULL)
+	DupString(aconf->oper_reason, oper_reason);
 
       aconf->hold = CurrentTime + temporary_kline_time_seconds;
       if(ip_kline)
