@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.30 1999/07/20 13:57:12 sean Exp $
+ * $Id: client.h,v 1.31 1999/07/20 20:30:25 sean Exp $
  */
 #ifndef	INCLUDED_client_h
 #define INCLUDED_client_h
@@ -156,8 +156,8 @@ struct Client
   short	            status;	/* Client type */
   char	            nicksent;
   unsigned char     local_flag; /* if this is 1 this client is local */
-  unsigned short    listprogress; /* where were we when the /list blocked? */
-  unsigned int      listprogress2; /* where in the current bucket were we? */
+  short    listprogress; /* where were we when the /list blocked? */
+  int      listprogress2; /* where in the current bucket were we? */
 
   /*
    * client->name is the unique name for a client nick or host
