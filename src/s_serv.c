@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.158 1999/07/18 23:27:21 tomh Exp $
+ *   $Id: s_serv.c,v 1.159 1999/07/18 23:35:15 db Exp $
  */
 
 #define CAPTAB
@@ -2628,7 +2628,7 @@ int   m_set(aClient *cptr,
 	    {
 	      int newval = atoi(parv[3]);
 
-	      if(!(parv[2],"ALL"))
+	      if(!irccmp(parv[2],"ALL"))
 		{
 		  sendto_realops(
 				 "%s has changed AUTOCONN ALL to %i",

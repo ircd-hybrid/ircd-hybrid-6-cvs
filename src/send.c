@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.57 1999/07/18 22:27:30 db Exp $
+ *   $Id: send.c,v 1.58 1999/07/18 23:35:17 db Exp $
  */
 #include "send.h"
 #include "struct.h"
@@ -922,7 +922,7 @@ sendto_ops_flags(int flags, const char *pattern, ...)
     {
       for(cptr = local_cptr_list; cptr; cptr = cptr->next_local_client)
 	{
-	  if(cptr->set_flags & FLAGS_SKILL)
+	  if(cptr->umodes & FLAGS_SKILL)
 	    {
 	      (void)ircsprintf(nbuf, ":%s NOTICE %s :*** Notice -- ",
 			       me.name, cptr->name);
@@ -941,7 +941,7 @@ sendto_ops_flags(int flags, const char *pattern, ...)
     {
       for(cptr = oper_cptr_list; cptr; cptr = cptr->next_oper_client)
 	{
-	  if(cptr->set_flags & flags)
+	  if(cptr->umodes & flags)
 	    {
 	      (void)ircsprintf(nbuf, ":%s NOTICE %s :*** Notice -- ",
 			       me.name, cptr->name);
@@ -1305,7 +1305,7 @@ sendto_realops_flags(int flags, const char *pattern, ...)
 
   for (cptr = oper_cptr_list; cptr; cptr = cptr->next_oper_client)
     {
-      if(cptr->set_flags & flags)
+      if(cptr->umodes & flags)
 	{
 	  (void)ircsprintf(nbuf, ":%s NOTICE %s :*** Notice -- ",
 			   me.name, cptr->name);
