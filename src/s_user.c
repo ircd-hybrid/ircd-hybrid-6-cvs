@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.119 1999/07/08 22:46:27 db Exp $
+ *  $Id: s_user.c,v 1.120 1999/07/10 03:25:10 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -2724,7 +2724,11 @@ static int do_user(char *nick,
     return register_user(cptr, sptr, sptr->name, username);
   else
     {
-      strncpy(sptr->user->username, username, USERLEN);
+      if (IsGotId(sptr))
+	strncpy(sptr->user->username, sptr->username, USERLEN);
+      else
+	strncpy(sptr->user->username, username, USERLEN);
+
       sptr->user->username[USERLEN] = '\0';
     }
   return 0;
