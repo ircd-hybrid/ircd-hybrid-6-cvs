@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_links.c,v 1.5 2000/11/24 18:24:36 lusky Exp $
+ *   $Id: m_links.c,v 1.6 2000/11/25 06:01:01 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -201,11 +201,13 @@ int m_links(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
           else
             p = "(Unknown Location)";
 
-          sendto_one(sptr, form_str(RPL_LINKS),
-                    me.name, parv[0], acptr->name, acptr->serv->up,
 #ifdef SERVERHIDE
+          sendto_one(sptr, form_str(RPL_LINKS),
+                    me.name, parv[0], acptr->name, NETWORK_DESC,
                      0, p);
 #else
+          sendto_one(sptr, form_str(RPL_LINKS),
+                    me.name, parv[0], acptr->name, acptr->serv->up,
                     acptr->hopcount, p);
 #endif
         }
