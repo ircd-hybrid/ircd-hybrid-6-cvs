@@ -20,15 +20,16 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_die.c,v 1.1 1999/07/30 04:01:32 tomh Exp $
+ *   $Id: m_die.c,v 1.2 1999/08/01 07:50:42 tomh Exp $
  */
 #include "m_commands.h"
 #include "client.h"
 #include "ircd.h"
 #include "irc_string.h"
 #include "numeric.h"
-#include "send.h"
 #include "s_bsd.h"
+#include "s_log.h"
+#include "send.h"
 
 /*
  * m_functions execute protocol messages on this server:
@@ -133,7 +134,7 @@ int m_die(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
             sendto_one(acptr,
                        ":%s NOTICE %s :Server Terminating. %s",
                        me.name, acptr->name,
-                       get_client_name(sptr, SHOW_IP));
+                       get_client_name(sptr, HIDE_IP));
           else
             sendto_one(acptr,
                        ":%s NOTICE %s :Server Terminating. %s",
@@ -145,6 +146,7 @@ int m_die(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
                    me.name, get_client_name(sptr, MASK_IP));
     }
   flush_connections(0);
+  log(L_NOTICE, "Server terminated by %s", get_client_name(sptr, HIDE_IP));
   /* 
    * this is a normal exit, tell the os it's ok 
    */
