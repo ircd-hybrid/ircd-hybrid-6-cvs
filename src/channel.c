@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.243 2003/08/21 23:59:26 ievil Exp $
+ * $Id: channel.c,v 1.244 2003/08/22 04:43:43 lusky Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -696,6 +696,7 @@ static  int is_invex(struct Client *cptr,struct Channel *chptr)
 #ifdef CHANMODE_I
   char  s[NICKLEN+USERLEN+HOSTLEN+6];
   char  *s2;
+  Link *t2;
 
   if (!IsPerson(cptr))
     return (0);
@@ -703,7 +704,6 @@ static  int is_invex(struct Client *cptr,struct Channel *chptr)
   strcpy(s, make_nick_user_host(cptr->name, cptr->username, cptr->host));
   s2 = make_nick_user_host(cptr->name, cptr->username,
                            inetntoa((char*) &cptr->ip));
-  Link *t2;
   for (t2 = chptr->invexlist; t2; t2 = t2->next)
     if (match(BANSTR(t2), s) || match(BANSTR(t2), s2))
       {
