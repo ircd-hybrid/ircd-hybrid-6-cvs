@@ -19,9 +19,10 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
  *  USA
  *
- *   $Id: m_whois.c,v 1.20 2004/05/23 16:10:04 ievil Exp $
+ *   $Id: m_whois.c,v 1.21 2004/06/12 23:59:44 ievil Exp $
  */
 
+#include "common.h"
 #include "m_operspylog.h"
 #include "m_commands.h"
 #include "client.h"
@@ -116,7 +117,7 @@ int m_whois (struct Client *cptr, struct Client *sptr, int parc, char *parv[])
   p = strchr (parv[1], ',');
   if (p) *p = '\0';
   {
-    int       invis, showperson, member, wilds;
+    int       invis, member;
     found = 0;
 
 #ifdef OPERSPY
