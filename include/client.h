@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.46 2001/06/04 05:07:11 db Exp $
+ * $Id: client.h,v 1.47 2001/06/04 19:52:58 db Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -556,5 +556,9 @@ extern struct Client* next_client(struct Client* next, const char* name);
 extern struct Client* next_client_double(struct Client* next, 
                                          const char* name);
 
+/* 
+ * Time we allow clients to spend in unknown state, before tossing.
+ */
+#define UNKNOWN_TIME 20
 
 #endif /* INCLUDED_client_h */

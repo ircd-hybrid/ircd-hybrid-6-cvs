@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.60 2001/06/04 05:07:15 db Exp $
+ *  $Id: client.c,v 1.61 2001/06/04 19:53:02 db Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -567,12 +567,13 @@ time_t check_pings(time_t currenttime)
 
       /*
        * Check UNKNOWN connections - if they have been in this state
-       * for > 100s, close them.
+       * for > UNKNOWN_TIME, close them.
        */
 
       if (IsUnknown(cptr))
         {
-          if (cptr->firsttime ? ((CurrentTime - cptr->firsttime) > 100) : 0)
+          if (cptr->firsttime ?
+	      ((CurrentTime - cptr->firsttime) > UNKNOWN_TIME) : 0)
             {
               dying_clients[die_index] = cptr;
               dying_clients_reason[die_index++] = "Connection Timed Out";
