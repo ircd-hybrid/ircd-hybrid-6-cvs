@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_restart.c,v 1.3 2000/06/09 01:59:07 lusky Exp $
+ *   $Id: m_restart.c,v 1.4 2001/11/29 23:01:51 wcampbel Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -109,6 +109,22 @@ int     m_restart(struct Client *cptr,
     {
       sendto_one(sptr,":%s NOTICE %s :You have no D flag", me.name, parv[0]);
       return 0;
+    }
+
+  if (parc < 2)
+    {
+      sendto_one(sptr,":%s NOTICE %s :Need server name: /restart %s",
+                 me.name,sptr->name,me.name);
+      return 0;
+    }
+  else
+    {
+      if (irccmp(parv[1], me.name))
+        {
+          sendto_one(sptr,":%s NOTICE %s :Mismatch on /restart %s",
+                     me.name,sptr->name,me.name);
+          return 0;
+        }
     }
 
   log(L_WARN, "Server RESTART by %s\n", get_client_name(sptr, SHOW_IP));

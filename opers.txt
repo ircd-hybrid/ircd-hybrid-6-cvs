@@ -1,5 +1,5 @@
 This file outlines the features that ircd-hybrid has for IRC Operators.
-$Id: opers.txt,v 1.19 2001/11/29 15:56:58 wcampbel Exp $
+$Id: opers.txt,v 1.20 2001/11/29 23:01:48 wcampbel Exp $
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -145,7 +145,7 @@ COMMAND         - USAGE and DESCRIPTION
                     HELP    - Re-reads this HELP file
                     DLINES  - Re-hashes D-lines
 
-  RESTART       - RESTART
+  RESTART       - RESTART server.name
                   Restarts the IRC server.
 
   CLOSE         - CLOSE
