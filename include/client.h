@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.4 1999/07/09 01:03:24 db Exp $
+ * $Id: client.h,v 1.5 1999/07/09 06:55:44 tomh Exp $
  */
 #ifndef	INCLUDED_client_h
 #define INCLUDED_client_h
@@ -276,6 +276,7 @@ struct ConfItem;
 struct Whowas;
 struct fludbot;
 struct Zdata;
+struct DNSReply;
 struct Client;
 
 /*
@@ -411,7 +412,7 @@ struct Client
   struct SLink*     confs;	/* Configuration record associated */
   struct in_addr    ip;		/* keep real ip# too */
   unsigned short    port;	/* and the remote port# too :-) */
-  struct hostent*   hostp;
+  struct DNSReply*  dns_reply;  /* result returned from resolver query */
 #ifdef ANTI_NICK_FLOOD
   time_t	    last_nick_change;
   int		    number_of_nick_changes;

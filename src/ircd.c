@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.67 1999/07/09 01:03:26 db Exp $
+ * $Id: ircd.c,v 1.68 1999/07/09 06:55:47 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -350,8 +350,7 @@ static	time_t	try_connections(time_t currenttime)
 	}
       else
 	{
-	  if (connect_server(con_conf, (aClient *)NULL,
-			     (struct hostent *)NULL) == 0)
+	  if (connect_server(con_conf, 0, 0) == 0)
 	    sendto_ops("Connection to %s[%s] activated.",
 		       con_conf->name, con_conf->host);
 	}

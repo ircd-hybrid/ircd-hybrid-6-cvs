@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.19 1999/07/08 08:36:18 tomh Exp $
+ *   $Id: s_auth.c,v 1.20 1999/07/09 06:55:48 tomh Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -162,12 +162,13 @@ static void release_auth_client(struct Client* client)
  * set the client on it's way to a connection completion, regardless
  * of success of failure
  */
-static void auth_dns_callback(void* vptr, struct hostent* hp)
+static void auth_dns_callback(void* vptr, struct DNSReply* reply)
 {
   struct AuthRequest* auth = (struct AuthRequest*) vptr;
 
   ClearDNSPending(auth);
-  if (hp) {
+  if (reply) {
+    struct hostent* hp = reply->hp;
     int i;
     /*
      * Verify that the host to ip mapping is correct both ways and that
@@ -181,7 +182,8 @@ static void auth_dns_callback(void* vptr, struct hostent* hp)
     if (!hp->h_addr_list[i])
       sendheader(auth->client, REPORT_IP_MISMATCH);
     else {
-      auth->client->hostp = hp;
+      ++reply->ref_count;
+      auth->client->dns_reply = reply;
       sendheader(auth->client, REPORT_FIN_DNS);
     }
   }
@@ -375,9 +377,11 @@ void start_auth(struct Client* client)
   sendheader(client, REPORT_DO_DNS);
   Debug((DEBUG_DNS, "lookup %s", inetntoa((char *)&addr.sin_addr)));
 
-  client->hostp = gethost_byaddr((const char*) &client->ip, &query);
-  if (client->hostp)
+  client->dns_reply = gethost_byaddr((const char*) &client->ip, &query);
+  if (client->dns_reply) {
+    ++client->dns_reply->ref_count;
     sendheader(client, REPORT_FIN_DNSC);
+  }
   else
     SetDNSPending(auth);
 

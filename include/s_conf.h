@@ -21,9 +21,16 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.6 1999/07/08 23:04:06 db Exp $
+ * $Id: s_conf.h,v 1.7 1999/07/09 06:55:45 tomh Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.7  1999/07/09 06:55:45  tomh
+ * Changed resolver code to use reference counting instead of blind hostent
+ * removal. This will ensure that if a client resolved we will always get
+ * it's hostent. Currently we are saving the hostent for the life of the client,
+ * but it can be released once the access checks are finished so the resolver
+ * cache stays reasonably sized.
+ *
  * Revision 1.6  1999/07/08 23:04:06  db
  * - fixed goof in s_conf.h
  *
@@ -59,6 +66,8 @@
 
 struct Client;
 struct SLink;
+struct DNSReply;
+struct hostent;
 
 struct ConfItem
 {
@@ -143,7 +152,7 @@ extern void             free_conf(struct ConfItem*);
 
 extern FBFILE*          openconf(char* filename);
 extern void             initconf(int, FBFILE*, int);
-extern struct hostent*  conf_dns_lookup(struct ConfItem* aconf);
+extern struct DNSReply* conf_dns_lookup(struct ConfItem* aconf);
 extern int              attach_conf(struct Client*, struct ConfItem *);
 extern struct ConfItem* attach_confs(struct Client*, char *, int);
 extern struct ConfItem* attach_confs_host(struct Client*, char *, int);
