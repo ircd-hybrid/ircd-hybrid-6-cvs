@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.227 2001/12/09 19:06:04 lusky Exp $
+ * $Id: channel.c,v 1.228 2001/12/09 20:01:04 lusky Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -2374,6 +2374,10 @@ int     m_join(struct Client *cptr,
                        sendto_one(sptr, form_str(ERR_UNAVAILRESOURCE),
                                   me.name, parv[0], name);
                        continue;
+                     }
+                   else
+                     {
+                       flags = CHFL_CHANOP;
                      }
                  }
 #else
