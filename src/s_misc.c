@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.69 2000/11/21 06:49:32 lusky Exp $
+ *  $Id: s_misc.c,v 1.70 2001/06/04 13:35:28 leeh Exp $
  */
 #include "s_misc.h"
 #include "client.h"
@@ -160,7 +160,7 @@ void serv_info(aClient *cptr,char *name)
        */
       if(IsAnOper(cptr))
         sendto_one(cptr, Lformat, me.name, RPL_STATSLINKINFO, name,
-#ifdef SERVERHIDE
+#if (defined SERVERHIDE) || (defined HIDE_SERVERS_IPS)
                    get_client_name(acptr, HIDEME),
 #else
                    get_client_name(acptr, TRUE),

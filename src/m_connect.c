@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_connect.c,v 1.5 2000/11/21 06:49:29 lusky Exp $
+ *   $Id: m_connect.c,v 1.6 2001/06/04 13:35:26 leeh Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -203,7 +203,7 @@ int m_connect(struct Client* cptr, struct Client* sptr, int parc, char* parv[])
    * C:line and a valid port in the C:line
    */
   if (connect_server(aconf, sptr, 0))
-#ifdef SERVERHIDE
+#if (defined SERVERHIDE) || (defined HIDE_SERVERS_IPS)
     sendto_one(sptr, ":%s NOTICE %s :*** Connecting to %s[%s].%d",
                me.name, parv[0], "255.255.255.255", aconf->name, aconf->port);
   else

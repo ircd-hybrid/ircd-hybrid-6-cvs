@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.94 2001/06/04 05:07:11 db Exp $
+ * $Id: config.h,v 1.95 2001/06/04 13:35:22 leeh Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -131,6 +131,13 @@
  * NOT ADEQUATELY TESTED YET, DON'T USE ON PRODUCTION NETWORK --Rodder
  */
 /* #undef SERVERHIDE */
+
+/* HIDE_SERVERS_IPS
+ * Define this to prevent opers from seeing the IP of a server.
+ * This will not show IPs of any server to anyone, to protect hidden
+ * hubs from untrustable opers.
+ */
+#undef HIDE_SERVERS_IPS
 
 /* NETWORK_NAME
  * Displayed in place of the servername when SERVERHIDE is enabled

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_error.c,v 1.3 2000/11/18 19:11:12 lusky Exp $
+ *   $Id: m_error.c,v 1.4 2001/06/04 13:35:26 leeh Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -111,12 +111,21 @@ int m_error(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
    */
   if (IsPerson(cptr) || IsUnknown(cptr))
     return 0;
+#if (defined SERVERHIDE) || (defined HIDE_SERVERS_IPS)
+  if (cptr == sptr)
+    sendto_realops("ERROR :from %s -- %s",
+               get_client_name(cptr, MASK_IP), para);
+  else
+    sendto_realops("ERROR :from %s via %s -- %s", sptr->name,
+               get_client_name(cptr, MASK_IP), para);
+#else	       
   if (cptr == sptr)
     sendto_realops("ERROR :from %s -- %s",
                get_client_name(cptr, FALSE), para);
   else
     sendto_realops("ERROR :from %s via %s -- %s", sptr->name,
                get_client_name(cptr,FALSE), para);
+#endif
   return 0;
 }
 
