@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.88 1999/06/13 01:13:32 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.89 1999/06/13 02:27:53 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -4167,8 +4167,6 @@ int	m_sjoin(aClient *cptr,
 
   if(clean_channelname((unsigned char *)parv[2],sptr))
      { 
-       sendto_one(sptr, err_str(ERR_BADCHANNAME),
-                  me.name, parv[0], (unsigned char *)parv[2]);
        return 0;
      }
 
