@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: listener.c,v 1.4 1999/07/17 02:41:18 tomh Exp $
+ *  $Id: listener.c,v 1.5 1999/07/17 02:46:32 tomh Exp $
  */
 #include "listener.h"
 #include "s_bsd.h"
@@ -171,9 +171,9 @@ static int inetport(struct Listener* listener)
   return 1;
 }
 
-static Listener* find_listener(int port, struct in_addr addr)
+static struct Listener* find_listener(int port, struct in_addr addr)
 {
-  Listener* listener;
+  struct Listener* listener;
   for (listener = ListenerPollList; listener; listener = listener->next) {
     if (port == listener->port && addr.s_addr == listener->addr.s_addr)
       return listener;
@@ -204,7 +204,7 @@ void add_listener(int port, const char* vhost_ip)
       return;
   }
 
-  if ((listener = find_listener(port, vaddr)) {
+  if ((listener = find_listener(port, vaddr))) {
     listener->active = 1;
     return;
   }
@@ -222,7 +222,7 @@ void add_listener(int port, const char* vhost_ip)
 
 void mark_listeners_closing(void)
 {
-  Listener* listener;
+  struct Listener* listener;
   for (listener = ListenerPollList; listener; listener = listener->next)
     listener->active = 0;
 }
@@ -277,7 +277,6 @@ void accept_connection(struct Listener* listener)
   int                fd;
 
   assert(0 != listener);
-  assert(0 != listener->conf);
 
   listener->last_accept = timeofday;
   /*
