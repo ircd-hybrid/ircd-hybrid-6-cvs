@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.235 2003/08/16 19:58:36 ievil Exp $
+ *   $Id: s_serv.c,v 1.236 2003/10/13 11:30:16 ievil Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -934,36 +934,40 @@ void set_autoconn(struct Client *sptr,char *parv0,char *name,int newval)
 
 
 /*
- * show_servers - send server list to client
+ * show_servers  - send server list to client - shows the server that
+ *                 the oper was connect from
  *
  * inputs        - struct Client pointer to client to show server list to
  *               - name of client
  * output        - NONE
  * side effects        -
  */
+       
 void show_servers(struct Client *cptr)
 {
   struct Client *cptr2;
-  int j=0;                /* used to count servers */
+  int j=0;
 
   for(cptr2 = serv_cptr_list; cptr2; cptr2 = cptr2->next_server_client)
     {
-      ++j;
-      sendto_one(cptr, ":%s %d %s :%s (%s!%s@%s) Idle: %d",
+      time_t days, hours, minutes, seconds;
+      
+      j++;
+      seconds = CurrentTime - cptr2->firsttime;
+      days = seconds / 86400;
+      seconds %= 86400;
+      hours = seconds / 3600;
+      seconds %= 3600;
+      minutes = seconds / 60;
+      seconds %= 60;
+      sendto_one(cptr, ":%s %d %s :%s (%s!%s@%s) Idle: %d Connected: %l%s%ld%s%ld%s%ld%s",
                  me.name, RPL_STATSDEBUG, cptr->name, cptr2->name,
                  (cptr2->serv->by[0] ? cptr2->serv->by : "Remote."), 
-                 "*", "*", CurrentTime - cptr2->lasttime);
-
-      /*
-       * NOTE: moving the username and host to the client struct
-       * makes the names in the server->user struct no longer available
-       * IMO this is not a big problem because as soon as the user that
-       * started the connection leaves the user info has to go away
-       * anyhow. Simply showing the nick should be enough here.
-       * --Bleep
-       */ 
+                 "*", (cptr2->serv->bysrv[0] ? cptr2->serv->bysrv : "*"), 
+                 CurrentTime - cptr2->lasttime,
+                 days, (days > 0) ? "" : "d ", hours, (hours > 0) ? "" : "h ",
+                 minutes, (minutes > 0) ? "" : "m ", seconds, (seconds > 0) ? "" : "s");
     }
-
   sendto_one(cptr, ":%s %d %s :%d Server%s", me.name, RPL_STATSDEBUG,
              cptr->name, j, (j==1) ? "" : "s");
 }

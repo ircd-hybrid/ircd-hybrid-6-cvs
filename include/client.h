@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.71 2003/08/16 19:10:44 ievil Exp $
+ * $Id: client.h,v 1.72 2003/10/13 11:30:15 ievil Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -95,7 +95,8 @@ struct Server
 {
   struct User*     user;        /* who activated this connection */
   const char*      up;          /* Pointer to scache name */
-  char             by[NICKLEN + 1];
+  char             by[NICKLEN + 1];     /* oper who made the connection */
+  char             bysrv[HOSTLEN + 1]; /* server connection was done from */
   struct ConfItem* nline;       /* N-line pointer for this server */
   struct Client*   servers;     /* Servers on this server */
   struct Client*   users;       /* Users on this server */

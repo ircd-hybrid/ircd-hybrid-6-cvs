@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.149 2003/10/13 10:11:52 ievil Exp $
+ *  $Id: s_bsd.c,v 1.150 2003/10/13 11:30:16 ievil Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -600,6 +600,7 @@ int connect_server(struct ConfItem* aconf,
   if (by && IsPerson(by))
     {
       strcpy(cptr->serv->by, by->name);
+      strcpy(cptr->serv->bysrv, by->user->server);
       if (cptr->serv->user) 
         free_user(cptr->serv->user, NULL);
       cptr->serv->user = by->user;
