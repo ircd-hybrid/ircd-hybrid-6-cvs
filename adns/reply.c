@@ -1,4 +1,8 @@
 /*
+ * reply.c: $Id: reply.c,v 1.5 2001/12/04 16:12:11 androsyn Exp $
+ *  
+ */
+/*
  * reply.c
  * - main handling and parsing routine for received datagrams
  */

@@ -1,4 +1,8 @@
 /*
+ * adns.h: $Id: adns.h,v 1.3 2001/12/04 16:12:10 androsyn Exp $
+ *  
+ */
+/*
  * adns.h
  * - adns user-visible API (single-threaded, without any locking)
  */
@@ -51,7 +55,7 @@
  *  Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
  *
- *  $Id: adns.h,v 1.2 2001/12/04 07:33:53 androsyn Exp $
+ *  $Id: adns.h,v 1.3 2001/12/04 16:12:10 androsyn Exp $
  */
 
 #ifndef ADNS_H_INCLUDED

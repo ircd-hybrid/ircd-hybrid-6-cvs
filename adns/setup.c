@@ -1,4 +1,8 @@
 /*
+ * setup.c: $Id: setup.c,v 1.5 2001/12/04 16:12:11 androsyn Exp $
+ *  
+ */
+/*
  * setup.c
  * - configuration file parsing
  * - management of global state

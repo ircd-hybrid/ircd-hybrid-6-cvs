@@ -1,4 +1,8 @@
 /*
+ * types.c: $Id: types.c,v 1.4 2001/12/04 16:12:11 androsyn Exp $
+ *  
+ */
+/*
  * types.c
  * - RR-type-specific code, and the machinery to call it
  */

@@ -1,4 +1,8 @@
 /*
+ * internal.h: $Id: internal.h,v 1.4 2001/12/04 16:12:11 androsyn Exp $
+ *  
+ */
+/*
  * internal.h
  * - declarations of private objects with external linkage (adns__*)
  * - definitons of internal macros

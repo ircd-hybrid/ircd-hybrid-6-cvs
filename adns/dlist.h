@@ -1,4 +1,8 @@
 /*
+ * dlist.h: $Id: dlist.h,v 1.3 2001/12/04 16:12:11 androsyn Exp $
+ *  
+ */
+/*
  * dlist.h
  * - macros for handling doubly linked lists
  */

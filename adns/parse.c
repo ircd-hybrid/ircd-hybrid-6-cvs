@@ -1,4 +1,8 @@
 /*
+ * parse.c: $Id: parse.c,v 1.2 2001/12/04 16:12:11 androsyn Exp $
+ *  
+ */
+/*
  * parse.c
  * - parsing assistance functions (mainly for domains inside datagrams)
  */

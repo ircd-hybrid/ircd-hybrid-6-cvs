@@ -1,4 +1,8 @@
 /*
+ * transmit.c: $Id: transmit.c,v 1.4 2001/12/04 16:12:11 androsyn Exp $
+ *  
+ */
+/*
  * transmit.c
  * - construct queries
  * - send queries

@@ -1,4 +1,8 @@
 /*
+ * event.c: $Id: event.c,v 1.5 2001/12/04 16:12:11 androsyn Exp $
+ *  
+ */
+/*
  * event.c
  * - event loop core
  * - TCP connection management

@@ -1,4 +1,8 @@
 /*
+ * tvarith.h: $Id: tvarith.h,v 1.2 2001/12/04 16:12:11 androsyn Exp $
+ *  
+ */
+/*
  * tvarith.h
  * - static inline functions for doing arithmetic on timevals
  */

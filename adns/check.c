@@ -1,4 +1,8 @@
 /*
+ * check.c: $Id: check.c,v 1.2 2001/12/04 16:12:10 androsyn Exp $
+ *  
+ */
+/*
  * check.c
  * - consistency checks
  */
