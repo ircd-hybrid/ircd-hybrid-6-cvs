@@ -22,7 +22,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.8 1998/09/25 14:10:41 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.9 1998/09/25 15:55:39 db Exp $";
 #endif
 
 #include "struct.h"
@@ -2747,6 +2747,14 @@ int	m_sjoin(aClient *cptr,
 
   chptr->locally_created = NO;
   oldts = chptr->channelts;
+
+  /* If there are no users on this channel, make sure mode is 0
+   */
+
+#if defined(PRESERVE_CHANNEL_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT)
+  if(chptr->users == 0)
+    chptr->mode.mode = 0;
+#endif
 
   /* If the TS goes to 0 for whatever reason, flag it
    * ya, I know its an invasion of privacy for those channels that
