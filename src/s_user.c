@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.150 1999/07/19 03:56:05 db Exp $
+ *  $Id: s_user.c,v 1.151 1999/07/19 04:02:19 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -1578,7 +1578,7 @@ int nickkilldone(aClient *cptr, aClient *sptr, int parc,
 	  m = &parv[4][1];
 	  while (*m)
 	    {
-	      if (*m == 'O')	/* Can only be a remote oper */
+	      if (*m == 'o')	/* Can only be a remote oper */
 		{
 		  Count.oper++;
 		  SetOper(sptr);
