@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.50 2001/12/15 16:24:09 leeh Exp $
+ *  $Id: m_gline.c,v 1.51 2003/05/04 22:10:48 ievil Exp $
  */
 #include "m_commands.h"
 #include "m_gline.h"
@@ -73,7 +73,11 @@ static void expire_pending_glines();
 
 static int majority_gline(aClient*, const char *,const char *, const char *, 
                           const char* serv_name,
-                          const char *,const char *,const char *); 
+                          const char *,const char *,const char *
+#ifdef GLINE_REASON_FIRST
+                          , GLINE_PENDING **
+#endif 
+                          ); 
 
 static int invalid_wildcard(char *, char *);
 static int invalid_gline(struct Client *, char *, char *, char *, int);
@@ -110,8 +114,12 @@ int     m_gline(aClient *cptr,
   char tempuser[USERLEN + 2];
   char temphost[HOSTLEN + 1];
   aConfItem *aconf;
-#endif
+#ifdef GLINE_REASON_FIRST  
+  GLINE_PENDING * tmp_gline_pending_ptr;
+#endif /* GLINE_REASON_FIRST */
+#endif /* GLINES */
 
+   
   /* its one of our local clients doing a /gline */
   if(MyClient(sptr))
     {
@@ -290,7 +298,11 @@ int     m_gline(aClient *cptr,
                     oper_server,
                     user,
                     host,
-                    reason))
+                    reason
+#ifdef GLINE_REASON_FIRST
+                    ,&tmp_gline_pending_ptr
+#endif                    
+                    ))
     {
       current_date = smalldate((time_t) 0);
           
@@ -298,7 +310,13 @@ int     m_gline(aClient *cptr,
       aconf->status = CONF_KILL;
       DupString(aconf->host, host);
 
-      ircsprintf(buffer, "%s (%s)",reason,current_date);
+      ircsprintf(buffer, "%s (%s)",
+#ifdef GLINE_REASON_FIRST
+                 gline_pending_ptr->reason1 
+#else
+                 reason
+#endif      
+                 ,current_date);
       
       DupString(aconf->passwd, buffer);
       DupString(aconf->name, user);
@@ -312,7 +330,12 @@ int     m_gline(aClient *cptr,
                      oper_server,
                      user,
                      host,
-                     reason);
+#ifdef GLINE_REASON_FIRST
+                     gline_pending_ptr->reason1
+#else
+                     reason
+#endif
+                     );
       
       rehashed = YES;
       dline_in_progress = NO;
@@ -533,7 +556,14 @@ static void log_gline(aClient *sptr,
   if (safe_write(sptr,filenamebuf,out,buffer))
     return;
 
-  ircsprintf(buffer, "K:%s:%s:%s\n", host,user,reason);
+  ircsprintf(buffer, "K:%s:%s:%s\n", host,user,
+#ifdef GLINE_REASON_FIRST
+                   gline_pending_ptr->reason1
+#else  
+                   reason
+#endif  
+                   );
+                   
   if (safe_write(sptr,filenamebuf,out,buffer))
     return;
 
@@ -918,7 +948,11 @@ static int majority_gline(aClient *sptr,
                           const char* oper_server,
                           const char *user,
                           const char *host,
-                          const char *reason)
+                          const char *reason
+#ifdef GLINE_REASON_FIRST
+                          , GLINE_PENDING ** tmp_gline_pending_ptr
+#endif
+                          )
 {
   GLINE_PENDING* gline_pending_ptr;
 
@@ -967,6 +1001,9 @@ static int majority_gline(aClient *sptr,
               log_gline(sptr,sptr->name,gline_pending_ptr,
                         oper_nick,oper_user,oper_host,oper_server,
                         user,host,reason);
+#ifdef GLINE_REASON_FIRST
+              *tmp_gline_pending_ptr = gline_pending_ptr;
+#endif
               return YES;
             }
           else

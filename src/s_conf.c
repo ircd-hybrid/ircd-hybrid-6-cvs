@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.239 2003/05/04 17:52:46 db Exp $
+ *  $Id: s_conf.c,v 1.240 2003/05/04 22:10:48 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -2433,7 +2433,15 @@ static void initconf(FBFILE* file, int use_include)
               aconf->host = x;
             }
 
+ /*
+  ** SPOOF_IP
+  **  - Allows spoofs to be ip's instead just hostnames.
+  */ 
+ #ifdef SPOOF_IP
+           if( !(aconf->flags & CONF_FLAGS_SPOOF_IP) && is_address(aconf->host,&ip_host,&ip_lmask) ) 
+ #else
            if( is_address(aconf->host,&ip_host,&ip_lmask) )
+ #endif
 	     {
                aconf->ip = ip_host & ip_lmask;
                aconf->ip_mask = ip_lmask;

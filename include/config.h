@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.155 2003/05/04 17:52:39 db Exp $
+ * $Id: config.h,v 1.156 2003/05/04 22:10:46 ievil Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -533,7 +533,7 @@
 /* MAXSENDQLENGTH - Max amount of internal send buffering
  * Max amount of internal send buffering when socket is stuck (bytes)
  */
-#define MAXSENDQLENGTH 9000000    /* Recommended value: 9000000 for EFnet */
+#define MAXSENDQLENGTH 15000000    /* Recommended value: 15000000 for EFnet */
 
 /*  BUFFERPOOL - the maximum size of the total of all sendq's.
  *  Recommended value is 4 times MAXSENDQLENGTH.
@@ -565,12 +565,12 @@
  */
 #undef  NO_JOIN_ON_SPLIT
 
-/* NO_CREATE_ON_SPLIT
+/* NO_CREATE_ON_SPLIT (default behaviour)
  *
  * When this is defined, users will not be allowed to create new channels
  * while the server is split, however they can join existing channel.
  */
-#undef  NO_CREATE_ON_SPLIT
+#define NO_CREATE_ON_SPLIT
 
 /*
  * SPLIT_SMALLNET_SIZE defines what constitutes a split from
@@ -721,6 +721,12 @@
  */
 #undef  NO_FAKE_GLINES
 
+/* GLINE_REASON_FIRST (default)
+ * Adopted the hybrid 7 behaviour of placing a gline based on the first reason
+ * instead of the last as hybrid6 now does.
+ */
+#define GLINE_REASON_FIRST
+   
 /* CHANMODE_E
  * /mode #channel +e allows you to add exceptions to bans.
  * very useful if a friend has to use an aol.com account for a few days.
@@ -746,6 +752,12 @@
  * this is undeffed.. -- fl_
  */
 #undef USE_KNOCK
+
+/* SPOOF_IP 
+ *  - Allows spoofs to be ip's instead just hostnames.
+ */   
+#undef SPOOF_IP
+
 
 /* -------------- END NOT APPROVED ON EFNET SECTION --------------------- */
 
