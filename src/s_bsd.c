@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.40 1999/06/24 03:42:38 db Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.41 1999/06/26 01:46:04 tomh Exp $";
 #endif
 
 #include "struct.h"
@@ -40,7 +40,6 @@ static char *rcs_version = "$Id: s_bsd.c,v 1.40 1999/06/24 03:42:38 db Exp $";
 #include <sys/select.h>
 #include <unistd.h>
 #endif
-#include "inet.h"
 #include <stdio.h>
 #include <signal.h>
 #include <fcntl.h>
@@ -74,9 +73,9 @@ fd_set  readset,writeset;
 # include <time.h>
 # include <arpa/nameser.h>
 #else
-# include "nameser.h"
+// # include "nameser.h"
 #endif
-#include "resolv.h"
+// #include "resolv.h"
 /*
 #include "sock.h"*/	/* If FD_ZERO isn't define up to this point,  */
 			/* define it (BSD4.2 needs this) */

@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.111 1999/06/25 05:23:37 tomh Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.112 1999/06/26 01:46:05 tomh Exp $";
 #endif
 
 
@@ -42,8 +42,6 @@ static char *rcs_version = "$Id: s_serv.c,v 1.111 1999/06/25 05:23:37 tomh Exp $
 #ifndef __EMX__
 #include <utmp.h> /* old slackware utmp.h defines BYTE_ORDER */
 #endif /* __EMX__ */
-#include "nameser.h" /* and nameser.h checks to see if its defined */
-#include "resolv.h"
 
 #if defined(AIX) || defined(DYNIXPTX) || defined(SVR3)
 #include <time.h>

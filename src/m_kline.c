@@ -22,7 +22,7 @@
  */
 
 #ifndef lint
-static char *rcs_version = "$Id: m_kline.c,v 1.4 1999/06/25 05:23:35 tomh Exp $";
+static char *rcs_version = "$Id: m_kline.c,v 1.5 1999/06/26 01:46:03 tomh Exp $";
 #endif
 
 #include "struct.h"
@@ -35,8 +35,6 @@ static char *rcs_version = "$Id: m_kline.c,v 1.4 1999/06/25 05:23:35 tomh Exp $"
 #ifndef __EMX__
 #include <utmp.h> /* old slackware utmp.h defines BYTE_ORDER */
 #endif /* __EMX__ */
-#include "nameser.h" /* and nameser.h checks to see if its defined */
-#include "resolv.h"
 
 #if defined(AIX) || defined(DYNIXPTX) || defined(SVR3)
 #include <time.h>
