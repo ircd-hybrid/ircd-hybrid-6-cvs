@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.35 1998/12/08 23:51:33 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.36 1998/12/10 04:30:40 db Exp $";
 
 #endif
 
@@ -2159,6 +2159,19 @@ static	int	m_message(aClient *cptr,
       return 0;
     }
 
+  /* Everything below here should be reserved for opers 
+   * as pointed out by Mortiis, user%host.name@server.name 
+   * syntax could be used to flood without FLUD protection
+   * its also a delightful way for non-opers to find users who
+   * have changed nicks -Dianora
+   */
+
+  if(!IsAnOper(sptr))
+    {
+      sendto_one(sptr, err_str(ERR_NOSUCHNICK),
+		 me.name, parv[0], cmd);
+      return -1;
+    }
 	
   /*
   ** the following two cases allow masks in NOTICEs
@@ -2166,13 +2179,8 @@ static	int	m_message(aClient *cptr,
   **
   ** Armin, 8Jun90 (gruner@informatik.tu-muenchen.de)
   */
-  if ((*nick == '$' || *nick == '#') && IsAnOper(sptr))
+  if ((*nick == '$' || *nick == '#'))
     {
-#ifdef	IDLE_CHECK
-      /* reset idle time for message only if target exists */
-      if(MyClient(sptr) && sptr->user)
-	sptr->user->last = timeofday;
-#endif
       if (!(s = (char *)strrchr(nick, '.')))
 	{
 	  sendto_one(sptr, err_str(ERR_NOTOPLEVEL),
