@@ -22,7 +22,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.27 1998/11/25 23:44:50 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.28 1998/11/26 02:05:37 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1076,12 +1076,6 @@ static  void     set_mode(aClient *cptr,
 	    {
 	      if((whatt == MODE_ADD) && !isok)
 		break;
-	      /* This mod dedicated to Martyn on Efnet, the biggest
-	       * sickest bigot I have ever met. He finds it ok to "out" others
-	       * yet finds it ok to be in the closet himself about his
-	       * his own bisexuality. Hypocrite.
-	       * - with love, Dianora
-	       */
 	      if(whatt == MODE_DEL)
 		isok = 0;
 	      }
