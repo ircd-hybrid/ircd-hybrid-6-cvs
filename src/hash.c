@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: hash.c,v 1.40 2001/12/10 02:56:28 jdc Exp $
+ *  $Id: hash.c,v 1.41 2003/08/16 18:41:58 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -126,17 +126,13 @@ unsigned int hash_nick_name(const char* name)
 /*
  * hash_channel_name
  *
- * calculate a hash value on at most the first 30 characters of the channel
- * name. Most names are short than this or dissimilar in this range. There
- * is little or no point hashing on a full channel name which maybe 255 chars
- * long.
+ * Having just the first 30 chars may make something bad happend.
  */
 unsigned int hash_channel_name(const char* name)
 {
-  int i = 30;
   unsigned int h = 0;
 
-  while (*name && --i)
+  while (*name != '\0')
     {
       h = (h << 4) - (h + (unsigned char)ToLower(*name++));
     }
