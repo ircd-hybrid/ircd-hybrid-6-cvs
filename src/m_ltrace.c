@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_ltrace.c,v 1.2 1999/09/08 03:42:37 lusky Exp $
+ *   $Id: m_ltrace.c,v 1.3 2000/10/05 00:13:05 lusky Exp $
  */
 #include "m_commands.h"
 #include "class.h"
@@ -157,6 +157,41 @@ int     m_ltrace(struct Client *cptr,
   doall = (parv[1] && (parc > 1)) ? match(tname, me.name): TRUE;
   wilds = !parv[1] || strchr(tname, '*') || strchr(tname, '?');
   dow = wilds || doall;
+
+  if(!IsAnOper(sptr) || !dow) /* non-oper traces must be full nicks */
+                              /* lets also do this for opers tracing nicks */
+    { 
+      const char* name;
+      const char* ip;
+      int         c_class;
+
+      acptr = hash_find_client(tname,(struct Client *)NULL);
+      if(!acptr || !IsPerson(acptr))
+        { 
+          /* this should only be reached if the matching
+             target is this server */
+          sendto_one(sptr, form_str(RPL_ENDOFTRACE),me.name,
+                     parv[0], tname);
+          return 0;
+        }
+      name = get_client_name(acptr, FALSE);
+      ip = inetntoa((char*) &acptr->ip);
+
+      c_class = get_client_class(acptr);
+
+      if (IsAnOper(acptr))
+        { 
+          sendto_one(sptr, form_str(RPL_TRACEOPERATOR),
+                     me.name, parv[0], c_class,
+                     name,
+                     IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"127.0.0.1":ip),
+                     now - acptr->lasttime,
+                     (acptr->user)?(now - acptr->user->last):0);
+        }
+      sendto_one(sptr, form_str(RPL_ENDOFTRACE),me.name,
+                 parv[0], tname);
+      return 0;
+    }
   
   for (i = 0; i < MAXCONNECTIONS; i++)
     link_s[i] = 0, link_u[i] = 0;

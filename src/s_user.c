@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.224 2000/09/14 05:22:03 lusky Exp $
+ *  $Id: s_user.c,v 1.225 2000/10/05 00:13:06 lusky Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -582,12 +582,22 @@ static int register_user(aClient *cptr, aClient *sptr,
 #endif
             {
               ServerStats->is_ref++;
-              sendto_realops_flags(FLAGS_CCONN, "%s from %s [%s].",
+	/* jdc - lists server name & port connections are on */
+	/*       a purely cosmetical change */
+              sendto_realops_flags(FLAGS_CCONN,
+				 "%s from %s [%s] on [%s/%u].",
                                  "Unauthorized client connection",
                                  get_client_host(sptr),
-                                 inetntoa((char *)&sptr->ip));
-              log(L_INFO,"Unauthorized client connection from %s.",
-                  get_client_host(sptr));
+                                 inetntoa((char *)&sptr->ip),
+				 sptr->listener->name,
+				 sptr->listener->port
+				 );
+              log(L_INFO,
+		  "Unauthorized client connection from %s on [%s/%u].",
+                  get_client_host(sptr),
+		  sptr->listener->name,
+		  sptr->listener->port
+		  );
 
               ServerStats->is_ref++;
               return exit_client(cptr, sptr, &me,
