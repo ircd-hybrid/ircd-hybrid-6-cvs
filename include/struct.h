@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.41 1999/07/01 18:26:06 db Exp $
+ * $Id: struct.h,v 1.42 1999/07/01 20:35:11 db Exp $
  */
 #ifndef	INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -657,11 +657,6 @@ struct Client
   int    oper_warn_count_down; /* warn opers of this possible spambot
 				  every time this gets to 0 */
 #endif
-#ifdef ANTI_SPAMBOT_EXTRA
-  int	channel_privmsgs; /* Count how many times client privmsgs a channel*/
-  int	person_privmsgs;  /* Count how many times client privmsgs a person */
-  struct Client *last_client_messaged; /* who was privmsg'ed last time */
-#endif
 #ifdef ANTI_DRONE_FLOOD
   time_t first_received_message_time;
   int	 received_number_of_privmsgs;
@@ -1092,10 +1087,6 @@ typedef struct
 #ifdef ANTI_SPAMBOT
   int spam_num;
   int spam_time;
-#endif
-
-#ifdef ANTI_SPAMBOT_EXTRA
-  int spambot_privmsg_count;
 #endif
 
 }SetOptionsType;

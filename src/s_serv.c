@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.118 1999/07/01 18:26:08 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.119 1999/07/01 20:35:13 db Exp $";
 #endif
 
 
@@ -98,10 +98,6 @@ extern int rehashed;		/* defined in ircd.c */
 extern int dline_in_progress;	/* defined in ircd.c */
 
 int     max_connection_count = 1, max_client_count = 1;
-
-#ifdef ANTI_SPAMBOT_EXTRA
-int spambot_privmsg_count = PRIVMSG_POSSIBLE_SPAMBOT_COUNT;
-#endif
 
 extern SetOptionsType GlobalSetOptions; /* defined in ircd.c */
 
@@ -2559,7 +2555,6 @@ extern int spam_time;
  *      10 - SPLITUSERS
  *	11 - SPAMNUM
  *	12 - SPAMTIME
- *	13 - SPAMMSGS	
  * - rjp
  */
 
@@ -2576,8 +2571,7 @@ extern int spam_time;
 #define TOKEN_SPLITUSERS 10
 #define TOKEN_SPAMNUM 11
 #define TOKEN_SPAMTIME 12
-#define TOKEN_SPAMMSGS 13
-#define TOKEN_BAD 14
+#define TOKEN_BAD 13
 
 static char *set_token_table[] = {
   "MAX",
@@ -2593,7 +2587,6 @@ static char *set_token_table[] = {
   "SPLITUSERS",
   "SPAMNUM",
   "SPAMTIME",
-  "SPAMMSGS",
   NULL
 };
 
@@ -3001,41 +2994,6 @@ int   m_set(aClient *cptr,
 	  return 0;
 	  break;
 #endif
-#ifdef ANTI_SPAMBOT_EXTRA
-	case TOKEN_SPAMMSGS:
-          if(parc > 2)
-            {
-              int newval = atoi(parv[2]);
-
-              if(newval < 0)
-                {
-                  sendto_one(sptr, ":%s NOTICE %s :SPAMMSGS must be > 0",
-                             me.name, parv[0]);
-                  return 0;
-                }
-	      if(newval == 0)
-		{
-		  sendto_realops("%s has disabled ANTI_SPAMBOT_EXTRA",
-				 parv[0]);
-		  SPAMMSGS = 0;
-		  return 0;
-		}
-
-              if(newval < PRIVMSG_POSSIBLE_SPAMBOT_COUNT)
-		SPAMMSGS = PRIVMSG_POSSIBLE_SPAMBOT_COUNT;
-	      else
-		SPAMMSGS = newval;
-              sendto_realops("%s has changed SPAMMSGS to %i",
-			     parv[0], spambot_privmsg_count);
-            }
-          else
-            {
-              sendto_one(sptr, ":%s NOTICE %s :SPAMMSGS is currently %i",
-                         me.name, parv[0], SPAMMSGS);
-            }
-	  return 0;
-	  break;
-#endif
 	default:
 	case TOKEN_BAD:
 	  break;
@@ -3053,10 +3011,6 @@ int   m_set(aClient *cptr,
 #endif
 #ifdef ANTI_SPAMBOT
   sendto_one(sptr, ":%s NOTICE %s :Options: SPAMNUM, SPAMTIME",
-	     me.name, parv[0]);
-#endif
-#ifdef ANTI_SPAMBOT_EXTRA
-  sendto_one(sptr, ":%s NOTICE %s :Options: SPAMMSGS",
 	     me.name, parv[0]);
 #endif
 #ifdef NEED_SPLITCODE

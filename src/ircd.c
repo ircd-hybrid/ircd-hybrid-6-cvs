@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.55 1999/07/01 18:26:07 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.56 1999/07/01 20:35:12 db Exp $";
 #endif
 
 #include "struct.h"
@@ -924,10 +924,6 @@ int	main(int argc, char *argv[])
 #ifdef ANTI_SPAMBOT
   SPAMTIME = MIN_JOIN_LEAVE_TIME;
   SPAMNUM = MAX_JOIN_LEAVE_COUNT;
-#endif
-
-#ifdef ANTI_SPAMBOT_EXTRA
-  SPAMMSGS = PRIVMSG_POSSIBLE_SPAMBOT_COUNT;
 #endif
 
 #ifdef ANTI_DRONE_FLOOD

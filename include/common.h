@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: common.h,v 1.6 1999/07/01 18:26:05 db Exp $
+ * $Id: common.h,v 1.7 1999/07/01 20:35:09 db Exp $
  */
 
 #ifndef	__common_include__
@@ -134,6 +134,5 @@ extern struct SLink *find_user_link(/* struct SLink *, struct Client * */);
 #define SPLITUSERS GlobalSetOptions.split_smallnet_users
 #define SPAMNUM    GlobalSetOptions.spam_num
 #define SPAMTIME   GlobalSetOptions.spam_time
-#define SPAMMSGS   GlobalSetOptions.spambot_privmsg_count
 
 #endif /* __common_include__ */
