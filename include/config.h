@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.108 2001/06/13 18:31:20 jdc Exp $
+ * $Id: config.h,v 1.109 2001/06/18 03:37:20 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -139,7 +139,7 @@
  * This will not show IPs of any server to anyone, to protect hidden
  * hubs from untrustable opers.
  */
-#undef HIDE_SERVERS_IPS
+#define HIDE_SERVERS_IPS
 
 /* NETWORK_NAME
  * Displayed in place of the servername when SERVERHIDE is enabled
