@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h.dist,v 1.90 2001/06/08 03:58:49 db Exp $
+ * $Id: config.h.dist,v 1.91 2001/06/08 21:10:05 kreator Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -411,6 +411,16 @@
 #undef CRYPT_LINKS             /* allow encrypted server-server links */
 #define CRYPT_LINKS_CNPREFIX '@'
 #define CRYPT_LINKS_PRIVATEKEYFILE "private.key"
+
+/* USE_EGD -  if your system does not have *random devices and you want to
+ * be able to use OpenSSL and CRYPT_LINKS, define this and option below if
+ * necessary. Beware - EGD is *very* CPU intensitive process when
+ * gathering data for its pool. */
+#undef USE_EGD
+
+/* EGD_POOL - define location of EGD pool. Not necessary for OpenSSL >=
+ * 0.9.7 since it will automagically check locations. */
+#undef EGD_POOL "/var/run/egd-pool"
 
 /* SHOW_INVISIBLE_LUSERS - show invisible clients in LUSERS
  * As defined this will show the correct invisible count for anyone who does
