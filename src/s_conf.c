@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.78 1999/06/27 01:12:20 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.79 1999/06/27 01:24:50 db Exp $";
 #endif
 
 #include "struct.h"
@@ -287,16 +287,6 @@ CT	      strncpyzt(cptr->sockhost,"oper.",sizeof(cptr->sockhost));
 	  return(-5);
 	}
     }
-
-  /* Slow down the reconnectors who are rejected */
-
-#ifdef REJECT_HOLD
-  if( (reject_held_fds != REJECT_HELD_MAX ) )
-    {
-      SetRejectHold(cptr);
-      reject_held_fds++;
-    }
-#endif
 
   return -1;	/* -1 on no match *bleh* */
 }
