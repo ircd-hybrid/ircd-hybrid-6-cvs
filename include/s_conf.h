@@ -18,7 +18,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *   $Id: s_conf.h,v 1.64 2003/05/04 17:52:39 db Exp $
+ *   $Id: s_conf.h,v 1.65 2003/06/10 01:12:02 ievil Exp $
  */
 
 #ifndef INCLUDED_config_h
@@ -152,14 +152,16 @@ typedef struct QlineItem {
 
 /* port definitions for Opers */
 
-#define CONF_OPER_GLOBAL_KILL 1
-#define CONF_OPER_REMOTE      2
-#define CONF_OPER_UNKLINE     4
-#define CONF_OPER_GLINE       8
-#define CONF_OPER_N          16
-#define CONF_OPER_K          32
-#define CONF_OPER_REHASH     64
-#define CONF_OPER_DIE       128
+#define CONF_OPER_GLOBAL_KILL   1
+#define CONF_OPER_REMOTE        2
+#define CONF_OPER_UNKLINE       4
+#define CONF_OPER_GLINE         8
+#define CONF_OPER_N            16
+#define CONF_OPER_K            32
+#define CONF_OPER_REHASH       64
+#define CONF_OPER_DIE         128
+#define CONF_OPER_STATSPHIDE  256
+
 
 typedef struct
 {

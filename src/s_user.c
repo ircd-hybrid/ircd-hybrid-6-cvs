@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.253 2003/06/06 08:49:24 ievil Exp $
+ *  $Id: s_user.c,v 1.254 2003/06/10 01:12:04 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -84,6 +84,7 @@ static FLAG_ITEM user_modes[] =
   {FLAGS_NCHANGE, 'n'},
   {FLAGS_OPER, 'o'},
   {FLAGS_LOCOP, 'O'},
+  {FLAGS_STATSPHIDE, 'p'},
   {FLAGS_REJ, 'r'},
   {FLAGS_SERVNOTICE, 's'},
   {FLAGS_WALLOP, 'w'},
@@ -145,6 +146,7 @@ static int user_modes_from_c_to_bitmask[] =
   0,            /* m */
   FLAGS_NCHANGE, /* n */
   FLAGS_OPER,   /* o */
+  FLAGS_STATSPHIDE, /* p */
   0,            /* p */
   0,            /* q */
   FLAGS_REJ,    /* r */
@@ -186,26 +188,29 @@ void show_opers(struct Client *cptr)
 
   for(cptr2 = oper_cptr_list; cptr2; cptr2 = cptr2->next_oper_client)
     {
-      ++j;
-      if (MyClient(cptr) && IsAnOper(cptr))
+      if (!(cptr2->umodes & FLAGS_STATSPHIDE))
         {
-          sendto_one(cptr, ":%s %d %s :[%c][%s] %s (%s@%s) Idle: %d",
-                     me.name, RPL_STATSDEBUG, cptr->name,
-                     IsOper(cptr2) ? 'O' : 'o',
-                     oper_privs_as_string(cptr2,
-                                          cptr2->confs->value.aconf->port),
-                     cptr2->name,
-                     cptr2->username, cptr2->host,
-                     CurrentTime - cptr2->user->last);
-        }
-      else
-        {
-          sendto_one(cptr, ":%s %d %s :[%c] %s (%s@%s) Idle: %d",
-                     me.name, RPL_STATSDEBUG, cptr->name,
-                     IsOper(cptr2) ? 'O' : 'o',
-                     cptr2->name,
-                     cptr2->username, cptr2->host,
-                     CurrentTime - cptr2->user->last);
+          ++j;
+          if (MyClient(cptr) && IsAnOper(cptr))
+            {
+              sendto_one(cptr, ":%s %d %s :[%c][%s] %s (%s@%s) Idle: %d",
+                         me.name, RPL_STATSDEBUG, cptr->name,
+                         IsOper(cptr2) ? 'O' : 'o',
+                         oper_privs_as_string(cptr2,
+                                              cptr2->confs->value.aconf->port),
+                         cptr2->name,
+                         cptr2->username, cptr2->host,
+                         CurrentTime - cptr2->user->last);
+            }
+          else
+            {
+              sendto_one(cptr, ":%s %d %s :[%c] %s (%s@%s) Idle: %d",
+                         me.name, RPL_STATSDEBUG, cptr->name,
+                         IsOper(cptr2) ? 'O' : 'o',
+                         cptr2->name,
+                         cptr2->username, cptr2->host,
+                         CurrentTime - cptr2->user->last);
+            }
         }
     }
 
@@ -2011,7 +2016,7 @@ int user_mode(aClient *cptr, aClient *sptr, int parc, char *parv[])
               if(!IsAnOper(sptr))
                 break;
 
-              sptr->umodes &= ~(FLAGS_OPER|FLAGS_LOCOP);
+              sptr->umodes &= ~(FLAGS_OPER|FLAGS_LOCOP|FLAGS_STATSPHIDE);
 
               Count.oper--;
 
@@ -2067,6 +2072,7 @@ int user_mode(aClient *cptr, aClient *sptr, int parc, char *parv[])
           break;
         }
 
+
   if(badflag)
     sendto_one(sptr, form_str(ERR_UMODEUNKNOWNFLAG), me.name, parv[0]);
 
@@ -2075,6 +2081,13 @@ int user_mode(aClient *cptr, aClient *sptr, int parc, char *parv[])
       sendto_one(sptr,":%s NOTICE %s :*** You need oper and N flag for +n",
                  me.name,parv[0]);
       sptr->umodes &= ~FLAGS_NCHANGE; /* only tcm's really need this */
+    }
+
+  if ((sptr->umodes & FLAGS_STATSPHIDE) && !SetOperStatsPHide(sptr))
+    {
+      sendto_one(sptr,":%s NOTICE %s :*** You need oper and P flag for +p", 
+                 me.name,parv[0]);
+      sptr->umodes &= ~FLAGS_STATSPHIDE; /* only tcm's or bopm's really need this */
     }
 
   if (!(setflags & FLAGS_INVISIBLE) && IsInvisible(sptr))

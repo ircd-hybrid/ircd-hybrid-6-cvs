@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.64 2003/05/05 02:39:06 db Exp $
+ * $Id: client.h,v 1.65 2003/06/10 01:12:02 ievil Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -321,22 +321,23 @@ struct Client
 #define FLAGS_IPHASH       0x1000 /* iphashed this client */
 
 /* umodes, settable flags */
-#define FLAGS_SERVNOTICE   0x0001 /* server notices such as kill */
-#define FLAGS_CCONN        0x0002 /* Client Connections */
-#define FLAGS_REJ          0x0004 /* Bot Rejections */
-#define FLAGS_SKILL        0x0008 /* Server Killed */
-#define FLAGS_FULL         0x0010 /* Full messages */
-#define FLAGS_SPY          0x0020 /* see STATS / LINKS */
-#define FLAGS_DEBUG        0x0040 /* 'debugging' info */
-#define FLAGS_NCHANGE      0x0080 /* Nick change notice */
-#define FLAGS_WALLOP       0x0100 /* send wallops to them */
-#define FLAGS_OPERWALL     0x0200 /* Operwalls */
-#define FLAGS_INVISIBLE    0x0400 /* makes user invisible */
-#define FLAGS_BOTS         0x0800 /* shows bots */
-#define FLAGS_EXTERNAL     0x1000 /* show servers introduced */
+#define FLAGS_SERVNOTICE   0x00001 /* server notices such as kill */
+#define FLAGS_CCONN        0x00002 /* Client Connections */
+#define FLAGS_REJ          0x00004 /* Bot Rejections */
+#define FLAGS_SKILL        0x00008 /* Server Killed */
+#define FLAGS_FULL         0x00010 /* Full messages */
+#define FLAGS_SPY          0x00020 /* see STATS / LINKS */
+#define FLAGS_DEBUG        0x00040 /* 'debugging' info */
+#define FLAGS_NCHANGE      0x00080 /* Nick change notice */
+#define FLAGS_WALLOP       0x00100 /* send wallops to them */
+#define FLAGS_OPERWALL     0x00200 /* Operwalls */
+#define FLAGS_INVISIBLE    0x00400 /* makes user invisible */
+#define FLAGS_BOTS         0x00800 /* shows bots */
+#define FLAGS_EXTERNAL     0x01000 /* show servers introduced */
 /* user information flags, only settable by remote mode or local oper */
-#define FLAGS_OPER         0x4000 /* Operator */
-#define FLAGS_LOCOP        0x8000 /* Local operator -- SRB */
+#define FLAGS_OPER         0x04000 /* Operator */
+#define FLAGS_LOCOP        0x08000 /* Local operator -- SRB */
+#define FLAGS_STATSPHIDE   0x10000 /* Oper hides from stats P */
 
 /* *sigh* overflow flags */
 #define FLAGS2_RESTRICTED   0x0001      /* restricted client */
@@ -347,14 +348,16 @@ struct Client
 #define FLAGS2_EXEMPTGLINE  0x2000      /* client can't be G-lined */
 
 /* oper priv flags */
-#define FLAGS2_OPER_GLOBAL_KILL 0x0020  /* oper can global kill */
-#define FLAGS2_OPER_REMOTE      0x0040  /* oper can do squits/connects */
-#define FLAGS2_OPER_UNKLINE     0x0080  /* oper can use unkline */
-#define FLAGS2_OPER_GLINE       0x0100  /* oper can use gline */
-#define FLAGS2_OPER_N           0x0200  /* oper can umode n */
-#define FLAGS2_OPER_K           0x0400  /* oper can kill/kline */
-#define FLAGS2_OPER_DIE         0x0800  /* oper can die */
-#define FLAGS2_OPER_REHASH      0x1000  /* oper can rehash */
+#define FLAGS2_OPER_GLOBAL_KILL 0x00020  /* oper can global kill */
+#define FLAGS2_OPER_REMOTE      0x00040  /* oper can do squits/connects */
+#define FLAGS2_OPER_UNKLINE     0x00080  /* oper can use unkline */
+#define FLAGS2_OPER_GLINE       0x00100  /* oper can use gline */
+#define FLAGS2_OPER_N           0x00200  /* oper can umode n */
+#define FLAGS2_OPER_K           0x00400  /* oper can kill/kline */
+#define FLAGS2_OPER_DIE         0x00800  /* oper can die */
+#define FLAGS2_OPER_REHASH      0x01000  /* oper can rehash */
+#define FLAGS2_OPER_STATSPHIDE  0x02000  /* oper can hide from stats p */
+
 #define FLAGS2_OPER_FLAGS       (FLAGS2_OPER_GLOBAL_KILL | \
                                  FLAGS2_OPER_REMOTE | \
                                  FLAGS2_OPER_UNKLINE | \
@@ -362,6 +365,7 @@ struct Client
                                  FLAGS2_OPER_N | \
                                  FLAGS2_OPER_K | \
                                  FLAGS2_OPER_DIE | \
+                                 FLAGS2_OPER_STATSPHIDE | \
                                  FLAGS2_OPER_REHASH)
 /* ZIP_LINKS */
 
@@ -384,7 +388,8 @@ struct Client
 #define ALL_UMODES   (SEND_UMODES | FLAGS_SERVNOTICE | FLAGS_CCONN | \
                       FLAGS_REJ | FLAGS_SKILL | FLAGS_FULL | FLAGS_SPY | \
                       FLAGS_NCHANGE | FLAGS_OPERWALL | FLAGS_DEBUG | \
-                      FLAGS_BOTS | FLAGS_EXTERNAL | FLAGS_LOCOP )
+                      FLAGS_BOTS | FLAGS_EXTERNAL | FLAGS_LOCOP | \
+                      FLAGS_STATSPHIDE )
 
 #ifndef OPER_UMODES
 #define OPER_UMODES  (FLAGS_OPER | FLAGS_WALLOP | FLAGS_SERVNOTICE | \
@@ -500,6 +505,8 @@ struct Client
 #define IsOperDie(x)            ((x)->flags2 & FLAGS2_OPER_DIE)
 #define SetOperRehash(x)        ((x)->flags2 |= FLAGS2_OPER_REHASH)
 #define IsOperRehash(x)         ((x)->flags2 & FLAGS2_OPER_REHASH)
+#define SetOperStatsPHide(x)    ((x)->flags2 |= FLAGS2_OPER_STATSPHIDE)
+#define IsOperStatsPHide(x)     ((x)->flags2 & FLAGS2_OPER_STATSPHIDE)
 #define CBurst(x)               ((x)->flags2 & FLAGS2_CBURST)
 
 /*
