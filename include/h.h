@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.54 1999/07/20 08:20:32 db Exp $
+ * $Id: h.h,v 1.55 1999/07/20 08:28:02 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -176,14 +176,6 @@ extern	void	debug(int, char *, ...);
 extern	void	send_listinfo (struct Client *, char *);
 extern	void	count_memory (struct Client *, char *);
 #endif
-
-
-#ifdef LIMIT_UH
-void remove_one_ip(struct Client *);
-#else
-void remove_one_ip(unsigned long);
-#endif
-
 
 #ifdef FLUD
 void	free_fluders();

@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.25 1999/07/20 08:20:33 db Exp $
+ * $Id: s_conf.h,v 1.26 1999/07/20 08:28:03 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.26  1999/07/20 08:28:03  db
+ * - more removal of stuff from h.h
+ *
  * Revision 1.25  1999/07/20 08:20:33  db
  * - more cleanups from h.h
  *
@@ -225,6 +228,13 @@ extern int              specific_virtual_host; /* GLOBAL - used in s_bsd.c */
 
 extern void clear_ip_hash_table(void);
 extern void iphash_stats(struct Client *,struct Client *,int,char **,int);
+
+#ifdef LIMIT_UH
+void remove_one_ip(struct Client *);
+#else
+void remove_one_ip(unsigned long);
+#endif
+
 extern struct ConfItem* make_conf(void);
 extern void             free_conf(struct ConfItem*);
 
