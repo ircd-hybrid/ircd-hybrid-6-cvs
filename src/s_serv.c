@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.55 1998/12/30 02:13:59 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.56 1998/12/30 06:50:11 db Exp $";
 #endif
 
 
@@ -2145,8 +2145,11 @@ int	m_stats(aClient *cptr,
 	   * So, I am going to return 0 for ->since if this happens.
 	   * - Dianora
 	   */
+	  /* trust opers not on this server */
+          /* if(IsAnOper(sptr)) */
 
-          if(IsAnOper(sptr))
+	  /* Don't trust opers not on this server */
+          if(MyClient(sptr) && IsAnOper(sptr))
 	    {
 	      sendto_one(sptr, Lformat, me.name,
 		     RPL_STATSLINKINFO, parv[0],
