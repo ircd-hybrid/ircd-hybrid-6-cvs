@@ -1,6 +1,6 @@
 ircd-hybrid-6 INSTALL
 ---------------------
-$Id: INSTALL,v 1.9 2001/08/04 21:24:31 leeh Exp $
+$Id: INSTALL,v 1.10 2001/12/06 23:45:52 davidt Exp $
 
 hybrid-6 relies upon GNU autoconf.  The following is a transcript of
 recommended procedures that users/administrators of hybrid-6 should
