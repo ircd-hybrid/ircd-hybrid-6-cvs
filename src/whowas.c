@@ -16,7 +16,7 @@
 *   along with this program; if not, write to the Free Software
 *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 *
-*   $Id: whowas.c,v 1.33 2000/11/21 06:49:33 lusky Exp $
+*   $Id: whowas.c,v 1.34 2001/07/18 02:30:34 lusky Exp $
 */
 #include "whowas.h"
 #include "client.h"
@@ -63,12 +63,6 @@ void add_history(aClient* cptr, int online)
   aWhowas* who = &WHOWAS[whowas_next];
 
   assert(0 != cptr);
-  /*
-   * XXX - can these be checked at compile time instead??
-   */
-  assert(sizeof(cptr->username) == sizeof(who->username));
-  assert(sizeof(cptr->host)     == sizeof(who->hostname));
-  assert(sizeof(cptr->info)     == sizeof(who->realname));
 
   if (who->hashv != -1)
     {

@@ -1,7 +1,7 @@
 #
 # Makefile.in for ircd/src
 #
-# $Id: Makefile.in,v 1.64 2001/07/10 12:42:17 jdc Exp $
+# $Id: Makefile.in,v 1.65 2001/07/18 02:30:33 lusky Exp $
 CC = @CC@
 RM = @RM@
 MKDEP = ${CC} -MM
@@ -77,7 +77,6 @@ SRCS = \
 	match.c \
 	motd.c \
 	mtrie_conf.c \
-	oratime.c \
 	numeric.c \
 	packet.c \
 	parse.c \
@@ -159,7 +158,6 @@ SRCS = \
 #	match.o \
 #	motd.o \
 #	mtrie_conf.o \
-#	oratime.o \
 #	numeric.o \
 #	packet.o \
 #	parse.o \
