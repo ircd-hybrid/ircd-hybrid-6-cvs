@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.162 2002/01/30 23:55:43 androsyn Exp $
+ * $Id: ircd.c,v 1.163 2002/02/02 15:58:20 db Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -675,7 +675,7 @@ static void check_pidfile(void)
     }
     close(fd);
   }
-  else
+  else if(errno != ENOENT)
   {
     printf("WARNING: problem opening %s: %s\n", PPATH, strerror(errno));
   }
