@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.66 1999/07/23 05:05:32 tomh Exp $
+ * $Id: struct.h,v 1.67 1999/07/23 06:02:36 tomh Exp $
  */
 #ifndef INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -74,7 +74,7 @@ typedef struct  Client  aClient;
 typedef struct  User    anUser;
 typedef struct  Server  aServer;
 typedef struct  SLink   Link;
-typedef struct  SMode   Mode;
+typedef struct  Mode    Mode;
 typedef struct  Zdata   aZdata;
 
 /*
