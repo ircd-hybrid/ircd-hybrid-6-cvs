@@ -43,7 +43,7 @@
  *
  * Diane Bruce -db (db@db.net)
  *
- * $Id: mtrie_conf.c,v 1.63 1999/10/14 01:05:42 lusky Exp $
+ * $Id: mtrie_conf.c,v 1.64 1999/12/21 04:45:33 lusky Exp $
  */
 #include "mtrie_conf.h"
 #include "class.h"
@@ -574,6 +574,9 @@ static DOMAIN_PIECE *find_host_piece(DOMAIN_LEVEL *level_ptr,int flags,
   DOMAIN_PIECE *ptr;
   DOMAIN_PIECE *piece_ptr;
   int index;
+
+  if(!level_ptr)
+    return((DOMAIN_PIECE *)NULL);
   
   index = *host_piece&(MAX_PIECE_LIST-1);
   piece_ptr = level_ptr->piece_list[index];
