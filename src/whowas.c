@@ -16,7 +16,7 @@
 *   along with this program; if not, write to the Free Software
 *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 *
-*   $Id: whowas.c,v 1.26 1999/07/24 07:59:03 tomh Exp $
+*   $Id: whowas.c,v 1.27 1999/07/25 06:52:25 tomh Exp $
 */
 #include "struct.h"
 #include "common.h"
@@ -26,6 +26,7 @@
 #include "hash.h"
 #include "s_user.h"
 #include "s_err.h"
+#include "s_serv.h"
 
 #include <assert.h>
 #include <string.h>

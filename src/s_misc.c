@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.61 1999/07/24 07:59:01 tomh Exp $
+ *  $Id: s_misc.c,v 1.62 1999/07/25 06:52:23 tomh Exp $
  */
 #include "s_misc.h"
 #include "s_conf.h"
@@ -30,6 +30,7 @@
 #include "numeric.h"
 #include "ircd.h"
 #include "s_bsd.h"
+#include "s_serv.h"
 #include "send.h"
 
 #include <string.h>

@@ -20,24 +20,22 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: motd.c,v 1.19 1999/07/24 07:58:59 tomh Exp $
+ *   $Id: motd.c,v 1.20 1999/07/25 06:52:23 tomh Exp $
  */
-
+#include "motd.h"
 #include "ircd.h"
 #include "s_bsd.h"
 #include "fileio.h"
 #include "res.h"
 #include "s_conf.h"
-#include "motd.h"
 #include "class.h"
 #include "send.h"
 #include "s_err.h"
 #include "s_conf.h"
 #include "numeric.h"
 #include "client.h"
-#include "struct.h"     /* HUNTED_ISME */
 #include "irc_string.h"
-#include "s_user.h"     /* hunt_server */
+#include "s_serv.h"     /* hunt_server */
 
 #include <string.h>
 #include <stdlib.h>

@@ -20,25 +20,26 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.34 1999/07/24 07:58:56 tomh Exp $
+ *  $Id: client.c,v 1.35 1999/07/25 06:52:22 tomh Exp $
  */
 #include "client.h"
-#include "s_conf.h"
-#include "struct.h"
 #include "blalloc.h"
-#include "res.h"
+#include "channel.h"
 #include "common.h"
-#include "numeric.h"
+#include "fdlist.h"
+#include "hash.h"
 #include "ircd.h"
 #include "list.h"
-#include "fdlist.h"
+#include "numeric.h"
+#include "res.h"
 #include "s_bsd.h"
-#include "send.h"
+#include "s_conf.h"
 #include "s_err.h"
-#include "hash.h"
-#include "whowas.h"
-#include "channel.h"
 #include "s_misc.h"
+#include "s_serv.h"
+#include "send.h"
+#include "struct.h"
+#include "whowas.h"
 
 #include <assert.h>
 #include <fcntl.h>
