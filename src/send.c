@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)send.c	2.32 2/28/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: send.c,v 1.31 1999/05/15 22:00:43 lusky Exp $";
+static char *rcs_version = "$Id: send.c,v 1.32 1999/05/19 05:31:02 db Exp $";
 #endif
 
 #include "struct.h"
@@ -230,9 +230,10 @@ static	int	send_message(aClient *to, char *msg, int len)
       */
       if (DBufLength(&to->sendQ) > get_sendq(to))
 	{
-	  sendto_ops("Max SendQ limit exceeded for %s : %d > %d",
-		     get_client_name(to, FALSE),
-		     DBufLength(&to->sendQ), get_sendq(to));
+	  sendto_ops_butone(to,
+			   "Max SendQ limit exceeded for %s : %d > %d",
+			   get_client_name(to, FALSE),
+			   DBufLength(&to->sendQ), get_sendq(to));
 	  if (IsDoingList(to))
 	    return dead_link(to, "Local kill by /list (so many channels!)");
 	  else

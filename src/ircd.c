@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.42 1999/05/15 22:00:41 lusky Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.43 1999/05/19 05:31:00 db Exp $";
 #endif
 
 #include "struct.h"
@@ -501,6 +501,14 @@ static	time_t	check_pings(time_t currenttime)
 		       * aConfItem then kill it
 		       */
 		    {
+		      if(IsConfElined(aconf))
+			{
+			  sendto_realops("D-line over-ruled for %s client is E-lined",
+				     get_client_name(cptr,FALSE));
+				     continue;
+			  continue;
+			}
+
 		      sendto_realops("D-line active for %s",
 				 get_client_name(cptr, FALSE));
 
@@ -574,7 +582,7 @@ static	time_t	check_pings(time_t currenttime)
 		  if((aconf = find_kill(cptr)))	/* if there is a returned
 						   aConfItem.. then kill it */
 		    {
-		      if(IsElined(cptr))
+		      if(aconf->status & CONF_ELINE)
 			{
 			  sendto_realops("K-line over-ruled for %s client is E-lined",
 				     get_client_name(cptr,FALSE));
