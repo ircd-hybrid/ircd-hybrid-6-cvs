@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.191 2000/11/24 18:51:17 lusky Exp $
+ *  $Id: s_conf.c,v 1.192 2000/12/01 06:28:50 lusky Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -433,7 +433,7 @@ int attach_Iline(aClient* cptr, const char* username, char **preason)
       if (aconf->status & CONF_CLIENT)
         {
 #ifdef GLINES
-          if ( !IsConfElined(aconf) )
+          if ( !IsConfElined(aconf) && !IsConfExemptGline(aconf) )
             {
               if (IsGotId(cptr))
                 gkill_conf = find_gkill(cptr,cptr->username);
@@ -1783,6 +1783,9 @@ static char *set_conf_flags(struct ConfItem *aconf,char *tmp)
           break;
         case '>':        /* can exceed max connects */
           aconf->flags |= CONF_FLAGS_F_LINED;
+          break;
+        case '_':        /* exempt from glines */
+          aconf->flags |= CONF_FLAGS_EXEMPTGLINE;
           break;
 #ifdef IDLE_CHECK
         case '<':        /* can idle */

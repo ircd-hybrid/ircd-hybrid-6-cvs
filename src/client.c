@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.56 2000/11/21 06:49:28 lusky Exp $
+ *  $Id: client.c,v 1.57 2000/12/01 06:28:47 lusky Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -367,13 +367,6 @@ time_t check_pings(time_t currenttime)
 #ifdef GLINES
                   if( (aconf = find_gkill(cptr,cptr->username)) )
                     {
-                      if(IsElined(cptr))
-                        {
-                          sendto_realops("G-line over-ruled for %s client is E-lined",
-                                     get_client_name(cptr,FALSE));
-                                     continue;
-                        }
-
                       sendto_realops("G-line active for %s",
                                  get_client_name(cptr, FALSE));
 

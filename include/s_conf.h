@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.44 2000/08/22 05:03:55 lusky Exp $
+ * $Id: s_conf.h,v 1.45 2000/12/01 06:28:47 lusky Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.45  2000/12/01 06:28:47  lusky
+ * added Gline Exemption flag ('_') to Ilines
+ *
  * Revision 1.44  2000/08/22 05:03:55  lusky
  * added support for CIDR IP tklines, just like normal klines
  *
@@ -275,6 +278,7 @@ typedef struct QlineItem {
 #define CONF_FLAGS_E_LINED              0x0020
 #define CONF_FLAGS_B_LINED              0x0040
 #define CONF_FLAGS_F_LINED              0x0080
+#define CONF_FLAGS_EXEMPTGLINE          0x2000
 
 #ifdef IDLE_CHECK
 #define CONF_FLAGS_IDLE_LINED           0x0100
@@ -301,6 +305,7 @@ typedef struct QlineItem {
 #define IsConfElined(x)         ((x)->flags & CONF_FLAGS_E_LINED)
 #define IsConfBlined(x)         ((x)->flags & CONF_FLAGS_B_LINED)
 #define IsConfFlined(x)         ((x)->flags & CONF_FLAGS_F_LINED)
+#define IsConfExemptGline(x)    ((x)->flags & CONF_FLAGS_EXEMPTGLINE)
 
 #ifdef IDLE_CHECK
 #define IsConfIdlelined(x)      ((x)->flags & CONF_FLAGS_IDLE_LINED)

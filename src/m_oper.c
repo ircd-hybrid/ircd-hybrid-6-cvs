@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_oper.c,v 1.7 2000/06/09 01:59:07 lusky Exp $
+ *   $Id: m_oper.c,v 1.8 2000/12/01 06:28:49 lusky Exp $
  */
 
 #include "m_commands.h"
@@ -213,6 +213,7 @@ int m_oper(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       Count.oper++;
 
       SetElined(cptr);
+      SetExemptGline(cptr);
       
       /* LINKLIST */  
       /* add to oper link list -Dianora */

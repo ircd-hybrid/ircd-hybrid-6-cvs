@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.227 2000/11/18 19:11:15 lusky Exp $
+ *  $Id: s_user.c,v 1.228 2000/12/01 06:28:50 lusky Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -1097,6 +1097,15 @@ report_and_set_user_flags(aClient *sptr,aConfItem *aconf)
          ":%s NOTICE %s :*** You are exempt from K/D/G lines. congrats.",
                  me.name,sptr->name);
     }
+#ifdef GLINES
+  else if(IsConfExemptGline(aconf))
+    {
+      SetExemptGline(sptr);
+      sendto_one(sptr,
+         ":%s NOTICE %s :*** You are exempt from G lines. congrats.",
+                 me.name,sptr->name);
+    }
+#endif /* GLINES */
 
   /* If this user can run bots set it "B lined" */
   if(IsConfBlined(aconf))
