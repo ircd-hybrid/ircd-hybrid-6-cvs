@@ -1,7 +1,7 @@
 /*
  * viconf.c
  *
- * $Id: viconf.c,v 1.9 1999/07/17 21:34:49 db Exp $
+ * $Id: viconf.c,v 1.10 1999/09/08 03:42:39 lusky Exp $
  */
 #include <stdio.h>
 #include <unistd.h>
@@ -180,7 +180,7 @@ LockedFile(char *filename)
     }
 
   fileptr = fdopen(fd,"w");
-  fprintf(fileptr,"%d\n",getpid());
+  fprintf(fileptr,"%d\n",(int) getpid());
   fclose(fileptr);
   return (0);
 } /* LockedFile() */

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_ltrace.c,v 1.1 1999/07/30 06:40:15 tomh Exp $
+ *   $Id: m_ltrace.c,v 1.2 1999/09/08 03:42:37 lusky Exp $
  */
 #include "m_commands.h"
 #include "class.h"
@@ -155,7 +155,7 @@ int     m_ltrace(struct Client *cptr,
 
 
   doall = (parv[1] && (parc > 1)) ? match(tname, me.name): TRUE;
-  wilds = !parv[1] || index(tname, '*') || index(tname, '?');
+  wilds = !parv[1] || strchr(tname, '*') || strchr(tname, '?');
   dow = wilds || doall;
   
   for (i = 0; i < MAXCONNECTIONS; i++)

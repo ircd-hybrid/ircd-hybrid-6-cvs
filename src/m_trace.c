@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_trace.c,v 1.1 1999/07/30 06:40:16 tomh Exp $
+ *   $Id: m_trace.c,v 1.2 1999/09/08 03:42:38 lusky Exp $
  */
 #include "m_commands.h"
 #include "class.h"
@@ -164,8 +164,8 @@ int m_trace(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
         }
 #endif
 
-      if (parv[1] && !index(parv[1],'.') && (index(parv[1], '*')
-          || index(parv[1], '?'))) /* bzzzt, no wildcard nicks for nonopers */
+      if (parv[1] && !strchr(parv[1],'.') && (strchr(parv[1], '*')
+          || strchr(parv[1], '?'))) /* bzzzt, no wildcard nicks for nonopers */
         {
           sendto_one(sptr, form_str(RPL_ENDOFTRACE),me.name,
                      parv[0], parv[1]);
