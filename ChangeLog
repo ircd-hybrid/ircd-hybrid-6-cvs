@@ -1,3 +1,16 @@
+ievil       2003/06/14 19:36:42 EDT	(20030614_4)
+
+  Modified files:
+    src                  m_operspylog.c 
+  Log:
+  Someone once told me that keeping the compilers happy was important. So
+  let's keep returning something sensible.. like 0.
+  
+  Revision  Changes    Path
+  1.2       +2 -1      ircd-hybrid-6/src/m_operspylog.c
+
+
+
 ievil       2003/06/14 19:26:27 EDT	(20030614_3)
 
   Added files:
