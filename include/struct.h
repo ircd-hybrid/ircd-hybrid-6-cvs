@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.68 1999/07/23 07:02:43 tomh Exp $
+ * $Id: struct.h,v 1.69 1999/07/23 19:52:33 sean Exp $
  */
 #ifndef INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -278,6 +278,7 @@ struct SLink
 #define CAP_ZIP         0x00000004      /* Can do server compresion */
 #define CAP_EX          0x00000008      /* Can do channel +e exemptions */
 #define CAP_CHW         0x00000010      /* Can do channel wall @# */
+#define CAP_DE          0x00000020      /* Can do channel +d (regex deny) */
 
 #define DoesCAP(x)      ((x)->caps)
 
@@ -311,6 +312,7 @@ struct Capability captab[] =
   { "QS",       CAP_QS },
   { "EX",       CAP_EX },
   { "CHW",      CAP_CHW },
+  { "DE",       CAP_DE },
   { (char*)0,   0 }
 };
 #else
