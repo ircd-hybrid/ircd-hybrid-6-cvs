@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.44 1999/09/04 20:21:14 lusky Exp $
+ *   $Id: s_debug.c,v 1.45 2000/08/10 04:40:16 lusky Exp $
  */
 #include "s_debug.h"
 #include "channel.h"
@@ -75,6 +75,9 @@ const char serveropts[] = {
 #endif
 #ifdef  OPER_REHASH
   'E',
+#endif
+#ifdef GLINES
+  'G',
 #endif
 #ifdef  HUB
   'H',

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.38 2000/02/01 03:25:05 lusky Exp $
+ *  $Id: m_gline.c,v 1.39 2000/08/10 04:40:16 lusky Exp $
  */
 #include "m_gline.h"
 #include "channel.h"
@@ -823,7 +823,7 @@ static int majority_gline(aClient *sptr,
                   (irccmp(gline_pending_ptr->oper_server2,oper_server)==0))
                 {
                   /* This oper or server has already "voted" */
-                  sendto_ops("oper or server has already voted");
+                  sendto_realops("oper or server has already voted");
                   return NO;
                 }
 
