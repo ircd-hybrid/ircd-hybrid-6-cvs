@@ -1,3 +1,22 @@
+ievil       2004/05/23 12:10:06 EDT	(20040523_7)
+
+  Modified files:
+    include              config.h numeric.h 
+    src                  m_whois.c messages.tab messages_cust.tab 
+  Log:
+  Added WHOISACTUALLY upon requests from opers and users.
+  No more wicked dns tricks on hybrid-6 servers who dont
+  like to be attacked over their users...
+  
+  Revision  Changes    Path
+  1.170     +6 -0      ircd-hybrid-6/include/config.h
+  1.26      +2 -0      ircd-hybrid-6/include/numeric.h
+  1.20      +133 -131  ircd-hybrid-6/src/m_whois.c
+  1.32      +1 -1      ircd-hybrid-6/src/messages.tab
+  1.31      +1 -1      ircd-hybrid-6/src/messages_cust.tab
+
+
+
 ievil       2004/05/23 11:41:43 EDT	(20040523_6)
 
   Modified files:
