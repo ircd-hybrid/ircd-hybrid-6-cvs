@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.159 1999/07/18 23:35:15 db Exp $
+ *   $Id: s_serv.c,v 1.160 1999/07/19 09:11:50 tomh Exp $
  */
 
 #define CAPTAB
@@ -504,6 +504,7 @@ int m_server(aClient *cptr, aClient *sptr, int parc, char *parv[])
        * XXX - hmmmm
        */
       strncpy_irc(info, parv[2], REALLEN);
+      info[REALLEN] = '\0';
       if ((parc > 3) && ((i = strlen(info)) < (REALLEN - 2)))
 	{
 	  strcat(info, " ");
@@ -782,7 +783,7 @@ int m_server(aClient *cptr, aClient *sptr, int parc, char *parv[])
     }
 
   strncpy_irc(cptr->name, host, HOSTLEN);
-  strncpy_irc(cptr->info, info[0] ? info:me.name, REALLEN);
+  strncpy_irc(cptr->info, info[0] ? info : me.name, REALLEN);
   cptr->hopcount = hop;
 
   switch (check_server_init(cptr))
@@ -1540,7 +1541,7 @@ int	m_stats(aClient *cptr,
 	    {
 	      sendto_one(sptr, Lformat, me.name,
 		     RPL_STATSLINKINFO, parv[0],
-		     (isupper(stat)) ?
+		     (IsUpper(stat)) ?
 		     get_client_name(acptr, TRUE) :
 		     get_client_name(acptr, FALSE),
 		     (int)DBufLength(&acptr->sendQ),
@@ -1565,7 +1566,7 @@ int	m_stats(aClient *cptr,
                  else
                   sendto_one(sptr, Lformat, me.name,
                      RPL_STATSLINKINFO, parv[0],
-                     (isupper(stat)) ?
+                     (IsUpper(stat)) ?
                      get_client_name(acptr, TRUE) :
                      get_client_name(acptr, FALSE),
                      (int)DBufLength(&acptr->sendQ),

@@ -16,13 +16,15 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: listener.c,v 1.9 1999/07/18 19:53:03 tomh Exp $
+ *  $Id: listener.c,v 1.10 1999/07/19 09:11:46 tomh Exp $
  */
 #include "listener.h"
 #include "s_bsd.h"
 #include "s_conf.h"
 #include "ircd_defs.h"
+#include "client.h"
 #include "h.h"
+#include "struct.h"
 #include "send.h"
 #include "irc_string.h"
 
@@ -30,6 +32,7 @@
 #include <string.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <netdb.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>

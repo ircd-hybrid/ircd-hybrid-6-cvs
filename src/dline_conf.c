@@ -1,15 +1,15 @@
 /*
  * dline_conf.c
  *
- * $Id: dline_conf.c,v 1.23 1999/07/17 23:14:55 db Exp $
+ * $Id: dline_conf.c,v 1.24 1999/07/19 09:11:45 tomh Exp $
  */
+#include "dline_conf.h"
 #include "struct.h"
 #include "common.h"
 #include "numeric.h"
 #include "class.h"
 #include "h.h"
 #include "s_conf.h"
-#include "dline_conf.h"
 #include "send.h"
 
 #include <fcntl.h>
@@ -646,16 +646,19 @@ void add_ip_Iline(aConfItem *conf_ptr)
  * and returns the matching aConfItem, or NULL if no match was found.
  * -good
  */
-aConfItem *match_ip_Kline(unsigned long ip,char *name)
+aConfItem* match_ip_Kline(unsigned long ip, const char* name)
 {
-  struct ip_subtree *node;
-  aConfItem *scan;
-  int head=ip>>24;
-  aConfItem *winner;
-  char winnertype;
-  
-  if ((ike_oracle[head] & ip) != ip)    /* oracle query failed.. IP is definitely not in */
-    return NULL;                    /*   this tree.  Don't even bother looking */
+  struct ip_subtree* node;
+  aConfItem*         scan;
+  int                head = ip >> 24;
+  aConfItem*         winner;
+  char               winnertype;
+  if ((ike_oracle[head] & ip) != ip) 
+   /* 
+    * oracle query failed.. IP is definitely not in
+    *   this tree.  Don't even bother looking 
+    */
+    return NULL;
 
   /* check the top level */
   if (ip_Kline[head]==NULL) return NULL;

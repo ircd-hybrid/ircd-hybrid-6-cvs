@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: hash.c,v 1.23 1999/07/18 07:16:49 tomh Exp $
+ *  $Id: hash.c,v 1.24 1999/07/19 09:11:45 tomh Exp $
  */
 #include "hash.h"
 #include "struct.h"
@@ -110,7 +110,7 @@ unsigned int hash_nick_name(const char* name)
 
   while (*name)
     {
-      h = (h << 4) - (h + (unsigned char)tolower(*name++));
+      h = (h << 4) - (h + (unsigned char)ToLower(*name++));
     }
 
   return(h & (U_MAX - 1));
@@ -131,7 +131,7 @@ unsigned int hash_channel_name(const char* name)
 
   while (*name && --i)
     {
-      h = (h << 4) - (h + (unsigned char)tolower(*name++));
+      h = (h << 4) - (h + (unsigned char)ToLower(*name++));
     }
 
   return(h & (CH_MAX - 1));
@@ -481,7 +481,7 @@ int m_hash(struct Client *cptr, struct Client *sptr,int parc,char *parv[])
         }
 
       ch = *parv[1];
-      if (islower(ch))
+      if (IsLower(ch))
         {
           table = clientTable;
           

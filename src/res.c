@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.38 1999/07/19 01:09:49 tomh Exp $
+ * $Id: res.c,v 1.39 1999/07/19 09:11:48 tomh Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
@@ -904,7 +904,7 @@ static int proc_answer(ResRQ* request, HEADER* header,
         address += sizeof(struct in_addr);
 
         if (!hp->h_name) {
-          strncpy_irc(name, hostbuf, endp - name);
+          strcpy(name, hostbuf);
           hp->h_name = name;
           name += strlen(name) + 1;
         }
@@ -935,7 +935,7 @@ static int proc_answer(ResRQ* request, HEADER* header,
        * ignore duplicate ptr records
        */
       if (!hp->h_name) {
-        strncpy_irc(name, hostbuf, endp - name);
+        strcpy(name, hostbuf);
         hp->h_name = name;
         name += strlen(name) + 1;
       }

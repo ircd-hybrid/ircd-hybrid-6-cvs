@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: motd.c,v 1.12 1999/07/18 22:27:28 db Exp $
+ *   $Id: motd.c,v 1.13 1999/07/19 09:11:47 tomh Exp $
  */
 
 #include "h.h"
@@ -34,6 +34,7 @@
 #include "s_conf.h"
 #include "numeric.h"
 #include "client.h"
+#include "struct.h"     /* HUNTED_ISME */
 #include "irc_string.h"
 
 #include <string.h>
@@ -47,12 +48,9 @@ extern ConfigFileEntryType ConfigFileEntry; /* defined in ircd.c */
 **	parv[0] = sender prefix
 **	parv[1] = servername
 */
-int	m_motd(aClient *cptr,
-	       aClient *sptr,
-	       int parc,
-	       char *parv[])
+int m_motd(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 {
-  static time_t last_used=0L;
+  static time_t last_used = 0;
 
   if(!IsAnOper(sptr))
     {
@@ -83,7 +81,8 @@ int	m_motd(aClient *cptr,
 */
 void InitMessageFile(MotdType motdType, char *fileName, MessageFile *motd)
   {
-    strncpy_irc(motd->fileName,fileName,PATH_MAX);
+    strncpy_irc(motd->fileName, fileName, PATH_MAX);
+    motd->fileName[PATH_MAX] = '\0';
     motd->motdType = motdType;
     motd->contentsOfFile = NULL;
     motd->lastChangedDate[0] = '\0';
@@ -97,7 +96,7 @@ void InitMessageFile(MotdType motdType, char *fileName, MessageFile *motd)
 ** -Dianora
 */
 
-int SendMessageFile(aClient *sptr, MessageFile *motdToPrint)
+int SendMessageFile(struct Client *sptr, MessageFile *motdToPrint)
 {
   MessageFileLine *linePointer;
   MotdType motdType;

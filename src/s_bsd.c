@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.74 1999/07/19 00:20:22 tomh Exp $
+ *  $Id: s_bsd.c,v 1.75 1999/07/19 09:11:49 tomh Exp $
  */
 #include "s_bsd.h"
 #include "listener.h"
@@ -1918,7 +1918,7 @@ static struct sockaddr* connect_inet(aConfItem *aconf, aClient *cptr,
    * conf line, whether as a result of the hostname lookup or the ip#
    * being present instead. If we dont know it, then the connect fails.
    */
-  if (isdigit(*aconf->host) && INADDR_NONE == aconf->ipnum.s_addr)
+  if (IsDigit(*aconf->host) && INADDR_NONE == aconf->ipnum.s_addr)
     aconf->ipnum.s_addr = inet_addr(aconf->host);
   if (INADDR_NONE == aconf->ipnum.s_addr)
     {

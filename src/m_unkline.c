@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_unkline.c,v 1.20 1999/07/18 08:25:07 db Exp $
+ *   $Id: m_unkline.c,v 1.21 1999/07/19 09:11:46 tomh Exp $
  */
 #include "struct.h"
 
@@ -193,6 +193,7 @@ K:bar:No reason (1997/08/30 14.56):foo
 	  char *found_comment;
 
 	  strncpy_irc(buff, buf, BUFSIZE);	/* extra paranoia */
+          buff[BUFSIZE] = '\0';
 
 	  p = strchr(buff,'\n');
 	  if(p)
@@ -250,6 +251,7 @@ K:bar:No reason (1997/08/30 14.56):foo
 	  char *found_host;
 
 	  strncpy_irc(buff, buf, BUFSIZE);
+          buff[BUFSIZE] = '\0';
 /*
 #Dianora!db@ts2-11.ottawa.net K'd: foo@bar:No reason
 K:bar:No reason (1997/08/30 14.56):foo

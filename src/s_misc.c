@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.53 1999/07/18 07:16:53 tomh Exp $
+ *  $Id: s_misc.c,v 1.54 1999/07/19 09:11:50 tomh Exp $
  */
 #include "s_conf.h"
 #include "struct.h"
@@ -146,7 +146,7 @@ char* small_file_date(time_t clock)
  */
 const char* my_name_for_link(const char* name, aConfItem* aconf)
 {
-  static char          namebuf[HOSTLEN];
+  static char          namebuf[HOSTLEN + 1];
   register int         count = aconf->port;
   register const char* start = name;
 
@@ -163,7 +163,7 @@ const char* my_name_for_link(const char* name, aConfItem* aconf)
 
   namebuf[0] = '*';
   strncpy_irc(&namebuf[1], name, HOSTLEN - 1);
-  namebuf[HOSTLEN - 1] = '\0';
+  namebuf[HOSTLEN] = '\0';
   return namebuf;
 }
 

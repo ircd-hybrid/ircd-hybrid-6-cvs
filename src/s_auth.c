@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.31 1999/07/18 07:16:52 tomh Exp $
+ *   $Id: s_auth.c,v 1.32 1999/07/19 09:11:48 tomh Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -35,6 +35,7 @@
 #include "s_bsd.h"
 #include "res.h"
 #include "h.h"
+#include "struct.h"
 
 #include <netdb.h>               /* struct hostent */
 #include <string.h>
@@ -527,7 +528,7 @@ void read_auth_reply(struct AuthRequest* auth)
 	if(*s == '@') {
 	    break;
 	  }
-        if ( !isspace(*s) && *s != ':' ) {
+        if ( !IsSpace(*s) && *s != ':' ) {
           *t++ = *s;
           count--;
         }
