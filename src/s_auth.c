@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.23 1999/07/11 21:51:37 tomh Exp $
+ *   $Id: s_auth.c,v 1.24 1999/07/11 22:04:36 tomh Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -386,7 +386,7 @@ void start_auth(struct Client* client)
   client->dns_reply = gethost_byaddr((const char*) &client->ip, &query);
   if (client->dns_reply) {
     ++client->dns_reply->ref_count;
-    strncpy(client->host, client->dns_reply->he->h_name, HOSTLEN);
+    strncpy(client->host, client->dns_reply->hp->h_name, HOSTLEN);
     sendheader(client, REPORT_FIN_DNSC);
   }
   else
