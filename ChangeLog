@@ -1,3 +1,18 @@
+ievil       2003/06/14 19:26:27 EDT	(20030614_3)
+
+  Added files:
+    include              m_operspylog.h 
+    src                  m_operspylog.c 
+  Log:
+  Let's all just whistle innocently in the wind....
+  Forgot to add the 2 new files that gives operspylog functionality.
+  
+  Revision  Changes    Path
+  1.1       +40 -0     ircd-hybrid-6/include/m_operspylog.h (new)
+  1.1       +110 -0    ircd-hybrid-6/src/m_operspylog.c (new)
+
+
+
 ievil       2003/06/14 19:23:44 EDT	(20030614_2)
 
   Modified files:
