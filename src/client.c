@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.7 1999/07/15 12:17:40 db Exp $
+ *  $Id: client.c,v 1.8 1999/07/15 20:25:22 db Exp $
  */
 #include "client.h"
 #include "struct.h"
@@ -980,11 +980,11 @@ char        *comment        /* Reason for the exit */
 
       if (sptr->servptr == &me)
         {
-          sendto_ops("%s was connected for %lu seconds.  %lu/%lu sendK/recvK.",
+          sendto_ops("%s was connected for %d seconds.  %d/%d sendK/recvK.",
                      sptr->name, timeofday - sptr->firsttime,
                      sptr->sendK, sptr->receiveK);
 #ifdef USE_SYSLOG
-          syslog(LOG_NOTICE, "%s was connected for %lu seconds.  %lu/%lu sendK/recvK.", sptr->name, timeofday - sptr->firsttime, sptr->sendK, sptr->receiveK);
+          syslog(LOG_NOTICE, "%s was connected for %d seconds.  %d/%d sendK/recvK.", sptr->name, timeofday - sptr->firsttime, sptr->sendK, sptr->receiveK);
 #endif
 
               /* Just for paranoia... this shouldn't be necessary if the
