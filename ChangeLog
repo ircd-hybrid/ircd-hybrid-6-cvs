@@ -1,3 +1,16 @@
+ievil       2004/06/12 21:40:13 EDT	(20040613_1)
+
+  Modified files:
+    include              config.h 
+  Log:
+  DLINES should be in a seperate file from KLINES. This is now default
+  behaviour.
+  
+  Revision  Changes    Path
+  1.172     +2 -2      ircd-hybrid-6/include/config.h
+
+
+
 ievil       2004/06/12 21:35:19 EDT	(20040613_0)
 
   Modified files:
