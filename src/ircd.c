@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.30 1999/01/25 05:17:28 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.31 1999/01/30 18:07:31 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1329,7 +1329,13 @@ time_t io_loop(time_t delay)
       sync_channels(timeofday - lasttimeofday);
     }
 
-  NOW = timeofday;
+  if(timeofday == lasttimeofday)
+    {
+      sleep(1);
+      NOW = timeofday+1;
+    }
+  else
+    NOW = timeofday;
 
   /*
    * This chunk of code determines whether or not

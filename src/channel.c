@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.65 1999/01/22 04:24:19 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.66 1999/01/30 18:07:30 db Exp $";
 #endif
 
 #include "struct.h"
@@ -3480,12 +3480,13 @@ int	m_invite(aClient *cptr,
        * INVITE other users to the channel when it is invite-only (+i). *
        * The NOTICE is sent from the local server.  -- David-R          */
 
-      /* Only allow this invite notice if the channel is also not +p
+      /* Only allow this invite notice if the channel is +p
+       * i.e. "paranoid"
        * -Dianora
        */
 
       if (chptr && (chptr->mode.mode & MODE_INVITEONLY)
-	  && !(chptr->mode.mode & MODE_PRIVATE))
+	  && (chptr->mode.mode & MODE_PRIVATE))
 	{ 
 	  char message[300];
 

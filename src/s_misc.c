@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.16 1999/01/23 15:04:15 db Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.17 1999/01/30 18:07:34 db Exp $";
 #endif
 
 #include <sys/time.h>
@@ -254,10 +254,17 @@ char	*get_client_name(aClient *sptr,int showip)
 
   if (MyConnect(sptr))
     {
-
       /* Check for ident */
-      if (IsGotId(sptr))
-        (void)strcpy(t_id, "(+)");
+
+      /* For consistency everywhere else no? -db */
+      if (!IsGotId(sptr))
+	{
+	  t_id[0] = '~';
+	  t_id[1] = '\0';
+	}
+
+      /* original -db */
+      /* (void)strcpy(t_id, "(+)"); */
 
       /* Check for a username (listening ports don't have usernames) */
       if (sptr->user && sptr->user->username[0])

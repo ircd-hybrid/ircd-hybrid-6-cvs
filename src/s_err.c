@@ -27,7 +27,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)s_err.c	1.11 5/17/93 (C) 1992 Darren Reed";
-static char *rcs_version = "$Id: s_err.c,v 1.12 1999/01/25 05:17:29 db Exp $";
+static char *rcs_version = "$Id: s_err.c,v 1.13 1999/01/30 18:07:33 db Exp $";
 #endif
 
 static	char	numbuff[512];
@@ -495,7 +495,7 @@ static	char *	replies[] = {
 /* 434 */	(char *)NULL,
 /* 435 */	(char *)NULL,
 /* 436 ERR_NICKCOLLISION, */	":%s 436 %s %s :Nickname collision KILL",
-/* 437 */	(char *)NULL,
+/* 437 EER_NOTAVAILABLE, */	":%s 437 %s %s :Nick/channel is temporarily unavailable",
 /* 438 */	(char *)NULL,
 /* 439 */	(char *)NULL,
 /* 440 */	(char *)NULL,
