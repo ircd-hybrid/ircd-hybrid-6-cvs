@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.75 2001/12/19 04:52:09 greg Exp $
+ *  $Id: client.c,v 1.76 2001/12/19 23:02:06 leeh Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -1514,9 +1514,9 @@ const char* comment        /* Reason for the exit */
 #else
                (sptr->flags & FLAGS_NORMALEX) ?  "Client Quit" : comment,
 #endif /* WINTRHAWK */
-#ifndef SPOOF_NOTICE
-                               IsIPHidden(sptr) ? "255.255.255.255" :
-#endif /* !SPOOF_NOTICE */
+#ifdef HIDE_SPOOF_IPS
+                               IsIPSpoof(sptr) ? "255.255.255.255" :
+#endif /* HIDE_SPOOF_IPS */
                                sptr->sockhost);
         }
 #ifdef FNAME_USERLOG
