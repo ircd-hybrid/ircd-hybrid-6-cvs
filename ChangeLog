@@ -1,3 +1,18 @@
+ievil       2003/06/12 19:56:45 EDT	(20030612_5)
+
+  Added files:
+    doc                  encap.txt 
+  Log:
+  Added the documentation for ENCAP written by Lee
+  
+  Submitted by:   ievil
+  Obtained from:  Lee Hardy
+  
+  Revision  Changes    Path
+  1.1       +37 -0     ircd-hybrid-6/doc/encap.txt (new)
+
+
+
 ievil       2003/06/12 19:53:08 EDT	(20030612_4)
 
   Modified files:
