@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.46 1999/07/18 17:27:01 db Exp $
+ * $Id: h.h,v 1.47 1999/07/18 17:36:24 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -141,7 +141,6 @@ extern	void	send_umode_out (aClient*, aClient *, int);
 
 
 extern	void	_free_link (Link *);
-extern	void	free_class(struct Class* c);
 extern	void	_free_user (anUser *, aClient *);
 extern	Link	*make_link (void);
 extern	anUser	*make_user (aClient *);
@@ -153,12 +152,8 @@ extern	void	initlists (void);
 extern  void	block_garbage_collect(void);	/* list.c */
 extern  void	block_destroy(void);		/* list.c */
 
-extern	void	add_class (int, int, int, int, long);
-extern	void	fix_class (aConfItem *, aConfItem *);
 extern  void    GetPrintableaConfItem(aConfItem *, char **, char **, char **,
 				      char **, int *);
-extern	void	report_classes (aClient *);
-
 
 extern int     zip_init (aClient *);
 extern void    zip_free (aClient *);
