@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.74 1999/06/26 14:37:16 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.75 1999/06/26 15:05:47 db Exp $";
 #endif
 
 #include "struct.h"
@@ -2536,10 +2536,6 @@ static aConfItem *find_tkline(char *host,char *user)
 	    {
 	      if(temporary_klines == kill_list_ptr)
 		{
-		  /* Its pointing to first one in link list*/
-		  /* so, bypass this one, remember bad things can happen
-		     if you try to use an already freed pointer.. */
-
 		  temporary_klines = last_list_ptr = tmp_list_ptr =
 		    kill_list_ptr->next;
 		}

@@ -26,7 +26,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.87 1999/06/26 01:07:00 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.88 1999/06/26 15:05:48 db Exp $";
 
 #endif
 
@@ -629,12 +629,6 @@ static	int	register_user(aClient *cptr,
 	  (void)strncpy(&user->username[1], temp, USERLEN);
 	  user->username[USERLEN] = '\0';
 
-#ifdef IDENTD_COMPLAIN
-/* tell them to install identd -Taner */
-	  sendto_one(sptr, ":%s NOTICE %s :*** Notice -- It seems that you don't have identd installed on your host.",
-		     me.name,cptr->name);
-/* end identd hack */
-#endif
 	  if(aconf && IsNeedIdentd(aconf))
 	    {
 	      ircstp->is_ref++;
@@ -3585,6 +3579,13 @@ int	m_oper(aClient *cptr,
 	    {
 	      sptr->flags |= (LOCOP_UMODES);
 	    }
+
+	  /* A local oper can't global kill ever, or do remote re-routes
+	   * or glines. Make sure thats enforced here.
+	   */
+
+	  sptr->port &= 
+	    ~(CONF_OPER_GLOBAL_KILL|CONF_OPER_REMOTE|CONF_OPER_GLINE);
 	}
       else
 	{
