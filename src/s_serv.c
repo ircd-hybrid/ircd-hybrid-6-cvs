@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.237 2003/10/13 16:55:57 ievil Exp $
+ *   $Id: s_serv.c,v 1.238 2003/10/13 17:16:12 ievil Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -965,8 +965,7 @@ void show_servers(struct Client *cptr)
                  (cptr2->serv->by[0] ? cptr2->serv->by : "Remote."), 
                  "*", (cptr2->serv->bysrv[0] ? cptr2->serv->bysrv : "*"), 
                  CurrentTime - cptr2->lasttime,
-                 days, (days > 0) ? "" : "d ", hours, (hours > 0) ? "" : "h ",
-                 minutes, (minutes > 0) ? "" : "m ", seconds, (seconds > 0) ? "" : "s");
+                 days, "d ", hours, "h ", minutes, "m ", seconds, "s");
     }
   sendto_one(cptr, ":%s %d %s :%d Server%s", me.name, RPL_STATSDEBUG,
              cptr->name, j, (j==1) ? "" : "s");
