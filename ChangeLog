@@ -1,3 +1,15 @@
+ievil       2003/08/16 15:19:42 EDT	(20030816_3)
+
+  Modified files:
+    src                  s_conf.c 
+  Log:
+  Missed one of the diffs for previous commit. Fixed.
+  
+  Revision  Changes    Path
+  1.248     +3 -1      ircd-hybrid-6/src/s_conf.c
+
+
+
 ievil       2003/08/16 15:10:47 EDT	(20030816_2)
 
   Modified files:
