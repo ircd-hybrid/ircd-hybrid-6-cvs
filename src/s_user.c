@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.260 2003/06/24 03:57:17 ievil Exp $
+ *  $Id: s_user.c,v 1.261 2003/06/30 12:58:15 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -149,7 +149,6 @@ static int user_modes_from_c_to_bitmask[] =
   FLAGS_NCHANGE, /* n */
   FLAGS_OPER,   /* o */
   FLAGS_STATSPHIDE, /* p */
-  0,            /* p */
   0,            /* q */
   FLAGS_REJ,    /* r */
   FLAGS_SERVNOTICE, /* s */
