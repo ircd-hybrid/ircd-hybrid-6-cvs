@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.84 1999/07/01 16:54:12 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.85 1999/07/02 02:08:41 db Exp $";
 #endif
 
 #include "struct.h"
@@ -859,7 +859,7 @@ aConfItem *find_admin()
   aConfItem *aconf;
 
   for (aconf = conf; aconf; aconf = aconf->next)
-    if (aconf->status & CONF_ADMIN && aconf->name)
+    if (aconf->status & CONF_ADMIN && aconf->user)
       break;
   
   return (aconf);

@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.119 1999/07/01 20:35:13 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.120 1999/07/02 02:08:41 db Exp $";
 #endif
 
 
@@ -2517,7 +2517,7 @@ int	m_admin(aClient *cptr,
       sendto_one(sptr, form_str(RPL_ADMINLOC2),
 		 me.name, parv[0], aconf->passwd);
       sendto_one(sptr, form_str(RPL_ADMINEMAIL),
-		 me.name, parv[0], aconf->name);
+		 me.name, parv[0], aconf->user);
     }
   else
     sendto_one(sptr, form_str(ERR_NOADMININFO),

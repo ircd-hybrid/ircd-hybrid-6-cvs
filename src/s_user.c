@@ -26,7 +26,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.104 1999/07/01 21:40:19 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.105 1999/07/02 02:08:42 db Exp $";
 
 #endif
 
@@ -2736,7 +2736,7 @@ int	m_quit(aClient *cptr,
   if (strlen(comment) > (size_t) TOPICLEN)
     comment[TOPICLEN] = '\0';
 
-#ifdef (ANTI_SPAM_EXIT_MESSAGE)
+#ifdef ANTI_SPAM_EXIT_MESSAGE
   if( !IsServer(sptr) && MyConnect(sptr) &&
      (sptr->firsttime + ANTI_SPAM_EXIT_MESSAGE_TIME) > NOW)
     comment = "Client Quit";
