@@ -18,7 +18,7 @@
  */
 
 #ifndef lint
-static  char rcsid[] = "@(#)$Id: s_zip.c,v 1.7 1998/12/19 23:50:26 db Exp $";
+static  char rcsid[] = "@(#)$Id: s_zip.c,v 1.8 1999/05/09 06:23:31 db Exp $";
 #endif
 
 #include "struct.h"
@@ -212,7 +212,7 @@ char *unzip_packet(aClient *cptr, char *buffer, int *length)
 		   * the bottom of the unzip buffer. -db
 		   */
 
-		  for(p = zin->next_out;;p >= unzipbuf)
+		  for(p = zin->next_out;p >= unzipbuf;)
 		    {
 		      if((*p == '\r') || (*p == '\n'))
 			break;
