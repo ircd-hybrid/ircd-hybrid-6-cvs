@@ -16,14 +16,10 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: irc_string.h,v 1.11 1999/07/25 18:05:05 tomh Exp $
+ *   $Id: irc_string.h,v 1.12 1999/07/31 01:54:09 tomh Exp $
  */
 #ifndef INCLUDED_irc_string_h
 #define INCLUDED_irc_string_h
-#ifndef INCLUDED_stdarg_h
-#include <stdarg.h>
-#define INCLUDED_stdarg_h
-#endif
 #ifndef INCLUDED_sys_types_h
 #include <sys/types.h>
 #define INCLUDED_sys_types_h
@@ -53,11 +49,6 @@ extern int ircncmp(const char *s1, const char *s2, int n);
  */
 extern int ircsprintf(register char *str, register const char *format, ...);
 /*
- * vsprintf_irc - optimized vsprintf
- */
-extern int vsprintf_irc(register char *str, register const char *format,
-                        register va_list args);
-/*
  * inetntoa - optimized inet_ntoa
  */
 extern const char* inetntoa(const char* in_addr);
@@ -72,9 +63,9 @@ extern char* strncpy_irc(char* s1, const char* s2, size_t n);
 extern char* clean_string(char* dest, const char* src, size_t len);
 
 extern const char* myctime(time_t);
-extern char* strtoken(char** save, char* str, char* fs);
-extern void* MyMalloc(size_t size);
-extern void* MyRealloc(void* p, size_t size);
+extern char*       strtoken(char** save, char* str, char* fs);
+extern void*       MyMalloc(size_t size);
+extern void*       MyRealloc(void* p, size_t size);
 /* MyFree is defined as a macro in ircd_defs.h */
 /* extern void MyFree(void* p); */
 

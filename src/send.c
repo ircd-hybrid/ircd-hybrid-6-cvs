@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.74 1999/07/30 06:40:20 tomh Exp $
+ *   $Id: send.c,v 1.75 1999/07/31 01:53:31 tomh Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -30,6 +30,7 @@
 #include "s_bsd.h"
 #include "s_serv.h"
 #include "s_zip.h"
+#include "sprintf_irc.h"
 #include "struct.h"
 
 #include <stdio.h>
@@ -42,11 +43,6 @@
 
 static  char    sendbuf[2048];
 static  int     send_message (aClient *, char *, int);
-
-/*
- * vsprintf_irc - defined in sprintf_irc.c
- */
-extern int vsprintf_irc(char* str, const char* fmt, va_list args);
 
 static  void vsendto_prefix_one(register aClient *, register aClient *, const char *, va_list);
 static  void vsendto_one(aClient *, const char *, va_list);
