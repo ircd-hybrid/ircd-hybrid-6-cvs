@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_operspylog.c,v 1.5 2003/08/18 06:31:33 ievil Exp $
+ *   $Id: m_operspylog.c,v 1.6 2003/08/25 21:21:54 ievil Exp $
  */
 
 #include "m_operspylog.h"
@@ -51,7 +51,7 @@ int ms_operspylog(struct Client *cptr, struct Client *sptr, int parc, char *parv
   if (IsPerson(cptr))
     return 0;
 #ifdef OPERSPYLOG
-  operspy_log(sptr, parv[1], parv[2]);
+  operspy_log(sptr, parv[1], parc < 3 ? "*" : parv[2]);
 #endif
   return 0;
 }
