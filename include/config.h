@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.137 2001/10/25 02:57:05 db Exp $
+ * $Id: config.h,v 1.138 2001/10/25 03:53:23 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -578,29 +578,6 @@
  */
 #define  JUPE_CHANNEL
 
-/*
- * define either NO_CHANOPS_ON_SPLIT or NO_JOIN_ON_SPLIT
- *
- * choose =one= only or undef on small networks
- *
- */
-
-/* ****NOTE NOTE NOTE****
- *
- * with TS5 an user cannot hack ops anyway, so NO_CHANOPS_ON_SPLIT
- * is no longer useful. However, they can still join on a split
- * gaining channel member information, you might want to define
- * NO_JOIN_ON_SPLIT.
- */
-
-/* NO_CHANOPS_ON_SPLIT
- *
- * When this is defined, users will not be chanopped on empty channels
- * if there are no servers presently connected to this server
- * opers are not affected.
- */
-#undef  NO_CHANOPS_ON_SPLIT
-
 /* NO_JOIN_ON_SPLIT
  *
  * When this is defined, users will not be allowed to join channels
@@ -1011,7 +988,7 @@
 #error CLIENT_FLOOD undefined.
 #endif
 
-#if defined(DEBUGMODE)
+#ifdef DEBUGMODE
 #  define Debug(x) debug x
 #  define LOGFILE LPATH
 #else
@@ -1022,10 +999,6 @@
 #define REPORT_DLINE_TO_USER
 
 #ifdef NO_JOIN_ON_SPLIT
-#define NO_CHANOPS_ON_SPLIT
-#endif
-
-#if defined(NO_CHANOPS_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT)
 #define NEED_SPLITCODE
 #endif
 

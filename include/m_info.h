@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.18 2001/10/25 02:57:05 db Exp $
+ * $Id: m_info.h,v 1.19 2001/10/25 03:53:23 db Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -412,12 +412,6 @@ Info MyInformation[] = {
 #endif /* NETWORK_DESC */
 
   { "NICKNAMEHISTORYLENGTH", "", NICKNAMEHISTORYLENGTH, "Size of WHOWAS Array" },
-
-#ifdef NO_CHANOPS_ON_SPLIT
-  { "NO_CHANOPS_ON_SPLIT", "ON", 0, "Do not Allow Channel Ops During a NetSplit" },
-#else
-  { "NO_CHANOPS_ON_SPLIT", "OFF", 0, "Do not Allow Channel Ops During a NetSplit" },
-#endif /* NO_CHANOPS_ON_SPLIT */
 
 #ifdef NO_DEFAULT_INVISIBLE
   { "NO_DEFAULT_INVISIBLE", "ON", 0, "Do not Give Clients +i Mode Upon Connection" },
