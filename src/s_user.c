@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.79 1999/06/12 15:42:59 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.80 1999/06/13 01:13:34 db Exp $";
 
 #endif
 
@@ -4359,21 +4359,22 @@ struct fludbot *remove_fluder_reference(struct fludbot **fluders,
 
   prev = NULL;
   current = *fluders;
-  while(current) { 
-    next = current->next;
-    if(current->fluder == fluder)
-      {
-	if(prev)
-	  prev->next = next; 
-	else
-	  *fluders = next;
-	
-	free_fludbot(current );
-      }
-    else
-      prev = current;
-    current = next; 
-  }
+  while(current)
+    { 
+      next = current->next;
+      if(current->fluder == fluder)
+	{
+	  if(prev)
+	    prev->next = next; 
+	  else
+	    *fluders = next;
+	  
+	  free_fludbot(current );
+	}
+      else
+	prev = current;
+      current = next; 
+    }
 
   return(*fluders);       
 }

@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.87 1999/06/12 04:52:38 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.88 1999/06/13 01:13:32 db Exp $";
 #endif
 
 #include "struct.h"
@@ -929,12 +929,12 @@ int	m_mode(aClient *cptr,
   /* Now, try to find the channel in question */
   if (parc > 1)
     {
-    if(clean_channelname((unsigned char *)parv[1],sptr))
-      { 
-        sendto_one(sptr, err_str(ERR_BADCHANNAME),
-                   me.name, parv[0], (unsigned char *)parv[1]);
-        return 0;
-      }
+      if(clean_channelname((unsigned char *)parv[1],sptr))
+	{ 
+	  sendto_one(sptr, err_str(ERR_BADCHANNAME),
+		     me.name, parv[0], (unsigned char *)parv[1]);
+	  return 0;
+	}
 
       chptr = find_channel(parv[1], NullChn);
       if (chptr == NullChn)
@@ -2135,7 +2135,7 @@ int	clean_channelname(unsigned char *name, aClient *sptr)
 	return;
 #endif /* 0 */
       }
-      return 0;
+  return 0;
 }
 
 /*
@@ -4160,18 +4160,6 @@ int	m_sjoin(aClient *cptr,
   static	char numeric[16], sjbuf[BUFSIZE];
   char	*mbuf = modebuf, *t = sjbuf, *p;
 
-  /* loop unrolled, this is now redundant */
-  /*
-  static	FLAG_ITEM	flags[] = {
-    {MODE_PRIVATE,    'p'},
-    {MODE_SECRET,     's'},
-    {MODE_MODERATED,  'm'},
-    {MODE_NOPRIVMSGS, 'n'},
-    {MODE_TOPICLIMIT, 't'},
-    {MODE_INVITEONLY, 'i'},
-    {0x0, 0x0} };
-    */
-
   if (IsClient(sptr) || parc < 5)
     return 0;
   if (!IsChannelName(parv[2]))
@@ -4335,6 +4323,19 @@ int	m_sjoin(aClient *cptr,
       if (doesop && !haveops)
 	{
 	  chptr->channelts = tstosend = newts;
+#if 0
+	  /* Only warn of Hacked ops if the channel already
+	   * existed on this side.
+	   * This should drop the number of warnings down dramatically
+	   */
+
+	  if (MyConnect(sptr) && !isnew)
+	    {
+	      sendto_realops("Hacked ops from %s on opless channel: %s",
+			     sptr->name,
+			     chptr->chname);
+	    }
+#endif
 	}
       else
 	tstosend = oldts;

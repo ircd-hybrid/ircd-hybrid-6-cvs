@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.102 1999/06/12 04:52:39 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.103 1999/06/13 01:13:33 db Exp $";
 #endif
 
 
@@ -2549,7 +2549,7 @@ int     m_operwall(aClient *cptr,
   if( MyClient(sptr) && ((last_used_wallops + WALLOPS_WAIT) > NOW) )
     {
       sendto_one(sptr, ":%s NOTICE %s :Oh, one of those annoying opers who doesn't know how to use a channel",
-		 me.name,parv[0]);
+		 me.name,parv[0]); 
       return 0;
     }
   last_used_wallops = NOW;
