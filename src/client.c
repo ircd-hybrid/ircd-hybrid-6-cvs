@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.38 1999/07/28 07:49:34 tomh Exp $
+ *  $Id: client.c,v 1.39 1999/07/30 04:01:31 tomh Exp $
  */
 #include "client.h"
 #include "blalloc.h"
@@ -603,8 +603,8 @@ void release_client_dns_reply(struct Client* client)
 }
 
 /*
- * get_client_name
- *      Return the name of the client for various tracking and
+ * get_client_name -  Return the name of the client
+ *    for various tracking and
  *      admin purposes. The main purpose of this function is to
  *      return the "socket host" name of the client, if that
  *        differs from the advertised name (other than case).
@@ -655,10 +655,10 @@ const char* get_client_name(struct Client* client, int showip)
       /* And finally, let's get the host information, ip or name */
       switch (showip)
         {
-          case TRUE:
+          case SHOW_IP:
             strcpy(t_host, inetntoa((char *)&client->ip));
             break;
-          case HIDEME:
+          case MASK_IP:
             strcpy(t_host, "255.255.255.255");
             break;
           default:
