@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.11 1998/12/23 19:05:15 db Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.12 1999/01/05 02:49:02 chuegen Exp $";
 #endif
 
 #include <sys/time.h>
@@ -252,18 +252,21 @@ char	*get_client_name(aClient *sptr,int showip)
         {
           case TRUE:
 #ifdef SHOW_UH
-	    (void)ircsprintf(nbuf, "%s[%s%s@%s]",
+	    (void)ircsprintf(nbuf, "%s[%s%s%s%s]",
 			     sptr->name,
 			     (!IsGotId(sptr)) ? "" :
 			     "(+)",
 			     sptr->user?sptr->user->username :
 			     sptr->username, 
+			     (sptr->user?sptr->user->username[0] :
+		             sptr->username[0]) ? "@" : "",
 			     inetntoa((char *)&sptr->ip));
 #else
-	    (void)sprintf(nbuf, "%s[%s@%s]",
+	    (void)sprintf(nbuf, "%s[%s%s%s]",
 			sptr->name,
 			(!isGotId(sptr)) ? "" :
 			sptr->username,
+			sptr->username[0] ? "@" : "",
 			inetntoa((char *)&sptr->ip));
 #endif
             break;
@@ -287,10 +290,13 @@ char	*get_client_name(aClient *sptr,int showip)
 	  default:
 	      if (mycmp(sptr->name, sptr->sockhost))
 #ifdef USERNAMES_IN_TRACE
-		(void)ircsprintf(nbuf, "%s[%s@%s]",
+		(void)ircsprintf(nbuf, "%s[%s%s%s]",
 				 sptr->name,
 				 sptr->user ? sptr->user->username :
-				 sptr->username, sptr->sockhost);
+				 sptr->username,
+				 (sptr->user ? sptr->user->username[0] :
+				 sptr->username[0]) ? "@" : "",
+				 sptr->sockhost);
 #else
 	      (void)ircsprintf(nbuf, "%s[%s]",
 			       sptr->name, sptr->sockhost);

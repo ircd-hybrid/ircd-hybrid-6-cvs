@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.49 1998/12/27 23:49:46 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.50 1999/01/05 02:49:03 chuegen Exp $";
 
 #endif
 
@@ -3444,7 +3444,7 @@ int	m_oper(aClient *cptr,
 #ifdef	OPER_REMOTE
       if (aconf->status == CONF_LOCOP)
 #else
-	if ((matches(s,me.sockhost) && !IsLocal(sptr)) ||
+	if ((matches(s,me.name) && !IsLocal(sptr)) ||
 	    aconf->status == CONF_LOCOP)
 #endif
 	  {
