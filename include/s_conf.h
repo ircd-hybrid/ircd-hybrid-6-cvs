@@ -18,7 +18,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *   $Id: s_conf.h,v 1.59 2001/12/04 08:26:49 db Exp $
+ *   $Id: s_conf.h,v 1.60 2001/12/12 23:04:03 leeh Exp $
  */
 
 #ifndef INCLUDED_config_h
@@ -252,6 +252,8 @@ extern void get_printable_conf(struct ConfItem *,
 extern void report_configured_links(struct Client* cptr, int mask);
 extern void report_specials(struct Client* sptr, int flags, int numeric);
 extern void report_qlines(struct Client* cptr);
+
+extern void clear_juped_channels();
 
 typedef enum {
   CONF_TYPE,
