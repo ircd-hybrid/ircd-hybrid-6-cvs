@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.57 1999/07/12 06:34:06 tomh Exp $
+ * $Id: struct.h,v 1.58 1999/07/12 23:40:33 tomh Exp $
  */
 #ifndef	INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -90,10 +90,10 @@ typedef struct  Zdata   aZdata;
 #define	BOOT_CONSOLE	1
 #define	BOOT_QUICK	2
 #define	BOOT_DEBUG	4
-#define	BOOT_INETD	8
+#define BOOT_INETD      8
 #define	BOOT_TTY	16
 #define	BOOT_OPER	32
-#define	BOOT_AUTODIE	64
+/* #define BOOT_AUTODIE 64  UNUSED */
 #define BOOT_STDERR	128
 
 /* for sendto_ops_lev */
@@ -477,10 +477,6 @@ extern struct Capability captab[];
 #define	BadPtr(x) (!(x) || (*(x) == '\0'))
 
 #define	isvalid(c) (((c) >= 'A' && (c) <= '~') || isdigit(c) || (c) == '-')
-
-#define	MyConnect(x)			((x)->fd >= 0)
-#define	MyClient(x)			(MyConnect(x) && IsClient(x))
-#define	MyOper(x)			(MyConnect(x) && IsOper(x))
 
 /* String manipulation macros */
 
