@@ -23,7 +23,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.12 1999/05/08 20:40:43 lusky Exp $
+ * $Id: h.h,v 1.13 1999/05/09 08:19:25 lusky Exp $
  *
  */
 
@@ -203,6 +203,8 @@ extern	void	sendto_channel_type_notice(aClient *, aChannel *, int, char *);
 extern	aConfItem	*match_Dline(unsigned long);
 extern	int	show_lusers(aClient *, aClient *, int, char **);
 extern	int	nickkilldone(aClient *, aClient *, int, char **,ts_val,char *);
+extern	char	*show_iline_prefix(aClient *,aConfItem *,char *);
+extern	int sendto_slaves(aClient *, char *, char *, int, char **);
 /* END Missing definitions */
 
 /*VARARGS2*/

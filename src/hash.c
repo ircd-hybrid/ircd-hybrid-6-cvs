@@ -20,7 +20,7 @@
 #ifndef lint
 static char sccsid[] = "@(#)hash.c	2.10 03 Jul 1993 (C) 1991 Darren Reed";
 
-static char *rcs_version = "$Id: hash.c,v 1.4 1998/11/25 23:44:51 db Exp $";
+static char *rcs_version = "$Id: hash.c,v 1.5 1999/05/09 08:19:26 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -490,7 +490,7 @@ int	m_hash(aClient *cptr,aClient *sptr,int parc,char *parv[])
       else if(!strcasecmp(parv[1],"Diphash"))
 	{
 	  tmptr = localtime(&NOW);
-	  strftime(timebuffer, MAX_DATE_STRING, "%y%m%d%H%M", tmptr);
+	  strftime(timebuffer, MAX_DATE_STRING, "%Y%m%d%H%M", tmptr);
 	  (void)sprintf(hash_log_file,"%s/hash/iphash.%s",
 			DPATH,timebuffer);
 
@@ -522,7 +522,7 @@ int	m_hash(aClient *cptr,aClient *sptr,int parc,char *parv[])
       if (ch == 'L' || ch == 'l')
 	{
 	  tmptr = localtime(&NOW);
-	  strftime(timebuffer, MAX_DATE_STRING, "%y%m%d%H%M", tmptr);
+	  strftime(timebuffer, MAX_DATE_STRING, "%Y%m%d%H%M", tmptr);
 	  (void)sprintf(hash_log_file,"%s/hash/%cdump.%s",
 			DPATH,ch,timebuffer);
 	  showlist = 1;

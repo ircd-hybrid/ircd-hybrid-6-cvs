@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.40 1999/05/08 20:40:46 lusky Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.41 1999/05/09 08:19:27 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -445,7 +445,7 @@ static	time_t	check_pings(time_t currenttime)
   int die_index=0;			/* index into list */
   char ping_time_out_buffer[64];	/* blech that should be a define */
 #if defined(IDLE_CHECK) && defined(SEND_FAKE_KILL_TO_CLIENT)
-  int		fakekill;
+  int		fakekill=0;
 #endif /* IDLE_CHECK && SEND_FAKE_KILL_TO_CLIENT */
 
 					/* of dying clients */
@@ -1267,7 +1267,7 @@ normal user.\n");
     char timebuffer[20], filename[200];
 
     tmptr = localtime(&NOW);
-    (void)strftime(timebuffer, 20, "%y%m%d", tmptr);
+    (void)strftime(timebuffer, 20, "%Y%m%d", tmptr);
     ircsprintf(filename, "%s.%s", klinefile, timebuffer);
     if ((fd = openconf(filename)) == -1)
       {

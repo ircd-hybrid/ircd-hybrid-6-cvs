@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: sys.h,v 1.5 1998/12/20 02:59:50 lusky Exp $
+ * $Id: sys.h,v 1.6 1999/05/09 08:19:25 lusky Exp $
  */
 
 #ifndef	__sys_include__
@@ -43,7 +43,7 @@
 #include <stdlib.h>
 #endif
 
-#if defined( HAVE_STRINGS_H )
+#if defined( HAVE_STRINGS_H ) && !defined( __GLIBC__ )
 #include <strings.h>
 #else
 # if defined( HAVE_STRING_H )
