@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.131 1999/07/12 06:30:35 tomh Exp $
+ *  $Id: s_user.c,v 1.132 1999/07/13 04:17:45 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -2018,7 +2018,7 @@ static	int	m_message(aClient *cptr,
       /* special case opers@server */
       if(!strcasecmp(nick,"opers") && IsAnOper(sptr))
 	{
-	  sendto_realops("To opers: From %s: %s",parv[0],sptr->name);
+	  sendto_realops("To opers: From %s: %s",sptr->name,parv[2]);
 	  return 0;
 	}
 	
