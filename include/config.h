@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.143 2001/12/06 21:15:59 leeh Exp $
+ * $Id: config.h,v 1.144 2001/12/07 03:22:15 jdc Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -554,14 +554,6 @@
  *  Recommended value is 4 times MAXSENDQLENGTH.
  */
 #define BUFFERPOOL (MAXSENDQLENGTH * 4)
-
-/* IRC_UID IRC_GID - user and group id ircd should switch to if run as root
- * If you start the server as root but wish to have it run as another user,
- * define IRC_UID to that UID.  This should only be defined if you are running
- * as root and even then perhaps not.
- */
-#define IRC_UID 1001
-#define IRC_GID 31
 
 /* CLIENT_FLOOD - client excess flood threshold
  * this controls the number of bytes the server will allow a client to
