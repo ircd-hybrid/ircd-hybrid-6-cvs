@@ -1,7 +1,7 @@
 /*
  * viconf.c
  *
- * $Id: viconf.c,v 1.11 2000/10/26 03:22:04 lusky Exp $
+ * $Id: viconf.c,v 1.12 2001/07/02 03:13:48 wcampbel Exp $
  */
 #include <stdio.h>
 #include <unistd.h>
@@ -17,11 +17,6 @@
 /* wait.h is in /include on solaris, likely on other SYSV machines as well
  * but wait.h is normally in /include/sys on BSD boxen,
  * probably we should have an #ifdef SYSV?
- * -Dianora
- */
-/*
- * USE_RCS assumes "ci" is in PATH, I suppose we should make
- * this CI_PATH or some such in config.h
  * -Dianora
  */
 
@@ -60,21 +55,6 @@ int main(int argc, char *argv[])
       exit(errno);
     }
 
-#ifdef USE_RCS
-  switch(fork())
-    {
-    case -1:
-      fprintf(stderr, "error forking, %d\n", errno);
-      exit(errno);
-    case 0:		/* Child */
-      execlp("ci", "ci", "-l", filename, NULL);
-      fprintf(stderr, "error running ci, %d\n", errno);
-      exit(errno);
-    default:
-      wait(0);
-    }
-#endif
-
   /* ed config file */
   switch(fork())
     {
@@ -90,21 +70,6 @@ int main(int argc, char *argv[])
     default:
       wait(0);
     }
-
-#ifdef USE_RCS
-  switch(fork())
-    {
-    case -1:
-      fprintf(stderr, "error forking, %d\n", errno);
-      exit(errno);
-    case 0:		/* Child */
-      execlp("ci", "ci", "-l", filename, NULL);
-      fprintf(stderr, "error running ci, %d\n", errno);
-      exit(errno);
-    default:
-      wait(0);
-    }
-#endif
 
   unlink(lockpath);
   return 0;
