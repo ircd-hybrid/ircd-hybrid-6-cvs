@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.183 1999/07/23 05:11:12 tomh Exp $
+ *   $Id: s_serv.c,v 1.184 1999/07/23 05:41:23 db Exp $
  */
 
 #define CAPTAB
@@ -62,21 +62,6 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <time.h>
-
-
-#ifdef NEED_SPLITCODE
-extern int server_was_split;            /* defined in channel.c */
-extern time_t server_split_time;        /* defined in channel.c */
-
-#ifdef SPLIT_PONG
-extern int got_server_pong;             /* defined in channel.c */
-#endif /* SPLIT_PONG */
-
-#if defined(PRESERVE_CHANNEL_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT)
-extern void remove_empty_channels();    /* defined in channel.c */
-#endif /* PRESERVE_CHANNEL_ON_SPLIT NO_JOIN_ON_SPLIT */
-
-#endif /* NEED_SPLITCODE */
 
 extern fdlist serv_fdlist;
 
