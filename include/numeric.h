@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: numeric.h,v 1.15 1999/07/28 07:44:15 tomh Exp $
+ * $Id: numeric.h,v 1.16 1999/12/23 07:10:51 lusky Exp $
  */
 #ifndef INCLUDED_numeric_h
 #define INCLUDED_numeric_h
@@ -335,7 +335,6 @@ extern const char* form_str(int);
 #define ERR_MODELESS         477        /* ircu numeric -db */
 #define ERR_BANLISTFULL      478        /* I stole the numeric from ircu -db */
 #define ERR_BADCHANNAME      479
-#define ERR_JUPEDCHAN        480        /* co-ordinate later with ircu/ircnet */
 
 #define ERR_NOPRIVILEGES     481
 #define ERR_CHANOPRIVSNEEDED 482
