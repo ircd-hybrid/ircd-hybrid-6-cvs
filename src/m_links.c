@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_links.c,v 1.1 1999/07/29 02:23:20 tomh Exp $
+ *   $Id: m_links.c,v 1.2 1999/09/10 04:54:19 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -122,7 +122,7 @@ int m_links(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
   if(!IsAnOper(sptr))
     {
       /* reject non local requests */
-      if(!MyConnect(sptr))
+      if(!MyClient(sptr))
         return 0;
 
       if((last_used + PACE_WAIT) > CurrentTime)

@@ -18,7 +18,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: packet.c,v 1.22 1999/09/04 20:21:14 lusky Exp $
+ *   $Id: packet.c,v 1.23 1999/09/10 04:54:19 lusky Exp $
  */ 
 #include "packet.h"
 #include "client.h"
@@ -225,7 +225,7 @@ int dopacket(aClient *cptr, char *buffer, size_t length)
     }while(!done_unzip);
 #endif
   cptr->count = ch1 - cptrbuf;
-  return 0;
+  return 1;
 }
 
 
@@ -294,7 +294,7 @@ int client_dopacket(struct Client *cptr, char *buffer, size_t length)
     return exit_client(cptr, cptr, &me, 
             (cptr->flags & FLAGS_SENDQEX) ? "SendQ exceeded" : "Dead socket");
   }
-  return 0;
+  return 1;
 }
 
 
