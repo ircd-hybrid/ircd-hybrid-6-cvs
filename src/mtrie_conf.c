@@ -43,7 +43,7 @@
  *
  * Diane Bruce -db (db@db.net)
  *
- * $Id: mtrie_conf.c,v 1.72 2001/06/04 01:09:34 db Exp $
+ * $Id: mtrie_conf.c,v 1.73 2001/06/04 03:29:17 greg Exp $
  */
 #include "mtrie_conf.h"
 #include "class.h"
@@ -1504,9 +1504,13 @@ static void report_sub_mtrie(aClient *sptr, int flags, DOMAIN_LEVEL *dl_ptr)
                       /* Non local opers do not need to know about
                        * I lines that do spoofing
                        */
+#ifdef SPOOF_NOTICE
                       if(!(MyConnect(sptr) && IsAnOper(sptr))
                          && IsConfDoSpoofIp(aconf))
                         continue;
+#else
+                      if (IsConfDoSpoofIp(aconf)) continue;
+#endif
 
                       c = 'I';
 #ifdef LITTLE_I_LINES
@@ -1559,9 +1563,14 @@ static void report_sub_mtrie(aClient *sptr, int flags, DOMAIN_LEVEL *dl_ptr)
                       /* Non local opers do not need to know about
                        * I lines that do spoofing
                        */
+#ifdef SPOOF_NOTICE
                       if(!(MyConnect(sptr) && IsAnOper(sptr))
                          && IsConfDoSpoofIp(aconf))
                         continue;
+#else
+                      if (IsConfDoSpoofIp(aconf)) continue;
+#endif
+
                       c = 'I';
 #ifdef LITTLE_I_LINES
                       if(IsConfLittleI(aconf))
