@@ -19,12 +19,22 @@
  *
  * "m_gline.h". - Headers file.
  *
- * $Id: m_gline.h,v 1.2 1999/07/25 17:23:19 db Exp $
+ * $Id: m_gline.h,v 1.3 1999/07/30 06:48:10 tomh Exp $
  *
  */
 
 #ifndef INCLUDED_m_gline_h
 #define INCLUDED_m_gline_h
+#ifndef INCLUDED_config_h
+#include "config.h"
+#endif
+#ifndef INCLUDED_ircd_defs_h
+#include "ircd_defs.h"
+#endif
+#ifndef INCLUDED_sys_types_h
+#include <sys/types.h>
+#define INCLUDED_sys_types_h
+#endif
 
 struct Client;
 struct ConfItem;

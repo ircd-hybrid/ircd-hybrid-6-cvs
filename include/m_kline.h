@@ -16,19 +16,26 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_kline.h,v 1.3 1999/07/21 05:45:03 tomh Exp $
+ * $Id: m_kline.h,v 1.4 1999/07/30 06:48:11 tomh Exp $
  */
+#ifndef INCLUDED_m_kline_h
+#define INCLUDED_m_kline_h
 
-typedef struct PKDlines
+struct Client;
+
+struct PKDlines
 {
-        struct PKDlines *next;
-        aClient *sptr, *rcptr;
-        char *user; /* username of K/D lined user */
-        char *host; /* hostname of K/D lined user */
-        char *reason; /* reason they are K/D lined */
-        char *when; /* when the K/D line was set */
-        int type;
-} aPendingLine;
+  struct PKDlines* next;
+  struct Client*   sptr;
+  struct Client*   rcptr;
+  char*            user; /* username of K/D lined user */
+  char*            host; /* hostname of K/D lined user */
+  char*            reason; /* reason they are K/D lined */
+  char*            when; /* when the K/D line was set */
+  int              type;
+};
+
+typedef struct PKDlines aPendingLine;
 
 /*
  * This number represents the number of non-wildcard characters
@@ -38,3 +45,5 @@ typedef struct PKDlines
  */
 
 #define NONWILDCHARS 4
+
+#endif /* INCLUDED_m_kline_h */
