@@ -25,7 +25,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.27 1998/12/01 21:54:00 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.28 1998/12/02 08:04:12 db Exp $";
 
 #endif
 
@@ -2057,8 +2057,10 @@ static	int	m_message(aClient *cptr,
 	    }
 	  else
 	    sendto_channel_type(cptr, sptr, chptr, type,
-				":%s %s %s :%s",
-				parv[0], cmd, nick,
+				":%s %s %c%s :%s",
+				parv[0], cmd,
+				(type==MODE_CHANOP)?'@':'+',
+				nick,
 				parv[2]);
 
 #ifdef ANTI_SPAMBOT_EXTRA
