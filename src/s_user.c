@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.266 2003/08/21 23:59:26 ievil Exp $
+ *  $Id: s_user.c,v 1.267 2003/10/13 11:33:13 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -798,6 +798,7 @@ static int register_user(aClient *cptr, aClient *sptr,
       return exit_client(NULL, sptr, &me, "Ghost");
     }
   add_client_to_llist(&(sptr->servptr->serv->users), sptr);
+  sptr->servptr->serv->usercnt++;
 
 /* Increment our total user count here */
   if (++Count.total > Count.max_tot)

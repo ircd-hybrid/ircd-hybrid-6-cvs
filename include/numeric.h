@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: numeric.h,v 1.22 2003/08/16 19:58:33 ievil Exp $
+ * $Id: numeric.h,v 1.23 2003/10/13 11:33:11 ievil Exp $
  */
 #ifndef INCLUDED_numeric_h
 #define INCLUDED_numeric_h
@@ -141,6 +141,9 @@ extern const char* form_str(int);
 #define RPL_CREATED          003
 #define RPL_MYINFO           004
 #define RPL_ISUPPORT         005
+
+#define RPL_MAP              015
+#define RPL_MAPEND           017
 
 /*
  * Numeric replies from server commands.

@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.72 2003/10/13 11:30:15 ievil Exp $
+ * $Id: client.h,v 1.73 2003/10/13 11:33:11 ievil Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -101,6 +101,7 @@ struct Server
   struct Client*   servers;     /* Servers on this server */
   struct Client*   users;       /* Users on this server */
   int		   tsversion;   /* ts version sent in SVINFO */
+  unsigned int     usercnt;     /* total number of users on this server */
 };
 
 struct Client

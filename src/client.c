@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.78 2003/06/24 03:57:16 ievil Exp $
+ *  $Id: client.c,v 1.79 2003/10/13 11:33:13 ievil Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -1173,7 +1173,10 @@ static void exit_one_client(struct Client *cptr, struct Client *sptr, struct Cli
         ts_warn("server %s without servptr!", sptr->name);
     }
   else if (sptr->servptr && sptr->servptr->serv)
+    {
       del_client_from_llist(&(sptr->servptr->serv->users), sptr);
+      sptr->servptr->serv->usercnt--;
+    }
   /* there are clients w/o a servptr: unregistered ones */
 
   /*
