@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: numeric.h,v 1.4 1998/11/17 16:01:51 db Exp $
+ * $Id: numeric.h,v 1.5 1998/12/02 08:43:49 db Exp $
  */
 #ifdef TOPIC_INFO
 # define RPL_TOPICWHOTIME 333
@@ -159,7 +159,6 @@
 
 #define RPL_UMODEIS          221
 
-#define RPL_STATSXLINE	     222
 #define RPL_STATSFLINE	     224
 #define RPL_STATSDLINE	     225
 
@@ -171,7 +170,8 @@
 #define	RPL_STATSOLINE       243
 #define	RPL_STATSHLINE       244
 #define	RPL_STATSSLINE       245
-#define	RPL_STATSULINE       246
+#define RPL_STATSXLINE	     247
+#define	RPL_STATSULINE       248
 #define	RPL_STATSDEBUG	     249
 
 #define	RPL_LUSERCLIENT      251
