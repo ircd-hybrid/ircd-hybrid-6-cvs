@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: listener.c,v 1.8 1999/07/18 07:16:50 tomh Exp $
+ *  $Id: listener.c,v 1.9 1999/07/18 19:53:03 tomh Exp $
  */
 #include "listener.h"
 #include "s_bsd.h"
@@ -28,6 +28,7 @@
 
 #include <assert.h>
 #include <string.h>
+#include <errno.h>
 #include <stdlib.h>
 #include <netdb.h>
 #include <sys/socket.h>

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.23 1999/07/17 22:12:49 db Exp $
+ *   $Id: s_debug.c,v 1.24 1999/07/18 19:53:04 tomh Exp $
  */
 #include "struct.h"
 #include "s_conf.h"
@@ -27,6 +27,7 @@
 #include "send.h"
 
 #include <stdarg.h>
+#include <errno.h>
 
 extern	void	count_whowas_memory(int *, u_long *);
 extern  void    count_ip_hash(int *,u_long *);	  /* defined in s_conf.c */

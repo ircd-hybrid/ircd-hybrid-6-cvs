@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.27 1999/07/18 07:16:50 tomh Exp $
+ *   $Id: m_kline.c,v 1.28 1999/07/18 19:53:03 tomh Exp $
  */
 
 #include "struct.h"
@@ -40,6 +40,7 @@
 #include <signal.h>
 #include <fcntl.h>
 #include <string.h>
+#include <errno.h>
 
 extern int rehashed;
 extern int dline_in_progress;	/* defined in ircd.c */
