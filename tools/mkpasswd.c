@@ -5,8 +5,11 @@
 ** md5 patch by Walter Campbell <wcampbel@botbay.net>
 ** Modernization, getopt, etc for the Hybrid IRCD team
 **
-** $Id: mkpasswd.c,v 1.9 2001/07/18 03:10:01 lusky Exp $
+** $Id: mkpasswd.c,v 1.10 2001/07/18 03:13:51 lusky Exp $
 */
+
+#include "setup.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
