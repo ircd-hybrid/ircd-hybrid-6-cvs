@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.53 2003/10/13 11:26:43 ievil Exp $
+ *  $Id: m_gline.c,v 1.54 2003/10/13 16:23:14 ievil Exp $
  */
 #include "m_commands.h"
 #include "m_gline.h"
@@ -1005,7 +1005,7 @@ static int majority_gline(aClient *sptr,
               (irccmp(gline_pending_ptr->oper_server1,oper_server) == 0) )
             {
               /* This oper or server has already "voted" */
-              sendto_realops("oper or server has already voted [%s!%s@%s] on %s"
+              sendto_realops("oper or server has already voted [%s!%s@%s] on %s",
 	                     oper_nick, oper_user, oper_host, oper_server);
               return NO;
             }
@@ -1019,7 +1019,7 @@ static int majority_gline(aClient *sptr,
                   (irccmp(gline_pending_ptr->oper_server2,oper_server)==0))
                 {
                   /* This oper or server has already "voted" */
-                  sendto_realops("oper or server has already voted [%s!%s@%s] on %s"
+                  sendto_realops("oper or server has already voted [%s!%s@%s] on %s",
 		                 oper_nick, oper_user, oper_host, oper_server);
                   return NO;
                 }
