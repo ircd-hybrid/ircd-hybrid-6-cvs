@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.56 2001/10/08 21:33:37 db Exp $
+ * $Id: res.c,v 1.57 2001/10/08 23:17:11 db Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
@@ -982,7 +982,8 @@ static int proc_answer(ResRQ* request, HEADER* header,
 #ifdef DEBUG
       Debug((DEBUG_INFO,"proc_answer: type:%d for:%s", type, hostbuf));
 #endif
-      break;
+      current += rd_length;
+    break;
     }
   }
   return answer_count;
