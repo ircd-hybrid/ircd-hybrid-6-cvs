@@ -1,7 +1,7 @@
 #
 # Makefile.in for ircd/src
 #
-# $Id: Makefile.in,v 1.23 1999/07/14 00:24:59 db Exp $
+# $Id: Makefile.in,v 1.24 1999/07/15 02:52:41 db Exp $
 #
 CC = @CC@
 RM = @RM@
@@ -129,7 +129,7 @@ clean:
 	${RM} -f ${OBJS} *~ ircd.core core ircd 
 
 distclean: clean
-	${RM} -f Makefile version.c.last .depend
+	${RM} -f Makefile version.c.last
 
 include .depend
 
