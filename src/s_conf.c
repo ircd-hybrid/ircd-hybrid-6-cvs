@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.63 1999/06/22 01:01:45 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.64 1999/06/22 04:00:19 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -1709,7 +1709,7 @@ int 	initconf(int opt, int fd,int use_include)
   aConfItem *include_conf = NULL;
   unsigned long ip;
   unsigned long ip_mask;
-  int sendq;
+  int sendq = 0;
 
   (void)dgets(-1, NULL, 0); /* make sure buffer is at empty pos */
   while ((i = dgets(fd, line, sizeof(line) - 1)) > 0)

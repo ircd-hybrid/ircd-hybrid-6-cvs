@@ -21,9 +21,9 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-
-static char *rcs_version = "$Id: m_unkline.c,v 1.1 1999/06/22 01:01:42 db Exp $";
-
+#ifndef lint
+static char *rcs_version = "$Id: m_unkline.c,v 1.2 1999/06/22 04:00:19 lusky Exp $";
+#endif
 
 #include "struct.h"
 
@@ -61,7 +61,7 @@ extern int rehashed;
 extern aConfItem *temporary_klines;	/* defined in s_conf.c */
 extern int dline_in_progress;	/* defined in ircd.c */
 int bad_tld(char *);
-extern safe_write(aClient *,char *,char *,int,char *);
+extern int safe_write(aClient *,char *,char *,int,char *);
 extern char *smalldate(time_t);		/* defined in s_misc.c */
 static int flush_write(aClient *,int,char *,int,char *);
 static int remove_tkline_match(char *,char *);
