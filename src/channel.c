@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.247 2004/03/18 02:53:41 ievil Exp $
+ * $Id: channel.c,v 1.248 2004/05/23 17:26:33 ievil Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -58,13 +58,9 @@ time_t server_split_time;
 struct Channel *channel = NullChn;
 
 static  void    add_invite (struct Client *, struct Channel *);
-static  int     add_banid (struct Client *, struct Channel *, char *);
-static  int     add_exceptid(struct Client *, struct Channel *, char *);
+static  int     add_id (struct Client *, struct Channel *, char *, int);
 static  int     can_join (struct Client *, struct Channel *, char *,int *);
-static  int     del_banid (struct Channel *, char *);
-static  int     del_exceptid (struct Channel *, char *);
-static  int     add_invexid(struct Client *, struct Channel *, char *);
-static  int     del_invexid (struct Channel *, char *);
+static  int     del_id (struct Channel *, char *, int);
 static  void    free_bans_exceptions_denies(struct Channel *);
 static  void    free_a_ban_list(Link *ban_ptr);
 static  int     is_banned (struct Client *, struct Channel *);
@@ -152,309 +148,135 @@ static char* make_nick_user_host(const char* nick,
   return namebuf;
 }
 
-/*
- * Ban functions to work with mode +b
- */
-/* add_banid - add an id to be banned to the channel  (belongs to cptr) */
 
-static  int     add_banid(struct Client *cptr, struct Channel *chptr, char *banid)
+/* Generic mode changer for hybrid-6 - arnvid
+ * add an id to the correct list ;)
+ */
+static int add_id(struct Client *cptr, struct Channel *chptr, char *banid, int type)
 {
-  Link  *ban;
+  Link **list;
+  Link *tmp;
+  
+  if (!banid)
+    return 0;
 
   /* dont let local clients overflow the banlist */
   if ((!IsServer(cptr)) && (chptr->num_bed >= MAXBANS))
 	  if (MyClient(cptr))
 	    {
 	      sendto_one(cptr, form_str(ERR_BANLISTFULL),
-                   me.name, cptr->name,
-                   chptr->chname, banid);
+                    me.name, cptr->name, chptr->chname, banid);
 	      return -1;
 	    }
   
   if (MyClient(cptr))
     collapse(banid);
 
-  for (ban = chptr->banlist; ban; ban = ban->next)
-	  if (match(BANSTR(ban), banid))
-	    return -1;
-
-  ban = make_link();
-  memset(ban, 0, sizeof(Link));
-  ban->flags = CHFL_BAN;
-  ban->next = chptr->banlist;
-
-#ifdef BAN_INFO
-
-  ban->value.banptr = (aBan *)MyMalloc(sizeof(aBan));
-  ban->value.banptr->banstr = (char *)MyMalloc(strlen(banid)+1);
-  (void)strcpy(ban->value.banptr->banstr, banid);
-
-#ifdef USE_UH
-  if (IsPerson(cptr))
+  switch (type)
     {
-      ban->value.banptr->who =
-        (char *)MyMalloc(strlen(cptr->name)+
-                         strlen(cptr->username)+
-                         strlen(cptr->host)+3);
-      ircsprintf(ban->value.banptr->who, "%s!%s@%s",
-                 cptr->name, cptr->username, cptr->host);
-    }
-  else
-    {
-#endif
-      ban->value.banptr->who = (char *)MyMalloc(strlen(cptr->name)+1);
-      (void)strcpy(ban->value.banptr->who, cptr->name);
-#ifdef USE_UH
-    }
-#endif
-
-  ban->value.banptr->when = CurrentTime;
-
-#else
-
-  ban->value.cp = (char *)MyMalloc(strlen(banid)+1);
-  (void)strcpy(ban->value.cp, banid);
-
-#endif  /* #ifdef BAN_INFO */
-
-  chptr->banlist = ban;
-  chptr->num_bed++;
+    case CHFL_BAN:
+      list = &chptr->banlist; 
+      break;
+    case CHFL_EXCEPTION:
+      list = &chptr->exceptlist;
+      break;
+    case CHFL_INVEX:
+      list = &chptr->invexlist;
+      break;
+    default:
+      sendto_realops("add_id() called with unknown ban type %d! call the hybteam.", type);
   return 0;
-}
+  }
 
-/* add_exceptid - add an id to the exception list for the channel  
- * (belongs to cptr) 
- */
+  /*  only check for matching bans if the klines are from the local server */
+  /*  fixes possible desync */
 
-static  int     add_exceptid(struct Client *cptr, struct Channel *chptr, char *eid)
-{
-  Link  *ex, *ban;
-
-  /* dont let local clients overflow the banlist */
-  if ((!IsServer(cptr)) && (chptr->num_bed >= MAXBANS))
     if (MyClient(cptr))
       {
-        sendto_one(cptr, form_str(ERR_BANLISTFULL),
-                   me.name, cptr->name,
-                   chptr->chname, eid);
+    for (tmp = *list; tmp; tmp = tmp->next)
+      if (match(BANSTR(tmp), banid))
         return -1;
       }
-
-  if (MyClient(cptr))
-    (void)collapse(eid);
-
-  for (ban = chptr->exceptlist; ban; ban = ban->next)
-	  if (match(BANSTR(ban), eid))
-	    return -1;
-  
-
-  ex = make_link();
-  memset(ex, 0, sizeof(Link));
-  ex->flags = CHFL_EXCEPTION;
-  ex->next = chptr->exceptlist;
+  tmp = make_link();
+  memset(tmp, 0, sizeof(Link));
+  tmp->flags = type;
+  tmp->next = *list;
 
 #ifdef BAN_INFO
 
-  ex->value.banptr = (aBan *)MyMalloc(sizeof(aBan));
-  ex->value.banptr->banstr = (char *)MyMalloc(strlen(eid)+1);
-  (void)strcpy(ex->value.banptr->banstr, eid);
+  tmp->value.banptr = (aBan *)MyMalloc(sizeof(aBan));
+  tmp->value.banptr->banstr = (char *)MyMalloc(strlen(banid)+1);
+  (void)strcpy(tmp->value.banptr->banstr, banid);
+  
 
 #ifdef USE_UH
   if (IsPerson(cptr))
     {
-      ex->value.banptr->who =
+      tmp->value.banptr->who =
         (char *)MyMalloc(strlen(cptr->name)+
                          strlen(cptr->username)+
                          strlen(cptr->host)+3);
-      ircsprintf(ex->value.banptr->who, "%s!%s@%s",
+      ircsprintf(tmp->value.banptr->who, "%s!%s@%s",
                  cptr->name, cptr->username, cptr->host);
     }
   else
     {
 #endif
-      ex->value.banptr->who = (char *)MyMalloc(strlen(cptr->name)+1);
-      (void)strcpy(ex->value.banptr->who, cptr->name);
+      tmp->value.banptr->who = (char *)MyMalloc(strlen(cptr->name)+1);
+      (void)strcpy(tmp->value.banptr->who, cptr->name);
 #ifdef USE_UH
     }
 #endif
 
-  ex->value.banptr->when = CurrentTime;
+  tmp->value.banptr->when = CurrentTime;
 
 #else
 
-  ex->value.cp = (char *)MyMalloc(strlen(eid)+1);
-  (void)strcpy(ex->value.cp, eid);
+  tmp->value.cp = (char *)MyMalloc(strlen(banid)+1);
+  (void)strcpy(tmp->value.cp, banid);
 
 #endif  /* #ifdef BAN_INFO */
 
-  chptr->exceptlist = ex;
+  *list = tmp;
   chptr->num_bed++;
   return 0;
+  
 }
 
-/*
- *
- * "del_banid - delete an id belonging to cptr
- * if banid is null, deleteall banids belonging to cptr."
- *
- * from orabidoo
- */
-static  int     del_banid(struct Channel *chptr, char *banid)
+
+static int del_id(struct Channel *chptr, char *banid, int type)
 {
-  Link **ban;
+  Link **list;
   Link *tmp;
 
   if (!banid)
     return -1;
-  for (ban = &(chptr->banlist); *ban; ban = &((*ban)->next))
-#ifdef BAN_INFO
-    if (irccmp(banid, (*ban)->value.banptr->banstr)==0)
-#else
-      if (irccmp(banid, (*ban)->value.cp)==0)
-#endif
-        {
-          tmp = *ban;
-          *ban = tmp->next;
-#ifdef BAN_INFO
-          MyFree(tmp->value.banptr->banstr);
-          MyFree(tmp->value.banptr->who);
-          MyFree(tmp->value.banptr);
-#else
-          MyFree(tmp->value.cp);
-#endif
-          free_link(tmp);
-	  /* num_bed should never be < 0 */
-	  if(chptr->num_bed > 0)
-	    chptr->num_bed--;
-	  else
-	    chptr->num_bed = 0;
-          break;
-        }
-  return 0;
-}
 
-/*
- * del_exceptid - delete an id belonging to cptr
- *
- * from orabidoo
- */
-static  int     del_exceptid(struct Channel *chptr, char *eid)
-{
-  Link **ex;
-  Link *tmp;
-
-  if (!eid)
-    return -1;
-  for (ex = &(chptr->exceptlist); *ex; ex = &((*ex)->next))
-    if (irccmp(eid, BANSTR(*ex)) == 0)
+  switch (type)
       {
-        tmp = *ex;
-        *ex = tmp->next;
-#ifdef BAN_INFO
-        MyFree(tmp->value.banptr->banstr);
-        MyFree(tmp->value.banptr->who);
-        MyFree(tmp->value.banptr);
-#else
-        MyFree(tmp->value.cp);
-#endif
-        free_link(tmp);
-	/* num_bed should never be < 0 */
-	if(chptr->num_bed > 0)
-	  chptr->num_bed--;
-	else
-	  chptr->num_bed = 0;
+    case CHFL_BAN:
+      list = &chptr->banlist;
         break;
-      }
+    case CHFL_EXCEPTION:
+      list = &chptr->exceptlist;
+      break;
+    case CHFL_INVEX:
+      list = &chptr->invexlist;
+      break;
+    default:
+      sendto_realops("del_id() called with unknown ban type %d! call the hybteam.", type);  
   return 0;
-}
-
-/* add_invexid - add an id to the exception list for the channel  
- * (belongs to cptr) - modded for invex by ievil - 2003
- */
-
-static  int     add_invexid(struct Client *cptr, struct Channel *chptr, char *eid)
-{
-  Link  *ie, *ban;
-
-  /* dont let local clients overflow the banlist */
-  if ((!IsServer(cptr)) && (chptr->num_bed >= MAXBANS))
-    if (MyClient(cptr))
-      {
-        sendto_one(cptr, form_str(ERR_BANLISTFULL),
-                   me.name, cptr->name,
-                   chptr->chname, eid);
-        return -1;
       }
 
-  if (MyClient(cptr))
-    (void)collapse(eid);
-
-  for (ban = chptr->invexlist; ban; ban = ban->next)
-	  if (match(BANSTR(ban), eid))
-	    return -1;
-  
-
-  ie = make_link();
-  memset(ie, 0, sizeof(Link));
-  ie->flags = CHFL_INVEX;
-  ie->next = chptr->invexlist;
-
+  for (; *list; list = &((*list)->next))
 #ifdef BAN_INFO
-
-  ie->value.banptr = (aBan *)MyMalloc(sizeof(aBan));
-  ie->value.banptr->banstr = (char *)MyMalloc(strlen(eid)+1);
-  (void)strcpy(ie->value.banptr->banstr, eid);
-
-#ifdef USE_UH
-  if (IsPerson(cptr))
-    {
-      ie->value.banptr->who =
-        (char *)MyMalloc(strlen(cptr->name)+
-                         strlen(cptr->username)+
-                         strlen(cptr->host)+3);
-      ircsprintf(ie->value.banptr->who, "%s!%s@%s",
-                 cptr->name, cptr->username, cptr->host);
-    }
-  else
-    {
-#endif
-      ie->value.banptr->who = (char *)MyMalloc(strlen(cptr->name)+1);
-      (void)strcpy(ie->value.banptr->who, cptr->name);
-#ifdef USE_UH
-    }
-#endif
-
-  ie->value.banptr->when = CurrentTime;
-
+    if (irccmp(banid, (*list)->value.banptr->banstr)==0)
 #else
-
-  ie->value.cp = (char *)MyMalloc(strlen(eid)+1);
-  (void)strcpy(ie->value.cp, eid);
-
-#endif  /* #ifdef BAN_INFO */
-
-  chptr->invexlist = ie;
-  chptr->num_bed++;
-  return 0;
-}
-
-/*
- * del_invexid - delete an id belonging to cptr
- *
- * from orabidoo - modded for +I/invex by ievil
- */
-static  int     del_invexid(struct Channel *chptr, char *eid)
-{
-  Link **ie;
-  Link *tmp;
-
-  if (!eid)
-    return -1;
-  for (ie = &(chptr->invexlist); *ie; ie = &((*ie)->next))
-    if (irccmp(eid, BANSTR(*ie)) == 0)
+      if (irccmp(banid, (*list)->value.cp)==0)
+#endif   
       {
-        tmp = *ie;
-        *ie = tmp->next;
+        tmp = *list;
+        *list = tmp->next;
 #ifdef BAN_INFO
         MyFree(tmp->value.banptr->banstr);
         MyFree(tmp->value.banptr->who);
@@ -1450,8 +1272,8 @@ void set_channel_mode(struct Client *cptr,
 	    break;
 #endif
 
-          if (!(((whatt & MODE_ADD) && !add_exceptid(sptr, chptr, arg)) ||
-                ((whatt & MODE_DEL) && !del_exceptid(chptr, arg))))
+          if (!(((whatt & MODE_ADD) && !add_id(sptr, chptr, arg, CHFL_EXCEPTION)) ||
+                ((whatt & MODE_DEL) && !del_id(chptr, arg, CHFL_EXCEPTION))))
             break;
 
           /* This stuff can go back in when all servers understand +e 
@@ -1548,8 +1370,8 @@ void set_channel_mode(struct Client *cptr,
 	    break;
 #endif
 
-          if (!(((whatt & MODE_ADD) && !add_invexid(sptr, chptr, arg)) ||
-                ((whatt & MODE_DEL) && !del_invexid(chptr, arg))))
+          if (!(((whatt & MODE_ADD) && !add_id(sptr, chptr, arg, CHFL_INVEX)) ||
+                ((whatt & MODE_DEL) && !del_id(chptr, arg, CHFL_INVEX))))
             break;
 
           /* This stuff can go back in when all servers understand +I
@@ -1670,8 +1492,8 @@ void set_channel_mode(struct Client *cptr,
           if (len + tmp + 2 >= MODEBUFLEN)
             break;
 
-          if (!(((whatt & MODE_ADD) && !add_banid(sptr, chptr, arg)) ||
-                ((whatt & MODE_DEL) && !del_banid(chptr, arg))))
+          if (!(((whatt & MODE_ADD) && !add_id(sptr, chptr, arg, CHFL_BAN)) ||
+                ((whatt & MODE_DEL) && !del_id(chptr, arg, CHFL_BAN))))
             break;
 
           *mbufw++ = plus;
