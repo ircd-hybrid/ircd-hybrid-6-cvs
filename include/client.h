@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.42 1999/09/04 20:21:07 lusky Exp $
+ * $Id: client.h,v 1.43 2000/06/09 03:48:22 lusky Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -377,7 +377,7 @@ struct Client
 #define ALL_UMODES   (SEND_UMODES | FLAGS_SERVNOTICE | FLAGS_CCONN | \
                       FLAGS_REJ | FLAGS_SKILL | FLAGS_FULL | FLAGS_SPY | \
                       FLAGS_NCHANGE | FLAGS_OPERWALL | FLAGS_DEBUG | \
-                      FLAGS_BOTS | FLAGS_EXTERNAL )
+                      FLAGS_BOTS | FLAGS_EXTERNAL | FLAGS_LOCOP )
 
 #ifndef OPER_UMODES
 #define OPER_UMODES  (FLAGS_OPER | FLAGS_WALLOP | FLAGS_SERVNOTICE | \

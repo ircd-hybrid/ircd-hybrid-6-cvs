@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.220 2000/06/07 03:51:24 lusky Exp $
+ *  $Id: s_user.c,v 1.221 2000/06/09 03:48:23 lusky Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -119,7 +119,7 @@ static int user_modes_from_c_to_bitmask[] =
   0,            /* L */
   0,            /* M */
   0,            /* N */
-  0,            /* O */
+  FLAGS_LOCOP,  /* O */
   0,            /* P */
   0,            /* Q */
   0,            /* R */
@@ -274,7 +274,7 @@ int show_lusers(struct Client *cptr, struct Client *sptr,
               s_count++;
               break;
             case STAT_CLIENT:
-              if (IsOper(acptr))
+              if (IsAnOper(acptr))
                 o_count++;
 #ifdef  SHOW_INVISIBLE_LUSERS
               if (MyConnect(acptr))
