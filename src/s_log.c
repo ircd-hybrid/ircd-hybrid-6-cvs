@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_log.c,v 1.5 1999/10/14 01:05:42 lusky Exp $
+ *   $Id: s_log.c,v 1.6 1999/10/14 01:36:47 lusky Exp $
  */
 #include "s_log.h"
 #include "irc_string.h"
@@ -120,4 +120,7 @@ void set_log_level(int level)
     logLevel = level;
 }
 
-
+int get_log_level(void)
+{
+  return( logLevel );
+}

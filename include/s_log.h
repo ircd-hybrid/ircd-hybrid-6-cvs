@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: s_log.h,v 1.3 1999/08/01 04:59:52 tomh Exp $
+ * $Id: s_log.h,v 1.4 1999/10/14 01:36:41 lusky Exp $
  */
 #ifndef INCLUDED_s_log_h
 #define INCLUDED_s_log_h
@@ -32,6 +32,7 @@
 
 extern void init_log(const char* filename);
 extern void close_log(void);
+extern int  get_log_level(void);
 extern void set_log_level(int level);
 extern void log(int priority, const char* fmt, ...);
 
