@@ -20,16 +20,21 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.35 1999/07/04 08:51:41 tomh Exp $
+ *  $Id: s_misc.c,v 1.36 1999/07/06 05:42:21 tomh Exp $
  */
 #include "s_conf.h"
 #include "struct.h"
 #include "common.h"
 #include "sys.h"
 #include "numeric.h"
+#include "h.h"
+#include "fdlist.h"
+#include "s_bsd.h"
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <fcntl.h>
+#include <netdb.h>
+
 #if !defined(ULTRIX) && !defined(SGI) && !defined(sequent) && \
     !defined(__convex__)
 # include <sys/param.h>
@@ -44,9 +49,7 @@
 #include <sys/types.h>
 #include <time.h>
 #endif
-#include <netdb.h>
-#include "h.h"
-#include "fdlist.h"
+
 extern fdlist serv_fdlist;
 
 /* LINKLIST */

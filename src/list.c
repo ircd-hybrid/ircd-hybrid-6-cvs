@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu, Computing Center and Jarkko Oikarinen
  *
- * $Id: list.c,v 1.19 1999/07/04 08:51:38 tomh Exp $
+ * $Id: list.c,v 1.20 1999/07/06 05:42:19 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -191,13 +191,12 @@ aClient	*make_client(aClient *from)
       /* cptr->serv = NULL; */
       cptr->status = STAT_UNKNOWN;
       cptr->fd = -1;
-      (void)strcpy(cptr->username, "unknown");
+      strcpy(cptr->username, "unknown");
       cptr->since = cptr->lasttime = cptr->firsttime = timeofday;
       /* cptr->confs = NULL; */
       /* cptr->sockhost[0] = '\0'; */
       /* cptr->buffer[0] = '\0'; */
       /* cptr->username[0] = '\0'; */
-      cptr->authfd = -1;
     }
   else
     { /* from is not NULL */

@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.93 1999/07/05 22:21:25 db Exp $
+ *  $Id: s_conf.c,v 1.94 1999/07/06 05:42:21 tomh Exp $
  */
 #include "s_conf.h"
 #include "class.h"
@@ -28,6 +28,10 @@
 #include "dline_conf.h"
 #include "sys.h"
 #include "numeric.h"
+#include "h.h"
+#include "mtrie_conf.h"
+#include "s_bsd.h"
+
 #if defined(AIX) || defined(DYNIXPTX) || defined(SVR3)
 #include <time.h>
 #endif
@@ -36,9 +40,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <assert.h>
-#include "h.h"
 extern int rehashed;
-#include "mtrie_conf.h"
 
 #include "res.h"    /* gethost_byname, gethost_byaddr */
 
