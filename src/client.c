@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.73 2001/12/07 14:38:46 leeh Exp $
+ *  $Id: client.c,v 1.74 2001/12/08 02:38:17 db Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -1059,10 +1059,13 @@ int check_registered(struct Client* client)
 void release_client_dns_reply(struct Client* client)
 {
   assert(0 != client);
-//  if (client->dns_reply) {
-//    --client->dns_reply->ref_count;
-//    client->dns_reply = 0;
-//  }
+#if 0
+  if (client->dns_reply)
+    {
+      --client->dns_reply->ref_count;
+      client->dns_reply = 0;
+    }
+#endif
 }
 
 /*

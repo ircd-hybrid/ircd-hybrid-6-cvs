@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: msg.h,v 1.21 2001/12/06 20:56:09 leeh Exp $
+ * $Id: msg.h,v 1.22 2001/12/08 02:38:15 db Exp $
  */
 #ifndef INCLUDED_msg_h
 #define INCLUDED_msg_h
@@ -244,7 +244,9 @@ struct Message msgtab[] = {
   { MSG_GLINE,   m_gline,    0, MAXPARA, 1, 0, 0, 0L },
   { MSG_UNGLINE, m_ungline,  0, MAXPARA, 1, 0, 0, 0L },
   { MSG_HASH,    m_hash,     0, MAXPARA, 1, 0, 0, 0L },
-//  { MSG_DNS,     m_dns,      0, MAXPARA, 1, 0, 0, 0L },
+#if notyet
+  { MSG_DNS,     m_dns,      0, MAXPARA, 1, 0, 0, 0L },
+#endif
   { MSG_REHASH,  m_rehash,   0, MAXPARA, 1, 0, 0, 0L },
   { MSG_RESTART, m_restart,  0, MAXPARA, 1, 0, 0, 0L },
   { MSG_DIE, m_die,          0, MAXPARA, 1, 0, 0, 0L },
