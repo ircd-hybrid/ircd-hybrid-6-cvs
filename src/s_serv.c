@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.129 1999/07/08 04:15:52 db Exp $
+ *   $Id: s_serv.c,v 1.130 1999/07/08 06:03:58 tomh Exp $
  */
 
 #define CAPTAB
@@ -970,7 +970,7 @@ int	m_server_estab(aClient *cptr)
     ClearCap(cptr, CAP_ZIP);
 #endif /* ZIP_LINKS */
 
-  sendto_one(cptr,"SVINFO %d %d 0 :%ld", TS_CURRENT, TS_MIN,(ts_val)timeofday);
+  sendto_one(cptr,"SVINFO %d %d 0 :%ld", TS_CURRENT, TS_MIN, timeofday);
   
   det_confs_butmask(cptr, CONF_LEAF|CONF_HUB|CONF_NOCONNECT_SERVER);
   /*

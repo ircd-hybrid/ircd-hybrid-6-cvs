@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.41 1999/07/08 02:04:32 db Exp $
+ *   $Id: send.c,v 1.42 1999/07/08 06:04:00 tomh Exp $
  */
 
 #include "struct.h"
@@ -1748,9 +1748,9 @@ va_dcl
  
 {
   va_list args;
-  static ts_val last = 0;
+  static time_t last = 0;
   static int warnings = 0;
-  register ts_val now;
+  time_t now;
 
   MyVaStart(args, pattern);
  
