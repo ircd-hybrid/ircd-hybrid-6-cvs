@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.176 1999/07/23 02:34:13 db Exp $
+ *  $Id: s_user.c,v 1.177 1999/07/23 05:28:11 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -155,12 +155,6 @@ void free_fluders(aClient *,aChannel *);
 void free_fludees(aClient *);
 #endif
 
-#ifdef NEED_SPLITCODE
-extern int server_was_split;               /* defined in channel.c */
-#if defined(SPLIT_PONG)
-extern int got_server_pong;
-#endif
-#endif
 
 /*
 ** m_functions execute protocol messages on this server:
