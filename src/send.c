@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.81 1999/09/08 06:00:33 lusky Exp $
+ *   $Id: send.c,v 1.82 1999/09/12 02:25:18 lusky Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -241,6 +241,9 @@ send_message(aClient *to, char *msg, int len)
                 sendto_ops("Trying to send to myself! [%s]", msg);
                 return 0;
         }
+
+        if (to->fd < 0)
+                return 0; /* Thou shalt not write to closed descriptors */
 
         if (IsDead(to))
                 return 0; /* This socket has already been marked as dead */
