@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.37 1999/07/07 02:56:55 tomh Exp $
+ *  $Id: s_misc.c,v 1.38 1999/07/07 03:22:55 db Exp $
  */
 #include "s_conf.h"
 #include "struct.h"
@@ -1126,8 +1126,10 @@ void show_opers(aClient *cptr,char *name)
   for(cptr2 = oper_cptr_list; cptr2; cptr2 = cptr2->next_oper_client)
     {
       j++;
-      sendto_one(cptr, ":%s %d %s :%s (%s@%s) Idle: %d",
-		 me.name, RPL_STATSDEBUG, name, cptr2->name,
+      sendto_one(cptr, ":%s %d %s :%s [%c] (%s@%s) Idle: %d",
+		 me.name, RPL_STATSDEBUG, name,
+		 IsAnOper(cptr2)?'O':'o',
+		 cptr2->name,
 		 cptr2->user->username, cptr2->user->host,
 		 timeofday - cptr2->user->last);
     }
