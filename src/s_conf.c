@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.150 1999/07/27 01:35:48 db Exp $
+ *  $Id: s_conf.c,v 1.151 1999/07/27 03:27:40 db Exp $
  */
 #include "s_conf.h"
 #include "listener.h"
@@ -2021,18 +2021,26 @@ static void initconf(FBFILE* file, int use_include)
           char *ps;        /* space finder */
           char *pt;        /* tab finder */
 
-          ps = strchr(aconf->user,' ');
-          pt = strchr(aconf->user,'\t');
+	  if(!aconf->user)
+	    {
+	      DupString(aconf->name, "*");
+	      DupString(aconf->user, "*");
+	    }
+	  else
+	    {
+	      ps = strchr(aconf->user,' ');
+	      pt = strchr(aconf->user,'\t');
 
-          if(ps || pt)
-            {
-              sendto_realops("H: or L: line trailing whitespace [%s]",
-                             aconf->name);
-              if(ps)*ps = '\0';
-              if(pt)*pt = '\0';
-            }
-          aconf->name = aconf->user;
-          DupString(aconf->user, "*");
+	      if(ps || pt)
+		{
+		  sendto_realops("H: or L: line trailing whitespace [%s]",
+				 aconf->name);
+		  if(ps)*ps = '\0';
+		  if(pt)*pt = '\0';
+		}
+	      aconf->name = aconf->user;
+	      DupString(aconf->user, "*");
+	    }
         }
 
       /*
