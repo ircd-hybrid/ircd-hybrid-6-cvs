@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.244 2003/08/22 04:43:43 lusky Exp $
+ * $Id: channel.c,v 1.245 2003/08/23 22:37:35 ievil Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -474,166 +474,6 @@ static  int     del_invexid(struct Channel *chptr, char *eid)
 }
 
 /*
- * del_matching_exception - delete an exception matching this user
- *
- * The idea is, if a +e client gets kicked for any reason
- * remove the matching exception for this client.
- * This will immediately stop channel "chatter" with scripts
- * that kick on matching ban. It will also stop apparent "desyncs."
- * It's not the long term answer, but it will tide us over.
- *
- * modified from orabidoo - Dianora
- */
-static void del_matching_exception(struct Client *cptr,struct Channel *chptr)
-{
-  Link **ex;
-  Link *tmp;
-  char  s[NICKLEN + USERLEN + HOSTLEN+6];
-  char  *s2;
-
-  if (!IsPerson(cptr))
-    return;
-
-  strcpy(s, make_nick_user_host(cptr->name, cptr->username, cptr->host));
-  s2 = make_nick_user_host(cptr->name, cptr->username,
-                           inetntoa((char*) &cptr->ip));
-
-  for (ex = &(chptr->exceptlist); *ex; ex = &((*ex)->next))
-    {
-      tmp = *ex;
-
-      if (match(BANSTR(tmp), s) ||
-          match(BANSTR(tmp), s2) )
-        {
-
-          /* code needed here to send -e to channel.
-           * I will not propogate the removal,
-           * This will lead to desyncs of e modes,
-           * but its not going to be any worse then it is now.
-           *
-           * Kickee gets to see the -e removal by the server
-           * since they have not yet been removed from the channel.
-           * I don't think thats a biggie.
-           *
-           * -Dianora
-           */
-
-#ifdef HIDE_OPS
-          sendto_channel_chanops_butserv(chptr,
-                                 &me,
-                                 ":%s MODE %s -e %s", 
-                                 me.name,
-                                 chptr->chname,
-                                 BANSTR(tmp));
-#else
-          sendto_channel_butserv(chptr,
-                                 &me,
-                                 ":%s MODE %s -e %s", 
-                                 me.name,
-                                 chptr->chname,
-                                 BANSTR(tmp));
-#endif
-
-          *ex = tmp->next;
-#ifdef BAN_INFO
-          MyFree(tmp->value.banptr->banstr);
-          MyFree(tmp->value.banptr->who);
-          MyFree(tmp->value.banptr);
-#else
-          MyFree(tmp->value.cp);
-#endif
-          free_link(tmp);
-	  /* num_bed should never be < 0 */
-	  if(chptr->num_bed > 0)
-	    chptr->num_bed--;
-	  else
-	    chptr->num_bed = 0;
-          return;
-        }
-    }
-}
-/*
- * del_matching_invex - delete an exception matching this user
- *
- * The idea is, if a +e client gets kicked for any reason
- * remove the matching exception for this client.
- * This will immediately stop channel "chatter" with scripts
- * that kick on matching ban. It will also stop apparent "desyncs."
- * It's not the long term answer, but it will tide us over.
- *
- * modified from orabidoo - Dianora
- */
-static void del_matching_invex(struct Client *cptr,struct Channel *chptr)
-{
-  Link **ie;
-  Link *tmp;
-  char  s[NICKLEN + USERLEN + HOSTLEN+6];
-  char  *s2;
-
-  if (!IsPerson(cptr))
-    return;
-
-  strcpy(s, make_nick_user_host(cptr->name, cptr->username, cptr->host));
-  s2 = make_nick_user_host(cptr->name, cptr->username,
-                           inetntoa((char*) &cptr->ip));
-
-  for (ie = &(chptr->invexlist); *ie; ie = &((*ie)->next))
-    {
-      tmp = *ie;
-
-      if (match(BANSTR(tmp), s) ||
-          match(BANSTR(tmp), s2) )
-        {
-
-          /* code needed here to send -I to channel.
-           * I will not propogate the removal,
-           * This will lead to desyncs of e modes,
-           * but its not going to be any worse then it is now.
-           *
-           * Kickee gets to see the -I removal by the server
-           * since they have not yet been removed from the channel.
-           * I don't think thats a biggie.
-           *
-           * -Dianora 
-           * - moddified by ievil to do INVEX - 2003
-           */
-
-#ifdef HIDE_OPS
-          sendto_channel_chanops_butserv(chptr,
-                                 &me,
-                                 ":%s MODE %s -I %s", 
-                                 me.name,
-                                 chptr->chname,
-                                 BANSTR(tmp));
-#else
-          sendto_channel_butserv(chptr,
-                                 &me,
-                                 ":%s MODE %s -I %s", 
-                                 me.name,
-                                 chptr->chname,
-                                 BANSTR(tmp));
-#endif
-
-          *ie = tmp->next;
-#ifdef BAN_INFO
-          MyFree(tmp->value.banptr->banstr);
-          MyFree(tmp->value.banptr->who);
-          MyFree(tmp->value.banptr);
-#else
-          MyFree(tmp->value.cp);
-#endif
-          free_link(tmp);
-	  /* num_bed should never be < 0 */
-	  if(chptr->num_bed > 0)
-	    chptr->num_bed--;
-	  else
-	    chptr->num_bed = 0;
-          return;
-        }
-    }
-}
-
-/*
  * is_banned -  returns an int 0 if not banned,
  *              CHFL_BAN if banned
  *              CHFL_EXCEPTION if they have a ban exception
@@ -749,28 +589,6 @@ void    remove_user_from_channel(struct Client *sptr,struct Channel *chptr,int w
   for (curr = &chptr->members; (tmp = *curr); curr = &tmp->next)
     if (tmp->value.cptr == sptr)
       {
-        /* User was kicked, but had an exception.
-         * so, to reduce chatter I'll remove any
-         * matching exception now.
-         * - Is this really a good idea?? ievil!2003
-         */
-
-        if(was_kicked && (tmp->flags & CHFL_EXCEPTION))
-          {
-            del_matching_exception(sptr,chptr);
-          }
-
-        if(was_kicked && (tmp->flags & CHFL_INVEX))
-          {
-            del_matching_invex(sptr,chptr);
-          }
-/* 
- * ievil: is this really a good idea.. if a channel gets
- * taken and then the takeover kiddies kick the legit ops
- * do we still want to remove their chance of getting bacl
- * into the channel??
- *
- */
         *curr = tmp->next;
         free_link(tmp);
         break;
