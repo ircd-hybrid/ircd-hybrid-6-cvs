@@ -1,5 +1,5 @@
 /*
- * check.c: $Id: check.c,v 1.2 2001/12/04 16:12:10 androsyn Exp $
+ * check.c: $Id: check.c,v 1.3 2003/05/09 02:20:55 db Exp $
  *  
  */
 /*
@@ -30,6 +30,12 @@
  */
 
 #include "internal.h"
+
+/* This crap is needed to make it compile on OS X
+ * Leave it to apple to take a perfectly good preprocessor and fuck it
+ * up.
+ */
+#define unused_arg /**/
 
 void adns_checkconsistency(adns_state ads, adns_query qu) {
   adns__consistency(ads,qu,cc_user);
@@ -185,16 +191,16 @@ void adns__consistency(adns_state ads, adns_query qu, consistency_checks cc) {
   if (qu) {
     switch (qu->state) {
     case query_tosend:
-      DLIST_ASSERTON(qu, search, ads->udpw, );
+      DLIST_ASSERTON(qu, search, ads->udpw, unused_arg);
       break;
     case query_tcpw:
-      DLIST_ASSERTON(qu, search, ads->tcpw, );
+      DLIST_ASSERTON(qu, search, ads->tcpw, unused_arg);
       break;
     case query_childw:
-      DLIST_ASSERTON(qu, search, ads->childw, );
+      DLIST_ASSERTON(qu, search, ads->childw, unused_arg);
       break;
     case query_done:
-      DLIST_ASSERTON(qu, search, ads->output, );
+      DLIST_ASSERTON(qu, search, ads->output, unused_arg);
       break;
     default:
       assert(!"specific query state");
