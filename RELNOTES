@@ -1,4 +1,4 @@
-$Id: RELNOTES,v 1.23 2004/06/12 00:23:27 ievil Exp $
+$Id: RELNOTES,v 1.24 2004/06/13 22:36:45 ievil Exp $
 
 This is the current release version of ircd-hybrid-6.
 
@@ -15,6 +15,30 @@ DISCUSSION: There is a mailing list for discussion of hybrid issues,
  done than ranting on #TZ.
 
 Questions/comments directed to ircd-hybrid@the-project.org
+
+
+ircd-hybrid-6.x Release Notes
+-------------------------------
+o Added ETRACE command - built upon Sarisa's ideas
+o Added SINFO command
+o Added oper notification on /quote CLOSE
+o Added SPOOF_NOTICE_ADMIN_ONLY - if defined only admins can
+  see source ip of the spoof
+o Added WHOISACTUALLY. Backported from ratbox
+o Added ACL's for ENCAP
+o Added CAP_CLUSTER and XLINE/UNXLINE/RESV/UNRESV fwd'ing
+  over ENCAP and CAP_CLUSTER
+o Added ip_must_resolve flag to i-lines
+o Changed the way +b/+I/+e is getting added, with a
+  generic command add_id/del_id
+o Changed config.h so dlines are in seperate file
+o Expanded the number of numerics used
+o Fixed a possible mode desync on net-rejoin
+o Fixed a possible core on connect if one uses CUSTOM_ERR
+o Fixed compile problem with whois notification
+o Fixed IPv6 compatibilities for GLINES
+o Removed wildcard whois. It's not used anymore
+o Removed SLAVE_SERVERS. Will be replaced in the future
 
 
 ircd-hybrid-6.4.2 Release Notes
