@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)send.c	2.32 2/28/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: send.c,v 1.17 1998/12/01 21:54:01 db Exp $";
+static char *rcs_version = "$Id: send.c,v 1.18 1998/12/05 07:37:26 db Exp $";
 #endif
 
 #include "struct.h"
@@ -531,6 +531,8 @@ va_dcl
 	continue;
 
       acptr = lp->value.cptr;
+      if (acptr->from == one)
+	continue;
 
       i = acptr->from->fd;
       if (MyConnect(acptr) && IsRegisteredUser(acptr))

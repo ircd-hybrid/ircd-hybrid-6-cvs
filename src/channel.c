@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.40 1998/12/05 00:10:29 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.41 1998/12/05 07:37:23 db Exp $";
 #endif
 
 #include "struct.h"
@@ -3243,8 +3243,11 @@ int	m_invite(aClient *cptr,
        * The NOTICE is sent from the local server.  -- David-R          */
       if (chptr && (chptr->mode.mode & MODE_INVITEONLY))
 	sendto_channel_type(cptr, &me, chptr, MODE_CHANOP,
-	  ":%s NOTICE %s :%s has invited %s to %s.", me.name, chptr->chname,
-			    parv[0], acptr->name, chptr->chname);
+	  ":%s NOTICE %s :%s has invited %s to %s.",
+			    sptr->name,
+			    chptr->chname,
+			    parv[0],
+			    acptr->name, chptr->chname);
 
     }
 
