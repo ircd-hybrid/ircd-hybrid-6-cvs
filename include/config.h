@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.55 1999/07/03 08:13:07 tomh Exp $
+ * $Id: config.h,v 1.56 1999/07/04 22:42:27 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -369,26 +369,6 @@
  * large increase in CPU usage.
  */
 #define ZIP_LEVEL       2
-
-/* OPER_REHASH OPER_RESTART OPER_DIE 
- *      restrict what local global-Opers can do
- *
- * OPER_REHASH and OPER_RESTART allow operators to
- * issue the REHASH and RESTART commands when connected to your server.
- * Left undefined they increase the security of your server from wayward
- * operators and accidents. 
- */
-#define	OPER_REHASH
-#define	OPER_RESTART
-#define	OPER_DIE
-
-/* LOCOP_REHASH LOCOP_RESTART LOCOP_DIE - restrict local opers
- * The 'LOCOP_' #defines are for making the respective commands available
- * to 'local' operators.  See above section.
- */
-#define	LOCOP_REHASH
-#undef	LOCOP_RESTART
-#undef	LOCOP_DIE
 
 /*
  * OPER_UMODES LOCOP_UMODES - set these to be the initial umodes when OPER'ing
