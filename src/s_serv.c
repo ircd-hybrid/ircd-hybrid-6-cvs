@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.75 1999/03/08 02:33:29 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.76 1999/03/11 04:15:15 lusky Exp $";
 #endif
 
 
@@ -1823,7 +1823,7 @@ int	m_info(aClient *cptr,
 	ircsprintf(outstr,"NICKNAMEHISTORYLENGTH=%d NOISY_HTM=%d",NICKNAMEHISTORYLENGTH,NOISY_HTM);
 	sendto_one(sptr, rpl_str(RPL_INFO),
 		me.name, parv[0], outstr);
-        ircsprintf(outstr,"TS_MAX_DELTA=%d TS_WARN_DELTA=%d",TS_MAX_DELTA,TS_WARN_DELTA);
+        ircsprintf(outstr,"TS_MAX_DELTA=%d TS_WARN_DELTA=%d WHOIS_WAIT=%d",TS_MAX_DELTA,TS_WARN_DELTA,WHOIS_WAIT);
 	sendto_one(sptr, rpl_str(RPL_INFO),
 		me.name, parv[0], outstr);
 
