@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_pass.c,v 1.3 2001/06/03 21:59:08 db Exp $
+ *  $Id: m_pass.c,v 1.4 2001/06/04 01:31:33 greg Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "client.h"      /* client struct */
@@ -122,7 +122,7 @@ int m_pass(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
        * safely assume if there is a ":TS" then its a TS server
        * -Dianora
        */
-      if ((0 == irccmp(parv[2], "TS") && (cptr->tsinfo == 0))
+      if ((0 == irccmp(parv[2], "TS")) && (cptr->tsinfo == 0))
         cptr->tsinfo = TS_DOESTS;
     }
   return 0;
