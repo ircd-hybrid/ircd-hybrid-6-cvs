@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_zip.c,v 1.23 2000/11/08 06:00:27 lusky Exp $
+ *   $Id: s_zip.c,v 1.24 2000/11/24 18:24:37 lusky Exp $
  */
 #include "s_zip.h"
 #include "client.h"
@@ -152,7 +152,7 @@ char *unzip_packet(aClient *cptr, char *buffer, int *length)
        */
       memcpy((void *)unzipbuf,(void *)cptr->zip->inbuf,cptr->zip->incount);
       zin->avail_out = UNZIP_BUFFER_SIZE - cptr->zip->incount;
-      zin->next_out = unzipbuf + cptr->zip->incount;
+      zin->next_out = (Bytef *) (unzipbuf + cptr->zip->incount);
       cptr->zip->incount = 0;
       cptr->zip->inbuf[0] = '\0'; /* again unnecessary but nice for debugger */
     }
@@ -168,9 +168,9 @@ char *unzip_packet(aClient *cptr, char *buffer, int *length)
           *length = -1;
           return((char *)NULL);
         }
-      zin->next_in = buffer;
+      zin->next_in = (Bytef *) buffer;
       zin->avail_in = *length;
-      zin->next_out = unzipbuf;
+      zin->next_out = (Bytef *) unzipbuf;
       zin->avail_out = UNZIP_BUFFER_SIZE;
     }
 
@@ -217,7 +217,7 @@ char *unzip_packet(aClient *cptr, char *buffer, int *length)
                    * the bottom of the unzip buffer. -db
                    */
 
-                  for(p = zin->next_out;p >= unzipbuf;)
+                  for(p = (char *) zin->next_out;p >= unzipbuf;)
                     {
                       if((*p == '\r') || (*p == '\n'))
                         break;
@@ -322,9 +322,9 @@ char *zip_buffer(aClient *cptr, char *buffer, int *length, int flush)
                   CBurst(cptr))))
     return((char *)NULL);
 
-  zout->next_in = cptr->zip->outbuf;
+  zout->next_in = (Bytef *) cptr->zip->outbuf;
   zout->avail_in = cptr->zip->outcount;
-  zout->next_out = zipbuf;
+  zout->next_out = (Bytef *) zipbuf;
   zout->avail_out = ZIP_BUFFER_SIZE;
 
   switch (r = deflate(zout, Z_PARTIAL_FLUSH))

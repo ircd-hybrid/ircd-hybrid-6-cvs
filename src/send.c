@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.96 2000/11/24 17:36:31 lusky Exp $
+ *   $Id: send.c,v 1.97 2000/11/24 18:24:38 lusky Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -362,7 +362,7 @@ int send_queued(aClient *to)
 #endif /* ZIP_LINKS */
 
   while (DBufLength(&to->sendQ) > 0) {
-    msg = dbuf_map(&to->sendQ, &len);
+    msg = dbuf_map(&to->sendQ, (size_t *) &len);
 
     /* Returns always len > 0 */
     if ((rlen = deliver_it(to, msg, len)) < 0)

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.41 2000/11/11 02:30:24 lusky Exp $
+ *   $Id: parse.c,v 1.42 2000/11/24 18:24:37 lusky Exp $
  */
 #include "parse.h"
 #include "channel.h"
@@ -451,6 +451,7 @@ static struct Message *do_msg_tree(MESSAGE_TREE *mtree, char *prefix,
       assert(0);
       exit(1);
     }
+  return (0); 
 }
 
 /*

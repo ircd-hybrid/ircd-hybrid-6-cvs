@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_server.c,v 1.9 2000/10/17 06:20:50 lusky Exp $
+ *   $Id: m_server.c,v 1.10 2000/11/24 18:24:37 lusky Exp $
  */
 #include "m_commands.h"  /* m_server prototype */
 #include "client.h"      /* client struct */
@@ -201,7 +201,7 @@ int m_server(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
         {
           char clean_host[2 * HOSTLEN + 4];
           sendto_one(sptr,"ERROR :Bogus server name (%s)", 
-                     clean_string(clean_host, host, 2 * HOSTLEN));
+                     clean_string(clean_host, (const unsigned char *) host, 2 * HOSTLEN));
           return exit_client(cptr, cptr, cptr, "Bogus server name");
         }
     }

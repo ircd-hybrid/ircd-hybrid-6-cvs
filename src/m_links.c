@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_links.c,v 1.4 2000/11/21 06:49:29 lusky Exp $
+ *   $Id: m_links.c,v 1.5 2000/11/24 18:24:36 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -159,14 +159,14 @@ int m_links(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
     {
       sendto_realops_flags(FLAGS_SPY,
                          "BOGUS LINKS '%s' requested by %s (%s@%s) [%s]",
-                         clean_string(clean_mask, mask, 2 * HOSTLEN),
+                         clean_string(clean_mask, (const unsigned char *) mask, 2 * HOSTLEN),
                          sptr->name, sptr->username,
                          sptr->host, sptr->user->server);
       return 0;
     }
 
   if (*mask)       /* only necessary if there is a mask */
-    mask = collapse(clean_string(clean_mask, mask, 2 * HOSTLEN));
+    mask = collapse(clean_string(clean_mask, (const unsigned char *) mask, 2 * HOSTLEN));
 
   if (MyConnect(sptr))
     sendto_realops_flags(FLAGS_SPY,
