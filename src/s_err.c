@@ -27,7 +27,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)s_err.c	1.11 5/17/93 (C) 1992 Darren Reed";
-static char *rcs_version = "$Id: s_err.c,v 1.4 1998/10/02 00:50:56 db Exp $";
+static char *rcs_version = "$Id: s_err.c,v 1.5 1998/10/11 18:42:59 db Exp $";
 #endif
 
 static	char	numbuff[512];
@@ -40,7 +40,7 @@ static	char *	replies[] = {
 /* 001	RPL_WELCOME, */	":%s 001 %s :Welcome to the Internet Relay Network %s",
 /* 002	RPL_YOURHOST,*/	":%s 002 %s :Your host is %s, running version %s",
 /* 003 	RPL_CREATED, */ ":%s 003 %s :This server was created %s",
-/* 004 	RPL_MYINFO, */ ":%s 004 %s %s %s oiwszcrkfydn biklmnopstv",
+/* 004 	RPL_MYINFO, */ ":%s 004 %s %s %s oiwszcrkfydn biklmnopstve",
 /* 005 */	(char *)NULL,
 /* 006 */	(char *)NULL,
 /* 007 */	(char *)NULL,

@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.10 1998/10/09 22:36:27 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.11 1998/10/11 18:43:00 db Exp $";
 #endif
 
 
@@ -4737,10 +4737,7 @@ static int remove_tkline_match(char *host,char *user)
 	    last_kill_ptr->next = kill_list_ptr->next;
 	  else
 	    temporary_klines = kill_list_ptr->next;
-	  MyFree(kill_list_ptr->host);
-	  MyFree(kill_list_ptr->name);
-	  MyFree(kill_list_ptr->passwd);
-	  MyFree(kill_list_ptr);
+	  free_conf(kill_list_ptr);
 	  return YES;
 	}
       else

@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.8 1998/10/06 04:42:32 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.9 1998/10/11 18:42:58 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1399,6 +1399,7 @@ int 	initconf(int opt, int fd)
   static	char	quotes[9][2] = {{'b', '\b'}, {'f', '\f'}, {'n', '\n'},
 					{'r', '\r'}, {'t', '\t'}, {'v', '\v'},
 					{'\\', '\\'}, { 0, 0}};
+
   Reg	char	*tmp, *s;
   int	i, j, dontadd;
   char	line[512];
@@ -1465,6 +1466,7 @@ int 	initconf(int opt, int fd)
       if (!*line || line[0] == '#' || line[0] == '\n' ||
 	  line[0] == ' ' || line[0] == '\t')
 	continue;
+
       /* Could we test if it's conf line at all?	-Vesa */
       if (line[1] != ':')
 	{
