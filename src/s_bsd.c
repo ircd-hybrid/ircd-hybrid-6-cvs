@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.39 1999/06/22 01:01:44 db Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.40 1999/06/24 03:42:38 db Exp $";
 #endif
 
 #include "struct.h"
@@ -794,6 +794,29 @@ int	check_server(aClient *cptr,
 	if (!bcmp(hp->h_addr_list[i], (char *)&cptr->ip,
 		  sizeof(struct in_addr)))
 	  break;
+    }
+
+  if (hp)
+    {
+      /*
+       * if we are missing a C or N line from above, search for
+       * it under all known hostnames we have for this ip#.
+       */
+      for (i=0,name = hp->h_name; name ; name = hp->h_aliases[i++])
+	{
+	  Debug((DEBUG_DNS, "sv_cl: gethostbyaddr: %s->%s",
+		 sockname, name));
+
+	  if (!c_conf)
+	    c_conf = find_conf_host(lp, name, CONF_CONNECT_SERVER );
+	  if (!n_conf)
+	    n_conf = find_conf_host(lp, name, CONF_NOCONNECT_SERVER );
+	  if (c_conf && n_conf)
+	    {
+	      get_sockhost(cptr, name);
+	      break;
+	    }
+	}
     }
 
   name = cptr->name;
