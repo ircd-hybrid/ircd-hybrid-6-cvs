@@ -25,7 +25,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)dbuf.c	2.16 20 Oct 1993 (C) 1990 Markku Savela";
-static char *rcs_version = "$Id: dbuf.c,v 1.4 1999/07/03 15:39:30 db Exp $";
+static char *rcs_version = "$Id: dbuf.c,v 1.5 1999/07/07 23:31:45 db Exp $";
 #endif
 
 #include <stdio.h>
@@ -330,7 +330,7 @@ getmsg_init:
 	  if ((d = d->next))
 	    {
 	      s = d->data;
-	      i = MIN(DBUFSIZ, dlen);
+	      i = IRCD_MIN(DBUFSIZ, dlen);
 	    }
 	}
       else
@@ -343,7 +343,7 @@ getmsg_init:
   /*
   ** copy as much of the message as wanted into parse buffer
   */
-  i = dbuf_get(dyn, buf, MIN(copy, length));
+  i = dbuf_get(dyn, buf, IRCD_MIN(copy, length));
   /*
   ** and delete the rest of it!
   */

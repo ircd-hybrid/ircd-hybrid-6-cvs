@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.51 1999/07/07 02:56:54 tomh Exp $
+ *  $Id: s_bsd.c,v 1.52 1999/07/07 23:31:46 db Exp $
  */
 #include "s_bsd.h"
 #include "struct.h"
@@ -1590,7 +1590,7 @@ int read_message(time_t delay, fdlist *listp)        /* mika */
         {
           FD_SET(ResolverFileDescriptor, read_set);
         }
-      wait.tv_sec = MIN(delay2, delay);
+      wait.tv_sec = IRCD_MIN(delay2, delay);
       wait.tv_usec = usec;
 
 #ifdef        HPUX
@@ -1898,7 +1898,7 @@ int read_message(time_t delay, fdlist *listp)
 	PFD_SETW(i);
     }
 
-    wait.tv_sec = MIN(delay2, delay);
+    wait.tv_sec = IRCD_MIN(delay2, delay);
     wait.tv_usec = usec;
     nfds = poll(poll_fdarray, nbr_pfds,
 		wait.tv_sec * 1000 + wait.tv_usec / 1000);

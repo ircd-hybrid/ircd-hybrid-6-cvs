@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.63 1999/07/06 05:42:19 tomh Exp $
+ * $Id: ircd.c,v 1.64 1999/07/07 23:31:46 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -1433,14 +1433,14 @@ time_t io_loop(time_t delay)
   /*
    * DNS checks, use smaller of resolver delay or next ping
    */
-  delay = MIN(timeout_resolver(timeofday), nextping);
+  delay = IRCD_MIN(timeout_resolver(timeofday), nextping);
   /*
   ** take the smaller of the two 'timed' event times as
   ** the time of next event (stops us being late :) - avalon
   ** WARNING - nextconnect can return 0!
   */
   if (nextconnect)
-    delay = MIN(nextping, nextconnect);
+    delay = IRCD_MIN(nextping, nextconnect);
   delay -= timeofday;
   /*
   ** Adjust delay to something reasonable [ad hoc values]
@@ -1454,7 +1454,7 @@ time_t io_loop(time_t delay)
   if (delay < 1)
     delay = 1;
   else
-    delay = MIN(delay, TIMESEC);
+    delay = IRCD_MIN(delay, TIMESEC);
   /*
    * We want to read servers on every io_loop, as well
    * as "busy" clients (which again, includes servers.

@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.24 1999/07/06 05:42:20 tomh Exp $
+ * $Id: res.c,v 1.25 1999/07/07 23:31:46 db Exp $
  */
 #include "res.h"
 #include "sys.h"
@@ -490,7 +490,7 @@ time_t timeout_resolver(time_t now)
     nextDNSCheck = timeout_query_list(now);
   if (nextCacheExpire < now)
     nextCacheExpire = expire_cache(now);
-  return MIN(nextDNSCheck, nextCacheExpire);
+  return IRCD_MIN(nextDNSCheck, nextCacheExpire);
 }
 
 
@@ -521,7 +521,7 @@ static int send_res_msg(const char* msg, int len, int rcount)
 {
   int i;
   int sent = 0;
-  int max_queries = MIN(_res.nscount, rcount);
+  int max_queries = IRCD_MIN(_res.nscount, rcount);
 
   assert(0 != msg);
   /*
