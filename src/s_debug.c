@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.15 1999/07/12 05:39:32 tomh Exp $
+ *   $Id: s_debug.c,v 1.16 1999/07/15 03:09:57 db Exp $
  */
 #include "struct.h"
 #include "s_conf.h"
@@ -25,11 +25,7 @@
 #include "res.h"
 #include "send.h"
 
-#ifdef HAVE_STDARG_H
 #include <stdarg.h>
-#else
-#include <varargs.h>
-#endif /* HAVE_STDARG_H */
 
 extern	void	count_whowas_memory(int *, u_long *);
 extern  void    count_ip_hash(int *,u_long *);	  /* defined in s_conf.c */
@@ -163,21 +159,8 @@ char	serveropts[] = {
 #if defined(DNS_DEBUG) || defined(DEBUGMODE)
 static	char	debugbuf[1024];
 
-#ifdef HAVE_STDARG_H
-
 void
 debug(int level, char *format, ...)
-
-#else
-
-void
-debug(level, format, va_alist)
-
-int level;
-char *format;
-va_dcl
-
-#endif /* HAVE_STDARG_H */
 
 {
 	va_list args;

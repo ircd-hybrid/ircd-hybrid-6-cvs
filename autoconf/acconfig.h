@@ -1,5 +1,5 @@
 /*
- * $Id: acconfig.h,v 1.1 1999/07/07 10:22:42 db Exp $
+ * $Id: acconfig.h,v 1.2 1999/07/15 03:09:53 db Exp $
  */
 
 /* Define only one of POSIX, BSD, or SYSV signals.  */
@@ -16,9 +16,6 @@
 #if !defined(STDC_HEADERS)
 #undef MALLOCH
 #endif
-
-/* Define if you have the stdarg.h header.  */
-#undef HAVE_STDARG_H
 
 /* Chose only one of NBLOCK_POSIX, NBLOCK_BSD, and NBLOCK_SYSV */
 /* Define if you have posix non-blocking sockets (O_NONBLOCK) */
