@@ -1,3 +1,18 @@
+ievil       2003/08/23 18:37:37 EDT	(20030823_0)
+
+  Modified files:
+    src                  channel.c 
+  Log:
+  Altho I tried to find a good commit message for this I failed. Removed
+  legacy del_matching_*. As someone said. It's a great way to waste CPU
+  esp, in the days of 100 possible bans/invex/exceptions in a channel.
+  Thoughts go out to the old and loved. Peace!
+  
+  Revision  Changes    Path
+  1.245     +0 -182    ircd-hybrid-6/src/channel.c
+
+
+
 lusky       2003/08/22 00:43:45 EDT	(20030822_1)
 
   Modified files:
