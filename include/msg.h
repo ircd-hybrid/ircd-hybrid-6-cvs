@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: msg.h,v 1.13 2000/06/10 02:45:36 lusky Exp $
+ * $Id: msg.h,v 1.14 2000/11/09 03:46:52 lusky Exp $
  */
 #ifndef INCLUDED_msg_h
 #define INCLUDED_msg_h
@@ -222,7 +222,7 @@ struct Message msgtab[] = {
   { MSG_TIME,    m_time,     0, MAXPARA, 1, 0, 0, 0L },
   { MSG_OPER,    m_oper,     0, MAXPARA, 1, 0, 0, 0L },
   { MSG_CONNECT, m_connect,  0, MAXPARA, 1, 0, 0, 0L },
-  { MSG_VERSION, m_version,  0, MAXPARA, 1, 1, 0, 0L },
+  { MSG_VERSION, m_version,  0, MAXPARA, 1, 0, 0, 0L },
   { MSG_STATS,   m_stats,    0, MAXPARA, 1, 0, 0, 0L },
   { MSG_LINKS,   m_links,    0, MAXPARA, 1, 0, 0, 0L },
   { MSG_ADMIN,   m_admin,    0, MAXPARA, 1, 1, 0, 0L },
