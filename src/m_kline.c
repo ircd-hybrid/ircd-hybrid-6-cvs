@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.35 1999/07/22 02:06:16 db Exp $
+ *   $Id: m_kline.c,v 1.36 1999/07/23 03:15:49 db Exp $
  */
 
 #include "struct.h"
@@ -33,6 +33,7 @@
 #include "send.h"
 #include "h.h"
 #include "ircd.h"
+#include "s_misc.h"
 #include "parse.h"
 #include "m_kline.h"
 #include "dline_conf.h"
@@ -43,11 +44,6 @@
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>
-
-extern int rehashed;
-extern int dline_in_progress;   /* defined in ircd.c */
-int bad_tld(char *);
-extern char *smalldate(time_t);         /* defined in s_misc.c */
 
 extern ConfigFileEntryType ConfigFileEntry; /* defined in ircd.c */
 

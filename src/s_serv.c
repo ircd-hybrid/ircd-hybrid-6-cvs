@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.180 1999/07/23 02:38:32 db Exp $
+ *   $Id: s_serv.c,v 1.181 1999/07/23 03:15:49 db Exp $
  */
 
 #define CAPTAB
@@ -57,6 +57,7 @@
 #include "match.h"
 #include "config.h"
 #include "m_gline.h"
+#include "channel.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -79,8 +80,6 @@ extern void remove_empty_channels();    /* defined in channel.c */
 #endif /* NEED_SPLITCODE */
 
 extern fdlist serv_fdlist;
-extern int rehashed;            /* defined in ircd.c */
-extern int dline_in_progress;   /* defined in ircd.c */
 
 int     max_connection_count = 1;
 int     max_client_count = 1;
