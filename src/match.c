@@ -15,27 +15,19 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- */
-/*
+ *
  * Changes:
  * Thomas Helvey <tomh@inxpress.net> June 23, 1999
  * Const correctness changes
  * Cleanup of collapse and match
  * Moved static calls variable to match
  * Added asserts for null pointers
+ * $Id: match.c,v 1.7 1999/07/08 06:15:02 tomh Exp $
+ *
  */
-#ifndef lint
-static  char sccsid[] = "%W% %G% (C) 1988 University of Oulu, \
-Computing Center and Jarkko Oikarinen";
-
-static char *rcs_version = "$Id: match.c,v 1.6 1999/07/03 08:07:06 tomh Exp $";
-#endif
-
 #include "match.h"
 #include <assert.h>
 
-#define	MAX_CALLS	512  /* ACK! This dies when it's less that this
-				and we have long lines to parse */
 /*
 **  Compare if a given string (name) matches the given
 **  mask (which can contain wild cards: '*' - match any
@@ -63,6 +55,8 @@ static char *rcs_version = "$Id: match.c,v 1.6 1999/07/03 08:07:06 tomh Exp $";
  * if a line matches a mask, true (1) is returned, otherwise false (0)
  * is returned.
  */
+#define	MATCH_MAX_CALLS	512  /* ACK! This dies when it's less that this
+				and we have long lines to parse */
 int match(const char *mask, const char *name)
 {
   const unsigned char* m = (const unsigned char*)  mask;
@@ -74,9 +68,7 @@ int match(const char *mask, const char *name)
   assert(0 != mask);
   assert(0 != name);
 
-  while (1) {
-    if (calls++ > MAX_CALLS)
-      return 0;
+  while (calls++ < MATCH_MAX_CALLS) {
     if (*m == '*') {
       /*
        * XXX - shouldn't need to spin here, the mask should have been
@@ -123,6 +115,7 @@ int match(const char *mask, const char *name)
         n++;
     }
   }
+  return 0;
 }
 
 
