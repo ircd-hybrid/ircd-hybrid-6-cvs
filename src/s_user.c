@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.185 1999/07/26 05:34:48 tomh Exp $
+ *  $Id: s_user.c,v 1.186 1999/07/28 05:04:36 db Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -1640,7 +1640,7 @@ static  int     m_message(aClient *cptr,
   ** plain old channel msg ?
   */
   if( IsChanPrefix(*nick)
-      && (IsPerson(sptr) && (chptr = find_channel(nick, NullChn))))
+      && (IsPerson(sptr) && (chptr = hash_find_channel(nick, NullChn))))
     {
 #ifdef  IDLE_CHECK
       /* reset idle time for message only if target exists */
@@ -1698,7 +1698,7 @@ static  int     m_message(aClient *cptr,
        * if the channel is found, fine, if not report an error
        */
 
-      if ( (chptr = find_channel(nick+1, NullChn)) )
+      if ( (chptr = hash_find_channel(nick+1, NullChn)) )
         {
 #ifdef  IDLE_CHECK
           /* reset idle time for message only if target exists */
@@ -2084,7 +2084,7 @@ int     m_who(aClient *cptr,
       /*
        * List all users on a given channel
        */
-      chptr = find_channel(channame, NULL);
+      chptr = hash_find_channel(channame, NULL);
       if (chptr)
         {
           member = IsMember(sptr, chptr);
