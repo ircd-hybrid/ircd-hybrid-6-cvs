@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.216 2001/10/25 03:53:23 db Exp $
+ * $Id: channel.c,v 1.217 2001/10/25 16:28:15 leeh Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -1064,6 +1064,25 @@ void set_channel_mode(struct Client *cptr,
                   parv++;
                   break;
                 }
+#ifdef LITTLE_I_LINES
+              else
+                {
+                  if(IsRestricted(sptr) && (whatt == MODE_ADD))
+                    {
+                      if(!errsent(SM_ERR_RESTRICTED, &errors_sent))
+                        {
+                          sendto_one(sptr,
+            ":%s NOTICE %s :*** Notice -- You are restricted and cannot chanop others",
+                                 me.name,
+                                 sptr->name);
+                        }
+                      /* eat the parameter */
+                      parc--;
+                      parv++;
+                      break;
+                    }
+                }
+#endif
             }
           if (whatt == MODE_QUERY)
             break;

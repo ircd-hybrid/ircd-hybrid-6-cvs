@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.238 2001/10/25 02:57:06 db Exp $
+ *  $Id: s_user.c,v 1.239 2001/10/25 16:28:15 leeh Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -851,6 +851,17 @@ static int register_user(aClient *cptr, aClient *sptr,
       SendMessageFile(sptr, &ConfigFileEntry.motd);
 #endif
       
+#ifdef LITTLE_I_LINES
+      if(sptr->confs && sptr->confs->value.aconf &&
+         (sptr->confs->value.aconf->flags
+          & CONF_FLAGS_LITTLE_I_LINE))
+        {
+          SetRestricted(sptr);
+          sendto_one(sptr,"NOTICE %s :*** Notice -- You are in a restricted access mode",nick);
+          sendto_one(sptr,"NOTICE %s :*** Notice -- You can not chanop others",nick);
+        }
+#endif
+
 #ifdef NEED_SPLITCODE
       if (server_was_split)
         {

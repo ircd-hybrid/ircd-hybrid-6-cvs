@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.138 2001/10/25 03:53:23 db Exp $
+ * $Id: config.h,v 1.139 2001/10/25 16:28:14 leeh Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -704,6 +704,12 @@
  * the network, but it will allow chanops to resync with a valid non TS 0
  */
 #undef  IGNORE_BOGUS_TS
+
+/* LITTLE_I_LINE support
+ * clients with a little i instead of an I in their I line
+ * can be chanopped, but cannot chanop anyone else.
+ */
+#undef LITTLE_I_LINES
 
 /* GLINES - global Kline-like bans
  * Define this if you want GLINE support

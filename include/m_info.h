@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.19 2001/10/25 03:53:23 db Exp $
+ * $Id: m_info.h,v 1.20 2001/10/25 16:28:14 leeh Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -353,6 +353,12 @@ Info MyInformation[] = {
 #else
   { "LIMIT_UH", "OFF", 0, "Make Y: lines limit username instead of hostname" },
 #endif /* LIMIT_UH */
+
+#ifdef LITTLE_I_LINES
+  { "LITTLE_I_LINES", "ON", 0, "\"i\" lines prevent matching clients from channel opping" },
+#else
+  { "LITTLE_I_LINES", "OFF", 0, "\"i\" lines prevent matching clients from channel opping" },
+#endif /* LITTLE_I_LINES */
 
 #ifdef LPATH
   { "LPATH", LPATH, 0, "Path to Log File" },
