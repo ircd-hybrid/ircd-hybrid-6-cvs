@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.108 1999/07/15 02:34:22 db Exp $
+ *  $Id: s_conf.c,v 1.109 1999/07/15 02:45:09 db Exp $
  */
 #include "s_conf.h"
 #include "class.h"
@@ -2371,6 +2371,21 @@ static void lookup_confhost(aConfItem* aconf)
     Debug((DEBUG_ERROR,"Host/server name error: (%s) (%s)",
            aconf->host, aconf->name));
   }
+}
+
+/*
+ * conf_connect_allowed (untested)
+ */
+int conf_connect_allowed(struct in_addr addr)
+{
+  aConfItem *aconf;
+
+  aconf = match_Dline(ntohl((unsigned long)addr.s_addr));
+
+  if (aconf && !IsConfElined(aconf))
+    return 1;
+  else
+    return 0;
 }
 
 /*

@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.11 1999/07/15 02:34:18 db Exp $
+ * $Id: s_conf.h,v 1.12 1999/07/15 02:45:07 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.12  1999/07/15 02:45:07  db
+ * - added conf_connect_allowed()
+ *
  * Revision 1.11  1999/07/15 02:34:18  db
  * - redid m_kline, moved conf file writing from m_kline into s_conf.c
  *   thus "hiding" the details of where the kline gets written..
@@ -191,6 +194,7 @@ extern struct ConfItem* find_conf_host (struct SLink *, char *, int);
 extern struct ConfItem* find_conf_ip (struct SLink *, char *, char *, int);
 extern struct ConfItem* find_conf_name (char *, int);
 extern struct ConfItem* find_kill (struct Client *);
+extern int conf_connect_allowed(struct in_addr addr);
 
 typedef enum {
   KLINE_TYPE,
