@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.160 1999/07/20 04:35:35 db Exp $
+ *  $Id: s_user.c,v 1.161 1999/07/20 07:51:02 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -36,7 +36,6 @@
 #include "hash.h"
 #include "whowas.h"
 #include "listener.h"
-// #include "irc_string.h"
 #ifdef FLUD
 #include "blalloc.h"
 #endif /* FLUD */
@@ -68,9 +67,6 @@ extern aClient *serv_cptr_list;
  
 extern void outofmemory(void);         /* defined in list.c */
 
-#ifdef MAXBUFFERS
-extern void reset_sock_opts();
-#endif
 
 #ifdef REJECT_HOLD
 extern int reject_held_fds;		/* defined in ircd.c */
@@ -737,13 +733,6 @@ static int register_user(aClient *cptr, aClient *sptr,
 
   if (MyConnect(sptr))
     {
-#ifdef MAXBUFFERS
-/* Let's try changing the socket options for the client here...
- * -Taner
- */
-      reset_sock_opts(sptr->fd, 0);
-      /* End sock_opt hack */
-#endif
       sendto_one(sptr, form_str(RPL_WELCOME), me.name, nick, nick);
       /* This is a duplicate of the NOTICE but see below...*/
       sendto_one(sptr, form_str(RPL_YOURHOST), me.name, nick,

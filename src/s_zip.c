@@ -16,12 +16,12 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_zip.c,v 1.15 1999/07/18 07:00:31 tomh Exp $
+ *   $Id: s_zip.c,v 1.16 1999/07/20 07:51:03 tomh Exp $
  */
 #include "struct.h"
-#include "h.h"
 #include "send.h"
 #include "irc_string.h"
+#include "s_bsd.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -65,7 +65,7 @@
  * -Dianora
  */
 
-#define	UNZIP_BUFFER_SIZE	6*ZIP_BUFFER_SIZE
+#define	UNZIP_BUFFER_SIZE	6 * ZIP_BUFFER_SIZE
 
 /* buffers */
 static	char	unzipbuf[UNZIP_BUFFER_SIZE];

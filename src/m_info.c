@@ -1,7 +1,7 @@
 /*
  * m_info.c 
  *
- * $Id: m_info.c,v 1.21 1999/07/18 22:27:28 db Exp $
+ * $Id: m_info.c,v 1.22 1999/07/20 07:51:00 tomh Exp $
  */
 #include "struct.h"
 
@@ -57,6 +57,9 @@ int	m_info(aClient *cptr,
       
       sendto_one(sptr, form_str(RPL_INFO), me.name, parv[0], "");
 
+      /*
+       * XXX - sigh
+       */
       if (IsAnOper(sptr))
       {
 #ifdef ANTI_DRONE_FLOOD
@@ -303,11 +306,8 @@ int	m_info(aClient *cptr,
 #else
 #define OUT2 " LWALLOPS=0"
 #endif
-#ifdef MAXBUFFERS
-#define OUT3 " MAXBUFFERS=1"
-#else
-#define OUT3 " MAXBUFFERS=0"
-#endif
+
+#define OUT3 ""
 	sendto_one(sptr, form_str(RPL_INFO),
                    me.name, parv[0], OUT1 OUT2 OUT3 );
 #undef OUT1

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: listener.c,v 1.10 1999/07/19 09:11:46 tomh Exp $
+ *  $Id: listener.c,v 1.11 1999/07/20 07:51:00 tomh Exp $
  */
 #include "listener.h"
 #include "s_bsd.h"
@@ -169,7 +169,7 @@ static int inetport(struct Listener* listener)
    * XXX - this should always work, performance will suck if it doesn't
    */
   if (!set_non_blocking(fd))
-    report_error(NB_ERROR_MESSAGE, get_listener_name(listener), errno);
+    report_error(NONB_ERROR_MSG, get_listener_name(listener), errno);
 
   listener->fd = fd;
 

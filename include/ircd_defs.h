@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: ircd_defs.h,v 1.4 1999/07/15 08:47:30 tomh Exp $
+ * $Id: ircd_defs.h,v 1.5 1999/07/20 07:48:28 tomh Exp $
  *
  * ircd_defs.h - Global size definitions for record entries used
  * througout ircd. Please think 3 times before adding anything to this
@@ -56,7 +56,6 @@
 #define	USERHOST_REPLYLEN	(NICKLEN+HOSTLEN+USERLEN+5)
 #define MAX_DATE_STRING 32      /* maximum string length for a date string */
 
-#define READBUF_SIZE    16384	/* used in s_bsd *AND* s_zip.c ! */
 
 /* 
  * Macros everyone uses :/ moved here from sys.h
