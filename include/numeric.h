@@ -16,8 +16,14 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: numeric.h,v 1.14 1999/07/21 05:45:04 tomh Exp $
+ * $Id: numeric.h,v 1.15 1999/07/28 07:44:15 tomh Exp $
  */
+#ifndef INCLUDED_numeric_h
+#define INCLUDED_numeric_h
+#ifndef INCLUDED_config_h
+#include "config.h"
+#endif
+
 #ifdef TOPIC_INFO
 # define RPL_TOPICWHOTIME 333
 #endif
@@ -118,6 +124,12 @@
  * Added ERR_UNKNOWNMODE...
  * Added ERR_CANNOTSENDTOCHAN...
  */
+
+/*
+ * form_str - return a format string for a message number
+ * messages are defined below
+ */
+extern const char* form_str(int);
 
 /*
  * Reserve numerics 000-099 for server-client connections where the client
@@ -337,3 +349,5 @@
 
 #define ERR_GHOSTEDCLIENT    503
 #define ERR_LAST_ERR_MSG     504
+
+#endif /* INCLUDED_numeric_h */
