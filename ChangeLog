@@ -1,3 +1,21 @@
+ievil       2004/10/12 23:12:39 EDT	(20041013_3)
+
+  Modified files:
+    include              config.h config.h.dist m_info.h 
+    src                  s_debug.c send.c 
+  Log:
+  Removed SENDQ_ALLWAYS define. No sence in letting people shoot themselves
+  in the head. Added a check from syldra source into config.h aswell.
+  
+  Revision  Changes    Path
+  1.176     +4 -9      ircd-hybrid-6/include/config.h
+  1.144     +4 -9      ircd-hybrid-6/include/config.h.dist
+  1.34      +0 -6      ircd-hybrid-6/include/m_info.h
+  1.63      +1 -3      ircd-hybrid-6/src/s_debug.c
+  1.122     +1 -92     ircd-hybrid-6/src/send.c
+
+
+
 ievil       2004/10/12 23:09:48 EDT	(20041013_2)
 
   Modified files:
