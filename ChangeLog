@@ -1,3 +1,15 @@
+ievil       2003/10/13 07:20:01 EDT	(20031013_5)
+
+  Modified files:
+    src                  m_set.c 
+  Log:
+  Dissallow tklinesmax to be more than 1 year...
+  
+  Revision  Changes    Path
+  1.11      +6 -0      ircd-hybrid-6/src/m_set.c
+
+
+
 ievil       2003/10/13 07:11:53 EDT	(20031013_4)
 
   Modified files:
