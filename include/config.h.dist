@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h.dist,v 1.85 2001/06/04 16:20:13 jdc Exp $
+ * $Id: config.h.dist,v 1.86 2001/06/04 18:10:38 jdc Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -1048,5 +1048,11 @@ void    free_fludees();
 #endif
 
 #define CONFIG_H_LEVEL_6
+
+#ifdef CRYPT_LINKS
+#  ifndef HAVE_LIBCRYPTO
+#    error CRYPT_LINKS is defined, but you lack OpenSSL.  Try using --enable-openssl during configure, or #undef CRYPT_LINKS.
+#  endif
+#endif
 
 #endif /* INCLUDED_config_h */
