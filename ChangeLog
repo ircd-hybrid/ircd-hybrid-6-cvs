@@ -1,3 +1,16 @@
+ievil       2003/10/13 12:23:15 EDT	(20031013_13)
+
+  Modified files:
+    src                  m_gline.c m_whois.c 
+  Log:
+  Fixed a compile time warning and a missing ,
+  
+  Revision  Changes    Path
+  1.54      +2 -2      ircd-hybrid-6/src/m_gline.c
+  1.17      +12 -6     ircd-hybrid-6/src/m_whois.c
+
+
+
 ievil       2003/10/13 11:18:30 EDT	(20031013_12)
 
   Modified files:
