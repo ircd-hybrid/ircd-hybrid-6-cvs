@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_debug.c	2.28 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_debug.c,v 1.11 1999/07/03 20:28:12 tomh Exp $";
+static char *rcs_version = "$Id: s_debug.c,v 1.12 1999/07/04 08:51:41 tomh Exp $";
 #endif
 
 #include "struct.h"
@@ -360,7 +360,7 @@ void count_memory(aClient *cptr,char *nick)
 
   count_whowas_memory(&wwu, &wwm);	/* no more away memory to count */
 
-  for (acptr = client; acptr; acptr = acptr->next)
+  for (acptr = GlobalClientList; acptr; acptr = acptr->next)
     {
       if (MyConnect(acptr))
 	{

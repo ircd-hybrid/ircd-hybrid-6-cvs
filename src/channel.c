@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.99 1999/07/02 02:24:50 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.100 1999/07/04 08:51:35 tomh Exp $";
 #endif
 
 #include "struct.h"
@@ -4002,7 +4002,7 @@ int	m_names( aClient *cptr,
   (void)strncpy(buf, "* * :", 6);
   idx = 5;
   flag = 0;
-  for (c2ptr = client; c2ptr; c2ptr = c2ptr->next)
+  for (c2ptr = GlobalClientList; c2ptr; c2ptr = c2ptr->next)
     {
       aChannel *ch3ptr;
       int	showflag = 0, secret = 0;

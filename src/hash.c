@@ -20,7 +20,7 @@
 #ifndef lint
 static char sccsid[] = "@(#)hash.c	2.10 03 Jul 1993 (C) 1991 Darren Reed";
 
-static char *rcs_version = "$Id: hash.c,v 1.10 1999/06/25 22:11:32 db Exp $";
+static char *rcs_version = "$Id: hash.c,v 1.11 1999/07/04 08:51:36 tomh Exp $";
 #endif
 
 #include "struct.h"
@@ -578,7 +578,7 @@ int	m_hash(aClient *cptr,aClient *sptr,int parc,char *parv[])
 	register	aClient	*acptr;
 	int	bad = 0, listlength = 0;
 	
-	for (acptr = client; acptr; acptr = acptr->next) {
+	for (acptr = GlobalClientList; acptr; acptr = acptr->next) {
 	  if (hash_find_client(acptr->name,acptr) != acptr)
 	    {
 	      if (ch == 'V')
@@ -602,7 +602,7 @@ int	m_hash(aClient *cptr,aClient *sptr,int parc,char *parv[])
 
 	sendto_one(sptr,"NOTICE %s :Rehashing Client List.", parv[0]);
 	clear_client_hash_table();
-	for (acptr = client; acptr; acptr = acptr->next)
+	for (acptr = GlobalClientList; acptr; acptr = acptr->next)
 	  (void)add_to_client_hash_table(acptr->name, acptr);
 	break;
       }
