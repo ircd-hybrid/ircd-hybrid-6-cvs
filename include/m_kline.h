@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_kline.h,v 1.1 1999/07/17 02:55:36 db Exp $
+ * $Id: m_kline.h,v 1.2 1999/07/21 01:55:23 db Exp $
  */
 
 typedef struct PKDlines
@@ -29,3 +29,12 @@ typedef struct PKDlines
 	char *when; /* when the K/D line was set */
 	int type;
 } aPendingLine;
+
+/*
+ * This number represents the number of non-wildcard characters
+ * that must be in the kline string in order for it to be
+ * considered valid. "* ? ! @ ." are considered wildcard
+ * characters for the kline routine.
+ */
+
+#define NONWILDCHARS 4
