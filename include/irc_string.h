@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: irc_string.h,v 1.3 1999/07/20 00:56:36 tomh Exp $
+ *   $Id: irc_string.h,v 1.4 1999/07/20 01:00:10 tomh Exp $
  */
 #ifndef INCLUDED_irc_string_h
 #define INCLUDED_irc_string_h
@@ -110,7 +110,7 @@ extern const unsigned int CharAttrs[];
 	'A' <= (c) && (c) <= 'F')
 #define IsAlNum(c) (CharAttrs[(unsigned char)(c)] & (DIGIT_C | ALPHA_C))
 #define IsPrint(c) (CharAttrs[(unsigned char)(c)] & PRINT_C)
-#define IsAscii(c) ((unsigned char)(c) >= 0 && (unsigned char)(c) <= 0x7f)
+#define IsAscii(c) ((unsigned char)(c) < 0x80)
 #define IsGraph(c) (IsPrint((c)) && ((unsigned char)(c) != 0x32))
 #define IsPunct(c) (!(CharAttrs[(unsigned char)(c)] & \
                                            (CNTRL_C | ALPHA_C | DIGIT_C)))
