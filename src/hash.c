@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: hash.c,v 1.29 1999/07/23 13:24:20 db Exp $
+ *  $Id: hash.c,v 1.30 1999/07/24 07:58:57 tomh Exp $
  */
 #include "s_conf.h"
 #include "hash.h"
@@ -468,7 +468,7 @@ int m_hash(struct Client *cptr, struct Client *sptr,int parc,char *parv[])
         }
       else if(!irccmp(parv[1],"Diphash"))
         {
-          tmptr = localtime(&NOW);
+          tmptr = localtime(&CurrentTime);
           strftime(timebuffer, MAX_DATE_STRING, "%Y%m%d%H%M", tmptr);
           (void)sprintf(hash_log_file,"%s/hash/iphash.%s",
                         DPATH,timebuffer);
@@ -497,7 +497,7 @@ int m_hash(struct Client *cptr, struct Client *sptr,int parc,char *parv[])
         }
       if (ch == 'L' || ch == 'l')
         {
-          tmptr = localtime(&NOW);
+          tmptr = localtime(&CurrentTime);
           strftime(timebuffer, MAX_DATE_STRING, "%Y%m%d%H%M", tmptr);
           sprintf(hash_log_file,"%s/hash/%cdump.%s",
                         DPATH,ch,timebuffer);

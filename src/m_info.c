@@ -1,7 +1,7 @@
 /*
  * m_info.c 
  *
- * $Id: m_info.c,v 1.30 1999/07/24 06:28:09 tomh Exp $
+ * $Id: m_info.c,v 1.31 1999/07/24 07:58:58 tomh Exp $
  */
 #define DEFINE_M_INFO_DATA
 #include "m_info.h"
@@ -44,14 +44,14 @@ m_info(aClient *cptr, aClient *sptr, int parc, char *parv[])
       /* reject non local requests */
       if (!MyConnect(sptr))
         return 0;
-      if ((last_used + PACE_WAIT) > NOW)
+      if ((last_used + PACE_WAIT) > CurrentTime)
       {
         /* safe enough to give this on a local connect only */
         sendto_one(sptr,form_str(RPL_LOAD2HI),me.name,parv[0]);
         return 0;
       }
       else
-        last_used = NOW;
+        last_used = CurrentTime;
     } /* if (!IsAnOper(sptr)) */
 
     while (*text)

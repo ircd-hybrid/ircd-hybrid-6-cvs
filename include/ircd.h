@@ -19,7 +19,7 @@
  *
  * "ircd.h". - Headers file.
  *
- * $Id: ircd.h,v 1.8 1999/07/24 06:37:19 tomh Exp $
+ * $Id: ircd.h,v 1.9 1999/07/24 07:54:00 tomh Exp $
  *
  */
 #ifndef INCLUDED_ircd_h
@@ -75,10 +75,9 @@ extern  int     debuglevel;
 extern  int     debugtty;
 extern  char*   debugmode;
 extern struct Counter Count;
-extern time_t NOW;
 extern time_t nextconnect;
 extern time_t nextping;
-extern time_t timeofday;
+extern time_t CurrentTime;
 extern struct Client* GlobalClientList;
 extern struct Client  me;
 extern struct Client* local[];

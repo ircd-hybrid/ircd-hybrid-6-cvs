@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.39 1999/07/24 06:28:09 tomh Exp $
+ *   $Id: s_auth.c,v 1.40 1999/07/24 07:59:00 tomh Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -102,7 +102,7 @@ static struct AuthRequest* make_auth_request(struct Client* client)
   memset(request, 0, sizeof(struct AuthRequest));
   request->fd      = -1;
   request->client  = client;
-  request->timeout = timeofday + CONNECTTIMEOUT;
+  request->timeout = CurrentTime + CONNECTTIMEOUT;
   return request;
 }
 
@@ -423,7 +423,7 @@ void timeout_auth_queries(time_t now)
 
   for (auth = AuthPollList; auth; auth = auth_next) {
     auth_next = auth->next;
-    if (auth->timeout < timeofday) {
+    if (auth->timeout < CurrentTime) {
       if (-1 < auth->fd)
         close(auth->fd);
 
@@ -443,7 +443,7 @@ void timeout_auth_queries(time_t now)
   }
   for (auth = AuthIncompleteList; auth; auth = auth_next) {
     auth_next = auth->next;
-    if (auth->timeout < timeofday) {
+    if (auth->timeout < CurrentTime) {
       delete_resolver_queries(auth);
       sendheader(auth->client, REPORT_FAIL_DNS);
       Debug((DEBUG_NOTICE,"DNS timeout %s",

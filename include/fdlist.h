@@ -1,15 +1,12 @@
 /*
  * fdlist.h
  *
- * $Id: fdlist.h,v 1.9 1999/07/24 06:37:19 tomh Exp $
+ * $Id: fdlist.h,v 1.10 1999/07/24 07:54:00 tomh Exp $
  */
 #ifndef INCLUDED_fdlist_h
 #define INCLUDED_fdlist_h
-#ifndef INCLUDED_config_h
-#include "config.h"       /* MAXCONNECTIONS */
-#endif
 #ifndef INCLUDED_sys_types_h
-#include <sys/types.h>
+#include <sys/types.h>         /* time_t */
 #define INCLUDED_sys_types_h
 #endif
 

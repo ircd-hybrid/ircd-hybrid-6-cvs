@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: listener.c,v 1.13 1999/07/23 13:24:21 db Exp $
+ *  $Id: listener.c,v 1.14 1999/07/24 07:58:58 tomh Exp $
  */
 #include "listener.h"
 #include "s_bsd.h"
@@ -287,7 +287,7 @@ void accept_connection(struct Listener* listener)
 
   assert(0 != listener);
 
-  listener->last_accept = timeofday;
+  listener->last_accept = CurrentTime;
   /*
    * There may be many reasons for error return, but
    * in otherwise correctly working environment the
@@ -312,10 +312,10 @@ void accept_connection(struct Listener* listener)
     /* 
      * slow down the whining to opers bit 
      */
-    if((last_oper_notice + 20) <= timeofday) {
+    if((last_oper_notice + 20) <= CurrentTime) {
       sendto_realops("All connections in use. (%s)", 
                      get_listener_name(listener));
-      last_oper_notice = timeofday;
+      last_oper_notice = CurrentTime;
     }
     send(fd, "ERROR :All connections in use\r\n", 32, 0);
     close(fd);
@@ -342,7 +342,7 @@ void accept_connection(struct Listener* listener)
     return;
   }
   ircstp->is_ac++;
-  nextping = timeofday;
+  nextping = CurrentTime;
 
   add_connection(listener, fd);
 }
