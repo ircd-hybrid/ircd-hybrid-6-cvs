@@ -4,7 +4,7 @@
  * Owner:  Wohali (Joan Touzet)
  *
  *
- * $Id: blalloc.c,v 1.13 1999/07/17 14:08:33 db Exp $
+ * $Id: blalloc.c,v 1.14 1999/07/17 14:38:33 db Exp $
  */
 #include "blalloc.h"
 #include "struct.h"
@@ -394,10 +394,19 @@ int BlockHeapDestroy(BlockHeap *bh)
    return 0;
 }
 
-/*
- *
- * Function added to count memory usage 
- */
+/* ************************************************************************ */
+/* FUNCTION DOCUMENTATION:                                                  */
+/*    BlockHeapCountMemory                                                  */
+/* Description:                                                             */
+/*    Counts up memory used by heap, and memory allocated out of heap       */
+/* Parameters:                                                              */
+/*    bh (IN):  Pointer to the BlockHeap to be counted.                     */
+/*    TotalUsed (IN): Pointer to int, total memory used by heap             */
+/*    TotalAllocated (IN): Pointer to int, total memory allocated           */
+/* Returns:                                                                 */
+/*   TotalUsed                                                              */
+/*   TotalAllocated                                                         */
+/* ************************************************************************ */
 
 void BlockHeapCountMemory(BlockHeap *bh,int *TotalUsed,int *TotalAllocated)
 {

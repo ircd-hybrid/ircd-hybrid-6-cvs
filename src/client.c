@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.11 1999/07/17 07:55:54 tomh Exp $
+ *  $Id: client.c,v 1.12 1999/07/17 14:38:33 db Exp $
  */
 #include "client.h"
 #include "struct.h"
@@ -1014,3 +1014,24 @@ char        *comment        /* Reason for the exit */
   return cptr == sptr ? FLUSH_BUFFER : 0;
 }
 
+/*
+ * Count up local client memory
+ */
+void count_local_client_memory(int *local_client_memory_used,
+			       int *local_client_memory_allocated )
+{
+  BlockHeapCountMemory( localClientFreeList,
+			local_client_memory_used,
+			local_client_memory_allocated);
+}
+
+/*
+ * Count up remote client memory
+ */
+void count_remote_client_memory(int *remote_client_memory_used,
+			       int *remote_client_memory_allocated )
+{
+  BlockHeapCountMemory( remoteClientFreeList,
+			remote_client_memory_used,
+			remote_client_memory_allocated);
+}
