@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.47 2001/06/04 12:44:54 db Exp $
+ *   $Id: s_auth.c,v 1.48 2001/06/17 23:51:22 greg Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -259,6 +259,12 @@ static int start_auth_query(struct AuthRequest* auth)
 
   if ((fd = socket(AF_INET, SOCK_STREAM, 0)) == -1)
     {
+      /* er .. on the off chance we're having ident errors, we may leak a
+       * server ip to a +d user. on the other hand, we should be spilling
+       * such a large amount of ident errors on a busy server that the
+       * server ip will be missed, and also there is no way that the person
+       * seeing the notice would know that that ip was the server ..
+       * we should change this sometime .... -gnp */
       report_error("creating auth stream socket %s:%s", 
 		   get_client_name(auth->client, TRUE), errno);
       log(L_ERROR, "Unable to create auth socket for %s:%m",
@@ -268,6 +274,7 @@ static int start_auth_query(struct AuthRequest* auth)
     }
   if ((MAXCONNECTIONS - 10) < fd)
     {
+	  /* see my note on ip leakage above -gnp */
       sendto_realops("Can't allocate fd for auth on %s",
 		     get_client_name(auth->client, TRUE));
       
@@ -295,6 +302,7 @@ static int start_auth_query(struct AuthRequest* auth)
 
   if (bind(fd, (struct sockaddr*) &localaddr, sizeof(localaddr)))
     {
+	  /* see my note above -gnp */
       report_error("binding auth stream socket %s:%s", 
 		   get_client_name(auth->client, TRUE), errno);
       close(fd);

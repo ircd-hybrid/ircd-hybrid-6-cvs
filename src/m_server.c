@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_server.c,v 1.13 2001/06/16 11:22:10 leeh Exp $
+ *   $Id: m_server.c,v 1.14 2001/06/17 23:51:21 greg Exp $
  */
 #include "m_commands.h"  /* m_server prototype */
 #include "client.h"      /* client struct */
@@ -164,14 +164,23 @@ int m_server(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
        */
       if (IsServer(cptr))
         {
+		  /* heh, obviously we've never encountered this condition ..
+		   * get_client_name returns a little sumpin-sumpin static, we
+		   * can't use it twice here. -gnp */
+        char nbuf[HOSTLEN * 2 + USERLEN + 5]; /* same size as in s_misc.c */
+
 #ifdef HIDE_SERVERS_IPS
+		strcpy(nbuf, get_client_name(sptr,MASK_IP));
+#else
+		strcpy(nbuf, get_client_name(sptr,SHOW_IP));
+#endif
+
           sendto_realops("SERVER command from remote user %s -- %s is a hacked server",
-	                 get_client_name(sptr,MASK_IP),
+	                 nbuf, 
+#ifdef HIDE_SERVERS_IPS
 	                 get_client_name(cptr,MASK_IP));
 #else							      
-          sendto_realops("SERVER command from remote user %s -- %s is a hacked server",
-                          get_client_name(sptr,SHOW_IP),
-                          get_client_name(cptr,SHOW_IP));
+                     get_client_name(cptr,SHOW_IP));
 #endif			  
         }
       else
@@ -446,7 +455,7 @@ int m_server(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
    */
   if (!DoesTS(cptr))
     {
-#ifdef _HIDE_SERVERS_IPS
+#ifdef HIDE_SERVERS_IPS
       sendto_realops("Link %s dropped, non-TS server",
                  get_client_name(cptr, MASK_IP));
 #else		 

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.61 2001/06/04 19:53:02 db Exp $
+ *  $Id: client.c,v 1.62 2001/06/17 23:51:19 greg Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -461,7 +461,7 @@ time_t check_pings(time_t currenttime)
               aconf = make_conf();
               aconf->status = CONF_KILL;
               DupString(aconf->host, cptr->host);
-              DupString(aconf->passwd, "idle exceeder" );
+              DupString(aconf->passwd, "Idle time limit exceeded" );
               DupString(aconf->name, cptr->username);
               aconf->port = 0;
               aconf->hold = CurrentTime + 60;

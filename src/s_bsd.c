@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.133 2001/06/16 15:47:06 db Exp $
+ *  $Id: s_bsd.c,v 1.134 2001/06/17 23:51:22 greg Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -1020,14 +1020,14 @@ static void error_exit_client(struct Client* cptr, int error)
         sendto_ops("Server %s closed the connection",
 		   get_client_name(cptr, MASK_IP));
       else
-        report_error("Lost connection to %s:%s",
+        report_error("Lost connection to %s: %s",
 		   get_client_name(cptr, MASK_IP), current_error);
 #else		   
       if (0 == error)
         sendto_ops("Server %s closed the connection",
                    get_client_name(cptr, TRUE));
       else
-        report_error("Lost connection to %s:%s", 
+        report_error("Lost connection to %s: %s", 
                      get_client_name(cptr, TRUE), current_error);
 #endif		     
       sendto_realops("%s had been connected for %d day%s, %2d:%02d:%02d",

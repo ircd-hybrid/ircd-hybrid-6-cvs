@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_ltrace.c,v 1.6 2001/06/16 11:22:10 leeh Exp $
+ *   $Id: m_ltrace.c,v 1.7 2001/06/17 23:51:21 greg Exp $
  */
 #include "m_commands.h"
 #include "class.h"
@@ -189,7 +189,7 @@ int     m_ltrace(struct Client *cptr,
           sendto_one(sptr, form_str(RPL_TRACEOPERATOR),
                      me.name, parv[0], c_class,
                      name,
-                     IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"127.0.0.1":ip),
+                     IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"255.255.255.255":ip),
                      now - acptr->lasttime,
                      (acptr->user)?(now - acptr->user->last):0);
         }
@@ -260,7 +260,7 @@ int     m_ltrace(struct Client *cptr,
                            form_str(RPL_TRACEOPERATOR),
                            me.name, parv[0], c_class,
                            name, 
-                           IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"127.0.0.1":ip), 
+                           IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"255.255.255.255":ip), 
                            now - acptr->lasttime,
                            (acptr->user)?(now - acptr->user->last):0);
               cnt++;

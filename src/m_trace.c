@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_trace.c,v 1.4 2001/06/04 13:35:27 leeh Exp $
+ *   $Id: m_trace.c,v 1.5 2001/06/17 23:51:22 greg Exp $
  */
 #include "m_commands.h"
 #include "class.h"
@@ -214,10 +214,14 @@ int m_trace(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
           sendto_one(sptr, form_str(RPL_TRACEOPERATOR),
                      me.name, parv[0], c_class,
                      name, 
-#ifdef SERVERHIDE
+#if (defined SERVERHIDE) || (defined HIDE_SERVERS_IPS)
                      "255.255.255.255",
 #else
-                     IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"127.0.0.1":ip),
+#ifndef SPOOF_NOTICE
+		             IsIPHidden(acptr)?"255.255.255.255":ip,
+#else
+		             IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"255.255.255.255":ip),
+#endif
 #endif
                      now - acptr->lasttime,
                      (acptr->user)?(now - acptr->user->last):0);
@@ -227,10 +231,14 @@ int m_trace(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
           sendto_one(sptr,form_str(RPL_TRACEUSER),
                      me.name, parv[0], c_class,
                      name, 
-#ifdef SERVERHIDE
+#if (defined SERVERHIDE) || (defined HIDE_SERVERS_IPS)
                      "255.255.255.255",
 #else
-                     IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"127.0.0.1":ip),
+#ifndef SPOOF_NOTICE
+		             IsIPHidden(acptr)?"255.255.255.255":ip,
+#else
+		             IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"255.255.255.255":ip),
+#endif
 #endif
                      now - acptr->lasttime,
                      (acptr->user)?(now - acptr->user->last):0);
@@ -334,10 +342,14 @@ int m_trace(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
                            me.name,
                            parv[0], c_class,
                            name,
-#ifdef SERVERHIDE
+#if (defined SERVERHIDE) || (defined HIDE_SERVERS_IPS)
                            "255.255.255.255",
 #else
-                           IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"127.0.0.1":ip),
+#ifndef SPOOF_NOTICE
+                           IsIPHidden(acptr)?"255.255.255.255":ip,
+#else
+                           IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"255.255.255.255":ip),
+#endif
 #endif
                            now - acptr->lasttime,
                            (acptr->user)?(now - acptr->user->last):0);
@@ -345,10 +357,14 @@ int m_trace(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
                 sendto_one(sptr,form_str(RPL_TRACEUSER),
                            me.name, parv[0], c_class,
                            name,
-#ifdef SERVERHIDE
+#if (defined SERVERHIDE) || (defined HIDE_SERVERS_IPS)
                            "255.255.255.255",
 #else
-                           IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"127.0.0.1":ip),
+#ifndef SPOOF_NOTICE
+                           IsIPHidden(acptr)?"255.255.255.255":ip,
+#else
+                           IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"255.255.255.255":ip),
+#endif
 #endif
                            now - acptr->lasttime,
                            (acptr->user)?(now - acptr->user->last):0);

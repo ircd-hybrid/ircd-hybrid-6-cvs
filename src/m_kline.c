@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.55 2000/08/22 05:03:59 lusky Exp $
+ *   $Id: m_kline.c,v 1.56 2001/06/17 23:51:20 greg Exp $
  */
 #include "m_kline.h"
 #include "channel.h"
@@ -407,12 +407,12 @@ m_kline(aClient *cptr,
 
       if(!find_special_conf(sptr->name,CONF_ULINE))
         {
-          sendto_realops("received Unauthorized kline from %s",sptr->name);
+          sendto_realops("Received unauthorized K-line from %s",sptr->name);
           return 0;
         }
       else
         {
-          sendto_realops("received kline from %s", sptr->name);
+          sendto_realops("Received K-line from %s", sptr->name);
         }
 
 #ifdef HUB
