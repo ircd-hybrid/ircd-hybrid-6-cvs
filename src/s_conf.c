@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.114 1999/07/16 01:14:33 db Exp $
+ *  $Id: s_conf.c,v 1.115 1999/07/16 03:03:35 db Exp $
  */
 #include "s_conf.h"
 #include "listener.h"
@@ -113,7 +113,7 @@ typedef struct ip_entry
 #endif
 }IP_ENTRY;
 
-IP_ENTRY *ip_hash_table[IP_HASH_SIZE];
+static IP_ENTRY *ip_hash_table[IP_HASH_SIZE];
 
 extern void zap_Dlines();
 
@@ -370,13 +370,15 @@ int attach_Iline(aClient* cptr, struct hostent* hp,
  */
 
 #ifdef LIMIT_UH
-static int attach_iline(
-                 aClient *cptr,
-                 aConfItem *aconf,char *username)
+static int
+attach_iline(
+	     aClient *cptr,
+	     aConfItem *aconf,char *username)
 #else
-static int attach_iline(
-                 aClient *cptr,
-                 aConfItem *aconf)
+static int
+attach_iline(
+	     aClient *cptr,
+	     aConfItem *aconf)
 #endif
 {
   IP_ENTRY *ip_found;
@@ -488,9 +490,11 @@ void clear_ip_hash_table()
  */
 
 #ifdef LIMIT_UH
-static IP_ENTRY *find_or_add_ip(aClient *cptr,char *username)
+static IP_ENTRY *
+find_or_add_ip(aClient *cptr,char *username)
 #else
-static IP_ENTRY *find_or_add_ip(aClient *cptr)
+static IP_ENTRY *
+find_or_add_ip(aClient *cptr)
 #endif
 {
   unsigned long ip_in=cptr->ip.s_addr;        
@@ -3403,7 +3407,7 @@ int safe_write(aClient *sptr,
 
 char *get_conf_name(KlineType type)
 {
-  static char filenamebuf[1024];
+  static char filenamebuf[PATH_MAX+1];
 #ifdef SEPARATE_QUOTE_KLINES_BY_DATE
   static  char    timebuffer[MAX_DATE_STRING];
   struct tm *tmptr;
