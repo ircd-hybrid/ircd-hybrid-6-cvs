@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.79 2000/06/22 05:40:54 lusky Exp $
+ * $Id: config.h,v 1.80 2000/06/22 06:33:11 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -55,7 +55,9 @@
 #define INIT_MAXCLIENTS 200
 
 #if defined(__CYGWIN__)
+#undef HARD_FDLIMIT_
 #define HARD_FDLIMIT_   25
+#undef INIT_MAXCLIENTS
 #define INIT_MAXCLIENTS 20
 #endif /* __CYGWIN__ */
 
