@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: hash.c,v 1.31 1999/07/25 05:32:57 tomh Exp $
+ *  $Id: hash.c,v 1.32 1999/07/26 05:34:43 tomh Exp $
  */
 #include "s_conf.h"
 #include "hash.h"
@@ -324,8 +324,7 @@ return cptr;
  * also made const correct
  * --Bleep
  */
-static struct Client* hash_find_masked_server(const char* name,
-                                              struct Client* client)
+static struct Client* hash_find_masked_server(const char* name)
 {
   char           buf[HOSTLEN + 1];
   char*          p = buf;
@@ -333,7 +332,7 @@ static struct Client* hash_find_masked_server(const char* name,
   struct Client* server;
 
   if ('*' == *name || '.' == *name)
-    return client;
+    return 0;
 
   /*
    * copy the damn thing and be done with it
@@ -348,17 +347,17 @@ static struct Client* hash_find_masked_server(const char* name,
        * Dont need to check IsServer() here since nicknames cant
        * have *'s in them anyway.
        */
-      if (((server = hash_find_client(s, client))) != client)
+      if ((server = hash_find_client(s, 0)))
         return server;
       p = s + 2;
     }
-  return client;
+  return 0;
 }
 
 /*
  * hash_find_server
  */
-struct Client* hash_find_server(const char* name, struct Client* cptr)
+struct Client* hash_find_server(const char* name)
 {
   struct Client* tmp;
   unsigned int   hashv;
@@ -381,11 +380,10 @@ struct Client* hash_find_server(const char* name, struct Client* cptr)
     }
   
 #ifndef DEBUGMODE
-  return hash_find_masked_server(name, cptr);
+  return hash_find_masked_server(name);
 
 #else /* DEBUGMODE */
-  tmp = hash_find_masked_server(name, cptr);
-  if (tmp == cptr)
+  if (!(tmp = hash_find_masked_server(name)))
     ++clmiss;
   return tmp;
 #endif

@@ -22,7 +22,7 @@
  * Cleanup of collapse and match
  * Moved static calls variable to match
  * Added asserts for null pointers
- * $Id: match.c,v 1.21 1999/07/25 18:01:46 tomh Exp $
+ * $Id: match.c,v 1.22 1999/07/26 05:34:45 tomh Exp $
  *
  */
 #include "irc_string.h"
@@ -68,6 +68,8 @@ int match(const char *mask, const char *name)
   int   calls = 0;
   assert(0 != mask);
   assert(0 != name);
+  if (!mask || !name)
+    return 0;
 
   while (calls++ < MATCH_MAX_CALLS) {
     if (*m == '*') {

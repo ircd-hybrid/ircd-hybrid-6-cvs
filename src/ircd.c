@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.108 1999/07/25 05:32:57 tomh Exp $
+ * $Id: ircd.c,v 1.109 1999/07/26 05:34:43 tomh Exp $
  */
 #include "ircd.h"
 #include "ircd_signal.h"
@@ -123,7 +123,7 @@ int     autoconn = 1;           /* allow auto conns or not */
  *      function should be made latest. (No harm done if this
  *      is called earlier or later...)
  */
-static  time_t  try_connections(time_t currenttime)
+static time_t try_connections(time_t currenttime)
 {
   aConfItem     *aconf;
   aClient       *cptr;
@@ -166,7 +166,7 @@ static  time_t  try_connections(time_t currenttime)
       ** Found a CONNECT config with port specified, scan clients
       ** and see if this server is already connected?
       */
-      cptr = find_name(aconf->name, (aClient *)NULL);
+      cptr = find_server(aconf->name);
       
       if (!cptr && (Links(cltmp) < MaxLinks(cltmp)) &&
           (!connecting || (ClassType(cltmp) > con_class)))

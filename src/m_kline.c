@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.41 1999/07/25 05:32:58 tomh Exp $
+ *   $Id: m_kline.c,v 1.42 1999/07/26 05:34:44 tomh Exp $
  */
 
 #include "struct.h"
@@ -33,7 +33,6 @@
 #include "s_err.h"
 #include "ircd.h"
 #include "s_misc.h"
-#include "parse.h"
 #include "m_kline.h"
 #include "dline_conf.h"
 #include "mtrie_conf.h"
