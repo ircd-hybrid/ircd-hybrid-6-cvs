@@ -1,3 +1,18 @@
+ievil       2003/06/24 01:30:49 EDT	(20030624_4)
+
+  Modified files:
+    adns                 transmit.c 
+    src                  s_misc.c 
+  Log:
+  Fixing the two last warnings when doing compile -Wall. Thanks to Diane
+  for helping solving these two. I'll keep my promise ;)
+  
+  Revision  Changes    Path
+  1.6       +9 -1      ircd-hybrid-6/adns/transmit.c
+  1.76      +2 -2      ircd-hybrid-6/src/s_misc.c
+
+
+
 ievil       2003/06/24 00:19:31 EDT	(20030624_3)
 
   Modified files:
