@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.29 1999/07/22 06:31:19 tomh Exp $
+ *  $Id: client.c,v 1.30 1999/07/23 05:37:36 db Exp $
  */
 #include "client.h"
 #include "s_conf.h"
@@ -57,12 +57,6 @@
  * rather than 30k times -Dianora
  */
 #define CLIENTS_PREALLOCATE 1024
-
-#ifdef NEED_SPLITCODE
-extern int server_was_split;
-extern time_t server_split_time;
-#endif
-
 
 /* 
  * for Wohali's block allocator 

@@ -34,7 +34,7 @@
  *                mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.137 1999/07/23 05:28:11 db Exp $
+ * $Id: channel.c,v 1.138 1999/07/23 05:37:35 db Exp $
  */
 #include "config.h"
 #include "struct.h"
@@ -59,6 +59,7 @@
 static void check_still_split();
 int server_was_split;
 int got_server_pong;
+time_t server_split_time;
 
 #if defined(PRESERVE_CHANNEL_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT)
 aChannel *empty_channel_list=(aChannel*)NULL;
