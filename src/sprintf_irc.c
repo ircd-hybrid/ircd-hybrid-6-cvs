@@ -40,7 +40,7 @@
 
 #endif /* HAVE_STDARG_H */
 
-static char *rcs_version = "$Id: sprintf_irc.c,v 1.1 1999/07/13 23:46:34 db Exp $";
+static char *rcs_version = "$Id: sprintf_irc.c,v 1.2 1999/07/13 23:58:40 db Exp $";
 
 const char atoi_tab[4000] = {
     '0','0','0',0, '0','0','1',0, '0','0','2',0, '0','0','3',0, '0','0','4',0,
@@ -350,6 +350,8 @@ vsprintf_irc(register char *str, register const char *format,
 			    
 			    *str++ = (v1/10) + '0';
 			    *str++ = v1%10 + '0';
+
+			    continue;
 			  }
 
 			if (c == 'd')
