@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: hash.h,v 1.6 1999/07/21 05:45:02 tomh Exp $
+ *   $Id: hash.h,v 1.7 1999/07/26 05:46:34 tomh Exp $
  */
 #ifndef INCLUDED_hash_h
 #define INCLUDED_hash_h
@@ -66,8 +66,7 @@ extern struct Channel* hash_find_channel(const char* name,
                                          struct Channel* chan);
 extern struct Client* hash_find_client(const char* name, 
                                        struct Client* client);
-extern struct Client* hash_find_server(const char* name, 
-                                       struct Client* client);
+extern struct Client* hash_find_server(const char* name);
 
 #endif  /* INCLUDED_hash_h */
 

@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.37 1999/07/25 18:05:06 tomh Exp $
+ * $Id: s_conf.h,v 1.38 1999/07/26 05:46:35 tomh Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.38  1999/07/26 05:46:35  tomh
+ * new functions for s_conf cleaning up connect
+ *
  * Revision 1.37  1999/07/25 18:05:06  tomh
  * untangle m_commands
  *
@@ -330,7 +333,7 @@ extern int              attach_Iline(struct Client* client,
                                      const char* username, char** reason);
 extern struct ConfItem* find_me(void);
 extern struct ConfItem* find_admin(void);
-extern struct ConfItem* count_cnlines(struct SLink *);
+extern struct ConfItem* find_first_nline(struct SLink* lp);
 extern void             det_confs_butmask (struct Client *, int);
 extern int              detach_conf (struct Client *, struct ConfItem *);
 extern struct ConfItem* det_confs_butone (struct Client *, struct ConfItem *);
@@ -339,7 +342,8 @@ extern struct ConfItem* find_conf_exact(const char* name, const char* user,
                                         const char* host, int statmask);
 extern struct ConfItem* find_conf_host (struct SLink *, char *, int);
 extern struct ConfItem* find_conf_ip (struct SLink *, char *, char *, int);
-extern struct ConfItem* find_conf_name (char *, int);
+extern struct ConfItem* find_conf_by_name(const char* name, int status);
+extern struct ConfItem* find_conf_by_host(const char* host, int status);
 extern struct ConfItem* find_kill (struct Client *);
 extern int conf_connect_allowed(struct in_addr addr);
 extern char *oper_flags_as_string(int);
@@ -351,7 +355,7 @@ extern struct ConfItem* find_is_klined(const char* host,
                                        const char* name,
                                        unsigned long ip);
 extern  char    *show_iline_prefix(struct Client *,struct ConfItem *,char *);
-extern void   GetPrintableaConfItem(struct ConfItem *,
+extern void   get_printable_conf(struct ConfItem *,
                                     char **, char **, char **,
                                     char **, int *);
 extern void report_qlines(struct Client* cptr);

@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.36 1999/07/25 05:42:01 tomh Exp $
+ * $Id: client.h,v 1.37 1999/07/26 05:46:34 tomh Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -527,5 +527,13 @@ extern void     count_local_client_memory(int *, int *);
 extern void     count_remote_client_memory(int *, int *);
 extern  int     check_registered (struct Client *);
 extern  int     check_registered_user (struct Client *);
+
+extern struct Client* find_chasing (struct Client *, char *, int *);
+extern struct Client* find_client(const char* name, struct Client* client);
+extern struct Client* find_server_by_name(const char* name);
+extern struct Client* find_person (char *, struct Client *);
+extern struct Client* find_server(const char* name);
+extern struct Client* find_userhost (char *, char *, struct Client *, int *);
+
 
 #endif /* INCLUDED_client_h */
