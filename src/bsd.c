@@ -16,15 +16,9 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ *   $Id: bsd.c,v 1.3 1999/07/08 04:44:19 tomh Exp $
  */
-
-#ifndef lint
-static  char sccsid[] = "@(#)bsd.c	2.14 1/30/94 (C) 1988 University of Oulu, \
-Computing Center and Jarkko Oikarinen";
-
-static char *rcs_version = "$Id: bsd.c,v 1.2 1998/10/18 06:23:49 lusky Exp $";
-#endif
-
 #include "struct.h"
 #include "common.h"
 #include "sys.h"
@@ -118,9 +112,6 @@ int	deliver_it(aClient *cptr,char *str,int len)
     }
   else if (retval > 0)
     {
-#ifdef	pyr
-      (void)gettimeofday(&cptr->lw, NULL);
-#endif
       cptr->flags &= ~FLAGS_BLOCKED;
     }
 
