@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.195 2001/06/04 13:35:27 leeh Exp $
+ *  $Id: s_conf.c,v 1.196 2001/06/06 05:17:20 db Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -457,22 +457,11 @@ int attach_Iline(aClient* cptr, const char* username, char **preason)
           /* Thanks for spoof idea amm */
           if(IsConfDoSpoofIp(aconf))
             {
-              /* abuse it, lose it. */
-#ifdef SPOOF_FREEFORM
 #ifdef SPOOF_NOTICE
               sendto_realops("%s spoofing: %s(%s) as %s", cptr->name,
                              cptr->host, inetntoa((char*) &cptr->ip), aconf->name);
 #endif /* SPOOF_NOTICE */
               strncpy_irc(cptr->host, aconf->name, HOSTLEN);
-#else
-              /* default to oper.server.name.tld */
-#ifdef SPOOF_NOTICE
-              sendto_realops("%s spoofing: %s(%s) as oper.%s", cptr->name,
-                             cptr->host, inetntoa((char*) &cptr->ip), me.name);
-#endif /* SPOOF_NOTICE */
-              strcpy(cptr->host, "oper.");
-              strncpy_irc(&cptr->host[5], me.name, HOSTLEN - 5);
-#endif
               SetIPSpoof(cptr);
               SetIPHidden(cptr);
             }

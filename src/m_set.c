@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_set.c,v 1.5 2001/06/06 05:03:17 db Exp $
+ *   $Id: m_set.c,v 1.6 2001/06/06 05:17:20 db Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -419,9 +419,6 @@ int m_set(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
                           server_was_split = NO;
                           sendto_ops("split-mode deactived by manual override");
                         }
-#if defined(PRESERVE_CHANNEL_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT)
-                      remove_empty_channels();
-#endif
 #if defined(SPLIT_PONG)
                       got_server_pong = YES;
 #endif

@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.215 2001/06/04 05:07:18 db Exp $
+ *   $Id: s_serv.c,v 1.216 2001/06/06 05:17:21 db Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -835,12 +835,7 @@ int server_estab(struct Client *cptr)
                   sendnick_TS(cptr, acptr);
               }
           }
-#if defined(PRESERVE_CHANNEL_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT)
-        /* don't send 0 user channels on rejoin (Mortiis)
-         */
-        if(chptr->users != 0)
-#endif
-          send_channel_modes(cptr, chptr);
+	send_channel_modes(cptr, chptr);
       }
     /*
     ** also send out those that are not on any channel
