@@ -1,3 +1,56 @@
+ievil       2003/06/23 23:57:21 EDT	(20030624_1)
+
+  Modified files:
+    adns                 general.c 
+    include              s_log.h 
+    src                  adns.c blalloc.c client.c ircd.c 
+                         ircd_signal.c list.c m_connect.c m_die.c 
+                         m_error.c m_kill.c m_kline.c m_oper.c 
+                         m_rehash.c m_restart.c m_server.c 
+                         m_squit.c m_undline.c m_ungline.c 
+                         m_unkline.c parse.c restart.c s_auth.c 
+                         s_bsd.c s_conf.c s_debug.c s_log.c 
+                         s_serv.c s_user.c send.c 
+  Log:
+  changed the internal log() to ilog(). Thanks to Josh for making me aware of
+  the tiny little compiler that screamed rape due to it allready being an
+  internal feature.
+  
+  Revision  Changes    Path
+  1.4       +4 -4      ircd-hybrid-6/adns/general.c
+  1.7       +2 -2      ircd-hybrid-6/include/s_log.h
+  1.14      +1 -1      ircd-hybrid-6/src/adns.c
+  1.25      +2 -2      ircd-hybrid-6/src/blalloc.c
+  1.78      +4 -4      ircd-hybrid-6/src/client.c
+  1.168     +3 -3      ircd-hybrid-6/src/ircd.c
+  1.7       +2 -2      ircd-hybrid-6/src/ircd_signal.c
+  1.43      +3 -3      ircd-hybrid-6/src/list.c
+  1.11      +2 -2      ircd-hybrid-6/src/m_connect.c
+  1.6       +1 -1      ircd-hybrid-6/src/m_die.c
+  1.9       +3 -3      ircd-hybrid-6/src/m_error.c
+  1.9       +2 -2      ircd-hybrid-6/src/m_kill.c
+  1.81      +2 -2      ircd-hybrid-6/src/m_kline.c
+  1.18      +1 -1      ircd-hybrid-6/src/m_oper.c
+  1.10      +3 -3      ircd-hybrid-6/src/m_rehash.c
+  1.6       +1 -1      ircd-hybrid-6/src/m_restart.c
+  1.16      +2 -2      ircd-hybrid-6/src/m_server.c
+  1.5       +2 -2      ircd-hybrid-6/src/m_squit.c
+  1.2       +1 -1      ircd-hybrid-6/src/m_undline.c
+  1.2       +1 -1      ircd-hybrid-6/src/m_ungline.c
+  1.54      +4 -4      ircd-hybrid-6/src/m_unkline.c
+  1.52      +1 -1      ircd-hybrid-6/src/parse.c
+  1.12      +2 -2      ircd-hybrid-6/src/restart.c
+  1.57      +4 -4      ircd-hybrid-6/src/s_auth.c
+  1.148     +4 -4      ircd-hybrid-6/src/s_bsd.c
+  1.246     +16 -16    ircd-hybrid-6/src/s_conf.c
+  1.60      +1 -1      ircd-hybrid-6/src/s_debug.c
+  1.15      +1 -1      ircd-hybrid-6/src/s_log.c
+  1.234     +4 -4      ircd-hybrid-6/src/s_serv.c
+  1.260     +2 -2      ircd-hybrid-6/src/s_user.c
+  1.118     +1 -1      ircd-hybrid-6/src/send.c
+
+
+
 ievil       2003/06/23 23:14:34 EDT	(20030624_0)
 
   Modified files:
