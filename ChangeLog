@@ -1,3 +1,15 @@
+ievil       2003/10/13 06:11:53 EDT	(20031013_3)
+
+  Modified files:
+    src                  s_bsd.c 
+  Log:
+  fix from Michael .. thnx ;)
+  
+  Revision  Changes    Path
+  1.149     +2 -2      ircd-hybrid-6/src/s_bsd.c
+
+
+
 ievil       2003/10/13 06:01:34 EDT	(20031013_2)
 
   Modified files:
