@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.158 2001/12/09 18:16:56 lusky Exp $
+ * $Id: ircd.c,v 1.159 2001/12/11 02:09:16 db Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -236,7 +236,6 @@ static void init_sys(int boot_daemon)
         }
       printf("Value of FD_SETSIZE is %d\n", FD_SETSIZE);
 #endif /* USE_POLL */
-      printf("Value of NOFILE is %d\n", NOFILE);
     }
 #endif        /* RLIMIT_FD_MAX */
 
