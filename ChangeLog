@@ -1,3 +1,15 @@
+db          2003/05/15 00:19:59 EDT	(20030515_3)
+
+  Modified files:
+    tools                mkpasswd.c 
+  Log:
+  - updated mkpasswd.c submitted by Hwy
+  
+  Revision  Changes    Path
+  1.12      +220 -19   ircd-hybrid-6/tools/mkpasswd.c
+
+
+
 db          2003/05/15 00:14:20 EDT	(20030515_2)
 
   Modified files:
