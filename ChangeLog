@@ -1,3 +1,15 @@
+ievil       2003/05/04 18:25:30 EDT	(20030504_2)
+
+  Modified files:
+    include              patchlevel.h 
+  Log:
+  Fixed the patchlevel to be beta 1 instead of rc1. Let's do it right ;)
+  
+  Revision  Changes    Path
+  1.154     +1 -1      ircd-hybrid-6/include/patchlevel.h
+
+
+
 ievil       2003/05/04 18:10:49 EDT	(20030504_1)
 
   Modified files:
