@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.16 1998/11/29 06:04:26 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.17 1998/11/30 13:17:00 db Exp $";
 #endif
 
 #include "struct.h"
@@ -65,6 +65,10 @@ aMessageFile *amotd=(aMessageFile *)NULL;
 #endif
 aMessageFile *helpfile=(aMessageFile *)NULL;	
 
+#if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
+	defined(NO_JOIN_ON_SPLIT)
+extern time_t server_split_time;
+#endif
 
 #ifdef SETUID_ROOT
 #include <sys/lock.h>
@@ -1083,6 +1087,12 @@ normal user.\n");
   initstats();
   init_tree_parse(msgtab);
   NOW = time(NULL);
+
+#if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
+	defined(NO_JOIN_ON_SPLIT)
+  server_split_time = NOW;
+#endif
+
   open_debugfile();
   NOW = time(NULL);
 
