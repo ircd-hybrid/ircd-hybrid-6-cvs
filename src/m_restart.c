@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_restart.c,v 1.2 1999/07/31 08:22:59 tomh Exp $
+ *   $Id: m_restart.c,v 1.3 2000/06/09 01:59:07 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -107,7 +107,7 @@ int     m_restart(struct Client *cptr,
 
   if ( !IsOperDie(sptr) )
     {
-      sendto_one(sptr,":%s NOTICE %s: You have no D flag", me.name, parv[0]);
+      sendto_one(sptr,":%s NOTICE %s :You have no D flag", me.name, parv[0]);
       return 0;
     }
 

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_oper.c,v 1.6 2000/06/07 03:23:14 lusky Exp $
+ *   $Id: m_oper.c,v 1.7 2000/06/09 01:59:07 lusky Exp $
  */
 
 #include "m_commands.h"
@@ -184,7 +184,7 @@ int m_oper(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
           if((int)aconf->hold)
             {
               sptr->umodes |= ((int)aconf->hold & ALL_UMODES); 
-              sendto_one(sptr, ":%s NOTICE %s:*** Oper flags set from conf",
+              sendto_one(sptr, ":%s NOTICE %s :*** Oper flags set from conf",
                          me.name,parv[0]);
             }
           else
@@ -201,7 +201,7 @@ int m_oper(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
               if( !IsSetOperN(sptr) )
                 sptr->umodes &= ~FLAGS_NCHANGE;
               
-              sendto_one(sptr, ":%s NOTICE %s:*** Oper flags set from conf",
+              sendto_one(sptr, ":%s NOTICE %s :*** Oper flags set from conf",
                          me.name,parv[0]);
             }
           else
