@@ -1,3 +1,20 @@
+ievil       2003/08/18 02:31:34 EDT	(20030818_0)
+
+  Modified files:
+    include              patchlevel.h 
+    src                  ircd.c m_operspylog.c 
+  Log:
+  Removed some code that was commented away in 6.4.0. I kept the old code for
+  refrence but it doesn't have to live for ever. That's what cvs is for!
+  Oh btw.. this is now 6.4.1rc1 ;)
+  
+  Revision  Changes    Path
+  1.158     +1 -1      ircd-hybrid-6/include/patchlevel.h
+  1.170     +0 -3      ircd-hybrid-6/src/ircd.c
+  1.5       +0 -3      ircd-hybrid-6/src/m_operspylog.c
+
+
+
 ievil       2003/08/17 02:01:58 EDT	(20030817_0)
 
   Modified files:
