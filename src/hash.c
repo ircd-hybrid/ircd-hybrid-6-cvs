@@ -16,8 +16,9 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: hash.c,v 1.24 1999/07/19 09:11:45 tomh Exp $
+ *  $Id: hash.c,v 1.25 1999/07/20 08:20:35 db Exp $
  */
+#include "s_conf.h"
 #include "hash.h"
 #include "struct.h"
 #include "common.h"

@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.53 1999/07/20 04:37:10 tomh Exp $
+ * $Id: h.h,v 1.54 1999/07/20 08:20:32 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -177,9 +177,6 @@ extern	void	send_listinfo (struct Client *, char *);
 extern	void	count_memory (struct Client *, char *);
 #endif
 
-/* iphash code */
-extern void iphash_stats(struct Client *,struct Client *,int,char **,int);
-extern void clear_ip_hash_table(void);
 
 #ifdef LIMIT_UH
 void remove_one_ip(struct Client *);

@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.24 1999/07/20 04:37:11 tomh Exp $
+ * $Id: s_conf.h,v 1.25 1999/07/20 08:20:33 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.25  1999/07/20 08:20:33  db
+ * - more cleanups from h.h
+ *
  * Revision 1.24  1999/07/20 04:37:11  tomh
  * more cleanups
  *
@@ -220,6 +223,8 @@ struct ConfItem
 extern struct ConfItem* ConfigItemList;        /* GLOBAL - conf list head */
 extern int              specific_virtual_host; /* GLOBAL - used in s_bsd.c */
 
+extern void clear_ip_hash_table(void);
+extern void iphash_stats(struct Client *,struct Client *,int,char **,int);
 extern struct ConfItem* make_conf(void);
 extern void             free_conf(struct ConfItem*);
 
