@@ -1,3 +1,19 @@
+ievil       2003/06/06 05:18:45 EDT	(20030606_6)
+
+  Modified files:
+    adns                 .depend 
+    src                  .depend channel.c 
+  Log:
+  - updated depend files.
+  - fixed a small typo in the stats q output fix.. chptr->chname
+  
+  Revision  Changes    Path
+  1.4       +21 -24    ircd-hybrid-6/adns/.depend
+  1.50      +382 -391  ircd-hybrid-6/src/.depend
+  1.239     +2 -1      ircd-hybrid-6/src/channel.c
+
+
+
 ievil       2003/06/06 05:06:40 EDT	(20030606_5)
 
   Modified files:
