@@ -56,7 +56,7 @@
 #endif
 
 #ifndef lint
-static char *version="$Id: mtrie_conf.c,v 1.15 1998/12/23 05:17:29 db Exp $";
+static char *version="$Id: mtrie_conf.c,v 1.16 1998/12/23 21:12:09 db Exp $";
 #endif /* lint */
 
 #define MAXPREFIX (HOSTLEN+USERLEN+15)
@@ -433,7 +433,10 @@ static void find_or_add_user_piece(DOMAIN_PIECE *piece_ptr,
 	  else if(found_aconf->status & CONF_CLIENT)
 	    {
 	      if(flags & CONF_CLIENT)
-		free_conf(aconf);	/* toss new I line into the garbage */
+		{
+		  report_dup('I',aconf);
+		  free_conf(aconf);	/* toss new I line into the garbage */
+		}
 	      else
 		{
 		  /* Its a K line */

@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.50 1998/12/23 19:05:11 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.51 1998/12/23 21:12:08 db Exp $";
 #endif
 
 #include "struct.h"
@@ -3401,8 +3401,15 @@ int	m_names( aClient *cptr,
   int	idx, flag, len, mlen;
   char	*s, *para = parc > 1 ? parv[1] : NULL;
 
+  /* Don't route names, no need for it -Dianora */
+  /*
   if (parc > 1 &&
       hunt_server(cptr, sptr, ":%s NAMES %s %s", 2, parc, parv))
+    return 0;
+    */
+
+  /* And throw away non local names requests that do get here -Dianora */
+  if(!MyConnect(sptr))
     return 0;
 
   mlen = strlen(me.name) + NICKLEN + 7;
