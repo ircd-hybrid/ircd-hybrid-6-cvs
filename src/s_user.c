@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.246 2002/01/14 00:19:32 db Exp $
+ *  $Id: s_user.c,v 1.247 2002/01/14 20:29:49 db Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -877,7 +877,11 @@ static int register_user(aClient *cptr, aClient *sptr,
         }
     }
 
-  send_umode(NULL, sptr, 0, SEND_UMODES, ubuf);
+  if(MyClient(sptr))
+    send_umode(sptr, sptr, 0, SEND_UMODES, ubuf);
+  else
+    send_umode(NULL, sptr, 0, SEND_UMODES, ubuf);
+
   if (!*ubuf)
     {
       ubuf[0] = '+';
