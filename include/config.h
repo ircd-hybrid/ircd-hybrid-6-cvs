@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.7 1998/10/15 04:17:50 db Exp $
+ * $Id: config.h,v 1.8 1998/10/16 04:22:25 lusky Exp $
  */
 
 #ifndef	__config_include__
@@ -104,8 +104,8 @@
  * -Dianora
  */
 
-#define DPATH   "./"
-#define SPATH   "./ircd"
+#define DPATH   "/usr/local/ircd/"
+#define SPATH   "/usr/local/ircd/ircd"
 #define	CPATH	"ircd.conf"
 #define KPATH   "kline.conf"
 #define	MPATH	"ircd.motd"
