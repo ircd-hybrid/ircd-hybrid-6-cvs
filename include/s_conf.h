@@ -21,16 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.42 1999/08/10 02:46:20 lusky Exp $
+ * $Id: s_conf.h,v 1.43 1999/08/10 03:32:14 lusky Exp $
  *
  * $Log: s_conf.h,v $
- * Revision 1.42  1999/08/10 02:46:20  lusky
- * bumped patchlevel to b95
- * removed unneeded arg to attach_Iline and fixed tklines for non-resolving hosts
- * fixes to allow SLAVE_SERVER to work (db)
- * RPL_MYINFO should report the user modes and channel modes available (db)
- * missed the user mode +b for bots (db)
- * applied neph's operwall/wallops pacing patch (db)
+ * Revision 1.43  1999/08/10 03:32:14  lusky
+ * remove <sys/syslog.h> check from configure, assume <syslog.h> exists (sw)
+ * cleaned up attach_Iline some more (db)
  *
  * Revision 1.41  1999/07/29 07:06:48  tomh
  * new m_commands
@@ -374,7 +370,6 @@ extern int              attach_confs(struct Client* client,
 extern int              attach_cn_lines(struct Client* client, 
                                         const char* host);
 extern int              attach_Iline(struct Client* client, 
-                                     struct hostent* hp,
                                      const char* username, char** reason);
 extern struct ConfItem* find_me(void);
 extern struct ConfItem* find_admin(void);

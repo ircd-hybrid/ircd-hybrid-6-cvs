@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.114 1999/08/10 02:46:26 lusky Exp $
+ *  $Id: s_bsd.c,v 1.115 1999/08/10 03:32:16 lusky Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -347,17 +347,15 @@ int deliver_it(aClient *cptr, char *str, int len)
  */
 int check_client(struct Client *cptr,char *username,char **reason)
 {
+  static char     sockname[HOSTLEN + 1];
   int             i;
   struct hostent* hp = 0;
  
   ClearAccess(cptr);
 
-  if (cptr->dns_reply)
-    hp = cptr->dns_reply->hp;
-
-  if ((i = attach_Iline(cptr, hp, username, reason)))
+  if ((i = attach_Iline(cptr, username, reason)))
     {
-      log(L_INFO, "Access denied: %s[%s]", cptr->name, cptr->sockhost);
+      log(L_INFO, "Access denied: %s[%s]", cptr->name, sockname);
       return i;
     }
 
