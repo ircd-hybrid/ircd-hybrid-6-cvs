@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.65 1999/07/21 05:45:01 tomh Exp $
+ * $Id: config.h,v 1.66 1999/07/22 01:29:48 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -971,6 +971,20 @@ error CLIENT_FLOOD undefined.
 #if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
         defined(NO_JOIN_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT_SIMPLE)
 #define NEED_SPLITCODE
+#endif
+
+#ifdef FLUD
+void    free_fluders();
+void    free_fludees();
+#endif /* FLUD */
+
+#ifdef ANTI_SPAMBOT
+#define MIN_SPAM_NUM 5
+#define MIN_SPAM_TIME 60
+#endif
+
+#ifdef IDLE_CHECK
+#define MIN_IDLETIME 1800
 #endif
 
 #define CONFIG_H_LEVEL_6

@@ -18,13 +18,14 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_numeric.c,v 1.7 1999/07/21 05:28:54 tomh Exp $
+ *   $Id: s_numeric.c,v 1.8 1999/07/22 01:29:51 db Exp $
  */
 #include "struct.h"
 #include "common.h"
 #include "numeric.h"
 #include "channel.h"
 #include "h.h"
+#include "parse.h"
 #include "send.h"
 
 #include <string.h>
