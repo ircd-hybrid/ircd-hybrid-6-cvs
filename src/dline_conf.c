@@ -1,7 +1,7 @@
 /*
  * dline_conf.c
  *
- * $Id: dline_conf.c,v 1.39 2001/12/04 16:27:34 db Exp $
+ * $Id: dline_conf.c,v 1.40 2001/12/07 14:38:46 leeh Exp $
  */
 #include "dline_conf.h"
 #include "class.h"
@@ -879,7 +879,7 @@ walk_the_ip_Klines(struct Client *sptr, struct ip_subtree *tree,
           /* print Kline */
           
           sendto_one(sptr, form_str(RPL_STATSKLINE), me.name,
-                     sptr->name, conftype, host, user, pass);
+                     sptr->name, conftype, host, user, pass, oper_reason);
         }
       else if(scan->status & CONF_CLIENT)
         {
