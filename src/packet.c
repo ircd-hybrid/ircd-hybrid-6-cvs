@@ -18,7 +18,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: packet.c,v 1.8 1999/07/12 23:37:03 tomh Exp $
+ *   $Id: packet.c,v 1.9 1999/07/15 08:47:38 tomh Exp $
  */ 
 #include "struct.h"
 #include "common.h"
@@ -49,7 +49,6 @@ int	dopacket(aClient *cptr, char *buffer, int length)
   char	*ch1;
   char	*ch2;
   register char *cptrbuf;
-  aClient	*acpt = cptr->acpt;
 #ifdef ZIP_LINKS
   int  zipped = NO;
   int  done_unzip = NO;
@@ -65,15 +64,6 @@ int	dopacket(aClient *cptr, char *buffer, int length)
       cptr->receiveB &= 0x03ff;	/* 2^10 = 1024, 3ff = 1023 */
     }
 
-  if (acpt != &me)
-    {
-      acpt->receiveB += length;
-      if (acpt->receiveB > 1023)
-	{
-	  acpt->receiveK += (acpt->receiveB >> 10);
-	  acpt->receiveB &= 0x03ff;
-	}
-    }
   else if (me.receiveB > 1023)
     {
       me.receiveK += (me.receiveB >> 10);
@@ -148,8 +138,6 @@ int	dopacket(aClient *cptr, char *buffer, int length)
 	      *ch1 = '\0';
 	      me.receiveM += 1; /* Update messages received */
 	      cptr->receiveM += 1;
-	      if (cptr->acpt != &me)
-		cptr->acpt->receiveM += 1;
 	      cptr->count = 0; /* ...just in case parse returns with
 			       ** FLUSH_BUFFER without removing the
 			       ** structure pointed by cptr... --msa

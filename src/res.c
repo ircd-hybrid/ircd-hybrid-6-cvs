@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.29 1999/07/11 22:28:58 tomh Exp $
+ * $Id: res.c,v 1.30 1999/07/15 08:47:38 tomh Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
@@ -20,6 +20,7 @@
 #include "send.h"
 
 #include <assert.h>
+#include <string.h>
 #include <sys/time.h>
 #include <sys/socket.h>
 #include <fcntl.h>

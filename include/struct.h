@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.59 1999/07/13 03:23:09 db Exp $
+ * $Id: struct.h,v 1.60 1999/07/15 08:47:31 tomh Exp $
  */
 #ifndef	INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -72,8 +72,6 @@
 #ifndef INCLUDED_client_h
 # include "client.h"
 #endif
-
-#define REPORT_DLINED  "NOTICE DLINE :*** You have been D-lined\r\n"
 
 typedef struct  ConfItem aConfItem;
 typedef	struct 	Client	aClient;
@@ -534,7 +532,7 @@ extern unsigned long tsdms;
 #endif /* DEFAULT_SERVER_SPLIT_RECOVERY_TIME */
 #endif
 
-typedef struct
+struct SetOptions
 {
   int maxclients;	/* max clients allowed */
   int autoconn;		/* autoconn enabled for all servers? */
@@ -567,7 +565,9 @@ typedef struct
   int spam_time;
 #endif
 
-}SetOptionsType;
+};
+
+extern struct SetOptions GlobalSetOptions;  /* defined in ircd.c */
 
 #ifdef FLUD
 struct fludbot {

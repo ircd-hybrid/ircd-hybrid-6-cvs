@@ -16,12 +16,13 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_zip.c,v 1.11 1999/07/12 23:37:05 tomh Exp $
+ *   $Id: s_zip.c,v 1.12 1999/07/15 08:47:42 tomh Exp $
  */
 #include "struct.h"
 #include "sys.h"
 #include "h.h"
 #include "send.h"
+#include <string.h>
 
 #ifdef	ZIP_LINKS
 /*

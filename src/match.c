@@ -22,7 +22,7 @@
  * Cleanup of collapse and match
  * Moved static calls variable to match
  * Added asserts for null pointers
- * $Id: match.c,v 1.9 1999/07/08 11:08:59 db Exp $
+ * $Id: match.c,v 1.10 1999/07/15 08:47:37 tomh Exp $
  *
  */
 #include "match.h"
@@ -161,12 +161,12 @@ char* collapse(char *pattern)
 }
 
 /*
-**  Case insensitive comparison of two NULL terminated strings.
-**
-**	returns	 0, if s1 equal to s2
-**		<0, if s1 lexicographically less than s2
-**		>0, if s1 lexicographically greater than s2
-*/
+ * irccmp - case insensitive comparison of two NULL terminated strings.
+ *
+ *	returns	 0, if s1 equal to s2
+ *		<0, if s1 lexicographically less than s2
+ *		>0, if s1 lexicographically greater than s2
+ */
 int irccmp(const char *s1, const char *s2)
 {
   const unsigned char* str1 = (const unsigned char*) s1;

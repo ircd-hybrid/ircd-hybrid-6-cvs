@@ -43,7 +43,7 @@
  *
  * Diane Bruce -db (db@db.net)
  *
- * $Id: mtrie_conf.c,v 1.46 1999/07/12 23:37:02 tomh Exp $
+ * $Id: mtrie_conf.c,v 1.47 1999/07/15 08:47:38 tomh Exp $
  */
 #include <string.h>
 	/* WHAT TO DO HERE?  guess we'll find out --ns */
@@ -1285,7 +1285,7 @@ static void report_unsortable_klines(aClient *sptr,char *need_host)
 	      if(p)
 		*p = '\0';
 	    }
-	  sendto_one(sptr, rpl_str(RPL_STATSKLINE), me.name,
+	  sendto_one(sptr, form_str(RPL_STATSKLINE), me.name,
 		     sptr->name, 'K', host,
 		     name, pass);
 	  if(p)
@@ -1334,7 +1334,7 @@ void report_mtrie_conf_links(aClient *sptr, int flags)
 	  if(IsConfLittleI(found_conf))
 	    c = 'i';
 #endif
-	  sendto_one(sptr, rpl_str(RPL_STATSILINE), me.name,
+	  sendto_one(sptr, form_str(RPL_STATSILINE), me.name,
 		     sptr->name,
 		     c,
 		     name,
@@ -1354,7 +1354,7 @@ void report_mtrie_conf_links(aClient *sptr, int flags)
 	  if(IsConfLittleI(found_conf))
 	    c = 'i';
 #endif
-	  sendto_one(sptr, rpl_str(RPL_STATSILINE), me.name,
+	  sendto_one(sptr, form_str(RPL_STATSILINE), me.name,
 		     sptr->name,
 		     c,
 		     name,
@@ -1377,7 +1377,7 @@ void report_mtrie_conf_links(aClient *sptr, int flags)
 	  if(IsConfLittleI(found_conf))
 	    c = 'i';
 #endif
-	  sendto_one(sptr, rpl_str(RPL_STATSILINE), me.name,
+	  sendto_one(sptr, form_str(RPL_STATSILINE), me.name,
 		     sptr->name,
 		     c,
 		     name,
@@ -1405,7 +1405,7 @@ void report_mtrie_conf_links(aClient *sptr, int flags)
 		*p = '\0';
 	    }
 
-	  sendto_one(sptr, rpl_str(RPL_STATSKLINE), me.name,
+	  sendto_one(sptr, form_str(RPL_STATSKLINE), me.name,
 		     sptr->name, 'K', host,
 		     name, pass);
 	  if(p)
@@ -1523,7 +1523,7 @@ static void report_sub_mtrie(aClient *sptr, int flags, DOMAIN_LEVEL *dl_ptr)
 			  if(p)
 			    *p = '\0';
 			}
-		      sendto_one(sptr, rpl_str(RPL_STATSKLINE),
+		      sendto_one(sptr, form_str(RPL_STATSKLINE),
 				 me.name,
 				 sptr->name,
 				 'K',
@@ -1547,7 +1547,7 @@ static void report_sub_mtrie(aClient *sptr, int flags, DOMAIN_LEVEL *dl_ptr)
 		      if(IsConfLittleI(aconf))
 			c = 'i';
 #endif
-		      sendto_one(sptr, rpl_str(RPL_STATSILINE),
+		      sendto_one(sptr, form_str(RPL_STATSILINE),
 				 me.name,
 				 sptr->name,
 				 c,
@@ -1578,7 +1578,7 @@ static void report_sub_mtrie(aClient *sptr, int flags, DOMAIN_LEVEL *dl_ptr)
 			  if(p)
 			    *p = '\0';
 			}
-		      sendto_one(sptr, rpl_str(RPL_STATSKLINE),
+		      sendto_one(sptr, form_str(RPL_STATSKLINE),
 				 me.name,
 				 sptr->name,
 				 'K',
@@ -1601,7 +1601,7 @@ static void report_sub_mtrie(aClient *sptr, int flags, DOMAIN_LEVEL *dl_ptr)
 		      if(IsConfLittleI(aconf))
 			c = 'i';
 #endif
-		      sendto_one(sptr, rpl_str(RPL_STATSILINE),
+		      sendto_one(sptr, form_str(RPL_STATSILINE),
 				 me.name,
 				 sptr->name,
 				 c,

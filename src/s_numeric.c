@@ -18,7 +18,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_numeric.c,v 1.3 1999/07/12 23:37:04 tomh Exp $
+ *   $Id: s_numeric.c,v 1.4 1999/07/15 08:47:40 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -26,6 +26,8 @@
 #include "numeric.h"
 #include "h.h"
 #include "send.h"
+
+#include <string.h>
 
 static char buffer[1024];
 

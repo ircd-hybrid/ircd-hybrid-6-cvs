@@ -1,3 +1,8 @@
+/*
+ * viconf.c
+ *
+ * $Id: viconf.c,v 1.5 1999/07/15 08:47:48 tomh Exp $
+ */
 #include <stdio.h>
 #include <fcntl.h>
 #include <stdlib.h>
@@ -23,9 +28,6 @@
 #include <sys/wait.h>
 #endif
 
-#ifndef lint
-static char *rcs_version="$Id: viconf.c,v 1.4 1999/05/15 22:00:44 lusky Exp $";
-#endif /* lint */
 
 int main(int argc, char *argv[])
 {

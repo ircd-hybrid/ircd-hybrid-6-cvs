@@ -16,8 +16,9 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ *   $Id: sprintf_irc.c,v 1.5 1999/07/15 08:47:43 tomh Exp $
  */
-
 #include <stdio.h>
 
 #include "send.h"
@@ -26,7 +27,6 @@
 
 #include <stdarg.h>
 
-static char *rcs_version = "$Id: sprintf_irc.c,v 1.4 1999/07/15 03:09:57 db Exp $";
 
 const char atoi_tab[4000] = {
     '0','0','0',0, '0','0','1',0, '0','0','2',0, '0','0','3',0, '0','0','4',0,

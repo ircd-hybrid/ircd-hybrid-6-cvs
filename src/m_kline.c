@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.16 1999/07/15 02:34:22 db Exp $
+ *   $Id: m_kline.c,v 1.17 1999/07/15 08:47:37 tomh Exp $
  */
 #include "struct.h"
 
@@ -160,7 +160,7 @@ int     m_kline(aClient *cptr,
     {
       if (!MyClient(sptr) || !IsAnOper(sptr))
 	{
-	  sendto_one(sptr, err_str(ERR_NOPRIVILEGES), me.name, parv[0]);
+	  sendto_one(sptr, form_str(ERR_NOPRIVILEGES), me.name, parv[0]);
 	  return 0;
 	}
 
@@ -172,7 +172,7 @@ int     m_kline(aClient *cptr,
 
       if ( parc < 2 )
 	{
-	  sendto_one(sptr, err_str(ERR_NEEDMOREPARAMS),
+	  sendto_one(sptr, form_str(ERR_NEEDMOREPARAMS),
 		     me.name, parv[0], "KLINE");
 	  return 0;
 	}
@@ -191,7 +191,7 @@ int     m_kline(aClient *cptr,
 #ifdef SLAVE_SERVERS
 	  if(!IsServer(sptr))
 #endif	  
-	     sendto_one(sptr, err_str(ERR_NEEDMOREPARAMS),
+	     sendto_one(sptr, form_str(ERR_NEEDMOREPARAMS),
 			me.name, parv[0], "KLINE");
 	  return 0;
 	}
@@ -624,7 +624,7 @@ int     m_dline(aClient *cptr,
 
   if (!MyClient(sptr) || !IsAnOper(sptr))
     {
-      sendto_one(sptr, err_str(ERR_NOPRIVILEGES), me.name, parv[0]);
+      sendto_one(sptr, form_str(ERR_NOPRIVILEGES), me.name, parv[0]);
       return 0;
     }
 
@@ -636,7 +636,7 @@ int     m_dline(aClient *cptr,
 
   if ( parc < 2 )
     {
-      sendto_one(sptr, err_str(ERR_NEEDMOREPARAMS),
+      sendto_one(sptr, form_str(ERR_NEEDMOREPARAMS),
 		 me.name, parv[0], "KLINE");
       return 0;
     }

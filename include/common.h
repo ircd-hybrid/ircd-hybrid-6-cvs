@@ -16,15 +16,23 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: common.h,v 1.8 1999/07/07 23:31:43 db Exp $
+ * $Id: common.h,v 1.9 1999/07/15 08:47:29 tomh Exp $
  */
-
-#ifndef	__common_include__
-#define __common_include__
-
-#if defined( HAVE_PARAM_H )
-#include <sys/param.h>
+#ifndef	INCLUDED_common_h
+#define INCLUDED_common_h
+#ifndef INCLUDED_sys_types_h
+#include <sys/types.h>
+#define INCLUDED_sys_types_h
 #endif
+
+#if 0 /* XXX - is this needed? */
+#if defined( HAVE_PARAM_H )
+#ifndef INCLUDED_sys_param_h
+#include <sys/param.h>
+#define INCLUDED_sys_param_h
+#endif
+#endif
+#endif /* 0 */
 
 #ifndef NULL
 #define NULL 0
@@ -114,7 +122,9 @@ extern char *strtoken (char **, char *, char *);
 extern void flush_connections();
 extern struct SLink *find_user_link(/* struct SLink *, struct Client * */);
 
-
+/*
+ * XXX - ACK!!!
+ */
 #define MAXCLIENTS GlobalSetOptions.maxclients
 #define NOISYHTM   GlobalSetOptions.noisy_htm
 #define LIFESUX    GlobalSetOptions.lifesux
