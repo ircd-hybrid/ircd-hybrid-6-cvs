@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.69 2001/12/10 07:18:53 db Exp $
+ *   $Id: m_kline.c,v 1.70 2001/12/10 08:03:49 db Exp $
  */
 #include "m_commands.h"
 #include "m_kline.h"
@@ -1270,6 +1270,8 @@ m_dline(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
   aconf->status = CONF_DLINE;
   DupString(aconf->host,host);
   DupString(aconf->passwd,buffer);
+  if (oper_reason != NULL)
+    DupString(aconf->oper_reason, oper_reason);
 
   aconf->ip = ip_host;
   aconf->ip_mask = ip_mask;
