@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: msg.h,v 1.12 1999/07/30 03:25:47 db Exp $
+ * $Id: msg.h,v 1.13 2000/06/10 02:45:36 lusky Exp $
  */
 #ifndef INCLUDED_msg_h
 #define INCLUDED_msg_h
@@ -102,7 +102,6 @@ typedef struct MessageTree MESSAGE_TREE;
 #define MSG_KICK     "KICK"     /* KICK */
 #define MSG_USERHOST "USERHOST" /* USER -> USRH */
 #define MSG_ISON     "ISON"     /* ISON */
-#define MSG_USRIP    "USRIP"    /* USRIP */
 #define MSG_REHASH   "REHASH"   /* REHA */
 #define MSG_RESTART  "RESTART"  /* REST */
 #define MSG_CLOSE    "CLOSE"    /* CLOS */

@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.50 2000/04/21 23:39:26 lusky Exp $
+ * $Id: res.c,v 1.51 2000/06/10 02:45:37 lusky Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
@@ -34,6 +34,10 @@
 #include <resolv.h>
 #include <netdb.h>
 #include <arpa/inet.h>
+
+#ifdef DEBUGMODE
+#include <errno.h>
+#endif
 
 #include <limits.h>
 #if (CHAR_BIT != 8)

@@ -1,5 +1,5 @@
 /************************************************************************
- *   IRC - Internet Relay Chat, src/m_kline.c
+ *   IRC - Internet Relay Chat, src/m_unkline.c
  *   Copyright (C) 1990 Jarkko Oikarinen and
  *                      University of Oulu, Computing Center
  *
@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_unkline.c,v 1.36 1999/08/06 18:00:57 lusky Exp $
+ *   $Id: m_unkline.c,v 1.37 2000/06/10 02:45:36 lusky Exp $
  */
 #include "m_commands.h"
 #include "channel.h"

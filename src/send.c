@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.91 2000/05/26 03:57:40 lusky Exp $
+ *   $Id: send.c,v 1.92 2000/06/10 02:45:37 lusky Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -51,7 +51,6 @@ static  char    sendbuf[2048];
 static  int     send_message (aClient *, char *, int);
 
 static  void vsendto_prefix_one(register aClient *, register aClient *, const char *, va_list);
-static  void vsendto_one(aClient *, const char *, va_list);
 static  void vsendto_one(aClient *, const char *, va_list);
 static  void vsendto_realops(const char *, va_list);
 

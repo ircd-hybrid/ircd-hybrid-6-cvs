@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.53 2000/04/21 23:39:25 lusky Exp $
+ *   $Id: m_kline.c,v 1.54 2000/06/10 02:45:36 lusky Exp $
  */
 #include "m_kline.h"
 #include "channel.h"
@@ -1036,7 +1036,7 @@ m_dline(aClient *cptr, aClient *sptr, int parc, char *parv[])
   if ( parc < 2 )
     {
       sendto_one(sptr, form_str(ERR_NEEDMOREPARAMS),
-                 me.name, parv[0], "KLINE");
+                 me.name, parv[0], "DLINE");
       return 0;
     }
 

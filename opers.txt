@@ -1,5 +1,5 @@
 This file outlines the features that ircd-hybrid has for IRC Operators.
-$Id: opers.txt,v 1.9 1999/12/28 05:16:26 lusky Exp $
+$Id: opers.txt,v 1.10 2000/06/10 02:45:34 lusky Exp $
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -22,7 +22,9 @@ Usermodes: (* designates that the umode is oper only)
        * +y     - Can see stats/links/admin requests to name a few.
        * +d     - Can see server debug messages.
        * +n     - Can see client nick changes.
-  
+       * +b     - Can see possible bot warnings.
+       * +x     - Can see new server introduction messages.
+
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 Oper Commands: (+ indicates that /quote must be used with ircII)
@@ -174,7 +176,6 @@ COMMAND         - USAGE and DESCRIPTION
                   KLINE 10 <nick|user@host> :cool off for 10 minutes
 
 + UNKLINE       - UNKLINE <user@host>
-                  -- If compiled with UNKLINE --
                   Will attempt to unkline the given <user@host>
                   Will unkline a temporary kline.
 
