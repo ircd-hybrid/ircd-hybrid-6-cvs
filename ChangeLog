@@ -1,3 +1,15 @@
+ievil       2003/10/13 05:55:05 EDT	(20031013_1)
+
+  Modified files:
+    src                  messages_cust.tab 
+  Log:
+  Added update to mesages_cust.tab...
+  
+  Revision  Changes    Path
+  1.28      +2 -2      ircd-hybrid-6/src/messages_cust.tab
+
+
+
 ievil       2003/10/13 05:53:06 EDT	(20031013_0)
 
   Modified files:
