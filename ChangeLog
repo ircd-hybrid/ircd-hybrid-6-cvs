@@ -1,3 +1,18 @@
+db          2003/05/22 08:22:11 EDT	(20030522_0)
+
+  Modified files:
+    src                  m_unkline.c mtrie_conf.c 
+  Log:
+  From Hwy again
+  Fix one compiler warning in src/m_unkline.c
+  Remove some accidental pieces of billy-jon and my patches from mtrie_conf.c
+  
+  Revision  Changes    Path
+  1.50      +1 -1      ircd-hybrid-6/src/m_unkline.c
+  1.92      +0 -6      ircd-hybrid-6/src/mtrie_conf.c
+
+
+
 db          2003/05/16 02:06:01 EDT	(20030516_0)
 
   Modified files:
