@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_squit.c,v 1.1 1999/07/28 06:20:30 tomh Exp $
+ *   $Id: m_squit.c,v 1.2 1999/07/28 07:49:37 tomh Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -29,7 +29,6 @@
 #include "ircd.h"
 #include "numeric.h"
 #include "s_conf.h"
-#include "s_err.h"
 #include "s_serv.h"
 #include "send.h"
 

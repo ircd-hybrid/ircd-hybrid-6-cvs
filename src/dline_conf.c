@@ -1,14 +1,13 @@
 /*
  * dline_conf.c
  *
- * $Id: dline_conf.c,v 1.28 1999/07/26 05:34:43 tomh Exp $
+ * $Id: dline_conf.c,v 1.29 1999/07/28 07:49:34 tomh Exp $
  */
 #include "dline_conf.h"
 #include "struct.h"
 #include "common.h"
 #include "numeric.h"
 #include "class.h"
-#include "s_err.h"
 #include "ircd.h"
 #include "s_conf.h"
 #include "send.h"

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.37 1999/07/28 06:20:30 tomh Exp $
+ *  $Id: client.c,v 1.38 1999/07/28 07:49:34 tomh Exp $
  */
 #include "client.h"
 #include "blalloc.h"
@@ -34,7 +34,6 @@
 #include "res.h"
 #include "s_bsd.h"
 #include "s_conf.h"
-#include "s_err.h"
 #include "s_misc.h"
 #include "s_serv.h"
 #include "send.h"

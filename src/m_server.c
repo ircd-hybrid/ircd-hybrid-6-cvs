@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_server.c,v 1.4 1999/07/28 06:20:30 tomh Exp $
+ *   $Id: m_server.c,v 1.5 1999/07/28 07:49:36 tomh Exp $
  */
 #include "m_commands.h"  /* m_server prototype */
 #include "client.h"      /* client struct */
@@ -31,7 +31,6 @@
 #include "list.h"        /* make_server */
 #include "numeric.h"     /* ERR_xxx */
 #include "s_conf.h"      /* struct ConfItem */
-#include "s_err.h"       /* form_str */
 #include "s_misc.h"      /* ircstp */
 #include "s_serv.h"      /* server_estab, check_server, my_name_for_link */
 #include "scache.h"      /* find_or_add */

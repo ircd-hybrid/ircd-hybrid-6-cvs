@@ -16,7 +16,7 @@
 *   along with this program; if not, write to the Free Software
 *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 *
-*   $Id: whowas.c,v 1.28 1999/07/25 17:09:07 db Exp $
+*   $Id: whowas.c,v 1.29 1999/07/28 07:49:42 tomh Exp $
 */
 #include "struct.h"
 #include "ircd_defs.h"
@@ -27,7 +27,6 @@
 #include "send.h"
 #include "hash.h"
 #include "s_user.h"
-#include "s_err.h"
 #include "s_serv.h"
 
 #include <assert.h>

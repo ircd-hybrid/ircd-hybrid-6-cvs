@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.32 1999/07/25 05:32:57 tomh Exp $
+ *  $Id: m_gline.c,v 1.33 1999/07/28 07:49:35 tomh Exp $
  */
 
 #include "config.h"
@@ -32,7 +32,6 @@
 #include "s_misc.h"
 #include "send.h"
 #include "ircd.h"
-#include "s_err.h"
 #include "scache.h"
 #include "dline_conf.h"
 #include "mtrie_conf.h"

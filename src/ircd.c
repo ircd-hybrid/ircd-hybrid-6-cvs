@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.112 1999/07/27 11:20:22 db Exp $
+ * $Id: ircd.c,v 1.113 1999/07/28 07:49:35 tomh Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -40,7 +40,6 @@
 #include "s_bsd.h"
 #include "s_conf.h"
 #include "s_debug.h"
-#include "s_err.h"
 #include "s_misc.h"
 #include "s_serv.h"      /* try_connections */
 #include "s_zip.h"

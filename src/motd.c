@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: motd.c,v 1.20 1999/07/25 06:52:23 tomh Exp $
+ *   $Id: motd.c,v 1.21 1999/07/28 07:49:38 tomh Exp $
  */
 #include "motd.h"
 #include "ircd.h"
@@ -30,7 +30,6 @@
 #include "s_conf.h"
 #include "class.h"
 #include "send.h"
-#include "s_err.h"
 #include "s_conf.h"
 #include "numeric.h"
 #include "client.h"

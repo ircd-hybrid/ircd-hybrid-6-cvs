@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.72 1999/07/28 05:36:11 tomh Exp $
+ *   $Id: send.c,v 1.73 1999/07/28 07:49:41 tomh Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -27,7 +27,6 @@
 #include "m_commands.h"
 #include "numeric.h"
 #include "s_bsd.h"
-#include "s_err.h"
 #include "s_serv.h"
 #include "s_zip.h"
 #include "struct.h"

@@ -34,7 +34,7 @@
  *                mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.159 1999/07/28 05:24:36 tomh Exp $
+ * $Id: channel.c,v 1.160 1999/07/28 07:49:33 tomh Exp $
  */
 #include "channel.h"
 #include "struct.h"
@@ -46,7 +46,6 @@
 #include "hash.h"
 #include "whowas.h"
 #include "s_user.h"
-#include "s_err.h"
 #include "s_serv.h"       /* captab */
 #include "irc_string.h"
 

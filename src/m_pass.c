@@ -20,14 +20,13 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_pass.c,v 1.1 1999/07/25 05:32:58 tomh Exp $
+ *  $Id: m_pass.c,v 1.2 1999/07/28 07:49:36 tomh Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "client.h"      /* client struct */
 #include "irc_string.h"  /* strncpy_irc */
 #include "send.h"        /* sendto_one */
 #include "numeric.h"     /* ERR_xxx */
-#include "s_err.h"       /* form_str */
 #include "ircd.h"        /* me */
 
 /*

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.187 1999/07/28 06:20:31 tomh Exp $
+ *  $Id: s_user.c,v 1.188 1999/07/28 07:49:41 tomh Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -36,7 +36,6 @@
 #include "numeric.h"
 #include "s_bsd.h"
 #include "s_conf.h"
-#include "s_err.h"
 #include "s_misc.h"
 #include "s_serv.h"
 #include "scache.h"

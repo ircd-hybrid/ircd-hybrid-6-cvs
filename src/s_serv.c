@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.196 1999/07/28 06:57:57 tomh Exp $
+ *   $Id: s_serv.c,v 1.197 1999/07/28 07:49:40 tomh Exp $
  */
 #define DEFINE_CAPTAB
 #include "s_serv.h"
@@ -47,7 +47,6 @@
 #include "s_bsd.h"
 #include "s_conf.h"
 #include "s_debug.h"
-#include "s_err.h"
 #include "s_misc.h"
 #include "s_user.h"
 #include "s_zip.h"
