@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.29 2003/06/14 23:23:39 ievil Exp $
+ * $Id: m_info.h,v 1.30 2003/08/16 19:58:33 ievil Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -101,6 +101,12 @@ Info MyInformation[] = {
   { "CHANMODE_E", "OFF", 0, "Enable channel mode +e" },
 #endif /* CHANMODE_E */
 
+#ifdef CHANMODE_I
+  { "CHANMODE_I", "ON", 0, "Enable channel mode +I" },
+#else
+  { "CHANMODE_I", "OFF", 0, "Enable channel mode +I" },
+#endif /* CHANMODE_O */
+    
 #ifdef CLIENT_FLOOD
   { "CLIENT_FLOOD", "", CLIENT_FLOOD, "Client Excess Flood Threshold" },
 #else

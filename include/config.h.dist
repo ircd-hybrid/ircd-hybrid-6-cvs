@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h.dist,v 1.139 2003/06/25 01:34:19 ievil Exp $
+ * $Id: config.h.dist,v 1.140 2003/08/16 19:58:33 ievil Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -773,8 +773,7 @@
  *
  * Note, +e will NEVER be sent to a server that does not understand it.
  *
- * +e is supported by dalnet, ircnet, undernet but not EFNet atm. (june 9
- * 2001)
+ * +e is supported by dalnet, ircnet, undernet and EFNet.
  */
 /* #undef'ing this will NOT stop modes passing through your server,
  * it will only stop them being used/set on your server.  This is to
@@ -782,6 +781,15 @@
  * +e lists differ.   --fl_
  */
 #undef CHANMODE_E
+
+/* CHANMODE_I
+ * /mode #channel +I allows you to add exceptions to +i.
+ * this is a nick!user@host mask of somebody who can join an
+ * invite-only (+i) channel without having to be invited first.
+ * - alk
+ */
+#undef CHANMODE_I
+
 
 /* USE_KNOCK
  * KNOCK allows users to send a "knock" to a +ikl channel.

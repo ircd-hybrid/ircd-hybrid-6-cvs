@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.60 2003/06/24 03:57:17 ievil Exp $
+ *   $Id: s_debug.c,v 1.61 2003/08/16 19:58:36 ievil Exp $
  */
 #include "s_debug.h"
 #include "channel.h"
@@ -78,10 +78,8 @@ const char serveropts[] = {
 #ifdef  SHOW_INVISIBLE_LUSERS
   'i',
 #endif
-#if 0 /* make this chanmode +I in future versions */
-#ifndef NO_DEFAULT_INVISIBLE
+#ifdef CHANMODE_I
   'I',
-#endif
 #endif
 #ifdef USE_KNOCK
   'K',
@@ -97,6 +95,9 @@ const char serveropts[] = {
 #endif
 #ifdef  LITTLE_I_LINES
   'r',
+#endif
+#ifdef  OPERSPY
+  'S',
 #endif
 #ifdef  IGNORE_BOGUS_TS
   'T',
@@ -328,6 +329,17 @@ void count_memory(aClient *cptr,char *nick)
 			chem += strlen(gen_link->value.banptr->banstr);
 		if (gen_link->value.banptr->who)
 			chem += strlen(gen_link->value.banptr->who);
+      #endif
+      }
+      for (gen_link = chptr->invexlist; gen_link; gen_link = gen_link->next)
+      {
+        che++;
+        chem += (strlen(gen_link->value.cp)+1+sizeof(Link));
+      #ifdef BAN_INFO
+                if (gen_link->value.banptr->banstr)
+                        chem += strlen(gen_link->value.banptr->banstr);
+                if (gen_link->value.banptr->who)
+                        chem += strlen(gen_link->value.banptr->who);
       #endif
       }
     }

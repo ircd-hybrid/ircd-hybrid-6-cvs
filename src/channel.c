@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.241 2003/06/14 23:23:41 ievil Exp $
+ * $Id: channel.c,v 1.242 2003/08/16 19:58:35 ievil Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -63,9 +63,12 @@ static  int     add_exceptid(struct Client *, struct Channel *, char *);
 static  int     can_join (struct Client *, struct Channel *, char *,int *);
 static  int     del_banid (struct Channel *, char *);
 static  int     del_exceptid (struct Channel *, char *);
+static  int     add_invexid(struct Client *, struct Channel *, char *);
+static  int     del_invexid (struct Channel *, char *);
 static  void    free_bans_exceptions_denies(struct Channel *);
 static  void    free_a_ban_list(Link *ban_ptr);
 static  int     is_banned (struct Client *, struct Channel *);
+static  int     is_invex (struct Client *, struct Channel *);
 static  void    sub1_from_channel (struct Channel *);
 
 
@@ -365,6 +368,111 @@ static  int     del_exceptid(struct Channel *chptr, char *eid)
   return 0;
 }
 
+/* add_invexid - add an id to the exception list for the channel  
+ * (belongs to cptr) - modded for invex by ievil - 2003
+ */
+
+static  int     add_invexid(struct Client *cptr, struct Channel *chptr, char *eid)
+{
+  Link  *ie, *ban;
+
+  /* dont let local clients overflow the banlist */
+  if ((!IsServer(cptr)) && (chptr->num_bed >= MAXBANS))
+    if (MyClient(cptr))
+      {
+        sendto_one(cptr, form_str(ERR_BANLISTFULL),
+                   me.name, cptr->name,
+                   chptr->chname, eid);
+        return -1;
+      }
+
+  if (MyClient(cptr))
+    (void)collapse(eid);
+
+  for (ban = chptr->invexlist; ban; ban = ban->next)
+	  if (match(BANSTR(ban), eid))
+	    return -1;
+  
+
+  ie = make_link();
+  memset(ie, 0, sizeof(Link));
+  ie->flags = CHFL_INVEX;
+  ie->next = chptr->invexlist;
+
+#ifdef BAN_INFO
+
+  ie->value.banptr = (aBan *)MyMalloc(sizeof(aBan));
+  ie->value.banptr->banstr = (char *)MyMalloc(strlen(eid)+1);
+  (void)strcpy(ie->value.banptr->banstr, eid);
+
+#ifdef USE_UH
+  if (IsPerson(cptr))
+    {
+      ie->value.banptr->who =
+        (char *)MyMalloc(strlen(cptr->name)+
+                         strlen(cptr->username)+
+                         strlen(cptr->host)+3);
+      ircsprintf(ie->value.banptr->who, "%s!%s@%s",
+                 cptr->name, cptr->username, cptr->host);
+    }
+  else
+    {
+#endif
+      ie->value.banptr->who = (char *)MyMalloc(strlen(cptr->name)+1);
+      (void)strcpy(ie->value.banptr->who, cptr->name);
+#ifdef USE_UH
+    }
+#endif
+
+  ie->value.banptr->when = CurrentTime;
+
+#else
+
+  ie->value.cp = (char *)MyMalloc(strlen(eid)+1);
+  (void)strcpy(ie->value.cp, eid);
+
+#endif  /* #ifdef BAN_INFO */
+
+  chptr->invexlist = ie;
+  chptr->num_bed++;
+  return 0;
+}
+
+/*
+ * del_invexid - delete an id belonging to cptr
+ *
+ * from orabidoo - modded for +I/invex by ievil
+ */
+static  int     del_invexid(struct Channel *chptr, char *eid)
+{
+  Link **ie;
+  Link *tmp;
+
+  if (!eid)
+    return -1;
+  for (ie = &(chptr->invexlist); *ie; ie = &((*ie)->next))
+    if (irccmp(eid, BANSTR(*ie)) == 0)
+      {
+        tmp = *ie;
+        *ie = tmp->next;
+#ifdef BAN_INFO
+        MyFree(tmp->value.banptr->banstr);
+        MyFree(tmp->value.banptr->who);
+        MyFree(tmp->value.banptr);
+#else
+        MyFree(tmp->value.cp);
+#endif
+        free_link(tmp);
+	/* num_bed should never be < 0 */
+	if(chptr->num_bed > 0)
+	  chptr->num_bed--;
+	else
+	  chptr->num_bed = 0;
+        break;
+      }
+  return 0;
+}
+
 /*
  * del_matching_exception - delete an exception matching this user
  *
@@ -444,6 +552,86 @@ static void del_matching_exception(struct Client *cptr,struct Channel *chptr)
         }
     }
 }
+/*
+ * del_matching_invex - delete an exception matching this user
+ *
+ * The idea is, if a +e client gets kicked for any reason
+ * remove the matching exception for this client.
+ * This will immediately stop channel "chatter" with scripts
+ * that kick on matching ban. It will also stop apparent "desyncs."
+ * It's not the long term answer, but it will tide us over.
+ *
+ * modified from orabidoo - Dianora
+ */
+static void del_matching_invex(struct Client *cptr,struct Channel *chptr)
+{
+  Link **ie;
+  Link *tmp;
+  char  s[NICKLEN + USERLEN + HOSTLEN+6];
+  char  *s2;
+
+  if (!IsPerson(cptr))
+    return;
+
+  strcpy(s, make_nick_user_host(cptr->name, cptr->username, cptr->host));
+  s2 = make_nick_user_host(cptr->name, cptr->username,
+                           inetntoa((char*) &cptr->ip));
+
+  for (ie = &(chptr->invexlist); *ie; ie = &((*ie)->next))
+    {
+      tmp = *ie;
+
+      if (match(BANSTR(tmp), s) ||
+          match(BANSTR(tmp), s2) )
+        {
+
+          /* code needed here to send -I to channel.
+           * I will not propogate the removal,
+           * This will lead to desyncs of e modes,
+           * but its not going to be any worse then it is now.
+           *
+           * Kickee gets to see the -I removal by the server
+           * since they have not yet been removed from the channel.
+           * I don't think thats a biggie.
+           *
+           * -Dianora 
+           * - moddified by ievil to do INVEX - 2003
+           */
+
+#ifdef HIDE_OPS
+          sendto_channel_chanops_butserv(chptr,
+                                 &me,
+                                 ":%s MODE %s -I %s", 
+                                 me.name,
+                                 chptr->chname,
+                                 BANSTR(tmp));
+#else
+          sendto_channel_butserv(chptr,
+                                 &me,
+                                 ":%s MODE %s -I %s", 
+                                 me.name,
+                                 chptr->chname,
+                                 BANSTR(tmp));
+#endif
+
+          *ie = tmp->next;
+#ifdef BAN_INFO
+          MyFree(tmp->value.banptr->banstr);
+          MyFree(tmp->value.banptr->who);
+          MyFree(tmp->value.banptr);
+#else
+          MyFree(tmp->value.cp);
+#endif
+          free_link(tmp);
+	  /* num_bed should never be < 0 */
+	  if(chptr->num_bed > 0)
+	    chptr->num_bed--;
+	  else
+	    chptr->num_bed = 0;
+          return;
+        }
+    }
+}
 
 /*
  * is_banned -  returns an int 0 if not banned,
@@ -493,6 +681,47 @@ static  int is_banned(struct Client *cptr,struct Channel *chptr)
 }
 
 /*
+ * is_invex  -  returns an int 0 if not invex,
+ *              CHFL_INVEX if they have a ban exception
+ *
+ * IP_BAN_ALL from comstud
+ * always on...
+ *
+ * +e code from orabidoo - modded to +I code by ievil / 2003
+ */
+
+static  int is_invex(struct Client *cptr,struct Channel *chptr)
+{
+/* if we dont have CHANMODE_I just abort */
+#ifdef CHANMODE_I
+
+  Link *tmp;
+  char  s[NICKLEN+USERLEN+HOSTLEN+6];
+  char  *s2;
+
+  if (!IsPerson(cptr))
+    return (0);
+
+  strcpy(s, make_nick_user_host(cptr->name, cptr->username, cptr->host));
+  s2 = make_nick_user_host(cptr->name, cptr->username,
+                           inetntoa((char*) &cptr->ip));
+  if (tmp)
+    {
+      Link *t2;
+      for (t2 = chptr->invexlist; t2; t2 = t2->next)
+        if (match(BANSTR(t2), s) ||
+            match(BANSTR(t2), s2))
+          {
+            return CHFL_INVEX;
+          }
+    }
+#endif
+  /* return 0 if we get here.. bcoz then there is no INVEX */
+  return (0);
+}
+
+
+/*
  * adds a user to a channel by adding another link to the channels member
  * chain.
  */
@@ -529,11 +758,24 @@ void    remove_user_from_channel(struct Client *sptr,struct Channel *chptr,int w
         /* User was kicked, but had an exception.
          * so, to reduce chatter I'll remove any
          * matching exception now.
+         * - Is this really a good idea?? ievil!2003
          */
         if(was_kicked && (tmp->flags & CHFL_EXCEPTION))
           {
             del_matching_exception(sptr,chptr);
           }
+/*
+ *       if(was_kicked && (tmp->flags & CHFL_INVEX))
+ *         {
+ *           del_matching_invex(sptr,chptr);
+ *         }
+ * 
+ * ievil: is this really a good idea.. if a channel gets
+ * taken and then the takeover kiddies kick the legit ops
+ * do we still want to remove their chance of getting bacl
+ * into the channel??
+ *
+ */
         *curr = tmp->next;
         free_link(tmp);
         break;
@@ -854,6 +1096,18 @@ void send_channel_modes(struct Client *cptr, struct Channel *chptr)
   if (modebuf[1] || *parabuf)
     sendto_one(cptr, ":%s MODE %s %s %s",
                me.name, chptr->chname, modebuf, parabuf);
+
+  if(!IsCapable(cptr,CAP_IE))
+    return;
+  *parabuf = '\0';
+  *modebuf = '+';
+  modebuf[1] = '\0';
+  send_mode_list(cptr, chptr->chname, chptr->exceptlist, CHFL_INVEX,'I');
+
+  if (modebuf[1] || *parabuf)
+    sendto_one(cptr, ":%s MODE %s %s %s",
+               me.name, chptr->chname, modebuf, parabuf);
+
 }
 
 /* stolen from Undernet's ircd  -orabidoo
@@ -951,7 +1205,7 @@ static  int     errsent(int err, int *errs)
 #define SM_ERR_RPL_E            0x00000020
 #define SM_ERR_NOTONCHANNEL     0x00000040      /* Not on channel */
 #define SM_ERR_RESTRICTED       0x00000080      /* Restricted chanop */
-
+#define SM_ERR_RPL_I            0x00000100      
 /*
 ** Apply the mode changes passed in parv to chptr, sending any error
 ** messages and MODE commands out.  Rewritten to do the whole thing in
@@ -1007,6 +1261,12 @@ void set_channel_mode(struct Client *cptr,
 
   char  *mbufw_new = modebuf_new;
   char  *pbufw_new = parabuf_new;
+
+  char  modebuf_new2[MODEBUFLEN];
+  char  parabuf_new2[MODEBUFLEN];
+  
+  char  *mbufw_new2 = modebuf_new2;
+  char  *pbufw_new2 = parabuf_new2;
 
   int   ischop;
   int   isok;
@@ -1403,6 +1663,104 @@ void set_channel_mode(struct Client *cptr,
 
           break;
 
+        case 'I':
+          if (whatt == MODE_QUERY || parc-- <= 0)
+            {
+              if (!MyClient(sptr))
+                break;
+              if (errsent(SM_ERR_RPL_I, &errors_sent))
+                break;
+
+              if(isok)
+                {
+#ifdef BAN_INFO
+                  for (lp = chptr->invexlist; lp; lp = lp->next)
+                    sendto_one(cptr, form_str(RPL_INVEXLIST),
+                               me.name, cptr->name,
+                               chptr->chname,
+                               lp->value.banptr->banstr,
+                               lp->value.banptr->who,
+                               lp->value.banptr->when);
+#else 
+                  for (lp = chptr->invexlist; lp; lp = lp->next)
+                    sendto_one(cptr, form_str(RPL_INVEXLIST),
+                               me.name, cptr->name,
+                               chptr->chname,
+                               lp->value.cp);
+#endif
+                  sendto_one(sptr, form_str(RPL_ENDOFINVEXLIST),
+                             me.name, sptr->name, 
+                             chptr->chname);
+                }
+              else
+                {
+                  sendto_one(sptr, form_str(ERR_CHANOPRIVSNEEDED), me.name, 
+                               sptr->name, chptr->chname);
+                }
+              break;
+            }
+          arg = check_string(*parv++);
+
+          if (MyClient(sptr) && opcnt >= MAXMODEPARAMS)
+            break;
+
+          if (!isok)
+            {
+              if (!errsent(SM_ERR_NOOPS, &errors_sent) && MyClient(sptr))
+                sendto_one(sptr, form_str(ERR_CHANOPRIVSNEEDED),
+                           me.name, sptr->name, 
+                           chptr->chname);
+              break;
+            }
+          
+          /* user-friendly ban mask generation, taken
+          ** from Undernet's ircd  -orabidoo
+          */
+          if (MyClient(sptr))
+            arg = collapse(pretty_mask(arg));
+
+          if(*arg == ':')
+            {
+              parc--;
+              parv++;
+              break;
+            }
+
+          tmp = strlen(arg);
+          if (len + tmp + 2 >= MODEBUFLEN)
+            break;
+
+#ifndef CHANMODE_I
+	  if(whatt == MODE_ADD)
+	    break;
+#endif
+
+          if (!(((whatt & MODE_ADD) && !add_invexid(sptr, chptr, arg)) ||
+                ((whatt & MODE_DEL) && !del_invexid(chptr, arg))))
+            break;
+
+          /* This stuff can go back in when all servers understand +I
+           * with the pbufw_new nonsense removed -Dianora
+           */
+
+          /*
+          *mbufw++ = plus;
+          *mbufw++ = 'I';
+          strcpy(pbufw, arg);
+          pbufw += strlen(pbufw);
+          *pbufw++ = ' ';
+          */
+          len += tmp + 1;
+          opcnt++;
+
+          *mbufw_new2++ = plus;
+          *mbufw_new2++ = 'I';
+          strcpy(pbufw_new2, arg);
+          pbufw_new2 += strlen(pbufw_new2);
+          *pbufw_new2++ = ' ';
+
+          break;
+          
         /* +d removed ... properly -gnp */
 
         case 'b':
@@ -1880,10 +2238,11 @@ void set_channel_mode(struct Client *cptr,
   ** together and send it along.
   */
 
-  *mbufw = *mbuf2w = *pbufw = *pbuf2w = *mbufw_new = *pbufw_new = '\0';
+  *mbufw = *mbuf2w = *pbufw = *pbuf2w = *mbufw_new = *pbufw_new = *mbufw_new2 = *pbufw_new2 = '\0';
 
   collapse_signs(modebuf);
   collapse_signs(modebuf_new);
+  collapse_signs(modebuf_new2);
 
   if(*modebuf)
     {
@@ -1910,6 +2269,17 @@ void set_channel_mode(struct Client *cptr,
       sendto_match_cap_servs(chptr, cptr, CAP_EX, ":%s MODE %s %s %s",
                              sptr->name, chptr->chname,
                              modebuf_new, parabuf_new);
+    }
+                     
+  if(*modebuf_new2)
+    {
+      sendto_channel_butserv(chptr, sptr, ":%s MODE %s %s %s", 
+                             sptr->name, chptr->chname,
+                             modebuf_new2, parabuf_new2);
+
+      sendto_match_cap_servs(chptr, cptr, CAP_IE, ":%s MODE %s %s %s",
+                             sptr->name, chptr->chname,
+                             modebuf_new2, parabuf_new2);
     }
                      
   return;
@@ -1940,7 +2310,7 @@ static  int     can_join(struct Client *sptr, struct Channel *chptr, char *key, 
   else
     *flags |= ban_or_exception; /* Mark this client as "charmed" */
 
-  if (chptr->mode.mode & MODE_INVITEONLY)
+  if ((chptr->mode.mode & MODE_INVITEONLY) && (!(is_invex (sptr, chptr) == CHFL_INVEX)))
     {
       for (lp = sptr->user->invited; lp; lp = lp->next)
         if (lp->value.chptr == chptr)

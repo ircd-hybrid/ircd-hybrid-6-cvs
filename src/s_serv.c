@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.234 2003/06/24 03:57:17 ievil Exp $
+ *   $Id: s_serv.c,v 1.235 2003/08/16 19:58:36 ievil Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -79,6 +79,7 @@ struct Capability captab[] = {
   { "UNKLN",    CAP_UNKLN },
 #endif
   { "ENCAP",    CAP_ENCAP },
+  { "IE",       CAP_IE },
   { 0,   0 }
 };
 

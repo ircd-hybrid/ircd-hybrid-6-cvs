@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_version.c,v 1.11 2001/12/20 21:25:48 leeh Exp $
+ *   $Id: m_version.c,v 1.12 2003/08/16 19:58:36 ievil Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -99,8 +99,7 @@ int m_version(struct Client* cptr, struct Client* sptr, int parc, char* parv[])
                parv[0], ircd_version, serno, 
 	       debugmode, me.name, serveropts);
     
-    sendto_one(sptr, form_str(RPL_ISUPPORT),
-                 me.name, parv[0], isupport);
+    show_isupport(sptr, parv[0]);    
   }
 
   return 0;

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.76 2003/06/24 05:30:48 ievil Exp $
+ *  $Id: s_misc.c,v 1.77 2003/08/16 19:58:36 ievil Exp $
  */
 #include "s_misc.h"
 #include "channel.h"
@@ -204,25 +204,48 @@ void serv_info(aClient *cptr,char *name)
 }
 
 /* Make ISUPPORT string */
-char *make_isupport()
+void show_isupport(aClient *cptr, char *name)
 {
-  static char tisupport[300];
+  char isupport[512];
+  char features[300];
+  char features2[300];
+  char cbmodes[128];
+  int  mode_e=0;
+  int  mode_I=0;
+  int  u_knock=0;
 
-  ircsprintf(tisupport, "WALLCHOPS PREFIX=(ov)@+ CHANTYPES=#& MAXCHANNELS=%d "
-                        "MAXBANS=%d NICKLEN=%d TOPICLEN=%d KICKLEN=%d "
-                        "NETWORK=%s CASEMAPPING=rfc1459 "
 #ifdef CHANMODE_E
-                        "CHANMODES=be,k,l,imnpst EXCEPTS"
-#else
-                        "CHANMODES=b,k,l,imnpst"
+  mode_e = 1;
+#endif
+#ifdef CHANMODE_I
+  mode_I = 1;
 #endif
 #ifdef USE_KNOCK
-                        " KNOCK"
+  u_knock = 1;
 #endif
-                        " MODES=%d", MAXCHANNELSPERUSER, MAXBANS, NICKLEN,
-                        TOPICLEN, KILLLEN, NETWORK_NAME, MAXMODEPARAMS);
 
-  return tisupport;
+  ircsprintf(features, "WALLCHOPS%s%s%s MODES=%d MAXCHANNELS=%d MAXBANS(b%s%s)=%d"
+                       "MAXTARGETS=4 NICKLEN=%d TOPICLEN=%d KICKLEN=%d",
+                        u_knock  ? " KNOCK"    : "",
+                        mode_e   ? " EXCEPTS " : "",
+                        mode_I   ? " INVEX "   : "",
+                        MAXMODEPARAMS,
+                        MAXCHANNELSPERUSER,
+                        mode_e ? "e" : "",
+                        mode_I ? "I" : "",
+                        MAXBANS,
+                        NICKLEN,
+                        TOPICLEN,
+                        KILLLEN );
+
+  ircsprintf(cbmodes,  "CHANMODES=b%s%s,k,l,imnpst", 
+                        mode_e ? "e" : "",
+                        mode_I ? "I" : "");
+
+  ircsprintf(features2, "CHANTYPES=#& PREFIX=(ov)@+ %s NETWORK=%s CASEMAPPING=rfc1459",
+                        cbmodes,
+                        NETWORK_NAME);
+
+  sendto_one(cptr, form_str(RPL_ISUPPORT), me.name, name, features);
+  sendto_one(cptr, form_str(RPL_ISUPPORT), me.name, name, features2);
 }
-
-

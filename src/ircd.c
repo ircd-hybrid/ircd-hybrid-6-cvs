@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.168 2003/06/24 03:57:16 ievil Exp $
+ * $Id: ircd.c,v 1.169 2003/08/16 19:58:35 ievil Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -812,8 +812,9 @@ int main(int argc, char *argv[])
   setup_signals();
   initialize_message_files();
 
-  isupport = make_isupport();
-
+/*  isupport = make_isupport();
+ *  will be replaced by show_isupport.. it's only run at one place in the source so..
+ */
   dbuf_init();  /* set up some dbuf stuff to control paging */
   init_hash();
 

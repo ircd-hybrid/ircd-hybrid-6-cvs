@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: channel.h,v 1.38 2003/06/14 23:23:39 ievil Exp $
+ * $Id: channel.h,v 1.39 2003/08/16 19:58:32 ievil Exp $
  */
 
 #ifndef INCLUDED_channel_h
@@ -64,6 +64,7 @@ struct Channel
   struct SLink*   invites;
   struct SLink*   banlist;
   struct SLink*   exceptlist;
+  struct SLink*   invexlist;
   int             num_bed;  /* number of bans+exceptions+denies */
 #ifdef JUPE_CHANNEL
   int		  juped;
@@ -145,6 +146,7 @@ extern int total_ignoreops;
 #define CHFL_BAN        0x0008 /* ban channel flag */
 #define CHFL_EXCEPTION  0x0010 /* exception to ban channel flag */
 #define CHFL_DENY       0x0020 /* regular expression deny flag */
+#define CHFL_INVEX      0x0040 /* exception to channel invite flag */
 
 /* Channel Visibility macros */
 

@@ -1,8 +1,8 @@
-$Id: server-version-info,v 1.9 2001/12/16 05:49:16 wcampbel Exp $
-Updated for Hybrid 6 (2000/11/26)
+$Id: server-version-info,v 1.10 2003/08/16 19:58:31 ievil Exp $
+Updated for Hybrid 6.4 (2003/11/26)
 
 When you type /version you will often see something like this:
-2.8/hybrid-6.2.1rc2(20011206_1). irc.ircd-hybrid.org AeGiKMpZ TS5ow
+2.8/hybrid-6.4 (20030701_1). irc.ircd-hybrid.org AeGiKMpZ TS5ow
 
 Ever wondered what those funny chars mean after the version number? Well
 here they are:
@@ -15,11 +15,13 @@ here they are:
 'G'	GLINES
 'H'	HUB
 'i'	SHOW_INVISIBLE_LUSERS
+'I'	CHANMODE_I
 'K'	USE_KNOCK
 'M'	IDLE_FROM_MSG
 'p'	CRYPT_OPER_PASSWORD
 'P'	CRYPT_LINK_PASSWORD
 'r'     LITTLE_I_LINES (restricted mode)
+'S'	OPERSPY
 'T'     IGNORE_BOGUS_TS
 'Y'	USE_SYSLOG
 'Z'	ZIP_LINKS
