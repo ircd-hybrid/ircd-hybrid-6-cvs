@@ -1,5 +1,5 @@
 /*
- * $Id: adns.c,v 1.13 2003/05/05 02:39:07 db Exp $
+ * $Id: adns.c,v 1.14 2003/06/24 03:57:16 ievil Exp $
  * adns.c  functions to enter libadns 
  *
  * Written by Aaron Sethman <androsyn@ratbox.org>
@@ -57,7 +57,7 @@ void init_resolver(void)
  gettimeofday(&SystemTime, NULL);
  r =adns_init(&dns_state, adns_if_noautosys, 0);    
  if(dns_state == NULL) {
-   log(L_CRIT, "Error opening /etc/resolv.conf: %s; r = %d", strerror(errno), r);
+   ilog(L_CRIT, "Error opening /etc/resolv.conf: %s; r = %d", strerror(errno), r);
    exit(76);
  }
 }

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.56 2003/05/05 02:39:08 db Exp $
+ *   $Id: s_auth.c,v 1.57 2003/06/24 03:57:16 ievil Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -253,7 +253,7 @@ static int start_auth_query(struct AuthRequest* auth)
        * we should change this sometime .... -gnp */
       report_error("creating auth stream socket %s:%s", 
 		   get_client_name(auth->client, TRUE), errno);
-      log(L_ERROR, "Unable to create auth socket for %s:%m",
+      ilog(L_ERROR, "Unable to create auth socket for %s:%m",
 	  get_client_name(auth->client, SHOW_IP));
       ++ServerStats->is_abad;
       return 0;
@@ -436,7 +436,7 @@ void timeout_auth_queries(time_t now)
 	      auth->client->dns_query->query = NULL;
 	      sendheader(auth->client, REPORT_FAIL_DNS);
 	    }
-	  log(L_INFO, "DNS/AUTH timeout %s",
+	  ilog(L_INFO, "DNS/AUTH timeout %s",
 	      get_client_name(auth->client, SHOW_IP));
 
 	  auth->client->since = now;
@@ -453,7 +453,7 @@ void timeout_auth_queries(time_t now)
 	  delete_adns_queries(auth->client->dns_query);
 	  auth->client->dns_query->query = NULL;
 	  sendheader(auth->client, REPORT_FAIL_DNS);
-	  log(L_INFO, "DNS timeout %s", get_client_name(auth->client, SHOW_IP));
+	  ilog(L_INFO, "DNS timeout %s", get_client_name(auth->client, SHOW_IP));
 
 	  auth->client->since = now;
 	  release_auth_client(auth->client);
@@ -482,7 +482,7 @@ void send_auth_query(struct AuthRequest* auth)
       getpeername(auth->client->fd, (struct sockaddr *)&them, &tlen))
     {
       
-      log(L_INFO, "auth get{sock,peer}name error for %s:%m",
+      ilog(L_INFO, "auth get{sock,peer}name error for %s:%m",
 	  get_client_name(auth->client, SHOW_IP));
       auth_error(auth);
       return;

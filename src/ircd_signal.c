@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd_signal.c,v 1.6 2002/11/28 04:18:01 db Exp $
+ * $Id: ircd_signal.c,v 1.7 2003/06/24 03:57:16 ievil Exp $
  */
 #include "ircd_signal.h"
 #include "ircd.h"         /* dorehash */
@@ -43,7 +43,7 @@ static void dummy_handler(int sig)
 static void sigterm_handler(int sig)  
 {
   flush_connections(0);
-  log(L_CRIT, "Server killed By SIGTERM");
+  ilog(L_CRIT, "Server killed By SIGTERM");
   exit(-1);
 }
   
@@ -70,7 +70,7 @@ static void sigint_handler(int sig)
 {
   static int restarting = 0;
 
-  log(L_WARN, "Server Restarting on SIGINT");
+  ilog(L_WARN, "Server Restarting on SIGINT");
   if (restarting == 0) {
     restarting = 1;
     server_reboot();

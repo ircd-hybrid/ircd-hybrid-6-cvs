@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_unkline.c,v 1.53 2003/06/21 02:40:06 ievil Exp $
+ *   $Id: m_unkline.c,v 1.54 2003/06/24 03:57:16 ievil Exp $
  */
 #include "m_commands.h"
 #include "channel.h"
@@ -158,7 +158,7 @@ int m_unkline (aClient *cptr,aClient *sptr,int parc,char *parv[])
       sendto_ops("%s has removed the temporary K-Line for: [%s@%s]",
                  parv[0], user, host );
 
-      log(L_NOTICE, "%s removed temporary K-Line for [%s@%s]",
+      ilog(L_NOTICE, "%s removed temporary K-Line for [%s@%s]",
           parv[0], user, host);
       return 0;
     }
@@ -209,7 +209,7 @@ K:bar:No reason (1997/08/30 14.56):foo
                          me.name, parv[0]);
               sendto_one(sptr, ":%s NOTICE %s :Couldn't find host",
                          me.name, parv[0]);
-              log(L_ERROR, "K-Line file corrupted (couldn't find host)");
+              ilog(L_ERROR, "K-Line file corrupted (couldn't find host)");
               if (flush_write(sptr, in, out, buf, temppath) < 0)
 		return 0;
 	      continue;
@@ -223,7 +223,7 @@ K:bar:No reason (1997/08/30 14.56):foo
                          me.name, parv[0]);
               sendto_one(sptr, ":%s NOTICE %s :Couldn't find comment",
                          me.name, parv[0]);
-              log(L_ERROR, "K-Line file corrupted (couldn't find comment)");
+              ilog(L_ERROR, "K-Line file corrupted (couldn't find comment)");
               if (flush_write(sptr, in, out, buf, temppath) < 0)
 		return 0;
 	      continue;
@@ -330,7 +330,7 @@ Then just ignore the line
   sendto_realops("%s has removed the K-Line for: [%s@%s]",
              parv[0], user, host);
 
-  log(L_NOTICE, "%s removed K-Line for [%s@%s]", parv[0], user, host);
+  ilog(L_NOTICE, "%s removed K-Line for [%s@%s]", parv[0], user, host);
   return 0; 
 }
 

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.167 2003/05/04 17:52:44 db Exp $
+ * $Id: ircd.c,v 1.168 2003/06/24 03:57:16 ievil Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -640,12 +640,12 @@ static void write_pidfile(void)
     {
       ircsprintf(buff,"%d\n", (int)getpid());
       if (write(fd, buff, strlen(buff)) == -1)
-        log(L_ERROR,"Error writing to pid file %s", PPATH);
+        ilog(L_ERROR,"Error writing to pid file %s", PPATH);
       close(fd);
       return;
     }
   else
-    log(L_ERROR, "Error opening pid file %s", PPATH);
+    ilog(L_ERROR, "Error opening pid file %s", PPATH);
 }
 
 /*
@@ -849,7 +849,7 @@ int main(int argc, char *argv[])
   check_class();
   write_pidfile();
 
-  log(L_NOTICE, "Server Ready");
+  ilog(L_NOTICE, "Server Ready");
 
   ServerRunning = 1;
   while (ServerRunning) {

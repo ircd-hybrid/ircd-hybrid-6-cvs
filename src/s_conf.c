@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.245 2003/06/14 23:23:42 ievil Exp $
+ *  $Id: s_conf.c,v 1.246 2003/06/24 03:57:17 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -416,7 +416,7 @@ int check_client(struct Client *cptr, char *username, char **reason)
 
   if ((i = verify_access(cptr, username, reason)))
     {
-      log(L_INFO, "Access denied: %s[%s]", cptr->name, sockname);
+      ilog(L_INFO, "Access denied: %s[%s]", cptr->name, sockname);
       return i;
     }
 
@@ -1094,7 +1094,7 @@ struct ConfItem *find_me()
       return(aconf);
   }
 
-  log(L_CRIT, "Server has no M: line");
+  ilog(L_CRIT, "Server has no M: line");
   exit (-1);
 
   assert(0);
@@ -1961,7 +1961,7 @@ static void initconf(FBFILE* file, int use_include)
                 filename++;
               else
                 {
-                  log(L_ERROR, "Bad config line: %s", line);
+                  ilog(L_ERROR, "Bad config line: %s", line);
                   continue;
                 }
 
@@ -1969,7 +1969,7 @@ static void initconf(FBFILE* file, int use_include)
                 *back = '\0';
               else
                 {
-                  log(L_ERROR, "Bad config line: %s", line);
+                  ilog(L_ERROR, "Bad config line: %s", line);
                   continue;
                 }
               include_conf = make_conf();
@@ -1989,7 +1989,7 @@ static void initconf(FBFILE* file, int use_include)
       /* Could we test if it's conf line at all?        -Vesa */
       if (line[1] != ':')
         {
-          log(L_ERROR, "Bad config line: %s", line);
+          ilog(L_ERROR, "Bad config line: %s", line);
           continue;
         }
       if (aconf)
@@ -2113,7 +2113,7 @@ static void initconf(FBFILE* file, int use_include)
           break;
 
         default:
-          log(L_ERROR, "Error in config file: %s", line);
+          ilog(L_ERROR, "Error in config file: %s", line);
           break;
         }
       if (IsIllegal(aconf))
@@ -2325,21 +2325,21 @@ static void initconf(FBFILE* file, int use_include)
           if (ncount > MAXCONFLINKS || ccount > MAXCONFLINKS ||
               !aconf->host || !aconf->user)
             {
-              log(L_ERROR, "Bad C/N line");
+              ilog(L_ERROR, "Bad C/N line");
               sendto_realops("Bad C/N line");
               continue;
             }
 
           if (BadPtr(aconf->passwd))
             {
-              log(L_ERROR, "Bad C/N line passwd for %s");
+              ilog(L_ERROR, "Bad C/N line passwd for %s");
               sendto_realops("Bad C/N line passwd for %s", aconf->host);
               continue;
             }
 
           if (SplitUserHost(aconf) < 0)
             {
-              log(L_ERROR, "Bad C/N line user/host portion for %s");
+              ilog(L_ERROR, "Bad C/N line user/host portion for %s");
               sendto_realops("Bad C/N line user/host portion for %s",
                              aconf->host);
               free_conf(aconf);
@@ -2597,7 +2597,7 @@ static void initconf(FBFILE* file, int use_include)
 
   if(me.name[0] == '\0')
     {
-      log(L_CRIT, "Server has no M: line");
+      ilog(L_CRIT, "Server has no M: line");
       exit(-1);
     }
 }
@@ -2677,7 +2677,7 @@ static void lookup_confhost(struct ConfItem* aconf)
 
   if (BadPtr(aconf->host) || BadPtr(aconf->name))
     {
-      log(L_ERROR, "Host/server name error: (%s) (%s)",
+      ilog(L_ERROR, "Host/server name error: (%s) (%s)",
           aconf->host, aconf->name);
       return;
     }
@@ -3614,7 +3614,7 @@ void read_conf_files(int cold)
     {
       if(cold)
         {
-          log(L_CRIT, "Failed in reading configuration file %s", filename);
+          ilog(L_CRIT, "Failed in reading configuration file %s", filename);
           exit(-1);
         }
       else
@@ -3648,7 +3648,7 @@ void read_conf_files(int cold)
         {
           if(cold)
             {
-              log(L_ERROR,"Failed reading kline file %s", kfilename);
+              ilog(L_ERROR,"Failed reading kline file %s", kfilename);
             }
           else
             {
@@ -3667,7 +3667,7 @@ void read_conf_files(int cold)
         {
           if(cold)
             {
-              log(L_ERROR,"Failed reading dline file %s", dfilename);
+              ilog(L_ERROR,"Failed reading dline file %s", dfilename);
             }
           else
             {
@@ -3876,10 +3876,10 @@ void write_kline_or_dline_to_conf_and_notice_opers(
   close(out);
 
   if(type==KLINE_TYPE)
-    log(L_TRACE, "%s added K-Line for [%s@%s] [%s]",
+    ilog(L_TRACE, "%s added K-Line for [%s@%s] [%s]",
         sptr->name, user, host, reason);
   else
-    log(L_TRACE, "%s added D-Line for [%s] [%s]",
+    ilog(L_TRACE, "%s added D-Line for [%s] [%s]",
            sptr->name, host, reason);
 }
 

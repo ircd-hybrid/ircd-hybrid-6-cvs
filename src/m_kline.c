@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.80 2003/06/21 02:40:06 ievil Exp $
+ *   $Id: m_kline.c,v 1.81 2003/06/24 03:57:16 ievil Exp $
  */
 #include "m_commands.h"
 #include "m_kline.h"
@@ -858,7 +858,7 @@ m_kline(struct Client *cptr,
 		 reason);
 
 
-  log(L_TRACE, "%s added K-Line for [%s@%s] [%s|%s]",
+  ilog(L_TRACE, "%s added K-Line for [%s@%s] [%s|%s]",
       sptr->name, user, host, reason, oper_reason ? oper_reason : "");
 
   kconf = get_conf_name(KLINE_TYPE);
@@ -1307,7 +1307,7 @@ m_dline(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 		 host,
 		 reason);
 
-  log(L_TRACE, "%s added D-Line for [%s] [%s|%s]", 
+  ilog(L_TRACE, "%s added D-Line for [%s] [%s|%s]", 
       sptr->name, host, reason,
       oper_reason ? oper_reason : "" );
 

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_die.c,v 1.5 2001/12/08 07:06:13 lusky Exp $
+ *   $Id: m_die.c,v 1.6 2003/06/24 03:57:16 ievil Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -147,7 +147,7 @@ int m_die(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
                    me.name, get_client_name(sptr, MASK_IP));
     }
   flush_connections(0);
-  log(L_NOTICE, "Server terminated by %s", get_client_name(sptr, HIDE_IP));
+  ilog(L_NOTICE, "Server terminated by %s", get_client_name(sptr, HIDE_IP));
   /* 
    * this is a normal exit, tell the os it's ok 
    */

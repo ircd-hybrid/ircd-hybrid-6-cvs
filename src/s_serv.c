@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.233 2003/06/21 02:40:06 ievil Exp $
+ *   $Id: s_serv.c,v 1.234 2003/06/24 03:57:17 ievil Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -584,7 +584,7 @@ int server_estab(struct Client *cptr)
       sendto_one(cptr,
                  "ERROR :Access denied. No N line for server %s", inpath_ip);
       sendto_ops("Access denied. No N line for server %s", inpath);
-      log(L_NOTICE, "Access denied. No N line for server %s", inpath_ip);
+      ilog(L_NOTICE, "Access denied. No N line for server %s", inpath_ip);
       return exit_client(cptr, cptr, cptr, "No N line for server");
     }
   if (!(c_conf = find_conf_name(cptr->confs, host, CONF_CONNECT_SERVER )))
@@ -592,7 +592,7 @@ int server_estab(struct Client *cptr)
       ServerStats->is_ref++;
       sendto_one(cptr, "ERROR :Only N (no C) field for server %s", inpath);
       sendto_realops("Only N (no C) field for server %s",inpath);
-      log(L_NOTICE, "Only N (no C) field for server %s",inpath_ip);
+      ilog(L_NOTICE, "Only N (no C) field for server %s",inpath_ip);
       return exit_client(cptr, cptr, cptr, "No C line for server");
     }
 #ifdef CRYPT_LINK_PASSWORD
@@ -616,7 +616,7 @@ int server_estab(struct Client *cptr)
       sendto_one(cptr, "ERROR :No Access (passwd mismatch) %s",
 		 inpath);
       sendto_realops("Access denied (passwd mismatch) %s", inpath);
-      log(L_NOTICE, "Access denied (passwd mismatch) %s", inpath_ip);
+      ilog(L_NOTICE, "Access denied (passwd mismatch) %s", inpath_ip);
       return exit_client(cptr, cptr, cptr, "Bad Password");
     }
   memset((void *)cptr->passwd, 0,sizeof(cptr->passwd));
@@ -733,7 +733,7 @@ int server_estab(struct Client *cptr)
   /* ircd-hybrid-6 can do TS links, and  zipped links*/
   sendto_ops("Link with %s established: (%s) link",
              inpath,show_capabilities(cptr));
-  log(L_NOTICE, "Link with %s established: (%s) link",
+  ilog(L_NOTICE, "Link with %s established: (%s) link",
              inpath_ip,show_capabilities(cptr));
 
   add_to_client_hash_table(cptr->name, cptr);

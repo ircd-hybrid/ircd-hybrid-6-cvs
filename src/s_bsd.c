@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.147 2002/02/06 04:56:12 androsyn Exp $
+ *  $Id: s_bsd.c,v 1.148 2003/06/24 03:57:17 ievil Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -170,7 +170,7 @@ void report_error(const char* text, const char* who, int error)
 
   sendto_realops_flags(FLAGS_DEBUG, text, who, strerror(error));
 
-  log(L_ERROR, text, who, strerror(error));
+  ilog(L_ERROR, text, who, strerror(error));
 }
 
 /*
@@ -505,7 +505,7 @@ int connect_server(struct ConfItem* aconf,
   if (aconf->dns_pending)
     return 0;
 
-  log(L_NOTICE, "Connect to %s[%s] @%s",
+  ilog(L_NOTICE, "Connect to %s[%s] @%s",
       aconf->user, aconf->host, inetntoa((char*)&aconf->ipnum));
 
   /*
@@ -1051,7 +1051,7 @@ int read_message(time_t delay, unsigned char mask)        /* mika */
 
       if ((CurrentTime = time(NULL)) == -1)
         {
-          log(L_CRIT, "Clock Failure");
+          ilog(L_CRIT, "Clock Failure");
           restart("Clock failure");
         }   
 
@@ -1305,7 +1305,7 @@ int read_message(time_t delay, unsigned char mask)
     nfds = poll(poll_fdarray, nbr_pfds, 250);
     if ((CurrentTime = time(0)) == -1)
       {
-        log(L_CRIT, "Clock Failure");
+        ilog(L_CRIT, "Clock Failure");
         restart("Clock failed");
       }   
     if (nfds == -1 && ((errno == EINTR) || (errno == EAGAIN)))

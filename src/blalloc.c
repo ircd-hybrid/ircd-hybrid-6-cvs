@@ -4,7 +4,7 @@
  * Owner:  Wohali (Joan Touzet)
  *
  * Modified 2001/11/29 for mmap() support by Aaron Sethman <androsyn@ratbox.org>
- * $Id: blalloc.c,v 1.24 2002/01/13 23:31:27 androsyn Exp $
+ * $Id: blalloc.c,v 1.25 2003/06/24 03:57:16 ievil Exp $
  */
 #include "config.h"
 #include "blalloc.h"
@@ -320,7 +320,7 @@ int BlockHeapFree(BlockHeap *bh, void *ptr)
    if (bh == NULL)
      {
 #if defined(SYSLOG_BLOCK_ALLOCATOR)
-       log(L_NOTICE,"blalloc.c bh == NULL");
+       ilog(L_NOTICE,"blalloc.c bh == NULL");
 #endif
        return 1;
      }
@@ -343,7 +343,7 @@ int BlockHeapFree(BlockHeap *bh, void *ptr)
           if( (walker->allocMap[ctr] & bitmask) == 0 )
             {
 #ifdef DEBUG_BLOCK_ALLOCATOR
-      log(L_WARN, "blalloc.c bit already clear in map caller %s %d",
+      ilog(L_WARN, "blalloc.c bit already clear in map caller %s %d",
           BH_CurrentFile, BH_CurrentLine);
       sendto_ops("blalloc.c bit already clear in map elemSize %d caller %s %d",
                          bh->elemSize,

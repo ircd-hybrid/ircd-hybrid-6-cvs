@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_log.c,v 1.14 2002/02/02 15:52:20 db Exp $
+ *   $Id: s_log.c,v 1.15 2003/06/24 03:57:17 ievil Exp $
  */
 #include "s_log.h"
 #include "irc_string.h"
@@ -130,7 +130,7 @@ void vlog(int priority, const char *fmt, va_list args)
 #endif	  		
 }
 
-void log(int priority, const char* fmt, ...)
+void ilog(int priority, const char* fmt, ...)
 {
   char    buf[LOG_BUFSIZE];
   va_list args;

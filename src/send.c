@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.117 2003/06/24 03:14:32 ievil Exp $
+ *   $Id: send.c,v 1.118 2003/06/24 03:57:17 ievil Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -1585,7 +1585,7 @@ ts_warn(const char *pattern, ...)
   va_start(args, pattern);
   vsendto_realops(pattern, args);
   vsprintf(buf, pattern, args);
-  log(L_CRIT, "%s", buf);
+  ilog(L_CRIT, "%s", buf);
   va_end(args);
 
 } /* ts_warn() */

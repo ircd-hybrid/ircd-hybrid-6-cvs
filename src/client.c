@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.77 2002/02/17 05:58:13 lusky Exp $
+ *  $Id: client.c,v 1.78 2003/06/24 03:57:16 ievil Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -216,7 +216,7 @@ void _free_client(struct Client* cptr)
       sendto_ops("Please report to the hybrid team! " \
                  "ircd-hybrid@the-project.org");
 
-      log(L_WARN, BH_FREE_ERROR_MESSAGE, cptr);
+      ilog(L_WARN, BH_FREE_ERROR_MESSAGE, cptr);
     }
 }
 
@@ -730,7 +730,7 @@ void remove_client_from_list(struct Client* cptr)
   */
   if(!cptr->prev && !cptr->next)
     {
-      log(L_CRIT, "already exited client %X [%s]",
+      ilog(L_CRIT, "already exited client %X [%s]",
         cptr,
         cptr->name?cptr->name:"NULL" );
       return;
@@ -1521,7 +1521,7 @@ const char* comment        /* Reason for the exit */
           on_for = CurrentTime - sptr->firsttime;
 # if defined(SYSLOG_USERS)
           if (IsPerson(sptr))
-            log(L_INFO, "%s (%3ld:%02ld:%02ld): %s!%s@%s %ld/%ld\n",
+            ilog(L_INFO, "%s (%3ld:%02ld:%02ld): %s!%s@%s %ld/%ld\n",
                 myctime(sptr->firsttime),
                 on_for / 3600, (on_for % 3600)/60,
                 on_for % 60, sptr->name,
@@ -1627,7 +1627,7 @@ const char* comment        /* Reason for the exit */
           sendto_ops("%s was connected for %d seconds.  %d/%d sendK/recvK.",
                      sptr->name, CurrentTime - sptr->firsttime,
                      sptr->sendK, sptr->receiveK);
-          log(L_NOTICE, "%s was connected for %d seconds.  %d/%d sendK/recvK.",
+          ilog(L_NOTICE, "%s was connected for %d seconds.  %d/%d sendK/recvK.",
               sptr->name, CurrentTime - sptr->firsttime, 
               sptr->sendK, sptr->receiveK);
 

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_oper.c,v 1.17 2003/06/12 23:53:06 ievil Exp $
+ *   $Id: m_oper.c,v 1.18 2003/06/24 03:57:16 ievil Exp $
  */
 
 #include "m_commands.h"
@@ -273,7 +273,7 @@ int m_oper(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 #if !defined(CRYPT_OPER_PASSWORD) && (defined(FNAME_OPERLOG) || defined(SYSLOG_OPER))
         encr = "";
 #endif
-        log(L_TRACE, "OPER %s by %s!%s@%s",
+        ilog(L_TRACE, "OPER %s by %s!%s@%s",
             name, parv[0], sptr->username, sptr->host);
 #ifdef FNAME_OPERLOG
         {

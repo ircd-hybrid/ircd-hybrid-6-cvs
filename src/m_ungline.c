@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_ungline.c,v 1.1 2003/06/06 09:35:19 ievil Exp $
+ *   $Id: m_ungline.c,v 1.2 2003/06/24 03:57:16 ievil Exp $
  */
 #include "m_commands.h"
 #include "channel.h"
@@ -118,7 +118,7 @@ m_ungline (aClient *cptr,aClient *sptr,int parc,char *parv[])
                  me.name, parv[0],user, host);
       sendto_ops("%s has removed the G-Line for: [%s@%s]",
                  parv[0], user, host );
-      log(L_NOTICE, "%s removed G-Line for [%s@%s]",
+      ilog(L_NOTICE, "%s removed G-Line for [%s@%s]",
           parv[0], user, host);
       return 0;
     }

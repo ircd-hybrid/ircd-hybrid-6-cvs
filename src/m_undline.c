@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_undline.c,v 1.1 2003/06/06 09:35:19 ievil Exp $
+ *   $Id: m_undline.c,v 1.2 2003/06/24 03:57:16 ievil Exp $
  */
 #include "m_commands.h"
 #include "channel.h"
@@ -277,6 +277,6 @@ Then just ignore the line
   sendto_ops("%s has removed the D-Line for: [%s]",
              parv[0], cidr);
 
-  log(L_NOTICE, "%s removed D-Line for [%s]", parv[0], cidr);
+  ilog(L_NOTICE, "%s removed D-Line for [%s]", parv[0], cidr);
   return 0;
 }

@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu, Computing Center and Jarkko Oikarinen
  *
- * $Id: list.c,v 1.42 2001/07/18 02:15:27 lusky Exp $
+ * $Id: list.c,v 1.43 2003/06/24 03:57:16 ievil Exp $
  */
 #include "struct.h"
 #include "blalloc.h"
@@ -115,7 +115,7 @@ void outofmemory()
   was_here = YES;
   clear_mtrie_conf_links();
 
-  log(L_CRIT, "Out of memory: restarting server...");
+  ilog(L_CRIT, "Out of memory: restarting server...");
   restart("Out of Memory");
 }
 
@@ -197,7 +197,7 @@ void _free_user(anUser* user, aClient* cptr)
           sendto_realops("list.c couldn't BlockHeapFree(free_anUsers,user) user = %lX", user );
           sendto_realops("Please report to the hybrid team! ircd-hybrid@the-project.org");
 #ifdef SYSLOG_BLOCK_ALLOCATOR 
-          log(L_DEBUG,"list.c couldn't BlockHeapFree(free_anUsers,user) user = %lX", (long unsigned int) user);
+          ilog(L_DEBUG,"list.c couldn't BlockHeapFree(free_anUsers,user) user = %lX", (long unsigned int) user);
 #endif
         }
 

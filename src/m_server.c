@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_server.c,v 1.15 2003/06/06 08:53:24 ievil Exp $
+ *   $Id: m_server.c,v 1.16 2003/06/24 03:57:16 ievil Exp $
  */
 #include "m_commands.h"  /* m_server prototype */
 #include "client.h"      /* client struct */
@@ -250,7 +250,7 @@ int m_server(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
           sendto_realops("Link %s Server %s dropped, no N: line",
 	                 get_client_name(cptr, TRUE), host);
 #endif			 
-	  log(L_NOTICE, "Access denied. No N line for server %s",
+	  ilog(L_NOTICE, "Access denied. No N line for server %s",
 	  		get_client_name(cptr, TRUE));
 #endif
           return exit_client(cptr, cptr, cptr, "NO N line");
@@ -292,7 +292,7 @@ int m_server(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
         sendto_realops("Link %s cancelled, server %s already exists",
 	                   get_client_name(bcptr, TRUE), host);
 #endif			   
-        log(L_NOTICE, "Link %s cancelled, server %s already exists",
+        ilog(L_NOTICE, "Link %s cancelled, server %s already exists",
                            get_client_name(bcptr, TRUE), host);
                                   
         return exit_client(bcptr, bcptr, &me, "Server Exists");

@@ -1,5 +1,5 @@
 /*
- * general.c: $Id: general.c,v 1.3 2001/12/04 16:12:11 androsyn Exp $
+ * general.c: $Id: general.c,v 1.4 2003/06/24 03:57:12 ievil Exp $
  *  
  */
 /*
@@ -29,7 +29,7 @@
  *  along with this program; if not, write to the Free Software Foundation,
  *  Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. 
  *
- * $Id: general.c,v 1.3 2001/12/04 16:12:11 androsyn Exp $
+ * $Id: general.c,v 1.4 2003/06/24 03:57:12 ievil Exp $
  */
 
 #include "fileio.h"
@@ -101,7 +101,7 @@ void adns__debug(adns_state ads, int serv, adns_query qu, const char *fmt, ...) 
   /* redundant calls to vsprintf() but what can you do,
    * when you live in a shoe?
    */
-  log(L_DEBUG, "%s", buf);
+  ilog(L_DEBUG, "%s", buf);
 }
 
 void adns__warn(adns_state ads, int serv, adns_query qu, const char *fmt, ...) {
@@ -115,7 +115,7 @@ void adns__warn(adns_state ads, int serv, adns_query qu, const char *fmt, ...) {
 #endif
   va_end(al);
 
-  log(L_WARN, "%s", buf);
+  ilog(L_WARN, "%s", buf);
 }
 
 void adns__diag(adns_state ads, int serv, adns_query qu, const char *fmt, ...) {
@@ -129,7 +129,7 @@ void adns__diag(adns_state ads, int serv, adns_query qu, const char *fmt, ...) {
 #endif
   va_end(al);
 
-  log(L_DEBUG, "%s", buf);
+  ilog(L_DEBUG, "%s", buf);
 }
 
 /* vbuf functions */

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.51 2003/06/17 21:46:41 ievil Exp $
+ *   $Id: parse.c,v 1.52 2003/06/24 03:57:16 ievil Exp $
  */
 #include "parse.h"
 #include "channel.h"
@@ -386,7 +386,7 @@ void init_tree_parse(struct Message *mptr)
    */
   if (mpt->cmd)
     {
-      log(L_CRIT, "bad msgtab entry: ``%s''\n", mpt->cmd);
+      ilog(L_CRIT, "bad msgtab entry: ``%s''\n", mpt->cmd);
       exit(1);
     }
 }

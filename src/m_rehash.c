@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_rehash.c,v 1.9 2001/12/07 04:51:34 wcampbel Exp $
+ *   $Id: m_rehash.c,v 1.10 2003/06/24 03:57:16 ievil Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -214,13 +214,13 @@ int m_rehash(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
           sendto_ops("%s is rehashing dlines from server config file",
 #endif
                      parv[0]);
-          log(L_NOTICE, "REHASH From %s\n", get_client_name(sptr, HIDE_IP));
+          ilog(L_NOTICE, "REHASH From %s\n", get_client_name(sptr, HIDE_IP));
           dline_in_progress = 1;
           return rehash(cptr, sptr, 0);
         }
       if(found)
         {
-          log(L_NOTICE, "REHASH %s From %s\n", parv[1], 
+          ilog(L_NOTICE, "REHASH %s From %s\n", parv[1], 
               get_client_name(sptr, HIDE_IP));
           return 0;
         }
@@ -246,7 +246,7 @@ int m_rehash(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       sendto_ops("%s is rehashing server config file",
 #endif
                  parv[0]);
-      log(L_NOTICE, "REHASH From %s\n", get_client_name(sptr, SHOW_IP));
+      ilog(L_NOTICE, "REHASH From %s\n", get_client_name(sptr, SHOW_IP));
       return rehash(cptr, sptr, 0);
     }
   return 0; /* shouldn't ever get here */

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.259 2003/06/17 21:46:41 ievil Exp $
+ *  $Id: s_user.c,v 1.260 2003/06/24 03:57:17 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -568,7 +568,7 @@ static int register_user(aClient *cptr, aClient *sptr,
                                "I-line is full",
                                get_client_host(sptr),
                                inetntoa((char*) &sptr->ip));
-          log(L_INFO,"Too many connections from %s.", get_client_host(sptr));
+          ilog(L_INFO,"Too many connections from %s.", get_client_host(sptr));
           ServerStats->is_ref++;
           return exit_client(cptr, sptr, &me, 
                  "No more connections allowed in your connection class" );
@@ -600,7 +600,7 @@ static int register_user(aClient *cptr, aClient *sptr,
 				 sptr->listener->name,
 				 sptr->listener->port
 				 );
-              log(L_INFO,
+              ilog(L_INFO,
 		  "Unauthorized client connection from %s on [%s/%u].",
                   get_client_host(sptr),
 		  sptr->listener->name,

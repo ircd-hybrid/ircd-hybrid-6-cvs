@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kill.c,v 1.8 2001/07/01 03:13:55 greg Exp $
+ *   $Id: m_kill.c,v 1.9 2003/06/24 03:57:16 ievil Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -253,7 +253,7 @@ int m_kill(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 
 #if defined(USE_SYSLOG) && defined(SYSLOG_KILL)
   if (IsOper(sptr))
-    log(L_INFO,"KILL From %s For %s Path %s!%s",
+    ilog(L_INFO,"KILL From %s For %s Path %s!%s",
                         parv[0], acptr->name, inpath, path);
 #endif
   /*
