@@ -1,5 +1,5 @@
 /************************************************************************
- *   IRC - Internet Relay Chat, src/s_err.c
+ *   IRC - Internet Relay Chat, src/messages.tab
  *   Copyright (C) 1992 Darren Reed
  *
  *   This program is free software; you can redistribute it and/or modify
@@ -19,7 +19,7 @@
  *
  *      I kind of modernized this code a bit. -Dianora
  *
- *   $Id: messages.tab,v 1.1 1999/07/28 07:49:38 tomh Exp $
+ *   $Id: messages.tab,v 1.2 1999/07/29 01:03:00 db Exp $
  */
 
 static  char *  replies[] = {

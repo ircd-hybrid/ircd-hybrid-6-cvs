@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.33 1999/07/28 07:49:35 tomh Exp $
+ *  $Id: m_gline.c,v 1.34 1999/07/29 01:03:00 db Exp $
  */
 
 #include "config.h"
@@ -73,9 +73,6 @@ static void expire_pending_glines();
 static int majority_gline(aClient*, const char *,const char *, const char *, 
                           const char* serv_name,
                           const char *,const char *,const char *); 
-/* defined in s_conf.c */
-
-
 
 #endif
 
