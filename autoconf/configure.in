@@ -1,4 +1,4 @@
-dnl $Id: configure.in,v 1.19 2001/12/04 04:47:43 androsyn Exp $
+dnl $Id: configure.in,v 1.20 2001/12/04 17:16:47 androsyn Exp $
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(include/class.h)
 
@@ -20,8 +20,6 @@ AC_PATH_PROG(CP,cp)
 AC_PROG_INSTALL
 
 dnl Checks for libraries.
-dnl Replace `main' with a function in -lnsl:
-AC_CHECK_LIB(nsl, gethostbyname)
 AC_CHECK_LIB(socket, socket)
 AC_CHECK_FUNC(crypt,, AC_CHECK_LIB(descrypt, crypt,,AC_CHECK_LIB(crypt, crypt,,)))
 
