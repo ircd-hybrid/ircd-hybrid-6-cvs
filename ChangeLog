@@ -1,3 +1,17 @@
+ievil       2004/06/12 21:35:19 EDT	(20040613_0)
+
+  Modified files:
+    src                  channel.c 
+  Log:
+  Fixed so that bans gets checked with irccmp on rejoin after split.
+  Was a tiny little thing there I forgot when rewriting it...
+  Noticed by Lee and myself .. :p
+  
+  Revision  Changes    Path
+  1.249     +10 -3     ircd-hybrid-6/src/channel.c
+
+
+
 ievil       2004/06/12 19:59:45 EDT	(20040612_1)
 
   Modified files:
