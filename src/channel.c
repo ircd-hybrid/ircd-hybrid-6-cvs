@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.69 1999/03/08 02:33:26 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.70 1999/03/19 03:01:29 db Exp $";
 #endif
 
 #include "struct.h"
@@ -589,14 +589,13 @@ int	can_send(aClient *cptr, aChannel *chptr)
   Reg	Link	*lp;
   Reg	int	member;
 
-  member = IsMember(cptr, chptr);
   lp = find_user_link(chptr->members, cptr);
 
   if (chptr->mode.mode & MODE_MODERATED &&
       (!lp || !(lp->flags & (CHFL_CHANOP|CHFL_VOICE))))
     return (MODE_MODERATED);
 
-  if (chptr->mode.mode & MODE_NOPRIVMSGS && !member)
+  if (chptr->mode.mode & MODE_NOPRIVMSGS && !lp)
     return (MODE_NOPRIVMSGS);
 
   return 0;
