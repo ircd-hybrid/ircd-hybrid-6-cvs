@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.9 1998/10/16 05:51:38 lusky Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.10 1998/10/17 21:06:58 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -47,8 +47,6 @@ static char *rcs_version = "$Id: s_bsd.c,v 1.9 1998/10/16 05:51:38 lusky Exp $";
 #include <fcntl.h>
 #include <utmp.h>
 #include <sys/resource.h>
-
-extern int spare_fd;		/* defined in ircd.c */
 
 /*
  * Stuff for poll()
@@ -954,8 +952,6 @@ static	int completed_connection(aClient *cptr)
 void	close_connection(aClient *cptr)
 {
   Reg	aConfItem *aconf;
-  Reg	int	i,j;
-  int	empty = cptr->fd;
 
   if (IsServer(cptr))
     {
@@ -1091,9 +1087,6 @@ void	reset_sock_opts(int fd,int type)
 static	void	set_sock_opts(int fd, aClient *cptr)
 {
   int	opt;
-  /* DEBUG */
-  struct timeval send_timeout;
-  struct timeval receive_timeout;
 
 #ifdef SO_REUSEADDR
   opt = 1;
@@ -1117,7 +1110,6 @@ static	void	set_sock_opts(int fd, aClient *cptr)
 # if defined(MAXBUFFERS) && !defined(SEQUENT)
   if (rcvbufmax==0)
     {
-      int optlen;
 #ifdef ZIP_LINKS
       rcvbufmax = READBUF_SIZE;  /* the zlib part needs buffers to be at least
 				    this big to make things fit, and not bigger
@@ -1125,6 +1117,7 @@ static	void	set_sock_opts(int fd, aClient *cptr)
 				    not a bad value  -orabidoo
 				  */
 #else
+      int optlen;
       optlen = sizeof(rcvbufmax);
       getsockopt(fd, SOL_SOCKET, SO_RCVBUF, (char *) &rcvbufmax,
 		 &optlen);
@@ -1565,7 +1558,7 @@ int read_packet(aClient *cptr, int msg_ready)
   u_long	usec = 0;
   int  auth = 0;
   int	res, length, fd;
-  register int i,j;
+  register int i;
 #ifdef USE_FAST_FD_ISSET
   int fd_mask;
   int fd_offset;
@@ -1750,10 +1743,8 @@ int read_packet(aClient *cptr, int msg_ready)
       else if(nfds == -1 && errno == EBADF)
 	{
 	  int i;
-	  int j;
 	  int result;
 	  struct stat file_stat;
-	  aClient *acptr;
 
 	  for(i=0;i<FD_SETSIZE;i++)
 	    {

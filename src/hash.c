@@ -20,7 +20,7 @@
 #ifndef lint
 static char sccsid[] = "@(#)hash.c	2.10 03 Jul 1993 (C) 1991 Darren Reed";
 
-static char *rcs_version = "$Id: hash.c,v 1.2 1998/10/14 05:51:49 db Exp $";
+static char *rcs_version = "$Id: hash.c,v 1.3 1998/10/17 21:06:53 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -90,8 +90,8 @@ unsigned hash_nick_name(nname)
      char *nname;
 {
   Reg unsigned hash = 0;
-  Reg hash2 = 0;
-  Reg ret;
+  Reg int hash2 = 0;
+  Reg int ret;
   Reg char lower;
   while (*nname)
     {
@@ -467,10 +467,10 @@ int	m_hash(aClient *cptr,aClient *sptr,int parc,char *parv[])
   int	mosthit = 0, mosthits = 0, used = 0, used_now = 0, totlink = 0;
   int	link_pop[10], size = HASHSIZE;
   char	ch;
+  char  result_buf[256];
   aHashEntry	*table;
 #endif
   char  hash_log_file[256];
-  char  result_buf[256];
   int   out;
   char timebuffer[MAX_DATE_STRING];
   struct tm *tmptr;

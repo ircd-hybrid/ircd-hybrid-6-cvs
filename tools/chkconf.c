@@ -19,7 +19,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)chkconf.c	1.7 27 Oct 1993 (C) 1993 Darren Reed";
-static char *rcs_version = "$Id: chkconf.c,v 1.2 1998/09/21 04:19:38 db Exp $";
+static char *rcs_version = "$Id: chkconf.c,v 1.3 1998/10/17 21:07:06 lusky Exp $";
 #endif
 
 #define FOREVER for(;;)
@@ -61,7 +61,7 @@ static	int	ckopenconf();
 static	aClass	*get_class();
 
 static	int	numclasses = 0, *classarr = (int *)NULL;
-static	char	*configfile = CONFIGFILE;
+char	*configfile = CONFIGFILE;
 static	char	nullfield[] = "";
 static	char	maxsendq[12];
 

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.8 1998/10/16 04:22:25 lusky Exp $
+ * $Id: config.h,v 1.9 1998/10/17 21:06:48 lusky Exp $
  */
 
 #ifndef	__config_include__
@@ -109,7 +109,7 @@
 #define	CPATH	"ircd.conf"
 #define KPATH   "kline.conf"
 #define	MPATH	"ircd.motd"
-#undef  APATH   "ircd.motd2"
+#undef  APATH
 #define	LPATH	"ircd.log"
 #define	PPATH	"ircd.pid"
 #define HPATH	"opers.txt"

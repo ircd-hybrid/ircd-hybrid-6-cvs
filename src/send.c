@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)send.c	2.32 2/28/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: send.c,v 1.8 1998/10/14 05:52:01 db Exp $";
+static char *rcs_version = "$Id: send.c,v 1.9 1998/10/17 21:07:04 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -902,7 +902,7 @@ va_dcl
 {
   va_list	vl;
 #endif
-  register	int	i;
+
   register	aClient *cptr, *acptr;
   
 #ifdef	USE_VARARGS
@@ -981,7 +981,7 @@ va_dcl
 {
   va_list	vl;
 #endif
-  register	int	i;
+
   register	aClient *cptr;
 
 #ifdef USE_VARARGS
@@ -1238,11 +1238,11 @@ va_dcl
 
 void    send_operwall(aClient *from, char *type_message,char *message)
 {
-  register int i, j;
   char sender[NICKLEN+USERLEN+HOSTLEN+5];
   aClient *acptr;
   anUser *user;
   
+
   if (!from || !message)
     return;
   if (!IsPerson(from))
@@ -1526,8 +1526,8 @@ va_dcl
   va_list vl;
 #endif
   register aClient	*cptr;
-  register int		i;
   char		nbuf[1024];
+
 
 #ifdef        USE_VARARGS
   va_start(vl);
@@ -1574,7 +1574,7 @@ va_dcl
 #endif
   register aClient	*cptr;
   char		nbuf[1024];
-  register int		i;
+
 
 #ifdef        USE_VARARGS
   va_start(vl);
@@ -1650,7 +1650,7 @@ va_dcl
         va_list vl; 
 #endif
         static  ts_val last = 0;
-        static  warnings = 0;
+        static  int warnings = 0;
         register ts_val now;
  
 #ifdef  USE_VARARGS 

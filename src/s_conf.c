@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.12 1998/10/14 05:51:56 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.13 1998/10/17 21:06:59 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -167,7 +167,6 @@ int	attach_Iline(aClient *cptr,
 {
   Reg	aConfItem	*aconf;
   Reg	char	*hname;
-  Reg	int	i;
   /*  static	char	user[USERLEN+3]; */
   static	char	host[HOSTLEN+3];
   static	char	fullname[HOSTLEN+1];
@@ -1404,7 +1403,7 @@ int 	initconf(int opt, int fd,int use_include)
 					{'\\', '\\'}, { 0, 0}};
 
   Reg	char	*tmp, *s;
-  int	i, j, dontadd;
+  int	i, dontadd;
   char	line[512];
   int	ccount = 0, ncount = 0;
   u_long vaddr;
@@ -1912,7 +1911,7 @@ int 	initconf(int opt, int fd,int use_include)
  * -Dianora
  */
 
-do_include_conf()
+void do_include_conf()
 {
   int fd;
   aConfItem *nextinclude;
@@ -2006,9 +2005,12 @@ static	int	lookup_confhost(aConfItem *aconf)
  * side effects	- none
  */
 
-int find_dline(unsigned long host_ip)
+int find_dline(struct in_addr raw_ip)
 {
   aConfItem *aconf;
+  unsigned long host_ip;
+
+  memcpy(&host_ip, &raw_ip, sizeof(host_ip));
 
   aconf = find_host_in_dline_hash(host_ip,CONF_DLINE);
   if(aconf)
@@ -2223,7 +2225,7 @@ void flush_glines()
 {
   aConfItem *kill_list_ptr;
 
-  if(kill_list_ptr = glines)
+  if((kill_list_ptr = glines))
     {
       while(kill_list_ptr)
         {
@@ -2350,7 +2352,7 @@ void report_glines(aClient *sptr)
   expire_pending_glines();	/* This is not the g line list, but
 				   the pending possible g line list */
 
-  if(gline_pending_ptr = pending_glines)
+  if((gline_pending_ptr = pending_glines))
     {
       sendto_one(sptr,":%s NOTICE %s :Pending G-lines", me.name,
 			 sptr->name);

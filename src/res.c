@@ -22,7 +22,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)res.c	2.34 03 Nov 1993 (C) 1992 Darren Reed";
-static  char *rcs_version = "$Id: res.c,v 1.4 1998/10/16 04:22:29 lusky Exp $";
+static  char *rcs_version = "$Id: res.c,v 1.5 1998/10/17 21:06:57 lusky Exp $";
 #endif
 
 #undef	DEBUG	/* because there is a lot of debug code in here :-) */
@@ -258,6 +258,7 @@ time_t	timeout_query_list(time_t now)
       r2ptr = rptr->next;
       tout = rptr->sentat + rptr->timeout;
       if (now >= tout)
+       {
 	if (--rptr->retries <= 0)
 	  {
 #ifdef DEBUG
@@ -295,8 +296,11 @@ time_t	timeout_query_list(time_t now)
 		   rptr->cinfo.value.cptr));
 #endif
 	  }
+       }
       if (!next || tout < next)
-	next = tout;
+	{
+	  next = tout;
+	}
     }
   return (next > now) ? next : (now + AR_TTL);
 }
