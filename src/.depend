@@ -129,7 +129,8 @@ m_die.o: m_die.c ../include/m_commands.h ../include/config.h \
 m_error.o: m_error.c ../include/m_commands.h ../include/config.h \
  ../include/setup.h ../include/client.h ../include/ircd_defs.h \
  ../include/dbuf.h ../include/common.h ../include/ircd.h \
- ../include/numeric.h ../include/send.h ../include/s_debug.h
+ ../include/numeric.h ../include/send.h ../include/s_debug.h \
+ ../include/s_log.h
 m_gline.o: m_gline.c ../include/m_commands.h ../include/config.h \
  ../include/setup.h ../include/m_gline.h ../include/ircd_defs.h \
  ../include/channel.h ../include/client.h ../include/dbuf.h \
@@ -399,13 +400,13 @@ s_debug.o: s_debug.c ../include/s_debug.h ../include/channel.h \
 s_log.o: s_log.c ../include/s_log.h ../include/irc_string.h \
  ../include/ircd_defs.h ../include/config.h ../include/setup.h \
  ../include/ircd.h ../include/s_misc.h
-s_misc.o: s_misc.c ../include/s_misc.h ../include/client.h \
+s_misc.o: s_misc.c ../include/s_misc.h ../include/channel.h \
  ../include/config.h ../include/setup.h ../include/ircd_defs.h \
- ../include/dbuf.h ../include/common.h ../include/irc_string.h \
- ../include/ircd.h ../include/numeric.h ../include/res.h \
- ../include/fileio.h ../include/../adns/adns.h ../include/s_bsd.h \
- ../include/s_conf.h ../include/motd.h ../include/s_serv.h \
- ../include/send.h ../include/struct.h
+ ../include/client.h ../include/dbuf.h ../include/common.h \
+ ../include/irc_string.h ../include/ircd.h ../include/numeric.h \
+ ../include/res.h ../include/fileio.h ../include/../adns/adns.h \
+ ../include/s_bsd.h ../include/s_conf.h ../include/motd.h \
+ ../include/s_serv.h ../include/send.h ../include/struct.h
 s_serv.o: s_serv.c ../include/s_serv.h ../include/config.h \
  ../include/setup.h ../include/channel.h ../include/ircd_defs.h \
  ../include/class.h ../include/client.h ../include/dbuf.h \

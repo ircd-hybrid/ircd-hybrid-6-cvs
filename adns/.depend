@@ -1,4 +1,3 @@
-# $Id .depend,v 0.0 2001/12/09 17:37:18 lusky Exp $
 check.o: check.c internal.h ../include/config.h ../include/setup.h \
  adns.h ../include/irc_string.h ../include/ircd_defs.h dlist.h
 event.o: event.c internal.h ../include/config.h ../include/setup.h \
