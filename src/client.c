@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.50 2000/05/15 04:11:05 lusky Exp $
+ *  $Id: client.c,v 1.51 2000/05/17 02:45:26 lusky Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -1624,6 +1624,8 @@ const char* comment        /* Reason for the exit */
                     {
                       ts_warn("Dependent server %s not on llist!?", 
                                      acptr->name);
+                      log(L_CRIT, "Depend server %s not on llist!?",
+                              acptr->name);
                       exit_one_client(NULL, acptr, &me, me.name);
                     }
                 }

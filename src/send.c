@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.87 2000/05/15 04:11:05 lusky Exp $
+ *   $Id: send.c,v 1.88 2000/05/17 02:45:26 lusky Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -530,7 +530,10 @@ vsendto_one_prefix(aClient *to, const char *prefix,
       return;
     }
 
+  va_start(args);
   vsprintf_irc(temp_sendbuf, pattern+4, args );
+  va_end(args);
+
   len = ircsprintf(sendbuf, ":%s %s", prefix , temp_sendbuf );
 
   /*
