@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.57 1999/07/01 21:40:18 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.58 1999/07/03 02:01:45 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1726,7 +1726,7 @@ time_t now;
       busycli_fdlist.entry[i] = 0;
 
       if (!(cptr=local[i])) continue;
-      if (IsServer(cptr) || IsListening(cptr) || IsOper(cptr))
+      if (IsServer(cptr) || IsListening(cptr) || IsAnOper(cptr))
 	{
 	  busycli_fdlist.entry[i] = 1;
 	  continue;
