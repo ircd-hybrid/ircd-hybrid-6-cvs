@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.54 2003/10/13 16:23:14 ievil Exp $
+ *  $Id: m_gline.c,v 1.55 2004/05/23 15:23:30 ievil Exp $
  */
 #include "m_commands.h"
 #include "m_gline.h"
@@ -426,7 +426,7 @@ static int invalid_gline(struct Client *sptr, char *luser, char *lhost,
   }
   
   /* dont allow glines with : in, theyll break the conf */
-  if(strchr(luser, ':') || strchr(lhost, ':') || strchr(lreason, ':'))
+  if(strchr(luser, ':') || strchr(lreason, ':'))
   {
     if(local_client)
       sendto_one(sptr, ":%s NOTICE %s :Invalid character ':' in gline",
