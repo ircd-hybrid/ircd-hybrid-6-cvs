@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)send.c	2.32 2/28/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: send.c,v 1.14 1998/11/18 02:19:18 db Exp $";
+static char *rcs_version = "$Id: send.c,v 1.15 1998/11/29 06:04:30 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1525,13 +1525,14 @@ register char f;
 	    rp = inp[++i];                  /* get the next parameter */
 	    break;
 	  case 'c':
-	    *wp++ = (char)(int)rp;
+	    *wp++ = (char)(long)rp;
 	    rp = inp[++i];
 	    break;
 	  case 'd':
 	    {
-	      register int myint,quotient;
-	      myint = (int)rp;
+	      register int quotient;
+              register long myint;
+	      myint = (long)rp;
 	      if (myint > 999 || myint < 0)
 		{
 		  /* don't call ircsprintf here... that's stupid.. */
@@ -1564,8 +1565,8 @@ register char f;
 	  break;
 	  case 'u':
 	    {
-	      register unsigned int myuint;
-	      myuint = (unsigned int)rp;
+	      register unsigned long myuint;
+	      myuint = (unsigned long)rp;
 
 	      if (myuint < 100 || myuint > 999)
 		{

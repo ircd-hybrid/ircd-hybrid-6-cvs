@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #ifndef lint
-static char *rcs_version = "$Id: ircsprintf.c,v 1.3 1998/10/10 05:59:45 lusky Exp $";
+static char *rcs_version = "$Id: ircsprintf.c,v 1.4 1998/11/29 06:04:28 db Exp $";
 #endif
 
 #ifndef USE_VARARGS
@@ -73,13 +73,13 @@ va_dcl
 	    rp = inp[++i];                  /* get the next parameter */
 	    break;
 	  case 'c':
-	    *wp++ = (char) ((int)rp);
+	    *wp++ = (char) ((long)rp);
 	    rp = inp[++i];
 	    break;
 	  case 'd':
 	    {
-	      register int myint;
-	      myint = (int)rp;
+	      register long myint;
+	      myint = (long)rp;
 	      
 	      if (myint < 100 || myint > 999)
 		{
@@ -102,8 +102,8 @@ va_dcl
 	  break;
 	  case 'u':
 	    {
-	      register unsigned int myuint;
-	      myuint = (unsigned int)rp;
+	      register unsigned long myuint;
+	      myuint = (unsigned long)rp;
 	  
 	      if (myuint < 100 || myuint > 999)
 		{
