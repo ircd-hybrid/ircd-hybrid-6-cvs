@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.121 2004/05/23 16:16:56 ievil Exp $
+ *   $Id: send.c,v 1.122 2004/10/13 03:12:37 ievil Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -105,7 +105,6 @@ dead_link(aClient *to, char *notice)
  */
 void flush_connections(struct Client* cptr)
 {
-#ifdef SENDQ_ALWAYS
   if (0 == cptr) {
     int i;
     for (i = highest_fd; i >= 0; --i) {
@@ -115,8 +114,6 @@ void flush_connections(struct Client* cptr)
   }
   else if (-1 < cptr->fd && DBufLength(&cptr->sendQ) > 0)
     send_queued(cptr);
-
-#endif /* SENDQ_ALWAYS */
 }
 
 
@@ -125,7 +122,7 @@ void flush_connections(struct Client* cptr)
 **      Internal utility which delivers one message buffer to the
 **      socket. Takes care of the error handling and buffering, if
 **      needed.
-**      if SENDQ_ALWAYS is defined, the message will be queued.
+**      the message will be queued - SENDQ_ALWAYS define removed - hardcoded.
 **      if ZIP_LINKS is defined, the message will eventually be compressed,
 **      anything stored in the sendQ is compressed.
 **
@@ -133,9 +130,6 @@ void flush_connections(struct Client* cptr)
 */
 static int
 send_message(aClient *to, char *msg, int len)
-
-#ifdef SENDQ_ALWAYS
-
 {
         static int SQinK;
 
@@ -236,87 +230,6 @@ send_message(aClient *to, char *msg, int len)
         return 0;
 } /* send_message() */
 
-#else /* SENDQ_ALWAYS */
-
-{
-        int rlen = 0;
-
-        if (to->from)
-                to = to->from;
-
-        if (IsMe(to))
-        {
-                sendto_realops("Trying to send to myself! [%s]", msg);
-                return 0;
-        }
-
-        if (to->fd < 0)
-                return 0; /* Thou shalt not write to closed descriptors */
-
-        if (IsDead(to))
-                return 0; /* This socket has already been marked as dead */
-
-        /*
-        ** DeliverIt can be called only if SendQ is empty...
-        */
-        if ((DBufLength(&to->sendQ) == 0) &&
-                        (rlen = deliver_it(to, msg, len)) < 0)
-                return dead_link(to,"Write error to %s, closing link");
-        else if (rlen < len)
-        {
-                /*
-                ** Was unable to transfer all of the requested data. Queue
-                ** up the remainder for some later time...
-                */
-                if (DBufLength(&to->sendQ) > get_sendq(to))
-                {
-                        sendto_ops_butone(to,
-                                "Max SendQ limit exceeded for %s : %d > %d",
-#ifdef HIDE_SERVERS_IPS
-				get_client_name(to, MASK_IP),
-#else				
-                                get_client_name(to, FALSE),
-#endif				
-                                DBufLength(&to->sendQ), get_sendq(to));
-
-                                return dead_link(to, "Max Sendq exceeded");
-                }
-                else
-                {
-                #ifdef ZIP_LINKS
-
-                        /*
-                        ** data is first stored in to->zip->outbuf until
-                        ** it's big enough to be compressed and stored in the sendq.
-                        ** send_queued is then responsible to never let the sendQ
-                        ** be empty and to->zip->outbuf not empty.
-                        */
-                        if (to->flags2 & FLAGS2_ZIP)
-                                msg = zip_buffer(to, msg, &len, 0);
-                        if (len && !dbuf_put(&to->sendQ, msg + rlen, len - rlen))
-
-                #else /* ZIP_LINKS */
-                        if (!dbuf_put(&to->sendQ,msg+rlen,len-rlen))
-
-                #endif /* ZIP_LINKS */
-
-                                return dead_link(to,"Buffer allocation error for %s");
-                }
-        } /* else if (rlen < len) */
-
-        /*
-        ** Update statistics. The following is slightly incorrect
-        ** because it counts messages even if queued, but bytes
-        ** only really sent. Queued bytes get updated in SendQueued.
-        */
-        to->sendM += 1;
-        me.sendM += 1;
-
-        return 0;
-} /* send_message() */
-
-#endif /* SENDQ_ALWAYS */
-
 /*
 ** send_queued
 **      This function is called from the main select-loop (or whatever)
@@ -341,11 +254,7 @@ int send_queued(aClient *to)
      * not working correct if send_queued is called for a
      * dead socket... --msa
      */
-#ifndef SENDQ_ALWAYS
-    return dead_link(to, "send_queued called for a DEADSOCKET:%s");
-#else
     return -1;
-#endif
   } /* if (IsDead(to)) */
 
 #ifdef ZIP_LINKS

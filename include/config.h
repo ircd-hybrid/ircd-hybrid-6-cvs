@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.175 2004/10/13 03:09:45 ievil Exp $
+ * $Id: config.h,v 1.176 2004/10/13 03:12:35 ievil Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -954,15 +954,6 @@
  */
 #define DEFAULTMAXBANS  100 /* bans + exceptions together */
 
-/* SENDQ_ALWAYS - should always be defined.
- * SendQ-Always causes the server to put all outbound data into the sendq and
- * flushing the sendq at the end of input processing. This should cause more
- * efficient write's to be made to the network.
- * There *shouldn't* be any problems with this method.
- * -avalon
- */
-#define SENDQ_ALWAYS
-
 /* FLUD - CTCP Flood Detection and Protection
  *
  * This enables server CTCP flood detection and protection for local clients.
@@ -1104,6 +1095,10 @@
 
 #if !defined(HAVE_LIBZ) && defined(ZIP_LINKS)
 #error ZIP_LINKS defined put ZLIB not found.  Undef ZIP_LINKS or install ZLIB
+#endif
+
+#if (NICKNAMEHISTORYLENGTH == 0)
+#error NICKNAMEHISTORYLENGTH cannot be set to 0
 #endif
 
 #if defined(OPERSPY) && !defined(OPERSPYLOG)

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.62 2004/10/13 00:53:36 ievil Exp $
+ *   $Id: s_debug.c,v 1.63 2004/10/13 03:12:37 ievil Exp $
  */
 #include "s_debug.h"
 #include "channel.h"
@@ -54,9 +54,7 @@ extern  int     maxdbufblocks;                    /* defined in dbuf.c */
  * Option string.  Must be before #ifdef DEBUGMODE.
  */
 const char serveropts[] = {
-#ifdef  SENDQ_ALWAYS
-  'A',
-#endif
+  'A',  /* SENDQ_ALWAYS */
 #ifdef  CMDLINE_CONFIG
   'C',
 #endif

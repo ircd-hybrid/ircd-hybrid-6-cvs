@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.33 2004/10/13 00:53:33 ievil Exp $
+ * $Id: m_info.h,v 1.34 2004/10/13 03:12:35 ievil Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -614,12 +614,6 @@ Info MyInformation[] = {
 #else
   { "SEND_FAKE_KILL_TO_CLIENT", "OFF", 0, "Make Client think they were KILLed" },
 #endif /* SEND_FAKE_KILL_TO_CLIENT */
-
-#ifdef SENDQ_ALWAYS
-  { "SENDQ_ALWAYS", "ON", 0, "Put All OutBound data into a SendQ" },
-#else
-  { "SENDQ_ALWAYS", "OFF", 0, "Put All OutBound data into a SendQ" },
-#endif /* SENDQ_ALWAYS */
 
 #ifdef SERVERHIDE
   { "SERVERHIDE", "ON", 0, "Hide server info from users" },
