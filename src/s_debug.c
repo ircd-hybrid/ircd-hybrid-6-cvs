@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.39 1999/07/27 20:21:00 wnder Exp $
+ *   $Id: s_debug.c,v 1.40 1999/07/31 02:57:27 tomh Exp $
  */
 #include "struct.h"
 #include "s_conf.h"
@@ -153,34 +153,6 @@ void debug(int level, char *format, ...)
 
   errno = err;
 } /* debug() */
-
-/*
- * get_vm_top - get the operating systems notion of the resident set size
- */
-size_t get_vm_top(void)
-{
-  /*
-   * NOTE: sbrk is not part of the ANSI C library or the POSIX.1 standard
-   * however it seems that everyone defines it. Calling sbrk with a 0
-   * argument will return a pointer to the top of the process virtual
-   * memory without changing the process size, so this call should be
-   * reasonably safe (sbrk returns the new value for the top of memory).
-   * This code relies on the notion that the address returned will be an 
-   * offset from 0 (NULL), so the result of sbrk is cast to a size_t and 
-   * returned. We really shouldn't be using it here but...
-   */
-  void* vptr = sbrk(0);
-  return (size_t) vptr;
-}
-
-/*
- * get_maxrss - get the operating systems notion of the resident set size
- */
-size_t get_maxrss(void)
-{
-  return get_vm_top() - InitialVMTop;
-}
-
 /*
  * This is part of the STATS replies. There is no offical numeric for this
  * since this isnt an official command, in much the same way as HASH isnt.
