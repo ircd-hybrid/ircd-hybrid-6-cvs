@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.78 2003/08/17 06:01:57 ievil Exp $
+ *  $Id: s_misc.c,v 1.79 2003/08/21 23:59:26 ievil Exp $
  */
 #include "s_misc.h"
 #include "channel.h"
@@ -206,7 +206,6 @@ void serv_info(aClient *cptr,char *name)
 /* Make ISUPPORT string */
 void show_isupport(aClient *cptr, char *name)
 {
-  char isupport[512];
   char features[300];
   char features2[300];
   char cbmodes[128];

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.265 2003/08/16 19:58:36 ievil Exp $
+ *  $Id: s_user.c,v 1.266 2003/08/21 23:59:26 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -43,6 +43,7 @@
 #include "s_log.h"
 #include "s_serv.h"
 #include "s_stats.h"
+#include "s_misc.h"
 #include "scache.h"
 #include "send.h"
 #include "struct.h"

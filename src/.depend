@@ -331,7 +331,7 @@ m_users.o: m_users.c ../include/m_commands.h ../include/config.h \
 m_version.o: m_version.c ../include/m_commands.h ../include/config.h \
   ../include/setup.h ../include/client.h ../include/ircd_defs.h \
   ../include/dbuf.h ../include/ircd.h ../include/numeric.h \
-  ../include/s_serv.h ../include/send.h
+  ../include/s_serv.h ../include/s_misc.h ../include/send.h
 m_wallops.o: m_wallops.c ../include/m_commands.h ../include/config.h \
   ../include/setup.h ../include/client.h ../include/ircd_defs.h \
   ../include/dbuf.h ../include/ircd.h ../include/irc_string.h \
@@ -450,8 +450,8 @@ s_user.o: s_user.c ../include/m_commands.h ../include/config.h \
   ../include/motd.h ../include/msg.h ../include/numeric.h \
   ../include/s_bsd.h ../include/res.h ../include/fileio.h ../adns/adns.h \
   ../include/s_conf.h ../include/s_log.h ../include/s_serv.h \
-  ../include/s_stats.h ../include/scache.h ../include/send.h \
-  ../include/struct.h ../include/whowas.h
+  ../include/s_stats.h ../include/s_misc.h ../include/scache.h \
+  ../include/send.h ../include/struct.h ../include/whowas.h
 s_zip.o: s_zip.c ../include/client.h ../include/config.h \
   ../include/setup.h ../include/ircd_defs.h ../include/dbuf.h \
   ../include/s_zip.h ../include/irc_string.h ../include/packet.h \

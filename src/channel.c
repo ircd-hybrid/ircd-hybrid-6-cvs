@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.242 2003/08/16 19:58:35 ievil Exp $
+ * $Id: channel.c,v 1.243 2003/08/21 23:59:26 ievil Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -694,8 +694,6 @@ static  int is_invex(struct Client *cptr,struct Channel *chptr)
 {
 /* if we dont have CHANMODE_I just abort */
 #ifdef CHANMODE_I
-
-  Link *tmp;
   char  s[NICKLEN+USERLEN+HOSTLEN+6];
   char  *s2;
 
@@ -705,16 +703,12 @@ static  int is_invex(struct Client *cptr,struct Channel *chptr)
   strcpy(s, make_nick_user_host(cptr->name, cptr->username, cptr->host));
   s2 = make_nick_user_host(cptr->name, cptr->username,
                            inetntoa((char*) &cptr->ip));
-  if (tmp)
-    {
-      Link *t2;
-      for (t2 = chptr->invexlist; t2; t2 = t2->next)
-        if (match(BANSTR(t2), s) ||
-            match(BANSTR(t2), s2))
-          {
-            return CHFL_INVEX;
-          }
-    }
+  Link *t2;
+  for (t2 = chptr->invexlist; t2; t2 = t2->next)
+    if (match(BANSTR(t2), s) || match(BANSTR(t2), s2))
+      {
+        return CHFL_INVEX;
+      }
 #endif
   /* return 0 if we get here.. bcoz then there is no INVEX */
   return (0);
@@ -760,16 +754,17 @@ void    remove_user_from_channel(struct Client *sptr,struct Channel *chptr,int w
          * matching exception now.
          * - Is this really a good idea?? ievil!2003
          */
+
         if(was_kicked && (tmp->flags & CHFL_EXCEPTION))
           {
             del_matching_exception(sptr,chptr);
           }
-/*
- *       if(was_kicked && (tmp->flags & CHFL_INVEX))
- *         {
- *           del_matching_invex(sptr,chptr);
- *         }
- * 
+
+        if(was_kicked && (tmp->flags & CHFL_INVEX))
+          {
+            del_matching_invex(sptr,chptr);
+          }
+/* 
  * ievil: is this really a good idea.. if a channel gets
  * taken and then the takeover kiddies kick the legit ops
  * do we still want to remove their chance of getting bacl

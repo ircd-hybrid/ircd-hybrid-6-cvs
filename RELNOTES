@@ -1,4 +1,4 @@
-$Id: RELNOTES,v 1.18 2003/06/24 04:09:41 ievil Exp $
+$Id: RELNOTES,v 1.19 2003/08/21 23:59:24 ievil Exp $
 
 This is the current release version of ircd-hybrid-6.
 
@@ -15,6 +15,21 @@ DISCUSSION: There is a mailing list for discussion of hybrid issues,
  done than ranting on #TZ.
 
 Questions/comments directed to ircd-hybrid@the-project.org
+
+ircd-hybrid-6.4.1 Release Notes
+-------------------------------
+This is a 'minor' bugfix release.
+
+o Added CAP IE - Chanmode Invex propogation
+o Added INVEX - Chanmode +I (INVEX)
+o Added oper unidle. Operflag I, umode +u. Intended for tcm's.
+o Changed +c connect message to include gecos (IRCNAME)
+o Changed the numeric 005 ISUPPORT repsonse
+o Fixed the double +p entry that made people unable to umode +/- over p
+o Fixed a possible problem that had been there for ages.
+o Removed legacy connect notice that was needed for OLD versions of ircII
+o Removed legacy (commented) source code
+
 
 ircd-hybrid-6.4 Release Notes
 ----------------------------
