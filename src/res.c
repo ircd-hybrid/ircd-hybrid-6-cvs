@@ -22,7 +22,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)res.c	2.34 03 Nov 1993 (C) 1992 Darren Reed";
-static  char *rcs_version = "$Id: res.c,v 1.11 1998/12/19 03:45:54 db Exp $";
+static  char *rcs_version = "$Id: res.c,v 1.12 1999/02/19 16:27:22 db Exp $";
 #endif
 
 #undef	DEBUG	/* because there is a lot of debug code in here :-) */
@@ -677,15 +677,7 @@ This comment is based on analysis by Shadowfax, Wohali and johan, not me.
 	   */
 	  if (hp->h_name)
 	    {
-	      if (alias >= &(hp->h_aliases[MAXALIASES-1]))
-		break;
-	      *alias = (char *)MyMalloc(len + 1);
-/* remember, strcpy is safe here, since we have ensured hostbuf is 
-   always < HOSTLEN above
-   -Dianora
-*/
-              strcpy(*alias++, hostbuf);
-	      *alias = NULL;
+	      Debug((DEBUG_INFO, "duplicate PTR ignored"));
 	    }
 	  else
 	    {
