@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_server.c,v 1.10 2000/11/24 18:24:37 lusky Exp $
+ *   $Id: m_server.c,v 1.11 2001/06/04 01:13:16 greg Exp $
  */
 #include "m_commands.h"  /* m_server prototype */
 #include "client.h"      /* client struct */
@@ -376,8 +376,8 @@ int m_server(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
                          
         }
       
-      sendto_realops_flags(FLAGS_EXTERNAL, "Server %s being introduced by %s",
-                           acptr->name, sptr->name);
+      sendto_realops_flags(FLAGS_EXTERNAL, "Server %s[%s] being introduced by %s[%d hops]",
+                           acptr->name, acptr->info, sptr->name, acptr->hopcount);
       return 0;
     }
 
