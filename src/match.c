@@ -22,7 +22,7 @@
  * Cleanup of collapse and match
  * Moved static calls variable to match
  * Added asserts for null pointers
- * $Id: match.c,v 1.26 2001/12/07 04:26:19 db Exp $
+ * $Id: match.c,v 1.27 2001/12/07 05:35:55 db Exp $
  *
  */
 #include "irc_string.h"
@@ -211,9 +211,9 @@ int ircncmp(const char* s1, const char *s2, int n)
 */
 char    *canonize(char *buffer)
 {
-  static        char    cbuf[BUFSIZE];
-  register char *s, *t, *cp = cbuf;
-  register int  l = 0;
+  static char    cbuf[BUFSIZE];
+  char *s, *t, *cp = cbuf;
+  int  l = 0;
   char  *p = 0, *p2;
 
   *cp = '\0';

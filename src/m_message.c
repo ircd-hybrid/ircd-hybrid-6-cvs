@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_message.c,v 1.14 2001/12/07 05:09:30 db Exp $
+ *   $Id: m_message.c,v 1.15 2001/12/07 05:35:55 db Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -146,10 +146,8 @@ static  int     m_message(struct Client *cptr,
         return 0;
 #endif
 #endif
-      if (strchr(parv[1],','))
-        parv[1] = canonize(parv[1]);
+      parv[1] = canonize(parv[1]);
     }
-
 
   /*
   ** channels are privmsg'd a lot more than other clients, moved up here
