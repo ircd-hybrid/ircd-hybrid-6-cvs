@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.11 1999/07/11 23:43:52 db Exp $
+ * $Id: client.h,v 1.12 1999/07/12 00:45:08 db Exp $
  */
 #ifndef	INCLUDED_client_h
 #define INCLUDED_client_h
@@ -358,9 +358,6 @@ struct Client
   short	            status;	/* Client type */
   char	            nicksent;
   unsigned char     local_flag; /* if this is 1 this client is local */
-#ifdef BOTCHECK
-  unsigned char     isbot;	/* non 0 if its a type of bot */
-#endif
 
   /*
    * client->name is the unique name for a client nick or host
@@ -397,6 +394,9 @@ struct Client
    * these fields, if (from != self).
    */
   int	            count;	 /* Amount of data in buffer */
+#ifdef BOTCHECK
+  unsigned char     isbot;	/* non 0 if its a type of bot */
+#endif
 #ifdef FLUD
   time_t            fludblock;
   struct fludbot*   fluders;

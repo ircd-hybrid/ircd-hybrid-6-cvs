@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.128 1999/07/11 23:43:54 db Exp $
+ *  $Id: s_user.c,v 1.129 1999/07/12 00:45:10 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -413,15 +413,12 @@ static	int do_nick_name(char *nick)
 **	   nick from local user or kill him/her...
 */
 
-#define MAX_REASON 80
-
 static int register_user(aClient *cptr, aClient *sptr, 
                          char *nick, char *username)
 {
   aConfItem*  aconf;
   char*       parv[3];
   static char ubuf[12];
-  short	      oldstatus = sptr->status;
   anUser*     user = sptr->user;
   char*       reason;
   char        tmpstr2[512];
