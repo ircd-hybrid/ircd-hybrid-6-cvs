@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.8 1999/07/11 21:09:34 tomh Exp $
+ * $Id: client.h,v 1.9 1999/07/11 23:03:23 tomh Exp $
  */
 #ifndef	INCLUDED_client_h
 #define INCLUDED_client_h
@@ -476,5 +476,6 @@ struct Client
 
 extern const char* get_client_name(struct Client* client, int show_ip);
 extern const char* get_client_host(struct Client* client);
+extern void        release_client_dns_reply(struct Client* client);
 
 #endif /* INCLUDED_client_h */
