@@ -1,3 +1,15 @@
+ievil       2003/10/13 12:55:58 EDT	(20031013_15)
+
+  Modified files:
+    src                  s_serv.c 
+  Log:
+  fixed typo
+  
+  Revision  Changes    Path
+  1.237     +1 -1      ircd-hybrid-6/src/s_serv.c
+
+
+
 ievil       2003/10/13 12:26:16 EDT	(20031013_14)
 
   Modified files:
