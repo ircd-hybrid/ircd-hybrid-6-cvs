@@ -1,3 +1,17 @@
+ievil       2003/06/06 05:35:20 EDT	(20030606_8)
+
+  Added files:
+    src                  m_undline.c m_ungline.c 
+  Log:
+  Second commit of the m_unkline.c split. This is just a split of the files.
+  More stuff would be done to this in the near future.
+  
+  Revision  Changes    Path
+  1.1       +282 -0    ircd-hybrid-6/src/m_undline.c (new)
+  1.1       +135 -0    ircd-hybrid-6/src/m_ungline.c (new)
+
+
+
 ievil       2003/06/06 05:30:16 EDT	(20030606_7)
 
   Modified files:
