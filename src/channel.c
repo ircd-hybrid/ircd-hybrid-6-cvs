@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.212 2001/08/07 02:22:30 leeh Exp $
+ * $Id: channel.c,v 1.213 2001/08/10 08:02:28 leeh Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -3683,10 +3683,22 @@ int     m_sjoin(struct Client *cptr,
    */
   else if (newts < oldts)
   {
+  /* new behaviour, never keep our modes */
+#ifdef TS5
     keep_our_modes = NO;
     chptr->channelts = tstosend = newts;
+    
+/* old behaviour, keep our modes if their sjoin is opless */
+#else
+    if(doesop)
+      keep_our_modes = NO;
+    if(haveops && !doesop)
+      tstosend = oldts;
+    else
+      chptr->channelts = tstosend = newts;
+#endif      
+
   }
-  /* their TS is newer, ignore all their modes, tstosend is our ts */
   else
   {
 
@@ -3699,9 +3711,18 @@ int     m_sjoin(struct Client *cptr,
       chptr->channelts = tstosend = newts;
     else
     {
-#endif    
+#endif
+#ifdef TS5
       keep_new_modes = NO;
       tstosend = oldts;
+#else
+      if(haveops)
+        keep_new_modes = NO;
+      if (doesop && !haveops)
+        chptr->channelts = tstosend = newts;
+      else
+        tstosend = oldts;
+#endif /* TS5 */	
 #ifdef JUPE_CHANNEL
     }
 #endif    

@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.56 2001/08/04 21:24:32 leeh Exp $
+ * $Id: client.h,v 1.57 2001/08/10 08:02:28 leeh Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -294,7 +294,11 @@ struct Client
  * ts stuff:
  *  if TS5_ONLY is defined, TS_MIN is 5, else 3
  */
+#ifdef TS5
 #define TS_CURRENT	5
+#else
+#define TS_CURRENT	3
+#endif
 
 #ifdef TS5_ONLY
 #define TS_MIN   	5
