@@ -28,7 +28,7 @@
 static  char sccsid[] = "%W% %G% (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: match.c,v 1.5 1999/06/25 05:23:35 tomh Exp $";
+static char *rcs_version = "$Id: match.c,v 1.6 1999/07/03 08:07:06 tomh Exp $";
 #endif
 
 #include "match.h"
@@ -151,17 +151,16 @@ char* collapse(char *pattern)
   /*
    * XXX - null pointers ok?
    */
-  if (!pattern || !*pattern)
-     return pattern;
-
-  for (; *s; s++) {
-    if ('*' == *s) {
-      t = s1 = s + 1;
-      while ('*' == *t)
-        ++t;
-      if (s1 != t) {
-        while ((*s1++ = *t++))
-          ;
+  if (s) {
+    for (; *s; s++) {
+      if ('*' == *s) {
+	t = s1 = s + 1;
+	while ('*' == *t)
+	  ++t;
+	if (s1 != t) {
+	  while ((*s1++ = *t++))
+	    ;
+	}
       }
     }
   }

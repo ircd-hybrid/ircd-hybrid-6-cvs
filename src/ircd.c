@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.59 1999/07/03 05:06:41 tomh Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.60 1999/07/03 08:07:04 tomh Exp $";
 #endif
 
 #include "struct.h"
@@ -303,7 +303,7 @@ static	time_t	try_connections(time_t currenttime)
   connecting = FALSE;
   Debug((DEBUG_NOTICE,"Connection check at   : %s",
 	 myctime(currenttime)));
-  for (aconf = conf; aconf; aconf = aconf->next )
+  for (aconf = ConfigItemList; aconf; aconf = aconf->next )
     {
       /* Also when already connecting! (update holdtimes) --SRB */
       if (!(aconf->status & CONF_CONNECT_SERVER) || aconf->port <= 0)
@@ -358,7 +358,7 @@ static	time_t	try_connections(time_t currenttime)
     {
       if (con_conf->next)  /* are we already last? */
 	{
-	  for (pconf = &conf; (aconf = *pconf);
+	  for (pconf = &ConfigItemList; (aconf = *pconf);
 	       pconf = &(aconf->next))
 	    /* put the current one at the end and
 	     * make sure we try all connections

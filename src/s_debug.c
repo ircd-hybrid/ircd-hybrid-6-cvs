@@ -21,12 +21,13 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_debug.c	2.28 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_debug.c,v 1.9 1999/07/03 05:06:46 tomh Exp $";
+static char *rcs_version = "$Id: s_debug.c,v 1.10 1999/07/03 08:07:08 tomh Exp $";
 #endif
 
 #include "struct.h"
+#include "s_conf.h"
+#include "res.h"
 extern	void	count_whowas_memory(int *, u_long *);
-extern	u_long	cres_mem(aClient *);
 extern  void    count_ip_hash(int *,u_long *);	  /* defined in s_conf.c */
 extern  int	maxdbufblocks;			  /* defined in dbuf.c */
 /*
@@ -306,9 +307,13 @@ void	send_usage(aClient *cptr, char *nick)
 
 void count_memory(aClient *cptr,char *nick)
 {
-  extern	aChannel	*channel;
-  extern	aClass	*classes;
-  extern	aConfItem	*conf;
+  /*
+   * XXX - BAD idea... include the headers
+   */
+#if 0
+  extern	aChannel* channel;
+  extern	aClass*   classes;
+#endif
   
   aClient *acptr;
   Link *link;
@@ -398,7 +403,7 @@ void count_memory(aClient *cptr,char *nick)
 	}
     }
 
-  for (aconf = conf; aconf; aconf = aconf->next)
+  for (aconf = ConfigItemList; aconf; aconf = aconf->next)
     {
       co++;
       com += aconf->host ? strlen(aconf->host)+1 : 0;

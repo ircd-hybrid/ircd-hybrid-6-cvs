@@ -19,13 +19,14 @@
 
 #ifndef	lint
 static char sccsid[] = "@(#)class.c	1.4 28 Jun 1993 (C) 1990 Darren Reed";
-static char *rcs_version = "$Id: class.c,v 1.3 1999/06/25 11:59:51 db Exp $";
+static char *rcs_version = "$Id: class.c,v 1.4 1999/07/03 08:07:04 tomh Exp $";
 #endif
 
 #include "struct.h"
 #include "common.h"
 #include "numeric.h"
 #include "h.h"
+#include "s_conf.h"
 
 #define BAD_CONF_CLASS		-1
 #define BAD_PING		-2

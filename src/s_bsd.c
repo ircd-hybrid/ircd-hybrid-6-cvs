@@ -21,13 +21,14 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.45 1999/07/03 05:06:42 tomh Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.46 1999/07/03 08:07:07 tomh Exp $";
 #endif
 
 #include "struct.h"
 #include "common.h"
 #include "sys.h"
 #include "res.h"
+#include "s_conf.h"
 #include "numeric.h"
 #include "patchlevel.h"
 #include <sys/types.h>

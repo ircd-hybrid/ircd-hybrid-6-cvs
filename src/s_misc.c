@@ -24,15 +24,16 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.32 1999/06/26 07:52:13 tomh Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.33 1999/07/03 08:07:08 tomh Exp $";
 #endif
 
-#include <sys/time.h>
+#include "s_conf.h"
 #include "struct.h"
 #include "common.h"
 #include "sys.h"
 #include "numeric.h"
 #include <sys/stat.h>
+#include <sys/time.h>
 #include <fcntl.h>
 #if !defined(ULTRIX) && !defined(SGI) && !defined(sequent) && \
     !defined(__convex__)
