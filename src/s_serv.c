@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.137 1999/07/13 23:46:32 db Exp $
+ *   $Id: s_serv.c,v 1.138 1999/07/14 02:04:45 db Exp $
  */
 
 #define CAPTAB
@@ -826,7 +826,7 @@ static void	sendnick_TS( aClient *cptr, aClient *acptr)
 	  /*	original was	strcpy(ubuf, "+"); */
 	}
 
-      sendto_one(cptr, "NICK %s %d %ld %s %s %s %s :%s", acptr->name, 
+      sendto_one(cptr, "NICK %s %d %lu %s %s %s %s :%s", acptr->name, 
 		 acptr->hopcount + 1, acptr->tsinfo, ubuf,
 		 acptr->username, acptr->host,
 		 acptr->user->server, acptr->info);
@@ -951,7 +951,7 @@ int m_server_estab(aClient *cptr)
     ClearCap(cptr, CAP_ZIP);
 #endif /* ZIP_LINKS */
 
-  sendto_one(cptr,"SVINFO %d %d 0 :%ld", TS_CURRENT, TS_MIN, timeofday);
+  sendto_one(cptr,"SVINFO %d %d 0 :%lu", TS_CURRENT, TS_MIN, timeofday);
   
   det_confs_butmask(cptr, CONF_LEAF|CONF_HUB|CONF_NOCONNECT_SERVER);
   /*

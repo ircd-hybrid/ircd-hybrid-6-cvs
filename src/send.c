@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.48 1999/07/13 23:46:34 db Exp $
+ *   $Id: send.c,v 1.49 1999/07/14 02:04:46 db Exp $
  */
 
 #include "send.h"
@@ -443,7 +443,8 @@ vsendto_one(aClient *to, const char *pattern, va_list args)
       return;
     }
 
-  len = vsprintf(sendbuf, pattern, args);
+  vsprintf_irc(sendbuf, pattern, args);
+  len = strlen(sendbuf);
 
   /*
    * from rfc1459
