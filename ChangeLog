@@ -1,3 +1,19 @@
+ievil       2004/05/23 11:00:55 EDT	(20040523_2)
+
+  Added files:
+    doc/old              example.conf.trillian 
+  Removed files:
+    doc                  example.conf.trillian 
+  Log:
+  moved example.conf.trillian to doc/old/.
+  it's included for legacy and respect!!!
+  
+  Revision  Changes    Path
+  1.6       +0 -369    ircd-hybrid-6/doc/example.conf.trillian (dead)
+  1.1       +370 -0    ircd-hybrid-6/doc/old/example.conf.trillian (new)
+
+
+
 ievil       2004/05/23 10:28:24 EDT	(20040523_1)
 
   Modified files:
