@@ -1,3 +1,19 @@
+ievil       2003/10/13 11:18:30 EDT	(20031013_12)
+
+  Modified files:
+    include              send.h 
+    src                  .depend m_map.c 
+  Log:
+  Updated depend, fixed a few missing entries in send.h and a return 0 ;)
+  Now it compiles with no warnings :)
+  
+  Revision  Changes    Path
+  1.19      +1 -0      ircd-hybrid-6/include/send.h
+  1.55      +4 -0      ircd-hybrid-6/src/.depend
+  1.2       +2 -2      ircd-hybrid-6/src/m_map.c
+
+
+
 ievil       2003/10/13 10:51:37 EDT	(20031013_11)
 
   Modified files:
