@@ -16,7 +16,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: listener.h,v 1.3 1999/07/17 02:41:17 tomh Exp $
+ * $Id: listener.h,v 1.4 1999/07/29 07:06:47 tomh Exp $
  */
 #ifndef INCLUDED_listener_h
 #define INCLUDED_listener_h
@@ -31,6 +31,8 @@
 #ifndef INCLUDED_ircd_defs_h
 #include "ircd_defs.h"       /* HOSTLEN */
 #endif
+
+struct Client;
 
 struct Listener {
   struct Listener* next;               /* list node pointer */
@@ -47,11 +49,12 @@ struct Listener {
 
 extern struct Listener* ListenerPollList; /* GLOBAL - listener list */
 
-extern void accept_connection(struct Listener* listener);
-extern void add_listener(int port, const char* vaddr_ip);
+extern void        accept_connection(struct Listener* listener);
+extern void        add_listener(int port, const char* vaddr_ip);
+extern void        close_listener(struct Listener* listener);
+extern void        close_listeners(void);
 extern const char* get_listener_name(const struct Listener* listener);
-extern void close_listener(struct Listener* listener);
-extern void mark_listeners_closing(void);
-extern void close_listeners(void);
+extern void        mark_listeners_closing(void);
+extern void        show_ports(struct Client* client);
 
 #endif /* INCLUDED_listener_h */

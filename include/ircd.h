@@ -19,7 +19,7 @@
  *
  * "ircd.h". - Headers file.
  *
- * $Id: ircd.h,v 1.11 1999/07/25 18:05:06 tomh Exp $
+ * $Id: ircd.h,v 1.12 1999/07/29 07:06:47 tomh Exp $
  *
  */
 #ifndef INCLUDED_ircd_h
@@ -66,6 +66,19 @@ struct SetOptions
   int spam_num;
   int spam_time;
 #endif
+};
+
+struct Counter {
+  int     server;         /* servers */
+  int     myserver;       /* my servers */
+  int     oper;           /* Opers */
+  int     chan;           /* Channels */
+  int     local;          /* Local Clients */
+  int     total;          /* total clients */
+  int     invisi;         /* invisible clients */
+  int     unknown;        /* unknown connections */
+  int     max_loc;        /* MAX local clients */
+  int     max_tot;        /* MAX global clients */
 };
 
 extern struct SetOptions GlobalSetOptions;  /* defined in ircd.c */
