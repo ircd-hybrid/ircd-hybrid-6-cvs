@@ -1,3 +1,24 @@
+db          2003/05/04 22:39:09 EDT	(20030505_0)
+
+  Modified files:
+    include              client.h res.h 
+    src                  adns.c m_error.c m_kline.c m_unkline.c 
+                         s_auth.c s_conf.c 
+  Log:
+  - Oki, this restores the fixes that were lost with last major revert.
+  
+  Revision  Changes    Path
+  1.64      +0 -3      ircd-hybrid-6/include/client.h
+  1.19      +2 -2      ircd-hybrid-6/include/res.h
+  1.13      +8 -8      ircd-hybrid-6/src/adns.c
+  1.8       +35 -10    ircd-hybrid-6/src/m_error.c
+  1.77      +25 -9     ircd-hybrid-6/src/m_kline.c
+  1.49      +2 -0      ircd-hybrid-6/src/m_unkline.c
+  1.56      +2 -2      ircd-hybrid-6/src/s_auth.c
+  1.241     +1 -1      ircd-hybrid-6/src/s_conf.c
+
+
+
 ievil       2003/05/04 18:49:29 EDT	(20030504_3)
 
   Modified files:
