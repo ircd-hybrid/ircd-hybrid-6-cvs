@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_quit.c,v 1.2 2001/12/08 07:06:14 lusky Exp $
+ *   $Id: m_quit.c,v 1.3 2003/06/12 21:54:25 ievil Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -29,6 +29,7 @@
 #include "s_serv.h"
 #include "send.h"
 #include <string.h>
+#include <stdio.h>
 
 /*
  * m_functions execute protocol messages on this server:
@@ -97,11 +98,19 @@ int     m_quit(struct Client *cptr,
                int parc,
                char *parv[])
 {
+  char reason[TOPICLEN +1];
   char *comment = (parc > 1 && parv[1]) ? parv[1] : cptr->name;
+
 
   sptr->flags |= FLAGS_NORMALEX;
   if (strlen(comment) > (size_t) TOPICLEN)
     comment[TOPICLEN] = '\0';
+
+  if (!IsServer(sptr) && MyConnect(sprt) && comment[0]) 
+    {
+      snprint(reason, TOPICLEN, "Quit: %s", comment);
+      comment = reason;    
+    }
 
 #ifdef ANTI_SPAM_EXIT_MESSAGE
   if( !IsServer(sptr) && MyConnect(sptr) &&
