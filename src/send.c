@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)send.c	2.32 2/28/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: send.c,v 1.5 1998/10/10 04:20:15 db Exp $";
+static char *rcs_version = "$Id: send.c,v 1.6 1998/10/10 05:59:47 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -1375,7 +1375,7 @@ register char f;
 	    rp = inp[++i];                  /* get the next parameter */
 	    break;
 	  case 'c':
-	    *wp++ = (char)rp;
+	    *wp++ = (char)(int)rp;
 	    rp = inp[++i];
 	    break;
 	  case 'd':

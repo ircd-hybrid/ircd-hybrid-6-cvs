@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #ifndef lint
-static char *rcs_version = "$Id: ircsprintf.c,v 1.2 1998/09/19 21:12:37 db Exp $";
+static char *rcs_version = "$Id: ircsprintf.c,v 1.3 1998/10/10 05:59:45 lusky Exp $";
 #endif
 
 #ifndef USE_VARARGS
@@ -73,7 +73,7 @@ va_dcl
 	    rp = inp[++i];                  /* get the next parameter */
 	    break;
 	  case 'c':
-	    *wp++ = (char)rp;
+	    *wp++ = (char) ((int)rp);
 	    rp = inp[++i];
 	    break;
 	  case 'd':
