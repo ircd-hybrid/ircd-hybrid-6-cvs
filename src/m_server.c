@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_server.c,v 1.5 1999/07/28 07:49:36 tomh Exp $
+ *   $Id: m_server.c,v 1.6 1999/07/29 02:34:20 tomh Exp $
  */
 #include "m_commands.h"  /* m_server prototype */
 #include "client.h"      /* client struct */
@@ -405,9 +405,6 @@ int m_server(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
   strncpy_irc(cptr->name, host, HOSTLEN);
   strncpy_irc(cptr->info, info[0] ? info : me.name, REALLEN);
   cptr->hopcount = hop;
-
-  if (IsHandshake(cptr))
-    return server_estab(cptr);
 
   if (check_server(cptr))
     return server_estab(cptr);
