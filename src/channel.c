@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.223 2001/12/08 02:27:54 db Exp $
+ * $Id: channel.c,v 1.224 2001/12/08 18:33:02 db Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -2827,6 +2827,7 @@ int     m_knock(struct Client *cptr,
 #ifdef USE_KNOCK
   struct Channel      *chptr;
   int knock_local = 0;
+  static time_t last_used=0;
 #endif
 
   /* anti flooding code,
