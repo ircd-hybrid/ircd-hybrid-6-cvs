@@ -18,7 +18,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *   $Id: s_conf.h,v 1.52 2001/07/18 01:37:06 lusky Exp $
+ *   $Id: s_conf.h,v 1.53 2001/08/05 17:04:18 leeh Exp $
  */
 
 #ifndef INCLUDED_config_h
@@ -241,6 +241,9 @@ extern char *oper_privs_as_string(struct Client *, int);
 extern int rehash_dump(struct Client *);
 extern int find_q_line(char*, char*, char *);
 extern struct ConfItem* find_special_conf(char *,int );
+extern struct ConfItem* is_klined(const char *host,
+                                  const char *name,
+				  unsigned long ip);
 extern struct ConfItem* find_is_klined(const char* host, 
                                        const char* name,
                                        unsigned long ip);

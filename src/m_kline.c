@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.59 2001/07/18 02:15:27 lusky Exp $
+ *   $Id: m_kline.c,v 1.60 2001/08/05 17:04:19 leeh Exp $
  */
 #include "m_commands.h"
 #include "m_kline.h"
@@ -684,7 +684,7 @@ m_kline(aClient *cptr,
     }
 
 #ifdef NON_REDUNDANT_KLINES
-  if( (aconf = find_matching_mtrie_conf(host,user,(unsigned long)ip)) )
+  if( (aconf = is_klined(host,user,(unsigned long)ip)) )
      {
        char *nrkreason;
 

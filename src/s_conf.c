@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.208 2001/07/19 01:50:38 bill Exp $
+ *  $Id: s_conf.c,v 1.209 2001/08/05 17:04:19 leeh Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -2795,6 +2795,37 @@ struct ConfItem *find_is_klined(const char* host, const char* name, unsigned lon
     return NULL;
 }
 
+/*
+ * is_klined()
+ *
+ * inputs	- hostname
+ *		- username
+ *		- ip of possible victim
+ * output	- matching struct or NULL
+ * side effects - NONE
+ */
+struct ConfItem *is_klined(const char *host,const char *name,
+                           unsigned long ip)
+{
+  struct ConfItem *found_aconf;
+
+  if( (found_aconf = find_tkline(host, name, ip)) )
+  {
+    sendto_realops("Temp Kline");
+    return(found_aconf);
+  }
+
+  found_aconf = find_matching_mtrie_conf(host, name, ip);
+  
+  if(found_aconf && (found_aconf->status & CONF_KILL))
+  {
+    sendto_realops("Perm Kline");
+    return(found_aconf);
+  }
+  else
+    return NULL;
+}
+  
 /* add_temp_kline
  *
  * inputs        - pointer to struct ConfItem
