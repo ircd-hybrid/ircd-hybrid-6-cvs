@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_stats.c,v 1.9 2000/12/31 00:12:00 lusky Exp $
+ *  $Id: m_stats.c,v 1.10 2001/06/04 05:10:42 db Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "class.h"       /* report_classes */
@@ -270,10 +270,6 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       valid_stats++;
       break;
 
-    case 'B' : case 'b' :
-      sendto_one(sptr,":%s NOTICE %s :Use stats I instead", me.name, parv[0]);
-      break;
-
     case 'D': case 'd':
       if (!IsAnOper(sptr))
         {
@@ -282,14 +278,6 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
         }
       report_dlines(sptr);
       valid_stats++;
-      break;
-
-    case 'E' : case 'e' :
-      sendto_one(sptr,":%s NOTICE %s :Use stats I instead", me.name, parv[0]);
-      break;
-
-    case 'F' : case 'f' :
-      sendto_one(sptr,":%s NOTICE %s :Use stats I instead", me.name, parv[0]);
       break;
 
     case 'G': case 'g' :
@@ -530,6 +518,14 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
                 );
         }
     }
+#else
+#ifdef STATS_P_NOTICE
+  if (stat == 'p')
+    sendto_realops_flags(FLAGS_SPY,
+                         "STATS p requested by %s (%s@%s) [%s]",
+                         sptr->name, sptr->username, sptr->host,
+                         sptr->user->server);
+#endif
 #endif
   return 0;
 }
