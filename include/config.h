@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.24 1999/01/31 20:17:08 chuegen Exp $
+ * $Id: config.h,v 1.25 1999/02/10 00:17:06 db Exp $
  */
 
 #ifndef	__config_include__
@@ -732,6 +732,16 @@
  * on the net gets less than 2, a split is deemed to have happened.
  */
 #define SPLIT_SMALLNET_SIZE 2
+
+/*
+ * SPLIT_SMALLNET_USER_SIZE defines how many global users on the
+ * net constitute a "normal" net size. It's used in conjunction
+ * with SPLIT_SMALLNET_SIZE to help determine the end of a split.
+ * if number of server seen on net > SPLIT_SMALLNET_SIZE &&
+ * number of users seen on net > SPLIT_SMALLNET_USER_SIZE start
+ * counting down the SERVER_SPLIT_RECOVERY_TIME
+ */
+#define SPLIT_SMALLNET_USER_SIZE 10000
 
 /*
  * DEFAULT_SERVER_SPLIT_RECOVERY_TIME - determines how long to delay split
