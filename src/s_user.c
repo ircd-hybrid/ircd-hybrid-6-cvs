@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.255 2003/06/12 23:53:06 ievil Exp $
+ *  $Id: s_user.c,v 1.256 2003/06/13 00:25:36 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -189,19 +189,33 @@ void show_opers(struct Client *cptr)
 
   for(cptr2 = oper_cptr_list; cptr2; cptr2 = cptr2->next_oper_client)
     {
-      if (!(cptr2->umodes & FLAGS_STATSPHIDE))
+      if (IsSetOperAdmin(cptr) || !(cptr2->umodes & FLAGS_STATSPHIDE)) 
         {
           ++j;
           if (MyClient(cptr) && IsAnOper(cptr))
             {
-              sendto_one(cptr, ":%s %d %s :[%c][%s] %s (%s@%s) Idle: %d",
-                         me.name, RPL_STATSDEBUG, cptr->name,
-                         IsOper(cptr2) ? 'O' : 'o',
-                         oper_privs_as_string(cptr2,
-                                              cptr2->confs->value.aconf->port),
-                         cptr2->name,
-                         cptr2->username, cptr2->host,
-                         CurrentTime - cptr2->user->last);
+              if (IsSetOperAdmin(cptr) && (cptr2->umodes & FLAGS_STATSPHIDE)) 
+                {
+                  sendto_one(cptr, ":%s %d %s :[%c][%s] %s (%s@%s) Idle: %d (hidden)",
+                             me.name, RPL_STATSDEBUG, cptr->name,
+                             IsOper(cptr2) ? 'O' : 'o',
+                             oper_privs_as_string(cptr2,
+                                                  cptr2->confs->value.aconf->port),
+                             cptr2->name,
+                             cptr2->username, cptr2->host,
+                             CurrentTime - cptr2->user->last);
+                } 
+              else 
+                {
+                  sendto_one(cptr, ":%s %d %s :[%c][%s] %s (%s@%s) Idle: %d",
+                            me.name, RPL_STATSDEBUG, cptr->name,
+                            IsOper(cptr2) ? 'O' : 'o',
+                            oper_privs_as_string(cptr2,
+                                                 cptr2->confs->value.aconf->port),
+                            cptr2->name,
+                            cptr2->username, cptr2->host,
+                            CurrentTime - cptr2->user->last);
+                }
             }
           else
             {
