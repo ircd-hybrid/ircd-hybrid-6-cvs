@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)send.c	2.32 2/28/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: send.c,v 1.22 1998/12/20 20:41:52 sean Exp $";
+static char *rcs_version = "$Id: send.c,v 1.23 1998/12/20 23:48:12 sean Exp $";
 #endif
 
 #include "struct.h"
@@ -588,6 +588,41 @@ va_dcl
 # endif
   return;
 }
+
+
+/* 
+** sendto_channel_type_notice()  - sends a message to all users on a channel who meet the
+** type criteria (chanop/voice/whatever).
+** message is also sent back to the sender if they have those privs.
+** used in knock/invite/privmsg@+/notice@+
+** -good
+*/
+void	sendto_channel_type_notice(aClient *from, aChannel *chptr, int type, char *message)
+{
+  register	Link	*lp;
+  register	aClient *acptr;
+  register	int	i;
+  
+  for (lp = chptr->members; lp; lp = lp->next)
+    {
+      if (!(lp->flags & type))
+	continue;
+
+      acptr = lp->value.cptr;
+
+      i = acptr->from->fd;
+      if (IsRegisteredUser(acptr))
+	{
+
+	  sendto_prefix_one(acptr, from, ":%s NOTICE %s :%s",
+			    from->name, 
+			    acptr->name, message);
+
+	}
+    }
+  return;
+}
+
 
 /*
  * sendto_serv_butone

@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.39 1998/12/20 17:58:55 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.40 1998/12/20 23:48:11 sean Exp $";
 
 #endif
 
@@ -2085,12 +2085,11 @@ static	int	m_message(aClient *cptr,
 		}
 	      return -1;
 	    }
-	  else
-	    sendto_channel_type(cptr, sptr, chptr, type,
-				":%s %s %s :%s",
-				parv[0], cmd,
-				nick,
+	  else {
+	    sendto_channel_type_notice(cptr, chptr, type,
 				parv[2]);
+
+	  }
 #ifdef ANTI_SPAMBOT_EXTRA
 	  if( MyConnect(sptr) && spambot_privmsg_count &&
 	      ((sptr->person_privmsgs - sptr->channel_privmsgs)
