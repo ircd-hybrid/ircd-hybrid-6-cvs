@@ -36,7 +36,7 @@ Typical usage:
 #define NO 0
 
 #ifndef lint
-static char *version="$Id: fixklines.c,v 1.2 1998/10/17 21:07:07 lusky Exp $";
+static char *version="$Id: fixklines.c,v 1.3 1999/06/08 04:18:10 lusky Exp $";
 #endif
 
 char linebuf[MAXLINE];
@@ -240,7 +240,7 @@ int host_is_legal_dline(char *host_name)
           else
             return(NO);
         }
-      else if(!isdigit(*host_name))
+      else if(!isdigit((int) *host_name))
         return(NO);
       host_name++;
     }

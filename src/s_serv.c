@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.100 1999/06/03 02:59:16 lusky Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.101 1999/06/08 04:18:08 lusky Exp $";
 #endif
 
 
@@ -1264,9 +1264,9 @@ int	m_server_estab(aClient *cptr)
 		(float)cptr->zip->out->total_in);
 #endif /* ZIP_LINKS */
 
-#if defined(SPLIT_PONG) && (defined(NO_CHANOPS_WHEN_SPLIT) || \
+#if defined(SPLIT_PONG) && ((defined(NO_CHANOPS_WHEN_SPLIT) || \
 	defined(PRESERVE_CHANNEL_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT)) \
-	|| defined(NO_JOIN_ON_SPLIT_SIMPLE)
+	|| defined(NO_JOIN_ON_SPLIT_SIMPLE))
   sendto_one(cptr, "PING :%s", me.name);
   if (server_was_split)
     got_server_pong = NO;

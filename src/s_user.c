@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.77 1999/06/03 02:59:16 lusky Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.78 1999/06/08 04:18:09 lusky Exp $";
 
 #endif
 
@@ -3509,9 +3509,9 @@ int	m_pong(aClient *cptr,
   cptr->flags &= ~FLAGS_PINGSENT;
   sptr->flags &= ~FLAGS_PINGSENT;
 
-#if defined(SPLIT_PONG) && (defined(NO_CHANOPS_WHEN_SPLIT) || \
+#if defined(SPLIT_PONG) && ((defined(NO_CHANOPS_WHEN_SPLIT) || \
 	defined(PRESERVE_CHANNEL_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT)) \
-	 || defined(NO_JOIN_ON_SPLIT_SIMPLE)
+	 || defined(NO_JOIN_ON_SPLIT_SIMPLE))
   if (IsServer(cptr))
     got_server_pong = YES;
 #endif
