@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.53 2003/08/16 19:10:45 ievil Exp $
+ *   $Id: parse.c,v 1.54 2003/10/13 14:51:35 ievil Exp $
  */
 #include "parse.h"
 #include "channel.h"
@@ -236,12 +236,12 @@ int parse(aClient *cptr, char *pbuffer, char *bufend)
 #ifdef NO_OPER_FLOOD
 #ifndef TRUE_NO_OPER_FLOOD
 /* note: both have to be defined for the real no-flood */
-          if (IsAnOper(cptr))
+          if (IsAnOper(cptr) || CanFlood(cptr)) 
             /* "randomly" (weighted) increase the since */
             cptr->since += (cptr->receiveM % 5) ? 1 : 0;
           else
 #else
-          if (!IsAnOper(cptr))
+          if (!IsAnOper(cptr) || !CanFlood(cptr))
 #endif
 #endif
             cptr->since += (2 + i / 120);

@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.74 2003/10/13 11:38:37 ievil Exp $
+ * $Id: client.h,v 1.75 2003/10/13 14:51:33 ievil Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -353,6 +353,7 @@ struct Client
 #define FLAGS2_B_LINED      0x0008      /* client is graced with B line */
 #define FLAGS2_F_LINED      0x0010      /* client is graced with F line */
 #define FLAGS2_EXEMPTGLINE  0x2000      /* client can't be G-lined */
+#define FLAGS2_CANFLOOD     0x10000000  /* client can flood */
 
 /* oper priv flags */
 #define FLAGS2_OPER_GLOBAL_KILL 0x00020  /* oper can global kill */
@@ -509,6 +510,8 @@ struct Client
 #define IsIPSpoof(x)            ((x)->flags2 & FLAGS2_IP_SPOOFING)
 #define SetIPHidden(x)          ((x)->flags2 |= FLAGS2_IP_HIDDEN)
 #define IsIPHidden(x)           ((x)->flags2 & FLAGS2_IP_HIDDEN)
+#define CanFlood(x)             ((x)->flags2 & FLAGS2_CANFLOOD)
+#define SetCanFlood(x)          ((x)->flags2 |= FLAGS2_CANFLOOD)
 
 #ifdef IDLE_CHECK
 #define SetIdlelined(x)         ((x)->flags2 |= FLAGS2_IDLE_LINED)

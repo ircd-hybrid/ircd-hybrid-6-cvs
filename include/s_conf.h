@@ -18,7 +18,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *   $Id: s_conf.h,v 1.68 2003/08/16 19:10:44 ievil Exp $
+ *   $Id: s_conf.h,v 1.69 2003/10/13 14:51:33 ievil Exp $
  */
 
 #ifndef INCLUDED_config_h
@@ -114,6 +114,7 @@ typedef struct QlineItem {
 #define CONF_FLAGS_E_LINED              0x0020
 #define CONF_FLAGS_F_LINED              0x0080
 #define CONF_FLAGS_EXEMPTGLINE          0x2000
+#define CONF_FLAGS_CANFLOOD             0x4000
 
 #ifdef IDLE_CHECK
 #define CONF_FLAGS_IDLE_LINED           0x0100
@@ -139,6 +140,7 @@ typedef struct QlineItem {
 #define IsConfElined(x)         ((x)->flags & CONF_FLAGS_E_LINED)
 #define IsConfFlined(x)         ((x)->flags & CONF_FLAGS_F_LINED)
 #define IsConfExemptGline(x)    ((x)->flags & CONF_FLAGS_EXEMPTGLINE)
+#define IsConfCanFlood(x)       ((x)->flags & CONF_FLAGS_CANFLOOD)
 
 #ifdef IDLE_CHECK
 #define IsConfIdlelined(x)      ((x)->flags & CONF_FLAGS_IDLE_LINED)

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.268 2003/10/13 11:38:39 ievil Exp $
+ *  $Id: s_user.c,v 1.269 2003/10/13 14:51:35 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -1121,6 +1121,13 @@ report_and_set_user_flags(aClient *sptr,aConfItem *aconf)
                  me.name,sptr->name);
     }
 #endif
+  if(IsConfCanFlood(aconf))
+    {
+      SetCanFlood(sptr);
+      sendto_one(sptr,
+                 ":%s NOTICE %s :*** You are exempt from flooding ratelimit. BEHAVE!",
+	         me.name,sptr->name);
+    }
 }
 
 /*

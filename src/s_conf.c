@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.249 2003/10/13 11:38:38 ievil Exp $
+ *  $Id: s_conf.c,v 1.250 2003/10/13 14:51:35 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -1853,6 +1853,9 @@ static char *set_conf_flags(struct ConfItem *aconf,char *tmp)
           aconf->flags |= CONF_FLAGS_IDLE_LINED;
           break;
 #endif
+         case '|':      /* can flood */
+	   aconf->flags |= CONF_FLAGS_CANFLOOD;
+	   break;
         default:
           return tmp;
         }
