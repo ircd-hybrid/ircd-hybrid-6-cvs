@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.46 1998/12/20 06:51:10 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.47 1998/12/20 19:07:50 db Exp $";
 #endif
 
 #include "struct.h"
@@ -3057,7 +3057,8 @@ int	m_knock(aClient *cptr,
   sendto_channel_type(cptr, sptr, chptr, MODE_CHANOP,
 		      ":%s NOTICE %s :%s has knocked on the channel door.",
 		      sptr->name,
-		      chptr->chname, parv[0]);
+		      chptr->chname,
+		      sptr->name);
   return 0;
 }
 
