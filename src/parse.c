@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.13 1999/07/12 06:30:35 tomh Exp $
+ *   $Id: parse.c,v 1.14 1999/07/17 07:55:58 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -30,11 +30,8 @@
 #include "send.h"
 #include "hash.h"
 
-#if defined( HAVE_STRING_H )
 #include <string.h>
-#else
-#include <strings.h>
-#endif
+#include <stdlib.h>
 
 /*
  * NOTE: parse() should not be called recursively by other functions!

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.139 1999/07/17 02:32:00 db Exp $
+ *  $Id: s_user.c,v 1.140 1999/07/17 07:56:00 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -36,10 +36,6 @@
 #include "send.h"
 #include "hash.h"
 #include "listener.h"
-
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <assert.h>
 #ifdef FLUD
 #include "blalloc.h"
 #endif /* FLUD */
@@ -47,14 +43,12 @@
 #include "dbuf.h"
 #endif
 
-#ifndef __EMX__
-#include <utmp.h>
-#endif /* __EMX__ */
-#if defined( HAVE_STRING_H)
 #include <string.h>
-#else
-#include <strings.h>
-#endif
+#include <stdlib.h>
+#include <fcntl.h>
+#include <assert.h>
+#include <time.h>
+#include <sys/stat.h>
 
 extern ConfigFileEntryType ConfigFileEntry; /* defined in ircd.c */
 

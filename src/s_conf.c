@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.125 1999/07/17 03:23:18 db Exp $
+ *  $Id: s_conf.c,v 1.126 1999/07/17 07:55:59 tomh Exp $
  */
 #include "s_conf.h"
 #include "listener.h"
@@ -34,14 +34,13 @@
 #include "s_bsd.h"
 #include "send.h"
 
-#if defined(AIX) || defined(DYNIXPTX) || defined(SVR3)
-#include <time.h>
-#endif
 #include <string.h>
-#include <netdb.h>
+#include <stdlib.h>
+#include <time.h>
 #include <signal.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <netdb.h>
 #include <fcntl.h>
 #include <assert.h>
 

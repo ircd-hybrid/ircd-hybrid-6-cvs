@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.144 1999/07/16 22:56:38 db Exp $
+ *   $Id: s_serv.c,v 1.145 1999/07/17 07:56:00 tomh Exp $
  */
 
 #define CAPTAB
@@ -45,14 +45,9 @@
 #include "hash.h"
 #include "s_debug.h"
 
-#ifndef __EMX__
-#include <utmp.h> /* old slackware utmp.h defines BYTE_ORDER */
-#endif /* __EMX__ */
-#if defined(AIX) || defined(DYNIXPTX) || defined(SVR3)
-#include <time.h>
-#endif
-
 #include <string.h>
+#include <stdlib.h>
+#include <time.h>
 
 /* external variables */
 

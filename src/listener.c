@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: listener.c,v 1.5 1999/07/17 02:46:32 tomh Exp $
+ *  $Id: listener.c,v 1.6 1999/07/17 07:55:56 tomh Exp $
  */
 #include "listener.h"
 #include "s_bsd.h"
@@ -184,6 +184,9 @@ static struct Listener* find_listener(int port, struct in_addr addr)
   
 /*
  * add_listener- create a new listener 
+ * port - the port number to listen on
+ * vhost_ip - if non-null must contain a valid IP address string in
+ * the format "255.255.255.255"
  */
 void add_listener(int port, const char* vhost_ip) 
 {

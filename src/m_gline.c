@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.17 1999/07/17 03:29:07 db Exp $
+ *  $Id: m_gline.c,v 1.18 1999/07/17 07:55:56 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -35,23 +35,10 @@
 #include "mtrie_conf.h"
 
 #include <assert.h>
-
-#ifndef __EMX__
-#include <utmp.h> /* old slackware utmp.h defines BYTE_ORDER */
-#endif /* __EMX__ */
-
-#if defined(AIX) || defined(DYNIXPTX) || defined(SVR3)
-#include <time.h>
-#endif
-#include <fcntl.h>
-#if defined( HAVE_STRING_H )
 #include <string.h>
-#else
-/* older unices don't have strchr/strrchr .. help them out */
-#include <strings.h>
-#undef strchr
-#define strchr index
-#endif
+#include <stdlib.h>
+#include <time.h>
+#include <fcntl.h>
 
 
 #ifdef GLINES

@@ -16,12 +16,14 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.63 1999/07/17 04:04:07 db Exp $
+ * $Id: config.h,v 1.64 1999/07/17 07:55:50 tomh Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
-
+#ifndef INCLUDED_setup_h
 #include "setup.h"
+#define INCLUDED_setup_h
+#endif
 
 /* PLEASE READ SECTION:
  *
@@ -62,8 +64,6 @@
 #define HARD_FDLIMIT	(HARD_FDLIMIT_ - 10)
 #define MASTER_MAX	(HARD_FDLIMIT - MAX_BUFFER)
 /*******************************************************************/
-
-#include "defs.h"
 
 /* DPATH SPATH CPATH MPATH KPATH - directoy and files locations
  * Full pathnames and defaults of irc system's support files. Please note that

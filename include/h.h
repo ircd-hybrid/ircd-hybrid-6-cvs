@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.40 1999/07/17 04:04:08 db Exp $
+ * $Id: h.h,v 1.41 1999/07/17 07:55:51 tomh Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -101,6 +101,7 @@ extern  char    *find_or_add(char *);
 extern  void    count_scache(int *,u_long *);
 extern  void    list_scache(aClient *, aClient *,int, char **);
 
+extern void     dummy(int signo);
 extern void*    MyMalloc(size_t size);
 extern void*    MyRealloc(void* p, size_t size);
 /* MyFree is defined as a macro in ircd_defs.h */

@@ -34,7 +34,7 @@
  *		  mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.111 1999/07/16 22:56:38 db Exp $
+ * $Id: channel.c,v 1.112 1999/07/17 07:55:53 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -46,6 +46,7 @@
 #include "hash.h"
 
 #include <string.h>
+#include <stdlib.h>
 
 #ifdef NEED_SPLITCODE
 int server_was_split=YES;

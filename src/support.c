@@ -16,20 +16,16 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: support.c,v 1.7 1999/07/15 08:47:43 tomh Exp $
+ *  $Id: support.c,v 1.8 1999/07/17 07:56:01 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
 #include "sys.h"
 #include "h.h"
+
 #include <string.h>
-
+#include <stdlib.h>
 #include <errno.h>
-#if 0
-extern	int errno; /* ...seems that errno.h doesn't define this everywhere */
-#endif
-
-#define FOREVER for(;;)
 
 #if !defined( HAVE_STRTOKEN )
 /*
@@ -37,7 +33,6 @@ extern	int errno; /* ...seems that errno.h doesn't define this everywhere */
 **			of separators
 **			argv 9/90
 **
-**	$Id: support.c,v 1.7 1999/07/15 08:47:43 tomh Exp $
 */
 
 char *strtoken(save, str, fs)
@@ -91,7 +86,7 @@ char *str, *fs;
 **	strerror - return an appropriate system error string to a given errno
 **
 **		   argv 11/90
-**	$Id: support.c,v 1.7 1999/07/15 08:47:43 tomh Exp $
+**	$Id: support.c,v 1.8 1999/07/17 07:56:01 tomh Exp $
 */
 
 char *strerror(int err_no)
@@ -193,7 +188,7 @@ char	*in;
 /*
 **	inet_netof --	return the net portion of an internet number
 **			argv 11/90
-**	$Id: support.c,v 1.7 1999/07/15 08:47:43 tomh Exp $
+**	$Id: support.c,v 1.8 1999/07/17 07:56:01 tomh Exp $
 **
 */
 

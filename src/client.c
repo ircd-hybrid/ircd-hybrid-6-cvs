@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.10 1999/07/17 01:07:09 db Exp $
+ *  $Id: client.c,v 1.11 1999/07/17 07:55:54 tomh Exp $
  */
 #include "client.h"
 #include "struct.h"
@@ -36,11 +36,14 @@
 #include "hash.h"
 
 #include <assert.h>
-#include <sys/stat.h>
-#include <sys/time.h>
 #include <fcntl.h>
 #include <netdb.h>
 #include <string.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#if 0
+#include <sys/time.h>
+#endif
 
 /* 
  * Number of aClient structures to preallocate at a time

@@ -20,11 +20,8 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.22 1999/07/17 04:44:17 db Exp $
+ *   $Id: m_kline.c,v 1.23 1999/07/17 07:55:56 tomh Exp $
  */
-
-#include <signal.h>
-#include <fcntl.h>
 
 #include "struct.h"
 #include "common.h"
@@ -35,27 +32,15 @@
 #include "s_conf.h"
 #include "class.h"
 #include "send.h"
-
-#include "m_kline.h"
-
-#ifndef __EMX__
-#include <utmp.h> /* old slackware utmp.h defines BYTE_ORDER */
-#endif /* __EMX__ */
-
-#if defined(AIX) || defined(DYNIXPTX) || defined(SVR3)
-#include <time.h>
-#endif
 #include "h.h"
-#if defined( HAVE_STRING_H )
-#include <string.h>
-#else
-/* older unices don't have strchr/strrchr .. help them out */
-#include <strings.h>
-#undef strchr
-#define strchr index
-#endif
+#include "m_kline.h"
 #include "dline_conf.h"
 #include "mtrie_conf.h"
+
+#include <stdlib.h>
+#include <signal.h>
+#include <fcntl.h>
+#include <string.h>
 
 extern int rehashed;
 extern int dline_in_progress;	/* defined in ircd.c */

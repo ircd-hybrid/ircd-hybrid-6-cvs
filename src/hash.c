@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: hash.c,v 1.20 1999/07/15 08:47:35 tomh Exp $
+ *  $Id: hash.c,v 1.21 1999/07/17 07:55:55 tomh Exp $
  */
 #include "hash.h"
 #include "struct.h"
@@ -30,6 +30,8 @@
 #include <assert.h>
 #include <fcntl.h>     /* O_RDWR ... */
 #include <string.h>
+#include <stdlib.h>
+#include <time.h>
 #include <sys/stat.h>
 
 /* New hash code */
