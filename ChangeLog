@@ -1,3 +1,16 @@
+ievil       2005/03/25 06:19:12 EST	(20050325_0)
+
+  Modified files:
+    src                  s_misc.c 
+  Log:
+  Updated 005 reply to send back ETRACE and SINFO. No longer breaks OOMON
+  gecos info search.
+  
+  Revision  Changes    Path
+  1.82      +1 -1      ircd-hybrid-6/src/s_misc.c
+
+
+
 lusky       2004/12/05 23:03:24 EST	(20041206_0)
 
   Modified files:
