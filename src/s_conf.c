@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.226 2001/12/04 16:27:35 db Exp $
+ *  $Id: s_conf.c,v 1.227 2001/12/04 16:31:30 db Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -3545,7 +3545,7 @@ void get_printable_conf(struct ConfItem *aconf, char **name, char **host,
   *name = BadPtr(aconf->name) ? null : aconf->name;
   *host = BadPtr(aconf->host) ? null : aconf->host;
   *pass = BadPtr(aconf->passwd) ? null : aconf->passwd;
-  *oper_reason = BadPtr(aconf->oper_reason) ? "" : aconf->passwd;
+  *oper_reason = BadPtr(aconf->oper_reason) ? "" : aconf->oper_reason;
   *user = BadPtr(aconf->user) ? null : aconf->user;
   *port = (int)aconf->port;
 }
