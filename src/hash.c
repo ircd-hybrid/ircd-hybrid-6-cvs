@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: hash.c,v 1.25 1999/07/20 08:20:35 db Exp $
+ *  $Id: hash.c,v 1.26 1999/07/20 13:52:18 sean Exp $
  */
 #include "s_conf.h"
 #include "hash.h"
@@ -38,11 +38,6 @@
 /*
  * Contributed by James L. Davis
  */
-struct HashEntry {
-  int    hits;
-  int    links;
-  void*  list;
-};
 
 #ifdef  DEBUGMODE
 static struct HashEntry* clientTable = NULL;
@@ -57,6 +52,11 @@ static struct HashEntry clientTable[U_MAX];
 static struct HashEntry channelTable[CH_MAX];
 
 #endif
+
+struct HashEntry hash_get_channel_block(int i)
+{
+  return channelTable[i];
+}
 
 size_t hash_get_channel_table_size(void)
 {
