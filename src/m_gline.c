@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.52 2003/05/04 22:49:28 ievil Exp $
+ *  $Id: m_gline.c,v 1.53 2003/10/13 11:26:43 ievil Exp $
  */
 #include "m_commands.h"
 #include "m_gline.h"
@@ -556,6 +556,15 @@ static void log_gline(aClient *sptr,
   if (safe_write(sptr,filenamebuf,out,buffer))
     return;
 
+  if (strchr(host, ':'))
+    ircsprintf(buffer, "# IPv6 Host, invalid (%s@%s) [%s]", user,host,
+#ifdef GLINE_REASON_FIRST
+               gline_pending_ptr->reason1
+#else
+               reason
+#endif
+               );
+  else
   ircsprintf(buffer, "K:%s:%s:%s\n", host,user,
 #ifdef GLINE_REASON_FIRST
                    gline_pending_ptr->reason1
@@ -876,6 +885,24 @@ static void expire_pending_glines()
           else
             pending_glines = gline_pending_ptr->next;
 
+	  sendto_realops("G-Line for [%s@%s] untriggered for %d seconds -- removing.",
+	                  gline_pending_ptr->user, gline_pending_ptr->host, GLINE_PENDING_EXPIRE);
+          tmp_pending_ptr = gline_pending_ptr;
+          gline_pending_ptr = gline_pending_ptr->next;
+          MyFree(tmp_pending_ptr->reason1);
+          MyFree(tmp_pending_ptr->reason2);
+          MyFree(tmp_pending_ptr);
+        }
+      else if( find_is_glined(gline_pending_ptr->host, gline_pending_ptr->user))
+        {
+          /* Expire any pending GLINE's if they were triggered and set. */
+          if(last_gline_pending_ptr)
+            last_gline_pending_ptr->next = gline_pending_ptr->next;
+          else
+            pending_glines = gline_pending_ptr->next;
+
+          sendto_realops("G-Line requests for [%s@%s] allready triggered -- removing.",
+	                 gline_pending_ptr->user, gline_pending_ptr->host);
           tmp_pending_ptr = gline_pending_ptr;
           gline_pending_ptr = gline_pending_ptr->next;
           MyFree(tmp_pending_ptr->reason1);
@@ -978,7 +1005,8 @@ static int majority_gline(aClient *sptr,
               (irccmp(gline_pending_ptr->oper_server1,oper_server) == 0) )
             {
               /* This oper or server has already "voted" */
-              sendto_realops("oper or server has already voted");
+              sendto_realops("oper or server has already voted [%s!%s@%s] on %s"
+	                     oper_nick, oper_user, oper_host, oper_server);
               return NO;
             }
 
@@ -991,7 +1019,8 @@ static int majority_gline(aClient *sptr,
                   (irccmp(gline_pending_ptr->oper_server2,oper_server)==0))
                 {
                   /* This oper or server has already "voted" */
-                  sendto_realops("oper or server has already voted");
+                  sendto_realops("oper or server has already voted [%s!%s@%s] on %s"
+		                 oper_nick, oper_user, oper_host, oper_server);
                   return NO;
                 }
 
