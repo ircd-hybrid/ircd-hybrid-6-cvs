@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.26 1998/11/12 03:56:32 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.27 1998/11/13 21:49:25 db Exp $";
 #endif
 
 
@@ -1332,13 +1332,8 @@ int	m_info(aClient *cptr,
 #else
 #define OUT2 " CLIENT_FLOOD=0"
 #endif
-#ifdef CLIENT_SERVER
-#define OUT3 " CLIENT_SERVER=1"
-#else
-#define OUT3 " CLIENT_SERVER=0"
-#endif
 	sendto_one(sptr, rpl_str(RPL_INFO),
-		me.name, parv[0], OUT1 OUT2 OUT3);
+		me.name, parv[0], OUT1 OUT2 );
 #undef OUT1
 #undef OUT2
 #undef OUT3
@@ -1680,23 +1675,13 @@ int	m_info(aClient *cptr,
 #undef OUT3
 #undef OUT4
 
-#ifdef SUNDBE
-#define OUT1 "SUNDBE=1"
-#else
-#define OUT1 "SUNDBE=0"
-#endif
-#ifdef SUN_GSO_BUG
-#define OUT2 " SUN_GSO_BUG=1"
-#else
-#define OUT2 " SUN_GSO_BUG=0"
-#endif
 #ifdef TIMED_KLINES
-#define OUT3 " TIMED_KLINES=1"
+#define OUT1 "TIMED_KLINES=1"
 #else
-#define OUT3 " TIMED_KLINES=0"
+#define OUT1 "TIMED_KLINES=0"
 #endif
 	sendto_one(sptr, rpl_str(RPL_INFO),
-		me.name, parv[0], OUT1 OUT2 OUT3 );
+		me.name, parv[0], OUT1 );
 
 #undef OUT1
 #undef OUT2
