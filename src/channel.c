@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.217 2001/10/25 16:28:15 leeh Exp $
+ * $Id: channel.c,v 1.218 2001/11/15 17:52:14 leeh Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -1349,14 +1349,15 @@ void set_channel_mode(struct Client *cptr,
           if (len + tmp + 2 >= MODEBUFLEN)
             break;
 
+#ifndef CHANMODE_E
+	  if(whatt == MODE_ADD)
+	    break;
+#endif
+
           if (!(((whatt & MODE_ADD) && !add_exceptid(sptr, chptr, arg)) ||
                 ((whatt & MODE_DEL) && !del_exceptid(chptr, arg))))
             break;
 
-#ifndef CHANMODE_E
-	  if(whatt == MODE_ADD)
-	    break;
-#endif	    
           /* This stuff can go back in when all servers understand +e 
            * with the pbufw_new nonsense removed -Dianora
            */
