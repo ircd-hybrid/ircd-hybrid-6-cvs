@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.54 1998/12/24 06:29:38 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.55 1998/12/24 21:48:52 db Exp $";
 #endif
 
 #include "struct.h"
@@ -3295,7 +3295,7 @@ int	m_invite(aClient *cptr,
 	  if(acptr->user)
 	    {
 	      (void)ircsprintf(message,
-		      ":INVITE: %s (%s invited %s [%s@%s])",
+		      "INVITE: %s (%s invited %s [%s@%s])",
 				chptr->chname,
 				sptr->name,
 				acptr->name,
