@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.34 1998/12/08 04:08:41 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.35 1998/12/08 23:51:33 db Exp $";
 
 #endif
 
@@ -1957,6 +1957,11 @@ static	int	m_message(aClient *cptr,
   */
   if ((acptr = find_person(nick, NULL)))
     {
+#ifdef	IDLE_CHECK
+      /* reset idle time for message only if target exists */
+      if(MyClient(sptr) && sptr->user)
+	sptr->user->last = timeofday;
+#endif
 #ifdef ANTI_SPAMBOT_EXTRA
       if(MyConnect(sptr) && !IsElined(sptr) &&
 	 (acptr != sptr->last_client_messaged))
@@ -2019,15 +2024,6 @@ static	int	m_message(aClient *cptr,
 #endif
       return 0;
     }
-#ifdef	IDLE_CHECK
-  else
-    {
-      /* reset idle time for message only if target exists */
-      if(sptr->user)
-	sptr->user->last = timeofday;
-      return 0;
-    }
-#endif
 
   /*
   ** channel msg?
@@ -2065,6 +2061,11 @@ static	int	m_message(aClient *cptr,
 
       if (chptr = find_channel(nick, NullChn))
 	{
+#ifdef	IDLE_CHECK
+	  /* reset idle time for message only if target exists */
+	  if(MyClient(sptr) && sptr->user)
+	    sptr->user->last = timeofday;
+#endif
 #ifdef ANTI_SPAMBOT_EXTRA
 	  if(MyConnect(sptr) && !IsElined(sptr))
 	    sptr->channel_privmsgs++;
@@ -2117,6 +2118,11 @@ static	int	m_message(aClient *cptr,
 
   if (IsPerson(sptr) && (chptr = find_channel(nick, NullChn)))
     {
+#ifdef	IDLE_CHECK
+      /* reset idle time for message only if target exists */
+      if(MyClient(sptr) && sptr->user)
+	sptr->user->last = timeofday;
+#endif
 #ifdef ANTI_SPAMBOT_EXTRA
       if(MyConnect(sptr) && !IsElined(sptr))
 	sptr->channel_privmsgs++;
@@ -2162,6 +2168,11 @@ static	int	m_message(aClient *cptr,
   */
   if ((*nick == '$' || *nick == '#') && IsAnOper(sptr))
     {
+#ifdef	IDLE_CHECK
+      /* reset idle time for message only if target exists */
+      if(MyClient(sptr) && sptr->user)
+	sptr->user->last = timeofday;
+#endif
       if (!(s = (char *)strrchr(nick, '.')))
 	{
 	  sendto_one(sptr, err_str(ERR_NOTOPLEVEL),
