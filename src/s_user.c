@@ -25,7 +25,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.21 1998/11/20 22:16:23 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.22 1998/11/23 04:16:09 db Exp $";
 
 #endif
 
@@ -1342,7 +1342,7 @@ int	m_nick(aClient *cptr,
     *s = '\0';
   strncpyzt(nick, parv[1], NICKLEN+1);
 
-  if(MyClient(sptr) &&
+  if(MyConnect(sptr) &&
      !IsAnOper(sptr) && find_special_conf(nick,CONF_QUARANTINED_NICK)) 
     {
       sendto_realops("Quarantined nick [%s], dumping user %s",
