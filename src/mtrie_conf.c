@@ -43,7 +43,7 @@
  *
  * Diane Bruce -db (db@db.net)
  *
- * $Id: mtrie_conf.c,v 1.90 2003/05/04 17:52:45 db Exp $
+ * $Id: mtrie_conf.c,v 1.91 2003/05/15 04:14:19 db Exp $
  */
 #include "mtrie_conf.h"
 #include "class.h"
@@ -80,7 +80,11 @@ static struct ConfItem *find_wild_host_piece(DOMAIN_LEVEL *,int,char *,
 static void find_or_add_user_piece(DOMAIN_PIECE *,struct ConfItem *,int,char *);
 static struct ConfItem *find_user_piece(DOMAIN_PIECE *,int,char *, const char* user);
 
+static struct ConfItem* look_for_dup_in_unsortable_ilines(const char* host,
+const char* user);
 static struct ConfItem* look_in_unsortable_ilines(const char* host, const char* user);
+static struct ConfItem* look_for_dup_in_unsortable_klines(const char* host,
+const char* user);
 static struct ConfItem* look_in_unsortable_klines(const char* host, const char* user);
 static struct ConfItem* find_wild_card_iline(const char* user);
 
@@ -117,6 +121,7 @@ add_mtrie_conf_entry(struct ConfItem *aconf,int flags)
   char tokenized_host[HOSTLEN+1];
   unsigned long ip_host;
   unsigned long ip_mask;
+  struct ConfItem *aconf2;
 
   /* Sanity tests are always good */
   if(!aconf->host || !aconf->user)
@@ -146,6 +151,13 @@ add_mtrie_conf_entry(struct ConfItem *aconf,int flags)
 
       if(aconf->status & CONF_CLIENT)
         {
+          aconf2 = look_for_dup_in_unsortable_ilines(aconf->host, aconf->user);
+          if (aconf2 != NULL)
+            {
+              report_dup('I', aconf2);
+              free(aconf);
+              return;
+            }
           if(unsortable_list_ilines)
             {
               aconf->next = unsortable_list_ilines;
@@ -156,6 +168,16 @@ add_mtrie_conf_entry(struct ConfItem *aconf,int flags)
         }
       else
         {
+          /* This is a CPU hit, but it prevents a mess of duplicate unsortable
+           * klines. -Hwy
+           */
+          aconf2 = look_for_dup_in_unsortable_klines(aconf->host, aconf->user);
+          if (aconf2 != NULL)
+            {
+              report_dup('K', aconf2);
+              free(aconf);
+              return;
+            }
           if(unsortable_list_klines)
             {
               aconf->next = unsortable_list_klines;
@@ -170,6 +192,13 @@ add_mtrie_conf_entry(struct ConfItem *aconf,int flags)
     case -2:
       if(aconf->status & CONF_CLIENT)
         {
+          aconf2 = find_wild_card_iline(aconf->user);
+          if (aconf2 != NULL)
+            {
+              report_dup('I', aconf2);
+              free(aconf);
+              return;
+            }
           if(wild_card_ilines)
             {
               aconf->next = wild_card_ilines;
@@ -180,6 +209,16 @@ add_mtrie_conf_entry(struct ConfItem *aconf,int flags)
         }
       else
         {
+          /* This is a CPU hit, but it prevents a mess of duplicate unsortable
+           * klines. -Hwy
+           */
+          aconf2 = look_for_dup_in_unsortable_klines(aconf->host, aconf->user);
+          if (aconf2 != NULL)
+            {
+              report_dup('K', aconf2);
+              free(aconf);
+              return;
+            }
           if(unsortable_list_klines)
             {
               aconf->next = unsortable_list_klines;
@@ -1095,6 +1134,33 @@ look_in_unsortable_ilines(const char* host, const char* user)
 }
 
 /*
+ * look_in_unsortable_ilines()
+ *
+ * inputs       - host name
+ *              - username
+ * output       - struct ConfItem pointer or NULL
+ * side effects -
+ *
+ * scan the link list of unsortable patterns
+ */
+            
+static struct ConfItem *
+look_for_dup_in_unsortable_ilines(const char* host, const char* user)
+{
+  struct ConfItem *found_conf;
+
+  for(found_conf=unsortable_list_ilines;found_conf;found_conf=found_conf->next)
+    {
+      if((irccmp(found_conf->host,host) == 0) &&
+         (irccmp(found_conf->user,user) == 0))
+        {
+            return(found_conf);
+        }
+    }
+  return(NULL);
+}
+
+/*
  * look_in_unsortable_klines()
  *
  * inputs       - host name
@@ -1114,6 +1180,31 @@ look_in_unsortable_klines(const char* host, const char* user)
     {
       if(match(found_conf->host,host) &&
          match(found_conf->user,user))
+        return(found_conf);
+    }
+  return(NULL);
+}
+
+/*
+ * look_for_dup_in_unsortable_klines()
+ *
+ * inputs       - host name   
+ *              - username
+ * output       - struct ConfItem pointer or NULL
+ * side effects -
+ *
+ * scan the link list of unsortable patterns
+ */
+  
+static struct ConfItem *
+look_for_dup_in_unsortable_klines(const char* host, const char* user)
+{
+  struct ConfItem *found_conf;
+
+  for(found_conf=unsortable_list_klines;found_conf;found_conf=found_conf->next)
+    {
+      if((irccmp(found_conf->host,host) == 0) &&
+         (irccmp(found_conf->user,user) == 0))
         return(found_conf);
     }
   return(NULL);
@@ -1361,7 +1452,8 @@ void report_mtrie_conf_links(struct Client *sptr, int flags)
       for(found_conf = unsortable_list_klines;
           found_conf;found_conf=found_conf->next)
         {
-          get_printable_conf(found_conf, &name, &host, &pass, &user, &port);
+          get_printable_conf(found_conf, &name, &host, &pass,
+                                    &user, &port);
 
 	  sendto_one(sptr, form_str(RPL_STATSKLINE), me.name,
 		     sptr->name, 'K', host,
@@ -1400,6 +1492,12 @@ char *show_iline_prefix(struct Client *sptr,struct ConfItem *aconf,char *name)
     *prefix_ptr++ = '%';
   if (IsConfDoSpoofIp(aconf))
     *prefix_ptr++ = '=';
+  if (IsMustResolve(aconf))
+    *prefix_ptr++ = '/';
+#ifdef CHECK_CLONE
+  if (IsConfCloneExempt(aconf))
+    *prefix_ptr++ = '{';
+#endif
 
 #ifdef E_LINES_OPER_ONLY
   if(IsAnOper(sptr))
