@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.91 1999/07/04 22:42:30 db Exp $
+ *  $Id: s_conf.c,v 1.92 1999/07/04 23:16:29 db Exp $
  */
 #include "s_conf.h"
 #include "class.h"
@@ -2794,9 +2794,9 @@ int get_oper_privs(int int_privs,char *privs)
       else if(*privs == 'h')		/* disallow rehash */
 	int_privs &= ~CONF_OPER_REHASH;
       else if(*privs == 'D')
-	int_privs &= CONF_OPER_DIE;	/* allow die */
+	int_privs |= CONF_OPER_DIE;	/* allow die */
       else if(*privs == 'd')
-	int_privs &= CONF_OPER_DIE; 	/* disallow die */
+	int_privs &= ~CONF_OPER_DIE; 	/* disallow die */
       privs++;
     }
 
