@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.213 2001/08/10 08:02:28 leeh Exp $
+ * $Id: channel.c,v 1.214 2001/08/10 13:59:14 leeh Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -1620,6 +1620,8 @@ void set_channel_mode(struct Client *cptr,
                   sendto_realops("%s!%s@%s locally unjuping channel %s",
                                  sptr->name, sptr->username,
                                  sptr->host, chptr->chname);
+		  if(chptr->users == 0)
+		    sub1_from_channel(chptr);
                 }
             }
           break;
