@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_zip.c,v 1.22 2000/10/06 03:00:59 lusky Exp $
+ *   $Id: s_zip.c,v 1.23 2000/11/08 06:00:27 lusky Exp $
  */
 #include "s_zip.h"
 #include "client.h"
@@ -311,7 +311,7 @@ char *zip_buffer(aClient *cptr, char *buffer, int *length, int flush)
   if (buffer)
     {
       /* concatenate buffer in cptr->zip->outbuf */
-      memcpy((void *)cptr->zip->outbuf + cptr->zip->outcount, (void *)buffer,
+      memcpy((void *)(cptr->zip->outbuf + cptr->zip->outcount), (void *)buffer,
              *length );
       cptr->zip->outcount += *length;
     }
