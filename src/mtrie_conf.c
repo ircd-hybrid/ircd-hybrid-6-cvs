@@ -43,7 +43,7 @@
  *
  * Diane Bruce -db (db@db.net)
  *
- * $Id: mtrie_conf.c,v 1.68 2000/06/26 22:38:42 lusky Exp $
+ * $Id: mtrie_conf.c,v 1.69 2000/08/22 03:34:41 lusky Exp $
  */
 #include "mtrie_conf.h"
 #include "class.h"
@@ -894,7 +894,10 @@ static aConfItem *find_sub_mtrie(DOMAIN_LEVEL *cur_level,
   else
     {
       if((aconf = find_user_piece(cur_piece,flags,cur_dns_piece,user)))
-        return(aconf);
+      {
+        if (match(aconf->host,host))
+          return(aconf);
+      }
       if((aconf = find_wild_host_piece(cur_level,flags,cur_dns_piece,user)))
         return(aconf);
       return(last_found_iline_aconf);
