@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.38 1999/07/26 05:46:35 tomh Exp $
+ * $Id: s_conf.h,v 1.39 1999/07/27 00:51:53 tomh Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.39  1999/07/27 00:51:53  tomh
+ * more connect cleanups
+ *
  * Revision 1.38  1999/07/26 05:46:35  tomh
  * new functions for s_conf cleaning up connect
  *
@@ -326,7 +329,8 @@ extern void             read_conf_files(int cold);
 extern struct DNSReply* conf_dns_lookup(struct ConfItem* aconf);
 extern int              attach_conf(struct Client*, struct ConfItem *);
 extern struct ConfItem* attach_confs(struct Client*, char *, int);
-extern struct ConfItem* attach_confs_host(struct Client*, char *, int);
+extern int              attach_cn_lines(struct Client* client, 
+                                        const char* host);
 extern int              attach_Iline(struct Client* client, 
                                      struct hostent* hp,
                                      const char* sockname, 
