@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.71 2001/12/14 16:56:36 db Exp $
+ *   $Id: m_kline.c,v 1.72 2001/12/15 02:42:04 db Exp $
  */
 #include "m_commands.h"
 #include "m_kline.h"
@@ -764,7 +764,8 @@ m_kline(struct Client *cptr,
       if ((p = strchr(reason, '|')) != NULL)
 	{
 	  *p = '\0';
-	  oper_reason = p+1;
+	  p++;
+	  oper_reason = p;
 	}
     }
 
@@ -776,8 +777,6 @@ m_kline(struct Client *cptr,
 		 reason,
 		 current_date);
       DupString(aconf->passwd, buffer );
-      if (oper_reason != NULL)
-	DupString(aconf->oper_reason, oper_reason);
 
       aconf->hold = CurrentTime + temporary_kline_time_seconds;
       if(ip_kline)
@@ -801,8 +800,6 @@ m_kline(struct Client *cptr,
     {
       ircsprintf(buffer, "%s (%s)", reason, current_date);
       DupString(aconf->passwd, buffer);
-      if (oper_reason != NULL)
-	DupString(aconf->oper_reason, oper_reason);
     }
   ClassPtr(aconf) = find_class(0);
 
@@ -1213,7 +1210,8 @@ m_dline(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
   if ((p = strchr(reason, '|')) != NULL)
     {
       *p = '\0';
-      oper_reason = p+1;
+      p++;
+      oper_reason = p;
     }
 
   if((ip_mask & 0xFFFFFF00) ^ 0xFFFFFF00)
@@ -1255,8 +1253,6 @@ m_dline(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
   aconf->status = CONF_DLINE;
   DupString(aconf->host,host);
   DupString(aconf->passwd,buffer);
-  if (oper_reason != NULL)
-    DupString(aconf->oper_reason, oper_reason);
 
   aconf->ip = ip_host;
   aconf->ip_mask = ip_mask;

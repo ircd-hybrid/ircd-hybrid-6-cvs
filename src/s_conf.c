@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.231 2001/12/14 16:56:36 db Exp $
+ *  $Id: s_conf.c,v 1.232 2001/12/15 02:42:04 db Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -228,7 +228,6 @@ free_conf(struct ConfItem* aconf)
   if (aconf->passwd)
     memset(aconf->passwd, 0, strlen(aconf->passwd));
   MyFree(aconf->passwd);
-  MyFree(aconf->oper_reason);
   MyFree(aconf->user);
   MyFree(aconf->name);
   MyFree((char*) aconf);
@@ -2137,8 +2136,6 @@ static void initconf(FBFILE* file, int use_include)
 	  {
 	    *p = '\0';
 	    DupString(aconf->passwd, tmp);
-	    DupString(aconf->oper_reason, (p+1));
-	    *p = '|';
 	  }
 	  else
 	  {

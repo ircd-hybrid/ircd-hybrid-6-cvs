@@ -18,7 +18,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *   $Id: s_conf.h,v 1.61 2001/12/14 16:56:33 db Exp $
+ *   $Id: s_conf.h,v 1.62 2001/12/15 02:42:01 db Exp $
  */
 
 #ifndef INCLUDED_config_h
@@ -55,7 +55,6 @@ struct ConfItem
   char*            name;     /* IRC name, nick, server name, or original u@h */
   char*            host;     /* host part of user@host */
   char*            passwd;   /* doubles as kline reason */
-  char*		   oper_reason; /* | portion of kline reason */
   char*            user;     /* user part of user@host */
   int              port;
   time_t           hold;     /* Hold action until this time (calendar time) */
