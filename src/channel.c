@@ -22,7 +22,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.22 1998/10/19 20:11:25 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.23 1998/10/28 02:06:17 db Exp $";
 #endif
 
 #include "struct.h"
@@ -973,6 +973,9 @@ static  void     set_mode(aClient *cptr,
   /* is an op or server or remote user on a TS channel */
   isok = ischop || (!isdeop && IsServer(cptr) && chptr->channelts);
 
+  if(isok)
+    chptr->keep_their_modes = YES;
+
   /* isok_c calculated later, only if needed */
 
   /* parc is the number of _remaining_ args (where <0 means 0);
@@ -980,6 +983,8 @@ static  void     set_mode(aClient *cptr,
   */
   parc--;
   parv++;
+
+
 
   FOREVER
     {
@@ -1022,8 +1027,6 @@ static  void     set_mode(aClient *cptr,
 
 	case 'o' :
 	case 'v' :
-	  chptr->keep_their_modes = YES;
-
 	  if (MyClient(sptr) && !IsMember(sptr, chptr))
 	    {
 	      if(!errsent(SM_ERR_NOTONCHANNEL, &errors_sent))

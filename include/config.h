@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.11 1998/10/19 07:05:24 db Exp $
+ * $Id: config.h,v 1.12 1998/10/28 02:06:15 db Exp $
  */
 
 #ifndef	__config_include__
@@ -385,6 +385,8 @@
 #define F_LINES_OPER_ONLY
 
 /* STATS_NOTICE - See a notice when a user does a /stats
+ * Bah. You don't need this its extra noise, the users can't
+ * flood a server anyway, and its an invasion of privacy. -Dianora
  */
 #undef STATS_NOTICE
 
@@ -416,6 +418,8 @@
 
 /* WHOIS_NOTICE - Shows a notice to an oper when a user does a
  * /whois on them
+ * Why do opers need this at all? Its an invasion of privacy. bah.
+ * you don't need this. -Dianora
  */
 #undef WHOIS_NOTICE
 
