@@ -1,3 +1,15 @@
+ievil       2003/08/25 17:21:55 EDT	(20030825_0)
+
+  Modified files:
+    src                  m_operspylog.c 
+  Log:
+  Fixed possible core from ratbox servers sending operspy on who ! ...
+  
+  Revision  Changes    Path
+  1.6       +1 -1      ircd-hybrid-6/src/m_operspylog.c
+
+
+
 ievil       2003/08/23 18:37:37 EDT	(20030823_0)
 
   Modified files:
