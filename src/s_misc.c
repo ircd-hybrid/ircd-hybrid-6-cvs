@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.9 1998/10/17 21:07:00 lusky Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.10 1998/10/26 07:35:48 db Exp $";
 #endif
 
 #include <sys/time.h>
@@ -1101,10 +1101,19 @@ void show_opers(aClient *cptr,char *name)
 	     name, j, (j==1) ? "" : "s");
 }
 
+/*
+ * show_servers
+ *
+ * inputs	- aClient pointer to client to show server list to
+ *		- name of client
+ * output	- NONE
+ * side effects	-
+ */
+
 void show_servers(aClient *cptr,char *name)
 {
-  Reg aClient	*cptr2;
-  Reg int j=0;
+  register aClient *cptr2;
+  register int j=0;		/* used to count servers */
 
   for(cptr2 = serv_cptr_list; cptr2; cptr2 = cptr2->next_server_client)
     {

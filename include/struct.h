@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.9 1998/10/10 04:20:14 db Exp $
+ * $Id: struct.h,v 1.10 1998/10/26 07:35:47 db Exp $
  */
 
 #ifndef	__struct_include__
@@ -556,6 +556,10 @@ struct Client
 
   struct        Client *next_server_client;
   struct        Client *next_oper_client;
+
+#ifndef USE_SENTALONG
+  unsigned long serial_number;
+#endif
 
   anUser	*user;		/* ...defined, if this is a User */
   aServer	*serv;		/* ...defined, if this is a server */
