@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.124 2001/07/22 21:41:03 db Exp $
+ * $Id: config.h,v 1.125 2001/07/26 16:14:21 leeh Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -140,6 +140,13 @@
  * hubs from untrustable opers.
  */
 #define HIDE_SERVERS_IPS
+
+/* HIDE_ERROR_MESSAGES
+ * ERROR messages coming from servers can sometimes have IPs in them.
+ * This will not show any error messages that are received, a 
+ * consequence being you may not see squit reasons..
+ */
+#define HIDE_ERROR_MESSAGES
 
 /* NETWORK_NAME
  * Displayed in place of the servername when SERVERHIDE is enabled
