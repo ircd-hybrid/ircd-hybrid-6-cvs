@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.34 1999/07/21 05:28:52 tomh Exp $
+ *   $Id: s_auth.c,v 1.35 1999/07/22 02:06:21 db Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -35,6 +35,8 @@
 #include "s_bsd.h"
 #include "res.h"
 #include "h.h"
+#include "ircd.h"
+#include "s_misc.h"
 #include "struct.h"
 
 #include <netdb.h>               /* struct hostent */

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.167 1999/07/21 23:12:16 db Exp $
+ *  $Id: s_user.c,v 1.168 1999/07/22 02:06:24 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -32,6 +32,8 @@
 #include "class.h"
 #include "s_bsd.h"
 #include "h.h"
+#include "ircd.h"
+#include "s_misc.h"
 #include "send.h"
 #include "hash.h"
 #include "whowas.h"

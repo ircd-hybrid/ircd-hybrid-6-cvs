@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: listener.c,v 1.11 1999/07/20 07:51:00 tomh Exp $
+ *  $Id: listener.c,v 1.12 1999/07/22 02:06:15 db Exp $
  */
 #include "listener.h"
 #include "s_bsd.h"
@@ -24,6 +24,8 @@
 #include "ircd_defs.h"
 #include "client.h"
 #include "h.h"
+#include "s_misc.h"
+#include "ircd.h"
 #include "struct.h"
 #include "send.h"
 #include "irc_string.h"

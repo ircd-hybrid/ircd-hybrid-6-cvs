@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_unkline.c,v 1.23 1999/07/21 05:28:48 tomh Exp $
+ *   $Id: m_unkline.c,v 1.24 1999/07/22 02:06:17 db Exp $
  */
 #include "struct.h"
 
@@ -36,6 +36,7 @@
 #include "fdlist.h"
 #include "fileio.h"
 #include "h.h"
+#include "ircd.h"
 
 #include <time.h>
 #include <string.h>

@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.69 1999/07/22 01:29:48 db Exp $
+ * $Id: h.h,v 1.70 1999/07/22 02:06:10 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -55,27 +55,6 @@ extern struct ConfItem* find_is_glined(const char* host, const char* name);
 extern  void    flush_glines(void);             
 extern  void    report_glines(struct Client *); 
 #endif
-
-/* ircd.c */
-extern void     report_error_on_tty(const char* message);
-extern  int     debuglevel;
-extern  int     highest_fd;
-extern  int     debuglevel;
-extern  int     debugtty;
-extern  char*   debugmode;
-extern  time_t  check_fdlists (time_t);
-extern int    lifesux;
-extern struct Counter Count;
-extern time_t NOW;
-extern time_t nextconnect;
-extern time_t nextping;
-extern time_t timeofday;
-extern struct Client* GlobalClientList;
-extern struct Client  me;
-extern struct Client* local[];
-extern struct Channel* channel;
-extern struct stats* ircstp;
-extern int    bootopt;
 
 /* scache.c */
 extern void        clear_scache_hash_table(void);

@@ -34,13 +34,14 @@
  *                mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.131 1999/07/21 23:12:12 db Exp $
+ * $Id: channel.c,v 1.132 1999/07/22 02:06:13 db Exp $
  */
 #include "struct.h"
 #include "common.h"
 #include "numeric.h"
 #include "channel.h"
 #include "h.h"
+#include "ircd.h"
 #include "list.h"
 #include "parse.h"
 #include "send.h"
@@ -66,8 +67,6 @@ static void check_still_split();
 aChannel *empty_channel_list=(aChannel*)NULL;
 void remove_empty_channels();
 #endif
-
-extern int cold_start;  /* defined in ircd.c */
 
 aChannel *channel = NullChn;
 

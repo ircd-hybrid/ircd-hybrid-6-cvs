@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.21 1999/07/21 19:34:38 sean Exp $
+ *   $Id: parse.c,v 1.22 1999/07/22 02:06:18 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -26,6 +26,8 @@
 #undef MSGTAB
 #include "numeric.h"
 #include "h.h"
+#include "ircd.h"
+#include "s_misc.h"
 #include "send.h"
 #include "hash.h"
 

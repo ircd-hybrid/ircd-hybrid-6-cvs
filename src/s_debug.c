@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.27 1999/07/21 21:41:52 db Exp $
+ *   $Id: s_debug.c,v 1.28 1999/07/22 02:06:22 db Exp $
  */
 #include "struct.h"
 #include "s_conf.h"
@@ -120,6 +120,8 @@ char    serveropts[] = {
 #include "numeric.h"
 #include "common.h"
 #include "hash.h"
+#include "ircd.h"
+#include "channel.h"
 #include <sys/file.h>
 #ifdef HPUX
 #include <fcntl.h>

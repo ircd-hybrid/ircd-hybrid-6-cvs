@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.55 1999/07/21 05:28:54 tomh Exp $
+ *  $Id: s_misc.c,v 1.56 1999/07/22 02:06:23 db Exp $
  */
 #include "s_conf.h"
 #include "struct.h"
@@ -28,6 +28,7 @@
 #include "common.h"
 #include "numeric.h"
 #include "h.h"
+#include "ircd.h"
 #include "fdlist.h"
 #include "s_bsd.h"
 #include "send.h"
