@@ -1,7 +1,7 @@
 /*
  * viconf.c
  *
- * $Id: viconf.c,v 1.12 2001/07/02 03:13:48 wcampbel Exp $
+ * $Id: viconf.c,v 1.13 2001/07/03 21:52:19 wcampbel Exp $
  */
 #include <stdio.h>
 #include <unistd.h>
@@ -48,6 +48,9 @@ int main(int argc, char *argv[])
   if(strcmp(p, "viklines") == 0)
     filename = KPATH;
 #endif /* KPATH */
+
+  if(strcmp(p, "vimotd") == 0)
+    filename = MPATH;
 
   if(LockedFile(filename))
     {
