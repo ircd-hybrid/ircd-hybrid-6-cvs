@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.53 1999/01/20 05:56:13 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.54 1999/01/21 05:48:38 db Exp $";
 
 #endif
 
@@ -3490,11 +3490,11 @@ int	m_oper(aClient *cptr,
       else
 	operprivs = "";
 
-#ifdef WINTRHAWK
+#ifdef CUSTOM_ERR
       sendto_ops("%s (%s@%s) has just acquired the personality of a petty megalomaniacal tyrant [IRC(%c)p]", parv[0],
 #else
       sendto_ops("%s (%s@%s) is now operator (%c)", parv[0],
-#endif /* WINTRHAWK */
+#endif /* CUSTOM_ERR */
 		 sptr->user->username, sptr->sockhost,
 		 IsOper(sptr) ? 'O' : 'o');
       send_umode_out(cptr, sptr, old);
