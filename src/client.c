@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.22 1999/07/20 14:00:59 sean Exp $
+ *  $Id: client.c,v 1.23 1999/07/20 14:04:16 sean Exp $
  */
 #include "client.h"
 #include "s_conf.h"
@@ -160,14 +160,14 @@ struct Client* make_client(struct Client* from)
   cptr->fd = -1;
   strcpy(cptr->username, "unknown");
 
-  cptr->listprogress=0; cptr->listprogress2=0;
-
 #ifdef NULL_POINTER_NOT_ZERO
   /* commenting out unnecessary assigns, but leaving them
    * for documentation. REMEMBER the fripping struct is already
    * zeroed up above =DUH= 
    * -Dianora 
    */
+  cptr->listprogress=0;
+  cptr->listprogress2=0;
   cptr->next    = NULL;
   cptr->prev    = NULL;
   cptr->hnext   = NULL;
