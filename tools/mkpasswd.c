@@ -5,14 +5,13 @@
 ** md5 patch by Walter Campbell <wcampbel@botbay.net>
 ** Modernization, getopt, etc for the Hybrid IRCD team
 **
-** $Id: mkpasswd.c,v 1.7 2001/07/18 02:15:28 lusky Exp $
+** $Id: mkpasswd.c,v 1.8 2001/07/18 02:20:47 lusky Exp $
 */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
-#include <crypt.h>
 
 #define FLAG_MD5     0x00000001
 #define FLAG_DES     0x00000002
