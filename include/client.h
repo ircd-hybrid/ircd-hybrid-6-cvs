@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.10 1999/07/11 23:10:51 db Exp $
+ * $Id: client.h,v 1.11 1999/07/11 23:43:52 db Exp $
  */
 #ifndef	INCLUDED_client_h
 #define INCLUDED_client_h
@@ -144,6 +144,7 @@
 				 FLAGS2_OPER_GLINE | \
 				 FLAGS2_OPER_N | \
 				 FLAGS2_OPER_K | \
+				 FLAGS2_OPER_DIE | \
                                  FLAGS2_OPER_REHASH)
 /* ZIP_LINKS */
 
