@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_message.c,v 1.1 1999/07/31 04:05:52 db Exp $
+ *   $Id: m_message.c,v 1.2 1999/07/31 04:08:37 db Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -36,10 +36,6 @@
 
 #include <string.h>
 
-/* used when sending to #mask or $mask */
-
-#define MATCH_SERVER  1
-#define MATCH_HOST    2
 
 /*
  * m_functions execute protocol messages on this server:
