@@ -43,7 +43,7 @@
  *
  * Diane Bruce -db (db@db.net)
  *
- * $Id: mtrie_conf.c,v 1.62 1999/08/02 23:58:32 lusky Exp $
+ * $Id: mtrie_conf.c,v 1.63 1999/10/14 01:05:42 lusky Exp $
  */
 #include "mtrie_conf.h"
 #include "class.h"
@@ -631,17 +631,25 @@ static aConfItem *find_wild_host_piece(DOMAIN_LEVEL *level_ptr,int flags,
               if(pptr->conf_ptr)
                 {
                   aconf= pptr->conf_ptr;
-                  if( (match(pptr->host_piece,host_piece)) &&
-                      (aconf->status & flags) )
+                  if( (aconf->status & flags) &&
+                      (match(pptr->host_piece,host_piece)) )
+
                     {
                       if(match(aconf->user,user))
                         first_aconf = aconf;
                     }
                 }
 
-              if(pptr->wild_conf_ptr &&
-                 (pptr->wild_conf_ptr->status & flags))
-                wild_aconf = pptr->wild_conf_ptr;
+              if(pptr->wild_conf_ptr)
+                {
+                  aconf= pptr->wild_conf_ptr;
+                  if( (aconf->status & flags) &&
+                      (match(pptr->host_piece,host_piece)) )
+                      
+		    {
+                       wild_aconf = aconf;
+		    }
+		}
             }
         }
     }

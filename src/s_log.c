@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_log.c,v 1.4 1999/08/01 04:59:57 tomh Exp $
+ *   $Id: s_log.c,v 1.5 1999/10/14 01:05:42 lusky Exp $
  */
 #include "s_log.h"
 #include "irc_string.h"
@@ -39,7 +39,7 @@
 #define LOG_BUFSIZE 2048 
 
 static int logFile = -1;
-static int logLevel = L_DEBUG;
+static int logLevel = INIT_LOG_LEVEL;
 
 static int sysLogLevel[] = {
   LOG_CRIT,
