@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.3 1999/07/08 07:40:29 tomh Exp $
+ * $Id: client.h,v 1.4 1999/07/09 01:03:24 db Exp $
  */
 #ifndef	INCLUDED_client_h
 #define INCLUDED_client_h
@@ -399,13 +399,13 @@ struct Client
   short	            lastsq;	/* # of 2k blocks when sendqueued called last*/
   dbuf	            sendQ;	/* Outgoing message queue--if socket full */
   dbuf	            recvQ;	/* Hold for data incoming yet to be parsed */
-  unsigned int      sendM;	/* Statistics: protocol messages send */
-  unsigned int      sendK;	/* Statistics: total k-bytes send */
-  unsigned int      receiveM;	/* Statistics: protocol messages received */
-  unsigned int      receiveK;	/* Statistics: total k-bytes received */
+  unsigned long     sendM;	/* Statistics: protocol messages send */
+  unsigned long     sendK;	/* Statistics: total k-bytes send */
+  unsigned long     receiveM;	/* Statistics: protocol messages received */
+  unsigned long     receiveK;	/* Statistics: total k-bytes received */
   unsigned short    sendB;	/* counters to count upto 1-k lots of bytes */
   unsigned short    receiveB;	/* sent and received. */
-  unsigned int	    lastrecvM;	/* to check for activity --Mika */
+  unsigned long	    lastrecvM;	/* to check for activity --Mika */
   int		    priority;
   struct Client*    acpt;	/* listening client which we accepted from */
   struct SLink*     confs;	/* Configuration record associated */
