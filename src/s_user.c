@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.71 1999/05/08 20:40:50 lusky Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.72 1999/05/09 01:00:31 lusky Exp $";
 
 #endif
 
@@ -2060,7 +2060,7 @@ static	int	m_message(aClient *cptr,
 	    return 0;
 #endif
 #ifdef ANTI_DRONE_FLOOD
-      if(MyConnect(acptr) && drone_time)
+      if(MyConnect(acptr) && IsClient(sptr) && !IsAnOper(sptr) && drone_time)
 	{
 	  if((acptr->first_received_message_time+drone_time) < NOW)
 	    {

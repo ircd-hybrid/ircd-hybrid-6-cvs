@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.37 1999/05/05 03:11:21 db Exp $
+ * $Id: config.h,v 1.38 1999/05/09 01:00:30 lusky Exp $
  */
 
 #ifndef	__config_include__
@@ -1002,14 +1002,14 @@
  * within 1 seconds. (I'm told it is usually that fast)
  * I'll do better next time, this is a Q&D -Dianora
  */
-#define ANTI_DRONE_FLOOD
+#undef ANTI_DRONE_FLOOD
 #define DEFAULT_DRONE_TIME 1
 #define DEFAULT_DRONE_COUNT 8
 
 /* JUPE_CHANNEL - jupes a channel from being joined on this server only
  * if added to Q lines e.g. Q:\#packet_channel:Tired of packets
  */
-#define JUPE_CHANNEL
+#undef JUPE_CHANNEL
 
 /* 
  * ANTI_SPAMBOT
