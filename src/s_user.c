@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.233 2001/07/01 03:13:55 greg Exp $
+ *  $Id: s_user.c,v 1.234 2001/07/02 03:18:43 db Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -1244,10 +1244,8 @@ static int nickkilldone(aClient *cptr, aClient *sptr, int parc,
           else
             {
               sendto_one(sptr,
-                         ":%s NOTICE %s :*** Notice -- Too many nick changes wait %d seconds before trying to change it again.",
-                         me.name,
-                         sptr->name,
-                         MAX_NICK_TIME);
+                         form_str(ERR_NICKTOOFAST),
+			 me.name, sptr->name, sptr->name, nick, MAX_NICK_TIME);
               return 0;
             }
 #endif
