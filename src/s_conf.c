@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.72 1999/06/26 07:52:13 tomh Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.73 1999/06/26 12:24:10 db Exp $";
 #endif
 
 #include "struct.h"
@@ -35,6 +35,7 @@ static char *rcs_version = "$Id: s_conf.c,v 1.72 1999/06/26 07:52:13 tomh Exp $"
 #endif
 #include <netdb.h>
 #include <signal.h>
+#include <sys/socket.h>
 #include "h.h"
 extern int rehashed;
 #include "mtrie_conf.h"

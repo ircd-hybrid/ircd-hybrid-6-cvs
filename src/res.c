@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.18 1999/06/26 07:52:12 tomh Exp $
+ * $Id: res.c,v 1.19 1999/06/26 12:24:10 db Exp $
  */
 #include "res.h"
 #include "struct.h"
@@ -18,6 +18,7 @@
 #include <sys/socket.h>
 #include <fcntl.h>
 
+#include <arpa/nameser.h>
 #include <resolv.h>
 #include <netdb.h>
 #include <arpa/inet.h>
