@@ -34,7 +34,7 @@
  *		  mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.121 1999/07/19 12:23:59 db Exp $
+ * $Id: channel.c,v 1.122 1999/07/20 01:20:41 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -904,9 +904,7 @@ int	m_mode(aClient *cptr,
   /* Now, try to find the channel in question */
   if (parc > 1)
     {
-      /* ZZZ I want a char attribe to tell me if this is a valid channel */
-
-      if( (parv[1][0] == '#') || (parv[1][0] == '&') )
+      if( IsChanPrefix(parv[1][0]) )
 	{
 	  /* Don't do any of this stuff at all
 	   * unless it looks like a channel name 

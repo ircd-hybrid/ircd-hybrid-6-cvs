@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.156 1999/07/20 00:43:57 db Exp $
+ *  $Id: s_user.c,v 1.157 1999/07/20 01:20:42 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -1792,7 +1792,7 @@ static	int	m_message(aClient *cptr,
   ** channels are privmsg'd a lot more than other clients, moved up here
   ** plain old channel msg ?
   */
-  if( ((*nick == '#') || (*nick == '&'))
+  if( IsChanPrefix(*nick)
       && (IsPerson(sptr) && (chptr = find_channel(nick, NullChn))))
     {
 #ifdef	IDLE_CHECK
