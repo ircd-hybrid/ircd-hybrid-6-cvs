@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.63 2003/05/04 17:52:39 db Exp $
+ * $Id: client.h,v 1.64 2003/05/05 02:39:06 db Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -51,8 +51,6 @@
 #define HOSTIPLEN       16      /* Length of dotted quad form of IP        */
                                 /* - Dianora                               */
 #define PASSWDLEN       20
-#define IDLEN           12      /* this is the maximum length, not the actual
-                                   generated length; DO NOT CHANGE! */
 #define CLIENT_BUFSIZE 512      /* must be at least 512 bytes */
 
 /*
@@ -79,7 +77,6 @@ struct User
   time_t         last;
   int            refcnt;        /* Number of times this block is referenced */
   int            joined;        /* number of channels joined */
-  char           id[IDLEN + 1]; /* for future use *hint* */
   const char*    server;        /* pointer to scached server name */
   /*
   ** In a perfect world the 'server' name

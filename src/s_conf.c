@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.240 2003/05/04 22:10:48 ievil Exp $
+ *  $Id: s_conf.c,v 1.241 2003/05/05 02:39:08 db Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -2201,7 +2201,7 @@ static void initconf(FBFILE* file, int use_include)
               if(classToFind && (ClassPtr(aconf) == class0))
                 {
                   sendto_realops(
-                           "Warning *** Defaulting to class 0 for class %d",
+                           "Warning: Defaulting to class 0 for class %d",
                          classToFind);
                 }
             }

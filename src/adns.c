@@ -1,5 +1,5 @@
 /*
- * $Id: adns.c,v 1.12 2003/05/04 17:52:44 db Exp $
+ * $Id: adns.c,v 1.13 2003/05/05 02:39:07 db Exp $
  * adns.c  functions to enter libadns 
  *
  * Written by Aaron Sethman <androsyn@ratbox.org>
@@ -167,28 +167,28 @@ void do_adns_io(void)
 	dns_do_callbacks();
 	timeout_adns();
 }
-/* void adns_gethost(const char *name, struct DNSQuery *req);
+/* int adns_gethost(const char *name, struct DNSQuery *req);
  * Input: A name, an address family, a DNSQuery structure.
  * Output: None
  * Side effects: Sets up a query structure and sends off a DNS query to
  *               the DNS server to resolve an "A"(address) entry by name.
  */
-void adns_gethost(const char *name, struct DNSQuery *req)
+int adns_gethost(const char *name, struct DNSQuery *req)
 {
  assert(dns_state->nservers > 0);
- adns_submit(dns_state, name, adns_r_addr, adns_qf_owner, req,
-             &req->query);
+ return(adns_submit(dns_state, name, adns_r_addr, adns_qf_owner, req,
+                    &req->query));
 
 }
 
-/* void adns_getaddr(struct irc_inaddr *addr, int aftype,
+/* int adns_getaddr(struct irc_inaddr *addr, int aftype,
                      struct DNSQuery *req);
  * Input: An address, an address family, a DNSQuery structure.
  * Output: None
  * Side effects: Sets up a query entry and sends it to the DNS server to
  *               resolve an IP address to a domain name.
  */
-void adns_getaddr(struct in_addr *addr,
+int adns_getaddr(struct in_addr *addr,
                   struct DNSQuery *req)
 {
  struct sockaddr_in ipn;
@@ -196,6 +196,6 @@ void adns_getaddr(struct in_addr *addr,
   ipn.sin_family = AF_INET;
   ipn.sin_port = 0;
   ipn.sin_addr.s_addr = addr->s_addr;
-  adns_submit_reverse(dns_state, (struct sockaddr *)&ipn,
-                      adns_r_ptr, adns_qf_owner|adns_qf_cname_loose|adns_qf_quoteok_anshost, req, &req->query);
+  return(adns_submit_reverse(dns_state, (struct sockaddr *)&ipn,
+                             adns_r_ptr, adns_qf_owner|adns_qf_cname_loose|adns_qf_quoteok_anshost, req, &req->query));
 }

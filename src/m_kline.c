@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.76 2003/05/04 17:52:44 db Exp $
+ *   $Id: m_kline.c,v 1.77 2003/05/05 02:39:07 db Exp $
  */
 #include "m_commands.h"
 #include "m_kline.h"
@@ -268,15 +268,31 @@ WriteKline(const char *filename, struct Client *sptr, struct Client *rcptr,
   if (IsServer(sptr))
   {
     if (rcptr != NULL)
-      ircsprintf(buffer,
-		 "#%s!%s@%s from %s K'd: %s@%s:%s\n",
-		 rcptr->name,
-		 rcptr->username,
-		 rcptr->host,
-		 sptr->name,
-		 user,
-		 host,
-		 reason);
+      if (oper_reason)
+      {
+        ircsprintf(buffer,
+		   "#%s!%s@%s from %s K'd: %s@%s:%s|%s\n",
+		   rcptr->name,
+		   rcptr->username,
+		   rcptr->host,
+		   sptr->name,
+		   user,
+		   host,
+		   reason,
+                   oper_reason);
+      }
+      else
+      {
+        ircsprintf(buffer,
+                   "#%s!%s@%s from %s K'd: %s@%s:%s\n",
+                   rcptr->name,
+                   rcptr->username,
+                   rcptr->host,
+                   sptr->name,
+                   user,
+                   host,
+                   reason);
+      }
   }
   else
 #endif /* SLAVE_SERVERS */
