@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.44 1998/12/10 18:09:26 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.45 1998/12/17 07:01:37 db Exp $";
 #endif
 
 
@@ -490,12 +490,14 @@ int	m_capab(aClient *cptr, aClient *sptr, int parc, char *parv[])
   register	struct Capability *cap;
   char	*p;
   Reg	char *s;
-  int   found = NO;
 
   if ((!IsUnknown(cptr) && !IsHandshake(cptr)) || parc < 2)
     return 0;
 
-  sendto_realops("CAPAB received %s",parv[1]);
+  if(cptr->caps)
+    return exit_client(cptr, cptr, cptr, "CAPAB received twice");
+  else
+    cptr->caps |= CAP_CAP;
 
   for (s=strtoken(&p, parv[1], " "); s; s=strtoken(&p, NULL, " "))
     {
@@ -504,16 +506,9 @@ int	m_capab(aClient *cptr, aClient *sptr, int parc, char *parv[])
 	  if (!strcmp(cap->name, s))
 	    {
 	      cptr->caps |= cap->cap;
-	      found = YES;
 	      break;
 	    }
 	 }
-
-      if(!found)
-	sendto_realops("CAPAB %s received from %s but not understood",
-		       s,get_client_name(cptr,FALSE));
-
-      found = NO;
     }
   
   return 0;
