@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.62 2001/06/17 23:51:19 greg Exp $
+ *  $Id: client.c,v 1.63 2001/06/25 02:22:03 greg Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -155,7 +155,7 @@ struct Client* make_client(struct Client* from)
 
       cptr->from = from; /* 'from' of local client is self! */
     }
-  cptr->status = STAT_UNKNOWN;
+  SetUnknown(cptr);
   cptr->fd = -1;
   strcpy(cptr->username, "unknown");
 
@@ -1562,12 +1562,16 @@ const char* comment        /* Reason for the exit */
 #endif
           if (sptr->fd >= 0)
             {
-              if (cptr != NULL && sptr != cptr)
-                sendto_one(sptr, "ERROR :Closing Link: %s (%s)",
-                           get_client_name(sptr, MASK_IP), comment);
+              if (IsRegistered(sptr) && !IsServer(sptr))
+                { /* jeremy is anal retentive */
+                  sendto_one(sptr, "ERROR :Closing Link: %s (%s)",
+                             get_client_name(sptr, SHOW_IP, comment);
+                } 
               else
-                sendto_one(sptr, "ERROR :Closing Link: %s (%s)",
-                           get_client_name(sptr, MASK_IP), comment);
+                {
+                  sendto_one(sptr, "ERROR :Closing Link: %s (%s)",
+                             get_client_name(sptr, MASK_IP, comment);
+                }
             }
           /*
           ** Currently only server connections can have
