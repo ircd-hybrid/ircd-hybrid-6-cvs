@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.51 2001/07/08 09:56:39 a1kmm Exp $
+ * $Id: client.h,v 1.52 2001/07/08 12:46:35 db Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -214,7 +214,7 @@ struct Client
 #ifdef ZIP_LINKS
   struct Zdata*     zip;        /* zip data */
 #endif
-#if defined(CRYPT_LINKS) || defined(USE_KSERVER)
+#if defined(CRYPT_LINKS)
   struct CryptData *crypt;      /* Encrypted link info */
 #endif
 #ifdef CRYPT_LINKS

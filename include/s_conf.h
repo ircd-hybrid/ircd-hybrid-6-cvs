@@ -18,7 +18,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *   $Id: s_conf.h,v 1.48 2001/07/08 09:56:40 a1kmm Exp $
+ *   $Id: s_conf.h,v 1.49 2001/07/08 12:46:36 db Exp $
  */
 
 #ifndef INCLUDED_config_h
@@ -60,7 +60,7 @@ struct ConfItem
   time_t           hold;     /* Hold action until this time (calendar time) */
   struct Class*    c_class;     /* Class of connection */
   int              dns_pending; /* 1 if dns query pending, 0 otherwise */
-#if defined(CRYPT_LINKS) || defined(USE_KSERVER)
+#if defined(CRYPT_LINKS)
   char *           rsa_public_keyfile; /* RSA public key filename */
 #ifdef CRYPT_LINKS
   struct CipherDef *cipher;            /* Cipher selection; ptr to Cipher[] */
@@ -135,7 +135,6 @@ typedef struct QlineItem {
 #define CONF_FLAGS_LITTLE_I_LINE        0x8000
 #endif
 #define CONF_FLAGS_ENCRYPTED            0x10000
-#define CONF_FLAGS_KSERVER              0x20000
 
 
 /* Macros for aConfItem */
@@ -150,7 +149,6 @@ typedef struct QlineItem {
 #define IsConfFlined(x)         ((x)->flags & CONF_FLAGS_F_LINED)
 #define IsConfExemptGline(x)    ((x)->flags & CONF_FLAGS_EXEMPTGLINE)
 #define IsConfEncrypted(x)      ((x)->flags & CONF_FLAGS_ENCRYPTED)
-#define IsConfKserver(x)        ((x)->flags & CONF_FLAGS_KSERVER)
 
 #ifdef IDLE_CHECK
 #define IsConfIdlelined(x)      ((x)->flags & CONF_FLAGS_IDLE_LINED)
