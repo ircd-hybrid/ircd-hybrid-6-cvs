@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.182 2000/04/24 02:21:08 lusky Exp $
+ *  $Id: s_conf.c,v 1.183 2000/06/12 04:36:00 lusky Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -3539,9 +3539,6 @@ void write_kline_or_dline_to_conf_and_notice_opers(
                                                    char *current_date)
   {
   char buffer[1024];
-#ifdef SEPARATE_QUOTE_KLINES_BY_DATE
-  char *timebuffer;
-#endif
   int out;
   const char *filename;         /* filename to use for kline */
 
