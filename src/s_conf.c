@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.76 1999/06/27 00:06:06 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.77 1999/06/27 01:03:09 db Exp $";
 #endif
 
 #include "struct.h"
@@ -178,8 +178,9 @@ int	attach_Iline(aClient *cptr,
 		     char **preason)
 {
   aConfItem *aconf;
+  aConfItem *gkill_conf;
   aConfItem *tkline_conf;
-   char *hname;
+  char *hname;
   char	host[HOSTLEN+3];
   char	fullname[HOSTLEN+1];
   char	non_ident[USERLEN+1];
@@ -201,7 +202,6 @@ int	attach_Iline(aClient *cptr,
 
       (void)strncat(host, fullname,
 		    sizeof(host) - strlen(host));
-      /*      (void)strncpy(user, cptr->username,sizeof(user)-1); */
     }
 
   if(*host == '\0')
@@ -238,6 +238,16 @@ int	attach_Iline(aClient *cptr,
     {
       if(aconf->status & CONF_CLIENT)
 	{
+#ifdef GLINES
+	  if ( (gkill_conf=find_gkill(cptr)) )
+	    {
+	      *preason = gkill_conf->passwd;
+	      sendto_one(cptr, ":%s NOTICE %s :*** G-lined",
+			   me.name,cptr->name);
+	      return ( -5 );
+	    }
+#endif	/* GLINES */
+
 	  if(IsConfDoIdentd(aconf))
 	    SetDoId(cptr);
 
