@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.192 2000/12/01 06:28:50 lusky Exp $
+ *  $Id: s_conf.c,v 1.193 2001/02/19 05:08:30 lusky Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -3104,6 +3104,12 @@ static int oper_flags_from_string(char *flags)
         int_flags |= FLAGS_DEBUG;
       else if(*flags == 'n')
         int_flags |= FLAGS_NCHANGE;
+      else if(*flags == 'b')
+        int_flags |= FLAGS_BOTS;
+      else if(*flags == 'x')
+        int_flags |= FLAGS_EXTERNAL;
+      else if(*flags == 'z')
+        int_flags |= FLAGS_OPERWALL;
       flags++;
     }
 
@@ -3147,6 +3153,12 @@ char *oper_flags_as_string(int flags)
     *flags_ptr++ = 'd';
   if(flags & FLAGS_NCHANGE)
     *flags_ptr++ = 'n';
+  if(flags & FLAGS_BOTS)
+    *flags_ptr++ = 'b';
+  if(flags & FLAGS_EXTERNAL)
+    *flags_ptr++ = 'x';
+  if(flags & FLAGS_OPERWALL)
+    *flags_ptr++ = 'z';
   *flags_ptr = '\0';
 
   return(flags_out);

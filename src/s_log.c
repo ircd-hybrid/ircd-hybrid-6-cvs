@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_log.c,v 1.10 2000/08/09 22:50:25 lusky Exp $
+ *   $Id: s_log.c,v 1.11 2001/02/19 05:08:31 lusky Exp $
  */
 #include "s_log.h"
 #include "irc_string.h"
@@ -37,7 +37,7 @@
 #include <unistd.h>
 
 
-#define LOG_BUFSIZE 2048 
+#define LOG_BUFSIZE 2000 
 
 #ifdef USE_LOGFILE
 static int logFile = -1;
