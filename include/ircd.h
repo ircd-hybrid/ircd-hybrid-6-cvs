@@ -19,7 +19,7 @@
  *
  * "ircd.h". - Headers file.
  *
- * $Id: ircd.h,v 1.20 2001/12/08 05:10:19 jdc Exp $
+ * $Id: ircd.h,v 1.21 2001/12/13 23:16:34 leeh Exp $
  *
  */
 #ifndef INCLUDED_ircd_h
@@ -134,6 +134,7 @@ extern time_t         LCF;
 extern time_t         nextconnect;
 extern time_t         nextping;
 
+char *isupport;
 
 extern struct Client* local_cptr_list;
 extern struct Client* oper_cptr_list;

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.242 2001/12/10 02:56:29 jdc Exp $
+ *  $Id: s_user.c,v 1.243 2001/12/13 23:16:38 leeh Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -785,6 +785,7 @@ static int register_user(aClient *cptr, aClient *sptr,
       sendto_one(sptr, form_str(RPL_CREATED),me.name,nick,creation);
       sendto_one(sptr, form_str(RPL_MYINFO), me.name, parv[0],
                  me.name, ircd_version);
+      sendto_one(sptr, form_str(RPL_ISUPPORT), me.name, parv[0], isupport);
       /* Increment the total number of clients since (re)start */
       Count.totalrestartcount++;
       show_lusers(sptr, sptr, 1, parv);

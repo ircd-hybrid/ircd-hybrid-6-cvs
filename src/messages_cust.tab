@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: messages_cust.tab,v 1.20 2001/12/07 05:09:31 db Exp $
+ * $Id: messages_cust.tab,v 1.21 2001/12/13 23:16:37 leeh Exp $
  *
  */
 /* 
@@ -29,7 +29,7 @@ static  char *  replies[] = {
 /* 002  RPL_YOURHOST,*/ ":%s 002 %s :Your host is %s, running version %s",
 /* 003  RPL_CREATED, */ ":%s 003 %s :This server was created %s",
 /* 004  RPL_MYINFO, */ ":%s 004 %s %s %s oOiwszcrkfydnxb biklmnopstve",
-/* 005 */       NULL,
+/* 005  RPL_ISUPPORT, */ ":%s 005 %s %s :are supported by this server",
 /* 006 */       NULL,
 /* 007 */       NULL,
 /* 008 */       NULL,
