@@ -20,12 +20,14 @@
  * "parse.h". - Headers file.
  *
  *
- * $Id: parse.h,v 1.1 1999/07/22 03:00:14 db Exp $
+ * $Id: parse.h,v 1.2 1999/07/25 05:42:02 tomh Exp $
  *
  */
-
 #ifndef INCLUDED_parse_h_h
 #define INCLUDED_parse_h_h
+
+struct Message;
+struct Client;
 
 extern  int     parse (struct Client *, char *, char *);
 extern  void    init_tree_parse (struct Message *);

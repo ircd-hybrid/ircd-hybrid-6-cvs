@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: irc_string.h,v 1.8 1999/07/25 01:44:53 db Exp $
+ *   $Id: irc_string.h,v 1.9 1999/07/25 05:42:01 tomh Exp $
  */
 #ifndef INCLUDED_irc_string_h
 #define INCLUDED_irc_string_h
@@ -75,6 +75,15 @@ extern void* MyRealloc(void* p, size_t size);
 
 #define DupString(x,y) \
   do{ x = (char*) MyMalloc(strlen(y) + 1); strcpy(x, y); } while(0)
+
+#define EmptyString(x) (!(x) || (*(x) == '\0'))
+
+/*
+ * deprecate
+ */
+#define BadPtr(x) (!(x) || (*(x) == '\0'))
+
+
 /*
  * character macros
  */

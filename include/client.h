@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.35 1999/07/22 05:41:15 tomh Exp $
+ * $Id: client.h,v 1.36 1999/07/25 05:42:01 tomh Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -288,6 +288,14 @@ struct Client
 
 #define PARSE_AS_CLIENT(x)      ((x)->status & STAT_CLIENT_PARSE)
 #define PARSE_AS_SERVER(x)      ((x)->status & STAT_SERVER_PARSE)
+
+/*
+ * ts stuff
+ */
+#define TS_CURRENT      3       /* current TS protocol version */
+#define TS_MIN          1       /* minimum supported TS protocol version */
+#define TS_DOESTS       0x20000000
+#define DoesTS(x)       ((x)->tsinfo == TS_DOESTS)
 
 
 /* housekeeping flags */
