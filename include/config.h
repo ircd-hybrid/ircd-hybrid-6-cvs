@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.27 1999/02/16 15:49:52 db Exp $
+ * $Id: config.h,v 1.28 1999/03/11 19:51:33 db Exp $
  */
 
 #ifndef	__config_include__
@@ -1036,10 +1036,6 @@
  */
 #define ANTI_SPAMBOT_EXTRA
 #define PRIVMSG_POSSIBLE_SPAMBOT_COUNT	50
-
-#ifdef HUB
-#undef FLUD
-#endif
 
 #ifdef FLUD
 #define FLUD_NUM	4	/* Number of flud messages to trip alarm */
