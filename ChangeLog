@@ -1,3 +1,19 @@
+ievil       2004/06/13 17:08:03 EDT	(20040613_3)
+
+  Modified files:
+    include              config.h 
+    src                  m_whois.c 
+  Log:
+  WHOISACTUALLY now only is added if the whois'd user is a not an oper. And
+  per Lee's request... not to be breaking the current "implementation" as
+  just show the ip...
+  
+  Revision  Changes    Path
+  1.173     +1 -1      ircd-hybrid-6/include/config.h
+  1.22      +12 -4     ircd-hybrid-6/src/m_whois.c
+
+
+
 ievil       2004/06/13 00:47:52 EDT	(20040613_2)
 
   Modified files:
