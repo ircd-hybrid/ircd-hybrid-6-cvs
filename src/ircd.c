@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.2 1998/09/22 22:27:12 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.3 1998/09/26 01:11:25 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1212,7 +1212,7 @@ time_t io_loop(time_t delay)
 		       "System clock was reset into the future - (%d+60 > %d)",
 		       timeofday, lasttimeofday);
       report_error(to_send, &me);
-      /*      sync_channels(); */
+      sync_channels();
     }
 
   NOW = timeofday;

@@ -22,7 +22,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.9 1998/09/25 15:55:39 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.10 1998/09/26 01:11:24 db Exp $";
 #endif
 
 #include "struct.h"
@@ -3081,6 +3081,8 @@ void sync_channels()
     {
       if(chptr->locally_created)
 	{
+	  sendto_realops("*** resetting TS on locally created %s from %d to %d",
+			 chptr->chname,chptr->channelts,timeofday);
 	  chptr->channelts = timeofday;
 	}
     }
