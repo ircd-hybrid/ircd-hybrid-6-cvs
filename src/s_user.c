@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.251 2003/05/04 17:52:46 db Exp $
+ *  $Id: s_user.c,v 1.252 2003/05/22 12:27:28 db Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -1521,7 +1521,6 @@ int m_nick(aClient *cptr, aClient *sptr, int parc, char *parv[])
                    acptr->name, acptr->from->name, parv[1], parv[5], parv[6],
                    cptr->name);
 
-#ifndef LOCAL_NICK_COLLIDE
 	    sendto_serv_butone(NULL, /* all servers */
 		       ":%s KILL %s :%s (%s(NOUSER) <- %s!%s@%s)(TS:%s)",
 			       me.name,
@@ -1532,7 +1531,6 @@ int m_nick(aClient *cptr, aClient *sptr, int parc, char *parv[])
 			       parv[5],
 			       parv[6],
 			       cptr->name);
-#endif
 
             acptr->flags |= FLAGS_KILLED;
             /* Having no USER struct should be ok... */
@@ -1574,20 +1572,6 @@ int m_nick(aClient *cptr, aClient *sptr, int parc, char *parv[])
 
   if (IsServer(sptr))
     {
-      /* As discussed with chris (comstud) nick kills can
-       * be handled locally, provided all NICK's are propogated
-       * globally. Just like channel joins are handled.
-       *
-       * I think I got this right. 
-       * -Dianora
-       * There are problems with this, due to lag it looks like.
-       * backed out for now...
-       */
-#ifdef LOCAL_NICK_COLLIDE
-      /* just propogate it through */
-      sendto_serv_butone(cptr, ":%s NICK %s :%lu",
-                         parv[0], nick, sptr->tsinfo);
-#endif
       /*
       ** A new NICK being introduced by a neighbouring
       ** server (e.g. message type "NICK new" received)
@@ -1606,7 +1590,6 @@ int m_nick(aClient *cptr, aClient *sptr, int parc, char *parv[])
           sendto_one(acptr, form_str(ERR_NICKCOLLISION),
                      me.name, acptr->name, acptr->name);
 
-#ifndef LOCAL_NICK_COLLIDE
 	  sendto_serv_butone(NULL, /* all servers */
 			     ":%s KILL %s :%s (%s <- %s)",
 			     me.name, acptr->name, me.name,
@@ -1619,7 +1602,6 @@ int m_nick(aClient *cptr, aClient *sptr, int parc, char *parv[])
 			     get_client_name(cptr, FALSE));
 #else
                              cptr->name);
-#endif
 #endif
           acptr->flags |= FLAGS_KILLED;
           return exit_client(cptr, acptr, &me, "Nick collision");
@@ -1655,7 +1637,6 @@ int m_nick(aClient *cptr, aClient *sptr, int parc, char *parv[])
               sendto_one(acptr, form_str(ERR_NICKCOLLISION),
                          me.name, acptr->name, acptr->name);
 
-#ifndef LOCAL_NICK_COLLIDE
 	      sendto_serv_butone(sptr, /* all servers but sptr */
 				 ":%s KILL %s :%s (%s <- %s)",
 				 me.name, acptr->name, me.name,
@@ -1664,7 +1645,6 @@ int m_nick(aClient *cptr, aClient *sptr, int parc, char *parv[])
 				 get_client_name(cptr, FALSE));
 #else
                                  cptr->name);
-#endif
 #endif
 
               acptr->flags |= FLAGS_KILLED;
@@ -1694,7 +1674,6 @@ int m_nick(aClient *cptr, aClient *sptr, int parc, char *parv[])
       sendto_one(acptr, form_str(ERR_NICKCOLLISION),
                  me.name, acptr->name, acptr->name);
 
-#ifndef LOCAL_NICK_COLLIDE
       sendto_serv_butone(NULL, /* KILL old from outgoing servers */
 			 ":%s KILL %s :%s (%s(%s) <- %s)",
 			 me.name, sptr->name, me.name, acptr->from->name,
@@ -1703,11 +1682,9 @@ int m_nick(aClient *cptr, aClient *sptr, int parc, char *parv[])
 #else
 			 acptr->name, cptr->name);
 #endif
-#endif
 
       ServerStats->is_kill++;
 
-#ifndef LOCAL_NICK_COLLIDE
       sendto_serv_butone(NULL, /* Kill new from incoming link */
 			 ":%s KILL %s :%s (%s <- %s(%s))",
 			 me.name, acptr->name, me.name, acptr->from->name,
@@ -1715,7 +1692,6 @@ int m_nick(aClient *cptr, aClient *sptr, int parc, char *parv[])
 			 get_client_name(cptr, FALSE), sptr->name);
 #else
 			 cptr->name, sptr->name);
-#endif
 #endif
 
       acptr->flags |= FLAGS_KILLED;
@@ -1748,7 +1724,6 @@ int m_nick(aClient *cptr, aClient *sptr, int parc, char *parv[])
 #endif
           ServerStats->is_kill++;
 
-#ifndef LOCAL_NICK_COLLIDE
 	  sendto_serv_butone(cptr, /* KILL old from outgoing servers */
 			     ":%s KILL %s :%s (%s(%s) <- %s)",
 			     me.name, sptr->name, me.name, acptr->from->name,
@@ -1756,7 +1731,6 @@ int m_nick(aClient *cptr, aClient *sptr, int parc, char *parv[])
 			     acptr->name, get_client_name(cptr, FALSE));
 #else
                              acptr->name, cptr->name);
-#endif
 #endif
 
           sptr->flags |= FLAGS_KILLED;
@@ -1788,7 +1762,6 @@ int m_nick(aClient *cptr, aClient *sptr, int parc, char *parv[])
           sendto_one(acptr, form_str(ERR_NICKCOLLISION),
                      me.name, acptr->name, acptr->name);
 
-#ifndef LOCAL_NICK_COLLIDE
 	  sendto_serv_butone(sptr, /* all servers but sptr */
 			     ":%s KILL %s :%s (%s <- %s)",
 			     me.name, acptr->name, me.name,
@@ -1797,7 +1770,6 @@ int m_nick(aClient *cptr, aClient *sptr, int parc, char *parv[])
 			     get_client_name(cptr, FALSE));
 #else
 			     cptr->name);
-#endif
 #endif
 
           acptr->flags |= FLAGS_KILLED;
