@@ -16,7 +16,7 @@
 #*   along with this program; if not, write to the Free Software
 #*   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #*
-#*   $Id: Makefile.in,v 1.19 2001/06/04 16:20:08 jdc Exp $
+#*   $Id: Makefile.in,v 1.20 2001/07/04 20:07:28 wcampbel Exp $
 #*/
 
 RM=@RM@
@@ -127,6 +127,13 @@ depend:
 		echo "Making dependencies in $$i";\
 		cd $$i;\
 		${MAKE} depend; cd ..;\
+	done
+
+lint:
+	@for i in $(SUBDIRS); do \
+		echo "lint'ing in $$i";\
+		cd $$i;\
+		${MAKE} lint; cd ..;\
 	done
 
 install: all

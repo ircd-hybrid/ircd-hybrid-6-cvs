@@ -1,4 +1,4 @@
-# $Id: Makefile.in,v 1.14 2001/06/08 21:22:54 db Exp $
+# $Id: Makefile.in,v 1.15 2001/07/04 20:07:33 wcampbel Exp $
 
 CC=@CC@
 RM=@RM@
@@ -50,6 +50,10 @@ install: build
 	@echo "Please do a make install from the top level directory"
 
 depend:
+
+lint:
+	lint -aacgprxhH $(INCLUDEDIR) $(mkpasswd_SOURCES) $(viconf_SOURCES) $(fixklines_SOURCES) $(encspeed_SOURCES) >>../lint.out
+	@echo done
 
 # DO NOT DELETE
 
