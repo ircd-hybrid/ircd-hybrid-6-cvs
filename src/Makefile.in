@@ -1,7 +1,7 @@
 #
 # Makefile.in for ircd/src
 #
-# $Id: Makefile.in,v 1.28 1999/07/19 09:11:43 tomh Exp $
+# $Id: Makefile.in,v 1.29 1999/07/23 04:58:15 tomh Exp $
 #
 CC = @CC@
 RM = @RM@
@@ -15,7 +15,6 @@ CPPFLAGS = ${INCLUDES} @CPPFLAGS@
 #
 # For developers
 # CFLAGS= -g -O2 -Wall 
-# CPPFLAGS = ${INCLUDES}
 #
 
 SRCS = \
@@ -31,6 +30,7 @@ SRCS = \
 	hash.c \
 	irc_string.c \
 	ircd.c \
+	ircd_signal.c \
 	list.c \
 	listener.c \
 	m_gline.c \

@@ -17,44 +17,15 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: bsd.c,v 1.9 1999/07/22 02:06:12 db Exp $
+ *   $Id: bsd.c,v 1.10 1999/07/23 04:58:15 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
 #include "ircd.h"
 
 #include <errno.h>
-#include <signal.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-
-void dummy(int sig)
-{
-#if !defined(POSIX_SIGNALS)
-  signal(SIGALRM, dummy);
-  signal(SIGPIPE, dummy);
-# ifdef SIGWINCH
-  signal(SIGWINCH, dummy);
-# endif
-#endif
-
-#if 0 /* POSIX signals reinstall handlers themselves */
-  struct  sigaction       act;
-
-  act.sa_handler = dummy;
-  act.sa_flags = 0;
-  sigemptyset(&act.sa_mask);
-  sigaddset(&act.sa_mask, SIGALRM);
-  sigaddset(&act.sa_mask, SIGPIPE);
-#  ifdef SIGWINCH
-  sigaddset(&act.sa_mask, SIGWINCH);
-  sigaction(SIGWINCH, &act, NULL);
-#  endif
-  sigaction(SIGALRM, &act, NULL);
-  sigaction(SIGPIPE, &act, NULL);
-#endif /* 0 */
-}
-
 
 /*
  * deliver_it

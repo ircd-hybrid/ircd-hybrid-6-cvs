@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.90 1999/07/23 03:04:54 tomh Exp $
+ *  $Id: s_bsd.c,v 1.91 1999/07/23 04:58:17 tomh Exp $
  */
 #include "s_bsd.h"
 #include "s_serv.h"
@@ -45,7 +45,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <signal.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <netdb.h>
@@ -1010,7 +1009,7 @@ void close_connection(aClient *cptr)
   }
   if (cptr->fd >= 0)
     {
-      flush_connections(cptr->fd);
+      flush_connections(cptr);
       local[cptr->fd] = NULL;
 #ifdef ZIP_LINKS
         /*

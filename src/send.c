@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.67 1999/07/22 06:03:37 tomh Exp $
+ *   $Id: send.c,v 1.68 1999/07/23 04:58:18 tomh Exp $
  */
 #include "send.h"
 #include "struct.h"
@@ -91,34 +91,28 @@ dead_link(aClient *to, char *notice)
 } /* dead_link() */
 
 /*
-** flush_connections
-**      Used to empty all output buffers for all connections. Should only
-**      be called once per scan of connections. There should be a select in
-**      here perhaps but that means either forcing a timeout or doing a poll.
-**      When flushing, all we do is empty the obuffer array for each local
-**      client and try to send it. if we cant send it, it goes into the sendQ
-**      -avalon
-*/
-
-void
-flush_connections(int fd)
-
+ * flush_connections - Used to empty all output buffers for all connections. 
+ * Should only be called once per scan of connections. There should be a 
+ * select in here perhaps but that means either forcing a timeout or doing 
+ * a poll. When flushing, all we do is empty the obuffer array for each local
+ * client and try to send it. if we cant send it, it goes into the sendQ
+ *      -avalon
+ */
+void flush_connections(struct Client* cptr)
 {
 #ifdef SENDQ_ALWAYS
-        int i;
-        aClient *cptr;
-
-        if (fd == me.fd)
-        {
-                for (i = highest_fd; i >= 0; i--)
-                        if ((cptr = local[i]) && DBufLength(&cptr->sendQ) > 0)
-                                (void)send_queued(cptr);
-        }
-        else if (fd >= 0 && (cptr = local[fd]) && DBufLength(&cptr->sendQ) > 0)
-                (void)send_queued(cptr);
+  if (0 == cptr) {
+    int i;
+    for (i = highest_fd; i >= 0; --i) {
+      if ((cptr = local[i]) && DBufLength(&cptr->sendQ) > 0)
+        send_queued(cptr);
+    }
+  }
+  else if (-1 < cptr->fd && DBufLength(&cptr->sendQ) > 0)
+    send_queued(cptr);
 
 #endif /* SENDQ_ALWAYS */
-} /* flush_connections() */
+}
 
 
 /*
