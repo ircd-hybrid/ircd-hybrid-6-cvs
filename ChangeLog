@@ -1,3 +1,49 @@
+db          2003/05/04 13:52:52 EDT	(20030504_0)
+
+  Modified files:
+    doc                  example.conf 
+    include              client.h config.h ircd.h res.h s_conf.h 
+                         send.h 
+    src                  adns.c channel.c ircd.c m_error.c 
+                         m_kline.c m_list.c m_locops.c m_set.c 
+                         m_unkline.c m_who.c m_whois.c 
+                         messages.tab messages_cust.tab 
+                         mtrie_conf.c parse.c s_auth.c s_conf.c 
+                         s_user.c send.c 
+  Log:
+  - "3l3tt" code has no business being in hybrid-6 as a separate patch yes
+    but not in baseline.
+  
+  Revision  Changes    Path
+  1.37      +0 -22     ircd-hybrid-6/doc/example.conf
+  1.63      +14 -90    ircd-hybrid-6/include/client.h
+  1.155     +2 -44     ircd-hybrid-6/include/config.h
+  1.24      +1 -4      ircd-hybrid-6/include/ircd.h
+  1.18      +2 -2      ircd-hybrid-6/include/res.h
+  1.64      +0 -17     ircd-hybrid-6/include/s_conf.h
+  1.17      +1 -3      ircd-hybrid-6/include/send.h
+  1.12      +6 -6      ircd-hybrid-6/src/adns.c
+  1.236     +15 -34    ircd-hybrid-6/src/channel.c
+  1.167     +0 -3      ircd-hybrid-6/src/ircd.c
+  1.7       +11 -36    ircd-hybrid-6/src/m_error.c
+  1.76      +24 -42    ircd-hybrid-6/src/m_kline.c
+  1.5       +31 -61    ircd-hybrid-6/src/m_list.c
+  1.4       +44 -38    ircd-hybrid-6/src/m_locops.c
+  1.9       +3 -19     ircd-hybrid-6/src/m_set.c
+  1.48      +0 -2      ircd-hybrid-6/src/m_unkline.c
+  1.5       +3 -20     ircd-hybrid-6/src/m_who.c
+  1.9       +15 -51    ircd-hybrid-6/src/m_whois.c
+  1.26      +1 -1      ircd-hybrid-6/src/messages.tab
+  1.25      +1 -1      ircd-hybrid-6/src/messages_cust.tab
+  1.90      +0 -2      ircd-hybrid-6/src/mtrie_conf.c
+  1.49      +9 -12     ircd-hybrid-6/src/parse.c
+  1.55      +2 -2      ircd-hybrid-6/src/s_auth.c
+  1.239     +1 -119    ircd-hybrid-6/src/s_conf.c
+  1.251     +26 -80    ircd-hybrid-6/src/s_user.c
+  1.114     +2 -2      ircd-hybrid-6/src/send.c
+
+
+
 androsyn    2003/04/06 17:42:04 EDT	(20030406_1)
 
   Modified files:
