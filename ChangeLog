@@ -1,3 +1,15 @@
+ievil       2003/06/17 22:29:28 EDT	(20030618_3)
+
+  Modified files:
+    include              config.h 
+  Log:
+  Change the default for operspy to be undefined
+  
+  Revision  Changes    Path
+  1.164     +1 -1      ircd-hybrid-6/include/config.h
+
+
+
 ievil       2003/06/17 21:49:02 EDT	(20030618_2)
 
   Added files:
