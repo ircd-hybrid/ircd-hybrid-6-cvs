@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.34 1999/07/18 23:27:20 tomh Exp $
+ * $Id: res.c,v 1.35 1999/07/19 00:44:24 tomh Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
@@ -248,6 +248,37 @@ static  struct  resinfo {
   int  re_shortttl;
   int  re_unkrep;
 } reinfo;
+
+/*
+ * From bind 8.3, this isn't in earlier versions of bind
+ *
+ * int
+ * res_isourserver(ina)
+ *      looks up "ina" in _res.ns_addr_list[]
+ * returns:
+ *      0  : not found
+ *      >0 : found
+ * author:
+ *      paul vixie, 29may94
+ */
+static int
+res_ourserver(const struct __res_state* statp, const struct sockaddr_in *inp) 
+{
+  struct sockaddr_in ina;
+  int ns;
+
+  ina = *inp;
+  for (ns = 0;  ns < statp->nscount;  ns++) {
+    const struct sockaddr_in *srv = &statp->nsaddr_list[ns];
+
+    if (srv->sin_family == ina.sin_family &&
+         srv->sin_port == ina.sin_port &&
+         (srv->sin_addr.s_addr == INADDR_ANY ||
+          srv->sin_addr.s_addr == ina.sin_addr.s_addr))
+             return (1);
+  }
+  return (0);
+}
 
 /*
  * start_resolver - do everything we need to read the resolv.conf file
@@ -967,7 +998,7 @@ void get_res(void)
   /*
    * check against possibly fake replies
    */
-  if (!res_isourserver(&sin)) {
+  if (!res_ourserver(&_res, &sin)) {
     ++reinfo.re_unkrep;
     return;
   }
