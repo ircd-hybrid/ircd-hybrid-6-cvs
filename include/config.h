@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.62 1999/07/17 03:29:05 db Exp $
+ * $Id: config.h,v 1.63 1999/07/17 04:04:07 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -946,15 +946,6 @@
                                      compiled, which attempts to remove this
                                      behaviour (apollo sr10.1/bsd4.3 needs
                                      this) */
-
-#define HELPFILE HPATH
-#define MOTD MPATH
-#define	MYNAME SPATH
-#define	CONFIGFILE CPATH
-#ifdef KPATH
-#define KLINEFILE  KPATH
-#endif
-#define	IRCD_PIDFILE PPATH
 
 #define MAX_CLIENTS INIT_MAXCLIENTS
 

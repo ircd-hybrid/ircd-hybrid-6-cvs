@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.63 1999/07/17 02:41:19 tomh Exp $
+ *  $Id: s_bsd.c,v 1.64 1999/07/17 04:04:10 db Exp $
  */
 #include "s_bsd.h"
 #include "listener.h"
@@ -379,26 +379,6 @@ void init_sys()
   return;
 }
 
-void        write_pidfile()
-{
-#ifdef IRCD_PIDFILE
-  int fd;
-  char buff[20];
-  if ((fd = open(IRCD_PIDFILE, O_CREAT|O_WRONLY, 0600))>=0)
-    {
-      ircsprintf(buff,"%5d\n", (int)getpid());
-      if (write(fd, buff, strlen(buff)) == -1)
-        Debug((DEBUG_NOTICE,"Error writing to pid file %s",
-               IRCD_PIDFILE));
-      close(fd);
-      return;
-    }
-#ifdef        DEBUGMODE
-  else
-    Debug((DEBUG_NOTICE,"Error opening pid file %s", IRCD_PIDFILE));
-#endif
-#endif
-}
                 
 /*
  * Initialize the various name strings used to store hostnames. This is set

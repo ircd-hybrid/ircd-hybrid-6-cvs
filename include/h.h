@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.39 1999/07/16 09:57:53 db Exp $
+ * $Id: h.h,v 1.40 1999/07/17 04:04:08 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -131,7 +131,7 @@ extern	int	utmp_close (int);
 extern	void	restart (char *);
 extern	void	send_channel_modes (aClient *, aChannel *);
 extern	void	server_reboot (void);
-extern	void	terminate (void), write_pidfile (void);
+extern	void	terminate (void);
 
 extern	int	send_queued (aClient *);
 
