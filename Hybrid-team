@@ -1,4 +1,4 @@
-$Id: Hybrid-team,v 1.29 2002/01/18 00:01:51 db Exp $
+$Id: Hybrid-team,v 1.30 2002/04/03 05:28:25 db Exp $
 
   The hybrid team is a group of ircd coders who were frustrated
 with the instability and all-out "dirtiness" of the EFnet ircd's
@@ -57,7 +57,7 @@ Riedel        Dennis Vink        <vink@vuurwerk.nl>
 Seaner        Sean McVeigh       <sdlmcvei@uwaterloo.ca>
 Shadowfax     Michael Pearce     <mpearce@varner.com>
 Slowaris      Ryan Parker        <rjp@wpmedia.com>
-Taner         Taner Halicioglu   <taner@cerf.net>
+Taner         Taner Halicioglu   <ircd@taner.net>
 ThemBones     Brian Kraemer      <kraemer@u.washington.edu>
 White_Dragon  Chip Norkus        <wd@dal.net>
 WintrHawk     Jake Khuon         <khuon@GCtr.Net>
