@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.81 1999/07/17 04:04:10 db Exp $
+ * $Id: ircd.c,v 1.82 1999/07/17 04:52:59 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -1182,9 +1182,6 @@ time_t io_loop(time_t delay)
   static long	lastrecvK	= 0;
   static int	lrv		= 0;
   time_t lasttimeofday;
-#ifdef DEBUGMODE
-  static int io_loop_count=0;
-#endif
 
   lasttimeofday = timeofday;
   if((timeofday = time(NULL)) == -1)
@@ -1310,13 +1307,6 @@ time_t io_loop(time_t delay)
    * flush any data to servers.
    *	-Taner
    */
-
-  Debug((DEBUG_DEBUG,"read_message io_loop_count %d call at: %s %d",
-	 io_loop_count,myctime(NOW), NOW));
-
-#ifdef DEBUGMODE
-  io_loop_count++;
-#endif
 
 #ifndef NO_PRIORITY
   (void)read_message(0, &serv_fdlist);
