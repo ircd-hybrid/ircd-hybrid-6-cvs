@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_ltrace.c,v 1.3 2000/10/05 00:13:05 lusky Exp $
+ *   $Id: m_ltrace.c,v 1.4 2000/11/21 06:49:30 lusky Exp $
  */
 #include "m_commands.h"
 #include "class.h"
@@ -115,6 +115,11 @@ int     m_ltrace(struct Client *cptr,
   
   if (check_registered(sptr))
     return 0;
+
+#ifdef SERVERHIDE
+  if (!IsAnOper(sptr))
+    return 0;
+#endif
 
   if (parc > 2)
     if (hunt_server(cptr, sptr, ":%s LTRACE %s :%s",

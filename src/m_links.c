@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_links.c,v 1.3 2000/07/20 03:58:23 lusky Exp $
+ *   $Id: m_links.c,v 1.4 2000/11/21 06:49:29 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -203,7 +203,11 @@ int m_links(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 
           sendto_one(sptr, form_str(RPL_LINKS),
                     me.name, parv[0], acptr->name, acptr->serv->up,
+#ifdef SERVERHIDE
+                     0, p);
+#else
                     acptr->hopcount, p);
+#endif
         }
 
     }

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kill.c,v 1.6 1999/09/08 04:41:52 lusky Exp $
+ *   $Id: m_kill.c,v 1.7 2000/11/21 06:49:29 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -294,7 +294,12 @@ int m_kill(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
   ** set in any other place)
   */
   if (MyConnect(acptr) && MyConnect(sptr) && IsAnOper(sptr))
-    ircsprintf(buf2, "Local kill by %s (%s)", sptr->name,
+#ifdef SERVERHIDE
+    ircsprintf(buf2, "Killed (%s): %s",
+#else
+    ircsprintf(buf2, "Local kill by %s (%s)",
+#endif
+                     sptr->name,
                      BadPtr(parv[2]) ? sptr->name : parv[2]);
   else
     {

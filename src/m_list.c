@@ -3,7 +3,7 @@
  *   Copyright (C) 1990 Jarkko Oikarinen and
  *                      University of Oulu, Co Center
  *
- * $Id: m_list.c,v 1.2 2000/10/06 03:00:59 lusky Exp $ 
+ * $Id: m_list.c,v 1.3 2000/11/21 06:49:30 lusky Exp $ 
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -143,13 +143,6 @@ int     m_list(struct Client *cptr,
       ClearDoingList(sptr);   /* yupo, its over */
       return 0;
     }   
-          
-
-  /* Don't route list, no need for it - Dianora */
-  /*
-    if (hunt_server(cptr, sptr, ":%s LIST %s %s", 2, parc, parv))
-      return 0;
-      */
 
   p = strchr(parv[1],',');
   if(p)

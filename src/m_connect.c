@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_connect.c,v 1.4 1999/07/31 08:22:58 tomh Exp $
+ *   $Id: m_connect.c,v 1.5 2000/11/21 06:49:29 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -203,11 +203,19 @@ int m_connect(struct Client* cptr, struct Client* sptr, int parc, char* parv[])
    * C:line and a valid port in the C:line
    */
   if (connect_server(aconf, sptr, 0))
-     sendto_one(sptr, ":%s NOTICE %s :*** Connecting to %s[%s].%d",
-                me.name, parv[0], aconf->host, aconf->name, aconf->port);
+#ifdef SERVERHIDE
+    sendto_one(sptr, ":%s NOTICE %s :*** Connecting to %s[%s].%d",
+               me.name, parv[0], "255.255.255.255", aconf->name, aconf->port);
   else
-      sendto_one(sptr, ":%s NOTICE %s :*** Couldn't connect to %s.%d",
-                 me.name, parv[0], aconf->host,aconf->port);
+    sendto_one(sptr, ":%s NOTICE %s :*** Couldn't connect to %s.%d",
+               me.name, parv[0], "255.255.255.255",aconf->port);
+#else
+    sendto_one(sptr, ":%s NOTICE %s :*** Connecting to %s[%s].%d",
+               me.name, parv[0], aconf->host, aconf->name, aconf->port);
+  else
+    sendto_one(sptr, ":%s NOTICE %s :*** Couldn't connect to %s.%d",
+               me.name, parv[0], aconf->host,aconf->port);
+#endif
   /*
    * client is either connecting with all the data it needs or has been
    * destroyed

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_stats.c,v 1.7 2000/10/29 20:55:25 lusky Exp $
+ *  $Id: m_stats.c,v 1.8 2000/11/21 06:49:30 lusky Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "class.h"       /* report_classes */
@@ -257,6 +257,15 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       valid_stats++;
       break;
     case 'C' : case 'c' :
+#ifdef SERVERHIDE
+      if (!IsAnOper(sptr))
+        {
+          ignore_request++;
+          valid_stats++;
+          break;
+        }
+      else
+#endif
       report_configured_links(sptr, CONF_CONNECT_SERVER|CONF_NOCONNECT_SERVER);
       valid_stats++;
       break;
@@ -294,6 +303,15 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       break;
 
     case 'H' : case 'h' :
+#ifdef SERVERHIDE
+      if (!IsAnOper(sptr))
+        {
+          ignore_request++;
+          valid_stats++;
+          break;
+        }
+      else
+#endif
       report_configured_links(sptr, CONF_HUB|CONF_LEAF);
       valid_stats++;
       break;

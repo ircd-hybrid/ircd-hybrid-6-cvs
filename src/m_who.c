@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_who.c,v 1.1 1999/07/30 03:47:16 db Exp $
+ *   $Id: m_who.c,v 1.2 2000/11/21 06:49:31 lusky Exp $
  */
 
 #include "m_commands.h"
@@ -118,9 +118,18 @@ static  void    do_who(struct Client *sptr,
     }
   *p = '\0';
   sendto_one(sptr, form_str(RPL_WHOREPLY), me.name, sptr->name,
-             (repchan) ? (repchan->chname) : "*", acptr->username,
-             acptr->host, acptr->user->server, acptr->name,
-             status, acptr->hopcount, acptr->info);
+             (repchan) ? (repchan->chname) : "*",
+             acptr->username,
+             acptr->host,
+#ifdef SERVERHIDE
+             IsAnOper(sptr) ? acptr->user->server : NETWORK_NAME,
+#else
+             acptr->user->server,
+#endif
+             acptr->name,
+             status,
+             acptr->hopcount,
+             acptr->info);
 }
 
 
@@ -149,13 +158,6 @@ int     m_who(struct Client *cptr,
   if (sptr->user)
     if ((lp = sptr->user->channel))
       mychannel = lp->value.chptr;
-
-  /* Allow use of m_who without registering */
-  /* Not anymore...- Comstud */
-  /* taken care of in parse.c now - Dianora */
-     /*  if (check_registered_user(sptr))
-    return 0;
-    */
 
   /*
   **  Following code is some ugly hacking to preserve the

@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.189 2000/11/18 19:11:13 lusky Exp $
+ *  $Id: s_conf.c,v 1.190 2000/11/21 06:49:31 lusky Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -297,7 +297,11 @@ void report_configured_links(struct Client* sptr, int mask)
             if(IsAnOper(sptr))
               sendto_one(sptr, form_str(p->rpl_stats), me.name,
                          sptr->name, c,
+#ifdef SERVERHIDE
+                         "255.255.255.255",
+#else
                          host,
+#endif
                          name,
                          port,
                          get_conf_class(tmp),
@@ -305,7 +309,7 @@ void report_configured_links(struct Client* sptr, int mask)
             else
               sendto_one(sptr, form_str(p->rpl_stats), me.name,
                          sptr->name, c,
-                         "*@127.0.0.1",
+                         "*@255.255.255.255",
                          name,
                          port,
                          get_conf_class(tmp));
@@ -324,8 +328,15 @@ void report_configured_links(struct Client* sptr, int mask)
                          oper_flags_as_string((int)tmp->hold));
             else
               sendto_one(sptr, form_str(p->rpl_stats), me.name,
-                         sptr->name, p->conf_char,
-                         user, host, name,
+                         sptr->name,
+                         p->conf_char,
+                         user,
+#ifdef SERVERHIDE
+                         IsAnOper(sptr) ? host : "255.255.255.255",
+#else
+                         host,
+#endif
+                         name,
                          "0",
                          get_conf_class(tmp),
                          "");

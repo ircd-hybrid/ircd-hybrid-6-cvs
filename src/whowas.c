@@ -16,7 +16,7 @@
 *   along with this program; if not, write to the Free Software
 *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 *
-*   $Id: whowas.c,v 1.32 1999/08/01 06:47:25 tomh Exp $
+*   $Id: whowas.c,v 1.33 2000/11/21 06:49:33 lusky Exp $
 */
 #include "whowas.h"
 #include "client.h"
@@ -220,8 +220,15 @@ int     m_whowas(aClient *cptr,
                      temp->hostname,
                      temp->realname);
           sendto_one(sptr, form_str(RPL_WHOISSERVER),
-                     me.name, parv[0], temp->name,
-                     temp->servername, myctime(temp->logoff));
+                     me.name,
+                     parv[0],
+                     temp->name,
+#ifdef SERVERHIDE
+                     IsAnOper(sptr) ? temp->servername : NETWORK_NAME,
+#else
+                     temp->servername,
+#endif
+                     myctime(temp->logoff));
           cur++;
           found++;
         }

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h.dist,v 1.77 2000/10/29 20:55:21 lusky Exp $
+ * $Id: config.h.dist,v 1.78 2000/11/21 06:49:22 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -117,6 +117,24 @@
 #define PPATH   "ircd.pid"
 #define HPATH   "opers.txt"
 #define OPATH   "opers.motd"
+
+/* SERVERHIDE
+ * Define this to prevent users from seeing what server a user is on.
+ * It also hide IP address in STATS commands and various notices, disables
+ * TRACE and LTRACE, and prevents hunting by nickname for nonopers.
+ */
+#undef SERVERHIDE
+
+/* NETWORK_NAME
+ * Displayed in place of the servername when SERVERHIDE is enabled
+ */   
+#define NETWORK_NAME "EFnet"
+
+/* NETWORK_DESC
+ * Displayed in place of the server info when SERVERHIDE is enabled
+ */
+#define NETWORK_DESC "Eris Free Network"
+
 
 /* TS_MAX_DELTA and TS_WARN_DELTA -  allowed delta for TS when another
  * server connects.
