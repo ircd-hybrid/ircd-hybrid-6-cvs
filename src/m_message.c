@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_message.c,v 1.11 2000/09/10 08:42:49 lusky Exp $
+ *   $Id: m_message.c,v 1.12 2001/12/01 21:17:40 leeh Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -389,9 +389,11 @@ static  int     m_message(struct Client *cptr,
   **
   ** Armin, 8Jun90 (gruner@informatik.tu-muenchen.de)
   */
-  if ((*nick == '$' || *nick == '#'))
+  if (*nick == '$')
     {
-
+      if((*(nick+1) == '$' || *(nick+1) == '#'))
+        nick++;
+      
       if(!IsAnOper(sptr))
         {
           sendto_one(sptr, form_str(ERR_NOSUCHNICK),
@@ -420,7 +422,7 @@ static  int     m_message(struct Client *cptr,
                           sptr, nick + 1,
                           (*nick == '#') ? MATCH_HOST :
                           MATCH_SERVER,
-                          ":%s %s %s :%s", parv[0],
+                          ":%s %s $%s :%s", parv[0],
                           cmd, nick, parv[2]);
       msgs++;
       continue;
