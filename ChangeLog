@@ -1,3 +1,22 @@
+ievil       2003/10/13 10:51:37 EDT	(20031013_11)
+
+  Modified files:
+    include              client.h s_conf.h 
+    src                  mtrie_conf.c parse.c s_conf.c s_user.c 
+  Log:
+  implemented and added a variant of xyst's i-line canflood. Good for
+  spamtrap type bots.
+  
+  Revision  Changes    Path
+  1.75      +3 -0      ircd-hybrid-6/include/client.h
+  1.69      +2 -0      ircd-hybrid-6/include/s_conf.h
+  1.94      +6 -0      ircd-hybrid-6/src/mtrie_conf.c
+  1.54      +2 -2      ircd-hybrid-6/src/parse.c
+  1.250     +3 -0      ircd-hybrid-6/src/s_conf.c
+  1.269     +7 -0      ircd-hybrid-6/src/s_user.c
+
+
+
 ievil       2003/10/13 07:38:40 EDT	(20031013_10)
 
   Modified files:
