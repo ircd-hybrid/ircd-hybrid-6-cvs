@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: s_err.h,v 1.18 1999/06/11 03:34:34 lusky Exp $
+ * $Id: s_err.h,v 1.19 1999/06/14 04:45:44 db Exp $
  *
  */
 
@@ -239,7 +239,7 @@ static	char *	replies[] = {
 /* 214 RPL_STATSNLINE, */	":%s 214 %s %c %s * %s %d %d",
 /* 215 RPL_STATSILINE, */	":%s 215 %s %c %s * %s@%s %d %d",
 /* 216 RPL_STATSKLINE, */	":%s 216 %s %c %s * %s %s",
-/* 217 RPL_STATSQLINE, */	":%s 217 %s %s %s * * 0 0",
+/* 217 RPL_STATSQLINE, */	":%s 217 %s %s %s %s %s 0 0",
 /* 218 RPL_STATSYLINE, */	":%s 218 %s %c %d %d %d %d %ld",
 /* 219 RPL_ENDOFSTATS, */	":%s 219 %s %c :End of /STATS report",
 /* 220 */	 (char *)NULL,

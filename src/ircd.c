@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.44 1999/05/27 01:30:58 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.45 1999/06/14 04:45:46 db Exp $";
 #endif
 
 #include "struct.h"
@@ -664,27 +664,6 @@ static	time_t	check_pings(time_t currenttime)
 	      dying_clients[die_index] = (aClient *)NULL;
 	      continue;		/* and go examine next fd/cptr */
 	    }
-	}
-#endif
-
-#if defined(R_LINES) && defined(R_LINES_OFTEN)
-      /*
-       * this is used for KILL lines with time restrictions
-       * on them - send a message to the user being killed
-       * first.
-       * *** Moved up above  -taner ***
-       *
-       * Moved here, no more rflag -Dianora 
-       */
-      if (IsPerson(cptr) && find_restrict(cptr))
-	{
-	  sendto_ops("Restricting %s, closing link.",
-		     get_client_name(cptr,FALSE));
-
-	  dying_clients[die_index] = cptr;
-	  dying_clients_reason[die_index++] = "you have been R-lined";
-	  dying_clients[die_index] = (aClient *)NULL;
-	  continue;			/* and go examine next fd/cptr */
 	}
 #endif
 

@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.103 1999/06/13 01:13:33 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.104 1999/06/14 04:45:47 db Exp $";
 #endif
 
 
@@ -168,6 +168,7 @@ static int isnumber(char *);	/* return 0 if not, else return number */
 static char *cluster(char *);
 static void set_autoconn(aClient *,char *,char *,int);
 static void report_specials(aClient *,int,int);
+extern void report_qlines(aClient *);
 static int bad_tld(char *);
 
 int send_motd(aClient *,aClient *,int, char **,aMessageFile *); 
@@ -1519,20 +1520,18 @@ static	void	report_specials(aClient *sptr,int flags,int numeric)
   static	char	null[] = "<NULL>";
   aConfItem *this_conf;
   aConfItem *aconf;
-  char	*pass, *name;
+  char	*pass, *name, *host, *mask;
 
   if(flags & CONF_XLINE)
     this_conf = x_conf;
   else if(flags & CONF_ULINE)
     this_conf = u_conf;
-  else if(flags & CONF_QUARANTINED_NICK)
-    this_conf = q_conf;
   else return;
 
   for (aconf = this_conf; aconf; aconf = aconf->next)
     if (aconf->status & flags)
       {
-	name = BadPtr(aconf->name) ? null : aconf->name;
+	name = BadPtr(aconf->name)   ? null : aconf->name;
 	pass = BadPtr(aconf->passwd) ? null : aconf->passwd;
 
 	sendto_one(sptr, rpl_str(numeric),
@@ -1540,7 +1539,6 @@ static	void	report_specials(aClient *sptr,int flags,int numeric)
 		   sptr->name,
 		   name,
 		   pass);
-
       }
 }
 
@@ -1783,7 +1781,7 @@ int	m_stats(aClient *cptr,
 		   me.name, parv[0]);
       else
 	{
-	  report_specials(sptr,CONF_QUARANTINED_NICK,RPL_STATSQLINE);
+	  report_qlines(sptr);
 	  valid_stats++;
 	}
       break;
