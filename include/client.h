@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.26 1999/07/20 00:43:55 db Exp $
+ * $Id: client.h,v 1.27 1999/07/20 03:25:02 db Exp $
  */
 #ifndef	INCLUDED_client_h
 #define INCLUDED_client_h
@@ -310,6 +310,7 @@ struct Client
 #define	FLAGS_WALLOP       0x0100 /* send wallops to them */
 #define FLAGS_OPERWALL     0x0200 /* Operwalls */
 #define	FLAGS_INVISIBLE    0x0400 /* makes user invisible */
+#define FLAGS_BOTS         0x0800 /* shows bots */
 /* user information flags, only settable by remote mode or local oper */
 #define	FLAGS_OPER	   0x4000 /* Operator */
 #define	FLAGS_LOCOP        0x8000 /* Local operator -- SRB */

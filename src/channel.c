@@ -34,7 +34,7 @@
  *		  mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.122 1999/07/20 01:20:41 db Exp $
+ * $Id: channel.c,v 1.123 1999/07/20 03:25:03 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -2788,7 +2788,7 @@ int	m_join(aClient *cptr,
 	    {
 	      if(SPAMNUM && (sptr->join_leave_count >= SPAMNUM))
 		{
-		  sendto_ops_flags(FLAGS_SPY,
+		  sendto_ops_flags(FLAGS_BOTS,
 				     "User %s (%s@%s) is a possible spambot",
 				     sptr->name,
 				     sptr->username, sptr->host);
@@ -2887,7 +2887,7 @@ int	m_join(aClient *cptr,
  
               if(sptr->oper_warn_count_down == 0)
                 {
-                  sendto_ops_flags(FLAGS_SPY,
+                  sendto_ops_flags(FLAGS_BOTS,
 		    "User %s (%s@%s) trying to join %s is a possible spambot",
                              sptr->name,
                              sptr->username,
@@ -3099,7 +3099,7 @@ int	m_part(aClient *cptr,
 	{
 	  if(SPAMNUM && (sptr->join_leave_count >= SPAMNUM))
 	    {
-	      sendto_ops_flags(FLAGS_SPY,
+	      sendto_ops_flags(FLAGS_BOTS,
 			       "User %s (%s@%s) is a possible spambot",
 			       sptr->name,
 			       sptr->username, sptr->host);
