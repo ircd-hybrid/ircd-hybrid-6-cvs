@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.2 1998/09/21 20:32:18 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1341,6 +1341,7 @@ aClient	*add_connection(aClient *cptr, int fd)
 	}
 #ifdef SHOW_HEADERS
       send(fd, REPORT_DO_DNS, R_do_dns, 0);
+      /*      sendheader(acptr, REPORT_DO_DNS, R_do_dns); */
 #endif
       lin.flags = ASYNC_CLIENT;
       lin.value.cptr = acptr;
@@ -1351,7 +1352,10 @@ aClient	*add_connection(aClient *cptr, int fd)
 	SetDNS(acptr);
 #ifdef SHOW_HEADERS
       else
-	send(fd, REPORT_FIN_DNSC, R_fin_dnsc, 0);
+	{
+	  /*	  sendheader(acptr, REPORT_FIN_DNSC, R_fin_dnsc); */
+	  send(fd, REPORT_FIN_DNSC, R_fin_dnsc, 0);
+	}
 #endif
       nextdnscheck = 1;
     }
@@ -1889,6 +1893,7 @@ int read_packet(aClient *cptr, int msg_ready)
 	  if (find_dline(addr.sin_addr))
 	    {
 	      ircstp->is_ref++;
+	      /* Can't use orabidoo's sendheader here -Dianora */
 #ifdef REPORT_DLINE_TO_USER
 	      send(fd, REPORT_DLINED, strlen(REPORT_DLINED), 0);
 #endif
@@ -2320,6 +2325,7 @@ int	read_message(time_t delay)
 	    {
 	      ircstp->is_ref++;
 #ifdef REPORT_DLINE_TO_USER
+	      /* can't use orabidoo's sendheader here */
 	      send(fd, REPORT_DLINED, strlen(REPORT_DLINED), 0);
 #endif
 	      (void)close(newfd);
@@ -2750,7 +2756,7 @@ static	void	do_dns_async()
 	  {
 	    del_queries((char *)cptr);
 #ifdef SHOW_HEADERS
-	    send(cptr->fd, REPORT_FIN_DNS, R_fin_dns, 0);
+	    sendheader(cptr, REPORT_FIN_DNS, R_fin_dns);
 #endif
 	    ClearDNS(cptr);
 	    cptr->hostp = hp;
