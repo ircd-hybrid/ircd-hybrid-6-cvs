@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.43 1999/07/31 08:23:00 tomh Exp $
+ *   $Id: s_auth.c,v 1.44 1999/08/17 05:44:57 lusky Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -183,8 +183,8 @@ static void auth_dns_callback(void* vptr, struct DNSReply* reply)
      * the ip#(s) for the socket is listed for the host.
      */
     for (i = 0; hp->h_addr_list[i]; ++i) {
-      if (0 == memcmp(hp->h_addr_list[i], (char*) &auth->client->ip,
-                      sizeof(struct in_addr)))
+      if (memcmp(hp->h_addr_list[i], (char*) &auth->client->ip,
+                      sizeof(struct in_addr)) == 0)
          break;
     }
     if (!hp->h_addr_list[i])
