@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_commands.h,v 1.11 2004/05/23 16:25:20 ievil Exp $
+ * $Id: m_commands.h,v 1.12 2004/05/23 16:52:50 ievil Exp $
  */
 #ifndef INCLUDED_m_commands_h
 #define INCLUDED_m_commands_h
@@ -104,6 +104,7 @@ extern int m_htm(struct Client *,struct Client *,int,char **);
 extern int m_set(struct Client *,struct Client *,int,char **);
 extern int m_map(struct Client *,struct Client *,int,char **);
 extern int m_etrace(struct Client *,struct Client *,int,char **);
+extern int m_sinfo(struct Client *,struct Client *,int,char **);
 
 #endif /* INCLUDED_m_commands_h */
 
