@@ -18,7 +18,7 @@
  */
 
 #ifndef lint
-static  char rcsid[] = "@(#)$Id: s_zip.c,v 1.5 1998/12/19 05:57:51 db Exp $";
+static  char rcsid[] = "@(#)$Id: s_zip.c,v 1.6 1998/12/19 06:00:40 db Exp $";
 #endif
 
 #include "struct.h"
@@ -89,7 +89,7 @@ int	zip_init(aClient *cptr)
   cptr->zip->in->data_type = Z_ASCII;
   if (inflateInit(cptr->zip->in) != Z_OK)
     {
-      cptr->zip->out = (char *)NULL;
+      cptr->zip->out = NULL;
       return -1;
     }
 
