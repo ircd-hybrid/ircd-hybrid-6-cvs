@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.229 2001/12/10 02:56:29 jdc Exp $
+ *   $Id: s_serv.c,v 1.230 2002/04/15 22:38:22 lusky Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -282,8 +282,12 @@ time_t try_connections(time_t currenttime)
        * auto connects disabled, send message to ops and bail
        */
       if (connecting)
+#ifdef HIDE_SERVERS_IP
+        sendto_ops("Connection to %s not activated.", con_conf->name);
+#else
         sendto_ops("Connection to %s[%s] not activated.",
                  con_conf->name, con_conf->host);
+#endif
       sendto_ops("WARNING AUTOCONN is 0, autoconns are disabled");
       Debug((DEBUG_NOTICE,"Next connection check : %s", myctime(next)));
       return next;
