@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.40 2000/09/14 05:22:02 lusky Exp $
+ *   $Id: parse.c,v 1.41 2000/11/11 02:30:24 lusky Exp $
  */
 #include "parse.h"
 #include "channel.h"
@@ -102,7 +102,8 @@ int parse(aClient *cptr, char *buffer, char *bufend)
       for (i = 0; *ch && *ch != ' '; i++ )
 	{
 	  if (i < (sizeof(sender)-1))
-	    *s++ = *ch++; /* leave room for NULL */
+	    *s++ = *ch; /* leave room for NULL */
+	  ch++;
 	}
       *s = '\0';
       i = 0;

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_rehash.c,v 1.5 2000/06/09 01:59:07 lusky Exp $
+ *   $Id: m_rehash.c,v 1.6 2000/11/11 02:30:24 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -215,9 +215,9 @@ int m_rehash(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 #undef OUT
 
 #ifdef GLINES
-#define OUT "rehash one of :DNS TKLINES GLINES GC MOTD OMOTD DUMP"
+#define OUT "rehash one of :DNS TKLINES GLINES GC HELP MOTD OMOTD DUMP"
 #else
-#define OUT "rehash one of :DNS TKLINES GC MOTD OMOTD DUMP"
+#define OUT "rehash one of :DNS TKLINES GC HELP MOTD OMOTD DUMP"
 #endif
           sendto_one(sptr,":%s NOTICE %s : " OUT,me.name,sptr->name);
           return(0);
