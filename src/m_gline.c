@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.39 2000/08/10 04:40:16 lusky Exp $
+ *  $Id: m_gline.c,v 1.40 2000/08/25 00:20:46 lusky Exp $
  */
 #include "m_gline.h"
 #include "channel.h"
@@ -495,10 +495,10 @@ void flush_glines()
  * side effects - none
  */
 
-aConfItem *find_gkill(aClient* cptr)
+aConfItem *find_gkill(aClient* cptr, char* username)
 {
   assert(0 != cptr);
-  return (IsElined(cptr)) ? 0 : find_is_glined(cptr->host, cptr->username);
+  return (IsElined(cptr)) ? 0 : find_is_glined(cptr->host, username);
 }
 
 /*

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.54 2000/08/24 06:15:55 lusky Exp $
+ *  $Id: client.c,v 1.55 2000/08/25 00:20:45 lusky Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -365,7 +365,7 @@ time_t check_pings(time_t currenttime)
               if(IsPerson(cptr))
                 {
 #ifdef GLINES
-                  if( (aconf = find_gkill(cptr)) )
+                  if( (aconf = find_gkill(cptr,cptr->username)) )
                     {
                       if(IsElined(cptr))
                         {
