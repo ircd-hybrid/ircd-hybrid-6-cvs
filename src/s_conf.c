@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.252 2004/05/23 16:16:56 ievil Exp $
+ *  $Id: s_conf.c,v 1.253 2004/05/23 16:22:16 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -485,6 +485,12 @@ verify_access(struct Client *cptr, const char* username, char **preason)
                 }
             }
 #endif        /* GLINES */
+
+         if (IsMustResolve(aconf) && IsDigit(cptr->host[strlen(cptr->host)-1]))
+         {
+           sendto_one(cptr, ":%s NOTICE %s :*** Your IP must resolve to use this server", me.name, cptr->name);
+           return ( -1 );
+         }
 
           if(IsConfDoIdentd(aconf))
             SetNeedId(cptr);
@@ -1844,6 +1850,9 @@ static char *set_conf_flags(struct ConfItem *aconf,char *tmp)
           break;
         case '^':        /* is exempt from k/g lines */
           aconf->flags |= CONF_FLAGS_E_LINED;
+          break;
+        case '/':        /* clients host must resolve */
+          aconf->flags |= CONF_FLAGS_RESOLVE;
           break;
         case '&':        /* obsolete flag was "can run a bot" */
           break;

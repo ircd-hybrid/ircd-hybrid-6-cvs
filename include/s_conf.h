@@ -18,7 +18,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *   $Id: s_conf.h,v 1.69 2003/10/13 14:51:33 ievil Exp $
+ *   $Id: s_conf.h,v 1.70 2004/05/23 16:22:14 ievil Exp $
  */
 
 #ifndef INCLUDED_config_h
@@ -106,32 +106,33 @@ typedef struct QlineItem {
 
 /* aConfItem->flags */
 
-#define CONF_FLAGS_LIMIT_IP             0x0001
-#define CONF_FLAGS_NO_TILDE             0x0002
-#define CONF_FLAGS_NEED_IDENTD          0x0004
-#define CONF_FLAGS_PASS_IDENTD          0x0008
-#define CONF_FLAGS_NOMATCH_IP           0x0010
-#define CONF_FLAGS_E_LINED              0x0020
-#define CONF_FLAGS_F_LINED              0x0080
-#define CONF_FLAGS_EXEMPTGLINE          0x2000
-#define CONF_FLAGS_CANFLOOD             0x4000
+#define CONF_FLAGS_LIMIT_IP             0x000001
+#define CONF_FLAGS_NO_TILDE             0x000002
+#define CONF_FLAGS_NEED_IDENTD          0x000004
+#define CONF_FLAGS_PASS_IDENTD          0x000008
+#define CONF_FLAGS_NOMATCH_IP           0x000010
+#define CONF_FLAGS_E_LINED              0x000020
+#define CONF_FLAGS_F_LINED              0x000080
+#define CONF_FLAGS_EXEMPTGLINE          0x002000
+#define CONF_FLAGS_CANFLOOD             0x004000
 
 #ifdef IDLE_CHECK
-#define CONF_FLAGS_IDLE_LINED           0x0100
+#define CONF_FLAGS_IDLE_LINED           0x000100
 #endif
 
-#define CONF_FLAGS_DO_IDENTD            0x0200
-#define CONF_FLAGS_ALLOW_AUTO_CONN      0x0400
-#define CONF_FLAGS_ZIP_LINK             0x0800
-#define CONF_FLAGS_SPOOF_IP             0x1000
+#define CONF_FLAGS_DO_IDENTD            0x000200
+#define CONF_FLAGS_ALLOW_AUTO_CONN      0x000400
+#define CONF_FLAGS_ZIP_LINK             0x000800
+#define CONF_FLAGS_SPOOF_IP             0x001000
 
 #ifdef LITTLE_I_LINES
-#define CONF_FLAGS_LITTLE_I_LINE        0x8000
+#define CONF_FLAGS_LITTLE_I_LINE        0x008000
 #endif
-
+#define CONF_FLAGS_RESOLVE              0x010000
 
 /* Macros for aConfItem */
 
+#define IsMustResolve(x)        ((x)->flags & CONF_FLAGS_RESOLVE)
 #define IsLimitIp(x)            ((x)->flags & CONF_FLAGS_LIMIT_IP)
 #define IsNoTilde(x)            ((x)->flags & CONF_FLAGS_NO_TILDE)
 #define IsNeedIdentd(x)         ((x)->flags & CONF_FLAGS_NEED_IDENTD)

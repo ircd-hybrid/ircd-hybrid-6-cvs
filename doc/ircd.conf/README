@@ -34,7 +34,4 @@ ylines.conf    -   Y-lines or connection block lines.
 I hope that by including these files that someone might benefit from them.
 Take care and enjoy ircd-hybrid-6.
 
-
-Arnvid Karstad - ievil@isd.no
-
-$Id: README,v 1.2 2004/03/09 02:38:15 db Exp $
+$Id: README,v 1.3 2004/05/23 16:22:12 ievil Exp $
