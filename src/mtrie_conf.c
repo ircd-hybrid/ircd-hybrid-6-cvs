@@ -59,12 +59,8 @@
 #include "mtrie_conf.h"
 #include "dline_conf.h"
 
-#if !defined(SYSV) && !defined(SOL20)
-#define memmove(x,y,N) bcopy(y,x,N)
-#endif
-
 #ifndef lint
-static char *rcs_version="$Id: mtrie_conf.c,v 1.43 1999/07/03 20:28:11 tomh Exp $";
+static char *rcs_version="$Id: mtrie_conf.c,v 1.44 1999/07/05 21:53:04 db Exp $";
 #endif /* lint */
 
 #define MAXPREFIX (HOSTLEN+USERLEN+15)
