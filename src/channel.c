@@ -34,7 +34,7 @@
  *                mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.185 2000/11/24 17:36:29 lusky Exp $
+ * $Id: channel.c,v 1.186 2000/11/27 04:11:49 lusky Exp $
  */
 #include "channel.h"
 #include "client.h"
@@ -1702,13 +1702,29 @@ void set_channel_mode(struct Client *cptr,
               if (errsent(SM_ERR_RPL_B, &errors_sent))
                 break;
 #ifdef BAN_INFO
-              for (lp = chptr->banlist; lp; lp = lp->next)
-                sendto_one(cptr, form_str(RPL_BANLIST),
-                           me.name, cptr->name,
-                           chptr->chname,
-                           lp->value.banptr->banstr,
-                           lp->value.banptr->who,
-                           lp->value.banptr->when);
+#ifdef HIDE_OPS
+	      if(chan_op)
+#endif
+		{
+		  for (lp = chptr->banlist; lp; lp = lp->next)
+		    sendto_one(cptr, form_str(RPL_BANLIST),
+			       me.name, cptr->name,
+			       chptr->chname,
+			       lp->value.banptr->banstr,
+			       lp->value.banptr->who,
+			       lp->value.banptr->when);
+		}
+#ifdef HIDE_OPS
+	      else
+		{
+		  for (lp = chptr->banlist; lp; lp = lp->next)
+		    sendto_one(cptr, form_str(RPL_BANLIST),
+			       me.name, cptr->name,
+			       chptr->chname,
+			       lp->value.banptr->banstr,
+			       "*",0);
+		}
+#endif
 #else 
               for (lp = chptr->banlist; lp; lp = lp->next)
                 sendto_one(cptr, form_str(RPL_BANLIST),

@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.43 2000/06/09 03:48:22 lusky Exp $
+ * $Id: client.h,v 1.44 2000/11/27 04:11:47 lusky Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -419,9 +419,9 @@ struct Client
 #define IsInvisible(x)          ((x)->umodes & FLAGS_INVISIBLE)
 #define SetInvisible(x)         ((x)->umodes |= FLAGS_INVISIBLE)
 #define ClearInvisible(x)       ((x)->umodes &= ~FLAGS_INVISIBLE)
-#define SendWallops(x)          ((x)->umodes & FLAGS_WALLOP)
+#define SendWallops(x)          (((x)->umodes & FLAGS_WALLOP) && IsAnOper(x))
 #define ClearWallops(x)         ((x)->umodes &= ~FLAGS_WALLOP)
-#define SendServNotice(x)       ((x)->umodes & FLAGS_SERVNOTICE)
+#define SendServNotice(x)       (((x)->umodes & FLAGS_SERVNOTICE) && IsAnOper(x))
 #define SendOperwall(x)         ((x)->umodes & FLAGS_OPERWALL)
 #define SendCConnNotice(x)      ((x)->umodes & FLAGS_CCONN)
 #define SendRejNotice(x)        ((x)->umodes & FLAGS_REJ)
