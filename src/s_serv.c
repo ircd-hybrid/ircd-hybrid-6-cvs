@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.40 1998/12/08 06:22:11 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.41 1998/12/09 17:46:35 db Exp $";
 #endif
 
 
@@ -1253,7 +1253,7 @@ int	m_info(aClient *cptr,
       
       sendto_one(sptr, rpl_str(RPL_INFO), me.name, parv[0], "");
 
-      if (IsAnOper(sptr) && MyConnect(sptr))
+      if (IsAnOper(sptr))
       {
 #ifdef ANTI_NICK_FLOOD
 	ircsprintf(outstr,
