@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.15 1998/11/16 16:37:08 db Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.16 1998/11/25 23:44:54 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1873,7 +1873,8 @@ int read_packet(aClient *cptr, int msg_ready)
 		    (char *)inetntoa((char *)&addr.sin_addr),
 		    sizeof(host));
 
-	  if (find_dline(addr.sin_addr))
+	  if (match_Dline(ntohl((unsigned long)addr.sin_addr.s_addr)))
+
 	    {
 	      ircstp->is_ref++;
 #ifdef REPORT_DLINE_TO_USER
@@ -2312,7 +2313,7 @@ int	read_message(time_t delay)
 		    (char *)inetntoa((char *)&addr.sin_addr),
 		    sizeof(host));
 
-	  if (find_dline(addr.sin_addr))
+	  if (match_Dline(ntohl((unsigned long)addr.sin_addr.s_addr)))
 	    {
 	      ircstp->is_ref++;
 #ifdef REPORT_DLINE_TO_USER

@@ -23,7 +23,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.7 1998/10/18 05:12:42 lusky Exp $
+ * $Id: h.h,v 1.8 1998/11/25 23:44:49 db Exp $
  *
  */
 
@@ -97,15 +97,8 @@ extern  aConfItem *find_is_glined(char *,char *);
 extern  aConfItem *find_is_klined(char *,char *,unsigned long);
 
 /* hash d lines */
-extern void clear_dline_hash_table();	/* called at startup by ircd.c */
-extern void add_to_dline_hash(aConfItem *);
-extern aConfItem *find_host_in_dline_hash(unsigned long,int);
-extern aConfItem *find_user_host_in_dline_hash(unsigned long,char *,int);
 unsigned long host_name_to_ip(char *, unsigned long *);
 extern aConfItem *find_dkill(aClient *cptr);
-extern void report_dline_hash(aClient *,int);
-extern void dhash_stats(aClient *,aClient *,int,char **,int);
-extern int find_dline(struct in_addr);
 
 extern  void	add_temp_kline(aConfItem *);
 extern  void	flush_temp_klines(void);

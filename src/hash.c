@@ -20,7 +20,7 @@
 #ifndef lint
 static char sccsid[] = "@(#)hash.c	2.10 03 Jul 1993 (C) 1991 Darren Reed";
 
-static char *rcs_version = "$Id: hash.c,v 1.3 1998/10/17 21:06:53 lusky Exp $";
+static char *rcs_version = "$Id: hash.c,v 1.4 1998/11/25 23:44:51 db Exp $";
 #endif
 
 #include "struct.h"
@@ -487,11 +487,6 @@ int	m_hash(aClient *cptr,aClient *sptr,int parc,char *parv[])
 	  iphash_stats(cptr,sptr,parc,parv,-1);
 	  return 0;
 	}
-      else if(!strcasecmp(parv[1],"dhash"))
-	{
-	  dhash_stats(cptr,sptr,parc,parv,-1);
-	  return 0;
-	}
       else if(!strcasecmp(parv[1],"Diphash"))
 	{
 	  tmptr = localtime(&NOW);
@@ -509,23 +504,6 @@ int	m_hash(aClient *cptr,aClient *sptr,int parc,char *parv[])
 	  iphash_stats(cptr,sptr,parc,parv,out);
 	  return 0;
 	}
-      else if(!strcasecmp(parv[1],"Ddhash"))
-	{
-	  tmptr = localtime(&NOW);
-	  strftime(timebuffer, MAX_DATE_STRING, "%y%m%d%H%M", tmptr);
-	  (void)sprintf(hash_log_file,"%s/hash/dhash.%s",
-			DPATH,timebuffer);
-
-	  if ((out = open(hash_log_file, O_RDWR|O_APPEND|O_CREAT,0664))==-1)
-	      sendto_one(sptr, ":%s NOTICE %s :Problem opening %s ",
-			 me.name, parv[0], hash_log_file);
-	  else
-	    sendto_one(sptr, ":%s NOTICE %s :Writing hash log to %s ",
-		       me.name, parv[0], hash_log_file);
-	  dhash_stats(cptr,sptr,parc,parv,out);
-	  return 0;
-	}
-
 #ifndef	DEBUGMODE
     }
 #endif
