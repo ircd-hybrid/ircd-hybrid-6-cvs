@@ -1,3 +1,22 @@
+db          2003/05/08 22:20:57 EDT	(20030509_0)
+
+  Modified files:
+    .                    configure 
+    adns                 check.c dlist.h 
+    autoconf             configure.in 
+  Log:
+  - Darwin changes for hybrid-6
+  
+    work done by Hwy, "credit prefect for the testing shell"
+  
+  Revision  Changes    Path
+  1.3       +10 -4     ircd-hybrid-6/adns/check.c
+  1.4       +4 -2      ircd-hybrid-6/adns/dlist.h
+  1.30      +0 -1      ircd-hybrid-6/autoconf/configure.in
+  1.31      +112 -205  ircd-hybrid-6/configure
+
+
+
 ievil       2003/05/05 12:38:38 EDT	(20030505_2)
 
   Modified files:
