@@ -1,3 +1,18 @@
+db          2002/09/13 20:17:57 EDT	(20020914_0)
+
+  Modified files:
+    .                    README.small_nets 
+    src                  m_kline.c 
+  Log:
+  - upped from 60 to 90k clients in readme, fixed typo
+  - fixed null user in m_kline.c patch by Hwy
+  
+  Revision  Changes    Path
+  1.6       +5 -3      ircd-hybrid-6/README.small_nets
+  1.74      +2 -0      ircd-hybrid-6/src/m_kline.c
+
+
+
 db          2002/08/20 21:50:25 EDT	(20020821_0)
 
   Modified files:
