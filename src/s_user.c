@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.129 1999/07/12 00:45:10 db Exp $
+ *  $Id: s_user.c,v 1.130 1999/07/12 00:47:12 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -2640,7 +2640,9 @@ int m_user(aClient* cptr, aClient* sptr, int parc, char *parv[])
   realname = (parc < 5 || BadPtr(parv[4])) ? "<bad-realname>" : parv[4];
   
 #ifdef BOTCHECK
-      cptr->isbot = bot_check(host);
+  /* Only do bot checks on local connecting clients */
+      if(MyClient(cptr))
+	cptr->isbot = bot_check(host);
 #endif
 
   return do_user(parv[0], cptr, sptr, username, host, server, realname);
