@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.9 1999/07/11 21:09:35 tomh Exp $
+ * $Id: s_conf.h,v 1.10 1999/07/13 01:42:58 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.10  1999/07/13 01:42:58  db
+ * - cleaned up conf file handling, handled by read_conf_files()
+ *
  * Revision 1.9  1999/07/11 21:09:35  tomh
  * sockhost cleanup and a lot of other stuff
  *
@@ -161,8 +164,8 @@ extern struct ConfItem* ConfigItemList;   /* GLOBAL - conf list head */
 extern struct ConfItem* make_conf(void);
 extern void             free_conf(struct ConfItem*);
 
-extern FBFILE*          openconf(char* filename);
-extern void             initconf(int, FBFILE*, int);
+extern void 		read_conf_files(int cold);
+
 extern struct DNSReply* conf_dns_lookup(struct ConfItem* aconf);
 extern int              attach_conf(struct Client*, struct ConfItem *);
 extern struct ConfItem* attach_confs(struct Client*, char *, int);
@@ -183,6 +186,7 @@ extern struct ConfItem* find_conf_host (struct SLink *, char *, int);
 extern struct ConfItem* find_conf_ip (struct SLink *, char *, char *, int);
 extern struct ConfItem* find_conf_name (char *, int);
 extern struct ConfItem* find_kill (struct Client *);
+
 
 
 typedef struct
