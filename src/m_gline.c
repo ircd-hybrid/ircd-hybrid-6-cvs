@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.51 2003/05/04 22:10:48 ievil Exp $
+ *  $Id: m_gline.c,v 1.52 2003/05/04 22:49:28 ievil Exp $
  */
 #include "m_commands.h"
 #include "m_gline.h"
@@ -312,7 +312,7 @@ int     m_gline(aClient *cptr,
 
       ircsprintf(buffer, "%s (%s)",
 #ifdef GLINE_REASON_FIRST
-                 gline_pending_ptr->reason1 
+                 tmp_gline_pending_ptr->reason1 
 #else
                  reason
 #endif      
@@ -331,7 +331,7 @@ int     m_gline(aClient *cptr,
                      user,
                      host,
 #ifdef GLINE_REASON_FIRST
-                     gline_pending_ptr->reason1
+                     tmp_gline_pending_ptr->reason1
 #else
                      reason
 #endif

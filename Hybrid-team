@@ -1,4 +1,4 @@
-$Id: Hybrid-team,v 1.31 2003/05/04 22:10:44 ievil Exp $
+$Id: Hybrid-team,v 1.32 2003/05/04 22:49:27 ievil Exp $
 
   The hybrid team is a group of ircd coders who were frustrated
 with the instability and all-out "dirtiness" of the EFnet ircd's
@@ -23,6 +23,7 @@ submittable bug reports.
 The core team as, of this release:
  
 AndroSyn      Aaron Sethman      <androsyn@ratbox.org>
+billy-jon     Bill Jonus         <bill@mu.org>
 cosine        Patrick Alken      <wnder@uwns.underworld.net>
 Dianora       Diane Bruce        <db@db.net>
 einride       Erik S. Johansen   <einride@einride.org>
@@ -31,7 +32,6 @@ Hwy101        W. Campbell        <wcampbel@botbay.net>
 ievil         Arnvid L. Karstad  <ievil@isd.no>
 larne         Edward Brocklesby  <ejb@leguin.org.uk>
 Neph|l|m      Adel Mezibra       <adel@cybercable.fr>
-billy-jon     Bill Jonus         <proggy@earthling.net>
 Rodder        Jon Lusky          <lusky@blown.net>
 toot          Toby Verrall       <to7@antipope.fsnet.co.uk>
 Wohali        Joan Touzet        <joant@ieee.org>
