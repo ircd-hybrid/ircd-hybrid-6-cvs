@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.75 1999/05/05 03:11:24 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.76 1999/05/07 11:13:59 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1611,9 +1611,19 @@ static  void     set_mode(aClient *cptr,
 	  if(IsAnOper(sptr))
 	    {
 	      if (whatt == MODE_ADD)
-		chptr->mode.mode |= MODE_JUPED;
+		{
+		  chptr->mode.mode |= MODE_JUPED;
+		  sendto_realops("%s!%s@%s juping locally Channel %s)",
+				 sptr->name, sptr->user->username,
+				 sptr->sockhost, chptr->chname);
+		}
 	      else if(whatt == MODE_DEL)
-		chptr->mode.mode &= ~MODE_JUPED;
+		{
+		  chptr->mode.mode &= ~MODE_JUPED;
+		  sendto_realops("%s!%s@%s unjuping locally Channel %s)",
+				 sptr->name, sptr->user->username,
+				 sptr->sockhost, chptr->chname);
+		}
 	    }
 	  break;
 #endif
@@ -1971,6 +1981,10 @@ static	int	can_join(aClient *sptr, aChannel *chptr, char *key)
 #ifdef JUPE_CHANNEL
   if( chptr->mode.mode & MODE_JUPED )
     {
+      sendto_ops_lev(SPY_LEV,
+	     "User %s (%s@%s) is attemping to join locally juped channel %s",
+		     sptr->name,
+		     sptr->user->username, sptr->user->host,chptr->chname);
       sendto_one(sptr, err_str(ERR_JUPEDCHAN),
 		 me.name, sptr->name, "JOIN");
       return (ERR_JUPEDCHAN);
