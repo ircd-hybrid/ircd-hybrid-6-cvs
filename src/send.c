@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)send.c	2.32 2/28/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: send.c,v 1.6 1998/10/10 05:59:47 lusky Exp $";
+static char *rcs_version = "$Id: send.c,v 1.7 1998/10/10 22:31:30 db Exp $";
 #endif
 
 #include "struct.h"
@@ -825,6 +825,55 @@ va_dcl
     {
       if (cptr == from)
         continue;
+      sendto_one(cptr, format, p1, p2, p3, p4, p5, p6, p7, p8, p9);
+    }
+  return;
+}
+
+/*
+ * sendto_match_cap_servs
+ *
+ * send to all servers which match the mask at the end of a channel name
+ * (if there is a mask present) or to all if no mask, and match the capability
+ */
+#ifndef	USE_VARARGS
+/*VARARGS*/
+void	sendto_match_cap_servs(chptr, from, cap, format, p1,p2,p3,p4,p5,p6,p7,p8,p9)
+aChannel *chptr;
+aClient	*from;
+int     cap;
+char	*format, *p1, *p2, *p3, *p4, *p5, *p6, *p7, *p8, *p9;
+{
+#else
+void	sendto_match_cap_servs(chptr, from, cap, format, va_alist)
+aChannel *chptr;
+aClient	*from;
+int     cap;
+char	*format;
+va_dcl
+{
+  va_list	vl;
+#endif
+  register aClient	*cptr;
+
+#ifdef	USE_VARARGS
+  va_start(vl);
+#endif
+
+  /* USE_VARARGS IS BROKEN someone volunteer to fix it :-) -Dianora */
+
+  if (chptr)
+    {
+      if (*chptr->chname == '&')
+	return;
+    }
+
+  for(cptr = serv_cptr_list; cptr; cptr = cptr->next_server_client)
+    {
+      if (cptr == from)
+        continue;
+      if(!IsCapable(cptr,cap))
+	continue;
       sendto_one(cptr, format, p1, p2, p3, p4, p5, p6, p7, p8, p9);
     }
   return;

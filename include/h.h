@@ -23,7 +23,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.3 1998/10/10 04:20:13 db Exp $
+ * $Id: h.h,v 1.4 1998/10/10 22:31:27 db Exp $
  *
  */
 
@@ -208,6 +208,9 @@ extern	void	sendto_serv_butone();
 
 /*VARARGS3*/
 extern	void	sendto_cap_serv_butone();
+
+/*VARARGS3*/
+extern  void	sendto_match_cap_servs();
 
 /*VARARGS2*/
 extern	void	sendto_common_channels();
