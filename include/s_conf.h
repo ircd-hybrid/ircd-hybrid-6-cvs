@@ -21,9 +21,15 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.14 1999/07/16 04:16:59 db Exp $
+ * $Id: s_conf.h,v 1.15 1999/07/16 09:36:00 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.15  1999/07/16 09:36:00  db
+ * - rename some function names to make function clearer
+ * - moved prototypes into headers
+ * - made some functions static
+ * - added some needed comments
+ *
  * Revision 1.14  1999/07/16 04:16:59  db
  * - optimized get_conf_name
  * - replaced char * with const char * for filename
@@ -204,6 +210,8 @@ extern struct ConfItem* find_conf_ip (struct SLink *, char *, char *, int);
 extern struct ConfItem* find_conf_name (char *, int);
 extern struct ConfItem* find_kill (struct Client *);
 extern int conf_connect_allowed(struct in_addr addr);
+extern char *oper_flags_as_string(int);
+extern char *oper_privs_as_string(struct Client *, int);
 
 typedef enum {
   CONF_TYPE,

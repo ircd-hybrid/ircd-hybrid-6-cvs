@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.135 1999/07/15 08:47:41 tomh Exp $
+ *  $Id: s_user.c,v 1.136 1999/07/16 09:36:05 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -115,7 +115,6 @@ unsigned long my_rand(void);	/* provided by orabidoo */
 
 /* externally defined functions */
 extern Link *find_channel_link(Link *,aChannel *);	/* defined in list.c */
-extern char *oper_privs(aClient *,int);		 /* defined in s_conf.c */
 extern aConfItem *find_special_conf(char *,int); /* defined in s_conf.c */
 extern int find_q_line(char *,char *,char *); /* defined in s_conf.c */
 
@@ -3231,7 +3230,7 @@ int	m_oper(aClient *cptr,
 	{
 	  aConfItem *aconf;
 	  aconf = cptr->confs->value.aconf;
-	  operprivs = oper_privs(cptr,aconf->port);
+	  operprivs = oper_privs_as_string(cptr,aconf->port);
 	}
       else
 	operprivs = "";
