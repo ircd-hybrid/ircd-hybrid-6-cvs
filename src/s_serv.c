@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.71 1999/02/16 06:04:43 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.72 1999/02/19 04:58:08 db Exp $";
 #endif
 
 
@@ -2050,7 +2050,7 @@ static	void	report_configured_links(aClient *sptr,int mask)
 	      c = 'c';
 
 	    /* Don't allow non opers to see actual ips */
-	    if(IsAnOper(sptr) && MyConnect(sptr))
+	    if(IsAnOper(sptr))
 	      sendto_one(sptr, rpl_str(p->rpl_stats), me.name,
 			 sptr->name, c,
 			 host,
