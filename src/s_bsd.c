@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.116 1999/08/10 23:07:23 lusky Exp $
+ *  $Id: s_bsd.c,v 1.117 1999/08/12 03:02:20 lusky Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -64,7 +64,6 @@
  * Stuff for poll()
  */
 #ifdef USE_POLL
-#include <stropts.h>
 #include <poll.h>
 #endif
 
