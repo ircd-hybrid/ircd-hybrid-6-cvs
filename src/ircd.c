@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.154 2001/12/08 05:56:30 jdc Exp $
+ * $Id: ircd.c,v 1.155 2001/12/08 07:22:27 jdc Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -768,24 +768,32 @@ int main(int argc, char *argv[])
 
 #ifdef  ZIP_LINKS
   {
-    const char *z_ver_str = zlibVersion();
-    unsigned long z_ver_major = atoi(z_ver_str+0);
-    unsigned long z_ver_minor = atoi(z_ver_str+2);
-    unsigned long z_ver_tiny  = atoi(z_ver_str+4);
+    char z_ver_str_new[7];              /* 6 chars + \0 */
+    unsigned long z_ver_new;
+    const char *z_ver_str_old = zlibVersion();
+
+    /* Use zero-padded 2 decimal places. */
+    ircsprintf(z_ver_str_new, "%02d%02d%02d", atoi(z_ver_str_old+0),
+                                              atoi(z_ver_str_old+2),
+                                              atoi(z_ver_str_old+4) );
+
+    /* Convert the buffer into an actual long */
+    z_ver_new = strtol(z_ver_str_new, (char **) NULL, 10);
 
     /* zlib library must be version 1.0.2 or above. */
-    if ( (z_ver_major <= 1) && (z_ver_minor == 0) && (z_ver_tiny < 2) )
+    if ( z_ver_new < 010002 )
     {
       fprintf(stderr, "ERROR: zlib version 1.0.2 or higher required.\n");
       exit(1);
     }
+
     /* Make sure the include files match the library version number. */
-    if (strcmp(z_ver_str, ZLIB_VERSION) != 0)
+    if (strcmp(z_ver_str_old, ZLIB_VERSION) != 0)
     {
       fprintf(stderr, "WARNING: zlib include files differ from library.\n");
       fprintf(stderr, "WARNING: ziplinks may fail!\n");
       fprintf(stderr, "WARNING: library %s, include files %s\n",
-              z_ver_str, ZLIB_VERSION);
+              z_ver_str_old, ZLIB_VERSION);
     }
   }
 #endif
