@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.12 1998/10/18 06:23:51 lusky Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.13 1998/10/19 07:05:27 db Exp $";
 #endif
 
 #include "struct.h"
@@ -95,6 +95,8 @@ int rcvbufmax = 0, sndbufmax = 0;
 #ifdef MAXBUFFERS
 void	reset_sock_opts (int, int);
 #endif
+
+extern int spare_fd;	/* defined in ircd.c */
 
 aClient	*local[MAXCONNECTIONS];
 
