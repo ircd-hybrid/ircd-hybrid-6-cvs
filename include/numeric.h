@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: numeric.h,v 1.11 1999/06/26 16:18:18 db Exp $
+ * $Id: numeric.h,v 1.12 1999/06/26 23:46:44 db Exp $
  */
 #ifdef TOPIC_INFO
 # define RPL_TOPICWHOTIME 333
@@ -184,10 +184,8 @@
 #define RPL_ENDOFTRACE       262
 #define RPL_LOAD2HI          263
 
-#ifdef CLIENT_COUNT
 #define RPL_LOCALUSERS       265
 #define RPL_GLOBALUSERS      266
-#endif
 
 /* numeric_replies */
 
