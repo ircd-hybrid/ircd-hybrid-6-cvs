@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.18 1998/12/08 04:08:37 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.19 1998/12/10 00:55:21 db Exp $";
 #endif
 
 #include "struct.h"
@@ -560,7 +560,8 @@ static	time_t	check_pings(time_t currenttime)
 #ifdef IDLE_CHECK
       if (IsPerson(cptr))
 	{
-	  if( !IsElined(cptr) && ((timeofday - cptr->user->last) > idle_time))
+	  if( !IsElined(cptr) && idle_time && 
+	      ((timeofday - cptr->user->last) > idle_time))
 	    {
 	      aConfItem *aconf;
 
