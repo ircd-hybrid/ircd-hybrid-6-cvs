@@ -1,3 +1,18 @@
+ievil       2003/05/04 18:49:29 EDT	(20030504_3)
+
+  Modified files:
+    .                    Hybrid-team 
+    src                  m_gline.c 
+  Log:
+  Changed billy-jon's email and sorting order. Fixed a missing tmp_ in
+  m_gline.c
+  
+  Revision  Changes    Path
+  1.32      +1 -1      ircd-hybrid-6/Hybrid-team
+  1.52      +2 -2      ircd-hybrid-6/src/m_gline.c
+
+
+
 ievil       2003/05/04 18:25:30 EDT	(20030504_2)
 
   Modified files:
