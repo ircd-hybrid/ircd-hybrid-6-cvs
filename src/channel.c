@@ -22,7 +22,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.33 1998/12/01 03:27:46 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.34 1998/12/01 21:53:58 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1076,8 +1076,9 @@ static  void     set_mode(aClient *cptr,
 
 	  if ((who == sptr) && (c == 'o'))
 	    {
-	      if((whatt == MODE_ADD) && !isok)
+	      if(whatt == MODE_ADD)
 		break;
+	      
 	      if(whatt == MODE_DEL)
 		self_lose_ops = 1;
 	      }

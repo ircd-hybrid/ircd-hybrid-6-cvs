@@ -25,7 +25,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.26 1998/11/29 07:04:22 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.27 1998/12/01 21:54:00 db Exp $";
 
 #endif
 
@@ -2042,13 +2042,12 @@ static	int	m_message(aClient *cptr,
 	    sptr->channel_privmsgs++;
 #endif
 #ifdef FLUD
-
 	  if(!notice)
 	    if(check_for_ctcp(parv[2]))
 	      check_for_flud(sptr, NULL, chptr, 1);
 #endif /* FLUD */
 
-	  if (can_send(sptr, chptr) != 0)
+	  if (!is_chan_op(sptr,chptr))
 	    {
 	      if (!notice)
 		{
