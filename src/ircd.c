@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.4 1998/10/02 12:49:19 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.5 1998/10/06 04:42:28 db Exp $";
 #endif
 
 #include "struct.h"
@@ -637,13 +637,6 @@ static	time_t	check_pings(time_t currenttime)
 		      *cptr->buffer = '\0';
 		    }
 #ifdef SHOW_HEADERS
-		  /*
-		  if (DoingDNS(cptr))
-		    send(cptr->fd, REPORT_FAIL_DNS, R_fail_dns, 0);
-		  else
-		    send(cptr->fd, REPORT_FAIL_ID, R_fail_id, 0);
-		    */
-
 		  if (DoingDNS(cptr))
 		    sendheader(cptr, REPORT_FAIL_DNS, R_fail_dns);
 		  else

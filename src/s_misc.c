@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.2 1998/09/29 07:04:27 db Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.3 1998/10/06 04:42:32 db Exp $";
 #endif
 
 #include <sys/time.h>
@@ -62,6 +62,7 @@ extern time_t server_split_time;
 #endif
 
 static	void	exit_one_client (aClient *,aClient *,aClient *,char *);
+static char *show_capabilities(aClient *);
 
 static	char	*months[] = {
 	"January",	"February",	"March",	"April",
@@ -931,7 +932,7 @@ void serv_info(aClient *cptr,char *name)
 		   (int)acptr->receiveM, (int)acptr->receiveK,
 		   timeofday - acptr->firsttime,
 		   timeofday - acptr->since,
-		   IsServer(acptr) ? "TS" : "-" );
+		   IsServer(acptr) ? show_capabilities(acptr) : "-" );
       else
 	{
 	  sendto_one(cptr, Lformat, me.name, RPL_STATSLINKINFO,
@@ -941,7 +942,7 @@ void serv_info(aClient *cptr,char *name)
 		     (int)acptr->receiveM, (int)acptr->receiveK,
 		     timeofday - acptr->firsttime,
 		     timeofday - acptr->since,
-		     IsServer(acptr) ? "TS" : "-" );
+		     IsServer(acptr) ? show_capabilities(acptr) : "-" );
 	}
       j++;
     }
@@ -961,6 +962,26 @@ void serv_info(aClient *cptr,char *name)
   sendto_one(cptr, ":%s %d %s :Server recv: %7.2f %s (%4.1f K/s)",
 	     me.name, RPL_STATSDEBUG, name, _GMKv(me.receiveK), _GMKs(me.receiveK),
 	     (float)((float)me.receiveK / (float)uptime));
+}
+
+static char *show_capabilities(aClient *acptr)
+{
+  static char	msgbuf[BUFSIZE];
+  register	struct Capability *cap;
+
+  strcpy(msgbuf,"TS ");
+  if(!acptr->caps)	/* short circuit if no caps */
+    return(msgbuf);
+
+  for (cap=captab; cap->cap; cap++)
+    {
+      if(cap->cap & acptr->caps)
+	{
+	  strcat(msgbuf, cap->name);
+	  strcat(msgbuf, " ");
+	}
+    }
+  return(msgbuf);
 }
 
 /*

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.3 1998/09/22 01:52:21 db Exp $
+ * $Id: config.h,v 1.4 1998/10/06 04:42:18 db Exp $
  */
 
 #ifndef	__config_include__
@@ -442,12 +442,21 @@
  */
 #define	SHOW_INVISIBLE_LUSERS
 
+#define	ZIP_LINKS		/* compress server-to-server links */
+
 /* NO_DEFAULT_INVISIBLE - clients not +i by default
  * When defined, your users will not automatically be attributed with user
  * mode "i" (i == invisible). Invisibility means people dont showup in
  * WHO or NAMES unless they are on the same channel as you.
  */
 #define	NO_DEFAULT_INVISIBLE
+
+/*
+ * The compression level used for zipped links. (Suggested values: 1 to 5)
+ * Above 4 will only give a rather marginal increase in compression for a
+ * large increase in CPU usage.
+ */
+#define ZIP_LEVEL       2
 
 /* OPER_KILL OPER_REHASH OPER_RESTART OPER_DIE OPER_REMOTE -
  *      restrict what local global-Opers can do

@@ -23,7 +23,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.1 1998/09/17 14:25:03 db Exp $
+ * $Id: h.h,v 1.2 1998/10/06 04:42:19 db Exp $
  *
  */
 
@@ -290,6 +290,11 @@ extern	int	init_resolver (int);
 extern	time_t	timeout_query_list (time_t);
 extern	time_t	expire_cache (time_t);
 extern	void    del_queries (char *);
+
+extern  int     zip_init (aClient *);
+extern  void    zip_free (aClient *);
+extern  char    *unzip_packet (aClient *, char *, int *);
+extern  char    *zip_buffer (aClient *, char *, int *, int);
 
 extern	void	clear_channel_hash_table (void);
 extern	void	clear_client_hash_table (void);

@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)packet.c	2.12 1/30/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: packet.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static char *rcs_version = "$Id: packet.c,v 1.2 1998/10/06 04:42:29 db Exp $";
 
 #endif
  
@@ -38,6 +38,12 @@ static char *rcs_version = "$Id: packet.c,v 1.1 1998/09/17 14:25:04 db Exp $";
 **	buffer - pointr to the buffer containing the newly read data
 **	length - number of valid bytes of data in the buffer
 **
+**      The buffer might be partially or totally zipped.
+**      At the beginning of the compressed flow, it is possible that
+**      an uncompressed ERROR message will be found.  This occurs when
+**      the connection fails on the other server before switching
+**      to compressed mode.
+**
 ** Note:
 **	It is implicitly assumed that dopacket is called only
 **	with cptr of "local" variation, which contains all the
@@ -49,7 +55,10 @@ int	dopacket(aClient *cptr, char *buffer, int length)
   Reg	char	*ch2;
   register char *cptrbuf;
   aClient	*acpt = cptr->acpt;
-  
+#ifdef ZIP_LINKS
+  int	zipped = NO;
+#endif
+
   cptrbuf = cptr->buffer;
   me.receiveB += length; /* Update bytes received */
   cptr->receiveB += length;
@@ -76,7 +85,32 @@ int	dopacket(aClient *cptr, char *buffer, int length)
     }
   ch1 = cptrbuf + cptr->count;
   ch2 = buffer;
-  while (--length >= 0)
+
+#ifdef ZIP_LINKS
+  if (cptr->flags2 & FLAGS2_ZIPFIRST)
+    {
+      if (*ch2 == '\n' || *ch2 == '\r')
+	{
+	  ch2++;
+	  length--;
+	}
+      cptr->flags2 &= ~FLAGS2_ZIPFIRST;
+    }
+
+  if (length && (cptr->flags2 & FLAGS2_ZIP))
+    {
+      /* uncompressed buffer first */
+      zipped = length;
+      ch2 = unzip_packet(cptr, ch2, &zipped);
+      length = zipped;
+      zipped = 1;
+      if (length == -1)
+	return exit_client(cptr, cptr, &me,
+			   "fatal error in unzip_packet(1)");
+    }
+#endif /* ZIP_LINKS */
+
+  while (--length >= 0 && ch2)
     {
       register char g;
       g = (*ch1 = *ch2++);
@@ -113,6 +147,36 @@ int	dopacket(aClient *cptr, char *buffer, int length)
 	  if (cptr->flags & FLAGS_DEADSOCKET)
 	    return exit_client(cptr, cptr, &me, (cptr->flags & FLAGS_SENDQEX) ?
 			       "SendQ exceeded" : "Dead socket");
+
+#ifdef ZIP_LINKS
+	  if ((cptr->flags2 & FLAGS2_ZIP) && (zipped == 0) &&
+	      (length > 0))
+	    {
+	      /*
+	      ** beginning of server connection, the buffer
+	      ** contained PASS/CAPAB/SERVER and is now 
+	      ** zipped!
+	      ** Ignore the '\n' that should be here.
+	      */
+	      /* Checked RFC1950: \r or \n can't start a
+	      ** zlib stream  -orabidoo
+	      */
+
+	      zipped = length;
+	      if (zipped > 0 && (*ch2 == '\n' || *ch2 == '\r'))
+		{
+		  ch2++;
+		  zipped--;
+		}
+	      cptr->flags2 &= ~FLAGS2_ZIPFIRST;
+	      ch2 = unzip_packet(cptr, ch2, &zipped);
+	      length = zipped;
+	      zipped = 1;
+	      if (length == -1)
+		return exit_client(cptr, cptr, &me,
+				   "fatal error in unzip_packet(2)");
+	    }
+#endif /* ZIP_LINKS */
 	  ch1 = cptrbuf;
 	}
       else if (ch1 < cptrbuf + (sizeof(cptr->buffer)-1))

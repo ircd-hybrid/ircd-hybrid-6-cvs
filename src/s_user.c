@@ -25,7 +25,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.5 1998/09/29 07:04:29 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.6 1998/10/06 04:42:34 db Exp $";
 
 #endif
 
@@ -1985,6 +1985,12 @@ static	int	m_message(aClient *cptr,
   if(type)
     {
       nick++;
+      /* Strip if using DALnet chanop/voice prefix.  -- David-R */
+      if (*nick == '@' || *nick == '+')
+	{
+	  nick++;
+	  type = MODE_CHANOP|MODE_VOICE;
+	}
 
       if (IsPerson(sptr) && (chptr = find_channel(nick, NullChn)))
 	{
@@ -1993,6 +1999,7 @@ static	int	m_message(aClient *cptr,
 	    sptr->channel_privmsgs++;
 #endif
 #ifdef FLUD
+
 	  if(!notice)
 	    if(check_for_ctcp(parv[2]))
 	      check_for_flud(sptr, NULL, chptr, 1);

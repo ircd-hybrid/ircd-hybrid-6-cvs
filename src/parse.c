@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)parse.c	2.30 17 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: parse.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static char *rcs_version = "$Id: parse.c,v 1.2 1998/10/06 04:42:30 db Exp $";
 
 #endif
 #include "struct.h"
@@ -408,6 +408,13 @@ int	parse(aClient *cptr, char *buffer, char *bufend)
 
   if (!IsRegistered(cptr) && !mptr->allow_unregistered_use )
     {
+      /* if its from a possible server connection
+       * ignore it.. more than likely its a header thats sneaked through
+       */
+
+      if(IsHandshake(cptr) || IsConnecting(cptr) || IsServer(cptr))
+	return -1;
+
       sendto_one(from,
 		 ":%s %d %s %s :Register first.",
 		 me.name, ERR_NOTREGISTERED,
