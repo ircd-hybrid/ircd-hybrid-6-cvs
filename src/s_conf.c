@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.162 1999/08/01 06:47:22 tomh Exp $
+ *  $Id: s_conf.c,v 1.163 1999/08/02 03:53:04 lusky Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -2570,10 +2570,6 @@ static void lookup_confhost(struct ConfItem* aconf)
   else if (0 != (dns_reply = conf_dns_lookup(aconf)))
     memcpy(&aconf->ipnum, dns_reply->hp->h_addr, sizeof(struct in_addr));
   
-  if (INADDR_NONE == aconf->ipnum.s_addr) {
-    log(L_ERROR, "Host/server name error: (%s) (%s)",
-        aconf->host, aconf->name);
-  }
 }
 
 /*
