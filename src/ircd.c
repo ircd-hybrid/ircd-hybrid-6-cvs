@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.128 1999/12/29 03:28:48 lusky Exp $
+ * $Id: ircd.c,v 1.129 2000/04/11 02:16:34 lusky Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -370,7 +370,7 @@ static time_t io_loop(time_t delay)
                  CurrentTime, lasttimeofday);
       report_error(to_send, me.name, 0);
     }
-  else if ((lasttimeofday + TS_MAX_DELTA) < CurrentTime)
+  else if ((lasttimeofday + MAX_SETBACK_TIME) < CurrentTime)
     {
       log(L_ERROR, "Clock Failure (%d)", errno);
       sendto_ops("Clock set back more than %d seconds, TS can be corrupted",

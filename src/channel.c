@@ -34,7 +34,7 @@
  *                mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.174 2000/01/02 22:41:00 lusky Exp $
+ * $Id: channel.c,v 1.175 2000/04/11 02:16:34 lusky Exp $
  */
 #include "channel.h"
 #include "client.h"
@@ -803,8 +803,16 @@ void channel_modes(struct Client *cptr, char *mbuf, char *pbuf, struct Channel *
   *mbuf++ = '+';
   if (chptr->mode.mode & MODE_SECRET)
     *mbuf++ = 's';
+
+  /* bug found by "is" ejb@debian.org */
+#ifdef OLD_P_S
   else if (chptr->mode.mode & MODE_PRIVATE)
     *mbuf++ = 'p';
+#else
+  if (chptr->mode.mode & MODE_PRIVATE)
+    *mbuf++ = 'p';
+#endif
+
   if (chptr->mode.mode & MODE_MODERATED)
     *mbuf++ = 'm';
   if (chptr->mode.mode & MODE_TOPICLIMIT)

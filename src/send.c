@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.85 2000/02/01 00:44:14 lusky Exp $
+ *   $Id: send.c,v 1.86 2000/04/11 02:16:34 lusky Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -626,7 +626,6 @@ sendto_channel_type(aClient *one, aClient *from, aChannel *chptr,
         }
       } /* for (lp = chptr->members; lp; lp = lp->next) */
 
-      va_end(args);
 } /* sendto_channel_type() */
 
 
