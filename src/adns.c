@@ -1,5 +1,5 @@
 /*
- * $Id: adns.c,v 1.3 2001/12/06 15:07:17 androsyn Exp $
+ * $Id: adns.c,v 1.4 2001/12/08 09:04:04 lusky Exp $
  * adns.c  functions to enter libadns 
  *
  * Written by Aaron Sethman <androsyn@ratbox.org>
@@ -161,7 +161,7 @@ static void do_adns_select(void)
 	FD_ZERO(&exceptfds);
 	adns_beforeselect(dns_state, &maxfd, &readfds, &writefds, &exceptfds, 0, &tvbuf, 0);
 	select(maxfd, &readfds, &writefds, &exceptfds, &tvbuf);
-	adns_afterselect(dns_state, maxfd, &readfds, &writefds, &exceptfds, tvbuf); 
+	adns_afterselect(dns_state, maxfd, &readfds, &writefds, &exceptfds, &tvbuf); 
 }
 #else
 static void do_adns_poll(void)

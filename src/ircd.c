@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.155 2001/12/08 07:22:27 jdc Exp $
+ * $Id: ircd.c,v 1.156 2001/12/08 09:04:04 lusky Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -688,6 +688,7 @@ static void check_pidfile(void)
  */
 static void setup_corefile(void)
 {
+#ifdef RLIMIT_CORE
   struct rlimit rlim; /* resource limits */
 
   /* Set corefilesize to maximum */
@@ -696,6 +697,7 @@ static void setup_corefile(void)
     rlim.rlim_cur = rlim.rlim_max;
     setrlimit(RLIMIT_CORE, &rlim);
   }
+#endif /* RLIMIT_CORE */
 }
 
 int main(int argc, char *argv[])

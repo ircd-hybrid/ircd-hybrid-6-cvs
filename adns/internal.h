@@ -1,5 +1,5 @@
 /*
- * internal.h: $Id: internal.h,v 1.5 2001/12/08 07:06:09 lusky Exp $
+ * internal.h: $Id: internal.h,v 1.6 2001/12/08 09:04:02 lusky Exp $
  *  
  */
 /*
@@ -715,5 +715,16 @@ static inline int errno_resources(int e) { return e==ENOMEM || e==ENOBUFS; }
 		       (tv)|=(GETIL_B((cb))<<8), \
 		       (tv)|=GETIL_B(cb), \
 		       (tv) )
+
+#ifndef timeclear
+#define timerclear(tvp)   (tvp)->tv_sec = (tvp)->tv_usec = 0
+#endif
+
+#ifndef timercmp
+#define timercmp(tvp, uvp, cmp) \
+        (((tvp)->tv_sec != (uvp)->tv_sec) ? \
+        ((tvp)->tv_sec cmp (uvp)->tv_sec) : \
+        ((tvp)->tv_usec cmp (uvp)->tv_usec))
+#endif
 
 #endif
