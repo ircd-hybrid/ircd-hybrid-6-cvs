@@ -1,12 +1,12 @@
 #
 # Makefile.in for ircd/src
 #
-# $Id: Makefile.in,v 1.68 2001/12/04 04:59:36 androsyn Exp $
+# $Id: Makefile.in,v 1.69 2001/12/04 05:15:31 androsyn Exp $
 CC = @CC@
 RM = @RM@
 MKDEP = ${CC} -MM
 
-IRCDLIBS = @LIBS@ ../zlib/libz.a
+IRCDLIBS = @LIBS@ ../zlib/libz.a ../adns/libadns.a
 
 INCLUDES = -I../include -I../zlib
 CPPFLAGS = ${INCLUDES} @CPPFLAGS@
