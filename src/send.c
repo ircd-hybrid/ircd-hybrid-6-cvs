@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.110 2001/12/14 07:44:08 leeh Exp $
+ *   $Id: send.c,v 1.111 2002/01/17 22:55:29 db Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -605,15 +605,14 @@ sendto_channel_type(aClient *one, aClient *from, aChannel *chptr,
               /* Send it individually to each opered or voiced
                * client on channel
                */
-              if (sentalong[i] != current_serial)
-                {
-                  sendto_prefix_one(acptr, from,
+	      /* Dont check sentalong - as it has to goto *every* client on
+	       * this server, as its !CAP_CHW --fl_
+	       */
+              sendto_prefix_one(acptr, from,
                     ":%s NOTICE %s :%s",
                     from->name,
                     lp->value.cptr->name, /* target name */
                     message);
-                }
-              sentalong[i] = current_serial;
             }
           else
             {
