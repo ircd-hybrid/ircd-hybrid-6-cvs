@@ -1,3 +1,28 @@
+ievil       2004/10/12 20:53:37 EDT	(20041013_0)
+
+  Modified files:
+    include              config.h config.h.dist m_info.h 
+    src                  channel.c irc_string.c m_away.c s_debug.c 
+                         s_serv.c 
+  Log:
+  Adding PROPAGATE_AWAY, BURST_AWAY, PART_MESSAGES from Syldra. Patches from
+  Hwy/Sarisa. There will be more of these backports/remerges from Syldra and
+  Hybrid-7 in the next few days. And then we should get back to the releases
+  like we used to. 6.4 cvs have been running nicely for weeks on efnet now ;)
+  Time for 6.4.3..
+  
+  Revision  Changes    Path
+  1.174     +22 -0     ircd-hybrid-6/include/config.h
+  1.142     +22 -0     ircd-hybrid-6/include/config.h.dist
+  1.33      +20 -0     ircd-hybrid-6/include/m_info.h
+  1.251     +16 -0     ircd-hybrid-6/src/channel.c
+  1.11      +5 -4      ircd-hybrid-6/src/irc_string.c
+  1.4       +21 -8     ircd-hybrid-6/src/m_away.c
+  1.62      +6 -6      ircd-hybrid-6/src/s_debug.c
+  1.240     +6 -0      ircd-hybrid-6/src/s_serv.c
+
+
+
 ievil       2004/07/24 09:31:10 EDT	(20040724_0)
 
   Modified files:
