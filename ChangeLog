@@ -1,3 +1,16 @@
+ievil       2003/07/01 09:05:10 EDT	(20030701_0)
+
+  Modified files:
+    src                  s_user.c 
+  Log:
+  Removed legacy connect NOTICE which was only needed by ircII. Was removed
+  in ircd-hybrid-7 also.
+  
+  Revision  Changes    Path
+  1.262     +0 -8      ircd-hybrid-6/src/s_user.c
+
+
+
 ievil       2003/06/30 08:58:16 EDT	(20030630_0)
 
   Modified files:
