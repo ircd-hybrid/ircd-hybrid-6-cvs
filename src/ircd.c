@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.6 1998/10/09 22:36:23 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.7 1998/10/12 05:48:55 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1085,7 +1085,8 @@ normal user.\n");
 		   configfile);
       exit(-1);
     }
-  (void)initconf(bootopt,fd);
+  (void)initconf(bootopt,fd,YES);
+  (void)do_include_conf();
 
 /* comstuds SEPARATE_QUOTE_KLINES_BY_DATE code */
 #ifdef SEPARATE_QUOTE_KLINES_BY_DATE
@@ -1104,7 +1105,7 @@ normal user.\n");
 		     filename);
       }
     else
-      (void)initconf(0,fd);
+      (void)initconf(0,fd,NO);
   }
 #else
 #ifdef KPATH
@@ -1116,7 +1117,7 @@ normal user.\n");
 		   klinefile);
     }
   else
-    (void)initconf(0,fd);
+    (void)initconf(0,fd,NO);
 #endif
 #endif
   if (!(bootopt & BOOT_INETD))
@@ -1168,6 +1169,7 @@ normal user.\n");
   me.serv->up = me.name;
   me.lasttime = me.since = me.firsttime = NOW;
   (void)add_to_client_hash_table(me.name, &me);
+
 
   check_class();
   if (bootopt & BOOT_OPER)
