@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.97 1999/07/01 16:13:32 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.98 1999/07/01 16:54:11 db Exp $";
 #endif
 
 #include "struct.h"
@@ -49,8 +49,7 @@ static char *rcs_version="$Id: channel.c,v 1.97 1999/07/01 16:13:32 db Exp $";
 #include "channel.h"
 #include "h.h"
 
-#if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
-	defined(NO_JOIN_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT_SIMPLE)
+#ifdef NEED_SPLITCODE
 int server_was_split=YES;
 time_t server_split_time;
 #ifdef SPLIT_PONG
@@ -2504,8 +2503,7 @@ static void clear_bans_exceptions(aClient *sptr, aChannel *chptr)
 }
 
 
-#if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
-	defined(NO_JOIN_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT_SIMPLE)
+#ifdef NEED_SPLITCODE
 
 /*
  * check_still_split()
@@ -2677,8 +2675,7 @@ int	m_join(aClient *cptr,
     }
 
 
-#if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
-	defined(NO_JOIN_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT_SIMPLE)
+#ifdef NEED_SPLITCODE
 
   /* Check to see if the timer has timed out, and if so, see if
    * there are a decent number of servers now connected 

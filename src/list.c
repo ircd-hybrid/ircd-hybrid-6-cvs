@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)list.c	2.22 15 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: list.c,v 1.14 1999/07/01 16:13:34 db Exp $";
+static char *rcs_version = "$Id: list.c,v 1.15 1999/07/01 16:54:12 db Exp $";
 #endif
 
 #include "struct.h"
@@ -34,8 +34,7 @@ static char *rcs_version = "$Id: list.c,v 1.14 1999/07/01 16:13:34 db Exp $";
 extern int BlockHeapGarbageCollect(BlockHeap *);
 extern SetOptionsType GlobalSetOptions;
 
-#if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
-	defined(NO_JOIN_ON_SPLIT)  || defined(NO_JOIN_ON_SPLIT_SIMPLE)
+#ifdef NEED_SPLITCODE
 extern int server_was_split;
 extern time_t server_split_time;
 #endif
@@ -343,8 +342,7 @@ void remove_client_from_list(aClient *cptr)
     {
       Count.server--;
 
-#if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
-      defined(NO_JOIN_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT_SIMPLE)
+#ifdef NEED_SPLITCODE
 
 	/* Don't bother checking for a split, if split code
 	 * is deactivated with server_split_recovery_time == 0

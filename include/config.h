@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.52 1999/06/29 01:45:27 db Exp $
+ * $Id: config.h,v 1.53 1999/07/01 16:54:09 db Exp $
  */
 
 #ifndef	__config_include__
@@ -893,7 +893,6 @@
 #define ANTI_SPAM_EXIT_MESSAGE_TIME 300
 
 /* ANTI_SPAMBOT_EXTRA
- * look for "http:" in gecos, flag as possible spambot
  * look for "suspicious" privmsg to other client count
  * other client count cannot be repeated more than once in a row
  * messaging the same client over and over again will not trigger this
@@ -1074,6 +1073,11 @@ error CLIENT_FLOOD undefined.
 #endif
 
 #define REPORT_DLINE_TO_USER
+
+#if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
+	defined(NO_JOIN_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT_SIMPLE)
+#define NEED_SPLITCODE
+#endif
 
 #define CONFIG_H_LEVEL_6
 
