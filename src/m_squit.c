@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_squit.c,v 1.3 1999/07/31 08:23:00 tomh Exp $
+ *   $Id: m_squit.c,v 1.4 2001/07/26 16:04:31 leeh Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -141,7 +141,7 @@ int m_squit(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       if (acptr && IsMe(acptr))
         {
           acptr = cptr;
-          server = cptr->host;
+          server = cptr->name;
         }
     }
   else
