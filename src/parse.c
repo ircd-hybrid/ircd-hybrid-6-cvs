@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.20 1999/07/21 05:28:51 tomh Exp $
+ *   $Id: parse.c,v 1.21 1999/07/21 19:34:38 sean Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -421,7 +421,11 @@ int     parse(aClient *cptr, char *buffer, char *bufend)
   if (IsRegisteredUser(cptr) && !mptr->reset_idle)
     from->user->last = timeofday;
 #endif
-
+  
+  /* don't allow other commands while a list is blocked. since we treat
+     them specially with respect to sendq. */
+  if ((IsDoingList(cptr)) && (*mptr->func != m_list))
+      return -1;
   return (*mptr->func)(cptr, from, i, para);
 }
 
