@@ -1,3 +1,30 @@
+ievil       2003/06/09 21:12:05 EDT	(20030610_0)
+
+  Modified files:
+    .                    opers.txt 
+    doc                  example.conf 
+    include              client.h s_conf.h 
+    src                  s_conf.c s_user.c 
+  Log:
+  Added new oper flag P for stats p hide. This is meant for
+  tcm/bopm style bots and not chicken opers. I will also follow
+  this commit with a patch that doesnt make this hidding very stealth
+  to the admin........
+  
+  Submitted by:   ievil
+  Reviewed by:    einride
+  Obtained from:  ievil & einride
+  
+  Revision  Changes    Path
+  1.38      +2 -0      ircd-hybrid-6/doc/example.conf
+  1.65      +31 -24    ircd-hybrid-6/include/client.h
+  1.65      +10 -8     ircd-hybrid-6/include/s_conf.h
+  1.22      +1 -0      ircd-hybrid-6/opers.txt
+  1.243     +13 -0     ircd-hybrid-6/src/s_conf.c
+  1.254     +33 -20    ircd-hybrid-6/src/s_user.c
+
+
+
 ievil       2003/06/06 06:08:05 EDT	(20030606_9)
 
   Modified files:
