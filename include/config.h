@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.107 2001/06/11 11:54:11 leeh Exp $
+ * $Id: config.h,v 1.108 2001/06/13 18:31:20 jdc Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -329,6 +329,9 @@
  *
  *  P_LINES_OPER_ONLY blocks STATS P (Capital P, NOT lower case p) from
  *  non-opers, denying them permission to see configured ports
+ *
+ *  U_LINES_OPER_ONLY only applies to STATS U (capital U, not lowercase).
+ *  U-lines are used to share K/D-lines between servers.
  */
 #define B_LINES_OPER_ONLY
 #define E_LINES_OPER_ONLY
@@ -337,6 +340,7 @@
 #undef  K_LINES_OPER_ONLY
 #undef  O_LINES_OPER_ONLY
 #define P_LINES_OPER_ONLY
+#undef  U_LINES_OPER_ONLY
 
 /* SPOOF_NOTICE - See a notice when a user connects with a
  * spoofed I: line

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_stats.c,v 1.13 2001/06/13 16:15:32 db Exp $
+ *  $Id: m_stats.c,v 1.14 2001/06/13 18:31:25 jdc Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "class.h"       /* report_classes */
@@ -438,6 +438,14 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       break;
 
     case 'U' :
+#ifdef U_LINES_OPER_ONLY
+      if (!IsAnOper(sptr))
+      {
+        ignore_request++;
+        valid_stats++;
+        break;
+      }
+#endif /* U_LINES_OPER_ONLY */
       report_specials(sptr,CONF_ULINE,RPL_STATSULINE);
       valid_stats++;
       break;
