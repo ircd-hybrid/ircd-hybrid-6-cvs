@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.49 2000/02/01 00:44:11 lusky Exp $
+ *  $Id: client.c,v 1.50 2000/05/15 04:11:05 lusky Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -720,16 +720,24 @@ static void release_client_state(struct Client* cptr)
 void remove_client_from_list(struct Client* cptr)
 {
   assert(0 != cptr);
-  if (cptr->prev)
-    cptr->prev->next = cptr->next;
-  else
+
+ /* HACK somehow this client has already exited
+  * but has come back to haunt us.. looks like a bug
+  */
+  if(!cptr->prev && !cptr->next)
     {
-      GlobalClientList = cptr->next;
-      GlobalClientList->prev = NULL;
+      log(L_CRIT, "already exited client %X [%s]",
+        cptr,
+        cptr->name?cptr->name:"NULL" );
+      return;
     }
 
+  if (cptr->prev)
+    cptr->prev->next = cptr->next;
   if (cptr->next)
     cptr->next->prev = cptr->prev;
+  if (cptr == GlobalClientList)
+    GlobalClientList = cptr->next;
   cptr->next = cptr->prev = NULL;
 
   /*
@@ -1600,6 +1608,8 @@ const char* comment        /* Reason for the exit */
                   if (!IsServer(acptr) && acptr->from == sptr)
                     {
                       ts_warn("Dependent client %s not on llist!?",
+                              acptr->name);
+                      log(L_CRIT, "Depend client %s not on llist!?",
                               acptr->name);
                       exit_one_client(NULL, acptr, &me, comment1);
                     }
