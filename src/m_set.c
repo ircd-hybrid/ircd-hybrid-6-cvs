@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_set.c,v 1.3 1999/10/14 01:36:46 lusky Exp $
+ *   $Id: m_set.c,v 1.4 1999/10/14 02:48:25 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -552,6 +552,7 @@ int m_set(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
           if(parc > 2)
             {
               int newval = atoi(parv[2]);
+              const char *log_level_as_string;
 
               if(newval < L_WARN)
                 {
@@ -562,13 +563,15 @@ int m_set(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
               if(newval > L_DEBUG)
                 newval = L_DEBUG;
               set_log_level(newval); 
-              sendto_realops("%s has changed LOG level to %i",
-                             parv[0], newval);
+              log_level_as_string = get_log_level_as_string(newval);
+              sendto_realops("%s has changed LOG level to %i (%s)",
+                             parv[0], newval, log_level_as_string);
             }
           else
             {
-              sendto_one(sptr, ":%s NOTICE %s :LOG level is currently %i",
-                         me.name, parv[0], get_log_level());
+              sendto_one(sptr, ":%s NOTICE %s :LOG level is currently %i (%s)",
+                         me.name, parv[0], get_log_level(),
+                         get_log_level_as_string(get_log_level()));
             }
           return 0;
           break;
