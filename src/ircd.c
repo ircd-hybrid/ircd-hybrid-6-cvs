@@ -17,9 +17,8 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.133 2000/08/13 00:08:10 lusky Exp $
+ * $Id: ircd.c,v 1.134 2000/08/13 00:12:11 lusky Exp $
  */
-
 #include "ircd.h"
 #include "channel.h"
 #include "class.h"
