@@ -1,5 +1,5 @@
 /*
- * adns.h: $Id: adns.h,v 1.4 2001/12/09 17:37:18 lusky Exp $
+ * adns.h: $Id: adns.h,v 1.5 2002/02/04 14:49:24 androsyn Exp $
  *  
  */
 /*
@@ -55,7 +55,7 @@
  *  Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
  *
- *  $Id: adns.h,v 1.4 2001/12/09 17:37:18 lusky Exp $
+ *  $Id: adns.h,v 1.5 2002/02/04 14:49:24 androsyn Exp $
  */
 
 #ifndef ADNS_H_INCLUDED
@@ -860,5 +860,5 @@ const char *adns_errtypeabbrev(adns_status st);
  * string XXX.  You MUST NOT call these functions with status values
  * not returned by the same adns library.
  */
-
+int adns__rereadconfig(adns_state);
 #endif

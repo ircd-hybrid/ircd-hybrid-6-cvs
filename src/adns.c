@@ -1,5 +1,5 @@
 /*
- * $Id: adns.c,v 1.6 2002/01/13 04:10:42 androsyn Exp $
+ * $Id: adns.c,v 1.7 2002/02/04 14:49:26 androsyn Exp $
  * adns.c  functions to enter libadns 
  *
  * Written by Aaron Sethman <androsyn@ratbox.org>
@@ -71,9 +71,7 @@ static void dns_cancel_all(void)
  */
 void restart_resolver(void)
 {
-  dns_cancel_all();
-  adns_finish(dns_state);
-  init_resolver();
+   adns__rereadconfig(dns_state);
 }
 
 /* void init_resolver(void)

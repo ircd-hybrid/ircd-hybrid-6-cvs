@@ -1,5 +1,5 @@
 /*
- * setup.c: $Id: setup.c,v 1.8 2002/01/28 04:30:31 androsyn Exp $
+ * setup.c: $Id: setup.c,v 1.9 2002/02/04 14:49:24 androsyn Exp $
  *  
  */
 /*
@@ -648,3 +648,25 @@ adns_query adns_forallqueries_next(adns_state ads, void **context_r) {
   if (context_r) *context_r= qu->ctx.ext;
   return qu;
 }
+
+int adns__rereadconfig(adns_state ads)
+{
+  struct in_addr ia;
+  adns__consistency(ads,0,cc_entex);
+  ads->nservers = 0;
+  ads->servers[0].addr.s_addr = 0;
+#ifndef VMS
+  readconfig(ads,"/etc/resolv.conf",1);
+  readconfig(ads,"/etc/resolv-adns.conf",0);
+#else
+  readconfig(ads,"[]resolv.conf",0);
+#endif
+  if (!ads->nservers)
+  {
+      ia.s_addr= htonl(INADDR_LOOPBACK);
+      addserver(ads,ia);
+  }
+  adns__consistency(ads,0,cc_entex);
+  return 0;
+}
+                                    
