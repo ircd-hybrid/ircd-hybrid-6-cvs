@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_message.c,v 1.4 1999/08/27 03:37:08 lusky Exp $
+ *   $Id: m_message.c,v 1.5 1999/11/14 04:41:59 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -248,9 +248,12 @@ static  int     m_message(struct Client *cptr,
             }
           else
             {
-              sendto_channel_type(cptr, sptr, chptr, type,
-                                  ":%s %s %s :%s",
-                                  parv[0], cmd, nick,
+              sendto_channel_type(cptr,
+                                  sptr,
+                                  chptr,
+                                  type,
+                                  nick+1,
+                                  cmd,
                                   parv[2]);
             }
         }

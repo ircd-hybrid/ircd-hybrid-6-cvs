@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_userhost.c,v 1.4 1999/09/09 02:39:46 lusky Exp $
+ *   $Id: m_userhost.c,v 1.5 1999/11/14 04:41:59 lusky Exp $
  */
 
 #include "m_commands.h"
@@ -95,13 +95,18 @@ static char buf[BUFSIZE];
  * the need for complicated requests like WHOIS. It returns user/host
  * information only (no spurious AWAY labels or channels).
  */
+/* rewritten Diane Bruce 1999 */
+
 int     m_userhost(struct Client *cptr,
                    struct Client *sptr,
                    int parc,
                    char *parv[])
 {
-  char  *p = NULL;
+  char  *p;            /* scratch end pointer */
+  char  *cn;           /* current name */
   struct Client *acptr;
+  char response[5][NICKLEN*2+CHANNELLEN+USERLEN+HOSTLEN+30];
+  int i;               /* loop counter */
 
   if (parc < 2)
     {
@@ -110,24 +115,41 @@ int     m_userhost(struct Client *cptr,
       return 0;
     }
 
-  p = strchr(parv[1], ' ');
-  if(p)
-    *p = '\0';
+  /* The idea is to build up the response string out of pieces
+   * none of this strlen() nonsense.
+   * 5 * (NICKLEN*2+CHANNELLEN+USERLEN+HOSTLEN+30) is still << sizeof(buf)
+   * and our ircsprintf() truncates it to fit anyway. There is
+   * no danger of an overflow here. -Dianora
+   */
 
-  if ((acptr = find_person(parv[1], NULL)))
+  response[0][0] = response[1][0] = response[2][0] = 
+    response[3][0] = response[4][0] = '\0';
+
+  cn = parv[1];
+
+  for(i=0; (i < 5) && cn; i++ )
     {
-      ircsprintf(buf, "%s%s%s=%c%s@%s",
-                 form_str(RPL_USERHOST),
-		 acptr->name,
-		 IsAnOper(acptr) ? "*" : "",
-		 (acptr->user->away) ? '-' : '+',
-		 acptr->username,
-		 acptr->host);
+      if((p = strchr(cn, ' ')))
+        *p = '\0';
+
+      if ((acptr = find_person(cn, NULL)))
+        {
+          ircsprintf(response[i], "%s%s=%c%s@%s",
+		     acptr->name,
+		     IsAnOper(acptr) ? "*" : "",
+		     (acptr->user->away) ? '-' : '+',
+		     acptr->username,
+		     acptr->host);
+        }
+      if(p)
+        p++;
+      cn = p;
     }
-  else
-    {
-      ircsprintf(buf, "%s", form_str(RPL_USERHOST));
-    }
+
+  ircsprintf(buf, "%s %s %s %s %s %s",
+    form_str(RPL_USERHOST),
+    response[0], response[1], response[2], response[3], response[4] );
   sendto_one(sptr, buf, me.name, parv[0]);
+
   return 0;
 }
