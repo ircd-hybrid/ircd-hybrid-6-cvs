@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: channel.h,v 1.26 2000/10/06 03:00:55 lusky Exp $
+ * $Id: channel.h,v 1.27 2001/01/11 00:35:13 lusky Exp $
  */
 
 #ifndef INCLUDED_channel_h
@@ -67,8 +67,6 @@ struct Channel
   struct SLink*   denylist;
   int             num_bed;  /* number of bans+exceptions+denies */
   time_t          channelts;
-  int             locally_created;  /* used to flag a locally created channel */
-  int             keep_their_modes; /* used only on mode after sjoin */
 #ifdef FLUD
   time_t          fludblock;
   struct fludbot* fluders;
