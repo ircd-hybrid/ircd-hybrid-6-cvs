@@ -19,13 +19,9 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ *   $Id: m_kline.c,v 1.15 1999/07/12 23:37:01 tomh Exp $
  */
-
-#ifndef lint
-static char *rcs_version = "$Id: m_kline.c,v 1.14 1999/07/10 20:24:58 tomh Exp $";
-#endif
-
-
 #include "struct.h"
 
 #include "common.h"

@@ -1,4 +1,10 @@
-/* fdlist.c   maintain lists of certain important fds */
+/* 
+ *
+ * fdlist.c   maintain lists of certain important fds 
+ *
+ *
+ * $Id: fdlist.c,v 1.5 1999/07/12 23:37:00 tomh Exp $
+ */
 #include "struct.h"
 #include "common.h"
 #include "sys.h"
@@ -6,9 +12,6 @@
 #include "config.h"
 #include "fdlist.h"
 
-#ifndef lint
-static char *rcs_version = "$Id: fdlist.c,v 1.4 1999/07/07 02:19:00 db Exp $";
-#endif /* lint */
 
 void addto_fdlist(int fd,fdlist *listp)
 {

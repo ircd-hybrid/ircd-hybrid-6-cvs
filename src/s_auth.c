@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.25 1999/07/11 22:42:25 tomh Exp $
+ *   $Id: s_auth.c,v 1.26 1999/07/12 23:37:03 tomh Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -249,7 +249,7 @@ static int start_auth_query(struct AuthRequest* auth)
     ++ircstp->is_abad;
     return 0;
   }
-  if ((HARD_FDLIMIT - 10) < fd) {
+  if ((MAXCONNECTIONS - 10) < fd) {
     sendto_ops("Can't allocate fd for auth on %s",
                 get_client_name(auth->client, TRUE));
 

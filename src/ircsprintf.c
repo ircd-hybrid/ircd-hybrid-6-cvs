@@ -1,3 +1,9 @@
+/*
+ * ircsprintf.c
+ *
+ *
+ * $Id: ircsprintf.c,v 1.6 1999/07/12 23:37:01 tomh Exp $
+ */
 #include <stdio.h>
 #include "struct.h"
 #include "sys.h"
@@ -9,9 +15,6 @@
 #include <varargs.h>
 #endif /* HAVE_STDARG_H */
 
-#ifndef lint
-static char *rcs_version = "$Id: ircsprintf.c,v 1.5 1999/07/08 21:31:31 db Exp $";
-#endif
 
 #ifdef HAVE_STDARG_H
 

@@ -15,13 +15,9 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ *   $Id: class.c,v 1.7 1999/07/12 23:36:59 tomh Exp $
  */
-
-#ifndef	lint
-static char sccsid[] = "@(#)class.c	1.4 28 Jun 1993 (C) 1990 Darren Reed";
-static char *rcs_version = "$Id: class.c,v 1.6 1999/07/08 00:53:25 db Exp $";
-#endif
-
 #include "class.h"
 #include "struct.h"
 #include "common.h"

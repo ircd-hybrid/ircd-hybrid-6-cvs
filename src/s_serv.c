@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.135 1999/07/12 06:30:35 tomh Exp $
+ *   $Id: s_serv.c,v 1.136 1999/07/12 23:37:05 tomh Exp $
  */
 
 #define CAPTAB
@@ -3525,11 +3525,6 @@ int	m_trace(aClient *cptr,
 		       me.name, now - acptr->lasttime);
 	  cnt++;
 	  break;
-	case STAT_LOG:
-	  sendto_one(sptr, form_str(RPL_TRACELOG), me.name,
-		     parv[0], LOGFILE, acptr->port);
-	  cnt++;
-	  break;
 	default: /* ...we actually shouldn't come here... --msa */
 	  sendto_one(sptr, form_str(RPL_TRACENEWTYPE), me.name,
 		     parv[0], name);
@@ -3713,11 +3708,6 @@ int	m_ltrace(aClient *cptr,
 		       link_u[i], name, *(acptr->serv->by) ?
 		       acptr->serv->by : "*", "*",
 		       me.name, now - acptr->lasttime);
-	  cnt++;
-	  break;
-	case STAT_LOG:
-	  sendto_one(sptr, form_str(RPL_TRACELOG), me.name,
-		     parv[0], LOGFILE, acptr->port);
 	  cnt++;
 	  break;
 	default: /* ...we actually shouldn't come here... --msa */

@@ -19,12 +19,10 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ *
+ *   $Id: m_unkline.c,v 1.10 1999/07/12 23:37:02 tomh Exp $
  */
-
-#ifndef lint
-static char *rcs_version = "$Id: m_unkline.c,v 1.9 1999/07/08 22:46:26 db Exp $";
-#endif
-
 #include "struct.h"
 
 #include "common.h"

@@ -15,20 +15,16 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- */
-
-/*
+ *
+ *
  *	I kind of modernized this code a bit. -Dianora
+ *
+ *   $Id: s_err.c,v 1.23 1999/07/12 23:37:04 tomh Exp $
  */
-
 #include "struct.h"
 #include "numeric.h"
 #include "h.h"
 
-#ifndef lint
-static  char sccsid[] = "@(#)s_err.c	1.11 5/17/93 (C) 1992 Darren Reed";
-static char *rcs_version = "$Id: s_err.c,v 1.22 1999/06/26 16:18:20 db Exp $";
-#endif
 
 static	char	numbuff[512];
 

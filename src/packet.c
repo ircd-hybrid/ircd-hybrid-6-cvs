@@ -16,15 +16,10 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- */
-
-#ifndef lint
-static  char sccsid[] = "@(#)packet.c	2.12 1/30/94 (C) 1988 University of Oulu, \
-Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: packet.c,v 1.7 1999/06/25 11:59:55 db Exp $";
-
-#endif
- 
+ *
+ *
+ *   $Id: packet.c,v 1.8 1999/07/12 23:37:03 tomh Exp $
+ */ 
 #include "struct.h"
 #include "common.h"
 #include "sys.h"

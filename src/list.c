@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu, Computing Center and Jarkko Oikarinen
  *
- * $Id: list.c,v 1.23 1999/07/11 21:09:39 tomh Exp $
+ * $Id: list.c,v 1.24 1999/07/12 23:37:01 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -30,12 +30,6 @@
 #include "res.h"
 #include "class.h"
 #include "send.h"
-/* #include "s_conf.h"
-
-#ifndef INADDR_NONE
-#define INADDR_NONE ((unsigned int) 0xffffffff)
-#endif
-*/
 
 extern int BlockHeapGarbageCollect(BlockHeap *);
 extern SetOptionsType GlobalSetOptions;
@@ -373,7 +367,6 @@ void remove_client_from_list(aClient *cptr)
 	}
     }
   if (IsInvisible(cptr)) Count.invisi--;
-  checklist();
   if (cptr->prev)
     cptr->prev->next = cptr->next;
   else

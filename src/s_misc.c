@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.44 1999/07/11 21:09:42 tomh Exp $
+ *  $Id: s_misc.c,v 1.45 1999/07/12 23:37:04 tomh Exp $
  */
 #include "s_conf.h"
 #include "struct.h"
@@ -207,29 +207,6 @@ const char* my_name_for_link(const char* name, aConfItem* aconf)
   strncpy(&namebuf[1], name, HOSTLEN - 1);
   namebuf[HOSTLEN - 1] = '\0';
   return namebuf;
-}
-
-
-void        checklist()
-{
-  aClient        *acptr;
-  int        i,j;
-
-  if (!(bootopt & BOOT_AUTODIE))
-    return;
-  for (j = i = 0; i <= highest_fd; i++)
-    if (!(acptr = local[i]))
-      continue;
-    else if (IsClient(acptr))
-      j++;
-  if (!j)
-    {
-#ifdef        USE_SYSLOG
-      syslog(LOG_WARNING,"ircd exiting: checklist() s_misc.c autodie");
-#endif
-      exit(0);
-    }
-  return;
 }
 
 void        initstats()
