@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: listener.c,v 1.20 2001/07/18 01:37:12 lusky Exp $
+ *  $Id: listener.c,v 1.21 2001/12/04 04:47:45 androsyn Exp $
  */
 #include "listener.h"
 #include "client.h"
@@ -169,15 +169,8 @@ static int inetport(struct Listener* listener)
   port_sin.sin_port   = htons(listener->port);
 
   if (INADDR_ANY != listener->addr.s_addr) {
-    struct hostent* hp;
-    /*
-     * XXX - blocking call to gethostbyaddr
-     */
-    if ((hp = gethostbyaddr((char*) &listener->addr, 
-                            sizeof(struct sockaddr_in), AF_INET))) {
-      strncpy_irc(listener->vhost, hp->h_name, HOSTLEN);
-      listener->name = listener->vhost;
-    }
+    strncpy_irc(listener->vhost, inetntoa((char *)&listener->addr), HOSTLEN);
+    listener->name = listener->vhost;
   }
 
   if (bind(fd, (struct sockaddr*) &port_sin, sizeof(port_sin))) {

@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.58 2001/11/30 08:00:18 db Exp $
+ * $Id: client.h,v 1.59 2001/12/04 04:47:43 androsyn Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -233,7 +233,7 @@ struct Client
   struct SLink*     confs;      /* Configuration record associated */
   struct in_addr    ip;         /* keep real ip# too */
   unsigned short    port;       /* and the remote port# too :-) */
-  struct DNSReply*  dns_reply;  /* result returned from resolver query */
+  struct DNSQuery*  dns_query;  /* result returned from resolver query */
 #ifdef ANTI_NICK_FLOOD
   time_t            last_nick_change;
   int               number_of_nick_changes;

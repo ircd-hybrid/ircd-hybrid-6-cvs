@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.56 2001/11/29 06:25:35 db Exp $
+ *   $Id: s_debug.c,v 1.57 2001/12/04 04:47:46 androsyn Exp $
  */
 #include "s_debug.h"
 #include "channel.h"
@@ -385,7 +385,6 @@ void count_memory(aClient *cptr,char *nick)
              me.name, RPL_STATSDEBUG, nick, dbuf_alloc_count, dbuf_allocated,
              dbuf_used_count, dbuf_used);
 
-  rm = cres_mem(cptr);
 
   count_scache(&number_servers_cached,&mem_servers_cached);
 

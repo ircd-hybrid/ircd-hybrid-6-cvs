@@ -16,7 +16,7 @@
 #*   along with this program; if not, write to the Free Software
 #*   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #*
-#*   $Id: Makefile.in,v 1.20 2001/07/04 20:07:28 wcampbel Exp $
+#*   $Id: Makefile.in,v 1.21 2001/12/04 04:47:40 androsyn Exp $
 #*/
 
 RM=@RM@
@@ -79,7 +79,7 @@ CFLAGS = -g -O2 -DNDEBUG
 
 
 SHELL=/bin/sh
-SUBDIRS=zlib src tools
+SUBDIRS=adns zlib src tools
 # ZSUBDIRS=zlib $(SUBDIRS)
 
 MAKE = make ${MFLAGS} 'CFLAGS=${CFLAGS}' 'INSTALL=${INSTALL}' 'LDFLAGS=${LDFLAGS}'

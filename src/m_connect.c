@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_connect.c,v 1.9 2001/07/21 20:35:40 leeh Exp $
+ *   $Id: m_connect.c,v 1.10 2001/12/04 04:47:45 androsyn Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -28,6 +28,7 @@
 #include "ircd.h"
 #include "irc_string.h"
 #include "numeric.h"
+#include "res.h"
 #include "s_bsd.h"
 #include "s_conf.h"
 #include "s_log.h"
@@ -107,11 +108,11 @@
  */
 int m_connect(struct Client* cptr, struct Client* sptr, int parc, char* parv[])
 {
+  
   int              port;
   int              tmpport;
   struct ConfItem* aconf;
   struct Client*   acptr;
-
   if (!IsPrivileged(sptr))
     {
       sendto_one(sptr, form_str(ERR_NOPRIVILEGES), me.name, parv[0]);
@@ -206,7 +207,7 @@ int m_connect(struct Client* cptr, struct Client* sptr, int parc, char* parv[])
    * at this point we should be calling connect_server with a valid
    * C:line and a valid port in the C:line
    */
-  if (connect_server(aconf, sptr, 0))
+  if (connect_server(aconf, sptr, NULL))
 #if (defined SERVERHIDE) || (defined HIDE_SERVERS_IPS)
     sendto_one(sptr, ":%s NOTICE %s :*** Connecting to %s[%s].%d",
                me.name, parv[0], "255.255.255.255", aconf->name, aconf->port);

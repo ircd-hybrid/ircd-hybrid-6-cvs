@@ -3,11 +3,12 @@
  * fdlist.c   maintain lists of certain important fds 
  *
  *
- * $Id: fdlist.c,v 1.10 1999/07/24 07:58:57 tomh Exp $
+ * $Id: fdlist.c,v 1.11 2001/12/04 04:47:45 androsyn Exp $
  */
 #include "fdlist.h"
 #include "client.h"  /* struct Client */
 #include "ircd.h"    /* GlobalSetOptions */
+#include "res.h"
 #include "s_bsd.h"   /* highest_fd */
 #include "config.h"  /* option settings */
 #include <string.h>

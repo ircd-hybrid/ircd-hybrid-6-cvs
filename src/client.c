@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.68 2001/08/03 15:12:56 leeh Exp $
+ *  $Id: client.c,v 1.69 2001/12/04 04:47:44 androsyn Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -198,9 +198,6 @@ void _free_client(struct Client* cptr)
   if (cptr->local_flag) {
     if (-1 < cptr->fd)
       close(cptr->fd);
-
-    if (cptr->dns_reply)
-      --cptr->dns_reply->ref_count;
 
     result = BlockHeapFree(localClientFreeList, cptr);
   }
@@ -1057,10 +1054,10 @@ int check_registered(struct Client* client)
 void release_client_dns_reply(struct Client* client)
 {
   assert(0 != client);
-  if (client->dns_reply) {
-    --client->dns_reply->ref_count;
-    client->dns_reply = 0;
-  }
+//  if (client->dns_reply) {
+//    --client->dns_reply->ref_count;
+//    client->dns_reply = 0;
+//  }
 }
 
 /*
@@ -1140,7 +1137,7 @@ const char* get_client_host(struct Client* client)
 
   if (!MyConnect(client))
     return client->name;
-  if (!client->dns_reply)
+  if (!client->host)
     return get_client_name(client, FALSE);
   else
     {

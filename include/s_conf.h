@@ -18,7 +18,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *   $Id: s_conf.h,v 1.56 2001/11/30 08:00:19 db Exp $
+ *   $Id: s_conf.h,v 1.57 2001/12/04 04:47:44 androsyn Exp $
  */
 
 #ifndef INCLUDED_config_h
@@ -60,6 +60,7 @@ struct ConfItem
   time_t           hold;     /* Hold action until this time (calendar time) */
   struct Class*    c_class;     /* Class of connection */
   int              dns_pending; /* 1 if dns query pending, 0 otherwise */
+  struct DNSQuery* dns_query;
 };
 
 typedef struct QlineItem {
@@ -205,7 +206,7 @@ extern void             free_conf(struct ConfItem*);
 
 extern void             read_conf_files(int cold);
 
-extern struct DNSReply* conf_dns_lookup(struct ConfItem* aconf);
+extern void conf_dns_lookup(struct ConfItem* aconf);
 extern int              attach_conf(struct Client*, struct ConfItem *);
 extern int              attach_confs(struct Client* client, 
                                      const char* name, int statmask);

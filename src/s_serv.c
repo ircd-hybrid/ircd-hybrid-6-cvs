@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.226 2001/07/27 23:20:24 jdc Exp $
+ *   $Id: s_serv.c,v 1.227 2001/12/04 04:47:46 androsyn Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -359,7 +359,8 @@ int check_server(struct Client* cptr)
       return 0;
     }
   lp = cptr->confs;
-  if (cptr->dns_reply)
+#if 0  
+  if (cptr->dns_query)
     {
       int             i;
       struct hostent* hp   = cptr->dns_reply->hp;
@@ -390,6 +391,7 @@ int check_server(struct Client* cptr)
                                   cptr->username, CONF_NOCONNECT_SERVER);
         }
     }
+#endif
   /*
    * Check for C and N lines with the hostname portion the ip number
    * of the host the server runs on. This also checks the case where
