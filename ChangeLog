@@ -1,3 +1,17 @@
+ievil       2003/10/13 07:26:44 EDT	(20031013_7)
+
+  Modified files:
+    src                  m_gline.c 
+  Log:
+  Enhancements and backports from h7.
+  - ideas and features also from Hwy's +FR, comstud's csircd
+    and my little crazy brain.
+  
+  Revision  Changes    Path
+  1.53      +31 -2     ircd-hybrid-6/src/m_gline.c
+
+
+
 ievil       2003/10/13 07:21:41 EDT	(20031013_6)
 
   Modified files:
