@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_version.c,v 1.5 1999/07/31 04:48:04 db Exp $
+ *   $Id: m_version.c,v 1.6 2001/07/04 16:23:06 leeh Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -93,7 +93,7 @@
  */
 int m_version(struct Client* cptr, struct Client* sptr, int parc, char* parv[])
 {
-  if (IsAnOper(sptr))
+  if (!MyClient(sptr) || IsAnOper(sptr))
      {
        if (hunt_server(cptr, sptr, ":%s VERSION :%s", 
                        1, parc, parv) == HUNTED_ISME)
