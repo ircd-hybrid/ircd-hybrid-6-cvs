@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.74 1999/05/09 08:19:29 lusky Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.75 1999/05/15 14:40:31 db Exp $";
 
 #endif
 
@@ -4353,7 +4353,7 @@ void announce_fluder(aClient *fluder,	/* fluder, client being fluded */
 
 
 /* This is really just a "convenience" function.  I can only keep three or
-** four levels of pointer dereferencing straight in my head.  This remove
+** four levels of pointer dereferencing straight in my head.  This removes
 ** an entry in a fluders list.  Use this when working on a fludees list :) */
 struct fludbot *remove_fluder_reference(struct fludbot **fluders,
 					aClient *fluder)

@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.22 1999/05/09 08:19:28 lusky Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.23 1999/05/15 14:40:31 db Exp $";
 #endif
 
 #include <sys/time.h>
@@ -855,7 +855,7 @@ static	void	exit_one_client(aClient *cptr,
 				   sptr->name, comment);
 
 	  while ((lp = sptr->user->channel))
-	    remove_user_from_channel(sptr,lp->value.chptr);
+	    remove_user_from_channel(sptr,lp->value.chptr,0);
 	  
 	  /* Clean up invitefield */
 	  while ((lp = sptr->user->invited))
