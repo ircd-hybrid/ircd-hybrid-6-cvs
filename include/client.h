@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.66 2003/06/12 23:53:03 ievil Exp $
+ * $Id: client.h,v 1.67 2003/06/14 19:48:17 ievil Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -358,8 +358,8 @@ struct Client
 #define FLAGS2_OPER_K           0x00400  /* oper can kill/kline */
 #define FLAGS2_OPER_DIE         0x00800  /* oper can die */
 #define FLAGS2_OPER_REHASH      0x01000  /* oper can rehash */
-#define FLAGS2_OPER_STATSPHIDE  0x02000  /* oper can hide from stats p */
-#define FLAGS2_OPER_ADMIN       0x04000  /* oper is admin */
+#define FLAGS2_OPER_STATSPHIDE  0x0800000  /* oper can hide from stats p */
+#define FLAGS2_OPER_ADMIN       0x1000000  /* oper is admin */
 
 
 #define FLAGS2_OPER_FLAGS       (FLAGS2_OPER_GLOBAL_KILL | \

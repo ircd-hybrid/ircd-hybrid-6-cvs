@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_quit.c,v 1.5 2003/06/14 17:39:06 ievil Exp $
+ *   $Id: m_quit.c,v 1.6 2003/06/14 19:48:19 ievil Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -101,15 +101,14 @@ int     m_quit(struct Client *cptr,
   char reason[TOPICLEN +1];
   char *comment = (parc > 1 && parv[1]) ? parv[1] : cptr->name;
 
-
   sptr->flags |= FLAGS_NORMALEX;
+
   if (strlen(comment) > (size_t) TOPICLEN)
     comment[TOPICLEN] = '\0';
 
   if (!IsServer(sptr) && MyConnect(sptr) && comment[0]) 
     {
       snprintf(reason, TOPICLEN, "Quit: %s", comment);
-      reason[TOPICLEN] = '\0';
       comment = reason;    
     }
 
