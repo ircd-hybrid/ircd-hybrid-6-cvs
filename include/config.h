@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.34 1999/03/29 04:54:01 lusky Exp $
+ * $Id: config.h,v 1.35 1999/04/17 23:18:11 lusky Exp $
  */
 
 #ifndef	__config_include__
@@ -689,8 +689,8 @@
 #define LITTLE_I_LINES
 
 /*
- * define ONE of NO_CHANOPS_ON_SPLIT, NO_JOIN_ON_SPLIT or
- * PRESERVE_CHANNEL_ON_SPLIT
+ * define ONE of NO_CHANOPS_ON_SPLIT, NO_JOIN_ON_SPLIT
+ * PRESERVE_CHANNEL_ON_SPLIT, NO_JOIN_ON_SPLIT_SIMPLE
  *
  * choose =one= only
  */
@@ -702,11 +702,20 @@
  */
 #define NO_CHANOPS_WHEN_SPLIT
 
+/* 
+ * NO_JOIN_ON_SPLIT_SIMPLE
+ * 
+ * When this is defined, users will not be allowed to join channels
+ * while the server is split.
+ */
+#undef NO_JOIN_ON_SPLIT_SIMPLE
+
 /*
  * NO_JOIN_ON_SPLIT
  *
  * When this is defined, users will not be allowed to join channels
  * that were present before a split.
+ * THIS IS BROKEN - DO NOT USE ON PRODUCTION SERVER --Rodder
  */
 #undef NO_JOIN_ON_SPLIT
 
@@ -716,6 +725,7 @@
  * When this is defined, channel modes are preserved when this
  * server is split from net until rejoin. i.e. if the channel
  * was +i before this server split, it remains +i during the split
+ * THIS IS BROKEN - DO NOT USE ON PRODUCTION SERVER --Rodder
  */
 #undef PRESERVE_CHANNEL_ON_SPLIT
 

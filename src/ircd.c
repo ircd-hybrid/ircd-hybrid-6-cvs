@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.38 1999/03/15 20:58:26 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.39 1999/04/17 23:18:13 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -63,7 +63,7 @@ aMessageFile *amotd=(aMessageFile *)NULL;
 aMessageFile *helpfile=(aMessageFile *)NULL;	
 
 #if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
-	defined(NO_JOIN_ON_SPLIT)
+	defined(NO_JOIN_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT_SIMPLE)
 extern time_t server_split_time;
 #endif
 
@@ -1204,7 +1204,7 @@ normal user.\n");
   init_fdlist(&listen_fdlist);
 
 #if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
-	defined(NO_JOIN_ON_SPLIT)
+	defined(NO_JOIN_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT_SIMPLE)
   server_split_time = NOW;
 #endif
 

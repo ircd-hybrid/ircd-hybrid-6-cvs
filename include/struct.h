@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.29 1999/03/24 00:13:36 db Exp $
+ * $Id: struct.h,v 1.30 1999/04/17 23:18:12 lusky Exp $
  */
 
 #ifndef	__struct_include__
@@ -1032,7 +1032,7 @@ extern unsigned long tsdms;
  */
 
 #if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
-	defined(NO_JOIN_ON_SPLIT)
+	defined(NO_JOIN_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT_SIMPLE)
 #define MAX_SERVER_SPLIT_RECOVERY_TIME 30
 #ifndef DEFAULT_SERVER_SPLIT_RECOVERY_TIME
 #define DEFAULT_SERVER_SPLIT_RECOVERY_TIME 15
