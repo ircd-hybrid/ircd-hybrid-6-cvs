@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.225 2001/07/27 22:56:07 jdc Exp $
+ *   $Id: s_serv.c,v 1.226 2001/07/27 23:20:24 jdc Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -510,7 +510,7 @@ const char* show_capabilities(struct Client* acptr)
 {
   static char        msgbuf[BUFSIZE];
   struct Capability* cap;
-  chat *t;
+  char *t;
   int tl;
 
   t = msgbuf;
