@@ -22,7 +22,7 @@
  */
 
 #ifndef lint
-static char *rcs_version = "$Id: m_unkline.c,v 1.3 1999/06/23 00:28:39 tomh Exp $";
+static char *rcs_version = "$Id: m_unkline.c,v 1.4 1999/06/24 03:30:49 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -100,7 +100,6 @@ int m_unkline (aClient *cptr,aClient *sptr,int parc,char *parv[])
 
   char	*user,*host;
   char  *p;
-  int   nread;
   int   error_on_write = NO;
   mode_t oldumask;
 

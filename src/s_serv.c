@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.107 1999/06/23 00:28:40 tomh Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.108 1999/06/24 03:30:49 lusky Exp $";
 #endif
 
 
@@ -251,7 +251,7 @@ int	m_version(aClient *cptr,
      {
        if (hunt_server(cptr,sptr,":%s VERSION :%s",1,parc,parv)==HUNTED_ISME)
 	 sendto_one(sptr, form_str(RPL_VERSION), me.name,
-		    parv[0], version, debugmode, me.name, serveropts);
+		    parv[0], version, serno, debugmode, me.name, serveropts);
      }
    else
      sendto_one(sptr, rpl_str(RPL_VERSION), me.name,
