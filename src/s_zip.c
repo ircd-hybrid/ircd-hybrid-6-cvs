@@ -1,5 +1,5 @@
 /************************************************************************
- *   IRC - Internet Relay Chat, ircd/s_zip.c
+ *   IRC - Internet Relay Chat, src/s_zip.c
  *   Copyright (C) 1996  Christophe Kalt
  *
  *   This program is free software; you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_zip.c,v 1.21 1999/08/01 06:47:24 tomh Exp $
+ *   $Id: s_zip.c,v 1.22 2000/10/06 03:00:59 lusky Exp $
  */
 #include "s_zip.h"
 #include "client.h"

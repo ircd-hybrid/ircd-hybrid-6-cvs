@@ -1,6 +1,7 @@
+$Id: mtrie.txt,v 1.2 2000/10/06 03:00:53 lusky Exp $
 
 
-In hybrid-5.4 dich_conf has been removed.
+In hybrid-6 dich_conf has been removed.
 
   All tree's K-lines/I-lines/E-lines/F-lines are now integrated
 into one tree form, I have called an "mtrie." (Sean suggests

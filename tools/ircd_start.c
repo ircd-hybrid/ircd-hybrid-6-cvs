@@ -1,5 +1,6 @@
 /*
  * contributed by mjr
+ * $Id: ircd_start.c,v 1.2 2000/10/06 03:01:03 lusky Exp $
  */
 
 #include <stdio.h>
