@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_map.c,v 1.2 2003/10/13 15:18:29 ievil Exp $
+ *   $Id: m_map.c,v 1.3 2003/10/13 18:46:31 ievil Exp $
  */
 
 #include <assert.h>
@@ -39,6 +39,7 @@ static void dump_map(struct Client *cptr,struct Client *root_p, char *pbuf);
 
 int m_map(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 {
+  buf[0]=0;
 #ifdef SERVERHIDE
   if (!IsAnOper(cptr))
   {
@@ -67,7 +68,7 @@ static void dump_map(struct Client *cptr,struct Client *root_p, char *pbuf)
 
   users = root_p->serv->usercnt;
 
-  snprintf(buf + len, BUFSIZE, " [Users: %d (%1.1f%%)]", users,
+  snprintf(buf + len, BUFSIZE - len, " [Users: %d (%1.1f%%)]", users,
            100 * (float)users / (float)Count.total);
 
   sendto_one(cptr, form_str(RPL_MAP),me.name,cptr->name,buf);

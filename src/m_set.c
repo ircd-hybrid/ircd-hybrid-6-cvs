@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_set.c,v 1.11 2003/10/13 11:19:59 ievil Exp $
+ *   $Id: m_set.c,v 1.12 2003/10/13 18:46:31 ievil Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -639,7 +639,7 @@ int m_set(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
           break;
         }
     }
-  sendto_one(sptr, ":%s NOTICE %s :Options: MAX MAXTKLINE AUTOCONN",
+  sendto_one(sptr, ":%s NOTICE %s :Options: MAX MAXBANS MAXTKLINE AUTOCONN",
              me.name, parv[0]);
 #ifdef FLUD
   sendto_one(sptr, ":%s NOTICE %s :Options: FLUDNUM, FLUDTIME, FLUDBLOCK",
