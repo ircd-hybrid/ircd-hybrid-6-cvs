@@ -1,3 +1,18 @@
+ievil       2003/10/13 06:01:34 EDT	(20031013_2)
+
+  Modified files:
+    src                  m_info.c m_whois.c s_misc.c 
+  Log:
+  A few security fixes to hybrid-6. Fixes a possible core in whois operspy
+  usage. Thanks to comstud for helping me debug that one.
+  
+  Revision  Changes    Path
+  1.42      +4 -1      ircd-hybrid-6/src/m_info.c
+  1.15      +1 -1      ircd-hybrid-6/src/m_whois.c
+  1.80      +1 -1      ircd-hybrid-6/src/s_misc.c
+
+
+
 ievil       2003/10/13 05:55:05 EDT	(20031013_1)
 
   Modified files:
