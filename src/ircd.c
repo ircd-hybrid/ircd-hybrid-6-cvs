@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.20 1998/12/10 02:13:44 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.21 1998/12/10 03:18:58 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1020,7 +1020,7 @@ normal user.\n");
 		    IRC_UID);
       (void)fprintf(stderr,"         changing to gid %d.\n",IRC_GID);
 
-      /* setgid/setuid changes suggested by ficus@neptho.net
+      /* setgid/setuid previous usage noted unsafe by ficus@neptho.net
        */
 
       if(setgid(IRC_GID) < 0)
