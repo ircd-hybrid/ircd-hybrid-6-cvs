@@ -1,3 +1,44 @@
+ievil       2003/05/04 18:10:49 EDT	(20030504_1)
+
+  Modified files:
+    .                    Hybrid-team 
+    include              config.h config.h.dist patchlevel.h 
+    src                  m_gline.c s_conf.c 
+  Log:
+  Commiting a series of small fixes to the default behaviour of hybrid6, and
+  at the same time we're adding the patchlevel up to 6.3.2 rc 1.
+  
+  I would like to thank Sariasa for all of the help with this release.
+  
+  config.h
+  config.h.dist
+          - Changes default values regarding max sendq lenght to be more valid
+          - Changed the default behaviour of hyb6 to not allow creation of chans
+            while split.
+          - Added SPOOF_IP - Allow spoofing of ip addresses.
+          - Added GLINE_REASON_FIRST
+  
+  m_gline.c
+          - Changed behaviour to take the first gline reason when adding.
+            Backport from h7
+  
+  s_conf.c
+          - Changed to allow spoofing of ip addresses.
+  
+  Submitted by: ievil
+  Reviewed by: einride
+  Approved by: ievil
+  
+  Revision  Changes    Path
+  1.31      +1 -0      ircd-hybrid-6/Hybrid-team
+  1.156     +15 -3     ircd-hybrid-6/include/config.h
+  1.133     +14 -3     ircd-hybrid-6/include/config.h.dist
+  1.153     +1 -1      ircd-hybrid-6/include/patchlevel.h
+  1.51      +44 -7     ircd-hybrid-6/src/m_gline.c
+  1.240     +8 -0      ircd-hybrid-6/src/s_conf.c
+
+
+
 db          2003/05/04 13:52:52 EDT	(20030504_0)
 
   Modified files:
