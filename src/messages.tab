@@ -19,7 +19,7 @@
  *
  *      I kind of modernized this code a bit. -Dianora
  *
- *   $Id: messages.tab,v 1.7 1999/08/10 23:07:22 lusky Exp $
+ *   $Id: messages.tab,v 1.8 1999/09/09 02:13:40 lusky Exp $
  */
 
 static  char *  replies[] = {
@@ -329,7 +329,7 @@ static  char *  replies[] = {
 /* 299 */       (char *)NULL,
 /* 300 RPL_NONE, */      (char *)NULL,
 /* 301 RPL_AWAY, */      ":%s 301 %s %s :%s",
-/* 302 RPL_USERHOST, */  ":%s 302 %s :%s%s=%c%s@%s",
+/* 302 RPL_USERHOST, */  ":%s 302 %s :",
 /* 303 RPL_ISON, */     ":%s 303 %s :",
 /* 304 RPL_TEXT, */      (char *)NULL,
 /* 305 RPL_UNAWAY, */   ":%s 305 %s :You are no longer marked as being away",

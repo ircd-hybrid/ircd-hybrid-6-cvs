@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_userhost.c,v 1.2 1999/07/31 00:22:24 db Exp $
+ *   $Id: m_userhost.c,v 1.3 1999/09/09 02:13:40 lusky Exp $
  */
 
 #include "m_commands.h"
@@ -31,6 +31,9 @@
 #include "send.h"
 #include "irc_string.h"
 #include <string.h>
+
+static char buf[BUFSIZE];
+static char buf2[BUFSIZE];
 
 /* m_functions execute protocol messages on this server:
  *
@@ -112,16 +115,22 @@ int     m_userhost(struct Client *cptr,
   if(p)
     *p = '\0';
 
+  (void)ircsprintf(buf, form_str(RPL_USERHOST), me.name, parv[0]);
   if ((acptr = find_person(parv[1], NULL)))
     {
-      sendto_one(sptr, form_str(RPL_USERHOST), 
-		 me.name, 
-		 parv[0],
+      ircsprintf(buf2, "%s%s%s=%c%s@%s",
+                 buf,
 		 acptr->name,
 		 IsAnOper(acptr) ? "*" : "",
 		 (acptr->user->away) ? '-' : '+',
 		 acptr->username,
 		 acptr->host);
+      p = buf2;
     }
+  else
+    {
+      p = buf;
+    }
+  sendto_one(sptr, "%s", p);
   return 0;
 }
