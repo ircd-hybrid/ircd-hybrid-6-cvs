@@ -1,3 +1,24 @@
+ievil       2003/06/11 09:20:15 EDT	(20030611_0)
+
+  Modified files:
+    include              config.h config.h.dist m_info.h 
+    src                  channel.c m_kline.c m_whois.c 
+  Log:
+  Added SHOW_REMOTE_WHOIS to config.h/config.h.dist, updated m_info.h to reflect
+  changes and additions to config.h lately. Now info will show a more correct
+  compile configuration. Fixed 2 minor tweaks to the remote kline/unkline
+  features added earlier. Thanks to Hwy for finding and notifying me of that.
+  
+  Revision  Changes    Path
+  1.158     +10 -1     ircd-hybrid-6/include/config.h
+  1.135     +11 -2     ircd-hybrid-6/include/config.h.dist
+  1.27      +24 -0     ircd-hybrid-6/include/m_info.h
+  1.240     +1 -1      ircd-hybrid-6/src/channel.c
+  1.79      +1 -1      ircd-hybrid-6/src/m_kline.c
+  1.10      +10 -2     ircd-hybrid-6/src/m_whois.c
+
+
+
 ievil       2003/06/09 21:12:05 EDT	(20030610_0)
 
   Modified files:
