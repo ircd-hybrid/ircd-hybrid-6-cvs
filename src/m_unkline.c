@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_unkline.c,v 1.21 1999/07/19 09:11:46 tomh Exp $
+ *   $Id: m_unkline.c,v 1.22 1999/07/21 02:33:27 db Exp $
  */
 #include "struct.h"
 
@@ -45,7 +45,6 @@ extern aConfItem *temporary_klines;	/* defined in s_conf.c */
 extern int dline_in_progress;	/* defined in ircd.c */
 extern ConfigFileEntryType ConfigFileEntry; /* defined in ircd.c */
 
-int bad_tld(char *);
 extern char *smalldate(time_t);		/* defined in s_misc.c */
 static int flush_write(aClient *, FBFILE* , char *, char *);
 static int remove_tkline_match(char *,char *);

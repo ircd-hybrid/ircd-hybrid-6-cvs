@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.30 1999/07/21 01:55:25 db Exp $
+ *   $Id: m_kline.c,v 1.31 1999/07/21 02:33:26 db Exp $
  */
 
 #include "struct.h"
@@ -1262,43 +1262,3 @@ m_dline(aClient *cptr, aClient *sptr, int parc, char *parv[])
   nextping = timeofday;
   return 0;
 } /* m_dline() */
-
-
-/*
- * bad_tld
- *
- * input	- hostname to k-line
- * output	- YES if not valid
- * side effects	- NONE
- * checks to see if its a kline of the form blah@*.com,*.net,*.org,*.ca etc.
- * if so, return YES
- */
-
-int bad_tld(char *host)
-{
-  char *tld;
-  int is_bad_tld;
-
-  is_bad_tld = NO;
-
-  tld = strrchr(host, '.');
-  if(tld)
-    {
-      if(tld == host)
-	is_bad_tld = YES;
-      tld--;
-      if(tld == host)
-	if( (*tld == '.') || (*tld == '*'))
-	  is_bad_tld = YES;
-      tld--;
-      if(tld != host)
-	{
-	  if((*tld == '*') || (*tld == '?'))
-	    is_bad_tld = YES;
-	}
-    }
-  else
-    is_bad_tld = YES;
-
-  return(is_bad_tld);
-}
