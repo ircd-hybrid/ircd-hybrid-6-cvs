@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.40 1998/12/20 23:48:11 sean Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.41 1998/12/21 00:33:38 db Exp $";
 
 #endif
 
@@ -481,6 +481,10 @@ static	int	register_user(aClient *cptr,
   user->last = timeofday;
   parv[0] = sptr->name;
   parv[1] = parv[2] = NULL;
+
+  /* pointed out by Mortiis, never be too careful */
+  if(strlen(username) > USERLEN)
+    username[USERLEN] = '\0';
 
   reason = (char *)NULL;
 
@@ -1269,9 +1273,6 @@ static	int	register_user(aClient *cptr,
 		     nick, sptr->hopcount+1, sptr->tsinfo, ubuf,
 		     user->username, user->host, user->server,
 		     sptr->info);
-  if (ubuf[1])
-    send_umode_out(cptr, sptr, 0);
-  
   return 0;
 }
 

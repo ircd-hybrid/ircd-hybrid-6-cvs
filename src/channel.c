@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.48 1998/12/20 23:48:08 sean Exp $";
+static char *rcs_version="$Id: channel.c,v 1.49 1998/12/21 00:33:37 db Exp $";
 #endif
 
 #include "struct.h"
@@ -3251,13 +3251,14 @@ int	m_invite(aClient *cptr,
       /* Send a NOTICE to all channel operators concerning chanops who  *
        * INVITE other users to the channel when it is invite-only (+i). *
        * The NOTICE is sent from the local server.  -- David-R          */
-      if (chptr && (chptr->mode.mode & MODE_INVITEONLY)) { 
-	char message[300];
-	sprintf(message, "INVITE: %s (%s invited %s)", chptr->chname, sptr->name, acptr->name);
-	sendto_channel_type_notice(cptr, chptr, MODE_CHANOP,
-				    message);
-      }
 
+      if (chptr && (chptr->mode.mode & MODE_INVITEONLY))
+	{ 
+	  char message[300];
+	  sprintf(message, "INVITE: %s (%s invited %s)", chptr->chname, sptr->name, acptr->name);
+	  sendto_channel_type_notice(cptr, chptr, MODE_CHANOP,
+				     message);
+	}
     }
 
   /* don't attach anything to the invite links if don't need_invite
