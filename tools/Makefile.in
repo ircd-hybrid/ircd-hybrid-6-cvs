@@ -1,9 +1,13 @@
-# $Id: Makefile.in,v 1.11 2001/06/04 05:07:21 db Exp $
+# $Id: Makefile.in,v 1.12 2001/06/06 21:35:49 jdc Exp $
 
 CC=@CC@
 RM=@RM@
-IRCDLIBS=@LIBS@
-INCLUDEDIR=-I../include -I../zlib
+
+SSL_LIBS     = @SSL_LIBS@
+SSL_INCLUDES = @SSL_INCLUDES@
+
+IRCDLIBS     = @LIBS@ $(SSL_LIBS)
+INCLUDEDIR   = -I../include -I../zlib $(SSL_INCLUDES)
 
 mkpasswd_SOURCES = mkpasswd.c
 mkpasswd_OBJECTS = mkpasswd.o

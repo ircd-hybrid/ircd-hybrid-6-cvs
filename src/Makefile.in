@@ -1,14 +1,17 @@
 #
 # Makefile.in for ircd/src
 #
-# $Id: Makefile.in,v 1.59 2001/06/04 05:07:15 db Exp $
+# $Id: Makefile.in,v 1.60 2001/06/06 21:35:48 jdc Exp $
 CC = @CC@
 RM = @RM@
 MKDEP = ${CC} -MM
 
-IRCDLIBS = @LIBS@ ../zlib/libz.a
+SSL_LIBS     = @SSL_LIBS@
+SSL_INCLUDES = @SSL_INCLUDES@
 
-INCLUDES = -I../include -I../zlib
+IRCDLIBS = @LIBS@ ../zlib/libz.a $(SSL_LIBS)
+
+INCLUDES = -I../include -I../zlib $(SSL_INCLUDES)
 CPPFLAGS = ${INCLUDES} @CPPFLAGS@
  
 # For developers
