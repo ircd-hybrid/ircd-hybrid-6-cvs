@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.65 1999/06/23 00:28:40 tomh Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.66 1999/06/23 02:07:25 db Exp $";
 #endif
 
 #include "struct.h"
@@ -934,7 +934,7 @@ aConfItem *attach_confs(aClient *cptr,char *name,int statmask)
 	}
       else if ((tmp->status & statmask) && !IsIllegal(tmp) &&
 	       (tmp->status & (CONF_SERVER_MASK|CONF_HUB)) &&
-	       tmp->name && !irccmp(tmp->name, name))
+	       tmp->name && !match(tmp->name, name))
 	{
 	  if (!attach_conf(cptr, tmp) && !first)
 	    first = tmp;
@@ -1717,15 +1717,6 @@ void initconf(int opt, FBFILE* file, int use_include)
     {
       if ((tmp = strchr(line, '\n')))
         *tmp = '\0';
-
-      /* 
-       * There was code here to discard up till next
-       * EOL char if none detected just above.
-       * not =really= needed because
-       * 1) line would have to be 512 chars and longer
-       * 2) garbage is tossed if line[1] isn't a ':'
-       * 
-       */
 
       /*
        * Do quoting of characters and # detection.
