@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.61 1999/01/19 02:23:10 khuon Exp $";
+static char *rcs_version="$Id: channel.c,v 1.62 1999/01/20 05:56:07 db Exp $";
 #endif
 
 #include "struct.h"
@@ -2113,6 +2113,7 @@ static	void	sub1_from_channel(aChannel *chptr)
       if(server_was_split)
 	{
 	  chptr->mode.mode |= MODE_SPLIT;
+
 	  /*
 	   * Now, find all invite links from channel structure
 	   */

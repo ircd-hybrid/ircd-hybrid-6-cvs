@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.52 1999/01/19 02:23:17 khuon Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.53 1999/01/20 05:56:13 db Exp $";
 
 #endif
 
@@ -705,7 +705,6 @@ static	int	register_user(aClient *cptr,
       /* If this user can run bots set it "B lined" */
       if(IsConfBlined(aconf))
 	{
-	  SetElined(sptr);
 	  SetBlined(sptr);
 	  sendto_one(sptr,
 	      ":%s NOTICE %s :*** You can run bots here. congrats.",
@@ -716,12 +715,20 @@ static	int	register_user(aClient *cptr,
       if(IsConfFlined(aconf))
 	{
 	  SetFlined(sptr);
-	  SetElined(sptr);
-	  SetBlined(sptr);
 	  sendto_one(sptr,
 	      ":%s NOTICE %s :*** You are exempt from user limits. congrats.",
 		     me.name,parv[0]);
 	}
+#ifdef IDLE_CHECK
+      /* If this user is exempt from idle time outs */
+      if(IsConfIdlelined(aconf))
+	{
+	  SetIdlelined(sptr);
+	  sendto_one(sptr,
+	      ":%s NOTICE %s :*** You are exempt from idle limits. congrats.",
+		     me.name,parv[0]);
+	}
+#endif
 
 #ifdef GLINES
       if ( (aconf=find_gkill(sptr)) )
