@@ -1,3 +1,18 @@
+db          2003/05/15 00:14:20 EDT	(20030515_2)
+
+  Modified files:
+    src                  mtrie_conf.c 
+  Log:
+  Prevent duplicate K-lines and I-lines from being included in the
+  unsortable I-line list, unsortable K-line list, and the wildcard I-line
+  list.
+  (submitted by hwy)
+  
+  Revision  Changes    Path
+  1.91      +99 -1     ircd-hybrid-6/src/mtrie_conf.c
+
+
+
 db          2003/05/15 00:13:33 EDT	(20030515_1)
 
   Modified files:
