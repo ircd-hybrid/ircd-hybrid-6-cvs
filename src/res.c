@@ -22,7 +22,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)res.c	2.34 03 Nov 1993 (C) 1992 Darren Reed";
-static  char *rcs_version = "$Id: res.c,v 1.6 1998/11/06 22:35:21 db Exp $";
+static  char *rcs_version = "$Id: res.c,v 1.7 1998/11/12 02:32:11 db Exp $";
 #endif
 
 #undef	DEBUG	/* because there is a lot of debug code in here :-) */
@@ -604,6 +604,7 @@ static	int	proc_answer(ResRQ *rptr,
 	  if (ans == 1)
 	    hp->h_addrtype =  (class == C_IN) ?
 	      AF_INET : AF_UNSPEC;
+	  /* from Christophe Kalt <kalt@stealth.net> */
           if (dlen != sizeof(dr))
             {
               sendto_realops("Bad IP length (%d) returned for %s",
