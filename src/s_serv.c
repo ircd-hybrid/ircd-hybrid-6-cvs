@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.21 1998/10/26 07:35:50 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.22 1998/10/27 23:40:49 db Exp $";
 #endif
 
 
@@ -2504,12 +2504,6 @@ int	 m_lusers(aClient *cptr,
 		  int parc,
 		  char *parv[])
 {
-#define LUSERS_CACHE_TIME 180
-  static long last_time=0;
-  static int	s_count = 0, c_count = 0, u_count = 0, i_count = 0;
-  static int	o_count = 0, m_client = 0, m_server = 0;
-  int forced;
-  aClient *acptr;
   /* anti flooding code,
    * I did have this in parse.c with a table lookup
    * but I think this will be less inefficient doing it in each
@@ -2530,7 +2524,20 @@ int	 m_lusers(aClient *cptr,
       else
 	last_used = NOW;
     }
+  return(show_lusers(cptr,sptr,parc,parv));
+}
 
+int show_lusers(aClient *cptr,
+		aClient *sptr,
+		int parc,
+		char *parv[])
+{
+#define LUSERS_CACHE_TIME 180
+  static long last_time=0;
+  static int	s_count = 0, c_count = 0, u_count = 0, i_count = 0;
+  static int	o_count = 0, m_client = 0, m_server = 0;
+  int forced;
+  aClient *acptr;
 
   if (parc > 2)
     if(hunt_server(cptr, sptr, ":%s LUSERS %s :%s", 2, parc, parv)
