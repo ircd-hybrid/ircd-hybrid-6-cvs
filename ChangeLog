@@ -1,3 +1,15 @@
+ievil       2003/10/13 12:26:16 EDT	(20031013_14)
+
+  Modified files:
+    include              patchlevel.h 
+  Log:
+  reved patchlevel - beta 1 of 6.4.2
+  
+  Revision  Changes    Path
+  1.161     +1 -1      ircd-hybrid-6/include/patchlevel.h
+
+
+
 ievil       2003/10/13 12:23:15 EDT	(20031013_13)
 
   Modified files:
