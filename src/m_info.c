@@ -1,7 +1,7 @@
 /*
  * m_info.c 
  *
- * $Id: m_info.c,v 1.25 1999/07/22 03:26:18 tomh Exp $
+ * $Id: m_info.c,v 1.26 1999/07/22 06:03:35 tomh Exp $
  */
 #include "struct.h"
 
@@ -13,7 +13,7 @@
 #include "fdlist.h"
 #include "h.h"
 #include "ircd.h"
-#include "list.h"
+#include "s_user.h"
 
 #include <time.h>
 #include <string.h>

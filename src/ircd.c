@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.100 1999/07/22 03:26:18 tomh Exp $
+ * $Id: ircd.c,v 1.101 1999/07/22 06:03:35 tomh Exp $
  */
 #include "ircd.h"
 #include "struct.h"
@@ -42,7 +42,8 @@
 #include "fdlist.h"
 #include "restart.h"
 #include "m_gline.h"
-#include "list.h"
+#include "scache.h"
+#include "s_misc.h"
 
 #include <string.h>
 #include <errno.h>

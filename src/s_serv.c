@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.178 1999/07/22 04:17:32 db Exp $
+ *   $Id: s_serv.c,v 1.179 1999/07/22 06:03:36 tomh Exp $
  */
 
 #define CAPTAB
@@ -56,7 +56,7 @@
 #include "irc_string.h"
 #include "match.h"
 #include "config.h"
-#include "list.h"
+#include "m_gline.h"
 
 #include <string.h>
 #include <stdlib.h>

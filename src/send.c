@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.66 1999/07/22 04:17:33 db Exp $
+ *   $Id: send.c,v 1.67 1999/07/22 06:03:37 tomh Exp $
  */
 #include "send.h"
 #include "struct.h"
@@ -29,10 +29,11 @@
 #include "class.h"
 #include "numeric.h"
 #include "channel.h"
-#include "list.h"
+#include "msg.h"
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <stdarg.h>
 #include <time.h>
 
