@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.161 2001/12/13 23:16:37 leeh Exp $
+ * $Id: ircd.c,v 1.162 2002/01/30 23:55:43 androsyn Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -707,6 +707,12 @@ int main(int argc, char *argv[])
 {
   time_t      delay = 0;
   aConfItem*  aconf;
+  
+  if(geteuid() == 0)
+  {
+  	fprintf(stderr, "ERROR: Don't run ircd as root!\n");
+  	return -1;
+  }
 
   /*
    * save server boot time right away, so getrusage works correctly
