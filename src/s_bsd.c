@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.89 1999/07/22 06:31:20 tomh Exp $
+ *  $Id: s_bsd.c,v 1.90 1999/07/23 03:04:54 tomh Exp $
  */
 #include "s_bsd.h"
 #include "s_serv.h"
@@ -1349,12 +1349,7 @@ int read_message(time_t delay, fdlist *listp)        /* mika */
       wait.tv_sec = IRCD_MIN(delay2, delay);
       wait.tv_usec = usec;
 
-#ifdef        HPUX
-      nfds = select(FD_SETSIZE, (fd_set *)read_set, (fd_set *)write_set,
-                    (fd_set *)0, &wait);
-#else
       nfds = select(MAXCONNECTIONS, read_set, write_set, 0, &wait);
-#endif
 
       if((timeofday = time(NULL)) == -1)
         {
