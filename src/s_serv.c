@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.236 2003/10/13 11:30:16 ievil Exp $
+ *   $Id: s_serv.c,v 1.237 2003/10/13 16:55:57 ievil Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -960,7 +960,7 @@ void show_servers(struct Client *cptr)
       seconds %= 3600;
       minutes = seconds / 60;
       seconds %= 60;
-      sendto_one(cptr, ":%s %d %s :%s (%s!%s@%s) Idle: %d Connected: %l%s%ld%s%ld%s%ld%s",
+      sendto_one(cptr, ":%s %d %s :%s (%s!%s@%s) Idle: %d Connected: %ld%s%ld%s%ld%s%ld%s",
                  me.name, RPL_STATSDEBUG, cptr->name, cptr2->name,
                  (cptr2->serv->by[0] ? cptr2->serv->by : "Remote."), 
                  "*", (cptr2->serv->bysrv[0] ? cptr2->serv->bysrv : "*"), 
