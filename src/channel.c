@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.57 1998/12/28 23:41:03 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.58 1998/12/29 01:19:05 db Exp $";
 #endif
 
 #include "struct.h"
@@ -2434,30 +2434,23 @@ int	m_join(aClient *cptr,
        */
       if(cold_start && MyClient(sptr))
 	{
-#endif
-
-#ifdef PRESERVE_CHANNEL_ON_SPLIT
 	  if(server_was_split && (*name == '#') && !IsAnOper(sptr))
 	    {
 	      sendto_one(sptr, err_str(ERR_NOJOINSPLIT),
 			 me.name, parv[0], name);
 	      continue;
 	    }
-#endif
-#ifdef NO_JOIN_ON_SPLIT
-	  if(server_was_split && MyClient(sptr) &&
-	     (*name == '#') && !IsAnOper(sptr))
-	    {
-	      sendto_one(sptr, err_str(ERR_NOJOINSPLIT),
-			 me.name, parv[0], name);
-	      continue;
-	    }
-#endif
-
-#ifdef PRESERVE_CHANNEL_ON_SPLIT
 	}
 #endif
-
+#ifdef NO_JOIN_ON_SPLIT
+      if(server_was_split && MyClient(sptr) &&
+	 (*name == '#') && !IsAnOper(sptr))
+	{
+	  sendto_one(sptr, err_str(ERR_NOJOINSPLIT),
+		     me.name, parv[0], name);
+	  continue;
+	}
+#endif
       if (*jbuf)
 	(void)strcat(jbuf, ",");
       (void)strncat(jbuf, name, sizeof(jbuf) - i - 1);
