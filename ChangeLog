@@ -1,3 +1,16 @@
+ievil       2003/06/17 18:45:30 EDT	(20030617_1)
+
+  Modified files:
+    .                    Hybrid-team RELNOTES 
+  Log:
+  fixed an email address per request. fixed aix info in RELNOTES.
+  
+  Revision  Changes    Path
+  1.33      +1 -1      ircd-hybrid-6/Hybrid-team
+  1.17      +1 -1      ircd-hybrid-6/RELNOTES
+
+
+
 ievil       2003/06/17 17:46:42 EDT	(20030617_0)
 
   Modified files:
