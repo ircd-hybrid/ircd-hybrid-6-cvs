@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.194 2001/06/10 01:08:50 db Exp $
+ * $Id: channel.c,v 1.195 2001/06/11 21:40:46 leeh Exp $
  */
 #include "channel.h"
 #include "client.h"
@@ -601,6 +601,7 @@ static  int is_banned(struct Client *cptr,struct Channel *chptr)
       }
   }
 
+#ifdef CHANMODE_E
   if (tmp)
     {
       for (t2 = chptr->exceptlist; t2; t2 = t2->next)
@@ -610,6 +611,7 @@ static  int is_banned(struct Client *cptr,struct Channel *chptr)
             return CHFL_EXCEPTION;
           }
     }
+#endif
 
   /* return CHFL_BAN for +b or +d match, we really dont need to be more
      specific */
@@ -1424,7 +1426,6 @@ void set_channel_mode(struct Client *cptr,
            * -Dianora
            */
 
-#ifdef CHANMODE_E
         case 'e':
           if (whatt == MODE_QUERY || parc-- <= 0)
             {
@@ -1498,6 +1499,10 @@ void set_channel_mode(struct Client *cptr,
                 ((whatt & MODE_DEL) && !del_exceptid(chptr, arg))))
             break;
 
+#ifndef CHANMODE_E
+	  if(whatt == MODE_ADD)
+	    break;
+#endif	    
           /* This stuff can go back in when all servers understand +e 
            * with the pbufw_new nonsense removed -Dianora
            */
@@ -1519,7 +1524,6 @@ void set_channel_mode(struct Client *cptr,
           *pbufw_new++ = ' ';
 
           break;
-#endif
 
           /* There is a nasty here... I'm supposed to have
            * CAP_DE before I can send exceptions to bans to a server.
