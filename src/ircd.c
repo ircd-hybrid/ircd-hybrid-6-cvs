@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.21 1998/12/10 03:18:58 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.22 1998/12/28 23:41:05 db Exp $";
 #endif
 
 #include "struct.h"
@@ -69,6 +69,8 @@ aMessageFile *helpfile=(aMessageFile *)NULL;
 	defined(NO_JOIN_ON_SPLIT)
 extern time_t server_split_time;
 #endif
+
+int cold_start=YES;	/* set if the server has just fired up */
 
 #ifdef SETUID_ROOT
 #include <sys/lock.h>
@@ -809,6 +811,8 @@ int	main(int argc, char *argv[])
   uid_t	uid, euid;
   time_t	delay = 0;
   int fd;
+
+  cold_start = YES;		/* set when server first starts up */
 
   if((timeofday = time(NULL)) == -1)
     {

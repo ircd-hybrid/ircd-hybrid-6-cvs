@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: s_err.h,v 1.9 1998/12/08 18:58:44 db Exp $
+ * $Id: s_err.h,v 1.10 1998/12/28 23:41:02 db Exp $
  *
  */
 
@@ -523,11 +523,7 @@ static	char *	replies[] = {
 /* 477 ERR_MODELESS, */		":%s 477 %s %s :Channel does not support modes",
 /* 478 ERR_BANLISTFULL, */	":%s 478 %s :Channel ban list is full",
 
-#ifdef NO_JOIN_ON_SPLIT
 /* 479 ERR_NOJOINSPLIT, */	":%s 479 %s %s :Cannot join channel on split",
-#else
-/* 479 */	(char *)NULL,
-#endif
 
 /* 480 */	(char *)NULL,
 /* 481 ERR_NOPRIVILEGES, */
