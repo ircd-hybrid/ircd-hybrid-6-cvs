@@ -1,7 +1,7 @@
 /*
  * viconf.c
  *
- * $Id: viconf.c,v 1.13 2001/07/03 21:52:19 wcampbel Exp $
+ * $Id: viconf.c,v 1.14 2003/05/16 06:06:00 db Exp $
  */
 #include <stdio.h>
 #include <unistd.h>
@@ -26,13 +26,13 @@
 #include <sys/wait.h>
 #endif
 
-static int LockedFile(char *filename);
+static int LockedFile(const char *filename);
 static char lockpath[PATH_MAX + 1];
 
 
 int main(int argc, char *argv[])
 {
-  char *ed, *p, *filename = CPATH;
+  const char *ed, *p, *filename = CPATH;
 
   if( chdir(DPATH) < 0 )
     {
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 
   if(LockedFile(filename))
     {
-      fprintf(stderr,"Cant' lock %s\n", filename);
+      fprintf(stderr,"Can't lock %s\n", filename);
       exit(errno);
     }
 
@@ -64,9 +64,9 @@ int main(int argc, char *argv[])
     case -1:
       fprintf(stderr, "error forking, %d\n", errno);
       exit(errno);
-    case 0:		/* Child */
+    case 0:             /* Child */
       if((ed = getenv("EDITOR")) == NULL)
-	ed = "vi";
+        ed = "vi";
       execlp(ed, ed, filename, NULL);
       fprintf(stderr, "error running editor, %d\n", errno);
       exit(errno);
@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
 
 
 static int
-LockedFile(char *filename)
+LockedFile(const char *filename)
 
 {
 
@@ -104,34 +104,34 @@ LockedFile(char *filename)
 
   if (!filename)
     return (0);
-  
+ 
   sprintf(lockpath, "%s.lock", filename);
-  
-  if ((fileptr = fopen(lockpath, "r")) != (FILE *) NULL)
+ 
+  if ((fileptr = fopen(lockpath, "r")) != NULL)
     {
       if (fgets(buffer, sizeof(buffer) - 1, fileptr))
-	{
-	  /*
-	   * If it is a valid lockfile, 'buffer' should now
-	   * contain the pid number of the editing process.
-	   * Send the pid a SIGCHLD to see if it is a valid
-	   * pid - it could be a remnant left over from a
-	   * crashed editor or system reboot etc.
-	   */
-      
-	  killret = kill(atoi(buffer), SIGCHLD);
-	  if (killret == 0)
-	    {
-	      fclose(fileptr);
-	      return (1);
-	    }
+        {
+          /*
+           * If it is a valid lockfile, 'buffer' should now
+           * contain the pid number of the editing process.
+           * Send the pid a SIGCHLD to see if it is a valid
+           * pid - it could be a remnant left over from a
+           * crashed editor or system reboot etc.
+           */
+     
+          killret = kill(atoi(buffer), SIGCHLD);
+          if (killret == 0)
+            {
+              fclose(fileptr);
+              return (1);
+            }
 
-	  /*
-	   * killret must be -1, which indicates an error (most
-	   * likely ESRCH - No such process), so it is ok to
-	   * proceed writing klines.
-	   */
-	}
+          /*
+           * killret must be -1, which indicates an error (most
+           * likely ESRCH - No such process), so it is ok to
+           * proceed writing klines.
+           */
+        }
       fclose(fileptr);
     }
 
@@ -148,7 +148,7 @@ LockedFile(char *filename)
     }
 
   fileptr = fdopen(fd,"w");
-  fprintf(fileptr,"%d\n",(int) getpid());
+  fprintf(fileptr,"%d\n",(int)getpid());
   fclose(fileptr);
   return (0);
 } /* LockedFile() */
