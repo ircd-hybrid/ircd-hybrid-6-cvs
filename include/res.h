@@ -1,7 +1,7 @@
 /*
  * irc2.7.2/ircd/res.h (C)opyright 1992 Darren Reed.
  *
- * $Id: res.h,v 1.6 1999/07/03 15:39:28 db Exp $
+ * $Id: res.h,v 1.7 1999/07/03 17:23:33 tomh Exp $
  */
 #ifndef	INCLUDED_res_h
 #define INCLUDED_res_h
@@ -17,6 +17,7 @@
 #endif
 
 struct Client;
+struct hostent;
 
 struct DNSQuery {
   void* vptr;               /* pointer used by callback to identify request */
