@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.92 2000/06/10 02:45:37 lusky Exp $
+ *   $Id: send.c,v 1.93 2000/10/05 23:39:42 bill Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -1289,7 +1289,7 @@ sendto_realops(const char *pattern, ...)
 
   vsendto_realops(pattern, args);
 
-  va_end(vl);
+  va_end(args);
 } /* sendto_realops() */
 
 /*
