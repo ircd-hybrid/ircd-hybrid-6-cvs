@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.46 1999/08/17 05:44:56 lusky Exp $
+ * $Id: res.c,v 1.47 1999/10/10 03:43:01 lusky Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
@@ -322,8 +322,10 @@ static void start_resolver(void)
 #ifdef DEBUG
   _res.options |= RES_DEBUG;
 #endif
-  if (ResolverFileDescriptor < 0)
+  if (ResolverFileDescriptor < 0) {
     ResolverFileDescriptor = socket(AF_INET, SOCK_DGRAM, 0);
+    set_non_blocking(ResolverFileDescriptor);
+  }
 }
 
 /*

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: listener.c,v 1.17 1999/08/12 03:02:19 lusky Exp $
+ *  $Id: listener.c,v 1.18 1999/10/10 03:43:01 lusky Exp $
  */
 #include "listener.h"
 #include "client.h"
@@ -324,6 +324,8 @@ void accept_connection(struct Listener* listener)
    * be accepted until some old is closed first.
    */
   if (-1 == (fd = accept(listener->fd, (struct sockaddr*) &addr, &addrlen))) {
+    if (EAGAIN == errno)
+       return;
     /*
      * slow down the whining to opers bit
      */

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.44 1999/08/17 05:44:57 lusky Exp $
+ *   $Id: s_auth.c,v 1.45 1999/10/10 03:43:02 lusky Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -482,6 +482,8 @@ void send_auth_query(struct AuthRequest* auth)
              (unsigned int) ntohs(us.sin_port));
 
   if (send(auth->fd, authbuf, strlen(authbuf), 0) == -1) {
+    if (EAGAIN == errno)
+      return;
     auth_error(auth);
     return;
   }
@@ -525,6 +527,9 @@ void read_auth_reply(struct AuthRequest* auth)
       *t = '\0';
     }
   }
+
+  if ((len < 0) && (EAGAIN == errno))
+    return;
 
   close(auth->fd);
   auth->fd = -1;
