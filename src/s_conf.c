@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.75 1999/06/26 15:05:47 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.76 1999/06/27 00:06:06 db Exp $";
 #endif
 
 #include "struct.h"
@@ -2367,9 +2367,6 @@ static int SplitUserHost(aConfItem *aconf)
  * output	- NONE
  * side effect	-
  * hash in any .include conf files listed in the conf file
- * I do them =after= the conf file is read in, because dgets
- * is non re-entrant. This has the side effect of ordering
- * things a bit differently then one might expect.
  * -Dianora
  */
 
