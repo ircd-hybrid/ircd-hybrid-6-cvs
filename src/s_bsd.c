@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.106 1999/07/31 08:23:01 tomh Exp $
+ *  $Id: s_bsd.c,v 1.107 1999/07/31 23:07:16 db Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -392,6 +392,8 @@ void init_sys()
     }
 
 #ifndef __CYGWIN__
+  /* This is needed to not fork if -s is on */
+  if( !bootopt & BOOT_STDERR )
     {
       int pid;
       if( (pid = fork()) < 0)
