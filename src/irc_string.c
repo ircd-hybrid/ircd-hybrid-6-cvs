@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: irc_string.c,v 1.8 2000/07/20 03:58:23 lusky Exp $
+ *  $Id: irc_string.c,v 1.9 2000/08/09 22:50:25 lusky Exp $
  */
 #include "irc_string.h"
 #include "list.h"
@@ -111,7 +111,10 @@ char* clean_string(char* dest, const unsigned char* src, size_t len)
             *d++ = 0x40 + *src;   /* turn it into a printable */
         }
       else if (*src > '~')
-        *d++ = '.';
+        {
+          if (d < (endp - 4))
+            d += ircsprintf(d,"\\%d",*src);
+        }
       else
         *d++ = *src;
       ++src;
