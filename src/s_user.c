@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.151 1999/07/19 04:02:19 db Exp $
+ *  $Id: s_user.c,v 1.152 1999/07/19 04:53:04 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -131,7 +131,7 @@ static int user_modes_from_c_to_bitmask[] =
 #ifdef BOTCHECK
 static int bot_check(char *);
 
-char *type_of_bot[]={
+const char *type_of_bot[]={
   "NONE",
   "eggdrop",
   "vald/com/joh bot",
@@ -3665,6 +3665,15 @@ int	m_umode(aClient *cptr,
 	case '-' :
 	  what = MODE_DEL;
 	  break;	
+
+	case 'o':
+	  if(what == MODE_ADD)
+	    {
+	      if(IsServer(cptr))
+		SetOper(sptr);
+	    }
+	  break;
+
 	  /* we may not get these,
 	   * but they shouldnt be in default
 	   */

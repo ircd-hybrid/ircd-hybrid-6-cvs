@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.22 1999/07/18 23:35:14 db Exp $
+ * $Id: client.h,v 1.23 1999/07/19 04:53:02 db Exp $
  */
 #ifndef	INCLUDED_client_h
 #define INCLUDED_client_h
@@ -299,8 +299,8 @@ struct Client
 #define FLAGS_IPHASH       0x1000 /* iphashed this client */
 
 /* user information flags, only settable by remote mode or local oper */
-#define	FLAGS_OPER	   0x1000 /* Operator */
-#define	FLAGS_LOCOP        0x2000 /* Local operator -- SRB */
+#define	FLAGS_OPER	   0x2000 /* Operator */
+#define	FLAGS_LOCOP        0x4000 /* Local operator -- SRB */
 
 
 /* umodes, settable flags */
