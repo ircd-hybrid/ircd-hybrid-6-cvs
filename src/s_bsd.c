@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.140 2001/07/21 17:05:16 jdc Exp $
+ *  $Id: s_bsd.c,v 1.141 2001/10/09 02:18:00 lusky Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -555,13 +555,10 @@ int connect_server(struct ConfItem* aconf,
       
       query.vptr     = aconf;
       query.callback = connect_dns_callback;
-      reply = gethost_byname(aconf->host, &query);
+      gethost_byname(aconf->host, &query);
 
-      if (!reply) {
-        aconf->dns_pending = 1;
-        return 0;
-      }
-      memcpy(&aconf->ipnum, reply->hp->h_addr, sizeof(struct in_addr));
+      aconf->dns_pending = 1;
+      return 0;
     }
   }
   cptr = make_client(NULL);

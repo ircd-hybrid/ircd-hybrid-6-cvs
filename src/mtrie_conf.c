@@ -43,7 +43,7 @@
  *
  * Diane Bruce -db (db@db.net)
  *
- * $Id: mtrie_conf.c,v 1.75 2001/10/08 22:58:01 db Exp $
+ * $Id: mtrie_conf.c,v 1.76 2001/10/09 02:18:00 lusky Exp $
  */
 #include "mtrie_conf.h"
 #include "class.h"
@@ -750,7 +750,7 @@ find_matching_mtrie_conf(const char* host, const char* user,
     {
       if(ip)
 	{
-	  iline_aconf= find_matching_ip_i_line(user, ip);
+	  iline_aconf= find_matching_ip_i_line((char *)user, ip);
 	  
 	  if(iline_aconf)
 	    {
@@ -1751,7 +1751,7 @@ find_matching_ip_i_line(char *user, unsigned long host_ip)
   for( aconf = ip_i_lines; aconf; aconf = aconf->next)
     {
       if (((host_ip & aconf->ip_mask) == aconf->ip) &&
-	  match(found_conf->user,user))
+	  match(aconf->user,user))
         return(aconf);
     }
   return(NULL);

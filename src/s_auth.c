@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.49 2001/07/18 01:37:16 lusky Exp $
+ *   $Id: s_auth.c,v 1.50 2001/10/09 02:18:00 lusky Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -413,15 +413,8 @@ void start_auth(struct Client* client)
 
   sendheader(client, REPORT_DO_DNS);
 
-  client->dns_reply = gethost_byaddr((const char*) &client->ip, &query);
-  if (client->dns_reply)
-    {
-      ++client->dns_reply->ref_count;
-      strncpy_irc(client->host, client->dns_reply->hp->h_name, HOSTLEN);
-      sendheader(client, REPORT_FIN_DNSC);
-    }
-  else
-    SetDNSPending(auth);
+  gethost_byaddr((const char*) &client->ip, &query);
+  SetDNSPending(auth);
 
   if (start_auth_query(auth))
     link_auth_request(auth, &AuthPollList);

@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.210 2001/08/05 18:40:52 leeh Exp $
+ *  $Id: s_conf.c,v 1.211 2001/10/09 02:18:00 lusky Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -173,8 +173,8 @@ struct DNSReply* conf_dns_lookup(struct ConfItem* aconf)
     struct DNSQuery query;
     query.vptr     = aconf;
     query.callback = conf_dns_callback;
-    if (0 == (dns_reply = gethost_byname(aconf->host, &query)))
-      aconf->dns_pending = 1;
+    gethost_byname(aconf->host, &query);
+    aconf->dns_pending = 1;
   }
   return dns_reply;
 }
