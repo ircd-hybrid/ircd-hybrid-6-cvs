@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)bsd.c	2.14 1/30/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: bsd.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static char *rcs_version = "$Id: bsd.c,v 1.2 1998/10/18 06:23:49 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -34,7 +34,7 @@ static char *rcs_version = "$Id: bsd.c,v 1.1 1998/09/17 14:25:04 db Exp $";
 #include <sys/socket.h>
 
 extern	int errno; /* ...seems that errno.h doesn't define this everywhere */
-#if !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__) && !defined(__bsdi__) && !defined(__linux__)
+#if !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__) && !defined(__bsdi__) && !defined(__linux__) && !defined(__EMX__)
 extern	char	*sys_errlist[];
 #endif
 

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: sys.h,v 1.3 1998/10/18 00:14:02 lusky Exp $
+ * $Id: sys.h,v 1.4 1998/10/18 06:23:48 lusky Exp $
  */
 
 #ifndef	__sys_include__
@@ -71,6 +71,10 @@ extern	char	*rindex (char *, char);
 #endif
 #else
 #include <sys/time.h>
+#endif
+
+#ifdef __EMX__
+#  include <os2.h>
 #endif
 
 #define MyFree(x)       if ((x) != NULL) free(x)

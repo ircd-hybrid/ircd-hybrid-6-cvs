@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.12 1998/10/18 00:14:03 lusky Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.13 1998/10/18 06:23:50 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -995,7 +995,7 @@ int	main(int argc, char *argv[])
     }
 #endif
 
-#ifndef IRC_UID
+#if !defined(IRC_UID)
   if ((uid != euid) && !euid)
     {
       (void)fprintf(stderr,
@@ -1021,11 +1021,13 @@ normal user.\n");
       (void)setuid(IRC_UID);
       (void)setgid(IRC_GID);
 #else
+#  ifndef __EMX__
       /* check for setuid root as usual */
       (void)fprintf(stderr,
 		    "ERROR: do not run ircd setuid root. Make it setuid a\
  normal user.\n");
       exit(-1);
+#  endif /* __EMX__ */
 # endif	
 	    } 
 #endif /*CHROOTDIR/UID/GID*/

@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.11 1998/10/18 00:14:04 lusky Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.12 1998/10/18 06:23:51 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -36,7 +36,7 @@ static char *rcs_version = "$Id: s_bsd.c,v 1.11 1998/10/18 00:14:04 lusky Exp $"
 #include <sys/socket.h>
 #include <sys/file.h>
 #include <sys/ioctl.h>
-#if defined(SOL20)
+#if defined(SOL20) 
 #include <sys/filio.h>
 #include <sys/select.h>
 #include <unistd.h>
@@ -45,7 +45,9 @@ static char *rcs_version = "$Id: s_bsd.c,v 1.11 1998/10/18 00:14:04 lusky Exp $"
 #include <stdio.h>
 #include <signal.h>
 #include <fcntl.h>
+#ifndef __EMX__
 #include <utmp.h>
+#endif
 #include <sys/resource.h>
 
 /*
@@ -505,7 +507,7 @@ void	init_sys()
 # if defined(HPUX)
   (void)setvbuf(stderr, NULL, _IOLBF, 0);
 # else
-#  if !defined(SOL20)
+#  if !defined(SOL20) && !defined(__EMX__)
   (void)setlinebuf(stderr);
 #  endif
 # endif
@@ -553,7 +555,9 @@ void	init_sys()
     defined(_POSIX_SOURCE) || defined(SVR4)
       (void)setsid();
 #else
+# ifndef __EMX__
     (void)setpgrp(0, (int)getpid());
+# endif /* __EMX__ */
 #endif
     (void)close(0);	/* fd 0 opened by inetd */
     local[0] = NULL;

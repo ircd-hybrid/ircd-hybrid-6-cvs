@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.9 1998/10/17 21:06:48 lusky Exp $
+ * $Id: config.h,v 1.10 1998/10/18 06:23:45 lusky Exp $
  */
 
 #ifndef	__config_include__
@@ -1066,6 +1066,12 @@
  */
 
 /* ------------------------- END CONFIGURATION SECTION -------------------- */
+#ifdef __EMX__
+#  undef IRC_UID
+#  undef IRC_GID
+#  undef USE_SYSLOG /* OS/2 doesn't have syslog */
+#endif
+
 #ifdef APOLLO
 #define RESTARTING_SYSTEMCALLS
 #endif                            /* read/write are restarted after signals
