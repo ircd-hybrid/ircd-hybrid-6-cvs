@@ -21,9 +21,13 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.16 1999/07/16 09:57:54 db Exp $
+ * $Id: s_conf.h,v 1.17 1999/07/16 11:57:31 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.17  1999/07/16 11:57:31  db
+ * - more cleanups
+ * - removed unused function in FLUD code
+ *
  * Revision 1.16  1999/07/16 09:57:54  db
  * - even more cleanups. moved prototype from h.h to s_conf.h
  *
@@ -216,6 +220,8 @@ extern int conf_connect_allowed(struct in_addr addr);
 extern char *oper_flags_as_string(int);
 extern char *oper_privs_as_string(struct Client *, int);
 extern int rehash_dump(struct Client *);
+extern int find_q_line(char*, char*, char *);
+extern struct ConfItem* find_special_conf(char *,int );
 
 typedef enum {
   CONF_TYPE,

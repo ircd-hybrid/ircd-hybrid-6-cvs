@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.120 1999/07/16 09:57:55 db Exp $
+ *  $Id: s_conf.c,v 1.121 1999/07/16 11:57:33 db Exp $
  */
 #include "s_conf.h"
 #include "listener.h"
@@ -76,7 +76,6 @@ static  int     attach_iline(aClient *, aConfItem *,char *);
 static  int     attach_iline(aClient *, aConfItem *);
 #endif
 aConfItem *find_special_conf(char *, int );
-int       find_q_line(char *, char *,char *);
 
 static void add_q_line(aConfItem *);
 static void clear_q_lines(void);
