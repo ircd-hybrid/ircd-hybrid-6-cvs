@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.25 2001/12/07 05:09:27 db Exp $
+ * $Id: m_info.h,v 1.26 2002/11/28 04:17:59 db Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -270,6 +270,12 @@ Info MyInformation[] = {
   { "HIDE_SERVERS_IPS", "OFF", 0, "Hide server's IP's from all users" },
 #endif /* HIDE_SERVERS_IPS */
 
+#ifdef HIDE_SPOOF_IPS
+  { "HIDE_SPOOF_IPS", "ON", 0, "Hide spoofed IP's from all users" },
+#else
+  { "HIDE_SPOOF_IPS", "OFF", 0, "Hide spoofed IP's from all users" },
+#endif /* HIDE_SPOOF_IPS */
+
 #ifdef HPATH
   { "HPATH", HPATH, 0, "Path to Operator Help File" },
 #else
@@ -445,6 +451,12 @@ Info MyInformation[] = {
 #else
   { "NO_FAKE_GLINES", "OFF", 0, "Do not allow GLINES from users that do not exist" },
 #endif /* NO_FAKE_GLINES */
+
+#ifdef NO_CREATE_ON_SPLIT
+  { "NO_CREATE_ON_SPLIT", "ON", 0, "Users Cannot Create Channels During a NetSplit" },
+#else
+  { "NO_CREATE_ON_SPLIT", "OFF", 0, "Users Cannot Create Channels During a NetSplit" },
+#endif
 
 #ifdef NO_JOIN_ON_SPLIT
   { "NO_JOIN_ON_SPLIT", "ON", 0, "Users Cannot Join Channels During a NetSplit" },

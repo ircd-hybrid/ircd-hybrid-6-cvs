@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_stats.c,v 1.21 2001/12/19 23:24:46 leeh Exp $
+ *  $Id: m_stats.c,v 1.22 2002/11/28 04:18:01 db Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "class.h"       /* report_classes */
@@ -517,7 +517,7 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
           report_specials(sptr,CONF_XLINE,RPL_STATSXLINE);
           valid_stats++;
         }
-      break;;
+      break;
 
     case 'Y' : case 'y' :
       if(IsAnOper(sptr))

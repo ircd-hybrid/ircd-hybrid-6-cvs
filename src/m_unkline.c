@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_unkline.c,v 1.45 2002/02/17 05:58:13 lusky Exp $
+ *   $Id: m_unkline.c,v 1.46 2002/11/28 04:18:01 db Exp $
  */
 #include "m_commands.h"
 #include "channel.h"
@@ -49,7 +49,7 @@
 
 extern ConfigFileEntryType ConfigFileEntry; /* defined in ircd.c */
 
-static int flush_write(aClient *, FBFILE* , char *, char *);
+static int flush_write(aClient *, FBFILE *in, FBFILE *out , char *, char *);
 static int remove_tkline_match(char *,char *, unsigned long);
 
 /*
@@ -78,7 +78,6 @@ int m_unkline (aClient *cptr,aClient *sptr,int parc,char *parv[])
 
   char  *user,*host;
   char  *p;
-  int   error_on_write = NO;
   mode_t oldumask;
   unsigned long ip;
   unsigned long ip_mask;
@@ -104,20 +103,20 @@ int m_unkline (aClient *cptr,aClient *sptr,int parc,char *parv[])
       return 0;
     }
 
-  if ( parc < 2 )
+  if (parc < 2)
     {
       sendto_one(sptr, form_str(ERR_NEEDMOREPARAMS),
                  me.name, parv[0], "UNKLINE");
       return 0;
     }
 
-  if ( (host = strchr(parv[1], '@')) || *parv[1] == '*' )
+  if ((host = strchr(parv[1], '@')) || *parv[1] == '*')
     {
       /* Explicit user@host mask given */
 
-      if(host)                  /* Found user@host */
+      if (host != NULL)		/* Found user@host */
         {
-          user = parv[1];       /* here is user part */
+          user = parv[1];	/* here is user part */
           *(host++) = '\0';     /* and now here is host */
         }
       else
@@ -133,7 +132,7 @@ int m_unkline (aClient *cptr,aClient *sptr,int parc,char *parv[])
       return 0;
     }
 
-  if( (user[0] == '*') && (user[1] == '\0')
+  if ((user[0] == '*') && (user[1] == '\0')
       && (host[0] == '*') && (host[1] == '\0') )
     {
       sendto_one(sptr, ":%s NOTICE %s :Cannot UNK-Line everyone",
@@ -141,10 +140,10 @@ int m_unkline (aClient *cptr,aClient *sptr,int parc,char *parv[])
       return 0;
     }
 
-  if(!(is_address(host, &ip, &ip_mask)))
+  if (!(is_address(host, &ip, &ip_mask)))
     ip = 0L;
     
-  if(remove_tkline_match(host,user,(unsigned long)ip))
+  if (remove_tkline_match(host,user,(unsigned long)ip))
     {
       sendto_one(sptr, ":%s NOTICE %s :Un-klined [%s@%s] from temporary k-lines",
                  me.name, parv[0],user, host);
@@ -158,7 +157,7 @@ int m_unkline (aClient *cptr,aClient *sptr,int parc,char *parv[])
 
   filename = get_conf_name(KLINE_TYPE);
 
-  if( (in = fbopen(filename, "r")) == 0)
+  if ((in = fbopen(filename, "r")) == 0)
     {
       sendto_one(sptr, ":%s NOTICE %s :Cannot open %s",
         me.name,parv[0],filename);
@@ -166,7 +165,7 @@ int m_unkline (aClient *cptr,aClient *sptr,int parc,char *parv[])
     }
 
   oldumask = umask(0);                  /* ircd is normally too paranoid */
-  if( (out = fbopen(temppath, "w")) == 0)
+  if ((out = fbopen(temppath, "w")) == 0)
     {
       sendto_one(sptr, ":%s NOTICE %s :Cannot open %s",
         me.name,parv[0],temppath);
@@ -183,7 +182,7 @@ K:bar:No reason (1997/08/30 14.56):foo
 
   while(fbgets(buf, sizeof(buf), in)) 
     {
-      if((buf[1] == ':') && ((buf[0] == 'k') || (buf[0] == 'K')))
+      if ((buf[1] == ':') && ((buf[0] == 'k') || (buf[0] == 'K')))
         {
           /* its a K: line */
           char *found_host;
@@ -192,41 +191,36 @@ K:bar:No reason (1997/08/30 14.56):foo
 
           strncpy_irc(buff, buf, BUFSIZE);      /* extra paranoia */
 
-          p = strchr(buff,'\n');
-          if(p)
+          if ((p = strchr(buff,'\n')) != NULL)
             *p = '\0';
 
           found_host = buff + 2;        /* point past the K: */
-          p = strchr(found_host,':');
-          if(p == (char *)NULL)
+          if ((p = strchr(found_host, ':')) == NULL)
             {
               sendto_one(sptr, ":%s NOTICE %s :K-Line file corrupted",
                          me.name, parv[0]);
               sendto_one(sptr, ":%s NOTICE %s :Couldn't find host",
                          me.name, parv[0]);
               log(L_ERROR, "K-Line file corrupted (couldn't find host)");
-              if(!error_on_write)
-                error_on_write = flush_write(sptr, out, buf, temppath);
-              continue;         /* This K line is corrupted ignore */
+              if (flush_write(sptr, in, out, buf, temppath) < 0)
+		return 0;
+	      continue;
             }
-          *p = '\0';
-          p++;
+          *p++ = '\0';
  
           found_comment = p;
-          p = strchr(found_comment,':');
-          if(p == (char *)NULL)
+          if ((p = strchr(found_comment, ':')) == NULL)
             {
               sendto_one(sptr, ":%s NOTICE %s :K-Line file corrupted",
                          me.name, parv[0]);
               sendto_one(sptr, ":%s NOTICE %s :Couldn't find comment",
                          me.name, parv[0]);
               log(L_ERROR, "K-Line file corrupted (couldn't find comment)");
-              if(!error_on_write)
-                error_on_write = flush_write(sptr, out, buf, temppath);
-              continue;         /* This K line is corrupted ignore */
+              if (flush_write(sptr, in, out, buf, temppath) < 0)
+		return 0;
+	      continue;
             }
-          *p = '\0';
-          p++;
+          *p++ = '\0';
           found_user = p;
 
 /*
@@ -234,10 +228,11 @@ K:bar:No reason (1997/08/30 14.56):foo
  * then, write the K: line out, and I add it back to the K line
  * tree
  */
-          if(irccmp(host,found_host) || irccmp(user,found_user))
+          if (irccmp(host,found_host) || irccmp(user,found_user))
             {
-              if(!error_on_write)
-                error_on_write = flush_write(sptr, out, buf, temppath);
+	      if (flush_write(sptr, in, out, buf, temppath) < 0)
+		return;
+	      continue;
             }
           else
             pairme++;
@@ -258,24 +253,19 @@ If its a comment coment line, i.e.
 #ignore this line
 Then just ignore the line
 */
-          p = strchr(buff,':');
-          if(p == (char *)NULL)
+          if ((p = strchr(buff, ':')) == NULL)
             {
-              if(!error_on_write)
-                error_on_write = flush_write(sptr, out, buf, temppath);
-              continue;
+              if (flush_write(sptr, in, out, buf, temppath) < 0)
+		return 0;
             }
-          *p = '\0';
-          p++;
+          *p++ = '\0';
 
           userathost = p;
-          p = strchr(userathost,':');
 
-          if(p == (char *)NULL)
+          if ((p = strchr(userathost, ':')) == NULL)
             {
-              if(!error_on_write)
-                error_on_write = flush_write(sptr, out, buf, temppath);
-              continue;
+              if (flush_write(sptr, in, out, buf, temppath) < 0)
+		return 0;
             }
           *p = '\0';
 
@@ -283,27 +273,28 @@ Then just ignore the line
             userathost++;
 
           found_user = userathost;
-          p = strchr(found_user,'@');
-          if(p == (char *)NULL)
+          if ((p = strchr(found_user, '@')) == NULL)
             {
-              if(!error_on_write)
-                error_on_write = flush_write(sptr, out, buf, temppath);
-              continue;
+              if (flush_write(sptr, in, out, buf, temppath) < 0)
+		return 0;
+	      continue;
             }
           *p = '\0';
           found_host = p;
           found_host++;
 
-          if( (irccmp(found_host,host)) || (irccmp(found_user,user)) )
+          if ((irccmp(found_host,host)) || (irccmp(found_user,user)))
             {
-              if(!error_on_write)
-                error_on_write = flush_write(sptr, out, buf, temppath);
+              if (flush_write(sptr, in, out, buf, temppath) < 0)
+		return 0;
+	      continue;
             }
         }
       else      /* its the ircd.conf file, and not a K line or comment */
         {
-          if(!error_on_write)
-            error_on_write = flush_write(sptr, out, buf, temppath);
+          if (flush_write(sptr, in, out, buf, temppath) < 0)
+	    return 0;
+	  continue;
         }
     }
 
@@ -314,20 +305,11 @@ Then just ignore the line
  * and I am not going to trash the original kline /conf file
  * -Dianora
  */
-  if(!error_on_write)
-    {
       fbclose(out);
       (void)rename(temppath, filename);
       rehash(cptr,sptr,0);
-    }
-  else
-    {
-      sendto_one(sptr,":%s NOTICE %s :Couldn't write temp kline file, aborted",
-        me.name,parv[0]);
-      return -1;
-    }
 
-  if(!pairme)
+  if (!pairme)
     {
       sendto_one(sptr, ":%s NOTICE %s :No K-Line for %s@%s",
                  me.name, parv[0],user,host);
@@ -350,8 +332,8 @@ Then just ignore the line
  *              - buf is the buffer to write
  *              - ntowrite is the expected number of character to be written
  *              - temppath is the temporary file name to be written
- * output       - YES for error on write
- *              - NO for success
+ * output       - -1 for error on write
+ *              - 0 for success
  * side effects - if successful, the buf is written to output file
  *                if a write failure happesn, and the file pointed to
  *                by temppath, if its non NULL, is removed.
@@ -361,8 +343,8 @@ Then just ignore the line
  *
  * -Dianora
  */
-
-static int flush_write(aClient *sptr, FBFILE* out, char *buf, char *temppath)
+static int
+flush_write(aClient *sptr, FBFILE *in, FBFILE *out, char *buf, char *temppath)
 {
   int error_on_write = (fbputs(buf, out) < 0) ? YES : NO;
 
@@ -370,6 +352,7 @@ static int flush_write(aClient *sptr, FBFILE* out, char *buf, char *temppath)
     {
       sendto_one(sptr,":%s NOTICE %s :Unable to write to %s",
         me.name, sptr->name, temppath );
+      fbclose(in);
       fbclose(out);
       if(temppath != (char *)NULL)
         (void)unlink(temppath);
@@ -391,7 +374,7 @@ static int remove_tkline_match(char *host,char *user, unsigned long ip)
   if(!temporary_klines && !temporary_ip_klines)
     return NO;
 
-  if(ip)
+  if(ip != 0)
   {
     kill_list_ptr = temporary_ip_klines;
 
@@ -450,7 +433,8 @@ static int remove_tkline_match(char *host,char *user, unsigned long ip)
 **      parv[0] = sender nick
 **      parv[1] = dline to remove
 */
-int m_undline (aClient *cptr,aClient *sptr,int parc,char *parv[])
+int
+m_undline (aClient *cptr,aClient *sptr,int parc,char *parv[])
 {
   FBFILE* in;
   FBFILE* out;
@@ -465,7 +449,6 @@ int m_undline (aClient *cptr,aClient *sptr,int parc,char *parv[])
   char  *p;
   unsigned long ip_host;
   unsigned long ip_mask;
-  int   error_on_write = NO;
   mode_t oldumask;
 
   ircsprintf(temppath, "%s.tmp", ConfigFileEntry.dlinefile);
@@ -507,7 +490,7 @@ int m_undline (aClient *cptr,aClient *sptr,int parc,char *parv[])
 
   filename = get_conf_name(DLINE_TYPE);
 
-  if( (in = fbopen(filename, "r")) == 0)
+  if ((in = fbopen(filename, "r")) == 0)
     {
       sendto_one(sptr, ":%s NOTICE %s :Cannot open %s",
         me.name,parv[0],filename);
@@ -515,7 +498,7 @@ int m_undline (aClient *cptr,aClient *sptr,int parc,char *parv[])
     }
 
   oldumask = umask(0);                  /* ircd is normally too paranoid */
-  if( (out = fbopen(temppath, "w")) == 0)
+  if ((out = fbopen(temppath, "w")) == 0)
     {
       sendto_one(sptr, ":%s NOTICE %s :Cannot open %s",
         me.name,parv[0],temppath);
@@ -533,35 +516,34 @@ D:123.4.5.0/24:test (2000/05/28 12.48)
 
   while(fbgets(buf, sizeof(buf), in))
     {
-      if((buf[1] == ':') && ((buf[0] == 'd') || (buf[0] == 'D')))
+      if ((buf[1] == ':') && ((buf[0] == 'd') || (buf[0] == 'D')))
         {
           /* its a D: line */
           char *found_cidr;
 
           strncpy_irc(buff, buf, BUFSIZE);      /* extra paranoia */
 
-          p = strchr(buff,'\n');
-          if(p)
+          if((p = strchr(buff, '\n')) != NULL)
             *p = '\0';
 
           found_cidr = buff + 2;        /* point past the D: */
-          p = strchr(found_cidr,':');
-          if(p == (char *)NULL)
+          if((p = strchr(found_cidr, ':'))  == NULL)
             {
               sendto_one(sptr, ":%s NOTICE %s :D-Line file corrupted",
                          me.name, parv[0]);
               sendto_one(sptr, ":%s NOTICE %s :Couldn't find CIDR",
                          me.name, parv[0]);
-              if(!error_on_write)
-                error_on_write = flush_write(sptr, out, buf, temppath);
-              continue;         /* This D line is corrupted ignore */
+              if (flush_write(sptr, in, out, buf, temppath) < 0)
+		return 0;
+	      continue;
             }
          *p = '\0';   
          
          if(irccmp(cidr,found_cidr))
             {
-              if(!error_on_write)
-                error_on_write = flush_write(sptr, out, buf, temppath);
+	      if(flush_write(sptr, in, out, buf, temppath) < 0)
+		return 0;
+	      continue;
             }
           else
             pairme++;
@@ -582,60 +564,47 @@ If its a comment coment line, i.e.
 Then just ignore the line
 */
 
-          p = strchr(buff,':');
-          if(p == (char *)NULL)
+          if((p = strchr(buff, ':')) == NULL)
             {
-              if(!error_on_write)
-                error_on_write = flush_write(sptr, out, buf, temppath);
-              continue;
+              if (flush_write(sptr, in, out, buf, temppath) < 0)
+		return 0;
+	      continue;
             }
-          *p = '\0';
-          p++;
+          *p++ = '\0';
 
           found_cidr = p;
-          p = strchr(found_cidr,':');
 
-          if(p == (char *)NULL)
+          if ((p = strchr(found_cidr, ':')) == NULL)
             {
-              if(!error_on_write)
-                error_on_write = flush_write(sptr, out, buf, temppath);
-              continue;
+	      if (flush_write(sptr, in, out, buf, temppath) < 0)
+		return 0;
+	      continue;
             }
           *p = '\0';
 
           while(*found_cidr == ' ')
             found_cidr++;
 
-
-          if( (irccmp(found_cidr,cidr)))
+          if ((irccmp(found_cidr,cidr)))
             {
-              if(!error_on_write)
-                error_on_write = flush_write(sptr, out, buf, temppath);
+	      if (flush_write(sptr, in, out, buf, temppath) < 0)
+		return 0;
+	      continue;
             }
         }
 
       else      /* its the ircd.conf file, and not a D line or comment */
         {
-          if(!error_on_write)
-            error_on_write = flush_write(sptr, out, buf, temppath);
+	  if (flush_write(sptr, in, out, buf, temppath) < 0)
+	    return 0;
+	  continue;
         }
     }
 
   fbclose(in);
-
-
-  if(!error_on_write)
-    {
-      fbclose(out);
-      (void)rename(temppath, filename);
-      rehash(cptr,sptr,0);
-    }
-  else
-    {
-      sendto_one(sptr,":%s NOTICE %s :Couldn't write D-line file, aborted",
-        me.name,parv[0]);
-      return -1;
-    }
+  fbclose(out);
+  (void)rename(temppath, filename);
+  rehash(cptr,sptr,0);
 
   if(!pairme)
     {
@@ -661,7 +630,8 @@ Then just ignore the line
 **      parv[1] = gline to remove
 */
 
-int m_ungline (aClient *cptr,aClient *sptr,int parc,char *parv[])
+int
+m_ungline (aClient *cptr,aClient *sptr,int parc,char *parv[])
 {
 #ifdef GLINES
 
@@ -693,11 +663,11 @@ int m_ungline (aClient *cptr,aClient *sptr,int parc,char *parv[])
       return 0;
     }
 
-  if ( (host = strchr(parv[1], '@')) || *parv[1] == '*' )
+  if ((host = strchr(parv[1], '@')) || *parv[1] == '*')
     {
       /* Explicit user@host mask given */
 
-      if(host)                  /* Found user@host */
+      if(host != NULL)		/* Found user@host */
         {
           user = parv[1];       /* here is user part */
           *(host++) = '\0';     /* and now here is host */

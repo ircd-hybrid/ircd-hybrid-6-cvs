@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.74 2002/02/17 18:16:03 lusky Exp $
+ *  $Id: s_misc.c,v 1.75 2002/11/28 04:18:01 db Exp $
  */
 #include "s_misc.h"
 #include "channel.h"
@@ -206,11 +206,11 @@ void serv_info(aClient *cptr,char *name)
 /* Make ISUPPORT string */
 char *make_isupport()
 {
-  static char tisupport[200];
+  static char tisupport[300];
 
   ircsprintf(tisupport, "WALLCHOPS PREFIX=(ov)@+ CHANTYPES=#& MAXCHANNELS=%d "
                         "MAXBANS=%d NICKLEN=%d TOPICLEN=%d KICKLEN=%d "
-                        "NETWORK=%s "
+                        "NETWORK=%s CASEMAPPING=rfc1459 "
 #ifdef CHANMODE_E
                         "CHANMODES=be,k,l,imnpst EXCEPTS"
 #else

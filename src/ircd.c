@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.164 2002/02/06 04:56:12 androsyn Exp $
+ * $Id: ircd.c,v 1.165 2002/11/28 04:18:01 db Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -150,6 +150,7 @@ static int         bootDaemon  = 1;
 
 char**  myargv;
 int     dorehash   = 0;
+int     doremotd   = 0;
 int     debuglevel = -1;        /* Server debug level */
 char*   debugmode  = "";        /*  -"-    -"-   -"-  */
 
@@ -529,6 +530,12 @@ static time_t io_loop(time_t delay)
     {
       rehash(&me, &me, 1);
       dorehash = 0;
+    }
+  if (doremotd)
+    {
+      ReadMessageFile( &ConfigFileEntry.motd );
+      sendto_realops("Got signal SIGUSR1, reloading ircd motd file");
+      doremotd = 0;
     }
   /*
   ** Flush output buffers on all connections now if they

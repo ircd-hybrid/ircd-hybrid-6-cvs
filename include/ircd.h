@@ -19,7 +19,7 @@
  *
  * "ircd.h". - Headers file.
  *
- * $Id: ircd.h,v 1.21 2001/12/13 23:16:34 leeh Exp $
+ * $Id: ircd.h,v 1.22 2002/11/28 04:17:59 db Exp $
  *
  */
 #ifndef INCLUDED_ircd_h
@@ -123,6 +123,7 @@ extern int            LRV;
 extern int            cold_start;
 extern int            dline_in_progress;
 extern int            dorehash;
+extern int            doremotd;
 extern int            rehashed;
 extern float          currlife;
 extern struct Client  me;
