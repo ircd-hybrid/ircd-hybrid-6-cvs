@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.38 1999/07/28 06:23:11 tomh Exp $
+ * $Id: client.h,v 1.39 1999/07/30 04:02:45 tomh Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -506,6 +506,13 @@ struct Client
 
 #define CLIENT_LOCAL_SIZE sizeof(struct Client)
 #define CLIENT_REMOTE_SIZE offsetof(struct Client, count)
+
+/*
+ * definitions for get_client_name
+ */
+#define HIDE_IP 0
+#define SHOW_IP 1
+#define MASK_IP 2
 
 extern const char*    get_client_name(struct Client* client, int show_ip);
 extern const char*    get_client_host(struct Client* client);
