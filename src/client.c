@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.63 2001/06/25 02:22:03 greg Exp $
+ *  $Id: client.c,v 1.64 2001/06/25 02:30:49 greg Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -1565,12 +1565,12 @@ const char* comment        /* Reason for the exit */
               if (IsRegistered(sptr) && !IsServer(sptr))
                 { /* jeremy is anal retentive */
                   sendto_one(sptr, "ERROR :Closing Link: %s (%s)",
-                             get_client_name(sptr, SHOW_IP, comment);
+                             get_client_name(sptr, SHOW_IP), comment);
                 } 
               else
                 {
                   sendto_one(sptr, "ERROR :Closing Link: %s (%s)",
-                             get_client_name(sptr, MASK_IP, comment);
+                             get_client_name(sptr, MASK_IP), comment);
                 }
             }
           /*
