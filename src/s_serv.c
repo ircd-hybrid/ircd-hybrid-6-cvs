@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.160 1999/07/19 09:11:50 tomh Exp $
+ *   $Id: s_serv.c,v 1.161 1999/07/20 00:43:57 db Exp $
  */
 
 #define CAPTAB
@@ -760,7 +760,11 @@ int m_server(aClient *cptr, aClient *sptr, int parc, char *parv[])
 
 	  sendto_one(bcptr, ":%s SERVER %s %d :%s",
 		     parv[0], acptr->name, hop+1, acptr->info);
+			 
 	}
+      
+      sendto_realops_flags(FLAGS_CCONN,"Server %s being introduced by %s",
+			 acptr->name, cptr->name);
       return 0;
     }
 

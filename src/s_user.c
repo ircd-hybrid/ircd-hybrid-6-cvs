@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.155 1999/07/19 09:11:50 tomh Exp $
+ *  $Id: s_user.c,v 1.156 1999/07/20 00:43:57 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -115,7 +115,7 @@ static int user_modes_from_c_to_bitmask[] =
   0,		/* l */
   0, 		/* m */
   FLAGS_NCHANGE, /* n */
-  0, 		/* o */
+  FLAGS_OPER,   /* o */
   0,		/* p */
   0,		/* q */
   FLAGS_REJ,	/* r */
@@ -1588,16 +1588,14 @@ int nickkilldone(aClient *cptr, aClient *sptr, int parc,
 	  m = &parv[4][1];
 	  while (*m)
 	    {
-	      if (*m == 'o')	/* Can only be a remote oper */
-		{
-		  Count.oper++;
-		  SetOper(sptr);
-		  sptr->umodes |= FLAGS_OPER;
-		}
 	      flag = user_modes_from_c_to_bitmask[(int)(*m & 0x1F)];
 	      if( flag == FLAGS_INVISIBLE )
 		{
 		  Count.invisi++;
+		}
+	      if( flag == FLAGS_OPER )
+		{
+		  Count.oper++;
 		}
 	      sptr->umodes |= flag & SEND_UMODES;
 	      m++;
@@ -3249,8 +3247,6 @@ int	m_oper(aClient *cptr,
       if (aconf->status == CONF_LOCOP)
 	{
 	  SetLocOp(sptr);
-	  /* replicate oper mode here */
-	  sptr->umodes |= FLAGS_LOCOP;
 	  if((int)aconf->hold)
 	    {
 	      sptr->umodes |= ((int)aconf->hold & ALL_UMODES); 
@@ -3272,7 +3268,6 @@ int	m_oper(aClient *cptr,
       else
 	{
 	  SetOper(sptr);
-	  sptr->umodes |= FLAGS_OPER;
 	  if((int)aconf->hold)
 	    {
 	      sptr->umodes |= ((int)aconf->hold & ALL_UMODES); 
@@ -3693,7 +3688,6 @@ int	m_umode(aClient *cptr,
 	    }
 	  else
 	    {
-	      sptr->flags &= ~(FLAGS_OPER|FLAGS_LOCOP);
 	      sptr->umodes &= ~(FLAGS_OPER|FLAGS_LOCOP);
 
 	      Count.oper--;
