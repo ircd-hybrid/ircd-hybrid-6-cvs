@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.173 1999/07/22 06:31:21 tomh Exp $
+ *  $Id: s_user.c,v 1.174 1999/07/22 07:56:55 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -879,78 +879,55 @@ static int register_user(aClient *cptr, aClient *sptr,
   return 0;
 }
 
-/* valid_hostname
+/* 
+ * valid_hostname - check hostname for validity
  *
  * Inputs       - pointer to user
  * Output       - YES if valid, NO if not
  * Side effects - NONE
+ *
+ * NOTE: this doesn't allow a hostname to begin with a dot and
+ * will not allow more dots than chars.
  */
-
 static int valid_hostname(const char* hostname)
 {
-  int dots;
-  const unsigned char *p = (const unsigned char*) hostname;
-  int bad_dns;
+  int         dots  = 0;
+  int         chars = 0;
+  const char* p     = hostname;
 
-  dots = 0;
-  bad_dns = NO;
-  while(*p)
-    {
-      if (!IsAlNum(*p))
-        {
-#ifdef RFC1035_ANAL
-          if ((*p != '-') && (*p != '.'))
-#else
-            if ((*p != '-') && (*p != '.') && (*p != '_') && (*p != '/'))
-#endif /* RFC1035_ANAL */
-              bad_dns = YES;
-        } 
-      if( *p == '.' )
-        dots++;
-      p++;
-    }
-  
-  /*
-   * Check that the hostname has AT LEAST ONE dot (.)
-   * in it. If not, drop the client (spoofed host)
-   * -ThemBones
-   */
-  if (!dots)
-    return ( NO );
-  
-  if(bad_dns)
-    return ( NO );
+  assert(0 != p);
 
-  return ( YES );
+  if ('.' == *p)
+    return NO;
+
+  while (*p) {
+    if (!IsHostChar(*p))
+      return NO;
+    if ('.' == *p++)
+      ++dots;
+    else
+      ++chars;
+  }
+  return (0 == dots || chars < dots) ? NO : YES;
 }
 
-/* valid_username
+/* 
+ * valid_username - check username for validity
  *
  * Inputs       - pointer to user
  * Output       - YES if valid, NO if not
  * Side effects - NONE
- */
-
-/* 
+ * 
  * Absolutely always reject any '*' '!' '?' '@' '.' in an user name
  * reject any odd control characters names.
  */
-
 static int valid_username(const char* username)
 {
-  const unsigned char *p = (const unsigned char*) username;
+  const char *p = username;
+  assert(0 != p);
 
-  while(*p)
-    {
-      if( (*p > 127) || (*p <= ' ') || (*p == '.') || 
-          (*p == '*') || (*p == '?') || (*p == '!') || (*p == '@') )
-        {
-          return ( NO );
-        }
-
-      p++;
-    }
-
+  if ('~' == *p)
+    ++p;
   /* 
    * reject usernames that don't start with an alphanum
    * i.e. reject jokers who have '-@somehost' or '.@somehost'
@@ -958,18 +935,14 @@ static int valid_username(const char* username)
    *
    * -Dianora
    */
-  
-  p = username;
+  if (!IsAlNum(*p))
+    return NO;
 
-  /* ignored unidented */
-
-  if(*p == '~')
-    p++;
-
-  if( !IsAlNum(*p))
-    return ( NO );
-
-  return ( YES );
+  while (*++p) {
+    if (!IsUserChar(*p))
+      return NO;
+  }
+  return YES;
 }
 
 /* 
