@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_commands.h,v 1.6 2001/07/10 12:40:28 jdc Exp $
+ * $Id: m_commands.h,v 1.7 2001/11/29 06:28:23 db Exp $
  */
 #ifndef INCLUDED_m_commands_h
 #define INCLUDED_m_commands_h
@@ -33,8 +33,10 @@ extern int m_admin(struct Client *,struct Client *,int,char **);
 extern int m_kline(struct Client *,struct Client *,int,char **);
 extern int m_unkline(struct Client *,struct Client *,int,char **);
 extern int m_dline(struct Client *,struct Client *,int,char **);
+extern int m_undline(struct Client *,struct Client *,int,char **);
 
 extern int m_gline(struct Client *,struct Client *,int,char **);
+extern int m_ungline(struct Client *,struct Client *,int,char **);
 
 extern int m_locops(struct Client *,struct Client *,int,char **);
 

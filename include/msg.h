@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: msg.h,v 1.18 2001/07/10 12:40:28 jdc Exp $
+ * $Id: msg.h,v 1.19 2001/11/29 06:28:23 db Exp $
  */
 #ifndef INCLUDED_msg_h
 #define INCLUDED_msg_h
@@ -115,10 +115,12 @@ typedef struct MessageTree MESSAGE_TREE;
 #define MSG_KLINE    "KLINE"    /* KLINE */
 #define MSG_UNKLINE  "UNKLINE"  /* UNKLINE */
 #define MSG_DLINE    "DLINE"    /* DLINE */
+#define MSG_UNDLINE  "UNDLINE"  /* UNDLINE */
 #define MSG_HTM      "HTM"      /* HTM */
 #define MSG_SET      "SET"      /* SET */
 
 #define MSG_GLINE    "GLINE"    /* GLINE */
+#define MSG_UNGLINE  "UNGLINE"  /* UNGLINE */
 
 #define MSG_LOCOPS   "LOCOPS"   /* LOCOPS */
 #ifdef LWALLOPS
@@ -242,7 +244,9 @@ struct Message msgtab[] = {
   { MSG_KLINE,   m_kline,    0, MAXPARA, 1, 0, 0, 0L },
   { MSG_UNKLINE, m_unkline,  0, MAXPARA, 1, 0, 0, 0L },
   { MSG_DLINE,   m_dline,    0, MAXPARA, 1, 0, 0, 0L },
+  { MSG_UNDLINE, m_undline,  0, MAXPARA, 1, 0, 0, 0L },
   { MSG_GLINE,   m_gline,    0, MAXPARA, 1, 0, 0, 0L },
+  { MSG_UNGLINE, m_ungline,  0, MAXPARA, 1, 0, 0, 0L },
   { MSG_HASH,    m_hash,     0, MAXPARA, 1, 0, 0, 0L },
   { MSG_DNS,     m_dns,      0, MAXPARA, 1, 0, 0, 0L },
   { MSG_REHASH,  m_rehash,   0, MAXPARA, 1, 0, 0, 0L },
