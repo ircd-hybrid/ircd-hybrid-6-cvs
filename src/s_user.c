@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.37 1998/12/18 22:51:41 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.38 1998/12/19 23:50:25 db Exp $";
 
 #endif
 
@@ -3609,7 +3609,7 @@ int	m_userhost(aClient *cptr,
 
   if (parc > 2)
     (void)m_userhost(cptr, sptr, parc-1, parv+1);
-  
+
   if (parc < 2)
     {
       sendto_one(sptr, err_str(ERR_NEEDMOREPARAMS),
@@ -3708,7 +3708,7 @@ int     m_usrip(aClient *cptr,
 
 	(void)strncat(buf, buf2, sizeof(buf) - len);
 	len += strlen(buf2);
-                    }
+      }
   sendto_one(sptr, "%s", buf);
   return 0;
 }
