@@ -22,7 +22,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.21 1998/10/18 07:05:08 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.22 1998/10/19 20:11:25 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1549,27 +1549,21 @@ static  void     set_mode(aClient *cptr,
 	    {
 	      if (len + 2 >= MODEBUFLEN)
 		break;
-	      if(!(chptr->mode.mode & MODE_NOPRIVMSGS))
-		{
-		  chptr->mode.mode |= MODE_NOPRIVMSGS;
-		  *mbufw++ = '+';
-		  *mbufw++ = 'n';
-		  len += 2;
-		  opcnt++;
-		}
+	      chptr->mode.mode |= MODE_NOPRIVMSGS;
+	      *mbufw++ = '+';
+	      *mbufw++ = 'n';
+	      len += 2;
+	      opcnt++;
 	    }
 	  else
 	    {
 	      if (len + 2 >= MODEBUFLEN)
 		break;
-	      if(chptr->mode.mode & MODE_NOPRIVMSGS)
-		{
-		  chptr->mode.mode &= ~MODE_NOPRIVMSGS;
-		  *mbufw++ = '-';
-		  *mbufw++ = 'n';
-		  len += 2;
-		  opcnt++;
-		}
+	      chptr->mode.mode &= ~MODE_NOPRIVMSGS;
+	      *mbufw++ = '-';
+	      *mbufw++ = 'n';
+	      len += 2;
+	      opcnt++;
 	    }
 	  break;
 
@@ -1606,27 +1600,21 @@ static  void     set_mode(aClient *cptr,
 		  len += 2;
 		  chptr->mode.mode &= ~MODE_SECRET;
 		}
-	      if(!(chptr->mode.mode & MODE_PRIVATE))
-		{
-		  chptr->mode.mode |= MODE_PRIVATE;
-		  *mbufw++ = '+';
-		  *mbufw++ = 'p';
-		  len += 2;
-		  opcnt++;
-		}
+	      chptr->mode.mode |= MODE_PRIVATE;
+	      *mbufw++ = '+';
+	      *mbufw++ = 'p';
+	      len += 2;
+	      opcnt++;
 	    }
 	  else
 	    {
 	      if (len + 2 >= MODEBUFLEN)
 		break;
-	      if(chptr->mode.mode & MODE_PRIVATE)
-		{
-		  chptr->mode.mode &= ~MODE_PRIVATE;
-		  *mbufw++ = '-';
-		  *mbufw++ = 'p';
-		  len += 2;
-		  opcnt++;
-		}
+	      chptr->mode.mode &= ~MODE_PRIVATE;
+	      *mbufw++ = '-';
+	      *mbufw++ = 'p';
+	      len += 2;
+	      opcnt++;
 	    }
 	  break;
 
@@ -1666,27 +1654,21 @@ static  void     set_mode(aClient *cptr,
 		  chptr->mode.mode &= ~MODE_PRIVATE;
 		}
 
-	      if(!(chptr->mode.mode & MODE_SECRET))
-		{
-		  chptr->mode.mode |= MODE_SECRET;
-		  *mbufw++ = '+';
-		  *mbufw++ = 's';
-		  len += 2;
-		  opcnt++;
-		}
+	      chptr->mode.mode |= MODE_SECRET;
+	      *mbufw++ = '+';
+	      *mbufw++ = 's';
+	      len += 2;
+	      opcnt++;
 	    }
 	  else
 	    {
 	      if (len + 2 >= MODEBUFLEN)
 		break;
-	      if(chptr->mode.mode & MODE_SECRET)
-		{
-		  chptr->mode.mode &= ~MODE_SECRET;
-		  *mbufw++ = '-';
-		  *mbufw++ = 's';
-		  len += 2;
-		  opcnt++;
-		}
+	      chptr->mode.mode &= ~MODE_SECRET;
+	      *mbufw++ = '-';
+	      *mbufw++ = 's';
+	      len += 2;
+	      opcnt++;
 	    }
 	  break;
 
@@ -1714,27 +1696,21 @@ static  void     set_mode(aClient *cptr,
 	    {
 	      if (len + 2 >= MODEBUFLEN)
 		break;
-	      if(!(chptr->mode.mode & MODE_TOPICLIMIT))
-		{
-		  chptr->mode.mode |= MODE_TOPICLIMIT;
-		  *mbufw++ = '+';
-		  *mbufw++ = 't';
-		  len += 2;
-		  opcnt++;
-		}
+	      chptr->mode.mode |= MODE_TOPICLIMIT;
+	      *mbufw++ = '+';
+	      *mbufw++ = 't';
+	      len += 2;
+	      opcnt++;
 	    }
 	  else
 	    {
 	      if (len + 2 >= MODEBUFLEN)
 		break;
-	      if(chptr->mode.mode & MODE_TOPICLIMIT)
-		{
-		  chptr->mode.mode &= ~MODE_TOPICLIMIT;
-		  *mbufw++ = '-';
-		  *mbufw++ = 't';
-		  len += 2;
-		  opcnt++;
-		}
+	      chptr->mode.mode &= ~MODE_TOPICLIMIT;
+	      *mbufw++ = '-';
+	      *mbufw++ = 't';
+	      len += 2;
+	      opcnt++;
 	    }
 	  break;
 

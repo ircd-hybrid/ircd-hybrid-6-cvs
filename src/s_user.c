@@ -25,7 +25,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.12 1998/10/19 07:05:30 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.13 1998/10/19 20:11:28 db Exp $";
 
 #endif
 
@@ -3356,8 +3356,13 @@ int	m_oper(aClient *cptr,
   else if (IsAnOper(sptr))
     {
       if (MyConnect(sptr))
-	sendto_one(sptr, rpl_str(RPL_YOUREOPER),
-		   me.name, parv[0]);
+	{
+	  sendto_one(sptr, rpl_str(RPL_YOUREOPER),
+		     me.name, parv[0]);
+#ifdef OPER_MOTD
+	  (void)send_oper_motd(sptr, sptr, 1, parv,opermotd);
+#endif
+	}
       return 0;
     }
   if (!(aconf = find_conf_exact(name, sptr->username, sptr->sockhost,
