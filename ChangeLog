@@ -1,3 +1,15 @@
+ievil       2003/06/28 00:37:21 EDT	(20030628_0)
+
+  Modified files:
+    include              patchlevel.h 
+  Log:
+  This is no longer 6.3.x.. it's atleast 6.4.0rc2... ;)
+  
+  Revision  Changes    Path
+  1.156     +1 -1      ircd-hybrid-6/include/patchlevel.h
+
+
+
 ievil       2003/06/24 21:34:20 EDT	(20030625_0)
 
   Modified files:
