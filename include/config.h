@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.82 2000/08/24 06:15:50 lusky Exp $
+ * $Id: config.h,v 1.83 2000/09/02 03:42:07 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -175,6 +175,12 @@
  * the target will be rejected
  */
 #define MAX_MULTI_MESSAGES 2
+
+/* NO_DUPE_MULTI_MESSAGES
+ * Define this to check for duplicate recipients in PRIVMSG, at the expense
+ * of noticeable CPU cycles.
+ */
+#define NO_DUPE_MULTI_MESSAGES
 
 /* WARN_NO_NLINE
  * Define this if you want ops to get noticed about "things" trying to

@@ -16,13 +16,16 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: irc_string.h,v 1.14 2000/07/20 03:58:22 lusky Exp $
+ *   $Id: irc_string.h,v 1.15 2000/09/02 03:42:08 lusky Exp $
  */
 #ifndef INCLUDED_irc_string_h
 #define INCLUDED_irc_string_h
 #ifndef INCLUDED_sys_types_h
 #include <sys/types.h>
 #define INCLUDED_sys_types_h
+#endif
+#ifndef INCLUDED_ircd_defs_h
+#include "ircd_defs.h"        /* buffer sizes */
 #endif
 
 /*
@@ -37,13 +40,20 @@ extern int match(const char *mask, const char *name);
  */
 extern char* collapse(char *pattern);
 /*
- * mycmp - case insensitive comparison of s1 and s2
+ * irccmp - case insensitive comparison of s1 and s2
  */
 extern int irccmp(const char *s1, const char *s2);
 /*
- * myncmp - counted case insensitive comparison of s1 and s2
+ * ircncmp - counted case insensitive comparison of s1 and s2
  */
 extern int ircncmp(const char *s1, const char *s2, int n);
+/*
+** canonize - reduce a string of duplicate list entries to contain
+** only the unique items.
+*/  
+#ifdef NO_DUPE_MULTI_MESSAGES
+extern char* canonize(char *);
+#endif
 /*
  * ircsprintf - optimized sprintf
  */

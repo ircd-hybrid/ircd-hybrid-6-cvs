@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_message.c,v 1.7 2000/06/07 03:01:06 lusky Exp $
+ *   $Id: m_message.c,v 1.8 2000/09/02 03:42:12 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -146,24 +146,12 @@ static  int     m_message(struct Client *cptr,
         return 0;
 #endif
 #endif
-      /* As Mortiis points out, if there is only one target,
-       * the call to canonize is silly
-       */
+#ifdef NO_DUPE_MULTI_MESSAGES
+      if (strchr(parv[1],','))
+        parv[1] = canonize(parv[1]);
+#endif
     }
-  /* 
-   * If the target contains a , it will barf tough.
-   */
 
-  nick = parv[1];
-
-/* #if (MAX_MULTI_MESSAGES == 1)
-  if((p = strchr(nick,',')))
-    {
-      sendto_one(sptr, form_str(ERR_TOOMANYTARGETS),
-                     me.name, parv[0], cmd, MAX_MULTI_MESSAGES);
-      return -1;
-    }
-#endif */
 
   /*
   ** channels are privmsg'd a lot more than other clients, moved up here
