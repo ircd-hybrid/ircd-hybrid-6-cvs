@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.16 1999/07/15 08:47:36 tomh Exp $
+ *  $Id: m_gline.c,v 1.17 1999/07/17 03:29:07 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -68,7 +68,6 @@ static GLINE_PENDING *pending_glines;
 
 /* external functions */
 extern int bad_tld(char *);	/* defined in m_kline.c */
-extern int safe_write(aClient *,char *,int,char *); /* in s_conf.c */
 extern char *small_file_date(time_t);  /* defined in s_misc.c */
 extern char *smalldate(time_t);		/* defined in s_misc.c */
 

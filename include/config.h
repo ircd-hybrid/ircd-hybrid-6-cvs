@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.61 1999/07/17 02:31:56 db Exp $
+ * $Id: config.h,v 1.62 1999/07/17 03:29:05 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -90,11 +90,11 @@
  *
  */
 
-#define DPATH   "/home/wnder/ircd-hybrid-6/"
-#define SPATH   "/home/wnder/ircd-hybrid-6/ircd"
+#define DPATH   "/usr/local/ircd/"
+#define SPATH   "/usr/local/ircd/ircd"
 #define	CPATH	"ircd.conf"
 #define KPATH   "kline.conf"
-#define DLPATH "kline.conf"
+#define DLPATH  "kline.conf"
 #define	MPATH	"ircd.motd"
 #define	LPATH	"ircd.log"
 #define	PPATH	"ircd.pid"
@@ -369,7 +369,7 @@
  * to a leaf which just has 1 server (typically the uplink). Define this
  * correctly for performance reasons.
  */
-#define	HUB
+#undef	HUB
 
 /* CMDLINE_CONFIG - allow conf-file to be specified on command line
  * NOTE: defining CMDLINE_CONFIG and installing ircd SUID or SGID is a MAJOR
