@@ -1,7 +1,7 @@
 /*
  * viconf.c
  *
- * $Id: viconf.c,v 1.7 1999/07/17 04:36:03 db Exp $
+ * $Id: viconf.c,v 1.8 1999/07/17 15:05:34 db Exp $
  */
 #include <stdio.h>
 #include <fcntl.h>
@@ -34,8 +34,7 @@ static char lockpath[PATH_MAX + 1];
 
 int main(int argc, char *argv[])
 {
-  int fd;
-  char s[20], *ed, *p, *filename = MPATH;
+  char *ed, *p, *filename = MPATH;
 
   if( chdir(DPATH) < 0 )
     {
