@@ -1,3 +1,15 @@
+ievil       2003/08/16 14:48:41 EDT	(20030816_1)
+
+  Modified files:
+    src                  s_user.c 
+  Log:
+  +c connect message now shows ircname/geco's on connect! (By popular demand)
+  
+  Revision  Changes    Path
+  1.263     +3 -2      ircd-hybrid-6/src/s_user.c
+
+
+
 ievil       2003/08/16 14:41:59 EDT	(20030816_0)
 
   Modified files:
