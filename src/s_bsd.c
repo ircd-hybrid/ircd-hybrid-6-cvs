@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.14 1998/11/13 21:49:24 db Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.15 1998/11/16 16:37:08 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1876,18 +1876,13 @@ int read_packet(aClient *cptr, int msg_ready)
 	  if (find_dline(addr.sin_addr))
 	    {
 	      ircstp->is_ref++;
-	      /* Can't use orabidoo's sendheader here
-	       * and if I'm sending a D line to a server,
-	       * well it can't connect anyway
-	       * -Dianora
-	       */
 #ifdef REPORT_DLINE_TO_USER
 	      /* Can't use orabidoo's sendheader here
 	       * and if I'm sending a D line to a server,
 	       * well it can't connect anyway
 	       * -Dianora
 	       */
-	      send(fd, REPORT_DLINED, strlen(REPORT_DLINED), 0);
+	      send(fd, REPORT_DLINED, sizeof(REPORT_DLINED)-1, 0);
 #endif
 
 	      (void)close(fd);

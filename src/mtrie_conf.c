@@ -55,7 +55,7 @@
 #endif
 
 #ifndef lint
-static char *version="$Id: mtrie_conf.c,v 1.7 1998/11/15 08:37:07 db Exp $";
+static char *version="$Id: mtrie_conf.c,v 1.8 1998/11/16 16:37:07 db Exp $";
 #endif /* lint */
 
 #define MAXPREFIX (HOSTLEN+USERLEN+10)
@@ -595,7 +595,6 @@ aConfItem *find_matching_mtrie_conf(char *host,char *user,
   aConfItem *iline_aconf_unsortable=(aConfItem *)NULL;
   aConfItem *iline_aconf=(aConfItem *)NULL;
   aConfItem *kline_aconf=(aConfItem *)NULL;
-  aConfItem *ip_iline_aconf=(aConfItem *)NULL;
   char tokenized_host[HOSTLEN+1];
   int top_of_stack;
 
@@ -678,9 +677,7 @@ aConfItem *find_matching_mtrie_conf(char *host,char *user,
 
   if(ip && !iline_aconf)
     {
-      ip_iline_aconf = find_matching_ip_i_line(ip);
-      if(ip_iline_aconf)
-	iline_aconf = ip_iline_aconf;
+      iline_aconf = find_matching_ip_i_line(ip);
     }
 
   /* If there is no I line, there is no point checking for a K line now

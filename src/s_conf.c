@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.15 1998/11/15 07:10:10 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.16 1998/11/16 16:37:09 db Exp $";
 #endif
 
 #include "struct.h"
@@ -132,6 +132,8 @@ aConfItem	*conf = ((aConfItem *)NULL);
 aConfItem	*x_conf = ((aConfItem *)NULL);
 /* conf qline link list root */
 aConfItem	*q_conf = ((aConfItem *)NULL);
+/* conf uline link list root */
+aConfItem	*u_conf = ((aConfItem *)NULL);
 
 /* keep track of .include files to hash in */
 aConfItem	*include_list = ((aConfItem *)NULL);

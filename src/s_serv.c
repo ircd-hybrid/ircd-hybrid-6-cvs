@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.28 1998/11/15 07:10:11 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.29 1998/11/16 16:37:10 db Exp $";
 #endif
 
 
@@ -3993,6 +3993,11 @@ int     m_kline(aClient *cptr,
 		 me.name, parv[0], "KLINE");
       return 0;
     }
+
+#ifdef SLAVE_SERVERS
+  if(IsAnOper(sptr))
+    sendto_slaves("KLINE",cptr,sptr,parc,parv);
+#endif
 
   argv = parv[1];
 
