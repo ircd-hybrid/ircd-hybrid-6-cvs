@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: channel.h,v 1.35 2001/11/29 06:47:33 db Exp $
+ * $Id: channel.h,v 1.36 2001/11/29 07:47:17 db Exp $
  */
 
 #ifndef INCLUDED_channel_h
@@ -114,12 +114,16 @@ extern void    set_channel_mode(struct Client *, struct Client *,
 extern void report_juped_channels(struct Client *);
 #endif
 
+extern int total_hackops;
+extern int total_ignoreops;
+
 /* this should eliminate a lot of ifdef's in the main code... -orabidoo */
 #ifdef BAN_INFO
 #  define BANSTR(l)  ((l)->value.banptr->banstr)
 #else
 #  define BANSTR(l)  ((l)->value.cp)
 #endif
+
 
 /*
 ** Channel Related macros follow
