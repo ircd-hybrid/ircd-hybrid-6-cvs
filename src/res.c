@@ -4,14 +4,13 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.31 1999/07/17 07:55:58 tomh Exp $
+ * $Id: res.c,v 1.32 1999/07/17 22:12:47 db Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
  *     --Bleep (Thomas Helvey <tomh@inxpress.net>)
  */
 #include "res.h"
-#include "sys.h"
 #include "numeric.h"
 #include "s_bsd.h"
 #include "struct.h"

@@ -17,14 +17,13 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.14 1999/07/17 07:55:58 tomh Exp $
+ *   $Id: parse.c,v 1.15 1999/07/17 22:12:47 db Exp $
  */
 #include "struct.h"
 #include "common.h"
 #define MSGTAB
 #include "msg.h"
 #undef MSGTAB
-#include "sys.h"
 #include "numeric.h"
 #include "h.h"
 #include "send.h"

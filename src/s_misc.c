@@ -20,13 +20,12 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.48 1999/07/16 09:36:04 db Exp $
+ *  $Id: s_misc.c,v 1.49 1999/07/17 22:12:49 db Exp $
  */
 #include "s_conf.h"
 #include "struct.h"
 #include "res.h"
 #include "common.h"
-#include "sys.h"
 #include "numeric.h"
 #include "h.h"
 #include "fdlist.h"

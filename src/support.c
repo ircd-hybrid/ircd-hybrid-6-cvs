@@ -16,11 +16,10 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: support.c,v 1.8 1999/07/17 07:56:01 tomh Exp $
+ *  $Id: support.c,v 1.9 1999/07/17 22:12:51 db Exp $
  */
 #include "struct.h"
 #include "common.h"
-#include "sys.h"
 #include "h.h"
 
 #include <string.h>
@@ -86,7 +85,7 @@ char *str, *fs;
 **	strerror - return an appropriate system error string to a given errno
 **
 **		   argv 11/90
-**	$Id: support.c,v 1.8 1999/07/17 07:56:01 tomh Exp $
+**	$Id: support.c,v 1.9 1999/07/17 22:12:51 db Exp $
 */
 
 char *strerror(int err_no)
@@ -188,7 +187,7 @@ char	*in;
 /*
 **	inet_netof --	return the net portion of an internet number
 **			argv 11/90
-**	$Id: support.c,v 1.8 1999/07/17 07:56:01 tomh Exp $
+**	$Id: support.c,v 1.9 1999/07/17 22:12:51 db Exp $
 **
 */
 

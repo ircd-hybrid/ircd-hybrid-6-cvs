@@ -3,11 +3,10 @@
  * fdlist.c   maintain lists of certain important fds 
  *
  *
- * $Id: fdlist.c,v 1.6 1999/07/15 10:53:16 db Exp $
+ * $Id: fdlist.c,v 1.7 1999/07/17 22:12:44 db Exp $
  */
 #include "struct.h"
 #include "common.h"
-#include "sys.h"
 #include "h.h"
 #include "config.h"
 #include "fdlist.h"

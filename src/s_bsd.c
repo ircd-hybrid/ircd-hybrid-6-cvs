@@ -17,13 +17,12 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.65 1999/07/17 07:55:59 tomh Exp $
+ *  $Id: s_bsd.c,v 1.66 1999/07/17 22:12:48 db Exp $
  */
 #include "s_bsd.h"
 #include "listener.h"
 #include "struct.h"
 #include "common.h"
-#include "sys.h"
 #include "res.h"
 #include "s_conf.h"
 #include "s_auth.h"

@@ -4,12 +4,11 @@
  * Owner:  Wohali (Joan Touzet)
  *
  *
- * $Id: blalloc.c,v 1.14 1999/07/17 14:38:33 db Exp $
+ * $Id: blalloc.c,v 1.15 1999/07/17 22:12:43 db Exp $
  */
 #include "blalloc.h"
 #include "struct.h"
 #include "common.h"
-#include "sys.h"
 #include "h.h"
 #include "numeric.h"
 #include "send.h"

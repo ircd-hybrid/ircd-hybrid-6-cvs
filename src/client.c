@@ -20,14 +20,13 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.12 1999/07/17 14:38:33 db Exp $
+ *  $Id: client.c,v 1.13 1999/07/17 22:12:44 db Exp $
  */
 #include "client.h"
 #include "struct.h"
 #include "blalloc.h"
 #include "res.h"
 #include "common.h"
-#include "sys.h"
 #include "numeric.h"
 #include "h.h"
 #include "fdlist.h"

@@ -20,11 +20,10 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.140 1999/07/17 07:56:00 tomh Exp $
+ *  $Id: s_user.c,v 1.141 1999/07/17 22:12:50 db Exp $
  */
 #include "struct.h"
 #include "common.h"
-#include "sys.h"
 #include "numeric.h"
 #include "msg.h"
 #include "channel.h"

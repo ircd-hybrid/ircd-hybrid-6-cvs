@@ -18,11 +18,10 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_numeric.c,v 1.4 1999/07/15 08:47:40 tomh Exp $
+ *   $Id: s_numeric.c,v 1.5 1999/07/17 22:12:49 db Exp $
  */
 #include "struct.h"
 #include "common.h"
-#include "sys.h" 
 #include "numeric.h"
 #include "h.h"
 #include "send.h"
