@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.202 2001/07/04 12:02:47 jdc Exp $
+ *  $Id: s_conf.c,v 1.203 2001/07/08 06:02:47 a1kmm Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -3642,6 +3642,7 @@ static void clear_out_old_conf(void)
     clear_special_conf(&x_conf);
     clear_special_conf(&u_conf);
     clear_q_lines();
+    mark_listeners_closing();
 }
 
 /*
