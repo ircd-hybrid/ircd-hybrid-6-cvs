@@ -43,7 +43,7 @@
  *
  * Diane Bruce -db (db@db.net)
  *
- * $Id: mtrie_conf.c,v 1.49 1999/07/17 22:12:47 db Exp $
+ * $Id: mtrie_conf.c,v 1.50 1999/07/18 08:25:07 db Exp $
  */
 #include "mtrie_conf.h"
 #include "numeric.h"
@@ -294,7 +294,7 @@ static DOMAIN_PIECE *find_or_add_host_piece(DOMAIN_LEVEL *level_ptr,
 
   for(ptr=piece_ptr; ptr; ptr = ptr->next_piece)
     {
-      if(!strcasecmp(ptr->host_piece,host_piece))
+      if(!irccmp(ptr->host_piece,host_piece))
 	{
 	  ptr->flags |= flags;
 	  return(ptr);
@@ -429,7 +429,7 @@ static void find_or_add_user_piece(DOMAIN_PIECE *piece_ptr,
       found_aconf=ptr->conf_ptr;
 
       if( (match(ptr->host_piece,host_piece)) &&
-	  (!strcasecmp(found_aconf->user,user)) )
+	  (!irccmp(found_aconf->user,user)) )
 	{
 	  found_aconf->status |= flags;
 	  piece_ptr->flags |= flags;
@@ -573,7 +573,7 @@ static DOMAIN_PIECE *find_host_piece(DOMAIN_LEVEL *level_ptr,int flags,
 
   for(ptr=piece_ptr;ptr;ptr=ptr->next_piece)
     {
-      if(!strcasecmp(ptr->host_piece,host_piece) && (ptr->flags & flags))
+      if(!irccmp(ptr->host_piece,host_piece) && (ptr->flags & flags))
 	{
 	  return(ptr);
 	}

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.143 1999/07/18 07:16:54 tomh Exp $
+ *  $Id: s_user.c,v 1.144 1999/07/18 08:25:08 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -2025,7 +2025,7 @@ static	int	m_message(aClient *cptr,
       *server = '\0';
 
       /* special case opers@server */
-      if(!strcasecmp(nick,"opers") && IsAnOper(sptr))
+      if(!irccmp(nick,"opers") && IsAnOper(sptr))
 	{
 	  sendto_realops("To opers: From %s: %s",sptr->name,parv[2]);
 	  return 0;
@@ -3917,7 +3917,7 @@ static int check_for_ctcp(char *str)
   char *p = str;          
   while((p = strchr(p, 1)) != NULL)
     {
-      if(strncasecmp(++p, "ACTION", 6) != 0)
+      if(ircncmp(++p, "ACTION", 6) != 0)
 	return 1;
       if((p = strchr(p, 1)) == NULL)
 	return 0;

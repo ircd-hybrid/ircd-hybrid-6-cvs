@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.21 1999/07/18 07:16:50 tomh Exp $
+ *  $Id: m_gline.c,v 1.22 1999/07/18 08:25:06 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -752,12 +752,12 @@ static int majority_gline(aClient *sptr,
   for(gline_pending_ptr = pending_glines;
       gline_pending_ptr; gline_pending_ptr = gline_pending_ptr->next)
     {
-      if( (strcasecmp(gline_pending_ptr->user,user) == 0) &&
-	  (strcasecmp(gline_pending_ptr->host,host) ==0 ) )
+      if( (irccmp(gline_pending_ptr->user,user) == 0) &&
+	  (irccmp(gline_pending_ptr->host,host) ==0 ) )
 	{
-	  if(((strcasecmp(gline_pending_ptr->oper_user1,oper_user) == 0) &&
-	      (strcasecmp(gline_pending_ptr->oper_host1,oper_host) == 0)) ||
-	      (strcasecmp(gline_pending_ptr->oper_server1,oper_server) == 0) )
+	  if(((irccmp(gline_pending_ptr->oper_user1,oper_user) == 0) &&
+	      (irccmp(gline_pending_ptr->oper_host1,oper_host) == 0)) ||
+	      (irccmp(gline_pending_ptr->oper_server1,oper_server) == 0) )
 	    {
 	      /* This oper or server has already "voted" */
 	      sendto_realops("oper or server has already voted");
@@ -768,9 +768,9 @@ static int majority_gline(aClient *sptr,
 	    {
 	      /* if two other opers on two different servers have voted yes */
 
-	      if(((strcasecmp(gline_pending_ptr->oper_user2,oper_user)==0) &&
-		  (strcasecmp(gline_pending_ptr->oper_host2,oper_host)==0)) ||
-		  (strcasecmp(gline_pending_ptr->oper_server2,oper_server)==0))
+	      if(((irccmp(gline_pending_ptr->oper_user2,oper_user)==0) &&
+		  (irccmp(gline_pending_ptr->oper_host2,oper_host)==0)) ||
+		  (irccmp(gline_pending_ptr->oper_server2,oper_server)==0))
 		{
 		  /* This oper or server has already "voted" */
 		  sendto_ops("oper or server has already voted");
