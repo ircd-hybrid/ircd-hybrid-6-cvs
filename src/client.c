@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.16 1999/07/18 16:53:10 db Exp $
+ *  $Id: client.c,v 1.17 1999/07/18 22:27:27 db Exp $
  */
 #include "client.h"
 #include "struct.h"
@@ -866,14 +866,15 @@ char        *comment        /* Reason for the exit */
       sptr->flags |= FLAGS_CLOSING;
       if (IsPerson(sptr))
         {
-          sendto_realops_lev(CCONN_LEV, "Client exiting: %s (%s@%s) [%s] [%s]",
-                    sptr->name, sptr->username, sptr->host,
+          sendto_realops_flags(FLAGS_CCONN,
+			       "Client exiting: %s (%s@%s) [%s] [%s]",
+			       sptr->name, sptr->username, sptr->host,
 #ifdef WINTRHAWK
-                    comment,
+			       comment,
 #else
-                    (sptr->flags & FLAGS_NORMALEX) ?  "Client Quit" : comment,
+               (sptr->flags & FLAGS_NORMALEX) ?  "Client Quit" : comment,
 #endif /* WINTRHAWK */
-                    inetntoa((char *)&sptr->ip));
+			       sptr->sockhost);
         }
 #ifdef FNAME_USERLOG
           on_for = timeofday - sptr->firsttime;

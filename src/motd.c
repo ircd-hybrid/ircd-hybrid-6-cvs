@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: motd.c,v 1.11 1999/07/18 17:27:04 db Exp $
+ *   $Id: motd.c,v 1.12 1999/07/18 22:27:28 db Exp $
  */
 
 #include "h.h"
@@ -70,7 +70,7 @@ int	m_motd(aClient *cptr,
   if (hunt_server(cptr, sptr, ":%s MOTD :%s", 1,parc,parv)!=HUNTED_ISME)
     return 0;
 
-  sendto_realops_lev(SPY_LEV, "motd requested by %s (%s@%s) [%s]",
+  sendto_realops_flags(FLAGS_SPY, "motd requested by %s (%s@%s) [%s]",
 		     sptr->name, sptr->username, sptr->host,
 		     sptr->user->server);
 
