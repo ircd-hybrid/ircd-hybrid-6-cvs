@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.219 2001/06/16 07:08:29 greg Exp $
+ *   $Id: s_serv.c,v 1.220 2001/06/16 11:22:12 leeh Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -551,8 +551,13 @@ int server_estab(struct Client *cptr)
   assert(0 != cptr);
   ClearAccess(cptr);
 
+#ifdef HIDE_SERVERS_IPS
+  strcpy(inpath_ip, get_client_name(cptr, MASK_IP));
+  inpath = get_client_name(cptr, MASK_IP);
+#else  
   strcpy(inpath_ip, get_client_name(cptr, SHOW_IP));
-  inpath = get_client_name(cptr, MASK_IP); /* "refresh" inpath with host */
+  inpath = get_client_name(cptr, HIDE_IP); /* "refresh" inpath with host */
+#endif  
 
   split = irccmp(cptr->name, cptr->host);
   host = cptr->name;

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_stats.c,v 1.14 2001/06/13 18:31:25 jdc Exp $
+ *  $Id: m_stats.c,v 1.15 2001/06/16 11:22:10 leeh Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "class.h"       /* report_classes */
@@ -237,7 +237,7 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
                 if(IsIPHidden(acptr) || IsServer(acptr))
                   sendto_one(sptr, Lformat, me.name,
                      RPL_STATSLINKINFO, parv[0],
-                     get_client_name(acptr, HIDEME),
+                     get_client_name(acptr, MASK_IP),
                      (int)DBufLength(&acptr->sendQ),
                      (int)acptr->sendM, (int)acptr->sendK,
                      (int)acptr->receiveM, (int)acptr->receiveK,

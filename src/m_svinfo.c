@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_svinfo.c,v 1.4 2000/10/17 06:20:50 lusky Exp $
+ *   $Id: m_svinfo.c,v 1.5 2001/06/16 11:22:11 leeh Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -117,8 +117,13 @@ int m_svinfo(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
        * TS_ONLY we can't fall back to the non-TS protocol so
        * we drop the link  -orabidoo
        */
+#ifdef HIDE_SERVERS_IPS
+      sendto_realops("Link %s dropped, wrong TS protocol version (%s,%s)",
+      		 get_client_name(sptr, MASK_IP), parv[1], parv[2]);
+#else		 
       sendto_realops("Link %s dropped, wrong TS protocol version (%s,%s)",
                  get_client_name(sptr, TRUE), parv[1], parv[2]);
+#endif		 
       return exit_client(sptr, sptr, sptr, "Incompatible TS version");
     }
 
@@ -131,17 +136,29 @@ int m_svinfo(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 
   if (deltat > TS_MAX_DELTA)
     {
+#ifdef HIDE_SERVERS_IPS
+      sendto_realops(
+       "Link %s dropped, excessive TS delta (my TS=%d, their TS=%d, delta=%d)",
+       		 get_client_name(sptr, MASK_IP), CurrentTime, theirtime,deltat);
+#else		 
       sendto_realops(
        "Link %s dropped, excessive TS delta (my TS=%d, their TS=%d, delta=%d)",
                  get_client_name(sptr, TRUE), CurrentTime, theirtime,deltat);
+#endif		 
       return exit_client(sptr, sptr, sptr, "Excessive TS delta");
     }
 
   if (deltat > TS_WARN_DELTA)
     { 
+#ifdef HIDE_SERVERS_IPS
+      sendto_realops(
+      		 "Link %s notable TS delta (my TS=%d, their TS=%d, delta=%d)",
+		 get_client_name(sptr, MASK_IP), CurrentTime, theirtime, deltat);
+#else		 
       sendto_realops(
                  "Link %s notable TS delta (my TS=%d, their TS=%d, delta=%d)",
                  get_client_name(sptr, TRUE), CurrentTime, theirtime, deltat);
+#endif		 
     }
 
   return 0;

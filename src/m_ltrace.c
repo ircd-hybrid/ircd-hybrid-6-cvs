@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_ltrace.c,v 1.5 2000/11/24 18:51:17 lusky Exp $
+ *   $Id: m_ltrace.c,v 1.6 2001/06/16 11:22:10 leeh Exp $
  */
 #include "m_commands.h"
 #include "class.h"
@@ -276,6 +276,9 @@ int     m_ltrace(struct Client *cptr,
                        acptr->serv->user->host, now - acptr->lasttime);
           else
 #endif
+#ifdef HIDE_SERVERS_IPS
+	    name=get_client_name(acptr, MASK_IP);
+#endif	    
             sendto_one(sptr, form_str(RPL_TRACESERVER),
                        me.name, parv[0], c_class, link_s[i],
                        link_u[i], name, *(acptr->serv->by) ?

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_server.c,v 1.12 2001/06/04 13:35:26 leeh Exp $
+ *   $Id: m_server.c,v 1.13 2001/06/16 11:22:10 leeh Exp $
  */
 #include "m_commands.h"  /* m_server prototype */
 #include "client.h"      /* client struct */
@@ -237,12 +237,12 @@ int m_server(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 #ifdef HIDE_SERVERS_IPS
           sendto_realops("Link %s Server %s dropped, no N: line",
                          get_client_name(cptr, MASK_IP), host);
-          log(L_NOTICE, "Access denied. No N line for server %s",
-	                 get_client_name(cptr, TRUE));
 #else
           sendto_realops("Link %s Server %s dropped, no N: line",
 	                 get_client_name(cptr, TRUE), host);
-#endif			 				   
+#endif			 
+	  log(L_NOTICE, "Access denied. No N line for server %s",
+	  		get_client_name(cptr, TRUE));
 #endif
           return exit_client(cptr, cptr, cptr, "NO N line");
         }
@@ -296,7 +296,7 @@ int m_server(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
        *  - comstud
        */
 #ifdef HIDE_SERVERS_IPS
-      strcpy(nbuf, get_client_name(bcptr, TRUE));
+      strcpy(nbuf, get_client_name(bcptr, MASK_IP));
       sendto_realops("Link %s cancelled, server %s reintroduced by %s",
                 nbuf, host, get_client_name(cptr, MASK_IP));
 #else
@@ -372,11 +372,11 @@ int m_server(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
         {
 #ifdef HIDE_SERVERS_IPS
           sendto_realops("Non-Hub link %s introduced %s(%s).",
-                     get_client_name(cptr,  TRUE), host,
+                     get_client_name(cptr,  MASK_IP), host,
                      aconf ? (aconf->host ? aconf->host : "*") : "!");
 #else		     
           sendto_realops("Non-Hub link %s introduced %s(%s).",
-	             get_client_name(cptr, MASK_IP), host,
+	             get_client_name(cptr, TRUE), host,
 		     aconf ? (aconf->host ? aconf->host : "*") : "!");
 #endif		     
           sendto_one(cptr, "ERROR :%s has no H: line for %s.",
