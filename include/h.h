@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.52 1999/07/19 09:05:10 tomh Exp $
+ * $Id: h.h,v 1.53 1999/07/20 04:37:10 tomh Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -68,13 +68,9 @@ extern	int	maxdbufalloc;
 extern  int     maxdbufblocks;
 extern	int	highest_fd;
 extern  int     debuglevel;
-extern  int     portnum;
 extern  int     debugtty;
 extern  int     maxusersperchannel;
 extern	char*   debugmode;
-extern char*    configfile;
-extern char*    sbrk0;
-
 
 extern void     outofmemory(void);               /* list.c */
 extern	time_t	check_fdlists (time_t);

@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.23 1999/07/19 09:05:14 tomh Exp $
+ * $Id: s_conf.h,v 1.24 1999/07/20 04:37:11 tomh Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.24  1999/07/20 04:37:11  tomh
+ * more cleanups
+ *
  * Revision 1.23  1999/07/19 09:05:14  tomh
  * Work on char attributes for nick names, changed isvalid macro
  * Const correctness changes
@@ -214,8 +217,8 @@ struct ConfItem
 #define CONF_FLAGS_LITTLE_I_LINE        0x8000
 #endif
 
-extern struct ConfItem* ConfigItemList;   /* GLOBAL - conf list head */
-
+extern struct ConfItem* ConfigItemList;        /* GLOBAL - conf list head */
+extern int              specific_virtual_host; /* GLOBAL - used in s_bsd.c */
 
 extern struct ConfItem* make_conf(void);
 extern void             free_conf(struct ConfItem*);
