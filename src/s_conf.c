@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.248 2003/08/16 19:19:41 ievil Exp $
+ *  $Id: s_conf.c,v 1.249 2003/10/13 11:38:38 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -3240,6 +3240,8 @@ oper_flags_from_string(char *flags)
         int_flags |= FLAGS_EXTERNAL;
       else if(*flags == 'z')
         int_flags |= FLAGS_OPERWALL;
+      else if(*flags == 'l')
+        int_flags |= FLAGS_LOCOPS;   
 #ifdef OPERSPYLOG
       else if(*flags == 'Z')
         int_flags |= FLAGS_OSPYLOG;
@@ -3299,6 +3301,8 @@ char *oper_flags_as_string(int flags)
     *flags_ptr++ = 'x';
   if(flags & FLAGS_OPERWALL)
     *flags_ptr++ = 'z';
+  if(flags & FLAGS_LOCOPS)
+    *flags_ptr++ = 'l';
 #ifdef OPERSPYLOG
   if(flags & FLAGS_OSPYLOG)
     *flags_ptr++ = 'Z';

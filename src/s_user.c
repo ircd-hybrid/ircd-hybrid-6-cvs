@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.267 2003/10/13 11:33:13 ievil Exp $
+ *  $Id: s_user.c,v 1.268 2003/10/13 11:38:39 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -83,6 +83,7 @@ static FLAG_ITEM user_modes[] =
   {FLAGS_FULL,  'f'},
   {FLAGS_INVISIBLE, 'i'},
   {FLAGS_SKILL, 'k'},
+  {FLAGS_LOCOPS, 'l'},
   {FLAGS_NCHANGE, 'n'},
   {FLAGS_OPER, 'o'},
   {FLAGS_LOCOP, 'O'},
@@ -146,7 +147,7 @@ static int user_modes_from_c_to_bitmask[] =
   FLAGS_INVISIBLE, /* i */
   0,            /* j */
   FLAGS_SKILL,  /* k */
-  0,            /* l */
+  FLAGS_LOCOPS, /* l */
   0,            /* m */
   FLAGS_NCHANGE, /* n */
   FLAGS_OPER,   /* o */

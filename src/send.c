@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.118 2003/06/24 03:57:17 ievil Exp $
+ *   $Id: send.c,v 1.119 2003/10/13 11:38:39 ievil Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -1326,6 +1326,49 @@ send_operwall(aClient *from, char *type_message, char *message)
       sendto_one(acptr, ":%s WALLOPS :%s - %s", sender, type_message, message);
     }
 } /* send_operwall() */
+
+/*
+** send_locops -- Send Wallop/Locops to All Opers on this server
+**
+*/
+
+void
+send_locops(aClient *from, char *type_message, char *message)
+
+{
+  char sender[NICKLEN + USERLEN + HOSTLEN + 5];
+  aClient *acptr;
+  anUser *user;
+  
+  if (!from || !message)
+    return;
+
+  if (!IsPerson(from))
+    return;
+
+  user = from->user;
+  (void)strcpy(sender, from->name);
+
+  if (*from->username) 
+    {
+      strcat(sender, "!");
+      strcat(sender, from->username);
+    }
+
+  if (*from->host)
+    {
+      strcat(sender, "@");
+      strcat(sender, from->host);
+    }
+
+  for (acptr = oper_cptr_list; acptr; acptr = acptr->next_oper_client)
+    {
+      if (!SendLocops(acptr)) 
+        continue; /* has to be oper if in this linklist */
+      sendto_one(acptr, ":%s WALLOPS :%s - %s", sender, type_message, message);
+    }
+} /* send_locops() */
+
 
 /*
  * to - destination client

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_locops.c,v 1.4 2003/05/04 17:52:45 db Exp $
+ *   $Id: m_locops.c,v 1.5 2003/10/13 11:38:38 ievil Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -130,7 +130,7 @@ int m_locops(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
           if(parv[1])
             {
               message = parv[1];
-              send_operwall(acptr, "SLOCOPS", message);
+              send_locops(acptr, "SLOCOPS", message);
             }
           else
             return 0;
@@ -163,7 +163,7 @@ int m_locops(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 #ifdef SLAVE_SERVERS
       sendto_slaves(NULL,"LOCOPS",sptr->name,parc,parv);
 #endif
-      send_operwall(sptr, "LOCOPS", message);
+      send_locops(sptr, "LOCOPS", message);
     }
   else
     {

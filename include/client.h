@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.73 2003/10/13 11:33:11 ievil Exp $
+ * $Id: client.h,v 1.74 2003/10/13 11:38:37 ievil Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -323,26 +323,28 @@ struct Client
 #define FLAGS_IPHASH       0x1000 /* iphashed this client */
 
 /* umodes, settable flags */
-#define FLAGS_SERVNOTICE   0x00001 /* server notices such as kill */
-#define FLAGS_CCONN        0x00002 /* Client Connections */
-#define FLAGS_REJ          0x00004 /* Bot Rejections */
-#define FLAGS_SKILL        0x00008 /* Server Killed */
-#define FLAGS_FULL         0x00010 /* Full messages */
-#define FLAGS_SPY          0x00020 /* see STATS / LINKS */
-#define FLAGS_DEBUG        0x00040 /* 'debugging' info */
-#define FLAGS_NCHANGE      0x00080 /* Nick change notice */
-#define FLAGS_WALLOP       0x00100 /* send wallops to them */
-#define FLAGS_OPERWALL     0x00200 /* Operwalls */
-#define FLAGS_INVISIBLE    0x00400 /* makes user invisible */
-#define FLAGS_BOTS         0x00800 /* shows bots */
-#define FLAGS_EXTERNAL     0x01000 /* show servers introduced */
+#define FLAGS_SERVNOTICE   0x000001 /* server notices such as kill */
+#define FLAGS_CCONN        0x000002 /* Client Connections */
+#define FLAGS_REJ          0x000004 /* Bot Rejections */
+#define FLAGS_SKILL        0x000008 /* Server Killed */
+#define FLAGS_FULL         0x000010 /* Full messages */
+#define FLAGS_SPY          0x000020 /* see STATS / LINKS */
+#define FLAGS_DEBUG        0x000040 /* 'debugging' info */
+#define FLAGS_NCHANGE      0x000080 /* Nick change notice */
+#define FLAGS_WALLOP       0x000100 /* send wallops to them */
+#define FLAGS_OPERWALL     0x000200 /* Operwalls */
+#define FLAGS_INVISIBLE    0x000400 /* makes user invisible */
+#define FLAGS_BOTS         0x000800 /* shows bots */
+#define FLAGS_EXTERNAL     0x001000 /* show servers introduced */
 /* user information flags, only settable by remote mode or local oper */
-#define FLAGS_OPER         0x04000 /* Operator */
-#define FLAGS_LOCOP        0x08000 /* Local operator -- SRB */
-#define FLAGS_STATSPHIDE   0x10000 /* Oper hides from stats P */
-#define FLAGS_ADMIN        0x20000 /* Oper is admin */
-#define FLAGS_OSPYLOG      0x40000 /* show Oper Spy being used */
-#define FLAGS_UNIDLE       0x80000 /* Hide idle time with umode +u */
+#define FLAGS_OPER         0x004000 /* Operator */
+#define FLAGS_LOCOP        0x008000 /* Local operator -- SRB */
+#define FLAGS_STATSPHIDE   0x010000 /* Oper hides from stats P */
+#define FLAGS_ADMIN        0x020000 /* Oper is admin */
+#define FLAGS_OSPYLOG      0x040000 /* show Oper Spy being used */
+#define FLAGS_UNIDLE       0x080000 /* Hide idle time with umode +u */
+#define FLAGS_LOCOPS       0x100000 /* Oper see's LOCOPS */
+
 
 /* *sigh* overflow flags */
 #define FLAGS2_RESTRICTED   0x0001      /* restricted client */
@@ -403,22 +405,23 @@ struct Client
                       FLAGS_NCHANGE | FLAGS_OPERWALL | FLAGS_DEBUG | \
                       FLAGS_BOTS | FLAGS_EXTERNAL | FLAGS_LOCOP | \
                       FLAGS_STATSPHIDE | FLAGS_ADMIN | FLAGS_OSPYLOG | \
-                      FLAGS_UNIDLE)
+                      FLAGS_UNIDLE | FLAGS_LOCOPS)
 
 #ifndef ADMIN_UMODES
 #define ADMIN_UMODES  (FLAGS_OPER | FLAGS_WALLOP | FLAGS_SERVNOTICE | \
                       FLAGS_SPY | FLAGS_OPERWALL | FLAGS_DEBUG | FLAGS_BOTS | \
-                      FLAGS_ADMIN )
+                      FLAGS_ADMIN | FLAGS_LOCOPS)
 #endif /* ADMIN_UMODES */
 
 #ifndef OPER_UMODES
 #define OPER_UMODES  (FLAGS_OPER | FLAGS_WALLOP | FLAGS_SERVNOTICE | \
-                      FLAGS_SPY | FLAGS_OPERWALL | FLAGS_DEBUG | FLAGS_BOTS)
+                      FLAGS_SPY | FLAGS_OPERWALL | FLAGS_DEBUG | FLAGS_BOTS | \
+                      FLAGS_LOCOPS)
 #endif /* OPER_UMODES */
 
 #ifndef LOCOP_UMODES
-#define LOCOP_UMODES (FLAGS_LOCOP | FLAGS_WALLOP | FLAGS_SERVNOTICE | \
-                      FLAGS_SPY | FLAGS_DEBUG | FLAGS_BOTS)
+#define LOCOP_UMODES (FLAGS_LOCOP | FLAGS_WALLOP| FLAGS_SERVNOTICE | \
+                      FLAGS_SPY | FLAGS_DEBUG | FLAGS_BOTS | FLAGS_LOCOPS )
 #endif /* LOCOP_UMODES */
 
 #define FLAGS_ID     (FLAGS_NEEDID | FLAGS_GOTID)
@@ -463,6 +466,7 @@ struct Client
 #define SendDebugNotice(x)      ((x)->umodes & FLAGS_DEBUG)
 #define SendNickChange(x)       ((x)->umodes & FLAGS_NCHANGE)
 #define SendOSpyNotice(x)       ((x)->umodes & FLAGS_OSPYLOG)
+#define SendLocops(x)           (((x)->umodes & FLAGS_LOCOPS) && IsAnOper(x))
 
 #define SetWallops(x)           ((x)->umodes |= FLAGS_WALLOP)
 
