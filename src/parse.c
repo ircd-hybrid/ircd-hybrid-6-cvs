@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.29 1999/07/25 06:39:49 db Exp $
+ *   $Id: parse.c,v 1.30 1999/07/25 11:43:07 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -211,6 +211,7 @@ int parse(aClient *cptr, char *buffer, char *bufend)
 	    *s++ = *ch++; /* leave room for NULL */
 	}
       *s = '\0';
+      i = 0;
 
       /*
       ** Actually, only messages coming from servers can have
@@ -384,24 +385,28 @@ int parse(aClient *cptr, char *buffer, char *bufend)
             }
 	  else
 	    {
-	      while(*s == ' ')	/* tabs are not considered space */
-		*s++;
-
-	      para[i++] = s;
-
-	      /* scan for end of string, either ' ' or '\0' */
-	      while (IsNonEOS(*s))
-		s++;
-
-	      if(*s == '\0')
-		break;
+	      if (i >= paramcount)
+		{
+		  para[i++] = s;
+		  break;
+		}
 	      else
-		*s++ = '\0';
+		{
+		  while(*s == ' ')	/* tabs are not considered space */
+		    s++;
+
+		  para[i++] = s;
+
+		  /* scan for end of string, either ' ' or '\0' */
+		  while (IsNonEOS(*s))
+		    s++;
+
+		  if(*s == '\0')
+		    break;
+		  else
+		    *s++ = '\0';
+		}
 	    }
-
-	  if (i > paramcount)
-	    break;
-
         }
     }
 
