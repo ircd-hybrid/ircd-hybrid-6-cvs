@@ -1,3 +1,26 @@
+ievil       2004/05/23 12:52:53 EDT	(20040523_12)
+
+  Modified files:
+    include              m_commands.h msg.h 
+    src                  Makefile.in 
+  Added files:
+    include              m_sinfo.h 
+    src                  m_sinfo.c 
+  Log:
+  Added new command SINFO which gives back info to the opers about the
+  current state of the server.. only 2 commands of the 5 in the file
+  is actually implemented.. the rest will be shortly. These are added
+  to make the day to day operation easier for the opers...
+  
+  Revision  Changes    Path
+  1.12      +1 -0      ircd-hybrid-6/include/m_commands.h
+  1.1       +52 -0     ircd-hybrid-6/include/m_sinfo.h (new)
+  1.27      +4 -3      ircd-hybrid-6/include/msg.h
+  1.76      +2 -0      ircd-hybrid-6/src/Makefile.in
+  1.1       +106 -0    ircd-hybrid-6/src/m_sinfo.c (new)
+
+
+
 ievil       2004/05/23 12:33:57 EDT	(20040523_11)
 
   Modified files:
