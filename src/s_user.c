@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.178 1999/07/23 07:06:58 tomh Exp $
+ *  $Id: s_user.c,v 1.179 1999/07/23 12:23:48 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -140,8 +140,6 @@ const char *type_of_bot[]={
 
 unsigned long my_rand(void);    /* provided by orabidoo */
 
-/* externally defined functions */
-extern Link *find_channel_link(Link *,aChannel *);      /* defined in list.c */
 
 #ifdef FLUD
 extern BlockHeap *free_fludbots;
