@@ -1,3 +1,16 @@
+ievil       2003/08/16 14:41:59 EDT	(20030816_0)
+
+  Modified files:
+    src                  hash.c 
+  Log:
+  fixed possible bad things from happening due to old hash code ;)
+  patch originally from Michael Wobst - thnx ;)
+  
+  Revision  Changes    Path
+  1.41      +2 -6      ircd-hybrid-6/src/hash.c
+
+
+
 ievil       2003/07/01 09:05:10 EDT	(20030701_0)
 
   Modified files:
