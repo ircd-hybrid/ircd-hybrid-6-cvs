@@ -1,6 +1,6 @@
 ircd-hybrid-6.3 Release Notes
 ---------------------------
-$Id: RELNOTES,v 1.13 2002/01/14 05:25:06 lusky Exp $
+$Id: RELNOTES,v 1.14 2002/01/14 13:35:30 db Exp $
 
 There have been a number of changes done since 6.0 release.
 
@@ -37,9 +37,6 @@ o All features not approved for EFnet use are disabled by default.
 o vimotd and viklines are installed along with viconf.
 
 o P: lines can now be removed if there are no clients on that port.
-
-o IP I: lines can include a username.  Consult example.conf for more
-  information.
 
 o RESTART requires the server name, like DIE.
 
