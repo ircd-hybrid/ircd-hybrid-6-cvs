@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.28 1999/07/20 03:32:21 db Exp $
+ * $Id: client.h,v 1.29 1999/07/20 04:35:33 db Exp $
  */
 #ifndef	INCLUDED_client_h
 #define INCLUDED_client_h
@@ -311,6 +311,7 @@ struct Client
 #define FLAGS_OPERWALL     0x0200 /* Operwalls */
 #define	FLAGS_INVISIBLE    0x0400 /* makes user invisible */
 #define FLAGS_BOTS         0x0800 /* shows bots */
+#define FLAGS_EXTERNAL     0x1000 /* show servers introduced */
 /* user information flags, only settable by remote mode or local oper */
 #define	FLAGS_OPER	   0x4000 /* Operator */
 #define	FLAGS_LOCOP        0x8000 /* Local operator -- SRB */
@@ -359,7 +360,7 @@ struct Client
 #define	ALL_UMODES   (SEND_UMODES | FLAGS_SERVNOTICE | FLAGS_CCONN | \
                       FLAGS_REJ | FLAGS_SKILL | FLAGS_FULL | FLAGS_SPY | \
                       FLAGS_NCHANGE | FLAGS_OPERWALL | FLAGS_DEBUG | \
-                      FLAGS_BOTS)
+                      FLAGS_BOTS | FLAGS_EXTERNAL )
 
 #ifndef OPER_UMODES
 #define OPER_UMODES  (FLAGS_OPER | FLAGS_WALLOP | FLAGS_SERVNOTICE | \

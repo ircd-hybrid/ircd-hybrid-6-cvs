@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.159 1999/07/20 03:32:23 db Exp $
+ *  $Id: s_user.c,v 1.160 1999/07/20 04:35:35 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -94,6 +94,7 @@ static FLAG_ITEM user_modes[] =
   {FLAGS_REJ, 'r'},
   {FLAGS_SERVNOTICE, 's'},
   {FLAGS_WALLOP, 'w'},
+  {FLAGS_EXTERNAL, 'x'},
   {FLAGS_SPY, 'y'},
   {FLAGS_OPERWALL, 'z'},
   {0, 0}
@@ -125,7 +126,7 @@ static int user_modes_from_c_to_bitmask[] =
   0,		/* u */
   0,		/* v */
   FLAGS_WALLOP,	/* w */
-  0,		/* x */
+  FLAGS_EXTERNAL, /* x */
   FLAGS_SPY, 	/* y */
   FLAGS_OPERWALL, /* z */
   0, 0, 0, 0, 0, 0	/* pad out to 0x1F */
