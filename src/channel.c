@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.236 2003/05/04 17:52:44 db Exp $
+ * $Id: channel.c,v 1.237 2003/06/06 08:59:45 ievil Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -4155,7 +4155,8 @@ int     m_sjoin(struct Client *cptr,
 void report_juped_channels(struct Client *sptr)
 {
   struct Channel * chptr;
-  int i;
+  aQlineItem *qp;
+  int i, mj;
 
   if (sptr->user == NULL)
     return;
@@ -4167,12 +4168,21 @@ void report_juped_channels(struct Client *sptr)
     {
       if (chptr->juped)
       {
+        mj = 0;
+        for (qp = q_conf; qp; qp = qp->next)
+        {
+          if (!qp->name || irccmp(qp->name, chptr->name)) continue;
+          // qp->name and aconf->name is set to the same variable.
+          mj = 1;
+          break;
+        }
 	sendto_one(sptr, form_str(RPL_STATSQLINE),
 		   me.name,
 		   sptr->name,
 		   'q',
 		   chptr->chname,
-		   "","","oper juped");
+		   "","",
+		   mj ? "conf juped" : "oper juped");
       }
     }
   }
