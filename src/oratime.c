@@ -20,17 +20,18 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: oratime.c,v 1.1 1999/08/01 07:18:24 tomh Exp $
+ *   $Id: oratime.c,v 1.2 1999/08/01 07:58:30 tomh Exp $
  */
 #include "oratime.h"
 #ifdef ORATIMING
+
 #include "client.h"
 #include "send.h"
 
 #include <sys/time.h>
 
-static struct timeval tdsnow;
-static struct timeval tdsthen;
+static struct timeval tsdnow;
+static struct timeval tsdthen;
 static unsigned int   tsdms;
 
 /*
