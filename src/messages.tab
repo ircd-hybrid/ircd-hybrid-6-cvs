@@ -19,7 +19,7 @@
  *
  *      I kind of modernized this code a bit. -Dianora
  *
- *   $Id: messages.tab,v 1.28 2003/08/16 19:58:36 ievil Exp $
+ *   $Id: messages.tab,v 1.29 2003/10/13 09:53:05 ievil Exp $
  */
 
 static  char *  replies[] = {
@@ -382,9 +382,9 @@ static  char *  replies[] = {
 /* 344 */       NULL,
 /* 345 */       NULL,
 #ifdef BAN_INFO
-/* 346 RPL_INVEXLIST */         ":xs 346 %s %s %s %s %lu",
+/* 346 RPL_INVEXLIST */         ":%s 346 %s %s %s %s %lu",
 #else
-/* 346 RPL_INVEXLIST */         ":xs 346 %s %s %s %s",
+/* 346 RPL_INVEXLIST */         ":%s 346 %s %s %s %s",
 #endif
 /* 347 RPL_ENDOFINVEXLIST */    ":%s 347 %s %s :End of Channel Invite List",
 #ifdef BAN_INFO

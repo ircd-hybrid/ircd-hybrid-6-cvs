@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.245 2003/08/23 22:37:35 ievil Exp $
+ * $Id: channel.c,v 1.246 2003/10/13 09:53:04 ievil Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -915,7 +915,7 @@ void send_channel_modes(struct Client *cptr, struct Channel *chptr)
   *parabuf = '\0';
   *modebuf = '+';
   modebuf[1] = '\0';
-  send_mode_list(cptr, chptr->chname, chptr->exceptlist, CHFL_INVEX,'I');
+  send_mode_list(cptr, chptr->chname, chptr->invexlist, CHFL_INVEX,'I');
 
   if (modebuf[1] || *parabuf)
     sendto_one(cptr, ":%s MODE %s %s %s",
