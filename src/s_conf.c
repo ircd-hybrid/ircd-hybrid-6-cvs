@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.106 1999/07/13 01:43:00 db Exp $
+ *  $Id: s_conf.c,v 1.107 1999/07/13 22:34:28 tomh Exp $
  */
 #include "s_conf.h"
 #include "class.h"
@@ -229,7 +229,7 @@ void free_conf(struct ConfItem* aconf)
   MyFree(aconf->passwd);
   MyFree(aconf->user);
   MyFree(aconf->name);
-  MyFree((char *)aconf);
+  MyFree((char*) aconf);
 }
 
 /*
@@ -1456,7 +1456,7 @@ void clear_special_conf(aConfItem **this_conf)
  * -Dianora
  */
 
-int        rehash_dump(aClient *sptr,char *parv0)
+int rehash_dump(aClient *sptr,char *parv0)
 {
   aConfItem *aconf;
   FBFILE* out;
