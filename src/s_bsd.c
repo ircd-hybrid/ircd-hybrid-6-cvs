@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.31 1999/02/16 06:04:41 db Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.32 1999/02/20 02:10:44 db Exp $";
 #endif
 
 #include "struct.h"
@@ -508,8 +508,10 @@ void	init_sys()
 # endif
 #endif
 
+#ifndef USE_POLL
   read_set = &readset;
   write_set = &writeset;
+#endif
 
   for (fd = 3; fd < MAXCONNECTIONS; fd++)
     {
@@ -1972,7 +1974,7 @@ void read_clients()
 		pfd->events = 0;                \
 	}
 
-int	read_message(time_t delay)
+int	read_message(time_t delay, fdlist *listp)
 {
   Reg	aClient *cptr;
   Reg	int     nfds;
@@ -1986,7 +1988,7 @@ int	read_message(time_t delay)
   u_long	usec = 0;
   int		res, length, fd, newfd;
   int		auth, rr, rw;
-  register	int i;
+  register	int i,j;
   static aClient	*authclnts[MAXCONNECTIONS];
   char		errmsg[255];
 
