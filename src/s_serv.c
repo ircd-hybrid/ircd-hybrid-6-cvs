@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.39 1998/12/08 04:08:40 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.40 1998/12/08 06:22:11 db Exp $";
 #endif
 
 
@@ -342,9 +342,25 @@ int	m_squit(aClient *cptr,
       /*
       ** This is actually protocol error. But, well, closing
       ** the link is very proper answer to that...
+      **
+      ** Closing the client's connection probably wouldn't do much
+      ** good.. any oper out there should know that the proper way
+      ** to disconnect is /QUIT :)  -- David-R
+      **
+      ** its still valid if its not a local client, its then
+      ** a protocol error for sure -Dianora
       */
-      server = cptr->sockhost;
-      acptr = cptr;
+      if(MyClient(sptr))
+        {
+          sendto_one(sptr, err_str(ERR_NEEDMOREPARAMS),
+               me.name, parv[0], "SQUIT");
+          return 0;
+        }
+      else
+        {
+          server = cptr->sockhost;
+          acptr = cptr;
+        }
     }
 
   /*
