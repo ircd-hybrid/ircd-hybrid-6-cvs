@@ -21,9 +21,14 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.10 1999/07/13 01:42:58 db Exp $
+ * $Id: s_conf.h,v 1.11 1999/07/15 02:34:18 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.11  1999/07/15 02:34:18  db
+ * - redid m_kline, moved conf file writing from m_kline into s_conf.c
+ *   thus "hiding" the details of where the kline gets written..
+ *   Temporarily removed Shadowfax's LOCKFILE code until this settles down.
+ *
  * Revision 1.10  1999/07/13 01:42:58  db
  * - cleaned up conf file handling, handled by read_conf_files()
  *
@@ -187,7 +192,20 @@ extern struct ConfItem* find_conf_ip (struct SLink *, char *, char *, int);
 extern struct ConfItem* find_conf_name (char *, int);
 extern struct ConfItem* find_kill (struct Client *);
 
+typedef enum {
+  KLINE_TYPE,
+  DLINE_TYPE
+}KlineType;
 
+extern void write_kline_or_dline_to_conf_and_notice_opers(
+							  KlineType,
+							  struct Client *,
+							  struct Client *,
+							  char *,
+							  char *,
+							  char *,
+							  char *
+							  );
 
 typedef struct
 {

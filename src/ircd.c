@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.76 1999/07/13 22:34:27 tomh Exp $
+ * $Id: ircd.c,v 1.77 1999/07/15 02:34:20 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -95,12 +95,6 @@ struct	Counter	Count;
 time_t	NOW;
 aClient me;			/* That's me */
 aClient* GlobalClientList = 0;	/* Pointer to beginning of Client list */
-
-#ifdef  LOCKFILE
-extern  time_t  pending_kline_time;
-extern	struct pkl *pending_klines;
-extern  void do_pending_klines(void);
-#endif
 
 void	server_reboot();
 void	restart (char *);
@@ -1399,18 +1393,6 @@ time_t io_loop(time_t delay)
   ** -avalon
   */
   flush_connections(me.fd);
-
-#ifdef	LOCKFILE
-  /*
-  ** If we have pending klines and
-  ** CHECK_PENDING_KLINES minutes
-  ** have passed, try writing them
-  ** out.  -ThemBones
-  */
-  if ((pending_klines) && ((timeofday - pending_kline_time)
-			   >= (CHECK_PENDING_KLINES * 60)))
-    do_pending_klines();
-#endif
 
   Debug((DEBUG_DEBUG,"About to return delay %d",delay));
   return delay;

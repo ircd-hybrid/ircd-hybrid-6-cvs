@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_unkline.c,v 1.10 1999/07/12 23:37:02 tomh Exp $
+ *   $Id: m_unkline.c,v 1.11 1999/07/15 02:34:22 db Exp $
  */
 #include "struct.h"
 
@@ -60,7 +60,6 @@ extern int dline_in_progress;	/* defined in ircd.c */
 extern ConfigFileEntryType ConfigFileEntry; /* defined in ircd.c */
 
 int bad_tld(char *);
-extern int safe_write(aClient *,char *,char *,int,char *);
 extern char *smalldate(time_t);		/* defined in s_misc.c */
 static int flush_write(aClient *, FBFILE* , char *, char *);
 static int remove_tkline_match(char *,char *);
@@ -177,15 +176,6 @@ int m_unkline (aClient *cptr,aClient *sptr,int parc,char *parv[])
 #endif
       return 0;
     }
-
-#if defined(LOCKFILE) && !defined(SEPARATE_QUOTE_KLINES_BY_DATE)
-  if(lock_kline_file() < 0 )
-    {
-      sendto_one(sptr,":%s NOTICE %s :%s is locked try again in a few minutes",
-	me.name,parv[0],ConfigFileEntry.klinefile);
-      return -1;
-    }
-#endif
 
 #ifdef SEPARATE_QUOTE_KLINES_BY_DATE
   tmptr = localtime(&NOW);

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.138 1999/07/14 02:04:45 db Exp $
+ *   $Id: s_serv.c,v 1.139 1999/07/15 02:34:23 db Exp $
  */
 
 #define CAPTAB
@@ -121,9 +121,6 @@ static void report_specials(aClient *,int,int);
 extern void report_qlines(aClient *);
 static int m_set_parser(char *);
 int bad_tld(char *);
-
-int safe_write(aClient *,char *,char *,int,char *);
-
 
 #ifdef PACE_WALLOPS
 time_t last_used_wallops = 0L;
