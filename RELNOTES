@@ -1,6 +1,6 @@
 ircd-hybrid-6 Release Notes
 ---------------------------
-$Id: RELNOTES,v 1.1 1999/08/03 04:23:22 lusky Exp $
+$Id: RELNOTES,v 1.2 1999/08/06 03:34:11 lusky Exp $
 
 Operating system dependencies have been removed, there is no longer any
 special code for AIX, SEQUENT, DYNIX, HPUX, Solaris, or pyr. We have
@@ -60,6 +60,9 @@ without a ~, use an I line such as:
 	I:NOMATCH::-*db@*some.host.on.the.net
 This will match this user, and will remove the ~ as seen on the net.
 
+KNOWN BUGS:
+There is a possibility that ircd will core dump if you there are errors
+in your conf file.
 
 Send bug reports to ircd-hybrid@the-project.org.  Please include a gdb
 backtrace and a copy of your config.h.
