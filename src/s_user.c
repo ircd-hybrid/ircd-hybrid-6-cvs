@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.177 1999/07/23 05:28:11 db Exp $
+ *  $Id: s_user.c,v 1.178 1999/07/23 07:06:58 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -51,6 +51,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <fcntl.h>
 #include <assert.h>
 #include <time.h>

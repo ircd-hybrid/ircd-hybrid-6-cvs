@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.67 1999/07/23 06:02:36 tomh Exp $
+ * $Id: struct.h,v 1.68 1999/07/23 07:02:43 tomh Exp $
  */
 #ifndef INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -56,11 +56,6 @@
 
 #ifndef INCLUDED_ircd_defs_h
 # include "ircd_defs.h"
-#endif
-
-#ifndef INCLUDED_zlib_h
-# include "zlib.h"
-# define INCLUDED_zlib_h
 #endif
 
 #ifndef INCLUDED_client_h
@@ -135,24 +130,6 @@ typedef struct Whowas
   struct Whowas *cprev; /* for client struct linked list */
 }aWhowas;
 
-
-#ifdef ZIP_LINKS
-/* the minimum amount of data needed to trigger compression */
-#define ZIP_MINIMUM     4096
-
-/* the maximum amount of data to be compressed (can actually be a bit more) */
-#define ZIP_MAXIMUM     8192    /* WARNING: *DON'T* CHANGE THIS!!!! */
-
-struct Zdata {
-        z_stream        *in;            /* input zip stream data */
-        z_stream        *out;           /* output zip stream data */
-        char            inbuf[ZIP_MAXIMUM]; /* incoming zipped buffer */
-        char            outbuf[ZIP_MAXIMUM]; /* outgoing (unzipped) buffer */
-        int             incount;        /* size of inbuf content */
-        int             outcount;       /* size of outbuf content */
-};
-
-#endif /* ZIP_LINKS */
 
 /* Macros for aConfItem */
 

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.37 1999/07/23 04:58:16 tomh Exp $
+ *   $Id: m_kline.c,v 1.38 1999/07/23 07:06:56 tomh Exp $
  */
 
 #include "struct.h"
@@ -40,6 +40,7 @@
 #include "mtrie_conf.h"
 
 #include <stdlib.h>
+#include <unistd.h>
 #include <signal.h>
 #include <fcntl.h>
 #include <string.h>

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.102 1999/07/23 04:58:16 tomh Exp $
+ * $Id: ircd.c,v 1.103 1999/07/23 07:06:55 tomh Exp $
  */
 #include "ircd.h"
 #include "ircd_signal.h"
@@ -45,12 +45,14 @@
 #include "m_gline.h"
 #include "scache.h"
 #include "s_misc.h"
+#include "s_zip.h"
 
 #include <string.h>
 #include <errno.h>
 #include <time.h>
 #include <pwd.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include <sys/file.h>
 #include <sys/stat.h>
 #include <sys/socket.h>
@@ -112,8 +114,6 @@ int     dorehash   = 0;
 int     debuglevel = -1;        /* Server debug level */
 int     bootopt    = 0;         /* Server boot option flags */
 char*   debugmode  = "";        /*  -"-    -"-   -"-  */
-
-extern void* edata;
 
 
 int     rehashed = YES;

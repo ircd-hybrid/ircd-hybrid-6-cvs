@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_debug.h,v 1.3 1999/07/23 02:38:30 db Exp $
+ * $Id: s_debug.h,v 1.4 1999/07/23 07:02:42 tomh Exp $
  *
  * $Log: s_debug.h,v $
+ * Revision 1.4  1999/07/23 07:02:42  tomh
+ * remove sbrk, replace with get_maxrss
+ *
  * Revision 1.3  1999/07/23 02:38:30  db
  * - more include file fixes
  *
@@ -38,11 +41,16 @@
  * - moved prototype for send_usage() into s_debug.h
  *
  */
+#ifndef INCLUDED_sys_types_h
+#include <sys/types.h>       /* size_t */
+#define INCLUDED_sys_types_h
+#endif
 
 struct Client;
 
 extern void send_usage(struct Client*, char *);
-extern	void	count_memory (struct Client *, char *);
+extern void count_memory (struct Client *, char *);
+extern size_t get_maxrss(void);
 
 extern	void	debug(int, char *, ...);
 

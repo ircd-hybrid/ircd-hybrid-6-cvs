@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_unkline.c,v 1.25 1999/07/23 03:15:49 db Exp $
+ *   $Id: m_unkline.c,v 1.26 1999/07/23 07:06:56 tomh Exp $
  */
 #include "struct.h"
 
@@ -41,6 +41,7 @@
 
 #include <time.h>
 #include <string.h>
+#include <unistd.h>
 
 extern ConfigFileEntryType ConfigFileEntry; /* defined in ircd.c */
 

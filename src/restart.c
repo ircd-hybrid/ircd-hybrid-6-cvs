@@ -1,7 +1,7 @@
 /*
  * restart.c
  *
- * $Id: restart.c,v 1.7 1999/07/23 04:58:17 tomh Exp $
+ * $Id: restart.c,v 1.8 1999/07/23 07:06:57 tomh Exp $
  */
 #include "restart.h"
 #include "common.h"
@@ -9,12 +9,12 @@
 #include "ircd.h"
 #include "send.h"
 #include "struct.h"
+#include "s_debug.h"
 
-/* function definition */
+#include <unistd.h>
 
 /* external var */
 extern char** myargv;
-extern void*  edata;
 
 void restart(char *mesg)
 {
@@ -26,12 +26,12 @@ void restart(char *mesg)
 
 #ifdef  USE_SYSLOG
   syslog(LOG_WARNING, "Restarting Server because: %s, memory data limit: %ld",
-         mesg, edata );
+         mesg, get_maxrss());
 #endif
   if (bootopt & BOOT_STDERR)
     {
-      fprintf(stderr, "Restarting Server because: %s, memory: %ld\n",
-              mesg, (unsigned long)edata);
+      fprintf(stderr, "Restarting Server because: %s, memory: %u\n",
+              mesg, get_maxrss());
     }
   server_reboot();
 }
@@ -40,8 +40,7 @@ void server_reboot(void)
 {
   int i;
   
-  sendto_ops("Aieeeee!!!  Restarting server... memory: %d",
-             edata );
+  sendto_ops("Aieeeee!!!  Restarting server... memory: %d", get_maxrss());
 
   Debug((DEBUG_NOTICE,"Restarting server..."));
   flush_connections(0);
