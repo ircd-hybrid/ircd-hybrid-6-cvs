@@ -1,3 +1,16 @@
+gregp       2003/01/09 11:46:36 EST	(20030109_0)
+
+  Modified files:
+    src                  m_unkline.c 
+  Log:
+  - fix cores introduced by the last revision to this file
+  reminder: please make sure cvs logs note all changes made
+  
+  Revision  Changes    Path
+  1.47      +2 -0      ircd-hybrid-6/src/m_unkline.c
+
+
+
 gregp       2003/01/05 23:52:11 EST	(20030106_0)
 
   Modified files:
