@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.178 1999/12/14 02:41:49 lusky Exp $
+ *  $Id: s_conf.c,v 1.179 2000/01/02 22:41:01 lusky Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -2393,6 +2393,7 @@ static void initconf(FBFILE* file, int use_include)
         {
           dontadd = 1;
           MyFree(aconf->user);
+          aconf->user = (char *)NULL;
           aconf->name = aconf->host;
           aconf->host = (char *)NULL;
           aconf->next = u_conf;
