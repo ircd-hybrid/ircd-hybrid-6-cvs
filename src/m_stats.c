@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_stats.c,v 1.3 2000/06/07 03:23:14 lusky Exp $
+ *  $Id: m_stats.c,v 1.4 2000/08/22 01:55:49 lusky Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "class.h"       /* report_classes */
@@ -137,6 +137,11 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
   int             valid_stats = 0;
   char*           name;
   static time_t   last_used = 0;
+
+  if(!IsClient(sptr))
+    {
+      return 0;
+    }
 
   if(!IsAnOper(sptr))
     {
