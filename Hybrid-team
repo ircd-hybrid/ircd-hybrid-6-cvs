@@ -1,4 +1,4 @@
-$Id: Hybrid-team,v 1.21 2001/07/02 03:55:44 joant Exp $
+$Id: Hybrid-team,v 1.22 2001/08/01 03:31:26 lusky Exp $
 
   The hybrid team is a group of ircd coders who were frustrated
 with the instability and all-out "dirtiness" of the EFnet ircd's
@@ -84,3 +84,4 @@ Thanks also to those who provide the kind sysadmins who let me and
 others continue to develop IRC.
  
 Email fixes/complaints/rotten tomatoes to ircd-hybrid@the-project.org.
+
