@@ -1,7 +1,7 @@
 /*
  * dline_conf.c
  *
- * $Id: dline_conf.c,v 1.40 2001/12/07 14:38:46 leeh Exp $
+ * $Id: dline_conf.c,v 1.41 2001/12/08 06:23:18 lusky Exp $
  */
 #include "dline_conf.h"
 #include "class.h"
@@ -868,7 +868,7 @@ walk_the_ip_Klines(struct Client *sptr, struct ip_subtree *tree,
   scan=tree->conf;
   for(scan=tree->conf;scan;scan=scan->next)
     {
-      if((scan->status & MASK) == NULL)
+      if((scan->status & MASK) == 0)
         continue;
 
       get_printable_conf(scan, &name, &host, &pass, &oper_reason,
