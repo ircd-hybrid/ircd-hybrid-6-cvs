@@ -1,3 +1,21 @@
+ievil       2003/06/24 21:34:20 EDT	(20030625_0)
+
+  Modified files:
+    .                    opers.txt 
+    include              client.h config.h config.h.dist 
+                         ircd_defs.h 
+  Log:
+  Upgraded config_h_level from 6_3 to 6_4. Added umode +Z to opers.txt
+  
+  Revision  Changes    Path
+  1.70      +1 -1      ircd-hybrid-6/include/client.h
+  1.165     +1 -1      ircd-hybrid-6/include/config.h
+  1.139     +20 -34    ircd-hybrid-6/include/config.h.dist
+  1.12      +1 -1      ircd-hybrid-6/include/ircd_defs.h
+  1.24      +1 -0      ircd-hybrid-6/opers.txt
+
+
+
 ievil       2003/06/24 01:30:49 EDT	(20030624_4)
 
   Modified files:
