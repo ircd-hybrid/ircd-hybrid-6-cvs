@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.44 1999/07/08 10:46:16 db Exp $
+ *   $Id: send.c,v 1.45 1999/07/08 11:39:20 db Exp $
  */
 
 #include "send.h"
@@ -56,7 +56,7 @@ extern aClient *serv_cptr_list;
 static	char	sendbuf[2048];
 static	int	send_message (aClient *, char *, int);
 
-static  void vsendto_prefix_one(register aClient *, register aClient *, char *, va_list);
+static  void vsendto_prefix_one(register aClient *, register aClient *, const char *, va_list);
 static  void vsendto_one(aClient *, const char *, va_list);
 static  void vsendto_realops(const char *, va_list);
 
@@ -1367,7 +1367,7 @@ va_dcl
 
 static void
 vsendto_prefix_one(register aClient *to, register aClient *from,
-                   char *pattern, va_list args)
+                   const char *pattern, va_list args)
 
 {
   static char sender[HOSTLEN + NICKLEN + USERLEN + 5];
