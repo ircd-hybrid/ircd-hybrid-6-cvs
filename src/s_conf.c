@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.22 1998/11/28 03:28:46 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.23 1998/12/01 06:12:02 db Exp $";
 #endif
 
 #include "struct.h"
@@ -197,7 +197,11 @@ int	attach_Iline(aClient *cptr,
       /*      (void)strncpy(user, cptr->username,sizeof(user)-1); */
     }
 
-  aconf = find_matching_mtrie_conf(host,username,ntohl(cptr->ip.s_addr));
+  if(cptr->flags & FLAGS_GOTID)
+    aconf = find_matching_mtrie_conf(host,cptr->username,
+				     ntohl(cptr->ip.s_addr));
+  else
+    aconf = find_matching_mtrie_conf(host,username,ntohl(cptr->ip.s_addr));
 
   if(aconf)
     {
