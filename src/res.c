@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.47 1999/10/10 03:43:01 lusky Exp $
+ * $Id: res.c,v 1.48 1999/12/09 05:08:18 lusky Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
@@ -1093,7 +1093,22 @@ void get_res(void)
        * got a name and address response, client resolved
        */
       cp = make_cache(request);
-      (*request->query.callback)(request->query.vptr, &cp->reply);
+
+      /* if cp is NULL then don't try to use it...&cp->reply will be 0x2c
+       * in this case btw.
+       * make_cache can return NULL if hp->h_name and hp->h_addr_list[0]
+       * are NULL -Dianora
+       */
+
+      if(cp)
+        {        
+          (*request->query.callback)(request->query.vptr, &cp->reply);
+        }
+      else
+        {
+          (*request->query.callback)(request->query.vptr, 0 );
+        }
+
 #ifdef  DEBUG
       Debug((DEBUG_INFO,"get_res:cp=%#x request=%#x (made)",cp,request));
 #endif
