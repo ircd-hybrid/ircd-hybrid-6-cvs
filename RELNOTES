@@ -1,6 +1,6 @@
 ircd-hybrid-6.3 Release Notes
 ---------------------------
-$Id: RELNOTES,v 1.9 2001/12/08 04:12:39 wcampbel Exp $
+$Id: RELNOTES,v 1.10 2001/12/09 19:02:03 lusky Exp $
 
 
 There have been a number of changes done since 6.0 release.
@@ -41,6 +41,9 @@ o IP I: lines can include a username.  Consult example.conf for more
   information.
 
 o RESTART requires the server name, like DIE.
+
+o NO_CREATE_ON_SPLIT will allow users to join existing channel bu
+  but create new ones.
 
 Oper level
 --======--

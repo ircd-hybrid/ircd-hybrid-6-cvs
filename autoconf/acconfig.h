@@ -1,5 +1,5 @@
 /*
- * $Id: acconfig.h,v 1.4 2001/06/17 17:27:34 kreator Exp $
+ * $Id: acconfig.h,v 1.5 2001/12/09 19:02:06 lusky Exp $
  */
 
 /* Define only one of POSIX, BSD, or SYSV signals.  */
@@ -30,11 +30,3 @@
 /* Define if you have SYSV non-blocking sockets (FIONBIO) */
 #undef NBLOCK_SYSV
 
-/* Define if you are running DYNIXPTX.  */
-#undef OS_DYNIXPTX
-
-/* Define if you are running HPUX.  */
-#undef OS_HPUX
-
-/* Define if you are running SOLARIS2.  */
-#undef OS_SOLARIS2

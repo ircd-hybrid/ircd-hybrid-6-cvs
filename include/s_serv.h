@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: s_serv.h,v 1.14 2001/12/06 20:56:09 leeh Exp $
+ * $Id: s_serv.h,v 1.15 2001/12/09 19:02:09 lusky Exp $
  *
  */
 #ifndef INCLUDED_serv_h
@@ -73,7 +73,7 @@ extern int MaxConnectionCount; /* GLOBAL - highest number of connections */
  * the network before allowing chanops new channels,
  *  but allow it to be set to a maximum of MAX_SERVER_SPLIT_RECOVERY_TIME 
  */
-#ifdef NO_JOIN_ON_SPLIT
+#ifdef NEED_SPLITCODE
 #define MAX_SERVER_SPLIT_RECOVERY_TIME 45 
 #ifndef DEFAULT_SERVER_SPLIT_RECOVERY_TIME
 #define DEFAULT_SERVER_SPLIT_RECOVERY_TIME 15

@@ -1,4 +1,4 @@
-dnl $Id: configure.in,v 1.26 2001/12/09 17:37:20 lusky Exp $
+dnl $Id: configure.in,v 1.27 2001/12/09 19:02:06 lusky Exp $
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(include/class.h)
 
@@ -176,13 +176,6 @@ int main()
 ], AC_DEFINE(BSD_RELIABLE_SIGNALS) AC_MSG_RESULT(bsd),
     AC_DEFINE(SYSV_UNRELIABLE_SIGNALS) AC_MSG_RESULT(sysv), AC_MSG_RESULT(uknown)),
 AC_MSG_RESULT(unknown))
-
-dnl don't add more of these unless it's critical.  Trying to get rid of them.
-AC_MSG_CHECKING(operating system)
-case "$target" in
-*-solaris2*) AC_DEFINE(OS_SOLARIS2) AC_MSG_RESULT(Solaris 2.x) ;;
-*) AC_MSG_RESULT(nothing special required) ;;
-esac
 
 AC_OUTPUT(Makefile adns/Makefile src/Makefile tools/Makefile)
 

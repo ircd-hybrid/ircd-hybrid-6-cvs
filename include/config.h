@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.149 2001/12/08 20:48:17 lusky Exp $
+ * $Id: config.h,v 1.150 2001/12/09 19:02:09 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -558,6 +558,13 @@
  */
 #undef  NO_JOIN_ON_SPLIT
 
+/* NO_CREATE_ON_SPLIT
+ *
+ * When this is defined, users will not be allowed to create new channels
+ * while the server is split, however they can join existing channel.
+ */
+#undef  NO_CREATE_ON_SPLIT
+
 /*
  * SPLIT_SMALLNET_SIZE defines what constitutes a split from
  * the net. for a leaf, 5 is fine. If the number of servers seen
@@ -991,7 +998,7 @@
 #define KNOCK_DELAY_CHANNEL 60
 #endif
 
-#ifdef NO_JOIN_ON_SPLIT
+#if defined(NO_JOIN_ON_SPLIT) || defined(NO_CREATE_ON_SPLIT)
 #define NEED_SPLITCODE
 #endif
 
