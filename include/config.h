@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.80 2000/06/22 06:33:11 lusky Exp $
+ * $Id: config.h,v 1.81 2000/06/26 22:38:40 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -608,12 +608,6 @@
 #undef  IDLE_CHECK
 #define IDLE_TIME 60
 #define OPER_IDLE
-
-/* If defined USE_IP_I_LINE_FIRST will search IP I lines first
- * and use that in preference over the mtrie. (hi jimmie)
- * -Dianora
- */
-#undef USE_IP_I_LINE_FIRST
 
 /* SEND_FAKE_KILL_TO_CLIENT - make the client think it's being /KILL'ed
  * 
