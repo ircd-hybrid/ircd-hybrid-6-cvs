@@ -1,6 +1,6 @@
 ircd-hybrid-6 README
 --------------------
-$Id: README.FIRST,v 1.14 2001/12/09 18:16:54 lusky Exp $
+$Id: README.FIRST,v 1.15 2002/02/02 15:52:17 db Exp $
 
 If you don't read this first, we won't help you.
 :-)
@@ -16,6 +16,11 @@ line, you must add a specific P line for it.
 TRANSLATION: You *MUST* fix your conf before upgrading from hybrid-5.
 
 LOTS OF THINGS HAVE CHANGED IN CONFIG.H.  PLEASE READ THROUGH IT.
+
+VERY IMPORTANT. The files, /etc/services, /etc/protocols, and
+/etc/resolv.conf, MUST be readable by the user running the server in order
+for ircd to start.  Errors from adns causing the ircd to refuse to start up
+are often related to permission problems on these files.
 
 There is now a mailing list for general discussion of Hybrid.  To subscribe
 to the Hybrid List, send email to listmanager@the-project.org with

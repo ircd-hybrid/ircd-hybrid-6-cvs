@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_log.c,v 1.13 2001/12/10 02:21:11 db Exp $
+ *   $Id: s_log.c,v 1.14 2002/02/02 15:52:20 db Exp $
  */
 #include "s_log.h"
 #include "irc_string.h"
@@ -77,8 +77,13 @@ static int open_log(const char* filename)
   logFile = open(filename, 
                  O_WRONLY | O_APPEND | O_CREAT | O_NONBLOCK, 0644);
   if (-1 == logFile) {
+#ifdef USE_SYSLOG
+    /* If the user does not wish to use syslog, don't even send the log error
+     * to syslog -Hwy
+     */
     syslog(LOG_ERR, "Unable to open log file: %s: %s",
            filename, strerror(errno));
+#endif
     return 0;
   }
   return 1;
