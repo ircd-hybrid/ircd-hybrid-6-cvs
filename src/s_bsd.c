@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.115 1999/08/10 03:32:16 lusky Exp $
+ *  $Id: s_bsd.c,v 1.116 1999/08/10 23:07:23 lusky Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -349,7 +349,6 @@ int check_client(struct Client *cptr,char *username,char **reason)
 {
   static char     sockname[HOSTLEN + 1];
   int             i;
-  struct hostent* hp = 0;
  
   ClearAccess(cptr);
 
