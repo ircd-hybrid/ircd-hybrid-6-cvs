@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_message.c,v 1.3 1999/07/31 04:23:36 tomh Exp $
+ *   $Id: m_message.c,v 1.4 1999/08/27 03:37:08 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -34,6 +34,7 @@
 #include "channel.h"
 #include "irc_string.h"
 #include "hash.h"
+#include "class.h"
 
 #include <string.h>
 
