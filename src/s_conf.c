@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.228 2001/12/10 06:53:06 db Exp $
+ *  $Id: s_conf.c,v 1.229 2001/12/11 02:05:35 db Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -2935,7 +2935,6 @@ show_temp_klines(aClient *sptr, struct ConfItem * tklist)
   char *user;
   char *reason;
   char *oper_reason;
-  char *p;
 
   kill_list_ptr = last_list_ptr = tklist;
 
