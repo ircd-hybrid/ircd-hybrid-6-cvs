@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.52 2000/10/19 04:18:53 lusky Exp $
+ * $Id: res.c,v 1.53 2000/11/02 03:37:16 lusky Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
@@ -1682,6 +1682,9 @@ int m_dns(aClient *cptr, aClient *sptr, int parc, char *parv[])
   aCache* cp;
   int     i;
   struct hostent* hp;
+
+  if (!IsAnOper(sptr))
+    return 0;
 
   if (parv[1] && *parv[1] == 'l') {
     for(cp = cacheTop; cp; cp = cp->list_next) {
