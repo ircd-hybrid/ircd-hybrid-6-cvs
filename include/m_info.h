@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.2 1999/07/23 01:30:35 wnder Exp $
+ * $Id: m_info.h,v 1.3 1999/07/23 02:15:19 db Exp $
  */
 
 typedef struct Information
@@ -453,12 +453,6 @@ Info MyInformation[] = {
 #else
 	{ "REPORT_DLINE_TO_USER", "OFF", 0, "Inform Clients They are D-lined" },
 #endif /* REPORT_DLINE_TO_USER */
-
-#ifdef RFC1035_ANAL
-	{ "RFC1035_ANAL", "ON", 0, "Reject Hostnames With Non-Compliant Characters" },
-#else
-	{ "RFC1035_ANAL", "OFF", 0, "Reject Hostnames With Non-Compliant Characters" },
-#endif /* RFC1035_ANAL */
 
 #ifdef SEND_FAKE_KILL_TO_CLIENT
 	{ "SEND_FAKE_KILL_TO_CLIENT", "ON", 0, "Make Client think they were KILLed" },
