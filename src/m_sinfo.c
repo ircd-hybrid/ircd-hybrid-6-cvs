@@ -20,7 +20,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_sinfo.c,v 1.2 2005/03/25 11:23:56 ievil Exp $
+ *   $Id: m_sinfo.c,v 1.3 2005/03/25 11:25:25 ievil Exp $
  */
 
 #include <assert.h>
@@ -72,7 +72,7 @@ int m_sinfo (struct Client *cptr, struct Client *sptr, int parc, char *parv[])
           sendto_one(sptr, ":%s NOTICE %s :*** Notice -- server is currently not in split-mode",
                      me.name, parv[0]);
 #else
-        sendto_one(sptr, ":%s NOTICE %s :*** Notice -- Error: server is not running with splitcode enabled!",
+        sendto_one(sptr, ":%s NOTICE %s :*** Notice -- server is not running with splitcode enabled!",
                    me.name, parv[0]);
 #endif
         return 0;
