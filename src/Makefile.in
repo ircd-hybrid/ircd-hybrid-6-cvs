@@ -1,7 +1,7 @@
 #
 # Makefile.in for ircd/src
 #
-# $Id: Makefile.in,v 1.22 1999/07/13 23:46:30 db Exp $
+# $Id: Makefile.in,v 1.23 1999/07/14 00:24:59 db Exp $
 #
 CC = @CC@
 RM = @RM@
@@ -30,7 +30,6 @@ SRCS = \
 	fileio.c \
 	hash.c \
 	ircd.c \
-	ircsprintf.c \
 	list.c \
 	m_gline.c \
 	m_info.c \
@@ -75,7 +74,6 @@ SRCS = \
 #	fileio.o \
 #	hash.o \
 #	ircd.o \
-#	ircsprintf.o \
 #	list.o \
 #	m_gline.o \
 #	m_info.o \
@@ -94,6 +92,7 @@ SRCS = \
 #	s_err.o \
 #	s_misc.o \
 #	s_numeric.o \
+#       sprintf_irc.o \
 #	s_serv.o \
 #	s_user.o \
 #	s_zip.o \
