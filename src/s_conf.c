@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.112 1999/07/15 22:26:46 db Exp $
+ *  $Id: s_conf.c,v 1.113 1999/07/15 22:52:23 tomh Exp $
  */
 #include "s_conf.h"
 #include "listener.h"
@@ -223,13 +223,6 @@ void free_conf(struct ConfItem* aconf)
 {
   assert(0 != aconf);
 
-  /*
-   * check aconf->c_class in case we have one we didn't know about
-   */
-  if (ClassPtr(aconf)) {
-    if (ConfMaxLinks(aconf) == -1 && ConfLinks(aconf) == 0)
-      free_class(ClassPtr(aconf));
-  }
   if (aconf->dns_pending)
     delete_resolver_queries(aconf);
   MyFree(aconf->host);
