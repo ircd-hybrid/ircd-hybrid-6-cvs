@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.51 1999/09/03 00:32:16 lusky Exp $
+ *   $Id: m_kline.c,v 1.52 1999/12/14 02:41:48 lusky Exp $
  */
 #include "m_kline.h"
 #include "channel.h"
@@ -1195,7 +1195,7 @@ m_dline(aClient *cptr, aClient *sptr, int parc, char *parv[])
   DupString(aconf->passwd,buffer);
 
   aconf->ip = ip_host;
-  aconf->ip_mask &= ip_mask;
+  aconf->ip_mask = ip_mask;
 
   add_Dline(aconf);
 

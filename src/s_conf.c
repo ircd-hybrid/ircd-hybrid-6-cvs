@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.177 1999/12/11 04:11:34 lusky Exp $
+ *  $Id: s_conf.c,v 1.178 1999/12/14 02:41:49 lusky Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -418,7 +418,7 @@ int attach_Iline(aClient* cptr, const char* username, char **preason)
       if (aconf->status & CONF_CLIENT)
         {
 #ifdef GLINES
-          if ( (gkill_conf = find_gkill(cptr)) )
+          if ( !IsConfElined(aconf) && (gkill_conf = find_gkill(cptr)) )
             {
               *preason = gkill_conf->passwd;
               sendto_one(cptr, ":%s NOTICE %s :*** G-lined",
