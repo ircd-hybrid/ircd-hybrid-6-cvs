@@ -27,7 +27,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)s_err.c	1.11 5/17/93 (C) 1992 Darren Reed";
-static char *rcs_version = "$Id: s_err.c,v 1.19 1999/06/14 04:45:47 db Exp $";
+static char *rcs_version = "$Id: s_err.c,v 1.20 1999/06/17 04:15:41 lusky Exp $";
 #endif
 
 static	char	numbuff[512];
@@ -403,7 +403,7 @@ static	char *	replies[] = {
 #endif
 /* 349 RPL_ENDOFEXCEPTLIST */	":%s 349 %s %s :End of Channel Exception List",
 /* 350 */	(char *)NULL,
-/* 351 RPL_VERSION, */		":%s 351 %s %s.%s %s :%s",
+/* 351 RPL_VERSION, */		":%s 351 %s %s(%s).%s %s :%s",
 /* 352 RPL_WHOREPLY, */		":%s 352 %s %s %s %s %s %s %s :%d %s",
 /* 353 RPL_NAMREPLY, */		":%s 353 %s %s",
 /* 354 */	(char *)NULL,

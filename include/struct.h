@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.36 1999/06/03 02:03:48 db Exp $
+ * $Id: struct.h,v 1.37 1999/06/17 04:15:40 lusky Exp $
  */
 
 #ifndef	__struct_include__
@@ -1019,7 +1019,7 @@ extern struct Capability captab[];
 
 /* misc variable externs */
 
-extern	char	*version, *infotext[];
+extern	char	*version, *serno, *infotext[];
 extern	char	*generation, *creation;
 
 /* misc defines */
