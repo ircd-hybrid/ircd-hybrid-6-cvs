@@ -1,7 +1,7 @@
 /*
  * irc2.7.2/ircd/res.h (C)opyright 1992 Darren Reed.
  *
- * $Id: res.h,v 1.11 1999/07/09 06:55:44 tomh Exp $
+ * $Id: res.h,v 1.12 1999/07/11 22:29:54 tomh Exp $
  */
 #ifndef	INCLUDED_res_h
 #define INCLUDED_res_h
@@ -31,7 +31,6 @@ extern struct DNSReply* gethost_byname(const char* name,
                                        const struct DNSQuery* req);
 extern struct DNSReply* gethost_byaddr(const char* name, 
                                        const struct DNSQuery* req);
-extern void            flush_cache(void);
 extern int	       init_resolver(void);
 extern void            restart_resolver(void);
 extern time_t          timeout_resolver(time_t now);
