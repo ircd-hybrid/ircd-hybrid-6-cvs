@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: irc_string.c,v 1.1 1999/07/18 07:00:27 tomh Exp $
+ *  $Id: irc_string.c,v 1.2 1999/07/20 00:56:54 tomh Exp $
  */
 #include "irc_string.h"
 #include "h.h"
@@ -50,6 +50,10 @@ const char* myctime(time_t value)
 
 /*
  * strncpy_irc - optimized strncpy
+ * This may not look like it would be the fastest possible way to do it,
+ * but it generally outperforms everything else on many platforms, 
+ * including asm library versions and memcpy, if compiled with the 
+ * optimizer on. (-O2 for gcc) --Bleep
  */
 char* strncpy_irc(char* s1, const char* s2, size_t n)
 {
