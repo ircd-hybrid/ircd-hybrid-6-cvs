@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_stats.c,v 1.11 2001/06/04 13:35:27 leeh Exp $
+ *  $Id: m_stats.c,v 1.12 2001/06/06 05:03:18 db Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "class.h"       /* report_classes */
@@ -394,8 +394,7 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 
     case 'Q' : case 'q' :
       if(!IsAnOper(sptr))
-        sendto_one(sptr,":%s NOTICE %s :This server does not support Q lines",
-                   me.name, parv[0]);
+          sendto_one(sptr, form_str(ERR_NOPRIVILEGES), me.name, parv[0]);
       else
         {
           report_qlines(sptr);
@@ -446,6 +445,12 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       }
 
     case 'v' : case 'V' :
+      if (!IsAnOper(sptr))
+        {
+          ignore_request++;
+          valid_stats++;
+          break;
+        }
       show_servers(sptr);
       valid_stats++;
       break;
