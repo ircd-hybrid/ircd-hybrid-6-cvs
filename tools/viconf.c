@@ -24,7 +24,7 @@
 #endif
 
 #ifndef lint
-static char *rcs_version="$Id: viconf.c,v 1.2 1998/10/12 06:18:14 db Exp $";
+static char *rcs_version="$Id: viconf.c,v 1.3 1999/01/19 02:23:19 khuon Exp $";
 #endif /* lint */
 
 int main(int argc, char *argv[])
@@ -43,8 +43,10 @@ int main(int argc, char *argv[])
     p = argv[0];
   else
     p++;
+#ifdef KPATH
   if(strcmp(p, "viklines") == 0)
     filename = KLINEFILE;
+#endif /* KPATH */
 
   /* create exclusive lock */
   if((fd = open(LOCKFILE, O_WRONLY|O_CREAT|O_EXCL, 0666)) < 0) {

@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.35 1999/01/05 05:26:32 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.36 1999/01/19 02:23:12 khuon Exp $";
 #endif
 
 #include "struct.h"
@@ -3305,3 +3305,49 @@ int host_is_legal_ip(char *host_name)
   else
     return(NO);
 }
+
+#ifdef KILL_COMMENT_IS_FILE
+/*
+**  output the reason for being k lined from a file
+** sptr is server
+** parv is the sender prefix
+** filename is the file that is to be output to the K lined client
+*/
+int     m_killcomment(sptr, parv, filename)
+aClient *sptr;
+char    *parv, *filename;
+{
+      int     fd;
+      char    line[256];
+      Reg1    char	*tmp;
+      struct  stat	sb;
+      struct  tm	*tm;
+
+      /*
+       * stop NFS hangs...most systems should be able to open a file in
+       * 3 seconds. -avalon (curtesy of wumpus)
+       */
+      (void)alarm(3);
+      fd = open(filename, O_RDONLY);
+      (void)alarm(0);
+      if (fd == -1)
+          {
+              sendto_one(sptr, ":%s %d %s :You are not welcome on this server.", me.name, ERR_YOUREBANNEDCREEP, parv);
+              return 0;
+          }
+      (void)fstat(fd, &sb);
+      tm = localtime(&sb.st_mtime);
+      (void)dgets(-1, NULL, 0); /* make sure buffer is at empty pos */
+      while (dgets(fd, line, sizeof(line)-1) > 0)
+          {
+              if ((tmp = (char *)index(line,'\n')))
+                      *tmp = '\0';
+              if ((tmp = (char *)index(line,'\r')))
+                      *tmp = '\0';
+              sendto_one(sptr, ":%s %d %s :%s.", me.name, ERR_YOUREBANNEDCREEP, parv,line);
+          }
+      (void)dgets(-1, NULL, 0); /* make sure buffer is at empty pos */
+      (void)close(fd);
+      return 0;
+}
+#endif /* KILL_COMMENT_IS_FILE */

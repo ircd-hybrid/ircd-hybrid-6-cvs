@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.60 1999/01/05 05:26:30 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.61 1999/01/19 02:23:10 khuon Exp $";
 #endif
 
 #include "struct.h"
@@ -2358,7 +2358,7 @@ static void check_still_split()
 	    (Count.total > split_smallnet_users))
 	    */
 
-      if(Count.server > split_smallnet_size)
+      if(Count.server >= split_smallnet_size)
 	{
 	  /* server hasn't been split for a while.
 	   * -Dianora
