@@ -1,3 +1,18 @@
+ievil       2003/10/13 05:53:06 EDT	(20031013_0)
+
+  Modified files:
+    src                  channel.c messages.tab 
+  Log:
+  fixes problem with +I propogation
+  
+  Obtained from: Michael
+  
+  Revision  Changes    Path
+  1.246     +1 -1      ircd-hybrid-6/src/channel.c
+  1.29      +2 -2      ircd-hybrid-6/src/messages.tab
+
+
+
 lusky       2003/09/03 18:11:22 EDT	(20030903_0)
 
   Modified files:
