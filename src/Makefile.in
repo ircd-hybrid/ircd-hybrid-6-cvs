@@ -1,7 +1,7 @@
 #
 # Makefile.in for ircd/src
 #
-# $Id: Makefile.in,v 1.30 1999/07/23 13:24:17 db Exp $
+# $Id: Makefile.in,v 1.31 1999/07/24 02:03:33 tomh Exp $
 #
 CC = @CC@
 RM = @RM@
@@ -76,6 +76,7 @@ SRCS = \
 #	hash.o \
 #	irc_string.o \
 #	ircd.o \
+	ircd_signal.o \
 #	list.o \
 #	listener.o \
 #	m_gline.o \
