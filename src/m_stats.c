@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_stats.c,v 1.19 2001/11/29 07:47:20 db Exp $
+ *  $Id: m_stats.c,v 1.20 2001/11/29 15:25:54 db Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "class.h"       /* report_classes */
@@ -342,17 +342,7 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       report_mtrie_conf_links(sptr, CONF_CLIENT);
       valid_stats++;
       break;
-#ifdef JUPE_CHANNEL
-    case 'J' : case 'j' :
-      if (!IsAnOper(sptr)) {
-	ignore_request++;
-	valid_stats++;
-	break;
-      }
-      report_juped_channels(sptr);
-      valid_stats++;
-      break;
-#endif
+
     case 'k' :
 #ifdef K_LINES_OPER_ONLY
       if (!IsAnOper(sptr)) 
@@ -424,7 +414,20 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       valid_stats++;
       break;
 
-    case 'Q' : case 'q' :
+#ifdef JUPE_CHANNEL
+    case 'q' :
+      if (!IsAnOper(sptr))
+      {
+	ignore_request++;
+	valid_stats++;
+	break;
+      }
+      report_juped_channels(sptr);
+      valid_stats++;
+      break;
+#endif
+
+    case 'Q' :
       if(!IsAnOper(sptr))
           sendto_one(sptr, form_str(ERR_NOPRIVILEGES), me.name, parv[0]);
       else

@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.219 2001/11/29 07:47:20 db Exp $
+ * $Id: channel.c,v 1.220 2001/11/29 15:25:54 db Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -4104,7 +4104,7 @@ int     m_sjoin(struct Client *cptr,
  * using a specific one? If so, tell me and I'll make a proper
  * RPL_STATSJLINE def.
  * --einride
- * done - Dianora
+ * made RPL_STATSQLINE like hybrid-7 - Dianora
  */
 void report_juped_channels(struct Client *sptr)
 {
@@ -4121,10 +4121,12 @@ void report_juped_channels(struct Client *sptr)
     {
       if (chptr->juped)
       {
-	sendto_one(sptr, form_str(RPL_STATSJLINE),
+	sendto_one(sptr, form_str(RPL_STATSQLINE),
 		   me.name,
 		   sptr->name,
-		   chptr->chname);
+		   'q',
+		   chptr->chname,
+		   "","","oper juped");
       }
     }
   }

@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.217 2001/11/29 07:47:20 db Exp $
+ *  $Id: s_conf.c,v 1.218 2001/11/29 15:25:55 db Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -1498,7 +1498,7 @@ void report_qlines(aClient *sptr)
           get_printable_conf(aconf, &name, &host, &pass, &user, &port);
           
           sendto_one(sptr, form_str(RPL_STATSQLINE),
-                     me.name, sptr->name, name, user, host, pass);
+                     me.name, sptr->name, 'Q', name, user, host, pass);
         }
     }
 }
