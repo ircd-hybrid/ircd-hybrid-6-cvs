@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_unkline.c,v 1.52 2003/06/06 10:08:03 ievil Exp $
+ *   $Id: m_unkline.c,v 1.53 2003/06/21 02:40:06 ievil Exp $
  */
 #include "m_commands.h"
 #include "channel.h"
@@ -85,9 +85,11 @@ int m_unkline (aClient *cptr,aClient *sptr,int parc,char *parv[])
   
   if (IsServer(cptr))
     {
+#ifdef HUB
       if (parc == 4)
          sendto_match_cap_servs(NULL, cptr, CAP_UNKLN,":%s UNKLINE %s %s %s",
                                 parv[0], parv[1], parv[2], parv[3]);
+#endif
       return 0;
     }
 

@@ -1,5 +1,5 @@
 /*
- * event.c: $Id: event.c,v 1.6 2002/01/28 04:30:31 androsyn Exp $
+ * event.c: $Id: event.c,v 1.7 2003/06/21 02:40:04 ievil Exp $
  *  
  */
 /*
@@ -237,6 +237,14 @@ static void tcp_events(adns_state ads, int act,
     case server_disconnected: /* fall through */
       if (!ads->tcpw.head) return;
       if (!act) { inter_immed(tv_io,tvbuf); return; }
+      for (qu= ads->tcpw.head; qu; qu= nqu) {
+       nqu= qu->next;
+       assert(qu->state == query_tcpw);
+       if (qu->retries > ads->nservers) {
+         LIST_UNLINK(ads->tcpw,qu);
+         adns__query_fail(qu,adns_s_allservfail);
+       }
+      }
       adns__tcp_tryconnect(ads,now);
       break;
     case server_ok:
