@@ -1,4 +1,4 @@
-$Id: Hybrid-team,v 1.28 2001/12/08 01:59:13 wcampbel Exp $
+$Id: Hybrid-team,v 1.29 2002/01/18 00:01:51 db Exp $
 
   The hybrid team is a group of ircd coders who were frustrated
 with the instability and all-out "dirtiness" of the EFnet ircd's
@@ -26,6 +26,7 @@ AndroSyn      Aaron Sethman      <androsyn@ratbox.org>
 cosine        Patrick Alken      <wnder@uwns.underworld.net>
 Dianora       Diane Bruce        <db@db.net>
 einride       Erik S. Johansen   <einride@einride.org>
+fl_           Lee Hardy          <leeh@shagged.org>
 Hwy101        W. Campbell        <wcampbel@botbay.net>
 larne         Edward Brocklesby  <ejb@leguin.org.uk>
 Neph|l|m      Adel Mezibra       <adel@cybercable.fr>
@@ -45,7 +46,6 @@ CBongo        Chris Bongaarts    <cab@tc.umn.edu>
 comstud       Chris Behrens      <cbehrens@concentric.net>
 David-T       David Taylor       <davidt@yadt.co.uk>
 echo          Adam J. Durana     <adam@caca.com>
-fl_           Lee Hardy          <leeh@shagged.org>
 FlashMan      Craig A. Huegen    <chuegen@quadrunner.com>
 jailbird      Dustin Marquess    <jailbird@alcatraz.fdf.net>
 johan         Johannes Erdfelt   <jerdfelt@eng.mindspring.net>
