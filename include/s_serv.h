@@ -17,13 +17,17 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: s_serv.h,v 1.3 1999/07/25 18:05:06 tomh Exp $
+ * $Id: s_serv.h,v 1.4 1999/07/27 01:36:45 tomh Exp $
  *
  */
 #ifndef INCLUDED_serv_h
 #define INCLUDED_serv_h
 #ifndef INCLUDED_config_h
 #include "config.h"
+#endif
+#ifndef INCLUDED_sys_types_h
+#include <sys/types.h>
+#define INCLUDED_sys_types_h
 #endif
 
 struct Client;
@@ -94,10 +98,11 @@ extern struct Capability captab[];
 #define HUNTED_ISME     0       /* if this server should execute the command */
 #define HUNTED_PASS     1       /* if message passed onwards successfully */
 
-extern void send_capabilities(struct Client* client, int use_zip);
-extern int  hunt_server(struct Client* cptr, struct Client* sptr,
-                        char* command, int server, int parc, char** parv);
-extern int  server_estab(struct Client* cptr);
+extern void   send_capabilities(struct Client* client, int use_zip);
+extern int    hunt_server(struct Client* cptr, struct Client* sptr,
+                          char* command, int server, int parc, char** parv);
+extern int    server_estab(struct Client* cptr);
+extern time_t try_connections(time_t currenttime);
 
 #endif /* INCLUDED_s_serv_h */
 
