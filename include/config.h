@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.118 2001/07/05 04:44:53 db Exp $
+ * $Id: config.h,v 1.119 2001/07/05 22:16:54 greg Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -116,13 +116,9 @@
 #define DLPATH  "kline.conf"
 #define MPATH   "ircd.motd"
 #define LPATH   "ircd.log"
+#define PPATH   "ircd.pid"
 #define HPATH   "opers.txt"
 #define OPATH   "opers.motd"
-
-/* PPATH - Only define this if you want to override the default.
- * default is the name of the server.pid
- */
-/* #define PPATH   "ircd.pid" */
 
 /* HIDE_OPS
  * Define this to prevent non chanops from seeing what ops a channel has
