@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_map.c,v 1.1 2003/10/13 11:33:13 ievil Exp $
+ *   $Id: m_map.c,v 1.2 2003/10/13 15:18:29 ievil Exp $
  */
 
 #include <assert.h>
@@ -43,14 +43,14 @@ int m_map(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
   if (!IsAnOper(cptr))
   {
     sendto_one(cptr, form_str(ERR_NOPRIVILEGES), me.name, parv[0]);
-    return;
+    return 0;
   }
 #endif
   dump_map(cptr,&me,buf);  
   sendto_one(cptr, form_str(RPL_MAPEND), me.name, cptr->name);
   sendto_realops_flags(FLAGS_SPY, "MAP requested by %s (%s@%s)",
                        sptr->name, sptr->username, sptr->host);
-  return;
+  return 0;
 }
 
 static void dump_map(struct Client *cptr,struct Client *root_p, char *pbuf)

@@ -2,7 +2,7 @@
  * send.h
  * Copyright (C) 1999 Patrick Alken
  *
- * $Id: send.h,v 1.18 2003/06/12 23:05:54 ievil Exp $
+ * $Id: send.h,v 1.19 2003/10/13 15:18:27 ievil Exp $
  */
 
 #ifndef INCLUDED_send_h
@@ -20,6 +20,7 @@ struct Channel;
 /* send.c prototypes */
 
 extern  void send_operwall(struct Client *,char *,char *);
+extern  void send_locops(struct Client *,char *,char *);
 extern  void sendto_channel_type_notice(struct Client *, 
                                         struct Channel *, int, char *);
 extern  void send_knock(struct Client *, struct Client *, 
