@@ -1,7 +1,7 @@
 #
 # Makefile.in for ircd/src
 #
-# $Id: Makefile.in,v 1.25 1999/07/15 08:47:33 tomh Exp $
+# $Id: Makefile.in,v 1.26 1999/07/18 02:08:13 db Exp $
 #
 CC = @CC@
 RM = @RM@
@@ -42,6 +42,7 @@ SRCS = \
 	packet.c \
 	parse.c \
 	res.c \
+	restart.c \
 	s_auth.c \
 	s_bsd.c \
 	s_conf.c \

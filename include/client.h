@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.18 1999/07/18 00:17:43 tomh Exp $
+ * $Id: client.h,v 1.19 1999/07/18 02:08:11 db Exp $
  */
 #ifndef	INCLUDED_client_h
 #define INCLUDED_client_h
@@ -461,7 +461,7 @@ struct Client
 #define SetOperDie(x)           ((x)->flags2 |= FLAGS2_OPER_DIE)
 #define IsOperDie(x)            ((x)->flags2 & FLAGS2_OPER_DIE)
 #define SetOperRehash(x)        ((x)->flags2 |= FLAGS2_OPER_REHASH)
-#define IsOperRehash(x)         ((x)->flags2 &= FLAGS2_OPER_REHASH)
+#define IsOperRehash(x)         ((x)->flags2 & FLAGS2_OPER_REHASH)
 #define CBurst(x)		((x)->flags2 & FLAGS2_CBURST)
 
 /*
