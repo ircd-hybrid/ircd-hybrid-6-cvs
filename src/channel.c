@@ -34,7 +34,7 @@
  *                mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.167 1999/09/08 01:52:57 lusky Exp $
+ * $Id: channel.c,v 1.168 1999/10/10 01:30:27 lusky Exp $
  */
 #include "channel.h"
 #include "client.h"
@@ -3305,11 +3305,7 @@ int     m_join(struct Client *cptr,
             }
 
           del_invite(sptr, chptr);
-        /*  call m_names BEFORE spewing the topic, so people actually see
-        **  the topic, and stop whining.  --SuperTaz
-        */
-          parv[1] = name;
-          (void)m_names(cptr, sptr, 2, parv);
+
           if (chptr->topic[0] != '\0')
             {
               sendto_one(sptr, form_str(RPL_TOPIC), me.name,
@@ -3321,6 +3317,8 @@ int     m_join(struct Client *cptr,
                          chptr->topic_time);
 #endif
             }
+          parv[1] = name;
+          (void)m_names(cptr, sptr, 2, parv);
         }
     }
 
