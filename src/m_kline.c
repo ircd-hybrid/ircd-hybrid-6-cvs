@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.42 1999/07/26 05:34:44 tomh Exp $
+ *   $Id: m_kline.c,v 1.43 1999/07/26 11:27:46 db Exp $
  */
 
 #include "struct.h"
@@ -58,10 +58,6 @@ aPendingLine *PendingLines = (aPendingLine *) NULL;
 
 #ifdef SLAVE_SERVERS
 extern aConfItem *find_special_conf(char *,int); /* defined in s_conf.c */
-#endif
-
-#ifdef SEPARATE_QUOTE_KLINES_BY_DATE
-extern char *small_file_date(time_t);  /* defined in s_misc.c */
 #endif
 
 /*
