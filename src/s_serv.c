@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.206 1999/07/30 20:10:54 tomh Exp $
+ *   $Id: s_serv.c,v 1.207 1999/08/01 23:33:55 lusky Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -51,6 +51,10 @@
 #include <netdb.h>
 
 #define MIN_CONN_FREQ 300
+
+#ifndef INADDR_NONE
+#define INADDR_NONE ((unsigned int) 0xffffffff)
+#endif
 
 int MaxConnectionCount = 1;
 int MaxClientCount     = 1;
