@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.257 2003/06/14 23:23:42 ievil Exp $
+ *  $Id: s_user.c,v 1.258 2003/06/16 22:52:37 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -2032,7 +2032,7 @@ int user_mode(aClient *cptr, aClient *sptr, int parc, char *parv[])
               if(!IsAnOper(sptr))
                 break;
 
-              sptr->umodes &= ~(FLAGS_OPER|FLAGS_LOCOP|FLAGS_STATSPHIDE|FLAGS_ADMIN);
+              sptr->umodes &= ~(FLAGS_OPER|FLAGS_LOCOP|FLAGS_STATSPHIDE|FLAGS_OSPYLOG|FLAGS_ADMIN);
 
               Count.oper--;
 

@@ -120,6 +120,11 @@ m_die.o: m_die.c ../include/m_commands.h ../include/config.h \
   ../include/dbuf.h ../include/ircd.h ../include/irc_string.h \
   ../include/numeric.h ../include/s_bsd.h ../include/res.h \
   ../include/fileio.h ../adns/adns.h ../include/s_log.h ../include/send.h
+m_encap.o: m_encap.c ../include/m_commands.h ../include/config.h \
+  ../include/setup.h ../include/client.h ../include/ircd_defs.h \
+  ../include/dbuf.h ../include/ircd.h ../include/numeric.h \
+  ../include/send.h ../include/irc_string.h ../include/s_serv.h \
+  ../include/parse.h ../include/msg.h
 m_error.o: m_error.c ../include/m_commands.h ../include/config.h \
   ../include/setup.h ../include/client.h ../include/ircd_defs.h \
   ../include/dbuf.h ../include/common.h ../include/ircd.h \
@@ -199,10 +204,15 @@ m_message.o: m_message.c ../include/m_commands.h ../include/config.h \
   ../include/msg.h ../include/channel.h ../include/irc_string.h \
   ../include/hash.h ../include/class.h
 m_mode.o: m_mode.c ../include/m_commands.h ../include/config.h \
-  ../include/setup.h ../include/channel.h ../include/ircd_defs.h \
-  ../include/client.h ../include/dbuf.h ../include/hash.h \
-  ../include/irc_string.h ../include/ircd.h ../include/numeric.h \
-  ../include/s_user.h ../include/send.h
+  ../include/setup.h ../include/m_operspylog.h ../include/channel.h \
+  ../include/ircd_defs.h ../include/client.h ../include/dbuf.h \
+  ../include/hash.h ../include/irc_string.h ../include/ircd.h \
+  ../include/numeric.h ../include/s_user.h ../include/send.h
+m_operspylog.o: m_operspylog.c ../include/m_operspylog.h \
+  ../include/m_commands.h ../include/config.h ../include/setup.h \
+  ../include/client.h ../include/ircd_defs.h ../include/dbuf.h \
+  ../include/ircd.h ../include/s_serv.h ../include/irc_string.h \
+  ../include/fileio.h ../include/s_misc.h
 m_operwall.o: m_operwall.c ../include/m_commands.h ../include/config.h \
   ../include/setup.h ../include/client.h ../include/ircd_defs.h \
   ../include/dbuf.h ../include/ircd.h ../include/irc_string.h \
@@ -327,17 +337,17 @@ m_wallops.o: m_wallops.c ../include/m_commands.h ../include/config.h \
   ../include/dbuf.h ../include/ircd.h ../include/irc_string.h \
   ../include/numeric.h ../include/send.h ../include/s_user.h
 m_who.o: m_who.c ../include/m_commands.h ../include/config.h \
-  ../include/setup.h ../include/client.h ../include/ircd_defs.h \
-  ../include/dbuf.h ../include/channel.h ../include/hash.h \
-  ../include/struct.h ../include/ircd.h ../include/numeric.h \
-  ../include/s_serv.h ../include/send.h ../include/list.h \
-  ../include/irc_string.h
-m_whois.o: m_whois.c ../include/m_commands.h ../include/config.h \
-  ../include/setup.h ../include/client.h ../include/ircd_defs.h \
-  ../include/dbuf.h ../include/channel.h ../include/hash.h \
-  ../include/struct.h ../include/ircd.h ../include/numeric.h \
-  ../include/s_serv.h ../include/send.h ../include/list.h \
-  ../include/irc_string.h
+  ../include/setup.h ../include/m_operspylog.h ../include/client.h \
+  ../include/ircd_defs.h ../include/dbuf.h ../include/channel.h \
+  ../include/hash.h ../include/struct.h ../include/ircd.h \
+  ../include/numeric.h ../include/s_serv.h ../include/send.h \
+  ../include/list.h ../include/irc_string.h
+m_whois.o: m_whois.c ../include/m_operspylog.h ../include/m_commands.h \
+  ../include/config.h ../include/setup.h ../include/client.h \
+  ../include/ircd_defs.h ../include/dbuf.h ../include/channel.h \
+  ../include/hash.h ../include/struct.h ../include/ircd.h \
+  ../include/numeric.h ../include/s_serv.h ../include/send.h \
+  ../include/list.h ../include/irc_string.h
 match.o: match.c ../include/irc_string.h ../include/ircd_defs.h \
   ../include/config.h ../include/setup.h
 motd.o: motd.c ../include/m_commands.h ../include/config.h \
