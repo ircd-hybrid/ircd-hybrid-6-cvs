@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_unkline.c,v 1.40 2001/06/06 05:25:10 db Exp $
+ *   $Id: m_unkline.c,v 1.41 2001/06/25 00:56:10 db Exp $
  */
 #include "m_commands.h"
 #include "channel.h"
@@ -60,8 +60,6 @@ static int remove_tkline_match(char *,char *);
 *
 * re-worked and cleanedup for use in hybrid-5 
 * -Dianora
-*
-* Added comstuds SEPARATE_QUOTE_KLINES_BY_DATE
 *
 */
 int m_unkline (aClient *cptr,aClient *sptr,int parc,char *parv[])

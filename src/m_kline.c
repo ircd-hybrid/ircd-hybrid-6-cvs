@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.56 2001/06/17 23:51:20 greg Exp $
+ *   $Id: m_kline.c,v 1.57 2001/06/25 00:56:10 db Exp $
  */
 #include "m_kline.h"
 #include "channel.h"
@@ -249,9 +249,7 @@ WriteKline(const char *filename, aClient *sptr, aClient *rcptr,
     return;
   }
 
-#ifdef SEPARATE_QUOTE_KLINES_BY_DATE
   fchmod(out, 0660);
-#endif
 
 #ifdef SLAVE_SERVERS
   if (IsServer(sptr))
@@ -319,9 +317,7 @@ WriteDline(const char *filename, aClient *sptr,
     return;
   }
 
-#ifdef SEPARATE_QUOTE_KLINES_BY_DATE
   fchmod(out, 0660);
-#endif
 
   ircsprintf(buffer,
     "#%s!%s@%s D'd: %s:%s (%s)\n",

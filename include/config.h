@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.111 2001/06/25 00:50:00 db Exp $
+ * $Id: config.h,v 1.112 2001/06/25 00:56:05 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -175,15 +175,6 @@
  * This is useful for sites with more than one client server.
  */
 #undef SLAVE_SERVERS
-
-/* SEPARATE_QUOTE_KLINES_BY_DATE
- * If you define this, then klines will be read and written
- * to a separate kline file according to date. You =must= then run
- * a daily/nightly script to consolidate your klines, or the previous
- * days klines are lost. If you define this, LOCKFILE on kline file
- * makes no sense
- */
-#undef SEPARATE_QUOTE_KLINES_BY_DATE
 
 /* FNAME_USERLOG and FNAME_OPERLOG - logs of local USERS and OPERS
  * Define this filename to maintain a list of persons who log
@@ -1055,7 +1046,7 @@ void    free_fludees();
 #define MIN_IDLETIME 1800
 #endif
 
-#define CONFIG_H_LEVEL_6_1
+#define CONFIG_H_LEVEL_6_1_1
 
 #ifdef CRYPT_LINKS
 #  ifndef HAVE_LIBCRYPTO

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.11 2001/06/13 18:31:21 jdc Exp $
+ * $Id: m_info.h,v 1.12 2001/06/25 00:56:06 db Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -564,12 +564,6 @@ Info MyInformation[] = {
 #else
   { "SENDQ_ALWAYS", "OFF", 0, "Put All OutBound data into a SendQ" },
 #endif /* SENDQ_ALWAYS */
-
-#ifdef SEPARATE_QUOTE_KLINES_BY_DATE
-  { "SEPARATE_QUOTE_KLINES_BY_DATE", "ON", 0, "Read/Write K-lines According to Date" },
-#else
-  { "SEPARATE_QUOTE_KLINES_BY_DATE", "OFF", 0, "Read/Write K-lines According to Date" },
-#endif /* SEPARATE_QUOTE_KLINES_BY_DATE */
 
 #ifdef SERVERHIDE
   { "SERVERHIDE", "ON", 0, "Hide server info from users" },
