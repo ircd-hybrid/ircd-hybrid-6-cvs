@@ -56,7 +56,7 @@
 #endif
 
 #ifndef lint
-static char *rcs_version="$Id: mtrie_conf.c,v 1.37 1999/05/29 14:06:48 db Exp $";
+static char *rcs_version="$Id: mtrie_conf.c,v 1.38 1999/05/30 04:08:31 db Exp $";
 #endif /* lint */
 
 #define MAXPREFIX (HOSTLEN+USERLEN+15)
@@ -516,47 +516,20 @@ static aConfItem *find_user_piece(DOMAIN_PIECE *piece_ptr, int flags,
 
   wild_aconf = piece_ptr->wild_conf_ptr;
 
-  if((*user == '~'))
+  for(ptr=piece_ptr; ptr; ptr=ptr->next_piece)
     {
-      for(ptr=piece_ptr; ptr; ptr=ptr->next_piece)
+      if((aconf=ptr->conf_ptr))
 	{
-	  if((aconf=ptr->conf_ptr))
+	  if( (!matches(ptr->host_piece,host_piece)) &&
+	      (aconf->status & flags) )
 	    {
-	      if( (!matches(ptr->host_piece,host_piece)) &&
-		  (aconf->status & flags) )
+	      if(!matches(aconf->name,user))
 		{
-		  if(!strcasecmp(aconf->name,user))
-		    {
-		      first_aconf = aconf;
-		      break;
-		    }
+		  first_aconf = aconf;
+		  if(first_aconf->status & CONF_ELINE)
+		    break;
+		}
 
-		  if((aconf->name[0] == '~') &&
-		     (aconf->name[1] == '*') &&
-		     (aconf->name[2] == '\0'))
-		    {
-		      first_aconf = aconf;
-		      break;
-		    }
-		}
-	    }
-	}
-    }
-  else
-    {
-      for(ptr=piece_ptr; ptr; ptr=ptr->next_piece)
-	{
-	  if((aconf=ptr->conf_ptr))
-	    {
-	      if( (!matches(ptr->host_piece,host_piece)) &&
-		  (aconf->status & flags) )
-		{
-		  if(!strcasecmp(aconf->name,user))
-		    {
-		      first_aconf = aconf;
-		      break;
-		    }
-		}
 	    }
 	}
     }
