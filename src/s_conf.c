@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.237 2002/04/28 08:13:02 androsyn Exp $
+ *  $Id: s_conf.c,v 1.238 2003/01/05 19:47:47 gregp Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -92,6 +92,7 @@ struct ConfItem *temporary_ip_klines = NULL;
 static  char *set_conf_flags(struct ConfItem *,char *);
 static  int  oper_privs_from_string(int,char *);
 static  int  oper_flags_from_string(char *);
+static	int  interp_uline_privs(int, char *);
 
 /* externally defined functions */
 extern  void    outofmemory(void);        /* defined in list.c */
@@ -1853,6 +1854,9 @@ static char *set_conf_flags(struct ConfItem *aconf,char *tmp)
           aconf->flags |= CONF_FLAGS_IDLE_LINED;
           break;
 #endif
+              case '|':
+                aconf->flags |= CONF_FLAGS_CANFLOOD;
+                break;
         default:
           return tmp;
         }
@@ -2096,6 +2100,11 @@ static void initconf(FBFILE* file, int use_include)
           aconf->status = CONF_QUARANTINED_NICK;
           break;
 
+		case 'S': /* settable stuff */
+		case 's':
+		  aconf->status = CONF_SET;
+		  break;
+
         case 'U': /* Uphost, ie. host where client reading */
         case 'u': /* this should connect.                  */
           aconf->status = CONF_ULINE;
@@ -2172,6 +2181,16 @@ static void initconf(FBFILE* file, int use_include)
                 break;
               aconf->port = oper_privs_from_string(aconf->port,tmp);
             }
+		  else if (aconf->status & CONF_ULINE)	/* allow flags to a u-line */
+		  {
+			  /* set some defaults.. */
+			  aconf->port = ULFL_DEFAULT;
+
+			  if ((tmp = getfield(NULL)) == NULL)
+				  break;
+
+			  aconf->port = interp_uline_privs(aconf->port, tmp);
+		  }
           else
             {
               if ((tmp = getfield(NULL)) == NULL)
@@ -2201,7 +2220,7 @@ static void initconf(FBFILE* file, int use_include)
               if(classToFind && (ClassPtr(aconf) == class0))
                 {
                   sendto_realops(
-                           "Warning *** Defaulting to class 0 for class %d",
+                           "Warning: Defaulting to class 0 for class %d",
                          classToFind);
                 }
             }
@@ -2222,6 +2241,15 @@ static void initconf(FBFILE* file, int use_include)
           break;
           /* NOTREACHED */
         }
+
+	  /* if they don't put :'s after their U:server bit, we won't even get to
+	   * the port field, so catch the case where it's 0..
+	   */
+	  if (aconf->status & CONF_ULINE)
+	  {
+		  if (!(aconf->port & ULFL_READ))
+			  aconf->port = ULFL_DEFAULT;
+	  }
 
       /* For Gersh
        * make sure H: lines don't have trailing spaces!
@@ -2388,6 +2416,11 @@ static void initconf(FBFILE* file, int use_include)
             }
           }
         }
+	  else if (aconf->status == CONF_SET)
+	  {
+		dontadd = 1;
+		strncpy_irc(GlobalSetOptions.operstring, aconf->host, IRCD_BUFSIZE);
+	  }
       else if (aconf->host && (aconf->status & CONF_CLIENT))
         {
           char *p;
@@ -3010,9 +3043,56 @@ oper_privs_from_string(int int_privs,char *privs)
         int_privs |= CONF_OPER_DIE;         /* allow die */
       else if(*privs == 'd')
         int_privs &= ~CONF_OPER_DIE;        /* disallow die */
+      else if(*privs == 'J')
+        int_privs |= CONF_JUPE_BYPASS;      /* allow joins to juped chans */
+      else if(*privs == 'j')
+        int_privs &= ~CONF_JUPE_BYPASS;     /* disallow juped joins */
+#ifdef ELEET_OPERS
+	  else if(*privs == 'E')
+		int_privs |= CONF_OPER_ELEET;		/* oper is eleet! */
+	  else if(*privs == 'e')
+		int_privs &= ~CONF_OPER_ELEET;		/* oper isn't so leet.. */
+#endif /* ELEET_OPERS */
       privs++;
     }
   return(int_privs);
+}
+
+/* interp_uline_privs:
+ * parse the port field of a uline, checking for privilige flags, this is so
+ * we can have ULINES for.. say.. locops only.. or.. downward kline sharing,
+ * but not upward.. ie: hub->client but not reverse..
+ */
+static int interp_uline_privs(int before, char *privs)
+{
+	/* whee. (lowercase disables)
+	 * K	- allow klines
+	 * S	- send klines
+	 * L	- allow locops
+	 * D	- send locops
+	 */
+	while (*privs)
+	{
+		if (*privs == 'K')
+			before |= ULFL_ACCEPTKLINES;
+		else if (*privs == 'k')
+			before &= ~ULFL_ACCEPTKLINES;
+		else if (*privs == 'S')
+			before |= ULFL_SENDKLINES;
+		else if (*privs == 's')
+			before &= ~ULFL_SENDKLINES;
+		else if (*privs == 'L')
+			before |= ULFL_ACCEPTLOCOPS;
+		else if (*privs == 'l')
+			before &= ~ULFL_ACCEPTLOCOPS;
+		else if (*privs == 'D')
+			before |= ULFL_SENDLOCOPS;
+		else if (*privs == 'd')
+			before &= ~ULFL_SENDLOCOPS;
+		privs++;
+	}
+
+	return before;	/* it's not really before anymore! */
 }
 
 /*
@@ -3105,6 +3185,24 @@ char *oper_privs_as_string(aClient *cptr,int port)
   else
     *privs_ptr++ = 'd';
 
+  if(port & CONF_JUPE_BYPASS)
+    {
+      if(cptr)
+        SetOperJupeBypass(cptr);
+      *privs_ptr++ = 'J';
+    }
+  else
+    *privs_ptr++ = 'j';
+
+#ifdef ELEET_OPERS
+  if(port & CONF_OPER_ELEET)
+    {
+      if(cptr)
+        SetOperEleet(cptr);
+	  /* don't show this flag off.. */
+    }
+#endif /* ELEET_OPERS */
+
   *privs_ptr = '\0';
 
   return(privs_out);
@@ -3152,6 +3250,14 @@ oper_flags_from_string(char *flags)
         int_flags |= FLAGS_EXTERNAL;
       else if(*flags == 'z')
         int_flags |= FLAGS_OPERWALL;
+#ifdef ALLOW_OPERHIDE
+	  else if(*flags == 'p')
+		int_flags |= FLAGS_HIDDENOPER;
+#endif /* ALLOW_OPERHIDE */
+#ifdef ALLOW_UNIDLE
+	  else if(*flags == 'l')
+		int_flags |= FLAGS_UNIDLE;
+#endif /* ALLOW_UNIDLE */
       flags++;
     }
 
@@ -3201,6 +3307,18 @@ char *oper_flags_as_string(int flags)
     *flags_ptr++ = 'x';
   if(flags & FLAGS_OPERWALL)
     *flags_ptr++ = 'z';
+#ifdef ALLOW_OPERHIDE
+  if(flags & FLAGS_HIDDENOPER)
+	*flags_ptr++ = 'p';
+#endif /* ALLOW_OPERHIDE */
+#ifdef ALLOW_UNIDLE
+  if(flags & FLAGS_UNIDLE)
+	*flags_ptr++ = 'l';
+#endif /* ALLOW_UNIDLE */
+#ifdef ELEET_BY_FLAG
+  if (flags & FLAGS_ELEET)
+	*flags_ptr++ = 'e';
+#endif /* ELEET_BY_FLAG */
   *flags_ptr = '\0';
 
   return(flags_out);

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.153 2002/02/17 05:58:09 lusky Exp $
+ * $Id: config.h,v 1.154 2003/01/05 19:47:44 gregp Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -368,6 +368,13 @@
  */
 #undef  WHOIS_NOTICE
 
+/* REMOTE_WHOIS_NOTICE - Extension to above to allow remote whois requests
+ * (/whois nick nick) to be seen by local opers.  This gives you more
+ * visibility to who /whois's you, but not total.
+ * (both of these must be on for anything to happen)
+ */
+#undef REMOTE_WHOIS_NOTICE
+
 /* WHOIS_WAIT - minimum seconds between remote use of WHOIS before
  * max use count is reset
  */
@@ -406,6 +413,18 @@
  */
 #undef  TRUE_NO_OPER_FLOOD
 
+/* warning:  the below three defines are provided for testing only.
+ *           i'm not responsible if you turn them on on efnet.
+ *           that being said to cover my ass....
+ */
+
+/* ALLOW_OPERHIDE - allow opers to go +p to hide from /stats p
+ * (but only for users, opers anywhere will still see everyone)
+ *
+ * this is useful for TCM's, BOPM's, and people having bad days.
+ */
+#undef ALLOW_OPERHIDE
+
 /* SHOW_INVISIBLE_LUSERS - show invisible clients in LUSERS
  * As defined this will show the correct invisible count for anyone who does
  * LUSERS on your server. On a large net this doesnt mean much, but on a
@@ -439,8 +458,9 @@
  * OPER_UMODES LOCOP_UMODES - set these to be the initial umodes when OPER'ing
  * These can be over-ridden in ircd.conf file, with flags in last O field
  */
-#define OPER_UMODES   (FLAGS_OPER|FLAGS_WALLOP|FLAGS_SERVNOTICE|FLAGS_OPERWALL)
-#define LOCOP_UMODES   (FLAGS_LOCOP|FLAGS_WALLOP|FLAGS_SERVNOTICE)
+#define OPER_UMODES   (FLAGS_OPER|FLAGS_WALLOP|FLAGS_SERVNOTICE|FLAGS_OPERWALL\
+						|FLAGS_SPY)
+#define LOCOP_UMODES   (FLAGS_LOCOP|FLAGS_WALLOP|FLAGS_SERVNOTICE|FLAGS_SPY)
 
 /* MAXIMUM LINKS - max links for class 0 if no Y: line configured
  *
@@ -686,6 +706,28 @@
  * if you are not an efnet admin - we recommend you enable most of these.. 
  * --fl_
  */
+
+/* this isn't approved on efnet, obviously.  it also doesn't fit under fl_'s
+ * above comment.  read: don't enable unless you're sure you know what this is.
+ */
+/* ELEET_OPERS - add an 'E' flag to ircd.conf/olines that makes an oper
+ * 'eleet', an 'eleet' oper can do the following:
+ *   - see all modes (+lk) for all channels (even those they are not on)
+ *   - use /who to search through all users, +i or not
+ *   - use /list to find +sp channels
+ *   - see +s channels on /whois (with % prefixes)
+ */
+#undef ELEET_OPERS
+
+#ifdef ELEET_OPERS
+#define ELEET_BY_FLAG		/* I don't think this works with it off.. */
+#endif
+
+/* ALLOW_UNIDLE - allow opers to go +l to have their idle time not
+ * reset *ever* -- this is useful for who knows what reason, but is here
+ * nonetheless.
+ */
+#undef ALLOW_UNIDLE
 
 /* Ignore bogus timestamps from other servers. Yes this will desync
  * the network, but it will allow chanops to resync with a valid non TS 0

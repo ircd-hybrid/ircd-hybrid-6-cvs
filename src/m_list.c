@@ -3,7 +3,7 @@
  *   Copyright (C) 1990 Jarkko Oikarinen and
  *                      University of Oulu, Co Center
  *
- * $Id: m_list.c,v 1.3 2000/11/21 06:49:30 lusky Exp $ 
+ * $Id: m_list.c,v 1.4 2003/01/05 19:47:47 gregp Exp $ 
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -78,19 +78,30 @@ int     m_list(struct Client *cptr,
         for (j=0, chptr=(struct Channel*)(hash_get_channel_block(i).list);
              (chptr) && (j<hash_get_channel_block(i).links); chptr=chptr->hnextch, j++) {
           if (j<progress2) continue;  /* wind up to listprogress2 */
-          if (!sptr->user ||
-              (SecretChannel(chptr) && !IsMember(sptr, chptr)))
-            continue;
-          sendto_one(sptr, form_str(RPL_LIST), me.name, parv[0],
-                     ShowChannel(sptr, chptr)?chptr->chname:"*",
-                     chptr->users,
-                     ShowChannel(sptr, chptr)?chptr->topic:"");
-          if (IsSendqPopped(sptr)) {
-            /* we popped again! : P */
-            sptr->listprogress=i;
-            sptr->listprogress2=j;
-            return 0;
-          }
+		  if (cptr->user && (!SecretChannel(chptr) || IsMember(sptr, chptr)
+#ifdef ELEET_OPERS
+												 || IsOperEleet(sptr)
+#endif /* ELEET_OPERS */
+			))
+		  {
+			if (ShowChannel(sptr, chptr)
+#ifdef ELEET_OPERS
+				|| IsOperEleet(sptr)
+#endif /* ELEET_OPERS */
+				)
+              sendto_one(sptr, form_str(RPL_LIST), me.name, parv[0],
+                         chptr->chname, chptr->users, chptr->topic);
+			else
+              sendto_one(sptr, form_str(RPL_LIST), me.name, parv[0],
+                         "*", chptr->users, "");
+
+            if (IsSendqPopped(sptr)) {
+              /* we popped again! : P */
+              sptr->listprogress=i;
+              sptr->listprogress2=j;
+              return 0;
+            }
+		  }
         }
         sptr->listprogress2 = 0;
       }
@@ -115,22 +126,33 @@ int     m_list(struct Client *cptr,
       for (i=0; i<CH_MAX; i++) {
         for (j=0, chptr = (struct Channel*)(hash_get_channel_block(i).list);
              (chptr) && (j<hash_get_channel_block(i).links); chptr = chptr->hnextch, j++) {
-          if (!sptr->user ||
-              (SecretChannel(chptr) && !IsMember(sptr, chptr)))
-            continue;
-          /* EVIL!  sendto_one doesnt return status of any kind!  Forcing us
-             to make up yet another stupid client flag (we could just
-             negate the DOING_LIST flag, but that might confuse people) -good*/
-          sendto_one(sptr, form_str(RPL_LIST), me.name, parv[0],
-                     ShowChannel(sptr, chptr)?chptr->chname:"*",
-                     chptr->users,
-                     ShowChannel(sptr, chptr)?chptr->topic:"");
-          if (IsSendqPopped(sptr)) {
-            /* GAAH!  We popped our sendq.  Mark our location in the /list */
-            sptr->listprogress=i;
-            sptr->listprogress2=j;
-            return 0;
-          }
+		  if (cptr->user && (!SecretChannel(chptr) || IsMember(sptr, chptr) 
+#ifdef ELEET_OPERS
+											|| IsOperEleet(sptr)
+#endif /* ELEET_OPERS */
+			))
+		  {
+            /* EVIL!  sendto_one doesnt return status of any kind!  Forcing us
+               to make up yet another stupid client flag (we could just
+               negate the DOING_LIST flag, but that might confuse people) -good*/
+			if (ShowChannel(sptr, chptr) 
+#ifdef ELEET_OPERS
+				|| IsOperEleet(sptr)
+#endif /* ELEET_OPERS */
+			  )
+              sendto_one(sptr, form_str(RPL_LIST), me.name, parv[0],
+                         chptr->chname, chptr->users, chptr->topic);
+			else
+              sendto_one(sptr, form_str(RPL_LIST), me.name, parv[0],
+                         "*", chptr->users, "");
+
+            if (IsSendqPopped(sptr)) {
+              /* GAAH!  We popped our sendq.  Mark our location in the /list */
+              sptr->listprogress=i;
+              sptr->listprogress2=j;
+              return 0;
+            }
+		  }
         }
       
       }
@@ -153,9 +175,17 @@ int     m_list(struct Client *cptr,
   if(name)
     {
       chptr = hash_find_channel(name, NullChn);
-      if (chptr && ShowChannel(sptr, chptr) && sptr->user)
+      if (chptr && sptr->user && (ShowChannel(sptr, chptr)
+#ifdef ELEET_OPERS
+			|| IsOperEleet(sptr)
+#endif /* ELEET_OPERS */
+		))
         sendto_one(sptr, form_str(RPL_LIST), me.name, parv[0],
-                   ShowChannel(sptr,chptr) ? name : "*",
+                   (ShowChannel(sptr,chptr) 
+#ifdef ELEET_OPERS
+						|| IsOperEleet(sptr)
+#endif /* ELEET_OPERS */
+						) ? name : "*",
                    chptr->users, chptr->topic);
       /*      name = strtoken(&p, (char *)NULL, ","); */
     }

@@ -2,7 +2,7 @@
  * send.h
  * Copyright (C) 1999 Patrick Alken
  *
- * $Id: send.h,v 1.15 2002/02/02 20:58:27 db Exp $
+ * $Id: send.h,v 1.16 2003/01/05 19:47:45 gregp Exp $
  */
 
 #ifndef INCLUDED_send_h
@@ -25,7 +25,9 @@ extern  void sendto_channel_type_notice(struct Client *,
 extern  void send_knock(struct Client *, struct Client *, 
                         struct Channel *, int, char *, char *);
 
-extern  int sendto_slaves(struct Client *, char *, char *, int, char **);
+#ifdef SLAVE_SERVERS
+extern  int sendto_slaves(struct Client *, int, char *, char *, int, char **);
+#endif /* SLAVE_SERVERS */
 
 extern  void sendto_one(struct Client *, const char *, ...);
 extern  void sendto_channel_butone(struct Client *, struct Client *, 

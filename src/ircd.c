@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.165 2002/11/28 04:18:01 db Exp $
+ * $Id: ircd.c,v 1.166 2003/01/05 19:47:47 gregp Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -573,6 +573,9 @@ static void initialize_global_set_options(void)
   MAXCLIENTS = MAX_CLIENTS;
   NOISYHTM = NOISY_HTM;
   GlobalSetOptions.autoconn = 1;
+
+  /* wheeeee? -gnp */
+  strcpy(GlobalSetOptions.operstring, "is an IRC Operator");
 
 #ifdef FLUD
   FLUDNUM = FLUD_NUM;

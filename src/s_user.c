@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.248 2002/01/23 18:39:08 androsyn Exp $
+ *  $Id: s_user.c,v 1.249 2003/01/05 19:47:48 gregp Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -51,7 +51,7 @@
 
 #ifdef ANTI_DRONE_FLOOD
 #include "dbuf.h"
-#endif
+#endif /* ANTI_DRONE_FLOOD */
 
 #include <string.h>
 #include <stdlib.h>
@@ -78,12 +78,21 @@ static FLAG_ITEM user_modes[] =
   {FLAGS_BOTS,  'b'},
   {FLAGS_CCONN, 'c'},
   {FLAGS_DEBUG, 'd'},
+#ifdef ELEET_BY_FLAG
+  {FLAGS_ELEET,	'e'},
+#endif /* ELEET_BY_FLAG */
   {FLAGS_FULL,  'f'},
   {FLAGS_INVISIBLE, 'i'},
   {FLAGS_SKILL, 'k'},
+#ifdef ALLOW_UNIDLE
+  {FLAGS_UNIDLE, 'l'},
+#endif /* ALLOW_UNIDLE */
   {FLAGS_NCHANGE, 'n'},
   {FLAGS_OPER, 'o'},
   {FLAGS_LOCOP, 'O'},
+#ifdef ALLOW_OPERHIDE
+  {FLAGS_HIDDENOPER, 'p'},
+#endif /* ALLOW_OPERHIDE */
   {FLAGS_REJ, 'r'},
   {FLAGS_SERVNOTICE, 's'},
   {FLAGS_WALLOP, 'w'},
@@ -134,18 +143,30 @@ static int user_modes_from_c_to_bitmask[] =
   FLAGS_BOTS,   /* b */
   FLAGS_CCONN,  /* c */
   FLAGS_DEBUG,  /* d */
-  0,            /* e */
+#ifdef ELEET_BY_FLAG
+  FLAGS_ELEET,	/* e */
+#else /* ELEET_BY_FLAG
+  0,			/* e */
+#endif /* ELEET_BY_FLAG */
   FLAGS_FULL,   /* f */
   0,            /* g */
   0,            /* h */
   FLAGS_INVISIBLE, /* i */
   0,            /* j */
   FLAGS_SKILL,  /* k */
-  0,            /* l */
+#ifdef ALLOW_UNIDLE
+  FLAGS_UNIDLE, /* l */
+#else /* ALLOW_UNIDLE */
+  0,			/* l */
+#endif /* ALLOW_UNIDLE */
   0,            /* m */
   FLAGS_NCHANGE, /* n */
   FLAGS_OPER,   /* o */
-  0,            /* p */
+#ifdef ALLOW_OPERHIDE
+  FLAGS_HIDDENOPER, /* p */
+#else /* ALLOW_OPERHIDE */
+  0,			/* p */
+#endif /* ALLOW_OPERHIDE */
   0,            /* q */
   FLAGS_REJ,    /* r */
   FLAGS_SERVNOTICE, /* s */
@@ -186,28 +207,44 @@ void show_opers(struct Client *cptr)
 
   for(cptr2 = oper_cptr_list; cptr2; cptr2 = cptr2->next_oper_client)
     {
-      ++j;
-      if (MyClient(cptr) && IsAnOper(cptr))
-        {
-          sendto_one(cptr, ":%s %d %s :[%c][%s] %s (%s@%s) Idle: %d",
-                     me.name, RPL_STATSDEBUG, cptr->name,
-                     IsOper(cptr2) ? 'O' : 'o',
-                     oper_privs_as_string(cptr2,
-                                          cptr2->confs->value.aconf->port),
-                     cptr2->name,
-                     cptr2->username, cptr2->host,
-                     CurrentTime - cptr2->user->last);
-        }
-      else
-        {
+	  if (IsAnOper(cptr))
+	  {
+		if (MyClient(cptr))
+		{
+		  sendto_one(cptr, ":%s %d %s :[%c][%s] %s (%s@%s) Idle: %d",
+					 me.name, RPL_STATSDEBUG, cptr->name,
+					 IsOper(cptr2) ? 'O' : 'o',
+					 oper_privs_as_string(cptr2, cptr2->confs->value.aconf->port),
+					 cptr2->name, cptr2->username, cptr2->host,
+					 CurrentTime - cptr2->user->last);
+		}
+		else
+		{
           sendto_one(cptr, ":%s %d %s :[%c] %s (%s@%s) Idle: %d",
                      me.name, RPL_STATSDEBUG, cptr->name,
                      IsOper(cptr2) ? 'O' : 'o',
-                     cptr2->name,
-                     cptr2->username, cptr2->host,
+                     cptr2->name, cptr2->username, cptr2->host,
                      CurrentTime - cptr2->user->last);
-        }
-    }
+		}
+		j++;
+	  }
+	  else
+	  {
+#ifdef ALLOW_OPERHIDE
+		if (!IsHiddenOper(cptr2))
+		{
+#endif /* ALLOW_OPERHIDE */
+          sendto_one(cptr, ":%s %d %s :[%c] %s (%s@%s) Idle: %d",
+                     me.name, RPL_STATSDEBUG, cptr->name,
+                     IsOper(cptr2) ? 'O' : 'o',
+                     cptr2->name, cptr2->username, cptr2->host,
+                     CurrentTime - cptr2->user->last);
+		  j++;
+#ifdef ALLOW_OPERHIDE
+		}
+#endif /* ALLOW_OPERHIDE */
+	  }
+	}
 
   sendto_one(cptr, ":%s %d %s :%d OPER%s", me.name, RPL_STATSDEBUG,
              cptr->name, j, (j==1) ? "" : "s");
@@ -1074,6 +1111,13 @@ report_and_set_user_flags(aClient *sptr,aConfItem *aconf)
          ":%s NOTICE %s :*** You are exempt from K/D/G lines. congrats.",
                  me.name,sptr->name);
     }
+  if(IsConfCanFlood(aconf))
+      {
+        SetCanFlood(sptr);
+        sendto_one(sptr,
+                               ":%s NOTICE %s :*** You can flood, go nuts!",
+                               me.name, sptr->name);
+      }
 #ifdef GLINES
   else if(IsConfExemptGline(aconf))
     {
@@ -2048,14 +2092,17 @@ int user_mode(aClient *cptr, aClient *sptr, int parc, char *parv[])
                   aClient *prev_cptr = (aClient *)NULL;
                   aClient *cur_cptr = oper_cptr_list;
 
+#ifdef OPER_ONLY_UMODES
+				  sptr->umodes &= ~(OPER_ONLY_UMODES);
+#endif /* OPER_ONLY_UMODES */
+#ifdef ELEET_BY_FLAG
+				  sptr->umodes &= ~(FLAGS_ELEET);
+#endif /* ELEET_BY_FLAG */
+
                   fdlist_delete(sptr->fd, FDL_OPER | FDL_BUSY);
                   detach_conf(sptr,sptr->confs->value.aconf);
-                  sptr->flags2 &= ~(FLAGS2_OPER_GLOBAL_KILL|
-                                    FLAGS2_OPER_REMOTE|
-                                    FLAGS2_OPER_UNKLINE|
-                                    FLAGS2_OPER_GLINE|
-                                    FLAGS2_OPER_N|
-                                    FLAGS2_OPER_K);
+                  sptr->flags2 &= ~(FLAGS2_ALL_OPERFLAGS);
+
                   while(cur_cptr)
                     {
                       if(sptr == cur_cptr) 
@@ -2084,7 +2131,14 @@ int user_mode(aClient *cptr, aClient *sptr, int parc, char *parv[])
         case '\t' :
           break;
         default :
-          if( (flag = user_modes_from_c_to_bitmask[(unsigned char)*m]))
+          if( (flag = user_modes_from_c_to_bitmask[(unsigned char)*m])
+#ifdef OPER_ONLY_UMODES
+				&& (IsAnOper(sptr) || !(flag & (OPER_ONLY_UMODES)))
+#endif /* OPER_ONLY_UMODES */
+#ifdef ELEET_BY_FLAG
+				&& (IsConfOperEleet(sptr) || !(flag & (FLAGS_ELEET)))
+#endif /* ELEET_BY_FLAG */
+				)
             {
               if (what == MODE_ADD)
                 sptr->umodes |= flag;
