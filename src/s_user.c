@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.46 1998/12/23 21:12:11 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.47 1998/12/24 06:29:42 db Exp $";
 
 #endif
 
@@ -3027,8 +3027,8 @@ int	m_kill(aClient *cptr,
 	    me.name, parv[0], "KILL");
 	    return 0;
 	    fix this damn kill parameter nonsense... Mika   }*/
-	if (strlen(path) > (size_t) TOPICLEN)
-	  path[TOPICLEN] = '\0';
+	if (strlen(path) > (size_t) KILLLEN)
+	  path[KILLLEN] = '\0';
     }
 
   if (!(acptr = find_client(user, NULL)))
@@ -3320,11 +3320,11 @@ int	m_pong(aClient *cptr,
   sptr->flags &= ~FLAGS_PINGSENT;
 
   /* Now attempt to route the PONG, comstud pointed out routable PING
-     is used for SPING.  routable PING should also probably be left in
-        -Dianora
-     That being the case, we will route, but only for registered clients (a
-     case can be made to allow them only from servers). -Shadowfax
-  */
+   * is used for SPING.  routable PING should also probably be left in
+   *        -Dianora
+   * That being the case, we will route, but only for registered clients (a
+   * case can be made to allow them only from servers). -Shadowfax
+   */
   if (!BadPtr(destination) && mycmp(destination, me.name) != 0
 		&& IsRegistered(sptr))
     {
