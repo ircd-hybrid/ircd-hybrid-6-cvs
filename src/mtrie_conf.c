@@ -43,7 +43,7 @@
  *
  * Diane Bruce -db (db@db.net)
  *
- * $Id: mtrie_conf.c,v 1.87 2001/12/19 23:02:06 leeh Exp $
+ * $Id: mtrie_conf.c,v 1.88 2002/03/22 00:04:57 androsyn Exp $
  */
 #include "mtrie_conf.h"
 #include "class.h"
@@ -1678,6 +1678,7 @@ static void clear_sub_mtrie(DOMAIN_LEVEL *dl_ptr)
             }
             
           next_dp_ptr = dp_ptr->next_piece;
+          MyFree(dp_ptr->host_piece);
           MyFree(dp_ptr);
         }
     }
