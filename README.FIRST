@@ -1,6 +1,6 @@
 ircd-hybrid-6 README
 --------------------
-$Id: README.FIRST,v 1.8 2000/06/12 05:33:34 lusky Exp $
+$Id: README.FIRST,v 1.9 2000/06/22 05:40:52 lusky Exp $
 
 If you don't read this first, we won't help you.
 :-)
@@ -29,4 +29,9 @@ SUPPORT PLATFORMS: this code should compile without any warnings
 on FreeBSD 3.x, RedHat 6.2, and Solaris 7/sparc.  Please let us know
 if you find otherwise.  It probably does not compile on AIX, IRIX,
 or libc5 Linux.
+
+CYGWIN USERS: This code is known to compile and run somewhat under
+Cygwin 1.1.2.  You will need BIND-4.9.7 and libcrypt to compile hybrid
+under Cygwin.  I have ported BIND 4.9.7 to Cygwin and written a standalone
+md5-based libcrypt that I will make available seperately.
 

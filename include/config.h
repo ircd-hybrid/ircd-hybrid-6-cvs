@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.78 2000/04/24 02:21:06 lusky Exp $
+ * $Id: config.h,v 1.79 2000/06/22 05:40:54 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -53,6 +53,11 @@
 
 #define HARD_FDLIMIT_   256
 #define INIT_MAXCLIENTS 200
+
+#if defined(__CYGWIN__)
+#define HARD_FDLIMIT_   25
+#define INIT_MAXCLIENTS 20
+#endif /* __CYGWIN__ */
 
 /*
  * This is how many 'buffer connections' we allow... 
@@ -416,10 +421,6 @@
  * and obtain their permission to send messages to the system log files.
  */
 #define USE_SYSLOG
-
-#if defined(__CYGWIN__)
-#undef USE_SYSLOG
-#endif
 
 #ifdef  USE_SYSLOG
 /* SYSLOG_KILL SYSLOG_SQUIT SYSLOG_CONNECT SYSLOG_USERS SYSLOG_OPER
