@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_whois.c,v 1.10 2003/06/11 13:20:14 ievil Exp $
+ *   $Id: m_whois.c,v 1.11 2003/06/12 23:53:06 ievil Exp $
  */
 
 #include "m_commands.h"
@@ -283,6 +283,12 @@ int     m_whois(struct Client *cptr,
           if (IsAnOper(acptr))
             sendto_one(sptr, form_str(RPL_WHOISOPERATOR),
                        me.name, parv[0], name);
+
+#ifndef HIDDEN_ADMIN
+          if (IsSetOperAdmin(acptr) && (acptr->umodes & FLAGS_ADMIN))
+                      sendto_one(sptr, form_str(RPL_WHOISADMIN), me.name, parv[0], name);
+#endif /* #ifndef HIDDEN_ADMIN */
+
 #ifdef WHOIS_NOTICE
           if ((MyOper(acptr)) && ((acptr)->umodes & FLAGS_SPY) &&
 #ifndef SHOW_REMOTE_WHOIS
@@ -430,6 +436,11 @@ int     m_whois(struct Client *cptr,
           if (IsAnOper(acptr))
             sendto_one(sptr, form_str(RPL_WHOISOPERATOR),
                        me.name, parv[0], name);
+#ifndef HIDDEN_ADMIN
+          if (IsSetOperAdmin(acptr) && (acptr->umodes & FLAGS_ADMIN))
+            sendto_one(sptr, form_str(RPL_WHOISADMIN), me.name, parv[0], name);
+#endif /* #ifdef HIDDEN_ADMIN */
+
 #ifdef WHOIS_NOTICE
           if ((MyOper(acptr)) && ((acptr)->umodes & FLAGS_SPY) &&
 #ifndef SHOW_REMOTE_WHOIS

@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.243 2003/06/10 01:12:04 ievil Exp $
+ *  $Id: s_conf.c,v 1.244 2003/06/12 23:53:06 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -3022,6 +3022,11 @@ oper_privs_from_string(int int_privs,char *privs)
         int_privs |= CONF_OPER_STATSPHIDE;  /* allow stats P hide */
       else if(*privs == 'p')
         int_privs &= ~CONF_OPER_STATSPHIDE; /* disallow stats P hide */
+      else if(*privs == 'A')
+        int_privs |= CONF_OPER_ADMIN;         /* admin */
+      else if(*privs == 'a')
+        int_privs &= ~CONF_OPER_ADMIN;        /* not admin */
+
       privs++;
     }
   return(int_privs);
@@ -3044,6 +3049,15 @@ char *oper_privs_as_string(aClient *cptr,int port)
 
   privs_ptr = privs_out;
   *privs_ptr = '\0';
+
+  if(port & CONF_OPER_ADMIN)
+    {
+      if(cptr)
+        SetOperAdmin(cptr);
+      *privs_ptr++ = 'A';
+    }
+  else
+    *privs_ptr++ = 'a';
 
   if(port & CONF_OPER_GLINE)
     {
@@ -3126,6 +3140,8 @@ char *oper_privs_as_string(aClient *cptr,int port)
   else
     *privs_ptr++ = 'd';
 
+
+
   *privs_ptr = '\0';
 
   return(privs_out);
@@ -3167,6 +3183,10 @@ oper_flags_from_string(char *flags)
         int_flags |= FLAGS_DEBUG;
       else if(*flags == 'n')
         int_flags |= FLAGS_NCHANGE;
+      else if(*flags == 'a')
+        int_flags |= FLAGS_ADMIN;
+      else if(*flags == 'p')
+        int_flags |= FLAGS_STATSPHIDE;
       else if(*flags == 'b')
         int_flags |= FLAGS_BOTS;
       else if(*flags == 'x')
@@ -3216,6 +3236,10 @@ char *oper_flags_as_string(int flags)
     *flags_ptr++ = 'd';
   if(flags & FLAGS_NCHANGE)
     *flags_ptr++ = 'n';
+  if(flags & FLAGS_ADMIN)
+    *flags_ptr++ = 'a';
+  if(flags & FLAGS_STATSPHIDE)
+    *flags_ptr++ = 'p';
   if(flags & FLAGS_BOTS)
     *flags_ptr++ = 'b';
   if(flags & FLAGS_EXTERNAL)

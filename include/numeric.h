@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: numeric.h,v 1.20 2001/12/13 23:16:34 leeh Exp $
+ * $Id: numeric.h,v 1.21 2003/06/12 23:53:03 ievil Exp $
  */
 #ifndef INCLUDED_numeric_h
 #define INCLUDED_numeric_h
@@ -214,6 +214,10 @@ extern const char* form_str(int);
 #define RPL_TEXT             304
 #define RPL_UNAWAY           305
 #define RPL_NOWAWAY          306
+
+#ifndef HIDDEN_ADMIN
+#define RPL_WHOISADMIN       308
+#endif
 
 #define RPL_WHOISUSER        311
 #define RPL_WHOISSERVER      312

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.254 2003/06/10 01:12:04 ievil Exp $
+ *  $Id: s_user.c,v 1.255 2003/06/12 23:53:06 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -75,6 +75,7 @@ static int tell_user_off(aClient *,char **);
 
 static FLAG_ITEM user_modes[] =
 { 
+  {FLAGS_ADMIN, 'a'},
   {FLAGS_BOTS,  'b'},
   {FLAGS_CCONN, 'c'},
   {FLAGS_DEBUG, 'd'},
@@ -131,7 +132,7 @@ static int user_modes_from_c_to_bitmask[] =
   0,            /* Z 0x5A */
   0, 0, 0, 0, 0, /* 0x5F */ 
   /* 0x60 */       0,
-  0,            /* a */
+  FLAGS_ADMIN,  /* a */
   FLAGS_BOTS,   /* b */
   FLAGS_CCONN,  /* c */
   FLAGS_DEBUG,  /* d */
@@ -2016,7 +2017,7 @@ int user_mode(aClient *cptr, aClient *sptr, int parc, char *parv[])
               if(!IsAnOper(sptr))
                 break;
 
-              sptr->umodes &= ~(FLAGS_OPER|FLAGS_LOCOP|FLAGS_STATSPHIDE);
+              sptr->umodes &= ~(FLAGS_OPER|FLAGS_LOCOP|FLAGS_STATSPHIDE|FLAGS_ADMIN);
 
               Count.oper--;
 
@@ -2081,6 +2082,13 @@ int user_mode(aClient *cptr, aClient *sptr, int parc, char *parv[])
       sendto_one(sptr,":%s NOTICE %s :*** You need oper and N flag for +n",
                  me.name,parv[0]);
       sptr->umodes &= ~FLAGS_NCHANGE; /* only tcm's really need this */
+    }
+
+  if ((sptr->umodes & FLAGS_ADMIN) && !IsSetOperAdmin(sptr))
+    {
+      sendto_one(sptr,":%s NOTICE %s :*** You need oper and A flag for +a",
+                me.name,parv[0]);
+      sptr->umodes &= ~FLAGS_ADMIN; /* only for admins ! */
     }
 
   if ((sptr->umodes & FLAGS_STATSPHIDE) && !SetOperStatsPHide(sptr))

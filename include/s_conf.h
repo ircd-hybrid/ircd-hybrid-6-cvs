@@ -18,7 +18,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *   $Id: s_conf.h,v 1.65 2003/06/10 01:12:02 ievil Exp $
+ *   $Id: s_conf.h,v 1.66 2003/06/12 23:53:04 ievil Exp $
  */
 
 #ifndef INCLUDED_config_h
@@ -161,7 +161,7 @@ typedef struct QlineItem {
 #define CONF_OPER_REHASH       64
 #define CONF_OPER_DIE         128
 #define CONF_OPER_STATSPHIDE  256
-
+#define CONF_OPER_ADMIN       512
 
 typedef struct
 {

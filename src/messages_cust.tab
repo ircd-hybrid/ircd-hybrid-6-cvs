@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: messages_cust.tab,v 1.25 2003/05/04 17:52:45 db Exp $
+ * $Id: messages_cust.tab,v 1.26 2003/06/12 23:53:06 ievil Exp $
  *
  */
 /* 
@@ -336,7 +336,11 @@ static  char *  replies[] = {
 /* 305 RPL_UNAWAY, */   ":%s 305 %s :OK, you're not /away anymore. Did you have fun?",
 /* 306 RPL_NOWAWAY, */  ":%s 306 %s :OK, you're /away now. Hurry back!",
 /* 307 */       NULL,
+#ifndef HIDDEN_ADMIN
+/* 308 RPL_WHOISADMIN */       ":%s 308 %s %s :is a Smurf Magnet (IRC Administrator)",
+#else
 /* 308 */       NULL,
+#endif
 /* 309 */       NULL,
 /* 310 */       NULL,
 /* 311 RPL_WHOISUSER, */        ":%s 311 %s %s %s %s * :%s",
