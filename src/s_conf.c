@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.166 1999/08/06 04:26:26 lusky Exp $
+ *  $Id: s_conf.c,v 1.167 1999/08/10 02:46:26 lusky Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -383,7 +383,7 @@ void report_specials(struct Client* sptr, int flags, int numeric)
  */
 
 int attach_Iline(aClient* cptr, struct hostent* hp,
-                 const char* sockhost, const char* username, char **preason)
+                 const char* username, char **preason)
 {
   struct ConfItem* aconf;
   struct ConfItem* gkill_conf;
@@ -405,7 +405,7 @@ int attach_Iline(aClient* cptr, struct hostent* hp,
     }
   else
     {
-      strncpy_irc(host, sockhost, HOSTLEN);
+      strncpy_irc(host, cptr->sockhost, HOSTLEN);
       host[HOSTLEN] = '\0';
     }
 

@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu, Computing Center and Jarkko Oikarinen
  *
- * $Id: list.c,v 1.39 1999/08/01 06:47:19 tomh Exp $
+ * $Id: list.c,v 1.40 1999/08/10 02:46:24 lusky Exp $
  */
 #include "struct.h"
 #include "blalloc.h"
@@ -196,8 +196,8 @@ void _free_user(anUser* user, aClient* cptr)
         {
           sendto_ops("list.c couldn't BlockHeapFree(free_anUsers,user) user = %lX", user );
           sendto_ops("Please report to the hybrid team! ircd-hybrid@the-project.org");
-#if defined(USE_SYSLOG) && defined(SYSLOG_BLOCK_ALLOCATOR)
-          syslog(LOG_DEBUG,"list.c couldn't BlockHeapFree(free_anUsers,user) user = %lX", (long unsigned int) user);
+#ifdef SYSLOG_BLOCK_ALLOCATOR 
+          log(L_DEBUG,"list.c couldn't BlockHeapFree(free_anUsers,user) user = %lX", (long unsigned int) user);
 #endif
         }
 

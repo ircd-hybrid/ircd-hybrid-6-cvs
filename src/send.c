@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.76 1999/08/01 06:47:24 tomh Exp $
+ *   $Id: send.c,v 1.77 1999/08/10 02:46:27 lusky Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -33,6 +33,7 @@
 #include "s_zip.h"
 #include "sprintf_irc.h"
 #include "struct.h"
+#include "s_conf.h"
 
 #include <stdio.h>
 #include <string.h>

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_wallops.c,v 1.1 1999/07/29 07:11:49 tomh Exp $
+ *   $Id: m_wallops.c,v 1.2 1999/08/10 02:46:25 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -122,13 +122,16 @@ int m_wallops(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
     {
 
 #ifdef PACE_WALLOPS
-      if( MyClient(sptr) && ((LastUsedWallops + WALLOPS_WAIT) > CurrentTime) )
+      if( MyClient(sptr) )
         {
-          sendto_one(sptr, ":%s NOTICE %s :Oh, one of those annoying opers who doesn't know how to use a channel",
+          if( (LastUsedWallops + WALLOPS_WAIT) > CurrentTime )
+            { 
+          	sendto_one(sptr, ":%s NOTICE %s :Oh, one of those annoying opers who doesn't know how to use a channel",
                      me.name,parv[0]);
-          return 0;
+          	return 0;
+            }
+          LastUsedWallops = CurrentTime;
         }
-      LastUsedWallops = CurrentTime;
 #endif
 
       send_operwall(sptr, "WALLOPS", message);

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_locops.c,v 1.1 1999/07/30 04:01:32 tomh Exp $
+ *   $Id: m_locops.c,v 1.2 1999/08/10 02:46:24 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -29,6 +29,8 @@
 #include "numeric.h"
 #include "send.h"
 #include "s_user.h"
+#include "s_conf.h"
+#include "hash.h"
 
 /*
  * m_functions execute protocol messages on this server:
