@@ -1,3 +1,5 @@
+$Id: README.small_nets,v 1.6 2002/09/14 00:17:55 db Exp $
+
   On a stand alone server, make sure you #undef NO_JOIN_ON_SPLIT in
 config.h Otherwise, you will have trouble with non opered clients
 joining new channels.
@@ -5,8 +7,8 @@ joining new channels.
 IMPORTANT NOTE:  INITIAL_DBUFS is now 16MB in the default.  Small
 networks MUST change this value to avoid wasting considerable memory.
 
-  ircd-hybrid has been primarily geared for EFnet, where 60k clients
-is becoming the norm. But for smaller non EFnet nets, thats going
+  ircd-hybrid has been primarily geared for EFnet, where 90k clients
+is the norm. But for smaller non EFnet nets, thats going
 to cost your server memory, because it will be expecting the large numbers
 of clients on EFnet that will never happen on a smaller net.
 
@@ -31,7 +33,7 @@ by modifying the file "list.c" in src
    rather than 30k times -Dianora
 */
 
-#define CLIENTS_PREALLOCATE 1024
+#define USERS_PREALLOCATE 1024
 
   I suggest you trim these numbers as needed, to fit your estimated
 needs. You could use 64 for each for example, on a server that 

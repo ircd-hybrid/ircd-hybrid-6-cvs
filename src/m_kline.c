@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.73 2002/08/21 01:50:24 db Exp $
+ *   $Id: m_kline.c,v 1.74 2002/09/14 00:17:56 db Exp $
  */
 #include "m_commands.h"
 #include "m_kline.h"
@@ -536,6 +536,8 @@ m_kline(struct Client *cptr,
 
       if (!*host)               /* duh. no host found, assume its '*' host */
         host = "*";
+      if (!*user)               /* The oper gave us a "@host" kline */
+        user = "*";
       strncpy_irc(tempuser, user, USERLEN + 1); /* allow for '*' in front */
       tempuser[USERLEN + 1] = '\0';
       strncpy_irc(temphost, host, HOSTLEN);
