@@ -1,3 +1,19 @@
+androsyn    2003/04/06 17:10:38 EDT	(20030406_0)
+
+  Modified files:
+    include              res.h 
+    src                  adns.c s_auth.c 
+  Log:
+  adns fixes from hybrid-7.  I have yet to see this bug crash a hybrid-6
+  server *but* its still possible, just harder I think.
+  
+  Revision  Changes    Path
+  1.17      +3 -3      ircd-hybrid-6/include/res.h
+  1.11      +6 -6      ircd-hybrid-6/src/adns.c
+  1.53      +3 -3      ircd-hybrid-6/src/s_auth.c
+
+
+
 gregp       2003/01/09 11:46:36 EST	(20030109_0)
 
   Modified files:
