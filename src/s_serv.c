@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.58 1999/01/05 14:57:51 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.59 1999/01/14 07:46:39 chuegen Exp $";
 #endif
 
 
@@ -1640,18 +1640,13 @@ int	m_info(aClient *cptr,
 #undef OUT3
 #undef OUT4
 
-#ifdef SHOW_UH
 #ifdef SHOW_INVISIBLE_LUSERS
 #define OUT1 "SHOW_INVISIBLE_LUSERS=1"
 #else
 #define OUT1 "SHOW_INVISIBLE_LUSERS=0"
 #endif
-#define OUT2 " SHOW_UH=1"
-#else
-#define OUT2 " SHOW_UH=0"
-#endif
 	sendto_one(sptr, rpl_str(RPL_INFO),
-		me.name, parv[0], OUT1 OUT2 );
+		me.name, parv[0], OUT1);
 
 #undef OUT1
 #undef OUT2

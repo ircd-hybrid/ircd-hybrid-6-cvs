@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.18 1998/12/24 07:50:51 db Exp $
+ * $Id: config.h,v 1.19 1999/01/14 07:46:35 chuegen Exp $
  */
 
 #ifndef	__config_include__
@@ -450,13 +450,6 @@
  * define this to remove flood control for opers
  */
 #define NO_OPER_FLOOD
-
-/* SHOW_UH - show the user@host everywhere
- */
-#define SHOW_UH
-#ifdef SHOW_UH
-#define USERNAMES_IN_TRACE
-#endif
 
 /* SHOW_INVISIBLE_LUSERS - show invisible clients in LUSERS
  * As defined this will show the correct invisible count for anyone who does
