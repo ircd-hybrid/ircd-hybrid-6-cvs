@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.171 2004/05/23 16:16:54 ievil Exp $
+ * $Id: config.h,v 1.172 2004/06/13 01:40:12 ievil Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -85,7 +85,7 @@
  * CPATH = conf file,
  * MPATH = MOTD
  * KPATH = kline conf file
- * DLPATH = dline conf file
+ * DLPATH = dline conf file  - changed to be in seperate file!!
  *
  * OMOTD = path to MOTD for opers
  *
@@ -104,7 +104,7 @@
 #define SPATH   "/usr/local/ircd/ircd"
 #define CPATH   "ircd.conf"
 #define KPATH   "kline.conf"
-#define DLPATH  "kline.conf"
+#define DLPATH  "dline.conf"
 #define MPATH   "ircd.motd"
 #define LPATH   "ircd.log"
 #define PPATH   "ircd.pid"
