@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_oper.c,v 1.4 1999/08/01 06:01:04 tomh Exp $
+ *   $Id: m_oper.c,v 1.5 1999/08/25 22:58:21 lusky Exp $
  */
 
 #include "m_commands.h"
@@ -191,13 +191,6 @@ int m_oper(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
             {
               sptr->umodes |= (LOCOP_UMODES);
             }
-
-          /* A local oper can't global kill ever, or do remote re-routes
-           * or glines. Make sure thats enforced here.
-           */
-
-          sptr->port &= 
-            ~(CONF_OPER_GLOBAL_KILL|CONF_OPER_REMOTE|CONF_OPER_GLINE);
         }
       else
         {
