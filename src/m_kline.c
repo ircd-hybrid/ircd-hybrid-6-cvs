@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.21 1999/07/17 04:36:00 db Exp $
+ *   $Id: m_kline.c,v 1.22 1999/07/17 04:44:17 db Exp $
  */
 
 #include <signal.h>
@@ -152,7 +152,7 @@ static int
 LockedFile(const char *filename)
 
 {
-	char lockpath[PATH_MAX + 1];
+	const char lockpath[PATH_MAX + 1];
 	char buffer[1024];
 	FBFILE *fileptr;
 	int killret;
@@ -162,7 +162,7 @@ LockedFile(const char *filename)
 
 	ircsprintf(lockpath, "%s.lock", filename);
 
-	if ((fileptr = fbopen(lockpath, "r")) == (FILE *) NULL)
+	if ((fileptr = fbopen(lockpath, "r")) == (FBFILE *) NULL)
 	{
 		/*
 		 * lockfile does not exist
