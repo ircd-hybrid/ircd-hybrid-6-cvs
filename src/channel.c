@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.83 1999/05/27 01:30:57 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.84 1999/06/03 02:03:49 db Exp $";
 #endif
 
 #include "struct.h"
@@ -461,7 +461,7 @@ static void del_matching_exception(aClient *cptr,aChannel *chptr)
   strcpy(s,make_nick_user_host(cptr->name, cptr->user->username,
 			       cptr->user->host));
   s2 = make_nick_user_host(cptr->name, cptr->user->username,
-			   cptr->hostip);
+			   inetntoa((char *)&cptr->ip));
 
   for (ex = &(chptr->exceptlist); *ex; ex = &((*ex)->next))
     {
@@ -528,7 +528,7 @@ static	int is_banned(aClient *cptr,aChannel *chptr)
   strcpy(s,make_nick_user_host(cptr->name, cptr->user->username,
 			       cptr->user->host));
   s2 = make_nick_user_host(cptr->name, cptr->user->username,
-			   cptr->hostip);
+			   inetntoa((char *)&cptr->ip));
 
   for (tmp = chptr->banlist; tmp; tmp = tmp->next)
     if ((match(BANSTR(tmp), s) == 0) ||

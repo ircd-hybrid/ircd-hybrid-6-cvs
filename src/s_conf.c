@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.57 1999/05/27 01:30:59 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.58 1999/06/03 02:03:50 db Exp $";
 #endif
 
 #include "struct.h"
@@ -247,7 +247,9 @@ int	attach_Iline(aClient *cptr,
 	      */
 	      /* default to oper.server.name.tld */
 	      sendto_realops("%s spoofing: %s(%s) as oper.%s",
-			     cptr->name,host,cptr->hostip,me.name);
+			     cptr->name,host,
+			     inetntoa((char *)&cptr->ip),
+			     me.name);
 	      strncpyzt(cptr->sockhost,"oper.",sizeof(cptr->sockhost));
 	      strcat(cptr->sockhost,me.name);
 	      SetIPSpoof(cptr);

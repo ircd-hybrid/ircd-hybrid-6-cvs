@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.35 1999/05/09 03:26:33 db Exp $
+ * $Id: struct.h,v 1.36 1999/06/03 02:03:48 db Exp $
  */
 
 #ifndef	__struct_include__
@@ -687,7 +687,6 @@ struct Client
   Link		*confs;		/* Configuration record associated */
   int		authfd;		/* fd for rfc931 authentication */
   struct	in_addr	ip;	/* keep real ip# too */
-  char    hostip[HOSTIPLEN+1];  /* Keep real ip as string too - Dianora */
   unsigned short	port;	/* and the remote port# too :-) */
   struct	hostent	*hostp;
 #ifdef	pyr

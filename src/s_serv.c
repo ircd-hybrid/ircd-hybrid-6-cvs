@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.98 1999/05/29 14:06:50 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.99 1999/06/03 02:03:50 db Exp $";
 #endif
 
 
@@ -4747,7 +4747,7 @@ int     m_dline(aClient *cptr,
 	  return 0;
 	}
 
-      strncpy(cidr_form_host,acptr->hostip,32);
+      strncpy(cidr_form_host,inetntoa((char *)&acptr->ip),32);
       
       p = strchr(cidr_form_host,'.');
       if(!p)
@@ -5264,7 +5264,7 @@ int	m_trace(aClient *cptr,
           return 0;
         }
       name = get_client_name(acptr,FALSE);
-      ip = acptr->hostip;
+      ip = inetntoa((char *)&acptr->ip);
 
       class = get_client_class(acptr);
 
@@ -5343,7 +5343,7 @@ int	m_trace(aClient *cptr,
       if (!dow && mycmp(tname, acptr->name))
 	continue;
       name = get_client_name(acptr,FALSE);
-      ip = acptr->hostip;
+      ip = inetntoa((char *)&acptr->ip);
 
       class = get_client_class(acptr);
       
@@ -5549,7 +5549,8 @@ int	m_ltrace(aClient *cptr,
       if (!dow && mycmp(tname, acptr->name))
 	continue;
       name = get_client_name(acptr,FALSE);
-      ip = acptr->hostip;
+      ip = inetntoa((char *)&acptr->ip);
+
       class = get_client_class(acptr);
       
       switch(acptr->status)
