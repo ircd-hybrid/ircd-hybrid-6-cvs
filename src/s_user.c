@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.207 1999/08/01 06:47:23 tomh Exp $
+ *  $Id: s_user.c,v 1.208 1999/08/05 04:43:11 lusky Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -1132,11 +1132,11 @@ static int nickkilldone(aClient *cptr, aClient *sptr, int parc,
           while (*m)
             {
               flag = user_modes_from_c_to_bitmask[(int)(*m & 0x1F)];
-              if( flag == FLAGS_INVISIBLE )
+              if( flag & FLAGS_INVISIBLE )
                 {
                   Count.invisi++;
                 }
-              if( flag == FLAGS_OPER )
+              if( flag & FLAGS_OPER )
                 {
                   Count.oper++;
                 }
@@ -1870,7 +1870,7 @@ int user_mode(aClient *cptr, aClient *sptr, int parc, char *parv[])
             {
               if(IsServer(cptr))
                 {
-                  Count.oper--;
+                  ++Count.oper;
 
                   SetOper(sptr);
                   sptr->umodes |= FLAGS_OPER;
@@ -1949,9 +1949,9 @@ int user_mode(aClient *cptr, aClient *sptr, int parc, char *parv[])
     }
 
   if (!(setflags & FLAGS_INVISIBLE) && IsInvisible(sptr))
-    Count.invisi++;
+    ++Count.invisi;
   if ((setflags & FLAGS_INVISIBLE) && !IsInvisible(sptr))
-    Count.invisi--;
+    --Count.invisi;
   /*
    * compare new flags with old flags and send string which
    * will cause servers to update correctly.
