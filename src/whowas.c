@@ -25,7 +25,7 @@
 #include "send.h"
 
 #ifndef lint
-static char *rcs_version = "$Id: whowas.c,v 1.11 1999/07/08 00:53:33 db Exp $";
+static char *rcs_version = "$Id: whowas.c,v 1.12 1999/07/10 20:25:01 tomh Exp $";
 #endif
 
 /* externally defined functions */
@@ -57,8 +57,8 @@ void add_history(aClient *cptr, int online)
   new->hashv = hash_whowas_name(cptr->name);
   new->logoff = NOW;
   strncpyzt(new->name, cptr->name,NICKLEN+1);
-  strncpyzt(new->username, cptr->user->username,USERLEN+1);
-  strncpyzt(new->hostname, cptr->user->host, HOSTLEN);
+  strncpyzt(new->username, cptr->username,USERLEN+1);
+  strncpyzt(new->hostname, cptr->host, HOSTLEN);
   strncpyzt(new->realname, cptr->info,REALLEN);
 
   /* Its not string copied, a pointer to the scache hash is copied

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.20 1999/07/09 06:55:48 tomh Exp $
+ *   $Id: s_auth.c,v 1.21 1999/07/10 20:24:59 tomh Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -184,12 +184,15 @@ static void auth_dns_callback(void* vptr, struct DNSReply* reply)
     else {
       ++reply->ref_count;
       auth->client->dns_reply = reply;
+      strncpy(auth->client->host, hp->h_name, HOSTLEN);
       sendheader(auth->client, REPORT_FIN_DNS);
     }
   }
-  else
+  else {
+    strncpy(auth->client->host, auth->client->sockhost, HOSTLEN);
     sendheader(auth->client, REPORT_FAIL_DNS);
-
+  }
+  auth->client->host[HOSTLEN] = '\0';
   if (!IsDoingAuth(auth)) {
     release_auth_client(auth->client);
     unlink_auth_request(auth, &AuthIncompleteList);
