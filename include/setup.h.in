@@ -1,8 +1,11 @@
-/* include/setup.h.in.  Generated automatically from configure.in by autoheader.  */
-/* $Id: setup.h.in,v 1.16 2002/01/04 04:00:59 lusky Exp $ */
+/* $Id: setup.h.in,v 1.17 2002/01/28 04:36:54 androsyn Exp $ */
+/* include/setup.h.in.  Generated automatically from autoconf/configure.in by autoheader 2.13.  */
 
 /* Define if you have a working `mmap' system call.  */
 #undef HAVE_MMAP
+
+/* Define as __inline if that's what the C compiler calls it.  */
+#undef inline
 
 /* Define if you need to in order for stat and other things to work.  */
 #undef _POSIX_SOURCE
