@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.163 2003/06/17 21:46:39 ievil Exp $
+ * $Id: config.h,v 1.164 2003/06/18 02:29:27 ievil Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -712,7 +712,7 @@
  * - See all +s/+ channels in /whois
  * - See channel keys/modes
  */
-#define OPERSPY
+#undef OPERSPY
 
 /* OPERSPYLOG *mandatory on efnet*
  * Logs OPERSPY usage.
