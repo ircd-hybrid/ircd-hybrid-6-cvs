@@ -1,6 +1,6 @@
 ircd-hybrid-6 Release Notes
 ---------------------------
-$Id: RELNOTES,v 1.5 2001/06/19 17:03:44 wcampbel Exp $
+$Id: RELNOTES,v 1.6 2001/06/19 17:05:13 wcampbel Exp $
 
 Operating system dependencies have been removed, there is no longer any
 special code for AIX, SEQUENT, DYNIX, HPUX, Solaris, or pyr. We have
@@ -77,6 +77,5 @@ $ gdb bin/ircd ircd.core
 3.  At the "(gdb)" prompt, enter the command "bt"
 4.  Save the output of the backtrace command and send it to
 ircd-hybrid@the-project.org.
-5.  Be sure to save the ircd binary, the modules, and the core file in a
-safe place in case the developers need to look deeper than a backtrace
-provides.
+5.  Be sure to save the ircd binary and the core file in a safe place in
+case the developers need to look deeper than a backtrace provides.
