@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_unkline.c,v 1.47 2003/01/09 16:46:35 gregp Exp $
+ *   $Id: m_unkline.c,v 1.48 2003/05/04 17:52:45 db Exp $
  */
 #include "m_commands.h"
 #include "channel.h"
@@ -257,7 +257,6 @@ Then just ignore the line
             {
               if (flush_write(sptr, in, out, buf, temppath) < 0)
 		return 0;
-              continue;
             }
           *p++ = '\0';
 
@@ -267,7 +266,6 @@ Then just ignore the line
             {
               if (flush_write(sptr, in, out, buf, temppath) < 0)
 		return 0;
-              continue;
             }
           *p = '\0';
 

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_error.c,v 1.6 2003/01/05 19:47:47 gregp Exp $
+ *   $Id: m_error.c,v 1.7 2003/05/04 17:52:44 db Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -29,7 +29,6 @@
 #include "numeric.h"
 #include "send.h"
 #include "s_debug.h"
-#include "s_log.h"
 
 /*
  * m_functions execute protocol messages on this server:
@@ -98,6 +97,7 @@
  */
 int m_error(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 {
+#ifndef HIDE_ERROR_MESSAGES
   char* para;
 
   para = (parc > 1 && *parv[1] != '\0') ? parv[1] : "<>";
@@ -113,48 +113,23 @@ int m_error(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
   if (IsPerson(cptr) || IsUnknown(cptr))
     return 0;
 
-  /* this is less ugly than it was before, if you ask me.
-   * at least with this logic, everything's clustered, and
-   * there's not a crapload of code duplic.  anyways, the
-   * logic is this:
-   * if the source is the server it came from,
-   *   if HIDE_ERROR_MESSAGES is undefined,
-   *     sendto_realops(hey i got an error me love you long time)
-   *       [ and hide the remote servers ip if HIDE_SERVERS_IPS ]
-   *   always: log(blah blah blah, with the real ip)
-   * otherwise, if this was sent along from another server:
-   *   same logic as above, but messages contain "via x"
-   *
-   * booooooooing.
-   */
-
+#if (defined SERVERHIDE) || (defined HIDE_SERVERS_IPS)
   if (cptr == sptr)
-  {
-#ifndef HIDE_ERROR_MESSAGES
     sendto_realops("ERROR :from %s -- %s",
-#if (defined SERVERHIDE) || (defined HIDE_SERVERS_IPS)
                get_client_name(cptr, MASK_IP), para);
-#else /* SERVERHIDE || HIDE_SERVERS_IPS */
-			   get_client_name(cptr, FALSE), para);
-#endif /* SERVERHIDE || HIDE_SERVERS_IPS */
-#endif /* !HIDE_ERROR_MESSAGES */
-	log(L_NOTICE, "ERROR from %s -- %s",
-        get_client_name(cptr, SHOW_IP), para);
-  }
   else
-  {
-#ifndef HIDE_ERROR_MESSAGES
     sendto_realops("ERROR :from %s via %s -- %s", sptr->name,
-#if (defined SERVERHIDE) || (defined HIDE_SERVERS_IPS)
                get_client_name(cptr, MASK_IP), para);
-#else /* SERVERHIDE || HIDE_SERVERS_IPS */
-			   get_client_name(cptr, FALSE), para);
-#endif /* SERVERHIDE || HIDE_SERVERS_IPS */
-#endif /* !HIDE_ERROR_MESSAGES */
-	log(L_NOTICE, "ERROR from %s via %s -- %s", sptr->name,
-	    get_client_name(cptr, SHOW_IP), para);
-  }
+#else	       
+  if (cptr == sptr)
+    sendto_realops("ERROR :from %s -- %s",
+               get_client_name(cptr, FALSE), para);
+  else
+    sendto_realops("ERROR :from %s via %s -- %s", sptr->name,
+               get_client_name(cptr,FALSE), para);
+#endif
 
+#endif /* HIDE_ERRORS */
   return 0;
 }
 

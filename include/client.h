@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.62 2003/01/05 19:47:44 gregp Exp $
+ * $Id: client.h,v 1.63 2003/05/04 17:52:39 db Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -51,6 +51,8 @@
 #define HOSTIPLEN       16      /* Length of dotted quad form of IP        */
                                 /* - Dianora                               */
 #define PASSWDLEN       20
+#define IDLEN           12      /* this is the maximum length, not the actual
+                                   generated length; DO NOT CHANGE! */
 #define CLIENT_BUFSIZE 512      /* must be at least 512 bytes */
 
 /*
@@ -77,6 +79,7 @@ struct User
   time_t         last;
   int            refcnt;        /* Number of times this block is referenced */
   int            joined;        /* number of channels joined */
+  char           id[IDLEN + 1]; /* for future use *hint* */
   const char*    server;        /* pointer to scached server name */
   /*
   ** In a perfect world the 'server' name
@@ -334,19 +337,6 @@ struct Client
 #define FLAGS_INVISIBLE    0x0400 /* makes user invisible */
 #define FLAGS_BOTS         0x0800 /* shows bots */
 #define FLAGS_EXTERNAL     0x1000 /* show servers introduced */
-
-#ifdef ALLOW_OPERHIDE
-#define FLAGS_HIDDENOPER   0x10000 /* hides in /stats p to users */
-#endif /* ALLOW_OPERHIDE */
-
-#ifdef ALLOW_UNIDLE
-#define FLAGS_UNIDLE	   0x20000 /* *whistles innocently* */
-#endif /* ALLOW_UNIDLE */
-
-#ifdef ELEET_BY_FLAG
-#define FLAGS_ELEET			0x40000
-#endif /* ELEET_BY_FLAG */
-
 /* user information flags, only settable by remote mode or local oper */
 #define FLAGS_OPER         0x4000 /* Operator */
 #define FLAGS_LOCOP        0x8000 /* Local operator -- SRB */
@@ -368,22 +358,14 @@ struct Client
 #define FLAGS2_OPER_K           0x0400  /* oper can kill/kline */
 #define FLAGS2_OPER_DIE         0x0800  /* oper can die */
 #define FLAGS2_OPER_REHASH      0x1000  /* oper can rehash */
-#ifdef ELEET_OPERS
-#define FLAGS2_OPER_ELEET		0x80000000 /* oper is "eleet" */
-#endif /* ELEET_OPERS */
-#define FLAGS2_JUPE_BYPASS		0x40000000 /* oper can join through jupes */
-
-#define _FLAGS2_ALL_OPERFLAGS	(FLAGS2_OPER_GLOBAL_KILL | FLAGS2_OPER_REMOTE \
-								|FLAGS2_OPER_UNKLINE | FLAGS2_OPER_GLINE \
-								|FLAGS2_OPER_N | FLAGS2_OPER_K | FLAGS2_OPER_DIE \
-								|FLAGS2_OPER_REHASH | FLAGS2_JUPE_BYPASS)
-#ifdef ELEET_OPERS
-#define FLAGS2_ALL_OPERFLAGS	(_FLAGS2_ALL_OPERFLAGS | FLAGS2_OPER_ELEET)
-#else /* ELEET_OPERS */
-#define FLAGS2_ALL_OPERFLAGS	_FLAGS2_ALL_OPERFLAGS
-#endif /* ELEET_OPERS */
-
-#define FLAGS2_CANFLOOD       0x800000  /* can flood! */
+#define FLAGS2_OPER_FLAGS       (FLAGS2_OPER_GLOBAL_KILL | \
+                                 FLAGS2_OPER_REMOTE | \
+                                 FLAGS2_OPER_UNKLINE | \
+                                 FLAGS2_OPER_GLINE | \
+                                 FLAGS2_OPER_N | \
+                                 FLAGS2_OPER_K | \
+                                 FLAGS2_OPER_DIE | \
+                                 FLAGS2_OPER_REHASH)
 /* ZIP_LINKS */
 
 #define FLAGS2_ZIP           0x4000  /* (server) link is zipped */
@@ -402,51 +384,10 @@ struct Client
 
 
 #define SEND_UMODES  (FLAGS_INVISIBLE | FLAGS_OPER | FLAGS_WALLOP)
-#define _ALL_UMODES   (SEND_UMODES | FLAGS_SERVNOTICE | FLAGS_CCONN | \
+#define ALL_UMODES   (SEND_UMODES | FLAGS_SERVNOTICE | FLAGS_CCONN | \
                       FLAGS_REJ | FLAGS_SKILL | FLAGS_FULL | FLAGS_SPY | \
                       FLAGS_NCHANGE | FLAGS_OPERWALL | FLAGS_DEBUG | \
-                      FLAGS_BOTS | FLAGS_EXTERNAL | FLAGS_LOCOP)
-
-#ifdef ALLOW_OPERHIDE
-#define _ALL_UMODES_HIDE		FLAGS_HIDDENOPER
-#else /* ALLOW_OPERHIDE */
-#define _ALL_UMODES_HIDE		0
-#endif /* ALLOW_OPERHIDE */
-
-#ifdef ALLOW_UNIDLE
-#define _ALL_UMODES_IDLE		FLAGS_UNIDLE
-#else /* ALLOW_UNIDLE */
-#define	_ALL_UMODES_IDLE		0
-#endif /* ALLOW_UNIDLE */
-
-#ifdef ELEET_BY_FLAG
-#define	_ALL_UMODES_ELEET		FLAGS_ELEET
-#else /* ELEET_BY_FLAG */
-#define _ALL_UMODES_ELEET		0
-#endif /* ELEET_BY_FLAG */
-
-#define ALL_UMODES	(_ALL_UMODES | _ALL_UMODES_IDLE | _ALL_UMODES_HIDE \
-					| _ALL_UMODES_ELEET )
-
-#ifdef ALLOW_OPERHIDE
-#define _OPERHIDE_STUB		FLAGS_HIDDENOPER
-#else /* ALLOW_OPERHIDE */
-#define _OPERHIDE_STUB		0
-#endif /* ALLOW_OPERHIDE */
-
-#ifdef ALLOW_UNIDLE
-#define _UNIDLE_STUB		FLAGS_UNIDLE
-#else /* ALLOW_UNIDLE */
-#define _UNIDLE_STUB		0
-#endif /* ALLOW_UNIDLE */
-
-#ifdef ELEET_BY_FLAG
-#define _ELEET_STUB			FLAGS_ELEET
-#else /* ELEET_BY_FLAG */
-#define _ELEET_STUB			0
-#endif /* ELEET_BY_FLAG */
-
-#define OPER_ONLY_UMODES	(_OPERHIDE_STUB | _UNIDLE_STUB | _ELEET_STUB)
+                      FLAGS_BOTS | FLAGS_EXTERNAL | FLAGS_LOCOP )
 
 #ifndef OPER_UMODES
 #define OPER_UMODES  (FLAGS_OPER | FLAGS_WALLOP | FLAGS_SERVNOTICE | \
@@ -500,9 +441,7 @@ struct Client
 #define SendDebugNotice(x)      ((x)->umodes & FLAGS_DEBUG)
 #define SendNickChange(x)       ((x)->umodes & FLAGS_NCHANGE)
 #define SetWallops(x)           ((x)->umodes |= FLAGS_WALLOP)
-#ifdef ALLOW_OPERHIDE
-#define IsHiddenOper(x)			((x)->umodes & FLAGS_HIDDENOPER)
-#endif /* ALLOW_OPERHIDE */
+
 
 #ifdef REJECT_HOLD
 #define IsRejectHeld(x)         ((x)->flags & FLAGS_REJECT_HOLD)
@@ -542,8 +481,6 @@ struct Client
 #define IsIPSpoof(x)            ((x)->flags2 & FLAGS2_IP_SPOOFING)
 #define SetIPHidden(x)          ((x)->flags2 |= FLAGS2_IP_HIDDEN)
 #define IsIPHidden(x)           ((x)->flags2 & FLAGS2_IP_HIDDEN)
-#define CanFlood(x)                           ((x)->flags2 & FLAGS2_CANFLOOD)
-#define SetCanFlood(x)                        ((x)->flags2 |= FLAGS2_CANFLOOD)
 
 #ifdef IDLE_CHECK
 #define SetIdlelined(x)         ((x)->flags2 |= FLAGS2_IDLE_LINED)
@@ -566,19 +503,6 @@ struct Client
 #define IsOperDie(x)            ((x)->flags2 & FLAGS2_OPER_DIE)
 #define SetOperRehash(x)        ((x)->flags2 |= FLAGS2_OPER_REHASH)
 #define IsOperRehash(x)         ((x)->flags2 & FLAGS2_OPER_REHASH)
-#ifdef ELEET_OPERS
-#define SetOperEleet(x)			((x)->flags2 |= FLAGS2_OPER_ELEET)
-#ifdef ELEET_BY_FLAG
-#define IsOperEleet(x)			((x)->flags2 & FLAGS2_OPER_ELEET \
-								&& (x)->umodes & FLAGS_ELEET)
-#define IsConfOperEleet(x)		((x)->flags2 & FLAGS2_OPER_ELEET)
-#else /* ELEET_BY_FLAG */
-#define IsOperEleet(x)			((x)->flags2 & FLAGS2_OPER_ELEET)
-#endif /* ELEET_BY_FLAG */
-#endif /* ELEET_OPERS */
-#define SetOperJupeBypass(x)	((x)->flags2 |= FLAGS2_JUPE_BYPASS)
-#define IsOperJupeBypass(x)		((x)->flags2 & FLAGS2_JUPE_BYPASS)
-
 #define CBurst(x)               ((x)->flags2 & FLAGS2_CBURST)
 
 /*

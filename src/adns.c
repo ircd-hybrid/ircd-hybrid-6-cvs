@@ -1,5 +1,5 @@
 /*
- * $Id: adns.c,v 1.11 2003/04/06 21:10:37 androsyn Exp $
+ * $Id: adns.c,v 1.12 2003/05/04 17:52:44 db Exp $
  * adns.c  functions to enter libadns 
  *
  * Written by Aaron Sethman <androsyn@ratbox.org>
@@ -173,11 +173,11 @@ void do_adns_io(void)
  * Side effects: Sets up a query structure and sends off a DNS query to
  *               the DNS server to resolve an "A"(address) entry by name.
  */
-int adns_gethost(const char *name, struct DNSQuery *req)
+void adns_gethost(const char *name, struct DNSQuery *req)
 {
  assert(dns_state->nservers > 0);
- return(adns_submit(dns_state, name, adns_r_addr, adns_qf_owner, req,
-             &req->query));
+ adns_submit(dns_state, name, adns_r_addr, adns_qf_owner, req,
+             &req->query);
 
 }
 
@@ -188,7 +188,7 @@ int adns_gethost(const char *name, struct DNSQuery *req)
  * Side effects: Sets up a query entry and sends it to the DNS server to
  *               resolve an IP address to a domain name.
  */
-int adns_getaddr(struct in_addr *addr,
+void adns_getaddr(struct in_addr *addr,
                   struct DNSQuery *req)
 {
  struct sockaddr_in ipn;
@@ -196,6 +196,6 @@ int adns_getaddr(struct in_addr *addr,
   ipn.sin_family = AF_INET;
   ipn.sin_port = 0;
   ipn.sin_addr.s_addr = addr->s_addr;
-  return(adns_submit_reverse(dns_state, (struct sockaddr *)&ipn,
-                      adns_r_ptr, adns_qf_owner|adns_qf_cname_loose|adns_qf_quoteok_anshost, req, &req->query));
+  adns_submit_reverse(dns_state, (struct sockaddr *)&ipn,
+                      adns_r_ptr, adns_qf_owner|adns_qf_cname_loose|adns_qf_quoteok_anshost, req, &req->query);
 }

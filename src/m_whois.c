@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_whois.c,v 1.8 2003/01/05 19:47:47 gregp Exp $
+ *   $Id: m_whois.c,v 1.9 2003/05/04 17:52:45 db Exp $
  */
 
 #include "m_commands.h"
@@ -229,14 +229,9 @@ int     m_whois(struct Client *cptr,
                lp = lp->next)
             {
               chptr = lp->value.chptr;
-              if (ShowChannel(sptr, chptr)
-#ifdef ELEET_OPERS
-				|| IsOperEleet(sptr)
-#endif /* ELEET_OPERS */
-				)
+              if (ShowChannel(sptr, chptr))
                 {
-				/* added +3 here for space +privilege prefix +goodluck */
-                  if (len + strlen(chptr->chname) + 3
+                  if (len + strlen(chptr->chname)
                       > (size_t) BUFSIZE - 4 - mlen)
                     {
                       sendto_one(sptr,
@@ -247,10 +242,6 @@ int     m_whois(struct Client *cptr,
                       *buf = '\0';
                       len = 0;
                     }
-#ifdef ELEET_OPERS
-		  if (IsOperEleet(sptr) && !ShowChannel(sptr, chptr))
-			*(buf + len++) = '%';
-#endif /* ELEET_OPERS */
 
 		  found_mode = user_channel_mode(acptr, chptr);
 #ifdef HIDE_OPS
@@ -291,22 +282,14 @@ int     m_whois(struct Client *cptr,
 
           if (IsAnOper(acptr))
             sendto_one(sptr, form_str(RPL_WHOISOPERATOR),
-                       me.name, parv[0], name, GlobalSetOptions.operstring);
+                       me.name, parv[0], name);
 #ifdef WHOIS_NOTICE
           if ((MyOper(acptr)) && ((acptr)->umodes & FLAGS_SPY) &&
-              (IsPerson(sptr)) && (acptr != sptr))
-            if (MyConnect(sptr)) 
-              sendto_one(acptr,
-                         ":%s NOTICE %s :*** Notice -- %s (%s@%s) is doing a /whois on you.",
-                         me.name, acptr->name, parv[0], sptr->username,
-                         sptr->host);
-#ifdef REMOTE_WHOIS_NOTICE
-            else
-              sendto_one(acptr,
-                         ":%s NOTICE %s :*** Notice -- %s (%s@%s) is doing a remote /whois on you. [%s]",
-                         me.name, acptr->name, parv[0], sptr->username,
-                         sptr->host, sptr->user->server);
-#endif /* REMOTE_WHOIS_NOTICE */
+              (MyConnect(sptr)) && (IsPerson(sptr)) && (acptr != sptr))
+            sendto_one(acptr,
+                       ":%s NOTICE %s :*** Notice -- %s (%s@%s) is doing a /whois on you.",
+                       me.name, acptr->name, parv[0], sptr->username,
+                       sptr->host);
 #endif /* #ifdef WHOIS_NOTICE */
 
 
@@ -390,11 +373,7 @@ int     m_whois(struct Client *cptr,
                lp = lp->next)
             {
               chptr = lp->value.chptr;
-              if (ShowChannel(sptr, chptr)
-#ifdef ELEET_OPERS
-				|| IsOperEleet(sptr)
-#endif /* ELEET_OPERS */
-				)
+              if (ShowChannel(sptr, chptr))
                 {
                   if (len + strlen(chptr->chname)
                       > (size_t) BUFSIZE - 4 - mlen)
@@ -407,14 +386,7 @@ int     m_whois(struct Client *cptr,
                       *buf = '\0';
                       len = 0;
                     }
-	
 		  found_mode = user_channel_mode(acptr, chptr);
-
-#ifdef ELEET_OPERS
-		  if (IsOperEleet(sptr) && !ShowChannel(sptr, chptr))
-			*(buf + len++) = '%';
-#endif /* ELEET_OPERS */
-
 #ifdef HIDE_OPS
                   if(is_chan_op(sptr,chptr))
 #endif
@@ -453,22 +425,14 @@ int     m_whois(struct Client *cptr,
 
           if (IsAnOper(acptr))
             sendto_one(sptr, form_str(RPL_WHOISOPERATOR),
-                       me.name, parv[0], name, GlobalSetOptions.operstring);
+                       me.name, parv[0], name);
 #ifdef WHOIS_NOTICE
           if ((MyOper(acptr)) && ((acptr)->umodes & FLAGS_SPY) &&
-              (IsPerson(sptr)) && (acptr != sptr))
-            if (MyConnect(sptr))
-              sendto_one(acptr,
-                         ":%s NOTICE %s :*** Notice -- %s (%s@%s) is doing a /whois on you.",
-                         me.name, acptr->name, parv[0], sptr->username,
-                         sptr->host);
-#ifdef REMOTE_WHOIS_NOTICE
-            else
-              sendto_one(acptr,
-                         ":%s NOTICE %s :*** Notice -- %s (%s@%s) is doing a remote /whois on you. [%s]",
-                         me.name, acptr->name, parv[0], sptr->username,
-                         sptr->host, sptr->user->server);
-#endif /* REMOTE_WHOIS_NOTICE */
+              (MyConnect(sptr)) && (IsPerson(sptr)) && (acptr != sptr))
+            sendto_one(acptr,
+                       ":%s NOTICE %s :*** Notice -- %s (%s@%s) is doing a /whois on you.",
+                       me.name, acptr->name, parv[0], sptr->username,
+                       sptr->host);
 #endif /* #ifdef WHOIS_NOTICE */
 
           if ((acptr->user

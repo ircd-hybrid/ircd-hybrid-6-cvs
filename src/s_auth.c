@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.54 2003/04/06 21:42:03 androsyn Exp $
+ *   $Id: s_auth.c,v 1.55 2003/05/04 17:52:45 db Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -398,8 +398,8 @@ void start_auth(struct Client* client)
 
   sendheader(client, REPORT_DO_DNS);
 
-  if(!adns_getaddr(&client->ip, client->dns_query))
-    SetDNSPending(auth);
+  adns_getaddr(&client->ip, client->dns_query);
+  SetDNSPending(auth);
 
   if (start_auth_query(auth))
     link_auth_request(auth, &AuthPollList);

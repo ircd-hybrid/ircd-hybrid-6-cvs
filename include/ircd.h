@@ -19,7 +19,7 @@
  *
  * "ircd.h". - Headers file.
  *
- * $Id: ircd.h,v 1.23 2003/01/05 19:47:44 gregp Exp $
+ * $Id: ircd.h,v 1.24 2003/05/04 17:52:39 db Exp $
  *
  */
 #ifndef INCLUDED_ircd_h
@@ -31,8 +31,6 @@
 #include <sys/types.h>
 #define INCLUDED_sys_types_h
 #endif
-
-#define IRCD_BUFSIZE	512
 
 struct Client;
 
@@ -68,8 +66,6 @@ struct SetOptions
   int spam_num;
   int spam_time;
 #endif
-
-  char operstring[IRCD_BUFSIZE+1];
 };
 
 struct Counter {
@@ -111,6 +107,7 @@ extern struct SetOptions GlobalSetOptions;  /* defined in ircd.c */
 #define SPLITDELAY GlobalSetOptions.server_split_recovery_time
 #define SPLITNUM   GlobalSetOptions.split_smallnet_size
 #define SPLITUSERS GlobalSetOptions.split_smallnet_users
+
 
 extern char*          debugmode;
 extern int            debuglevel;

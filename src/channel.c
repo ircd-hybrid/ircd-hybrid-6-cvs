@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.235 2003/01/05 19:47:46 gregp Exp $
+ * $Id: channel.c,v 1.236 2003/05/04 17:52:44 db Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -616,7 +616,7 @@ int     can_send(struct Client *cptr, struct Channel *chptr)
   Link  *lp;
 
 #ifdef JUPE_CHANNEL
-  if (MyClient(cptr) && chptr->juped && !IsOperJupeBypass(cptr))
+  if (MyClient(cptr) && chptr->juped)
     {
       return 1;
     }
@@ -669,21 +669,13 @@ void channel_modes(struct Client *cptr, char *mbuf, char *pbuf, struct Channel *
   if (chptr->mode.limit)
     {
       *mbuf++ = 'l';
-      if (IsMember(cptr, chptr)
-#ifdef ELEET_OPERS
-		|| IsOperEleet(cptr) 
-#endif /* ELEET_OPERS */
-		|| IsServer(cptr))
+      if (IsMember(cptr, chptr) || IsServer(cptr))
         ircsprintf(pbuf, "%d ", chptr->mode.limit);
     }
   if (*chptr->mode.key)
     {
       *mbuf++ = 'k';
-      if (IsMember(cptr, chptr)
-#ifdef ELEET_OPERS
-		|| IsOperEleet(cptr) 
-#endif /* ELEET_OPERS */
-		|| IsServer(cptr))
+      if (IsMember(cptr, chptr) || IsServer(cptr))
         (void)strcat(pbuf, chptr->mode.key);
     }
   *mbuf++ = '\0';
@@ -1620,14 +1612,16 @@ void set_channel_mode(struct Client *cptr,
               if (whatt == MODE_ADD)
                 {
                   chptr->juped = 1;
-                  sendto_realops("%s locally juping channel %s",
-                                 sptr->name, chptr->chname);
+                  sendto_realops("%s!%s@%s locally juping channel %s",
+                                 sptr->name, sptr->username,
+                                 sptr->host, chptr->chname);
                 }
               else if(whatt == MODE_DEL)
                 {
                   chptr->juped = 0;
-                  sendto_realops("%s locally unjuping channel %s",
-                                 sptr->name, chptr->chname);
+                  sendto_realops("%s!%s@%s locally unjuping channel %s",
+                                 sptr->name, sptr->username,
+                                 sptr->host, chptr->chname);
 		  if(chptr->users == 0)
 		    sub1_from_channel(chptr);
                 }
@@ -1899,7 +1893,7 @@ void set_channel_mode(struct Client *cptr,
   return;
 }
 
-static int can_join(struct Client *sptr, struct Channel *chptr, char *key, int *flags)
+static  int     can_join(struct Client *sptr, struct Channel *chptr, char *key, int *flags)
 {
   Link  *lp;
   int ban_or_exception;
@@ -1907,20 +1901,11 @@ static int can_join(struct Client *sptr, struct Channel *chptr, char *key, int *
 #ifdef JUPE_CHANNEL
   if(chptr->juped)
     {
-      if (IsOperJupeBypass(sptr))
-	  {
-		sendto_ops_flags(FLAGS_SPY, "Oper %s (%s@%s) joining locally juped "
-			"channel %s", sptr->name, sptr->username, sptr->host,
-			chptr->chname);
-	  }
-	  else
-	  {
-		sendto_ops_flags(FLAGS_SPY,
+      sendto_ops_flags(FLAGS_SPY,
              "User %s (%s@%s) is attempting to join locally juped channel %s",
-                     sptr->name, sptr->username, sptr->host,chptr->chname);
-      	return (ERR_UNAVAILRESOURCE);
-	  }
-
+                     sptr->name,
+                     sptr->username, sptr->host,chptr->chname);
+      return (ERR_UNAVAILRESOURCE);
     }
 #endif
 
@@ -3064,11 +3049,7 @@ int     m_topic(struct Client *cptr,
           return 0;
         }
 
-      if (!(IsMember(sptr, chptr) 
-#ifdef ELEET_OPERS
-		|| (IsOperEleet(sptr) && parc <= 2)
-#endif /* ELEET_OPERS */
-			))
+      if (!IsMember(sptr, chptr))
         {
           sendto_one(sptr, form_str(ERR_NOTONCHANNEL), me.name, parv[0],
               name);

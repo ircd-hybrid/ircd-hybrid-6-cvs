@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_who.c,v 1.4 2003/01/05 19:47:47 gregp Exp $
+ *   $Id: m_who.c,v 1.5 2003/05/04 17:52:45 db Exp $
  */
 
 #include "m_commands.h"
@@ -200,20 +200,12 @@ int     m_who(struct Client *cptr,
       if (chptr)
         {
           member = IsMember(sptr, chptr);
-          if (member || !SecretChannel(chptr) 
-#ifdef ELEET_OPERS
-				|| IsOperEleet(sptr)
-#endif /* ELEET_OPERS */
-				)
+          if (member || !SecretChannel(chptr))
             for (lp = chptr->members; lp; lp = lp->next)
               {
                 if (oper && !IsAnOper(lp->value.cptr))
                   continue;
-                if (IsInvisible(lp->value.cptr) && !member 
-#ifdef ELEET_OPERS
-					&& !IsOperEleet(sptr)
-#endif /* ELEET_OPERS */
-					)
+                if (IsInvisible(lp->value.cptr) && !member)
                   continue;
                 do_who(sptr, lp->value.cptr, chptr, lp);
               }
@@ -231,12 +223,7 @@ int     m_who(struct Client *cptr,
         {
           chptr = lp->value.chptr;
           member = IsMember(sptr, chptr);
-          if (isinvis && !member 
-#ifdef ELEET_OPERS
-			&& !IsOperEleet(sptr)
-#endif /* ELEET_OPERS */
-			)
-			/* is this right? -gnp */
+          if (isinvis && !member)
             continue;
           if (member || (!isinvis && PubChannel(chptr)))
             {
@@ -283,10 +270,6 @@ int     m_who(struct Client *cptr,
         }
       if (!acptr->user->channel && !isinvis)
         showperson = 1;
-#ifdef ELEET_OPERS
-	  if (IsOperEleet(sptr))
-		showperson = 1;
-#endif /* ELEET_OPERS */
       if (showperson &&
           (!mask ||
            match(mask, acptr->name) ||

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.48 2003/01/05 19:47:47 gregp Exp $
+ *   $Id: parse.c,v 1.49 2003/05/04 17:52:45 db Exp $
  */
 #include "parse.h"
 #include "channel.h"
@@ -236,12 +236,12 @@ int parse(aClient *cptr, char *pbuffer, char *bufend)
 #ifdef NO_OPER_FLOOD
 #ifndef TRUE_NO_OPER_FLOOD
 /* note: both have to be defined for the real no-flood */
-          if (IsAnOper(cptr) || CanFlood(cptr))
+          if (IsAnOper(cptr))
             /* "randomly" (weighted) increase the since */
             cptr->since += (cptr->receiveM % 5) ? 1 : 0;
           else
 #else
-          if (!IsAnOper(cptr) && !CanFlood(cptr))
+          if (!IsAnOper(cptr))
 #endif
 #endif
             cptr->since += (2 + i / 120);
@@ -334,17 +334,14 @@ int parse(aClient *cptr, char *pbuffer, char *bufend)
    *
    * - Dianora
    */
-  if (IsRegisteredUser(cptr)
+
 #ifdef IDLE_FROM_MSG
-	&& mptr->reset_idle
-#else /* IDLE_FROM_MSG */
-	&& !mptr->reset_idle
-#endif /* IDLE_FROM_MSG */
-#ifdef ALLOW_UNIDLE
-	&& !(cptr->umodes & FLAGS_UNIDLE)
-#endif /* ALLOW_UNIDLE */
-	)
-	from->user->last = CurrentTime;
+  if (IsRegisteredUser(cptr) && mptr->reset_idle)
+    from->user->last = CurrentTime;
+#else
+  if (IsRegisteredUser(cptr) && !mptr->reset_idle)
+    from->user->last = CurrentTime;
+#endif
   
   /* don't allow other commands while a list is blocked. since we treat
      them specially with respect to sendq. */

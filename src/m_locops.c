@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_locops.c,v 1.3 2003/01/05 19:47:47 gregp Exp $
+ *   $Id: m_locops.c,v 1.4 2003/05/04 17:52:45 db Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -101,48 +101,54 @@ int m_locops(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 #ifdef SLAVE_SERVERS
   char *slave_oper;
   struct Client *acptr;
-  struct ConfItem *aconf;
 #endif
 
-  if (IsServer(sptr))
-  {
 #ifdef SLAVE_SERVERS
-	  aconf = find_special_conf(sptr->name, CONF_ULINE);
-	  if (!aconf)
-	  {
-		  sendto_realops("Received LOCOPS from non-slave server %s", sptr->name);
-		  return 0;
-	  }
-	  else if (!(aconf->port & ULFL_ACCEPTLOCOPS))
-	  {
-		  sendto_realops("Refused LOCOPS from unauthorized slave %s", sptr->name);
-		  return 0;
-	  }
+  if(IsServer(sptr))
+    {
+      if(!find_special_conf(sptr->name,CONF_ULINE))
+        {
+          sendto_realops("received Unauthorized locops from %s",sptr->name);
+          return 0;
+        }
 
-	  if (parc > 2)
-	  {
-		  slave_oper = parv[1];
-		  message = parv[2];
+      if(parc > 2)
+        {
+          slave_oper = parv[1];
 
-		  if ((acptr = hash_find_client(slave_oper, NULL)) && IsPerson(acptr))
-		  {
-			  /* is it not pointless to check if parv[1] != NULL, since if it's
-			   * not true parse() is busted? */
-			  send_operwall(acptr, "SLOCOPS", message);
+          parc--;
+          parv++;
+
+          if ((acptr = hash_find_client(slave_oper,(struct Client *)NULL)))
+            {
+              if(!IsPerson(acptr))
+                return 0;
+            }
+          else
+            return 0;
+
+          if(parv[1])
+            {
+              message = parv[1];
+              send_operwall(acptr, "SLOCOPS", message);
+            }
+          else
+            return 0;
 #ifdef HUB
-			  sendto_slaves(sptr, ULFL_SENDLOCOPS, "LOCOPS", slave_oper, parc - 1, parv + 1);
-#endif /* HUB */
-
-			  return 0;
-		  }
-		  else
-			  sendto_realops("Received slave LOCOPS from non-existant client %s", slave_oper);
-	  }
-#endif /* SLAVE_SERVERS */
-      return 0;
-  }
-
+          sendto_slaves(sptr,"LOCOPS",slave_oper,parc,parv);
+#endif
+          return 0;
+        }
+    }
+  else
+    {
+      message = parc > 1 ? parv[1] : NULL;
+    }
+#else
+  if(IsServer(sptr))
+    return 0;
   message = parc > 1 ? parv[1] : NULL;
+#endif
 
   if (EmptyString(message))
     {
@@ -155,7 +161,7 @@ int m_locops(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
     {
 
 #ifdef SLAVE_SERVERS
-      sendto_slaves(NULL, ULFL_SENDLOCOPS, "LOCOPS", sptr->name, parc, parv);
+      sendto_slaves(NULL,"LOCOPS",sptr->name,parc,parv);
 #endif
       send_operwall(sptr, "LOCOPS", message);
     }

@@ -18,7 +18,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *   $Id: s_conf.h,v 1.63 2003/01/05 19:47:44 gregp Exp $
+ *   $Id: s_conf.h,v 1.64 2003/05/04 17:52:39 db Exp $
  */
 
 #ifndef INCLUDED_config_h
@@ -80,7 +80,6 @@ typedef struct QlineItem {
 #define CONF_ME                 0x0040
 #define CONF_KILL               0x0080
 #define CONF_ADMIN              0x0100
-#define CONF_SET				0x0200
 /*
  * R_LINES are no more
  * -wnder
@@ -105,16 +104,6 @@ typedef struct QlineItem {
 
 #define IsIllegal(x)    ((x)->status & CONF_ILLEGAL)
 
-/* aConfItem->port (if aconf->status & CONF_ULINE) */
-#define	ULFL_SENDKLINES			0x01
-#define ULFL_ACCEPTKLINES		0x02
-#define ULFL_SENDLOCOPS			0x04
-#define ULFL_ACCEPTLOCOPS		0x08
-#define ULFL_READ				0x10
-#define	ULFL_DEFAULT			(ULFL_SENDKLINES | ULFL_ACCEPTKLINES | \
-								ULFL_SENDLOCOPS | ULFL_ACCEPTLOCOPS | \
-								ULFL_READ)
-
 /* aConfItem->flags */
 
 #define CONF_FLAGS_LIMIT_IP             0x0001
@@ -126,7 +115,6 @@ typedef struct QlineItem {
 #define CONF_FLAGS_F_LINED              0x0080
 #define CONF_FLAGS_EXEMPTGLINE          0x2000
 
-#define CONF_FLAGS_CANFLOOD                           0x4000
 #ifdef IDLE_CHECK
 #define CONF_FLAGS_IDLE_LINED           0x0100
 #endif
@@ -151,7 +139,6 @@ typedef struct QlineItem {
 #define IsConfElined(x)         ((x)->flags & CONF_FLAGS_E_LINED)
 #define IsConfFlined(x)         ((x)->flags & CONF_FLAGS_F_LINED)
 #define IsConfExemptGline(x)    ((x)->flags & CONF_FLAGS_EXEMPTGLINE)
-#define IsConfCanFlood(x)             ((x)->flags & CONF_FLAGS_CANFLOOD)
 
 #ifdef IDLE_CHECK
 #define IsConfIdlelined(x)      ((x)->flags & CONF_FLAGS_IDLE_LINED)
@@ -173,10 +160,6 @@ typedef struct QlineItem {
 #define CONF_OPER_K          32
 #define CONF_OPER_REHASH     64
 #define CONF_OPER_DIE       128
-#ifdef ELEET_OPERS
-#define CONF_OPER_ELEET		256
-#endif /* ELEET_OPERS */
-#define CONF_JUPE_BYPASS	512
 
 typedef struct
 {

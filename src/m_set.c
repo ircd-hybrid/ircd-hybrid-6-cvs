@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_set.c,v 1.8 2003/01/05 19:47:47 gregp Exp $
+ *   $Id: m_set.c,v 1.9 2003/05/04 17:52:45 db Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -110,10 +110,9 @@
  *      11 - SPAMNUM
  *      12 - SPAMTIME
  *      13 - LOG
- *      14 - OPERSTRING
  * - rjp
  *
- * Currently, the end of the table is TOKEN_BAD, 15.  If you add anything
+ * Currently, the end of the table is TOKEN_BAD, 14.  If you add anything
  * to the set table, you must increase TOKEN_BAD so that it is directly
  * after the last valid entry.
  * -Hwy
@@ -133,8 +132,7 @@
 #define TOKEN_SPAMNUM 11
 #define TOKEN_SPAMTIME 12
 #define TOKEN_LOG 13
-#define TOKEN_OPERSTRING 14
-#define TOKEN_BAD 15
+#define TOKEN_BAD 14
 
 static char *set_token_table[] = {
   "MAX",
@@ -151,7 +149,6 @@ static char *set_token_table[] = {
   "SPAMNUM",
   "SPAMTIME",
   "LOG",
-  "OPERSTRING",
   NULL
 };
 
@@ -581,20 +578,7 @@ int m_set(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
             }
           return 0;
           break;
-		case TOKEN_OPERSTRING:
-		  if (parc > 2)
-		  {
-		    strncpy_irc(GlobalSetOptions.operstring, parv[2], IRCD_BUFSIZE);
-			sendto_realops("%s has changed OPERSTRING to %s",
-						   parv[0], parv[2]);
-		  }
-		  else
-		  {
-			sendto_one(sptr, ":%s NOTICE %s :*** Notice -- OPERSTRING is currently %s",
-					   me.name, parv[0], GlobalSetOptions.operstring);
-		  }
-		  return 0;
-		  break;
+
         default:
         case TOKEN_BAD:
           break;
