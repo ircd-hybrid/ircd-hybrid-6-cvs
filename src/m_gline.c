@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.48 2001/12/12 19:10:06 leeh Exp $
+ *  $Id: m_gline.c,v 1.49 2001/12/12 21:56:34 leeh Exp $
  */
 #include "m_commands.h"
 #include "m_gline.h"
@@ -962,9 +962,6 @@ static int majority_gline(aClient *sptr,
                 }
 
               if(find_is_glined(host, user))
-                return NO;
-
-              if(find_is_klined(host, user, 0))
                 return NO;
 
               log_gline(sptr,sptr->name,gline_pending_ptr,
