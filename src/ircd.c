@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.7 1998/10/12 05:48:55 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.8 1998/10/14 05:51:50 db Exp $";
 #endif
 
 #include "struct.h"
@@ -868,7 +868,7 @@ int	main(int argc, char *argv[])
 
   myargv = argv;
   (void)umask(077);                /* better safe than sorry --SRB */
-  bzero((char *)&me, sizeof(me));
+  memset((void *)&me, 0, sizeof(me));
 
   setup_signals();
   

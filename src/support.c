@@ -20,7 +20,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)support.c	2.21 4/13/94 1990, 1991 Armin Gruner;\
 1992, 1993 Darren Reed";
-static char *rcs_version = "$Id: support.c,v 1.1 1998/09/17 14:25:05 db Exp $";
+static char *rcs_version = "$Id: support.c,v 1.2 1998/10/14 05:52:02 db Exp $";
 #endif
 
 #include "struct.h"
@@ -38,7 +38,7 @@ extern	void	outofmemory();
 **			of separators
 **			argv 9/90
 **
-**	$Id: support.c,v 1.1 1998/09/17 14:25:05 db Exp $
+**	$Id: support.c,v 1.2 1998/10/14 05:52:02 db Exp $
 */
 
 char *strtoken(save, str, fs)
@@ -51,7 +51,7 @@ char *str, *fs;
     if (str)
 	pos = str;		/* new string scan */
 
-    while (pos && *pos && index(fs, *pos) != NULL)
+    while (pos && *pos && strchr(fs, *pos) != NULL)
 	pos++; 		 	/* skip leading separators */
 
     if (!pos || !*pos)
@@ -59,7 +59,7 @@ char *str, *fs;
 
     tmp = pos; 			/* now, keep position of the token */
 
-    while (*pos && index(fs, *pos) == NULL)
+    while (*pos && strchr(fs, *pos) == NULL)
 	pos++; 			/* skip content of the token */
 
     if (*pos)
@@ -92,7 +92,7 @@ char *str, *fs;
 **	strerror - return an appropriate system error string to a given errno
 **
 **		   argv 11/90
-**	$Id: support.c,v 1.1 1998/09/17 14:25:05 db Exp $
+**	$Id: support.c,v 1.2 1998/10/14 05:52:02 db Exp $
 */
 
 char *strerror(int err_no)
@@ -194,7 +194,7 @@ char	*in;
 /*
 **	inet_netof --	return the net portion of an internet number
 **			argv 11/90
-**	$Id: support.c,v 1.1 1998/09/17 14:25:05 db Exp $
+**	$Id: support.c,v 1.2 1998/10/14 05:52:02 db Exp $
 **
 */
 
@@ -286,7 +286,7 @@ int dgets(int fd,char *buf,int num)
       ** check input buffer for EOL and if present return string.
       */
       if (head < tail &&
-	  ((s = index(head, '\n')) || (s = index(head, '\r'))) && s < tail)
+	  ((s = strchr(head, '\n')) || (s = strchr(head, '\r'))) && s < tail)
 	{
 	  n = MIN(s - head + 1, num);	/* at least 1 byte */
 	  bcopy(head, buf, n);
@@ -332,7 +332,7 @@ int dgets(int fd,char *buf,int num)
       tail += nr;
       *tail = '\0';
 
-      for (t = head; (s = index(t, '\n')); )
+      for (t = head; (s = strchr(t, '\n')); )
 	{
 	  if ((s > head) && (s > dgbuf))
 	    {

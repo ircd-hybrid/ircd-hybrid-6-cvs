@@ -24,7 +24,7 @@
 #include "h.h"
 
 #ifndef lint
-static char *rcs_version = "$Id: whowas.c,v 1.1 1998/09/17 14:25:05 db Exp $";
+static char *rcs_version = "$Id: whowas.c,v 1.2 1998/10/14 05:52:03 db Exp $";
 #endif
 
 /* externally defined functions */
@@ -199,7 +199,7 @@ void    initwhowas()
 
   for (i=0;i<NICKNAMEHISTORYLENGTH;i++)
     {
-      bzero((char *)&WHOWAS[i], sizeof(aWhowas));
+      memset((void *)&WHOWAS[i], 0, sizeof(aWhowas));
       WHOWAS[i].hashv = -1;
     }
   for (i=0;i<WW_MAX;i++)

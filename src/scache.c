@@ -5,7 +5,7 @@
 #include "h.h"
 
 #ifndef lint
-static char *rcs_version ="$Id: scache.c,v 1.1 1998/09/17 14:25:05 db Exp $";
+static char *rcs_version ="$Id: scache.c,v 1.2 1998/10/14 05:52:00 db Exp $";
 #endif
 
 static int hash(char *);	/* keep it hidden here */
@@ -39,8 +39,7 @@ static SCACHE *scache_hash[SCACHE_HASH_SIZE];
 
 void clear_scache_hash_table(void)
 {
-  /*  memset(scache_hash, 0, sizeof(scache_hash)); */
-  bzero((char *)scache_hash, sizeof(scache_hash));
+  memset((void *)scache_hash, 0, sizeof(scache_hash));
 }
 
 static int hash(char *string)
