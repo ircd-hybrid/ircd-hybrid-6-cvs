@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.45 1999/07/18 16:53:08 db Exp $
+ * $Id: h.h,v 1.46 1999/07/18 17:27:01 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -66,7 +66,6 @@ extern	aClient	*find_userhost (char *, char *, aClient *, int *);
 extern aConfItem *find_is_klined(char*, char *,unsigned long);
 
 /* hash d lines */
-unsigned long host_name_to_ip(char *, unsigned long *);
 extern aConfItem *find_dkill(aClient *cptr);
 
 extern  void	add_temp_kline(aConfItem *);
