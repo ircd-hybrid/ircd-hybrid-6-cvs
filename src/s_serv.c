@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.88 1999/05/01 02:47:22 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.89 1999/05/03 00:42:51 db Exp $";
 #endif
 
 
@@ -3584,6 +3584,7 @@ int   m_set(aClient *cptr,
                              me.name, parv[0]);
                   return 0;
                 }
+	      /* sygma found it, the hard way */
 	      if(newval > MAX_SERVER_SPLIT_RECOVERY_TIME)
 		{
 		  sendto_one(sptr,
