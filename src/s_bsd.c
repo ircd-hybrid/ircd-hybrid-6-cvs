@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.73 1999/07/19 00:14:48 tomh Exp $
+ *  $Id: s_bsd.c,v 1.74 1999/07/19 00:20:22 tomh Exp $
  */
 #include "s_bsd.h"
 #include "listener.h"
@@ -47,6 +47,7 @@
 #include <sys/stat.h>
 #include <sys/socket.h>
 #include <sys/file.h>
+#define BSD_COMP          /* needed on Solaris for FIONBIO */
 #include <sys/ioctl.h>
 #include <sys/resource.h>
 #include <sys/param.h>    /* NOFILE */
