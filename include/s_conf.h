@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.5 1999/07/08 22:46:22 db Exp $
+ * $Id: s_conf.h,v 1.6 1999/07/08 23:04:06 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.6  1999/07/08 23:04:06  db
+ * - fixed goof in s_conf.h
+ *
  * Revision 1.5  1999/07/08 22:46:22  db
  * - changes to centralize config.h ircd config files to one struct
  *
@@ -159,7 +162,7 @@ extern struct ConfItem* find_conf_ip (struct SLink *, char *, char *, int);
 extern struct ConfItem* find_conf_name (char *, int);
 extern struct ConfItem* find_kill (struct Client *);
 
-typedef struct
+typedef struct MessageFileItem
 {
   char	line[MESSAGELINELEN];
   struct MessageFileItem *next;
