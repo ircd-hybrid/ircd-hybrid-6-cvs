@@ -1,3 +1,30 @@
+ievil       2003/10/13 07:33:15 EDT	(20031013_9)
+
+  Modified files:
+    include              client.h m_commands.h msg.h numeric.h 
+    src                  Makefile.in client.c messages.tab 
+                         messages_cust.tab s_misc.c s_user.c 
+  Added files:
+    src                  m_map.c 
+  Log:
+  added new command MAP. Direct back port from ircd-hybrid-7, with some
+  adjustments according to Hwy's patch for hyb6.3.1.
+  
+  Revision  Changes    Path
+  1.73      +1 -0      ircd-hybrid-6/include/client.h
+  1.10      +3 -0      ircd-hybrid-6/include/m_commands.h
+  1.25      +3 -0      ircd-hybrid-6/include/msg.h
+  1.23      +3 -0      ircd-hybrid-6/include/numeric.h
+  1.74      +1 -0      ircd-hybrid-6/src/Makefile.in
+  1.79      +3 -0      ircd-hybrid-6/src/client.c
+  1.1       +108 -0    ircd-hybrid-6/src/m_map.c (new)
+  1.30      +2 -2      ircd-hybrid-6/src/messages.tab
+  1.29      +2 -1      ircd-hybrid-6/src/messages_cust.tab
+  1.81      +1 -1      ircd-hybrid-6/src/s_misc.c
+  1.267     +1 -0      ircd-hybrid-6/src/s_user.c
+
+
+
 ievil       2003/10/13 07:30:18 EDT	(20031013_8)
 
   Modified files:
