@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.55 2001/08/10 11:34:04 leeh Exp $
+ *   $Id: s_debug.c,v 1.56 2001/11/29 06:25:35 db Exp $
  */
 #include "s_debug.h"
 #include "channel.h"
@@ -179,7 +179,7 @@ void send_usage(aClient *cptr, char *nick)
              me.name, RPL_STATSDEBUG, nick, secs/60, secs%60,
              rus.ru_utime.tv_sec/60, rus.ru_utime.tv_sec%60,
              rus.ru_stime.tv_sec/60, rus.ru_stime.tv_sec%60);
-  sendto_one(cptr, ":%s %d %s :RSS %d ShMem %d Data %d Stack %d",
+  sendto_one(cptr, ":%s %d %s :RSS %ld ShMem %d Data %d Stack %d",
              me.name, RPL_STATSDEBUG, nick, rus.ru_maxrss,
              rus.ru_ixrss / rup, rus.ru_idrss / rup,
              rus.ru_isrss / rup);
