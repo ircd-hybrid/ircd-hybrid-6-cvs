@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: channel.h,v 1.34 2001/07/18 02:15:18 lusky Exp $
+ * $Id: channel.h,v 1.35 2001/11/29 06:47:33 db Exp $
  */
 
 #ifndef INCLUDED_channel_h
@@ -110,8 +110,9 @@ extern int     check_channel_name(const char* name);
 extern void    channel_modes(struct Client *, char *, char *, struct Channel*);
 extern void    set_channel_mode(struct Client *, struct Client *, 
                                 struct Channel *, int, char **);
-
-
+#ifdef JUPE_CHANNEL
+extern void report_juped_channels(struct Client *);
+#endif
 
 /* this should eliminate a lot of ifdef's in the main code... -orabidoo */
 #ifdef BAN_INFO
