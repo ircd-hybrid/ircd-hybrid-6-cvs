@@ -21,9 +21,13 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.13 1999/07/15 22:26:43 db Exp $
+ * $Id: s_conf.h,v 1.14 1999/07/16 04:16:59 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.14  1999/07/16 04:16:59  db
+ * - optimized get_conf_name
+ * - replaced char * with const char * for filename
+ *
  * Revision 1.13  1999/07/15 22:26:43  db
  * - fixed core bug in m_kline.c, probably should add extra sanity test there
  *   REDUNDANT_KLINES was using aconf->name instead of aconf->user
@@ -216,7 +220,7 @@ extern void write_kline_or_dline_to_conf_and_notice_opers(
 							  char *,
 							  char *
 							  );
-extern char *get_conf_name(KlineType);
+extern const char *get_conf_name(KlineType);
 
 typedef struct
 {

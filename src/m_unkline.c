@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_unkline.c,v 1.13 1999/07/15 22:26:45 db Exp $
+ *   $Id: m_unkline.c,v 1.14 1999/07/16 04:17:01 db Exp $
  */
 #include "struct.h"
 
@@ -88,7 +88,7 @@ int m_unkline (aClient *cptr,aClient *sptr,int parc,char *parv[])
   char  buff[BUFSIZE];	/* matches line definition in s_conf.c */
   char	temppath[256];
 
-  char  *filename;		/* filename to use for unkline */
+  const char  *filename;		/* filename to use for unkline */
 
   char	*user,*host;
   char  *p;
