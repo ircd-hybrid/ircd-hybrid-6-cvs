@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.207 2001/07/27 22:14:59 leeh Exp $
+ * $Id: channel.c,v 1.208 2001/07/28 00:49:51 leeh Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -3679,22 +3679,31 @@ int     m_sjoin(struct Client *cptr,
   else if (newts == oldts)
     tstosend = oldts;
   else if (newts < oldts)
+  {
+    if(sptr->serv->tsversion > 3)
     {
-#ifdef NO_HACK_OPS
       keep_our_modes = NO;
       chptr->channelts = tstosend = newts;
-#else
+    }
+    else
+    {
       if (doesop)
         keep_our_modes = NO;
       if (haveops && !doesop)
           tstosend = oldts;
       else
         chptr->channelts = tstosend = newts;
-#endif
     }
+  }
   else
+  {
+    if(sptr->serv->tsversion > 3)
     {
-#ifndef NO_HACK_OPS    
+      keep_new_modes = NO;
+      tstosend = oldts;
+    }
+    else
+    {
       if (haveops)
         keep_new_modes = NO;
       if (doesop && !haveops)
@@ -3703,11 +3712,8 @@ int     m_sjoin(struct Client *cptr,
         }
       else
         tstosend = oldts;
-#else
-      keep_new_modes = NO;
-      tstosend = oldts;
-#endif      
     }
+  }
 
   if (!keep_new_modes)
     mode = *oldmode;

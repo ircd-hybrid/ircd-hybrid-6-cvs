@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_svinfo.c,v 1.5 2001/06/16 11:22:11 leeh Exp $
+ *   $Id: m_svinfo.c,v 1.6 2001/07/28 00:49:52 leeh Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -127,6 +127,8 @@ int m_svinfo(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       return exit_client(sptr, sptr, sptr, "Incompatible TS version");
     }
 
+  sptr->serv->tsversion = atoi(parv[1]);
+  
   /*
    * since we're here, might as well set CurrentTime while we're at it
    */
