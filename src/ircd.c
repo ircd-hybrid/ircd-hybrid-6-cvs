@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.140 2001/06/06 22:11:08 db Exp $
+ * $Id: ircd.c,v 1.141 2001/06/12 02:15:47 greg Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -667,7 +667,7 @@ static void check_pidfile(void)
     else
     {
       pidfromfile = atoi(buff);
-      if (!kill(pidfromfile, 0))
+      if (pidfromfile != (int)getpid() && !kill(pidfromfile, 0))
       {
         printf("ERROR: daemon is already running\n");
         exit(-1);
