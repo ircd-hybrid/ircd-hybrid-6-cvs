@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.24 1999/05/29 14:06:49 db Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.25 1999/05/29 21:55:11 db Exp $";
 #endif
 
 #include <sys/time.h>
@@ -292,6 +292,13 @@ char	*get_client_name(aClient *sptr,int showip)
         t_user, t_host, t_port); */
       (void)ircsprintf(nbuf, "%s[%s%s%s]", sptr->name,
         t_user, t_host, t_port);
+    }
+  else
+    {
+      /* As pointed out by Adel Mezibra 
+       * Neph|l|m@EFnet. Was missing a return here.
+       */
+      return sptr->name;
     }
 
   if (mycmp(sptr->name,sptr->sockhost) || t_port[0])
