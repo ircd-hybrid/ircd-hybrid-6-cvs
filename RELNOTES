@@ -1,6 +1,6 @@
 ircd-hybrid-6 Release Notes
 ---------------------------
-$Id: RELNOTES,v 1.7 2001/12/07 04:51:25 wcampbel Exp $
+$Id: RELNOTES,v 1.8 2001/12/08 01:59:13 wcampbel Exp $
 
 Operating system dependencies have been removed, there is no longer any
 special code for AIX, SEQUENT, DYNIX, HPUX, Solaris, or pyr. We have
@@ -45,7 +45,7 @@ for setting the value in real time. If you define USE_SYSLOG in your
 config ircd will log to both the ircd.log file and syslog.
 
 Authentication and DNS lookups are handled a bit differently now,
-clients are completely ignored until both auth and dns have completed.
+clients are completely ignored until both auth and DNS have completed.
 This is not significantly different than earlier behavior but you should
 notice slightly faster client connects.
 
