@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.80 1999/05/15 15:03:12 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.81 1999/05/15 21:02:39 db Exp $";
 #endif
 
 #include "struct.h"
@@ -4132,6 +4132,14 @@ int	m_sjoin(aClient *cptr,
     return 0;
   if (!IsChannelName(parv[2]))
     return 0;
+
+  /* comstud server did this, SJOIN's for
+   * local channels can't happen.
+   */
+
+  if(*parv[2] == '&')
+    return 0;
+
   newts = atol(parv[1]);
   memset((void *)&mode, 0, sizeof(mode));
 
