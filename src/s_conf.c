@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.247 2003/08/16 19:10:46 ievil Exp $
+ *  $Id: s_conf.c,v 1.248 2003/08/16 19:19:41 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -3151,8 +3151,10 @@ char *oper_privs_as_string(aClient *cptr,int port)
     {
       if(cptr)
         SetOperUnIdle(cptr);
+      *privs_ptr++ = 'I';
     }
-  
+  else
+    *privs_ptr++ = 'i';  
 
   if(port & CONF_OPER_DIE)
     {
