@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.62 2001/10/27 14:55:58 db Exp $
+ * $Id: res.c,v 1.63 2001/10/27 15:04:12 bill Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
@@ -632,7 +632,7 @@ do_query_name(const struct DNSQuery* query,
   }
   else
   {
-    /* XXX if request _is_ NULL is there any point calling query_name?
+    /* XXX if request _is_ NULL is there any point calling query_name? */
     return;
   }
 
@@ -664,7 +664,7 @@ do_query_number(const struct DNSQuery* query,
   }
   else
   {
-    /* XXX if request _is_ NULL is there any point calling query_name?
+    /* XXX if request _is_ NULL is there any point calling query_name? */
     return;
   }
 
