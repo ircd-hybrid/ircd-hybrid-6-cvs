@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.159 2001/12/11 02:09:16 db Exp $
+ * $Id: ircd.c,v 1.160 2001/12/13 05:21:22 db Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -142,7 +142,11 @@ struct Client *serv_cptr_list  = NULL;
 
 static size_t      initialVMTop = 0;   /* top of virtual memory at init */
 static const char* logFileName = LPATH;
+#if defined(__CYGWIN__)
+static int         bootDaemon  = 0;
+#else
 static int         bootDaemon  = 1;
+#endif
 
 char**  myargv;
 int     dorehash   = 0;
