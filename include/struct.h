@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.54 1999/07/08 07:35:04 tomh Exp $
+ * $Id: struct.h,v 1.55 1999/07/08 22:46:22 db Exp $
  */
 #ifndef	INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -87,8 +87,6 @@ typedef	struct	SLink	Link;
 typedef	struct	SMode	Mode;
 typedef struct  Zdata   aZdata;
 
-typedef struct	MessageFileItem aMessageFile;
-
 /*
 ** flags for bootup options (command line flags)
 */
@@ -138,11 +136,6 @@ struct	Counter	{
 	int	max_tot;	/* MAX global clients */
 };
 
-struct  MessageFileItem
-{
-  char	line[MESSAGELINELEN];
-  struct MessageFileItem *next;
-};
 
 /*
   lets speed this up...

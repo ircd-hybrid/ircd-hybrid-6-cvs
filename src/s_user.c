@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.118 1999/07/08 06:03:59 tomh Exp $
+ *  $Id: s_user.c,v 1.119 1999/07/08 22:46:27 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -54,6 +54,8 @@
 
 extern SetOptionsType GlobalSetOptions;
 
+extern ConfigFileEntryType ConfigFileEntry; /* defined in ircd.c */
+
 static int do_user (char *, aClient *, aClient*, char *, char *, char *,
                      char *);
 
@@ -62,11 +64,9 @@ static int valid_username( anUser *);
 static void report_and_set_user_flags( aClient *, aConfItem * );
 static int tell_user_off(aClient *,char **);
 
-extern char motd_last_changed_date[];
 extern int send_motd(aClient *,aClient *,int, char **,aMessageFile *);
 
 #ifdef OPER_MOTD
-extern aMessageFile *opermotd;	/* defined in s_serv.c */
 extern int send_oper_motd(aClient *,aClient *,int, char **,aMessageFile *);
 #endif
 
@@ -760,7 +760,7 @@ static	int	register_user(aClient *cptr,
       (void)show_lusers(sptr, sptr, 1, parv);
       
       sendto_one(sptr,"NOTICE %s :*** Notice -- motd was last changed at %s",
-		 nick, motd_last_changed_date);
+		 nick, ConfigFileEntry.motd_last_changed_date);
 #ifdef SHORT_MOTD
       sendto_one(sptr,
 		 "NOTICE %s :*** Notice -- Please read the motd if you haven't read it",
@@ -778,7 +778,7 @@ static	int	register_user(aClient *cptr,
       sendto_one(sptr, rpl_str(RPL_ENDOFMOTD),
 		 me.name, parv[0]);
 #else
-      (void)send_motd(sptr, sptr, 1, parv,motd);
+      (void)send_motd(sptr, sptr, 1, parv,ConfigFileEntry.motd);
 #endif
 #ifdef LITTLE_I_LINES
       if(sptr->confs && sptr->confs->value.aconf &&
@@ -3163,7 +3163,7 @@ int	m_oper(aClient *cptr,
 	  sendto_one(sptr, rpl_str(RPL_YOUREOPER),
 		     me.name, parv[0]);
 #ifdef OPER_MOTD
-	  (void)send_oper_motd(sptr, sptr, 1, parv,opermotd);
+	  (void)send_oper_motd(sptr, sptr, 1, parv,ConfigFileEntry.opermotd);
 #endif
 	}
       return 0;
@@ -3273,7 +3273,7 @@ int	m_oper(aClient *cptr,
 		 operprivs);
 
 #ifdef OPER_MOTD
-      (void)send_oper_motd(sptr, sptr, 1, parv,opermotd);
+      (void)send_oper_motd(sptr, sptr, 1, parv,ConfigFileEntry.opermotd);
 #endif
 
 #if !defined(CRYPT_OPER_PASSWORD) && (defined(FNAME_OPERLOG) ||\
