@@ -1,7 +1,7 @@
 /*
  * dline_conf.c
  *
- * $Id: dline_conf.c,v 1.19 1999/07/15 08:47:35 tomh Exp $
+ * $Id: dline_conf.c,v 1.20 1999/07/15 10:53:16 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -14,6 +14,7 @@
 #include <time.h>
 #endif
 #include <signal.h>
+#include <string.h>
 #include "h.h"
 #include "s_conf.h"
 #include "dline_conf.h"
