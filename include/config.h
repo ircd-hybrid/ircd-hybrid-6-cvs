@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.148 2001/12/07 05:09:27 db Exp $
+ * $Id: config.h,v 1.149 2001/12/08 20:48:17 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -59,15 +59,6 @@
  * Remember, MAX_BUFFER + MAX_CLIENTS can't exceed HARD_FDLIMIT :)
  */
 #define MAX_BUFFER      60
-
-#if defined(__CYGWIN__)
-#undef  HARD_FDLIMIT_
-#define HARD_FDLIMIT_   64
-#undef  INIT_MAXCLIENTS
-#define INIT_MAXCLIENTS 20
-#undef  MAX_BUFFER
-#define MAX_BUFFER      10
-#endif /* __CYGWIN__ */
 
 /* NICKNAMEHISTORYLENGTH - size of WHOWAS array
  * this defines the length of the nickname history.  each time a user changes
