@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.1 1998/09/17 14:25:04 db Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.2 1998/09/29 07:04:27 db Exp $";
 #endif
 
 #include <sys/time.h>
@@ -628,7 +628,11 @@ char	*comment	/* Reason for the exit */
 		{
 		  next = acptr->next;
 		  if (IsServer(acptr) && acptr->from == sptr)
-		    exit_one_client(NULL, acptr, &me, me.name);
+		    {
+		      ts_warn("Dependent server %s not on llist!?", 
+		      	       acptr->name);
+		      exit_one_client(NULL, acptr, &me, me.name);
+		    }
 		}
 	    }
 	  else

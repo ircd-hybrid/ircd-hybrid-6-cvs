@@ -1,3 +1,4 @@
+
 /************************************************************************
  *   IRC - Internet Relay Chat, src/s_bsd.c
  *   Copyright (C) 1990 Jarkko Oikarinen and
@@ -21,7 +22,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.3 1998/09/22 22:27:15 db Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.4 1998/09/29 07:04:24 db Exp $";
 #endif
 
 #include "struct.h"

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: numeric.h,v 1.2 1998/09/24 02:33:29 db Exp $
+ * $Id: numeric.h,v 1.3 1998/09/29 07:04:20 db Exp $
  */
 #ifdef TOPIC_INFO
 # define RPL_TOPICWHOTIME 333
@@ -228,6 +228,9 @@
 
 #define RPL_INVITING         341
 #define	RPL_SUMMONING        342
+
+#define RPL_EXCEPTLIST       348
+#define RPL_ENDOFEXCEPTLIST  349
 
 #define RPL_VERSION          351
 
