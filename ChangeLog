@@ -1,3 +1,20 @@
+ievil       2003/06/14 21:49:45 EDT	(20030615_0)
+
+  Modified files:
+    src                  mtrie_conf.c 
+  Log:
+  Fixed a small bork that made the following i-line combo not work:
+  
+  I:NOMATCH::+*@*::104
+  I:NOMATCH::~*@*::102
+  
+  tnx to einride for walking trough the logic with me
+  
+  Revision  Changes    Path
+  1.93      +6 -3      ircd-hybrid-6/src/mtrie_conf.c
+
+
+
 ievil       2003/06/14 19:36:42 EDT	(20030614_4)
 
   Modified files:
