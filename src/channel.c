@@ -34,7 +34,7 @@
  *                mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.155 1999/07/27 21:31:55 db Exp $
+ * $Id: channel.c,v 1.156 1999/07/27 21:37:13 db Exp $
  */
 #include "channel.h"
 #include "struct.h"
@@ -2804,6 +2804,7 @@ static void free_bans_exceptions_denies(struct Channel *chptr)
     }
 
   chptr->banlist = chptr->exceptlist = chptr->denylist = NULL;
+  chptr->num_bed = 0;
 }
 
 
