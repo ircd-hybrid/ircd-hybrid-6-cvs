@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.5 1998/09/22 22:27:15 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.6 1998/09/24 02:33:32 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1565,6 +1565,11 @@ int 	initconf(int opt, int fd)
 	  aconf->status = CONF_LISTEN_PORT;
 	  break;
 
+	case 'Q': /* reserved nicks */
+	case 'q': 
+	  aconf->status = CONF_QUARANTINED_NICK;
+	  break;
+
 #ifdef R_LINES
 	case 'R': /* extended K line */
 	case 'r': /* Offers more options of how to restrict */
@@ -1575,6 +1580,11 @@ int 	initconf(int opt, int fd)
 	case 'u': /* this should connect.                  */
 	  /* This is for client only, I must ignore this */
 	  /* ...U-line should be removed... --msa */
+	  break;
+
+	case 'X': /* rejected gecos */
+	case 'x': 
+	  aconf->status = CONF_XLINE;
 	  break;
 
 	case 'Y':
@@ -1801,6 +1811,12 @@ int 	initconf(int opt, int fd)
 	{
 	  dontadd = 1;
 	  add_to_dline_hash(aconf);
+	}
+
+      if (aconf->status & (CONF_XLINE|CONF_QUARANTINED_NICK))
+	{
+	  MyFree(aconf->name);
+	  aconf->name = aconf->host;
 	}
 
       (void)collapse(aconf->host);
