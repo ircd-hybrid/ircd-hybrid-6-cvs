@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.92 1999/05/09 08:19:28 lusky Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.93 1999/05/13 03:10:46 db Exp $";
 #endif
 
 
@@ -155,6 +155,7 @@ extern int majority_gline(aClient *,
 #endif
 
 extern char *oper_privs(aClient *,int);	/* defined in s_conf.c */
+extern char *oper_flags(int);		/* defined in s_conf.c */
 extern void outofmemory(void);		/* defined in list.c */
 extern void s_die(void);		/* defined in ircd.c as VOIDSIG */
 extern int match(char *,char *);	/* defined in match.c */
@@ -2254,7 +2255,8 @@ static	void	report_configured_links(aClient *sptr,int mask)
 			 host,
 			 name,
 			 port,
-			 get_conf_class(tmp));
+			 get_conf_class(tmp),
+			 oper_flags((int)tmp->hold));
 	    else
 	      sendto_one(sptr, rpl_str(p->rpl_stats), me.name,
 			 sptr->name, c,
@@ -2271,7 +2273,8 @@ static	void	report_configured_links(aClient *sptr,int mask)
 	      sendto_one(sptr, rpl_str(p->rpl_stats), me.name,
 			 sptr->name, p->conf_char, host, name,
 			 oper_privs((aClient *)NULL,port),
-			 get_conf_class(tmp));
+			 get_conf_class(tmp),
+			 oper_flags((int)tmp->hold));
 	    else
 	      sendto_one(sptr, rpl_str(p->rpl_stats), me.name,
 			 sptr->name, p->conf_char, host, name,
