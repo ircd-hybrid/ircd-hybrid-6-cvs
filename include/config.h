@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.109 2001/06/18 03:37:20 db Exp $
+ * $Id: config.h,v 1.110 2001/06/19 18:34:13 leeh Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -738,6 +738,13 @@
  * As configured here, a GLINE will last 12 hours
  */
 #define GLINE_TIME      (12*3600)
+
+/* NO_FAKE_GLINES - disable fake glines
+ * Define this if you want to stop fake glines from users who
+ * dont exist.  This could possibly have an impact with services,
+ * so its #undef'd by default.
+ */
+#undef NO_FAKE_GLINES
 
 /* Ignore bogus timestamps from other servers. Yes this will desync
  * the network, but it will allow chanops to resync with a valid non TS 0
