@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.73 2001/12/13 23:16:38 leeh Exp $
+ *  $Id: s_misc.c,v 1.74 2002/02/17 18:16:03 lusky Exp $
  */
 #include "s_misc.h"
 #include "channel.h"
@@ -209,7 +209,8 @@ char *make_isupport()
   static char tisupport[200];
 
   ircsprintf(tisupport, "WALLCHOPS PREFIX=(ov)@+ CHANTYPES=#& MAXCHANNELS=%d "
-                        "NICKLEN=%d TOPICLEN=%d KICKLEN=%d NETWORK=%s "
+                        "MAXBANS=%d NICKLEN=%d TOPICLEN=%d KICKLEN=%d "
+                        "NETWORK=%s "
 #ifdef CHANMODE_E
                         "CHANMODES=be,k,l,imnpst EXCEPTS"
 #else
@@ -218,8 +219,8 @@ char *make_isupport()
 #ifdef USE_KNOCK
                         " KNOCK"
 #endif
-                        " MODES=%d", MAXCHANNELSPERUSER, NICKLEN, TOPICLEN,
-			KILLLEN, NETWORK_NAME, MAXMODEPARAMS);
+                        " MODES=%d", MAXCHANNELSPERUSER, MAXBANS, NICKLEN,
+                        TOPICLEN, KILLLEN, NETWORK_NAME, MAXMODEPARAMS);
 
   return tisupport;
 }
