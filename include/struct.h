@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.64 1999/07/22 05:56:12 db Exp $
+ * $Id: struct.h,v 1.65 1999/07/22 06:33:27 tomh Exp $
  */
 #ifndef INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -369,8 +369,6 @@ extern  char    *generation, *creation;
 
 /* misc defines */
 
-#define FLUSH_BUFFER    -2
-#define GO_ON           -3      /* for m_nick/m_client's benefit */
 #define UTMP            "/etc/utmp"
 #define COMMA           ","
 

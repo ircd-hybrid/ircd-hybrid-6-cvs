@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.88 1999/07/22 05:19:09 tomh Exp $
+ *  $Id: s_bsd.c,v 1.89 1999/07/22 06:31:20 tomh Exp $
  */
 #include "s_bsd.h"
 #include "s_serv.h"
@@ -1143,8 +1143,8 @@ static int parse_client_queued(struct Client* cptr)
       if (dolen > 0 && DBufLength(&cptr->recvQ))
 	DBufClear(&cptr->recvQ);
     }
-    if (dolen > 0 && (dopacket(cptr, readBuf, dolen) == FLUSH_BUFFER))
-      return FLUSH_BUFFER;
+    if (dolen > 0 && (dopacket(cptr, readBuf, dolen) == CLIENT_EXITED))
+      return CLIENT_EXITED;
   }
   return 1;
 }
@@ -1450,7 +1450,7 @@ int read_message(time_t delay, fdlist *listp)        /* mika */
     else if (PARSE_AS_CLIENT(cptr) && !NoNewLine(cptr))
       length = parse_client_queued(cptr);
 
-    if (length > 0 || length == FLUSH_BUFFER)
+    if (length > 0 || length == CLIENT_EXITED)
       continue;
     if (IsDead(cptr)) {
        exit_client(cptr, cptr, &me,
@@ -1724,7 +1724,7 @@ int read_message(time_t delay, fdlist *listp)
       else if (PARSE_AS_CLIENT(cptr) && !NoNewLine(cptr))
         length = parse_client_queued(cptr);
 
-      if (length > 0 || length == FLUSH_BUFFER)
+      if (length > 0 || length == CLIENT_EXITED)
         continue;
       if (IsDead(cptr)) {
          exit_client(cptr, cptr, &me,

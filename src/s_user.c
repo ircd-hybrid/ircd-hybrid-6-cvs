@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.172 1999/07/22 06:15:40 db Exp $
+ *  $Id: s_user.c,v 1.173 1999/07/22 06:31:21 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -1228,8 +1228,8 @@ static int nickkilldone(aClient *cptr, aClient *sptr, int parc,
           ** may reject the client and call exit_client for it
           ** --must test this and exit m_nick too!!!
           */
-            if (register_user(cptr, sptr, nick, buf) == FLUSH_BUFFER)
-              return FLUSH_BUFFER;
+            if (register_user(cptr, sptr, nick, buf) == CLIENT_EXITED)
+              return CLIENT_EXITED;
         }
     }
 

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.28 1999/07/22 04:17:31 db Exp $
+ *  $Id: client.c,v 1.29 1999/07/22 06:31:19 tomh Exp $
  */
 #include "client.h"
 #include "s_conf.h"
@@ -744,7 +744,7 @@ static void remove_dependents(aClient* cptr,
 ** For convenience, this function returns a suitable value for
 ** m_function return value:
 **
-**        FLUSH_BUFFER        if (cptr == sptr)
+**        CLIENT_EXITED        if (cptr == sptr)
 **        0                if (cptr != sptr)
 */
 int exit_client(
@@ -1003,7 +1003,7 @@ const char* comment        /* Reason for the exit */
         }
 
   exit_one_client(cptr, sptr, from, comment);
-  return cptr == sptr ? FLUSH_BUFFER : 0;
+  return cptr == sptr ? CLIENT_EXITED : 0;
 }
 
 /*

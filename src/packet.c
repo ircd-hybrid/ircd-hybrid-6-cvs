@@ -18,7 +18,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: packet.c,v 1.16 1999/07/22 06:03:36 tomh Exp $
+ *   $Id: packet.c,v 1.17 1999/07/22 06:31:20 tomh Exp $
  */ 
 #include "packet.h"
 #include "struct.h"
@@ -143,18 +143,18 @@ int     dopacket(aClient *cptr, char *buffer, int length)
               me.receiveM += 1; /* Update messages received */
               cptr->receiveM += 1;
               cptr->count = 0; /* ...just in case parse returns with
-                               ** FLUSH_BUFFER without removing the
+                               ** CLIENT_EXITED without removing the
                                ** structure pointed by cptr... --msa
                                */
-              if (parse(cptr, cptr->buffer, ch1) == FLUSH_BUFFER)
+              if (parse(cptr, cptr->buffer, ch1) == CLIENT_EXITED)
                 /*
-                ** FLUSH_BUFFER means actually that cptr
+                ** CLIENT_EXITED means actually that cptr
                 ** structure *does* not exist anymore!!! --msa
                 */
-                return FLUSH_BUFFER;
+                return CLIENT_EXITED;
               /*
               ** Socket is dead so exit (which always returns with
-              ** FLUSH_BUFFER here).  - avalon
+              ** CLIENT_EXITED here).  - avalon
               */
               if (cptr->flags & FLAGS_DEADSOCKET)
                 return exit_client(cptr, cptr, &me, (cptr->flags & FLAGS_SENDQEX) ?

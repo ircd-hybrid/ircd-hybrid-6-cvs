@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: ircd_defs.h,v 1.6 1999/07/21 05:45:03 tomh Exp $
+ * $Id: ircd_defs.h,v 1.7 1999/07/22 06:33:26 tomh Exp $
  *
  * ircd_defs.h - Global size definitions for record entries used
  * througout ircd. Please think 3 times before adding anything to this
@@ -56,6 +56,11 @@
 #define USERHOST_REPLYLEN       (NICKLEN+HOSTLEN+USERLEN+5)
 #define MAX_DATE_STRING 32      /* maximum string length for a date string */
 
+/* 
+ * message return values 
+ */
+#define CLIENT_EXITED    -2
+#define HANDLED_OK        0
 
 /* 
  * Macros everyone uses :/ moved here from sys.h
