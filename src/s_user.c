@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.62 1999/03/17 19:20:40 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.63 1999/03/19 05:37:50 db Exp $";
 
 #endif
 
@@ -1401,7 +1401,7 @@ int	m_nick(aClient *cptr,
       return 0;
     }
 
-  if(MyClient(sptr) &&
+  if(MyConnect(sptr) && !IsServer(sptr) &&
      !IsAnOper(sptr) && find_special_conf(nick,CONF_QUARANTINED_NICK)) 
     {
       sendto_realops_lev(REJ_LEV,
