@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.49 1999/07/17 22:12:49 db Exp $
+ *  $Id: s_misc.c,v 1.50 1999/07/17 23:29:58 db Exp $
  */
 #include "s_conf.h"
 #include "struct.h"
@@ -373,6 +373,14 @@ void serv_info(aClient *cptr,char *name)
              (float)((float)me.receiveK / (float)uptime));
 }
 
+/*
+ * show_capabilities
+ *
+ * inputs	- pointer to an aClient
+ * output	- pointer to static string
+ * side effects	- build up string representing capabilities of server listed
+ */
+
 char *show_capabilities(aClient *acptr)
 {
   static char        msgbuf[BUFSIZE];
@@ -393,44 +401,6 @@ char *show_capabilities(aClient *acptr)
   return(msgbuf);
 }
 
-/*
- * show_opers
- * show who is opered on this server
- */
-
-void show_opers(aClient *cptr,char *name)
-{
-  register aClient        *cptr2;
-  register int j=0;
-
-  for(cptr2 = oper_cptr_list; cptr2; cptr2 = cptr2->next_oper_client)
-    {
-      j++;
-      if (MyClient(cptr) && IsAnOper(cptr))
-        {
-          sendto_one(cptr, ":%s %d %s :[%c][%s] %s (%s@%s) Idle: %d",
-                     me.name, RPL_STATSDEBUG, name,
-                     IsOper(cptr2) ? 'O' : 'o',
-                     oper_privs_as_string(cptr2,
-					  cptr2->confs->value.aconf->port),
-                     cptr2->name,
-                     cptr2->username, cptr2->host,
-                     timeofday - cptr2->user->last);
-        }
-      else
-        {
-          sendto_one(cptr, ":%s %d %s :[%c] %s (%s@%s) Idle: %d",
-                     me.name, RPL_STATSDEBUG, name,
-                     IsOper(cptr2) ? 'O' : 'o',
-                     cptr2->name,
-                     cptr2->username, cptr2->host,
-                     timeofday - cptr2->user->last);
-        }
-    }
-
-  sendto_one(cptr, ":%s %d %s :%d OPER%s", me.name, RPL_STATSDEBUG,
-             name, j, (j==1) ? "" : "s");
-}
 
 /*
  * show_servers
