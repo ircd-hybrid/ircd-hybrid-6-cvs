@@ -1,3 +1,20 @@
+ievil       2003/06/14 15:48:20 EDT	(20030614_1)
+
+  Modified files:
+    include              client.h 
+    src                  m_quit.c 
+  Log:
+  In this evil evil world there were some flags, some flags and some flags2.
+  Some of these flags, they like to play. Play and collide. And when they
+  collide bad things happend. Bad Bad Bad things. Then the dark side comes
+  and gives us the core.
+  
+  Revision  Changes    Path
+  1.67      +2 -2      ircd-hybrid-6/include/client.h
+  1.6       +1 -2      ircd-hybrid-6/src/m_quit.c
+
+
+
 ievil       2003/06/14 13:39:07 EDT	(20030614_0)
 
   Modified files:
