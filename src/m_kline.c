@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.54 2000/06/10 02:45:36 lusky Exp $
+ *   $Id: m_kline.c,v 1.55 2000/08/22 05:03:59 lusky Exp $
  */
 #include "m_kline.h"
 #include "channel.h"
@@ -662,12 +662,8 @@ m_kline(aClient *cptr,
   **
   */
 
-  /*
-   * what to do if host is a legal ip, and its a temporary kline ?
-   * Don't do the CIDR conversion for now of course.
-   */
 
-  if(!temporary_kline_time && (ip_kline = is_address(host, &ip, &ip_mask)))
+  if((ip_kline = is_address(host, &ip, &ip_mask)))
      {
        /*
         * XXX - ack
@@ -730,6 +726,11 @@ m_kline(aClient *cptr,
         current_date);
       DupString(aconf->passwd, buffer );
       aconf->hold = CurrentTime + temporary_kline_time_seconds;
+      if(ip_kline)
+        {
+          aconf->ip = ip;
+          aconf->ip_mask = ip_mask;
+        }
       add_temp_kline(aconf);
       rehashed = YES;
       dline_in_progress = NO;
