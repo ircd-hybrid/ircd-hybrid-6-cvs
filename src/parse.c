@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.49 2003/05/04 17:52:45 db Exp $
+ *   $Id: parse.c,v 1.50 2003/06/12 23:05:56 ievil Exp $
  */
 #include "parse.h"
 #include "channel.h"
@@ -59,7 +59,7 @@ static int do_numeric (char [], struct Client *,
                          struct Client *, int, char **);
 
 static struct Message *do_msg_tree(MESSAGE_TREE *, char *, struct Message *);
-static struct Message *tree_parse(char *);
+struct Message *tree_parse(char *);
 
 static char buffer[1024];  /* ZZZ must this be so big? must it be here? */
 
@@ -470,7 +470,7 @@ static struct Message *do_msg_tree(MESSAGE_TREE *mtree, char *prefix,
  *      -Dianora, orabidoo
  */
 
-static struct Message *tree_parse(char *cmd)
+struct Message *tree_parse(char *cmd)
 {
   char r;
   MESSAGE_TREE *mtree = msg_tree_root;

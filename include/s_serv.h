@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: s_serv.h,v 1.16 2003/06/06 10:08:02 ievil Exp $
+ * $Id: s_serv.h,v 1.17 2003/06/12 23:05:54 ievil Exp $
  *
  */
 #ifndef INCLUDED_serv_h
@@ -47,7 +47,7 @@ struct Capability
 #define CAP_KNOCK	0x00000020      /* Can do KNOCK */
 #define CAP_KLN         0x00000040      /* Can do remote Kline */
 #define CAP_UNKLN       0x00000080      /* Can do remote UNkline */
-
+#define CAP_ENCAP       0x00000100      /* Can do command encapsulation */
 
 #define DoesCAP(x)      ((x)->caps)
 

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_commands.h,v 1.7 2001/11/29 06:28:23 db Exp $
+ * $Id: m_commands.h,v 1.8 2003/06/12 23:05:54 ievil Exp $
  */
 #ifndef INCLUDED_m_commands_h
 #define INCLUDED_m_commands_h
@@ -27,6 +27,7 @@
 
 struct Client;
 
+extern int ms_encap(struct Client *,struct Client *,int,char **);
 extern int m_testline(struct Client *,struct Client *,int,char **);
 
 extern int m_admin(struct Client *,struct Client *,int,char **);

@@ -20,7 +20,7 @@
  * "parse.h". - Headers file.
  *
  *
- * $Id: parse.h,v 1.3 1999/07/26 05:46:35 tomh Exp $
+ * $Id: parse.h,v 1.4 2003/06/12 23:05:54 ievil Exp $
  *
  */
 #ifndef INCLUDED_parse_h_h
@@ -29,6 +29,7 @@
 struct Message;
 struct Client;
 
-extern  int     parse (struct Client *, char *, char *);
-extern  void    init_tree_parse (struct Message *);
+extern  int            parse (struct Client *, char *, char *);
+extern  void           init_tree_parse (struct Message *);
+extern  struct Message *tree_parse(char *);
 #endif /* INCLUDED_parse_h_h */

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.115 2003/06/12 22:09:53 ievil Exp $
+ *   $Id: send.c,v 1.116 2003/06/12 23:05:56 ievil Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -56,6 +56,8 @@ static  void vsendto_realops(const char *, va_list);
 
 static  unsigned long sentalong[MAXCONNECTIONS];
 static unsigned long current_serial=0L;
+
+void vsendto_anywhere(struct Client *, struct Client *, const char *, va_list);
 
 /*
 ** dead_link
@@ -922,6 +924,74 @@ sendto_match_servs(aChannel *chptr, aClient *from, const char *pattern, ...)
   va_end(args);
 
 } /* sendto_match_servs() */
+
+/*
+ * sendto_match_cap_servs_butone
+ *
+ * send to all servers matching the mask, have the capab, except one
+ */
+void
+sendto_match_cap_servs_butone(aClient *from, aClient *one, const char *mask,
+                              int cap, const char *pattern, ...)
+{
+  aClient *cptr;
+  va_list args;
+  char buf[BUFSIZE];
+
+  va_start(args, pattern);
+
+  for(cptr = serv_cptr_list; cptr; cptr = cptr->next_server_client)
+  {
+    if (cptr == one)
+      continue;
+
+    if (!IsCapable(cptr, cap))
+      continue;
+
+    if (!match(mask, cptr->name))
+      continue;
+
+    vsendto_anywhere(cptr, from, pattern, args);
+  }
+
+  va_end(args);
+}
+
+/* sendto_anywhere()
+ *
+ * inputs	- pointer to dest client
+ *		- pointer to from client
+ * 		- varargs
+ * outpus	- none
+ * side effects	- less efficient than sendto_remote and sendto_one
+ *		  but useful when one does not know where target "lives"
+ */
+void
+vsendto_anywhere(struct Client *to, struct Client *from,
+                 const char *pattern, va_list args)
+{
+  char buffer[BUFSIZE], *ptr = buffer;
+  int len;
+  struct Client *send_to = (to->from != NULL ? to->from : to);
+
+  if (IsDead(send_to))
+    return;
+
+  if (MyClient(to))
+  {
+    if (IsServer(from))
+      len = ircsprintf(buffer, ":%s ", from->name);
+    else
+      len = ircsprintf(buffer, ":%s!%s@%s ",
+                       from->name, from->username, from->host);
+  }
+  else len = ircsprintf(buffer, ":%s ",
+                        from->name);
+  ptr+=len;
+  vsprintf(ptr, pattern, args);
+
+  sendto_one(send_to, "%s", buffer);
+}
 
 /*
  * sendto_match_cap_servs

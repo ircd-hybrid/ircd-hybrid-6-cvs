@@ -2,7 +2,7 @@
  * send.h
  * Copyright (C) 1999 Patrick Alken
  *
- * $Id: send.h,v 1.17 2003/05/04 17:52:39 db Exp $
+ * $Id: send.h,v 1.18 2003/06/12 23:05:54 ievil Exp $
  */
 
 #ifndef INCLUDED_send_h
@@ -55,6 +55,9 @@ extern  void sendto_match_servs(struct Channel *, struct Client *,
                                 const char *, ...);
 extern  void sendto_match_cap_servs(struct Channel *, struct Client *, 
                                     int, const char *, ...);
+extern  void sendto_match_cap_servs_butone(struct Client *,struct Client *,
+                                           const char *, int,
+                                           const char *, ...);
 extern  void sendto_match_butone(struct Client *, struct Client *, 
                                  char *, int, const char *, ...);
 
