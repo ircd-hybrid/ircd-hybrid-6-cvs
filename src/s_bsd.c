@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.84 1999/07/22 03:16:34 tomh Exp $
+ *  $Id: s_bsd.c,v 1.85 1999/07/22 03:26:19 tomh Exp $
  */
 #include "s_bsd.h"
 #include "s_serv.h"
@@ -39,6 +39,7 @@
 #include "s_zip.h"
 #include "ircd.h"
 #include "s_misc.h"
+#include "list.h"
 
 #include <assert.h>
 #include <stdio.h>

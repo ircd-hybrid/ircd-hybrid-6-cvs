@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: class.c,v 1.9 1999/07/22 02:06:13 db Exp $
+ *   $Id: class.c,v 1.10 1999/07/22 03:26:17 tomh Exp $
  */
 #include "class.h"
 #include "struct.h"
@@ -26,6 +26,7 @@
 #include "ircd.h"
 #include "s_conf.h"
 #include "send.h"
+#include "list.h"
 
 #define BAD_CONF_CLASS          -1
 #define BAD_PING                -2

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.28 1999/07/22 02:06:22 db Exp $
+ *   $Id: s_debug.c,v 1.29 1999/07/22 03:26:20 tomh Exp $
  */
 #include "struct.h"
 #include "s_conf.h"
@@ -26,6 +26,7 @@
 #include "dbuf.h"
 #include "res.h"
 #include "send.h"
+#include "list.h"
 
 #include <string.h>
 #include <stdarg.h>
