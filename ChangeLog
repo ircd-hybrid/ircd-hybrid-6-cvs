@@ -1,3 +1,15 @@
+ievil       2003/06/12 20:25:37 EDT	(20030613_0)
+
+  Modified files:
+    src                  s_user.c 
+  Log:
+  change stats p to show an admin who is using umode +p (hidden)
+  
+  Revision  Changes    Path
+  1.256     +23 -9     ircd-hybrid-6/src/s_user.c
+
+
+
 ievil       2003/06/12 19:56:45 EDT	(20030612_5)
 
   Added files:
