@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.77 1999/06/27 01:03:09 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.78 1999/06/27 01:12:20 db Exp $";
 #endif
 
 #include "struct.h"
@@ -265,7 +265,7 @@ int	attach_Iline(aClient *cptr,
 			     cptr->name,host,
 			     inetntoa((char *)&cptr->ip),
 			     me.name);
-	      strncpyzt(cptr->sockhost,"oper.",sizeof(cptr->sockhost));
+CT	      strncpyzt(cptr->sockhost,"oper.",sizeof(cptr->sockhost));
 	      strcat(cptr->sockhost,me.name);
 #endif
 	      SetIPSpoof(cptr);
@@ -291,7 +291,11 @@ int	attach_Iline(aClient *cptr,
   /* Slow down the reconnectors who are rejected */
 
 #ifdef REJECT_HOLD
-  SetRejectHold(cptr);
+  if( (reject_held_fds != REJECT_HELD_MAX ) )
+    {
+      SetRejectHold(cptr);
+      reject_held_fds++;
+    }
 #endif
 
   return -1;	/* -1 on no match *bleh* */
