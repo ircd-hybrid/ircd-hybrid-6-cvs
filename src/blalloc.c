@@ -4,7 +4,7 @@
  * Owner:  Wohali (Joan Touzet)
  *
  * Modified 2001/11/29 for mmap() support by Aaron Sethman <androsyn@ratbox.org>
- * $Id: blalloc.c,v 1.22 2001/12/08 08:53:46 jdc Exp $
+ * $Id: blalloc.c,v 1.23 2002/01/13 22:32:45 androsyn Exp $
  */
 #include "config.h"
 #include "blalloc.h"
@@ -14,6 +14,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <fcntl.h>
 #ifdef HAVE_MMAP
 #include <sys/mman.h>
 #endif
