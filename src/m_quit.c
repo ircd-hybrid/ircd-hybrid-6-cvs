@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_quit.c,v 1.4 2003/06/12 22:09:53 ievil Exp $
+ *   $Id: m_quit.c,v 1.5 2003/06/14 17:39:06 ievil Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -109,6 +109,7 @@ int     m_quit(struct Client *cptr,
   if (!IsServer(sptr) && MyConnect(sptr) && comment[0]) 
     {
       snprintf(reason, TOPICLEN, "Quit: %s", comment);
+      reason[TOPICLEN] = '\0';
       comment = reason;    
     }
 
