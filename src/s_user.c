@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.217 2000/02/01 03:25:07 lusky Exp $
+ *  $Id: s_user.c,v 1.218 2000/05/26 03:57:39 lusky Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -1156,7 +1156,7 @@ static int nickkilldone(aClient *cptr, aClient *sptr, int parc,
       else
         {
           newts = sptr->tsinfo = CurrentTime;
-          ts_warn("Remote nick %s introduced without a TS", nick);
+          ts_warn("Remote nick %s (%s) introduced without a TS", nick, parv[0]);
         }
       /* copy the nick in place */
       (void)strcpy(sptr->name, nick);
