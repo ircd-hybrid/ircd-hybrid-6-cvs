@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.146 2001/12/07 04:16:29 jdc Exp $
+ * $Id: config.h,v 1.147 2001/12/07 04:26:15 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -232,12 +232,6 @@
  * any PRIVMSG with a ',' in the target will be rejected.
  */
 #define MAX_MULTI_MESSAGES 2
-
-/* NO_DUPE_MULTI_MESSAGES
- * Define this to check for duplicate recipients in PRIVMSG, at the expense
- * of noticeable CPU cycles.
- */
-#define NO_DUPE_MULTI_MESSAGES
 
 /* WARN_NO_NLINE
  * Define this if you want ops to get noticed about "things" trying to
