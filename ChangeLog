@@ -1,3 +1,24 @@
+ievil       2003/05/05 09:25:47 EDT	(20030505_1)
+
+  Modified files:
+    include              patchlevel.h 
+  Log:
+  Just a quick commit to describe in detail the fixes done
+  by W. Campbell which was cvs commited by Diane Bruce a few days
+  ago:
+  
+  - removes the unused id field from struct Client
+  - restores Androsyn's adns fix
+  - restores xyst's m_error fix, always log the real IP
+  - correct an issue with kline and shared servers (U:)
+  - restore the m_unkline fix (stops cores)
+  - corrected the defaulting to class 0 notice
+  
+  Revision  Changes    Path
+  1.155     +1 -1      ircd-hybrid-6/include/patchlevel.h
+
+
+
 db          2003/05/04 22:39:09 EDT	(20030505_0)
 
   Modified files:
