@@ -1,3 +1,18 @@
+ievil       2004/05/23 13:26:34 EDT	(20040523_13)
+
+  Modified files:
+    include              channel.h 
+    src                  channel.c 
+  Log:
+  Cleaned up channel code a bit. Made add and del modes into 1 generic command
+  for +I, +e and +b ;)
+  
+  Revision  Changes    Path
+  1.40      +1 -2      ircd-hybrid-6/include/channel.h
+  1.248     +72 -250   ircd-hybrid-6/src/channel.c
+
+
+
 ievil       2004/05/23 12:52:53 EDT	(20040523_12)
 
   Modified files:
