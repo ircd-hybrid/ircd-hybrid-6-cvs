@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.88 1999/07/03 20:28:11 tomh Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.89 1999/07/04 03:28:02 db Exp $";
 #endif
 
 #include "s_conf.h"
@@ -838,10 +838,6 @@ int	attach_conf(aClient *cptr,aConfItem *aconf)
   /* If OLD_Y_LIMIT is defined the code goes back to the old way
    * I lines used to work, i.e. number of clients per I line
    * not total in Y
-   * -Dianora
-   */
-  /* blah this code is not used at the moment, needs to be rewritten
-   * look at attach_iline()
    * -Dianora
    */
 #ifdef OLD_Y_LIMIT
@@ -1724,6 +1720,9 @@ void initconf(int opt, FBFILE* file, int use_include)
   unsigned long ip;
   unsigned long ip_mask;
   int sendq = 0;
+  aClass *class0;
+
+  class0 = find_class(0);	/* which one is class 0 ? */
 
   while (fbgets(line, sizeof(line), file))
     {
@@ -1994,7 +1993,18 @@ void initconf(int opt, FBFILE* file, int use_include)
 	    }
 	  else
 	    {
-	      ClassPtr(aconf) = find_class(atoi(tmp));
+	      int classToFind;
+
+	      classToFind = atoi(tmp);
+
+	      ClassPtr(aconf) = find_class(classToFind);
+
+	      if(classToFind && (ClassPtr(aconf) == class0))
+		{
+		  sendto_realops(
+          		 "Warning *** Defaulting to class 0 for class %d",
+			 classToFind);
+		}
 	    }
 
 	  if(aconf->status & (CONF_LOCOP|CONF_OPERATOR))
