@@ -19,7 +19,7 @@
  *
  *      I kind of modernized this code a bit. -Dianora
  *
- *   $Id: messages.tab,v 1.15 2001/07/02 03:18:42 db Exp $
+ *   $Id: messages.tab,v 1.16 2001/07/02 09:19:45 leeh Exp $
  */
 
 static  char *  replies[] = {
@@ -478,7 +478,7 @@ static  char *  replies[] = {
 /* 434 */       (char *)NULL,
 /* 435 */       (char *)NULL,
 /* 436 ERR_NICKCOLLISION, */    ":%s 436 %s %s :Nickname collision KILL",
-/* 437 ERR_NOTAVAILABLE, */     ":%s 437 %s %s :Nick/channel is temporarily unavailable",
+/* 437 ERR_UNAVAILRESOURCE, */  ":%s 437 %s %s :Nick/channel is temporarily unavailable",
 /* 438 ERR_NICKTOOFAST */       ":%s 438 %s %s %s :Nick change too fast. Please wait %d seconds.",
 /* 439 */       (char *)NULL,
 /* 440 */       (char *)NULL,

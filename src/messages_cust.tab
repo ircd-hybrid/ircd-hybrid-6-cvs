@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: messages_cust.tab,v 1.14 2001/07/02 03:18:43 db Exp $
+ * $Id: messages_cust.tab,v 1.15 2001/07/02 09:19:46 leeh Exp $
  *
  */
 /* 
@@ -479,7 +479,7 @@ static  char *  replies[] = {
 /* 434 */       (char *)NULL,
 /* 435 */       (char *)NULL,
 /* 436 ERR_NICKCOLLISION, */    ":%s 436 %s %s :Nickname collision KILL",
-/* 437 ERR_NOTAVAILABLE, */     ":%s 437 %s %s :Nick/channel is temporarily unavailable",
+/* 437 ERR_UNAVAILRESOURCE, */  ":%s 437 %s %s :Nick/channel is temporarily unavailable",
 /* 438 ERR_NICKTOOFAST */       ":%s 438 %s %s %s :Nick change too fast. Please wait %d seconds.",
 /* 439 */       (char *)NULL,
 /* 440 */       (char *)NULL,
