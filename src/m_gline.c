@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.37 1999/08/01 06:47:19 tomh Exp $
+ *  $Id: m_gline.c,v 1.38 2000/02/01 03:25:05 lusky Exp $
  */
 #include "m_gline.h"
 #include "channel.h"
@@ -101,10 +101,10 @@ int     m_gline(aClient *cptr,
   const char* oper_server;      /* server of oper requesting GLINE */
   char *user, *host;            /* user and host of GLINE "victim" */
   char *reason;                 /* reason for "victims" demise */
+#ifdef GLINES
   char *p;
   register char tmpch;
   register int nonwild;
-#ifdef GLINES
   char buffer[512];
   const char *current_date;
   char tempuser[USERLEN + 2];

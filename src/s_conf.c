@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.180 2000/02/01 00:44:12 lusky Exp $
+ *  $Id: s_conf.c,v 1.181 2000/02/01 03:25:06 lusky Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -386,7 +386,9 @@ void report_specials(struct Client* sptr, int flags, int numeric)
 int attach_Iline(aClient* cptr, const char* username, char **preason)
 {
   struct ConfItem* aconf;
+#ifdef GLINES
   struct ConfItem* gkill_conf;
+#endif /* GLINES */
   struct ConfItem* tkline_conf;
   char       non_ident[USERLEN + 1];
 
