@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.66 1999/04/17 23:18:15 lusky Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.67 1999/04/18 01:47:28 db Exp $";
 
 #endif
 
@@ -3526,6 +3526,7 @@ int	m_oper(aClient *cptr,
 	    SetOper(sptr);
 	    sptr->flags |= (OPER_UMODES);
 	  }
+      SetIPHidden(sptr);
       Count.oper++;
       *--s =  '@';
       SetElined(cptr);
@@ -3777,7 +3778,7 @@ int     m_usrip(aClient *cptr,
 	  }
 	else
 	  {
-	    if(IsAnOper(acptr))
+	    if(IsIPHidden(acptr))
 	       (void)ircsprintf(buf2, "%s%s=%c%s@127.0.0.1",
 				acptr->name,
 				IsAnOper(acptr) ? "*" : "",
