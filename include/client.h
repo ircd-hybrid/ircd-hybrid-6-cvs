@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.29 1999/07/20 04:35:33 db Exp $
+ * $Id: client.h,v 1.30 1999/07/20 13:57:12 sean Exp $
  */
 #ifndef	INCLUDED_client_h
 #define INCLUDED_client_h
@@ -156,6 +156,8 @@ struct Client
   short	            status;	/* Client type */
   char	            nicksent;
   unsigned char     local_flag; /* if this is 1 this client is local */
+  unsigned short    listprogress; /* where were we when the /list blocked? */
+  unsigned int      listprogress2; /* where in the current bucket were we? */
 
   /*
    * client->name is the unique name for a client nick or host
@@ -282,6 +284,7 @@ struct Client
 #define	SetClient(x)		((x)->status = STAT_CLIENT)
 
 
+
 /* housekeeping flags */
 
 #define	FLAGS_PINGSENT     0x0001 /* Unreplied ping sent */
@@ -354,6 +357,7 @@ struct Client
 #define FLAGS2_IP_SPOOFING	0x100000	/* client IP is spoofed */
 #define FLAGS2_IP_HIDDEN	0x200000	/* client IP should be hidden
 					           from non opers */
+#define FLAGS2_SENDQ_POP  0x400000  /* sendq exceeded (during list) */
 
 
 #define	SEND_UMODES  (FLAGS_INVISIBLE | FLAGS_OPER | FLAGS_WALLOP)
@@ -440,6 +444,9 @@ struct Client
 #define ClearDoingList(x)	((x)->flags2 &= ~FLAGS2_DOINGLIST)
 #define SetDoingList(x)         ((x)->flags2 |= FLAGS2_DOINGLIST)
 #define IsDoingList(x)		((x)->flags2 & FLAGS2_DOINGLIST)
+#define ClearSendqPop(x)  ((x)->flags2 &= ~FLAGS2_SENDQ_POP)
+#define SetSendqPop(x)    ((x)->flags2 |= FLAGS2_SENDQ_POP)
+#define IsSendqPopped(x)  ((x)->flags2 & FLAGS2_SENDQ_POP)
 #define IsElined(x)		((x)->flags2 & FLAGS2_E_LINED)
 #define SetElined(x)		((x)->flags2 |= FLAGS2_E_LINED)
 #define IsBlined(x)		((x)->flags2 & FLAGS2_B_LINED)
