@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu, Computing Center and Jarkko Oikarinen
  *
- * $Id: list.c,v 1.30 1999/07/17 22:12:45 db Exp $
+ * $Id: list.c,v 1.31 1999/07/18 16:36:48 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -30,6 +30,7 @@
 #include "class.h"
 #include "send.h"
 #include "list.h"
+#include "channel.h"
 #include <string.h>
 #include <stdlib.h>
 
