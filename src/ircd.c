@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.122 1999/08/01 05:38:14 tomh Exp $
+ * $Id: ircd.c,v 1.123 1999/08/01 05:48:26 tomh Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -810,7 +810,8 @@ int main(int argc, char *argv[])
   read_conf_files(YES);         /* cold start init conf files */
 
   aconf = find_me();
-  strncpy_irc(me.name, aconf->host, HOSTLEN);
+  if (EmptyString(me.name))
+    strncpy_irc(me.name, aconf->host, HOSTLEN);
   strncpy_irc(me.host, aconf->host, HOSTLEN);
 
   me.fd = -1;
