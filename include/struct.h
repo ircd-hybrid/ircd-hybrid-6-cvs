@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.73 1999/07/25 17:09:03 db Exp $
+ * $Id: struct.h,v 1.74 1999/07/25 17:23:19 db Exp $
  */
 #ifndef INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -256,35 +256,5 @@ struct fludbot {
 };
 #endif /* FLUD */
 
-#ifdef GLINES
-typedef struct gline_pending
-{
-  char oper_nick1[NICKLEN + 1];
-  char oper_user1[USERLEN + 1];
-  char oper_host1[HOSTLEN + 1];
-  const char* oper_server1;     /* point to scache */
-  char *reason1;
-  time_t time_request1;
-
-  char oper_nick2[NICKLEN + 1];
-  char oper_user2[USERLEN + 1];
-  char oper_host2[HOSTLEN + 1];
-  const char* oper_server2;     /* point to scache */
-  char *reason2;
-  time_t time_request2;
-  
-  time_t last_gline_time;       /* for expiring entry */
-  char user[USERLEN + 1];
-  char host[HOSTLEN + 1];
-
-  struct gline_pending *next;
-}GLINE_PENDING;
-
-/* how long a pending G line can be around
- *   10 minutes should be plenty
- */
-
-#define GLINE_PENDING_EXPIRE 600
-#endif
 
 #endif /* INCLUDED_struct_h */
