@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.56 1999/07/01 20:35:12 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.57 1999/07/01 21:40:18 db Exp $";
 #endif
 
 #include "struct.h"
@@ -91,7 +91,7 @@ fdlist oper_fdlist;
 fdlist busycli_fdlist;	/* high-priority clients */
 #endif
 
-fdlist default_fdlist;  /* just the number of the entry */
+fdlist default_fdlist;
 
 SetOptionsType GlobalSetOptions;
 

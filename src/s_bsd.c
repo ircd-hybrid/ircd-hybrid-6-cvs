@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.43 1999/07/01 16:13:35 db Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.44 1999/07/01 21:40:19 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1892,7 +1892,7 @@ int	read_message(time_t delay, fdlist *listp)
 
 	  if (!(cptr = local[i]))
 	    continue;
-	  if (!
+
 	  if (IsLog(cptr))
 	    continue;
 	  if (DoingAuth(cptr))
