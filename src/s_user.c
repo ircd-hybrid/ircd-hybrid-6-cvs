@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.249 2003/01/05 19:47:48 gregp Exp $
+ *  $Id: s_user.c,v 1.250 2003/01/06 04:52:10 gregp Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -145,7 +145,7 @@ static int user_modes_from_c_to_bitmask[] =
   FLAGS_DEBUG,  /* d */
 #ifdef ELEET_BY_FLAG
   FLAGS_ELEET,	/* e */
-#else /* ELEET_BY_FLAG
+#else /* ELEET_BY_FLAG */
   0,			/* e */
 #endif /* ELEET_BY_FLAG */
   FLAGS_FULL,   /* f */
