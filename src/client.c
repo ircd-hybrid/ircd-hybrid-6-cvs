@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.79 2003/10/13 11:33:13 ievil Exp $
+ *  $Id: client.c,v 1.80 2004/12/06 04:03:23 lusky Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -214,7 +214,7 @@ void _free_client(struct Client* cptr)
        */
       sendto_ops(BH_FREE_ERROR_MESSAGE, cptr);
       sendto_ops("Please report to the hybrid team! " \
-                 "ircd-hybrid@the-project.org");
+                 "bugs@ircd-hybrid.org");
 
       ilog(L_WARN, BH_FREE_ERROR_MESSAGE, cptr);
     }

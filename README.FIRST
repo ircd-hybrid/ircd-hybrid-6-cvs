@@ -1,6 +1,6 @@
 ircd-hybrid-6 README
 --------------------
-$Id: README.FIRST,v 1.16 2003/06/06 08:45:16 ievil Exp $
+$Id: README.FIRST,v 1.17 2004/12/06 04:03:17 lusky Exp $
 
 If you don't read this first, we won't help you.
 :-)
@@ -22,9 +22,9 @@ VERY IMPORTANT. The files, /etc/services, /etc/protocols, and
 for ircd to start.  Errors from adns causing the ircd to refuse to start up
 are often related to permission problems on these files.
 
-There is now a mailing list for general discussion of Hybrid.  To subscribe
-to the Hybrid List, send email to listmanager@the-project.org with
-a single line in the body containing "subscribe hybrid".
+There is now a mailing list for general discussion of Hybrid.  To subscribe,
+use this link:
+    https://lists.ircd-hybrid.org/mailman/listinfo/hybrid
 
 SOLARIS USERS: this code appears to tickle a bug in older gcc and
 egcs ONLY on 64-bit Solaris7.  gcc-2.95 and SunPro C on 64bit should

@@ -1,6 +1,6 @@
 ircd-hybrid-6 INSTALL
 ---------------------
-$Id: INSTALL,v 1.12 2001/12/08 04:12:39 wcampbel Exp $
+$Id: INSTALL,v 1.13 2004/12/06 04:03:17 lusky Exp $
 
 hybrid-6 relies upon GNU autoconf.  The following is a transcript of
 recommended procedures that users/administrators of hybrid-6 should
@@ -67,15 +67,14 @@ Send Check or Money Order to...  just kidding!  Commercial support for
 ircd-hybrid is not available at this time.
 
 However, all hope is not lost; the Hybrid Mailing List is available for
-general help, and/or questions.  To subscribe, please send Email to
-listmanager@the-project.org with a single line in the body containing
-"subscribe hybrid".
+general help, and/or questions.  To subscribe, use this link:
+    https://lists.ircd-hybrid.org/mailman/listinfo/hybrid
 
-If hybrid crashes on you, PLEASE CONTACT ircd-hybrid@the-project.org
+If hybrid crashes on you, PLEASE CONTACT bugs@ircd-hybrid.org
 ASAP with a backtrace of the core.  The hybrid team can't fix bugs if
 no one tells us about them!
 
 If there is a new feature you would like to see in the next major
 release of ircd-hybrid, please post it to the public mailing list,
-hybrid@the-project.org.
+hybrid@lists.ircd-hybrid.org.
 

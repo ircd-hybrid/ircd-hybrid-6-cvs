@@ -4,7 +4,7 @@
  * Owner:  Wohali (Joan Touzet)
  *
  * Modified 2001/11/29 for mmap() support by Aaron Sethman <androsyn@ratbox.org>
- * $Id: blalloc.c,v 1.25 2003/06/24 03:57:16 ievil Exp $
+ * $Id: blalloc.c,v 1.26 2004/12/06 04:03:22 lusky Exp $
  */
 #include "config.h"
 #include "blalloc.h"
@@ -349,7 +349,7 @@ int BlockHeapFree(BlockHeap *bh, void *ptr)
                          bh->elemSize,
                          BH_CurrentFile,
                          BH_CurrentLine);
-              sendto_ops("Please report to the hybrid team! ircd-hybrid@the-project.org");
+              sendto_ops("Please report to the hybrid team! bugs@ircd-hybrid.org");
 #endif /* DEBUG_BLOCK_ALLOCATOR */
             }
           else

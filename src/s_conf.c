@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.253 2004/05/23 16:22:16 ievil Exp $
+ *  $Id: s_conf.c,v 1.254 2004/12/06 04:03:23 lusky Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -673,7 +673,7 @@ find_or_add_ip(struct Client *cptr, const char *username)
       if( free_ip_entries == (IP_ENTRY *)NULL)
         {
           sendto_realops("s_conf.c free_ip_entries was found NULL in find_or_add");
-          sendto_realops("Please report to the hybrid team! ircd-hybrid@the-project.org");
+          sendto_realops("Please report to the hybrid team! bugs@ircd-hybrid.org");
           outofmemory();
         }
 
@@ -697,7 +697,7 @@ find_or_add_ip(struct Client *cptr, const char *username)
       if( free_ip_entries == (IP_ENTRY *)NULL)
         {
           sendto_realops("s_conf.c free_ip_entries was found NULL in find_or_add");
-          sendto_realops("Please report to the hybrid team! ircd-hybrid@the-project.org");
+          sendto_realops("Please report to the hybrid team! bugs@ircd-hybrid.org");
           outofmemory();
         }
 
@@ -831,7 +831,7 @@ void remove_one_ip(unsigned long ip_in)
         }
     }
   sendto_realops("s_conf.c couldn't find ip# in hash table in remove_one_ip()");
-  sendto_realops("Please report to the hybrid team! ircd-hybrid@the-project.org");
+  sendto_realops("Please report to the hybrid team! bugs@ircd-hybrid.org");
   return;
 }
 

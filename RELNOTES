@@ -1,23 +1,22 @@
-$Id: RELNOTES,v 1.24 2004/06/13 22:36:45 ievil Exp $
+$Id: RELNOTES,v 1.25 2004/12/06 04:03:17 lusky Exp $
 
 This is the current release version of ircd-hybrid-6.
 
 BUG REPORTS: If you run this code and encounter problems, you must report
- the bug in one of the following ways:
-  a) By EMAIL to ircd-hybrid@the-project.org.  
+ the bug by EMAIL to bugs@ircd-hybrid.org.  
  Please include a gdb backtrace and a copy of your config.h and ircd.conf 
  with any report  (with passwords and other sensitive information masked).
 
 DISCUSSION: There is a mailing list for discussion of hybrid issues,
- including betas.  To subscribe, send a message with the subject "subscribe"
- to hybrid-request@the-project.org.  This is the proper place to discuss new
- features, bugs, etc.  Posting here is much more likely to get something
- done than ranting on #TZ.
+ including betas.  To subscribe, use this link:
+    https://lists.ircd-hybrid.org/mailman/listinfo/hybrid
+ This is the proper place to discuss new features, bugs, etc.  Posting here
+ is much more likely to get something done than ranting on #TZ.
 
-Questions/comments directed to ircd-hybrid@the-project.org
+Questions/comments directed to bugs@ircd-hybrid.org
 
 
-ircd-hybrid-6.x Release Notes
+ircd-hybrid-6.4.3 Release Notes
 -------------------------------
 o Added ETRACE command - built upon Sarisa's ideas
 o Added SINFO command
@@ -29,16 +28,19 @@ o Added ACL's for ENCAP
 o Added CAP_CLUSTER and XLINE/UNXLINE/RESV/UNRESV fwd'ing
   over ENCAP and CAP_CLUSTER
 o Added ip_must_resolve flag to i-lines
+o Added PROPAGATE_AWAY, BURST_AWAY, PART_MESSAGES
 o Changed the way +b/+I/+e is getting added, with a
   generic command add_id/del_id
 o Changed config.h so dlines are in seperate file
 o Expanded the number of numerics used
+o Made IDENTD timeout configurable by a seperate define in config.h
 o Fixed a possible mode desync on net-rejoin
 o Fixed a possible core on connect if one uses CUSTOM_ERR
 o Fixed compile problem with whois notification
 o Fixed IPv6 compatibilities for GLINES
 o Removed wildcard whois. It's not used anymore
 o Removed SLAVE_SERVERS. Will be replaced in the future
+o Removed SENDQ_ALLWAYS define
 
 
 ircd-hybrid-6.4.2 Release Notes
@@ -303,7 +305,7 @@ KNOWN BUGS:
 There is a possibility that ircd will core dump if you there are errors
 in your conf file.
 
-Send bug reports to ircd-hybrid@the-project.org.  If it cored, please
+Send bug reports to bugs@ircd-hybrid.org.  If it cored, please
 include a gdb backtrace and a copy of your config.h.
 
 
@@ -318,7 +320,7 @@ instructions:
     $ gdb ./ircd ircd.core
 3.  At the "(gdb)" prompt, enter the command "bt"
 4.  Save the output of the backtrace command and send it to
-    ircd-hybrid@the-project.org.
+    bugs@ircd-hybrid.org.
 5.  Be sure to save the ircd binary and the core file in a safe place in
     case the developers need to look deeper than a backtrace provides.
 
