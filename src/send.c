@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)send.c	2.32 2/28/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: send.c,v 1.24 1998/12/23 19:05:20 db Exp $";
+static char *rcs_version = "$Id: send.c,v 1.25 1998/12/24 00:03:52 db Exp $";
 #endif
 
 #include "struct.h"
@@ -568,10 +568,16 @@ va_dcl
 #ifdef USE_VARARGS
 #error "Broken in send.c"
 #else
-	      sendto_prefix_one(acptr, from, pattern,
-			       p1, p2,
-			       lp->value.cptr->name,
-			       p4, p5, p6, p7, p8);
+	      /* kludge in a built in chan wall for older servers */
+
+	      sendto_prefix_one(acptr, from,
+				":%s NOTICE %s :%s",
+				p1,
+				/* ignore p2, replace with NOTICE */
+				/* ignore p3, replace with username */
+				lp->value.cptr->name,
+				/* p4 is message "payload" */
+				p4);
 #endif
 	    }
 	  else
