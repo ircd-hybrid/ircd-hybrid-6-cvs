@@ -56,7 +56,7 @@
 #endif
 
 #ifndef lint
-static char *rcs_version="$Id: mtrie_conf.c,v 1.31 1999/05/05 03:11:24 db Exp $";
+static char *rcs_version="$Id: mtrie_conf.c,v 1.32 1999/05/08 20:40:46 lusky Exp $";
 #endif /* lint */
 
 #define MAXPREFIX (HOSTLEN+USERLEN+15)
@@ -680,11 +680,13 @@ aConfItem *find_matching_mtrie_conf(char *host,char *user,
 				    unsigned long ip)
 {
   aConfItem *iline_aconf_unsortable=(aConfItem *)NULL;
+#ifdef USE_IP_I_LINE_FIRST
   aConfItem *ip_iline_aconf=(aConfItem *)NULL;
+#endif
   aConfItem *iline_aconf=(aConfItem *)NULL;
   aConfItem *kline_aconf=(aConfItem *)NULL;
   char tokenized_host[HOSTLEN+1];
-  int top_of_stack;
+  int top_of_stack = 0;
 
   /* I look in the unsortable i line list first, to find
    * special cases like *@*ppp* first
@@ -871,7 +873,6 @@ static aConfItem *find_sub_mtrie(DOMAIN_LEVEL *cur_level,
 				 char *host,char *user,int flags)
 {
   DOMAIN_PIECE *cur_piece;
-  DOMAIN_PIECE *cur_wild_piece;
   char *cur_dns_piece;
   aConfItem *aconf=(aConfItem *)NULL;
 
@@ -926,7 +927,7 @@ static aConfItem *find_sub_mtrie(DOMAIN_LEVEL *cur_level,
     {
       aconf = find_wild_host_piece(cur_level,flags,cur_dns_piece,user);
 
-      if(aconf = find_user_piece(cur_piece,cur_dns_piece,user))
+      if((aconf = find_user_piece(cur_piece,cur_dns_piece,user)))
 	return(aconf);
       else
 	{

@@ -24,7 +24,7 @@
 #include "h.h"
 
 #ifndef lint
-static char *rcs_version = "$Id: whowas.c,v 1.6 1998/12/24 07:50:54 db Exp $";
+static char *rcs_version = "$Id: whowas.c,v 1.7 1999/05/08 20:40:51 lusky Exp $";
 #endif
 
 /* externally defined functions */
@@ -144,9 +144,9 @@ int     m_whowas(aClient *cptr,
   register aWhowas *temp;
   register int cur = 0;
   int     max = -1, found = 0;
-  char    *p, *nick, *s;
+  char    *p, *nick;
+/*  char    *s; */
   static time_t last_used=0L;
-  static int last_count=0;
 
   if (parc < 2)
     {

@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.70 1999/05/07 11:14:00 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.71 1999/05/08 20:40:50 lusky Exp $";
 
 #endif
 
@@ -1570,7 +1570,7 @@ int	m_nick(aClient *cptr,
 			   ":%s KILL %s :%s (%s(NOUSER) <- %s!%s@%s)(TS:%s)", me.name,
 			   acptr->name, me.name, acptr->from->name, parv[1], parv[5],
 			   parv[6], cptr->name);
-#endi
+#endif
 	    acptr->flags |= FLAGS_KILLED;
 	    /* Having no USER struct should be ok... */
 	    return exit_client(cptr, acptr, &me,
@@ -2204,7 +2204,7 @@ static	int	m_message(aClient *cptr,
        * if the channel is found, fine, if not report an error
        */
 
-      if (chptr = find_channel(nick+1, NullChn))
+      if ( (chptr = find_channel(nick+1, NullChn)) )
 	{
 #ifdef	IDLE_CHECK
 	  /* reset idle time for message only if target exists */
@@ -2674,7 +2674,8 @@ int	m_whois(aClient *cptr,
   Reg	anUser	*user;
   aClient *acptr, *a2cptr;
   aChannel *chptr;
-  char	*nick, *tmp, *name;
+  char	*nick, *name;
+  /* char  *tmp; */
   char	*p = NULL;
   int	found, len, mlen;
   static time_t last_used=0L;
@@ -3542,9 +3543,6 @@ int	m_oper(aClient *cptr,
   extern	char *crypt();
 #endif /* CRYPT_OPER_PASSWORD */
   char *operprivs;
-#ifdef OPER_MOTD
-  register aMessageFile *opermotd_ptr;
-#endif
 
   name = parc > 1 ? parv[1] : (char *)NULL;
   password = parc > 2 ? parv[2] : (char *)NULL;

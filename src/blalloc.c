@@ -8,7 +8,7 @@
 /* ************************************************************************ */
 
 #ifndef lint
-static char *rcs_version = "$Id: blalloc.c,v 1.5 1999/02/01 05:45:56 db Exp $";
+static char *rcs_version = "$Id: blalloc.c,v 1.6 1999/05/08 20:40:44 lusky Exp $";
 #endif
 
 /* ------------------------------------------------------------------------ */
@@ -324,7 +324,7 @@ int BlockHeapFree(BlockHeap *bh, void *ptr)
 /* ************************************************************************ */
 int BlockHeapGarbageCollect(BlockHeap *bh)
 {
-   Block *walker, *last, *tmpptr;
+   Block *walker, *last;
 
    if (bh == NULL)
       return 1;

@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.20 1999/03/15 20:58:30 db Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.21 1999/05/08 20:40:49 lusky Exp $";
 #endif
 
 #include <sys/time.h>
@@ -241,8 +241,8 @@ int	check_registered(aClient *sptr)
 char	*get_client_name(aClient *sptr,int showip)
 {
   static char nbuf[HOSTLEN * 2 + USERLEN + 5];
-  char t_port[7], t_user[USERLEN+2], t_host[HOSTLEN+1], t_id[4];
-
+  char t_port[7], t_user[USERLEN+2], t_host[HOSTLEN+1];
+  /* t_id[4]; */
   /*
    * The idea here is to build our text first, then do the
    * ircsprintf(), as all these conditionals are getting very
@@ -272,7 +272,7 @@ char	*get_client_name(aClient *sptr,int showip)
 
       /* Check for a port number, needed for listening ports */
       if (sptr->flags & FLAGS_LISTEN)
-        (void)sprintf(t_port, "/%.u", sptr->port);
+        (void)sprintf(t_port, "/%u", sptr->port);
 
       /* And finally, let's get the host information, ip or name */
       switch (showip)
@@ -758,7 +758,7 @@ static	void remove_dependents(aClient *cptr,
       /* The WALLOPS isn't needed here as pointed out by
        * comstud, since m_squit already does the notification.
        */
-#ifdef 0
+#if 0
       if (to != cptr &&	/* not to the originator */
 	  to != sptr->from && /* not to the destination */
 	  cptr != sptr->from	/* hasn't reached target */

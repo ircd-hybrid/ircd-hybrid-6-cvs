@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.39 1999/04/17 23:18:13 lusky Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.40 1999/05/08 20:40:46 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -495,7 +495,7 @@ static	time_t	check_pings(time_t currenttime)
 	    {
 	      if(IsPerson(cptr))
 		{
-		  if( aconf = match_Dline(ntohl(cptr->ip.s_addr)))
+		  if( (aconf = match_Dline(ntohl(cptr->ip.s_addr))) )
 
 		      /* if there is a returned 
 		       * aConfItem then kill it
