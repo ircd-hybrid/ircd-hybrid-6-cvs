@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: motd.c,v 1.3 1999/07/11 05:10:55 tomh Exp $
+ *   $Id: motd.c,v 1.4 1999/07/11 12:41:33 db Exp $
  */
 
 #include "sys.h"
@@ -87,7 +87,7 @@ int	m_motd(aClient *cptr,
 ** InitMessageFile
 **
 */
-void InitMessageFile(int motdType, char *fileName, MessageFile *motd)
+void InitMessageFile(MotdType motdType, char *fileName, MessageFile *motd)
   {
     strncpy(motd->fileName,fileName,PATH_MAX);
     motd->motdType = motdType;
@@ -106,7 +106,7 @@ void InitMessageFile(int motdType, char *fileName, MessageFile *motd)
 int SendMessageFile(aClient *sptr, MessageFile *motdToPrint)
 {
   MessageFileLine *linePointer;
-  int motdType;
+  MotdType motdType;
 
   if(motdToPrint)
     motdType = motdToPrint->motdType;
