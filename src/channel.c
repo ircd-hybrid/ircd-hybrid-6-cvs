@@ -34,7 +34,7 @@
  *                mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.133 1999/07/22 05:25:22 db Exp $
+ * $Id: channel.c,v 1.134 1999/07/22 06:15:39 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -703,6 +703,18 @@ int     can_send(aClient *cptr, aChannel *chptr)
 
   return 0;
 }
+
+int     user_channel_mode(aClient *cptr, aChannel *chptr)
+{
+  Link  *lp;
+
+  if (chptr)
+    if ((lp = find_user_link(chptr->members, cptr)))
+      return (lp->flags);
+  
+  return 0;
+}
+
 
 aChannel *find_channel(char *chname, aChannel *chptr)
 {
