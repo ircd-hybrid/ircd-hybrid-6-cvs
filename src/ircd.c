@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.114 1999/07/30 06:40:12 tomh Exp $
+ * $Id: ircd.c,v 1.115 1999/07/30 20:10:51 tomh Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -43,6 +43,7 @@
 #include "s_debug.h"
 #include "s_misc.h"
 #include "s_serv.h"      /* try_connections */
+#include "s_stats.h"
 #include "s_zip.h"
 #include "scache.h"
 #include "send.h"
@@ -835,7 +836,7 @@ int main(int argc, char *argv[])
   initlists();
   initclass();
   initwhowas();
-  initstats();
+  init_stats();
   init_tree_parse(msgtab);      /* tree parse code (orabidoo) */
 
   fdlist_init();

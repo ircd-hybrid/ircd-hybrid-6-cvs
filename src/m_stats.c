@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_stats.c,v 1.1 1999/07/29 07:11:48 tomh Exp $
+ *  $Id: m_stats.c,v 1.2 1999/07/30 20:10:52 tomh Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "class.h"       /* report_classes */
@@ -39,8 +39,9 @@
 #include "s_bsd.h"       /* highest_fd */
 #include "s_conf.h"      /* ConfItem, report_configured_links */
 #include "s_debug.h"     /* send_usage */
-#include "s_misc.h"      /* tstats */
+#include "s_misc.h"      /* serv_info */
 #include "s_serv.h"      /* hunt_server, show_servers */
+#include "s_stats.h"     /* tstats */
 #include "s_user.h"      /* show_opers */
 
 #include <string.h>

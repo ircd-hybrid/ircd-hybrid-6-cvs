@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_server.c,v 1.6 1999/07/29 02:34:20 tomh Exp $
+ *   $Id: m_server.c,v 1.7 1999/07/30 20:10:52 tomh Exp $
  */
 #include "m_commands.h"  /* m_server prototype */
 #include "client.h"      /* client struct */
@@ -31,8 +31,8 @@
 #include "list.h"        /* make_server */
 #include "numeric.h"     /* ERR_xxx */
 #include "s_conf.h"      /* struct ConfItem */
-#include "s_misc.h"      /* ircstp */
 #include "s_serv.h"      /* server_estab, check_server, my_name_for_link */
+#include "s_stats.h"     /* ServerStats */
 #include "scache.h"      /* find_or_add */
 #include "send.h"        /* sendto_one */
 #include "struct.h"      /* bleah */
@@ -409,7 +409,7 @@ int m_server(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
   if (check_server(cptr))
     return server_estab(cptr);
 
-  ++ircstp->is_ref;
+  ++ServerStats->is_ref;
   sendto_ops("Received unauthorized connection from %s.",
               get_client_host(cptr));
   return exit_client(cptr, cptr, cptr, "No C/N conf lines");

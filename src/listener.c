@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: listener.c,v 1.15 1999/07/29 07:11:47 tomh Exp $
+ *  $Id: listener.c,v 1.16 1999/07/30 20:10:52 tomh Exp $
  */
 #include "listener.h"
 #include "client.h"
@@ -26,7 +26,7 @@
 #include "numeric.h"
 #include "s_bsd.h"
 #include "s_conf.h"
-#include "s_misc.h"
+#include "s_stats.h"
 #include "send.h"
 #include "struct.h"
 
@@ -332,7 +332,7 @@ void accept_connection(struct Listener* listener)
    * check for connection limit
    */
   if ((MAXCONNECTIONS - 10) < fd) {
-    ++ircstp->is_ref;
+    ++ServerStats->is_ref;
     /* 
      * slow down the whining to opers bit 
      */
@@ -349,7 +349,7 @@ void accept_connection(struct Listener* listener)
    * check to see if listener is shutting down
    */
   if (!listener->active) {
-    ++ircstp->is_ref;
+    ++ServerStats->is_ref;
     send(fd, "ERROR :Use another port\r\n", 25, 0);
     close(fd);
     return;
@@ -358,14 +358,14 @@ void accept_connection(struct Listener* listener)
    * check conf for ip address access
    */
   if (!conf_connect_allowed(addr.sin_addr)) {
-    ircstp->is_ref++;
+    ServerStats->is_ref++;
 #ifdef REPORT_DLINE_TO_USER
      send(fd, "NOTICE DLINE :*** You have been D-lined\r\n", 41, 0);
 #endif
     close(fd);
     return;
   }
-  ircstp->is_ac++;
+  ServerStats->is_ac++;
   nextping = CurrentTime;
 
   add_connection(listener, fd);

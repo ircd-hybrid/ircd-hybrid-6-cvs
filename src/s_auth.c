@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.41 1999/07/30 06:40:17 tomh Exp $
+ *   $Id: s_auth.c,v 1.42 1999/07/30 20:10:53 tomh Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -36,7 +36,7 @@
 #include "numeric.h"
 #include "res.h"
 #include "s_bsd.h"
-#include "s_misc.h"
+#include "s_stats.h"
 #include "send.h"
 #include "struct.h"
 
@@ -215,7 +215,7 @@ static void auth_dns_callback(void* vptr, struct DNSReply* reply)
  */
 static void auth_error(struct AuthRequest* auth)
 {
-  ++ircstp->is_abad;
+  ++ServerStats->is_abad;
 
   close(auth->fd);
   auth->fd = -1;
@@ -255,7 +255,7 @@ static int start_auth_query(struct AuthRequest* auth)
     syslog(LOG_ERR, "Unable to create auth socket for %s:%m",
            get_client_name(auth->client,TRUE));
 #endif
-    ++ircstp->is_abad;
+    ++ServerStats->is_abad;
     return 0;
   }
   if ((MAXCONNECTIONS - 10) < fd) {
@@ -298,7 +298,7 @@ static int start_auth_query(struct AuthRequest* auth)
 
   if (connect(fd, (struct sockaddr*) &sock, sizeof(sock)) == -1) {
     if (errno != EINPROGRESS) {
-      ircstp->is_abad++;
+      ServerStats->is_abad++;
       /*
        * No error report from this...
        */
@@ -545,12 +545,12 @@ void read_auth_reply(struct AuthRequest* auth)
   ClearAuth(auth);
   
   if (!s) {
-    ++ircstp->is_abad;
+    ++ServerStats->is_abad;
     strcpy(auth->client->username, "unknown");
   }
   else {
     sendheader(auth->client, REPORT_FIN_ID);
-    ++ircstp->is_asuc;
+    ++ServerStats->is_asuc;
     SetGotId(auth->client);
     Debug((DEBUG_INFO, "got username [%s]", ruser));
   }
