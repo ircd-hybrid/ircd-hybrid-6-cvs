@@ -1,3 +1,20 @@
+ievil       2003/06/12 18:09:54 EDT	(20030612_1)
+
+  Modified files:
+    include              config.h m_info.h 
+    src                  m_quit.c send.c 
+  Log:
+  Fixed two typo's that sneaked in thru the last commit of m_quit.c.
+  Added RESTRICT_LOCOP.
+  
+  Revision  Changes    Path
+  1.159     +12 -0     ircd-hybrid-6/include/config.h
+  1.28      +6 -0      ircd-hybrid-6/include/m_info.h
+  1.4       +2 -2      ircd-hybrid-6/src/m_quit.c
+  1.115     +5 -0      ircd-hybrid-6/src/send.c
+
+
+
 ievil       2003/06/12 17:54:26 EDT	(20030612_0)
 
   Modified files:
