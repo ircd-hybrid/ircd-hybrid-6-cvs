@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.94 1999/07/06 05:42:21 tomh Exp $
+ *  $Id: s_conf.c,v 1.95 1999/07/07 00:59:16 db Exp $
  */
 #include "s_conf.h"
 #include "class.h"
@@ -1217,12 +1217,8 @@ aConfItem *find_special_conf(char *to_find, int mask)
   else
     return((aConfItem *)NULL);
 
-  for (aconf = this_conf, mask &= ~CONF_ILLEGAL; aconf; aconf = aconf->next)
+  for (aconf = this_conf; aconf; aconf = aconf->next)
     {
-      /* This shouldn't happen, since there are separate conf link lists
-       * for X lines and Q lines now. i.e. no mixed conf items on these
-       * lists.
-       */
       if (!(aconf->status & mask))
 	continue;
       

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.49 1999/07/06 05:42:20 tomh Exp $
+ *  $Id: s_bsd.c,v 1.50 1999/07/07 00:59:15 db Exp $
  */
 #include "s_bsd.h"
 #include "struct.h"
@@ -1533,7 +1533,7 @@ int read_message(time_t delay, fdlist *listp)        /* mika */
       for (auth = AuthPollList; auth; auth = auth->next) {
         if (IsAuthConnect(auth))
           FD_SET(auth->fd, write_set);
-        else
+        else if(IsAuthPending(auth))
           FD_SET(auth->fd, read_set);
       }
       for (i = 0; i <= highest_fd; i++)
@@ -1640,7 +1640,7 @@ int read_message(time_t delay, fdlist *listp)        /* mika */
       if (0 == --nfds)
         break;
     }
-    else if (FD_ISSET(auth->fd, read_set)) {
+    else if (IsAuthPending(auth) && FD_ISSET(auth->fd, read_set)) {
       read_auth_reply(auth);
       if (0 == --nfds)
         break;

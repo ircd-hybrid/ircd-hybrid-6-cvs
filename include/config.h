@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.56 1999/07/04 22:42:27 db Exp $
+ * $Id: config.h,v 1.57 1999/07/07 00:59:12 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -330,10 +330,6 @@
  */
 #define PACE_WALLOPS
 #define WALLOPS_WAIT 10	
-
-/* SHOW_HEADERS - Shows messages like "looking up hostname" 
- */
-#define SHOW_HEADERS
 
 /* SHORT_MOTD
  * There are client ignoring the FORCE_MOTD MOTD numeric, there is
