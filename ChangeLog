@@ -1,3 +1,16 @@
+ievil       2004/07/24 09:31:10 EDT	(20040724_0)
+
+  Modified files:
+    src                  channel.c 
+  Log:
+  Fixed logic bug in new add_id, now it will check for identical bans
+  from remote servers too ;)
+  
+  Revision  Changes    Path
+  1.250     +4 -3      ircd-hybrid-6/src/channel.c
+
+
+
 ievil       2004/06/13 18:36:46 EDT	(20040613_4)
 
   Modified files:
