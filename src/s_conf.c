@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.122 1999/07/17 02:31:59 db Exp $
+ *  $Id: s_conf.c,v 1.123 1999/07/17 03:02:45 db Exp $
  */
 #include "s_conf.h"
 #include "listener.h"
@@ -2023,17 +2023,11 @@ static void initconf(FBFILE* file, int use_include)
        */
       if ( aconf->status & CONF_LISTEN_PORT)
 	{
-          aConfItem *bconf;
-          
-          if ((bconf = find_conf_entry(aconf, aconf->status)))
-            {
-              delist_conf(bconf);
-              bconf->status &= ~CONF_ILLEGAL;
-              free_conf(aconf);
-              aconf = bconf;
-            }
-          else
-            add_listener(aconf);
+	  dontadd = 1;
+	  if(aconf->passwd[0] == '*')
+	    add_listener(aconf->port, NULL );
+	  else
+	    add_listener(aconf->port, (const char *)aconf->passwd);
 	}
       else if(aconf->status & CONF_CLIENT_MASK)
         {
