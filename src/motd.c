@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: motd.c,v 1.2 1999/07/11 03:50:46 db Exp $
+ *   $Id: motd.c,v 1.3 1999/07/11 05:10:55 tomh Exp $
  */
 
 #include "sys.h"
@@ -150,7 +150,7 @@ int SendMessageFile(aClient *sptr, MessageFile *motdToPrint)
       break;
 
     default:
-      return;
+      return 0;
       /* NOT REACHED */
     }
 
@@ -180,12 +180,12 @@ int ReadMessageFile(MessageFile *MessageFileptr)
   struct tm *local_tm;
 
   /* used to clear out old MessageFile entries */
-  MessageFileLine *mptr;
-  MessageFileLine *next_mptr;
+  MessageFileLine *mptr = 0;
+  MessageFileLine *next_mptr = 0;
 
   /* used to add new MessageFile entries */
-  MessageFileLine *newMessageLine;
-  MessageFileLine *currentMessageLine;
+  MessageFileLine *newMessageLine = 0;
+  MessageFileLine *currentMessageLine = 0;
 
   char buffer[MESSAGELINELEN];
   char *p;
@@ -233,7 +233,8 @@ int ReadMessageFile(MessageFile *MessageFileptr)
 
       if (MessageFileptr->contentsOfFile)
 	{
-	  currentMessageLine->next = newMessageLine;
+          if (currentMessageLine)
+	    currentMessageLine->next = newMessageLine;
 	  currentMessageLine = newMessageLine;
 	}
       else
