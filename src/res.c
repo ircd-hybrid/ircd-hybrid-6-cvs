@@ -22,7 +22,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)res.c	2.34 03 Nov 1993 (C) 1992 Darren Reed";
-static  char *rcs_version = "$Id: res.c,v 1.10 1998/12/10 18:44:22 db Exp $";
+static  char *rcs_version = "$Id: res.c,v 1.11 1998/12/19 03:45:54 db Exp $";
 #endif
 
 #undef	DEBUG	/* because there is a lot of debug code in here :-) */
@@ -571,7 +571,7 @@ static	int	proc_answer(ResRQ *rptr,
       if (n <= 0)
 	break;
 
-      /* With Address arithemetic you have to be very anal
+      /* With Address arithmetic you have to be very anal
        * this code was not working on alpha due to that
        * (spotted by rodder/jailbird/dianora)
        */
