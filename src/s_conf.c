@@ -19,11 +19,12 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.161 1999/07/31 23:45:50 db Exp $
+ *  $Id: s_conf.c,v 1.162 1999/08/01 06:47:22 tomh Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
 #include "class.h"
+#include "client.h"
 #include "common.h"
 #include "dline_conf.h"
 #include "hash.h"
@@ -39,6 +40,7 @@
 #include "send.h"
 #include "struct.h"
 
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>

@@ -16,9 +16,10 @@
 *   along with this program; if not, write to the Free Software
 *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 *
-*   $Id: whowas.c,v 1.31 1999/07/30 06:40:21 tomh Exp $
+*   $Id: whowas.c,v 1.32 1999/08/01 06:47:25 tomh Exp $
 */
 #include "whowas.h"
+#include "client.h"
 #include "common.h"
 #include "hash.h"
 #include "irc_string.h"

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: hash.h,v 1.7 1999/07/26 05:46:34 tomh Exp $
+ *   $Id: hash.h,v 1.8 1999/08/01 06:47:15 tomh Exp $
  */
 #ifndef INCLUDED_hash_h
 #define INCLUDED_hash_h
@@ -52,8 +52,7 @@ struct HashEntry {
 extern struct HashEntry hash_get_channel_block(int i);
 extern size_t hash_get_client_table_size(void);
 extern size_t hash_get_channel_table_size(void);
-extern void   clear_channel_hash_table(void);
-extern void   clear_client_hash_table(void);
+extern void   init_hash(void);
 extern void   add_to_client_hash_table(const char* name, 
                                        struct Client* client);
 extern void   del_from_client_hash_table(const char* name, 

@@ -1,10 +1,11 @@
 /*
  * dline_conf.c
  *
- * $Id: dline_conf.c,v 1.31 1999/07/31 23:45:50 db Exp $
+ * $Id: dline_conf.c,v 1.32 1999/08/01 06:47:18 tomh Exp $
  */
 #include "dline_conf.h"
 #include "class.h"
+#include "client.h"
 #include "common.h"
 #include "irc_string.h"
 #include "ircd.h"

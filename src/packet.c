@@ -18,16 +18,19 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: packet.c,v 1.19 1999/07/25 05:32:59 tomh Exp $
+ *   $Id: packet.c,v 1.20 1999/08/01 06:47:21 tomh Exp $
  */ 
 #include "packet.h"
-#include "struct.h"
+#include "client.h"
 #include "common.h"
-#include "s_zip.h"
 #include "ircd.h"
 #include "list.h"
 #include "parse.h"
- 
+#include "s_zip.h"
+#include "struct.h"
+
+
+
 /*
 ** dopacket
 **      cptr - pointer to client structure for which the buffer data

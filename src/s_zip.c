@@ -16,9 +16,10 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_zip.c,v 1.20 1999/07/25 06:52:25 tomh Exp $
+ *   $Id: s_zip.c,v 1.21 1999/08/01 06:47:24 tomh Exp $
  */
 #include "s_zip.h"
+#include "client.h"
 #include "irc_string.h"
 #include "packet.h"
 #include "s_bsd.h"

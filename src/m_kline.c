@@ -20,11 +20,12 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.48 1999/07/31 08:22:59 tomh Exp $
+ *   $Id: m_kline.c,v 1.49 1999/08/01 06:47:20 tomh Exp $
  */
 #include "m_kline.h"
 #include "channel.h"
 #include "class.h"
+#include "client.h"
 #include "common.h"
 #include "dline_conf.h"
 #include "irc_string.h"

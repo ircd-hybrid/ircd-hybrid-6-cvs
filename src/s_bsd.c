@@ -17,10 +17,11 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.110 1999/08/01 04:59:55 tomh Exp $
+ *  $Id: s_bsd.c,v 1.111 1999/08/01 06:47:22 tomh Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
+#include "client.h"
 #include "common.h"
 #include "config.h"
 #include "fdlist.h"

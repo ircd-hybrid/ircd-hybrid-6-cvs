@@ -17,11 +17,12 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.75 1999/07/31 01:53:31 tomh Exp $
+ *   $Id: send.c,v 1.76 1999/08/01 06:47:24 tomh Exp $
  */
 #include "send.h"
 #include "channel.h"
 #include "class.h"
+#include "client.h"
 #include "common.h"
 #include "irc_string.h"
 #include "ircd.h"

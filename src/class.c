@@ -16,16 +16,17 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: class.c,v 1.12 1999/07/28 07:49:33 tomh Exp $
+ *   $Id: class.c,v 1.13 1999/08/01 06:47:18 tomh Exp $
  */
 #include "class.h"
-#include "struct.h"
+#include "client.h"
 #include "common.h"
-#include "numeric.h"
 #include "ircd.h"
+#include "list.h"
+#include "numeric.h"
 #include "s_conf.h"
 #include "send.h"
-#include "list.h"
+#include "struct.h"
 
 #define BAD_CONF_CLASS          -1
 #define BAD_PING                -2

@@ -20,9 +20,10 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.67 1999/07/31 08:23:03 tomh Exp $
+ *  $Id: s_misc.c,v 1.68 1999/08/01 06:47:23 tomh Exp $
  */
 #include "s_misc.h"
+#include "client.h"
 #include "common.h"
 #include "irc_string.h"
 #include "ircd.h"

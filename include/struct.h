@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.83 1999/07/31 04:13:52 tomh Exp $
+ * $Id: struct.h,v 1.84 1999/08/01 06:47:15 tomh Exp $
  */
 #ifndef INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -27,39 +27,16 @@
 #if !defined(CONFIG_H_LEVEL_6)
 #  error Incorrect config.h for this revision of ircd.
 #endif
-#ifndef INCLUDED_stdio_h
-#include <stdio.h>
-#define INCLUDED_stdio_h
-#endif
+
 #ifndef INCLUDED_sys_types_h
 #include <sys/types.h>
 #define INCLUDED_sys_types_h
 #endif
-#ifndef INCLUDED_netinet_in_h
-#include <netinet/in.h>
-#define INCLUDED_netinet_in_h
-#endif
-
 #ifdef ORATIMING
 # ifndef INCLUDED_sys_time_h
 #  include <sys/time.h>
 #  define INCLUDED_sys_time_h
 # endif
-#endif
-
-#ifdef USE_SYSLOG
-# ifndef INCLUDED_syslog_h
-#  include <syslog.h>
-#  define INCLUDED_syslog_h
-# endif
-#endif
-
-#ifndef INCLUDED_ircd_defs_h
-# include "ircd_defs.h"
-#endif
-
-#ifndef INCLUDED_client_h
-# include "client.h"
 #endif
 
 struct Channel;
@@ -73,14 +50,6 @@ typedef struct  SLink   Link;
 typedef struct  Mode    Mode;
 typedef struct  Zdata   aZdata;
 
-/*
-** flags for bootup options (command line flags)
-*/
-#define BOOT_CONSOLE    1
-#define BOOT_DEBUG      4
-#define BOOT_TTY        16
-#define BOOT_STDERR     128
-
 /* general link structure used for chains */
 
 struct SLink
@@ -88,9 +57,9 @@ struct SLink
   struct        SLink   *next;
   union
   {
-    aClient   *cptr;
+    struct Client   *cptr;
     struct Channel  *chptr;
-    aConfItem *aconf;
+    struct ConfItem *aconf;
 #ifdef BAN_INFO
     struct Ban   *banptr;
 #endif

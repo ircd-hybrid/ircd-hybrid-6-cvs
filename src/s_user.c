@@ -20,11 +20,12 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.206 1999/08/01 04:59:57 tomh Exp $
+ *  $Id: s_user.c,v 1.207 1999/08/01 06:47:23 tomh Exp $
  */
 #include "s_user.h"
 #include "channel.h"
 #include "class.h"
+#include "client.h"
 #include "common.h"
 #include "fdlist.h"
 #include "flud.h"

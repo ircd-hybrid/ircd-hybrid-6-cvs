@@ -17,11 +17,12 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.123 1999/08/01 05:48:26 tomh Exp $
+ * $Id: ircd.c,v 1.124 1999/08/01 06:47:19 tomh Exp $
  */
 #include "ircd.h"
 #include "channel.h"
 #include "class.h"
+#include "client.h"
 #include "common.h"
 #include "dline_conf.h"
 #include "fdlist.h"
@@ -52,6 +53,7 @@
 #include "whowas.h"
 
 #include <string.h>
+#include <stdio.h>
 #include <errno.h>
 #include <time.h>
 #include <pwd.h>
@@ -663,8 +665,6 @@ int main(int argc, char *argv[])
  * criteria do not match the requirements of ircd 
  */
 #ifdef SETUID_ROOT
-  if (plock(TXTLOCK) < 0) 
-    fprintf(stderr,"could not plock...\n");
   if (setuid(IRCD_UID) < 0)
     exit(-1); /* blah.. this should be done better */
 #endif
@@ -793,8 +793,8 @@ int main(int argc, char *argv[])
   initialize_message_files();
 
   dbuf_init();  /* set up some dbuf stuff to control paging */
-  clear_client_hash_table();
-  clear_channel_hash_table();
+  init_hash();
+
   clear_scache_hash_table();    /* server cache name table */
   clear_ip_hash_table();        /* client host ip hash table */
   clear_Dline_table();          /* d line tree */
