@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_version.c,v 1.6 2001/07/04 16:23:06 leeh Exp $
+ *   $Id: m_version.c,v 1.7 2001/10/17 15:13:31 db Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -93,16 +93,9 @@
  */
 int m_version(struct Client* cptr, struct Client* sptr, int parc, char* parv[])
 {
-  if (!MyClient(sptr) || IsAnOper(sptr))
-     {
-       if (hunt_server(cptr, sptr, ":%s VERSION :%s", 
-                       1, parc, parv) == HUNTED_ISME)
-         sendto_one(sptr, form_str(RPL_VERSION), me.name,
-                    parv[0], version, serno, debugmode, me.name, serveropts);
-     }
-   else
-     sendto_one(sptr, form_str(RPL_VERSION), me.name,
-                parv[0], version, serno, debugmode, me.name, serveropts);
+  if (hunt_server(cptr, sptr, ":%s VERSION :%s", 1, parc, parv) == HUNTED_ISME)
+    sendto_one(sptr, form_str(RPL_VERSION), me.name,
+      parv[0], version, serno, debugmode, me.name, serveropts);
 
   return 0;
 }

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.236 2001/07/18 01:37:18 lusky Exp $
+ *  $Id: s_user.c,v 1.237 2001/10/17 15:13:31 db Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -61,10 +61,6 @@
 #include <time.h>
 #include <sys/stat.h>
 
-
-#ifdef PACE_WALLOPS
-time_t LastUsedWallops = 0;
-#endif
 
 static int do_user (char *, aClient *, aClient*, char *, char *, char *,
                      char *);

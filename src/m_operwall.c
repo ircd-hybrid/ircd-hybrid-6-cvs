@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_operwall.c,v 1.2 1999/08/10 02:46:24 lusky Exp $
+ *   $Id: m_operwall.c,v 1.3 2001/10/17 15:13:31 db Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -115,19 +115,6 @@ int m_operwall(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
                    me.name, parv[0], "OPERWALL");
       return 0;
     }
-
-#ifdef PACE_WALLOPS
-  if( MyClient(sptr) )
-    {
-          if( (LastUsedWallops + WALLOPS_WAIT) > CurrentTime ) 
-            {
-                sendto_one(sptr, ":%s NOTICE %s :Oh, one of those annoying opers who doesn't know how to use a channel",
-                     me.name,parv[0]);
-                return 0;
-            }
-          LastUsedWallops = CurrentTime;
-     }
-#endif
 
   sendto_serv_butone(IsServer(cptr) ? cptr : NULL, ":%s OPERWALL :%s",
                      parv[0], message);

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.16 2001/08/05 18:47:28 db Exp $
+ * $Id: m_info.h,v 1.17 2001/10/17 15:13:30 db Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -496,12 +496,6 @@ Info MyInformation[] = {
 #endif /* P_LINES_OPER_ONLY */
 
   { "PACE_WAIT", "", PACE_WAIT, "Minimum Delay between uses of certain commands" },
-
-#ifdef PACE_WALLOPS
-  { "PACE_WALLOPS", "ON", 0, "Delay WALLOPS and OPERWALL" },
-#else
-  { "PACE_WALLOPS", "OFF", 0, "Delay WALLOPS and OPERWALL" },
-#endif /* PACE_WALLOPS */
 
 #ifdef PPATH
   { "PPATH", PPATH, 0, "Path to Pid File" },

@@ -19,7 +19,7 @@
  *
  * "s_user.h". - Headers file.
  *
- * $Id: s_user.h,v 1.9 1999/07/31 02:44:44 tomh Exp $
+ * $Id: s_user.h,v 1.10 2001/10/17 15:13:31 db Exp $
  *
  */
 #ifndef INCLUDED_s_user_h
@@ -33,10 +33,6 @@
 #endif
 
 struct Client;
-#ifdef PACE_WALLOPS
-extern time_t LastUsedWallops;
-#endif
-
 
 extern int   user_mode(struct Client *, struct Client *, int, char **);
 extern void  send_umode (struct Client *, struct Client *,
