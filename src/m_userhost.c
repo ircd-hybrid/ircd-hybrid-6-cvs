@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_userhost.c,v 1.6 2000/01/02 22:41:01 lusky Exp $
+ *   $Id: m_userhost.c,v 1.7 2000/10/29 20:04:30 lusky Exp $
  */
 
 #include "m_commands.h"
@@ -134,12 +134,20 @@ int     m_userhost(struct Client *cptr,
 
       if ((acptr = find_person(cn, NULL)))
         {
-          ircsprintf(response[i], "%s%s=%c%s@%s",
-		     acptr->name,
-		     IsAnOper(acptr) ? "*" : "",
-		     (acptr->user->away) ? '-' : '+',
-		     acptr->username,
-		     acptr->host);
+          if (acptr == sptr) /* show real IP for USERHOST on yourself */
+            ircsprintf(response[i], "%s%s=%c%s@%s",
+		       acptr->name,
+		       IsAnOper(acptr) ? "*" : "",
+		       (acptr->user->away) ? '-' : '+',
+		       acptr->username,
+		       acptr->sockhost);
+          else
+            ircsprintf(response[i], "%s%s=%c%s@%s",
+		       acptr->name,
+		       IsAnOper(acptr) ? "*" : "",
+		       (acptr->user->away) ? '-' : '+',
+		       acptr->username,
+		       acptr->host);
         }
       if(p)
         p++;
