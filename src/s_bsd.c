@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.17 1998/12/08 04:08:39 db Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.18 1998/12/11 05:00:16 db Exp $";
 #endif
 
 #include "struct.h"
@@ -536,7 +536,6 @@ void	init_sys()
       !(bootopt & BOOT_STDERR))
     {
       int pid;
-#ifndef DEBUG_NO_FORK
       if( (pid = fork()) < 0)
 	{
 	  if ((fd = open("/dev/tty", O_RDWR)) >= 0)
@@ -545,7 +544,6 @@ void	init_sys()
 	}
       else if(pid > 0)
 	exit(0);
-#endif
 #ifdef TIOCNOTTY
       if ((fd = open("/dev/tty", O_RDWR)) >= 0)
 	{
