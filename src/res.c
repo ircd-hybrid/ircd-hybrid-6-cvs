@@ -22,7 +22,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)res.c	2.34 03 Nov 1993 (C) 1992 Darren Reed";
-static  char *rcs_version = "$Id: res.c,v 1.16 1999/06/26 01:46:03 tomh Exp $";
+static  char *rcs_version = "$Id: res.c,v 1.17 1999/06/26 04:16:33 db Exp $";
 #endif
 
 #undef	DEBUG	/* because there is a lot of debug code in here :-) */
@@ -123,8 +123,6 @@ int	init_resolver(int op)
       int     on = 0;
       
       ret = resfd = socket(AF_INET, SOCK_DGRAM, 0);
-      (void) setsockopt(ret, SOL_SOCKET, SO_BROADCAST,
-			(char *)&on, sizeof(on));
     }
 #ifdef DEBUG
   if (op & RES_INITDEBG);
@@ -157,9 +155,6 @@ int restart_resolver()
     }
   (void)close(resfd);
   ret = resfd = socket(AF_INET, SOCK_DGRAM, 0);
-  (void) setsockopt(ret, SOL_SOCKET, SO_BROADCAST,
-		    (char *)&on, sizeof(on));
-
   return ret;
 }
 
