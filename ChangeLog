@@ -1,3 +1,16 @@
+ievil       2004/05/23 11:21:28 EDT	(20040523_3)
+
+  Modified files:
+    src                  m_close.c 
+  Log:
+  Added notice to oper about issued CLOSE command.
+  idea from Hwy
+  
+  Revision  Changes    Path
+  1.2       +3 -1      ircd-hybrid-6/src/m_close.c
+
+
+
 ievil       2004/05/23 11:00:55 EDT	(20040523_2)
 
   Added files:
