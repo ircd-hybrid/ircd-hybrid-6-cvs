@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: s_err.h,v 1.14 1999/02/10 00:17:09 db Exp $
+ * $Id: s_err.h,v 1.15 1999/03/15 20:58:25 db Exp $
  *
  */
 
@@ -225,9 +225,9 @@ static	char *	replies[] = {
 /* 200 RPL_TRACELINK, */	":%s 200 %s Link %s%s %s %s",
 /* 201 RPL_TRACECONNECTING, */	":%s 201 %s Try. %d %s",
 /* 202 RPL_TRACEHANDSHAKE, */	":%s 202 %s H.S. %d %s",
-/* 203 RPL_TRACEUNKNOWN, */	":%s 203 %s ???? %d %s %d",
-/* 204 RPL_TRACEOPERATOR, */	":%s 204 %s Oper %d %s %ld %ld",
-/* 205 RPL_TRACEUSER, */	":%s 205 %s User %d %s %ld %ld",
+/* 203 RPL_TRACEUNKNOWN, */	":%s 203 %s ???? %d %s (%s) %d",
+/* 204 RPL_TRACEOPERATOR, */	":%s 204 %s Oper %d %s (%s) %ld %ld",
+/* 205 RPL_TRACEUSER, */	":%s 205 %s User %d %s (%s) %ld %ld",
 /* 206 RPL_TRACESERVER, */	":%s 206 %s Serv %d %dS %dC %s %s!%s@%s %ld",
 /* 207 */	(char *)NULL,
 /* 208 RPL_TRACENEWTYPE, */	":%s 208 %s <newtype> 0 %s",
