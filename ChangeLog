@@ -1,3 +1,15 @@
+ievil       2004/06/13 00:47:52 EDT	(20040613_2)
+
+  Modified files:
+    src                  m_gline.c 
+  Log:
+  Added missing linefeed to m_gline.c when loggin ipv6 glines.
+  
+  Revision  Changes    Path
+  1.56      +1 -1      ircd-hybrid-6/src/m_gline.c
+
+
+
 ievil       2004/06/12 21:40:13 EDT	(20040613_1)
 
   Modified files:
