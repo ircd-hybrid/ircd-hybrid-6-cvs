@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: msg.h,v 1.16 2001/06/10 01:08:47 db Exp $
+ * $Id: msg.h,v 1.17 2001/07/04 12:02:41 jdc Exp $
  */
 #ifndef INCLUDED_msg_h
 #define INCLUDED_msg_h
@@ -120,8 +120,7 @@ typedef struct MessageTree MESSAGE_TREE;
 
 #define MSG_GLINE    "GLINE"    /* GLINE */
 #ifdef CRYPT_LINKS
-#define MSG_CRYPTSERV "CRYPTSERV"
-#define MSG_CRYPTAUTH "CRYPTAUTH"
+#define MSG_CRYPTLINK "CRYPTLINK"
 #endif
 
 #define MSG_LOCOPS   "LOCOPS"   /* LOCOPS */
@@ -255,8 +254,7 @@ struct Message msgtab[] = {
   { MSG_HTM,    m_htm,       0, MAXPARA, 1, 0, 0, 0L },
   { MSG_SET,    m_set,       0, MAXPARA, 1, 0, 0, 0L },
 #ifdef CRYPT_LINKS
-  { MSG_CRYPTSERV, m_cryptserv, 0, MAXPARA, 1, 1, 0, 0L },
-  { MSG_CRYPTAUTH, m_cryptauth, 0, MAXPARA, 1, 1, 0, 0L },
+  { MSG_CRYPTLINK, m_cryptlink, 0, MAXPARA, 1, 1, 0, 0L },
 #endif
   { MSG_TESTLINE,       m_testline,          0, MAXPARA, 1, 0, 0, 0L },
   { (char *) 0, (int (*)()) 0 , 0, 0,    0, 0, 0, 0L }

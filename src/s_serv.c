@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.221 2001/06/18 02:13:43 db Exp $
+ *   $Id: s_serv.c,v 1.222 2001/07/04 12:02:48 jdc Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -437,35 +437,31 @@ void send_capabilities(struct Client* cptr, int use_zip)
 {
   struct Capability* cap;
   char  msgbuf[BUFSIZE];
-#ifdef CRYPT_LINKS
-  int i;
-#endif
+
   msgbuf[0] = '\0';
 
   for (cap = captab; cap->name; ++cap)
-    {
-      /* kludge to rhyme with sludge */
+  {
+    /* kludge to rhyme with sludge */
 
-      if (use_zip)
-        {
-          strcat(msgbuf, cap->name);
-          strcat(msgbuf, " ");
-        }
-      else
-        {
-          if(cap->cap != CAP_ZIP)
-            {
-              strcat(msgbuf, cap->name);
-              strcat(msgbuf, " ");
-            }
-        }
+    if (use_zip)
+    {
+      strcat(msgbuf, cap->name);
+      strcat(msgbuf, " ");
     }
+    else
+    {
+      if (cap->cap != CAP_ZIP)
+      {
+        strcat(msgbuf, cap->name);
+        strcat(msgbuf, " ");
+      }
+    }
+  }
 #ifdef CRYPT_LINKS
+  /* Append "ENC:CIPHER/SIZE" to the CAPAB line. */
   strcat(msgbuf, "ENC:");
-  for (i=0;Ciphers[i].name[0];i++)
-    sprintf(msgbuf + strlen(msgbuf), "%s/%i,", Ciphers[i].name, Ciphers[i].keysize);
-  if (i)
-    msgbuf[strlen(msgbuf)-1] = 0;
+  strcat(msgbuf, cptr->cipher->name);
 #endif
   sendto_one(cptr, "CAPAB :%s", msgbuf);
 }
@@ -529,9 +525,11 @@ const char* show_capabilities(struct Client* acptr)
     }
 #ifdef CRYPT_LINKS
   if (acptr->crypt)
-    sprintf(msgbuf + strlen(msgbuf), "ENC:%s/%i,%s/%i",
-	    acptr->crypt->OutCipher->name, acptr->crypt->OutCipher->keysize,
-	    acptr->crypt->InCipher->name, acptr->crypt->InCipher->keysize);
+  {
+    sprintf(msgbuf + strlen(msgbuf), "ENC:%s,%s",
+            acptr->crypt->OutCipher->name,
+            acptr->crypt->InCipher->name);
+  }
 #endif
   return msgbuf;
 }

@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.49 2001/06/25 02:29:02 greg Exp $
+ * $Id: client.h,v 1.50 2001/07/04 12:02:41 jdc Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -216,7 +216,7 @@ struct Client
 #endif
 #ifdef CRYPT_LINKS
   struct CryptData *crypt;      /* Encrypted link info */
-  char * ciphers;               /* Supported ciphers */
+  struct CipherDef *cipher;     /* Supported cipher */
 #endif
   short             lastsq;     /* # of 2k blocks when sendqueued called last*/
   struct DBuf       sendQ;      /* Outgoing message queue--if socket full */
