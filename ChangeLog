@@ -1,3 +1,31 @@
+ievil       2004/05/23 17:07:02 EDT	(20040523_14)
+
+  Modified files:
+    include              m_commands.h msg.h s_serv.h 
+    src                  Makefile.in s_serv.c 
+  Added files:
+    doc                  newcluster.txt 
+    src                  m_resv.c m_unresv.c m_unxline.c m_xline.c 
+  Log:
+  Added CAP_CLUSTER to be compatible with hybrid-7 and ratbox-1.4.
+  Added RESV, UNRESV, XLINE and UNXLINE routing. This will form
+  the base for these new commands to be added to local use in hybrid-6
+  within some period of time. Enjoy...
+  
+  Revision  Changes    Path
+  1.1       +25 -0     ircd-hybrid-6/doc/newcluster.txt (new)
+  1.13      +5 -0      ircd-hybrid-6/include/m_commands.h
+  1.28      +10 -0     ircd-hybrid-6/include/msg.h
+  1.19      +3 -2      ircd-hybrid-6/include/s_serv.h
+  1.77      +10 -0     ircd-hybrid-6/src/Makefile.in
+  1.1       +57 -0     ircd-hybrid-6/src/m_resv.c (new)
+  1.1       +57 -0     ircd-hybrid-6/src/m_unresv.c (new)
+  1.1       +57 -0     ircd-hybrid-6/src/m_unxline.c (new)
+  1.1       +58 -0     ircd-hybrid-6/src/m_xline.c (new)
+  1.239     +1 -0      ircd-hybrid-6/src/s_serv.c
+
+
+
 ievil       2004/05/23 13:26:34 EDT	(20040523_13)
 
   Modified files:
