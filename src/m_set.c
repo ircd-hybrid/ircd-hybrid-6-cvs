@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_set.c,v 1.10 2003/10/13 11:11:52 ievil Exp $
+ *   $Id: m_set.c,v 1.11 2003/10/13 11:19:59 ievil Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -591,6 +591,12 @@ int m_set(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
               if(newval <= 0)
                 {
                   sendto_one(sptr, ":%s NOTICE %s :MAXTKLINE must be > 0",
+                             me.name, parv[0]);
+                  return 0;
+                }
+              if (newval >= (60*24*365))
+                {
+                  sendto_one(sptr, ":%s NOTICE %s :MAXTKLINE must be < 525600 (a year)",
                              me.name, parv[0]);
                   return 0;
                 }
