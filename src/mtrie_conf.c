@@ -43,7 +43,7 @@
  *
  * Diane Bruce -db (db@db.net)
  *
- * $Id: mtrie_conf.c,v 1.84 2001/12/08 02:27:55 db Exp $
+ * $Id: mtrie_conf.c,v 1.85 2001/12/08 02:33:54 db Exp $
  */
 #include "mtrie_conf.h"
 #include "class.h"
@@ -1527,7 +1527,7 @@ report_sub_mtrie(struct Client *sptr, int flags, DOMAIN_LEVEL *dl_ptr)
               if(aconf->status & flags)
                 {
                   get_printable_conf(aconf, &name, &host, &pass,
-				     &oper_reason, &user, &port)
+				     &oper_reason, &user, &port);
 
                   if (aconf->status == CONF_KILL)
                     {
