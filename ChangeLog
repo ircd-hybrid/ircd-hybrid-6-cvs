@@ -1,3 +1,15 @@
+db          2003/05/22 08:27:30 EDT	(20030522_1)
+
+  Modified files:
+    src                  s_user.c 
+  Log:
+  - removed LOCAL_NICK_COLLIDE This never worked right and left ghosts...
+  
+  Revision  Changes    Path
+  1.252     +0 -28     ircd-hybrid-6/src/s_user.c
+
+
+
 db          2003/05/22 08:22:11 EDT	(20030522_0)
 
   Modified files:
