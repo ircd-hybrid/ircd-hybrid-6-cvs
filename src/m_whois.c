@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_whois.c,v 1.17 2003/10/13 16:23:14 ievil Exp $
+ *   $Id: m_whois.c,v 1.18 2004/05/23 14:28:23 ievil Exp $
  */
 
 #include "m_operspylog.h"
@@ -331,8 +331,8 @@ int     m_whois(struct Client *cptr,
                        ":%s NOTICE %s :*** Notice -- %s (%s@%s) is doing a /whois on you.",
                        me.name, acptr->name, parv[0], sptr->username,
                        sptr->host);
-                }
 #ifdef SHOW_REMOTE_WHOIS
+                }
           else
                 {
             sendto_one(acptr,
