@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.55 2001/07/18 01:37:15 lusky Exp $
+ * $Id: res.c,v 1.56 2001/10/08 21:33:37 db Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
@@ -1566,6 +1566,9 @@ static aCache* make_cache(ResRQ* request)
    */
   if (!hp->h_name || !hp->h_addr_list[0])
     return NULL;
+
+  /* Spoofing bug here from ircnet (Q <Q@ping.be>) */
+#if 0
   /*
    * Make cache entry.  First check to see if the cache already exists
    * and if so, return a pointer to it.
@@ -1574,6 +1577,7 @@ static aCache* make_cache(ResRQ* request)
     if ((cp = find_cache_number(request, hp->h_addr_list[i])))
       return cp;
   }
+#endif
   /*
    * a matching entry wasnt found in the cache so go and make one up.
    */ 
