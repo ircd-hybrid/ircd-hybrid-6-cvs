@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h.dist,v 1.82 2001/02/19 04:47:01 lusky Exp $
+ * $Id: config.h.dist,v 1.83 2001/06/03 21:42:56 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -970,6 +970,11 @@
  * As configured here, a GLINE will last 12 hours
  */
 #define GLINE_TIME      (12*3600)
+
+/* Ignore bogus timestamps from other servers. Yes this will desync
+ * the network, but it will allow chanops to resync with a valid non TS 0
+ */
+#undef IGNORE_BOGUS_TS
 
 /* ----------------- archaic and/or broken section -------------------- */
 #undef DNS_DEBUG
