@@ -1,4 +1,4 @@
-$Id: Hybrid-team,v 1.15 2000/10/06 03:00:46 lusky Exp $
+$Id: Hybrid-team,v 1.16 2001/06/04 15:06:26 greg Exp $
 
   The hybrid team is a group of ircd coders who were frustrated
 with the instability and all-out "dirtiness" of the efnet ircd's
@@ -48,6 +48,7 @@ Slowaris, Ryan Parker <rjp@wpmedia.com>
 ThemBones, Brian Kraemer <kraemer@u.washington.edu>
 White_Dragon, Chip Norkus, <wd@dal.net>
 WintrHawk, Jake Khuon <khuon@GCtr.Net>
+xyst, Greg Prosser, <greg@arrogant.org>
 
 Others are welcome. Always.
 

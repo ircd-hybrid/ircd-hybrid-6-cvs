@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# $Id: version.c.SH,v 1.22 2000/10/21 06:36:15 lusky Exp $ 
+# $Id: version.c.SH,v 1.23 2001/06/04 15:06:30 greg Exp $ 
 
 spitshell=cat
 package=IRC
@@ -98,6 +98,7 @@ char *infotext[] =
   "ThemBones           Brian Kraemer       kraemer@u.washington.edu",
   "White_Dragon        Chip Norkus         wd@dal.net",
   "WintrHawk           Jake Khuon          khuon@GCtr.Net",
+  "xyst                Greg Prosser        greg@arrogant.org",
   "",
   "",
   "Developers and Contributors for previous versions:",
