@@ -1,3 +1,19 @@
+ievil       2003/06/06 05:06:40 EDT	(20030606_5)
+
+  Modified files:
+    include              config.h config.h.dist 
+    src                  channel.c 
+  Log:
+  Added config variable OPER_JUPE_BYPASS to allow opers to bypass and join
+  juped channels. This can be a useful tool in the war against drones.
+  
+  Revision  Changes    Path
+  1.157     +6 -0      ircd-hybrid-6/include/config.h
+  1.134     +6 -0      ircd-hybrid-6/include/config.h.dist
+  1.238     +8 -0      ircd-hybrid-6/src/channel.c
+
+
+
 ievil       2003/06/06 04:59:47 EDT	(20030606_4)
 
   Modified files:
