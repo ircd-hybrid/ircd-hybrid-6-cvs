@@ -20,12 +20,17 @@
  * "list.h". - Headers file.
  *
  *
- * $Id: list.h,v 1.2 1999/07/21 22:36:10 db Exp $
+ * $Id: list.h,v 1.3 1999/07/23 13:33:06 db Exp $
  *
  */
 
 #ifndef INCLUDED_list_h
 #define INCLUDED_list_h
+
+struct SLink;
+struct Client;
+struct Class;
+struct User;
 
 extern void count_user_memory(int *, int *);
 extern void count_links_memory(int *, int *);
