@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_message.c,v 1.17 2001/12/14 14:58:43 leeh Exp $
+ *   $Id: m_message.c,v 1.18 2001/12/23 00:06:14 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -119,7 +119,6 @@ static  int     m_message(struct Client *cptr,
                           int notice)
 {
   struct Client       *acptr;
-  char  *s;
   struct Channel *chptr;
   char  *nick, *server, *cmd, *host;
   char *p;
