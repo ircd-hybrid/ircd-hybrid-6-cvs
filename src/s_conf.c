@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.10 1998/10/12 05:48:57 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.11 1998/10/12 05:51:49 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1501,6 +1501,13 @@ int 	initconf(int opt, int fd,int use_include)
 	      include_conf->next = include_list;
 	      include_list = include_conf;
 	    }
+	  /* 
+	   * A line consisting of the first char '.' will now
+	   * be treated as a comment line.
+	   * a line `.include "file"' will result in an included
+	   * portion of the conf file.
+	   */
+	  continue;
 	}
 
       /* Could we test if it's conf line at all?	-Vesa */
