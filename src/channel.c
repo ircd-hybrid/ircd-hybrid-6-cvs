@@ -22,7 +22,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.29 1998/11/28 03:28:44 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.30 1998/11/28 06:42:24 db Exp $";
 #endif
 
 #include "struct.h"
@@ -2334,7 +2334,7 @@ int spam_num = MAX_JOIN_LEAVE_COUNT;
 	     and server has been split */
 
 #ifdef NO_CHANOPS_WHEN_SPLIT
-	  if((*name != '&') && !IsAnOper(sptr)
+	  if((*name != '&')
 	     && server_was_split && server_split_recovery_time)
 	    {
 	      allow_op = NO;
