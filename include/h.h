@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.63 1999/07/21 21:41:49 db Exp $
+ * $Id: h.h,v 1.64 1999/07/21 21:54:27 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -77,12 +77,6 @@ extern struct Client* find_person (char *, struct Client *);
 extern struct Client* find_server(const char* name, struct Client* dflt_client);
 extern struct Client* find_userhost (char *, char *, struct Client *, int *);
 
-/* hash d lines */
-extern struct ConfItem *find_dkill(struct Client *cptr);
-
-extern  void    add_temp_kline(struct ConfItem *);
-extern  void    flush_temp_klines(void);
-extern  void    report_temp_klines(struct Client *);
 
 #ifdef  GLINES
 extern struct ConfItem* find_gkill(struct Client* client);
@@ -105,18 +99,10 @@ extern  char    *form_str (int);
 extern  void    get_my_name (struct Client *, char *, int);
 extern  int     setup_ping (void);
 
-extern  void    send_channel_modes (struct Client *, struct Channel *);
 extern  void    terminate (void);
-
 extern  int     send_queued(struct Client*);
 
-/* Missing definitions */
-/*VARARGS*/
 extern  void    send_capabilities(struct Client *,int);
-extern  int     is_address(char *,unsigned long *,unsigned long *); 
-extern  int     show_lusers(struct Client *, struct Client *, int, char **);
-
-/* END Missing definitions */
 
 extern  int     deliver_it (struct Client *, char *, int);
 

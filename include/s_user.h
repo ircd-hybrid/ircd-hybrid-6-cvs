@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: s_user.h,v 1.2 1999/07/21 05:45:06 tomh Exp $
+ * $Id: s_user.h,v 1.3 1999/07/21 21:54:28 db Exp $
  *
  */
 #ifndef INCLUDED_s_user_h
@@ -33,6 +33,7 @@ struct Client;
 extern  void    send_umode (struct Client *, struct Client *,
                             int, int, char *);
 extern  void    send_umode_out (struct Client*, struct Client *, int);
-extern int m_umode(struct Client *, struct Client *, int, char **);
+extern  int     m_umode(struct Client *, struct Client *, int, char **);
+extern  int     show_lusers(struct Client *, struct Client *, int, char **);
 
 #endif

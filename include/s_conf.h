@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.28 1999/07/21 05:45:05 tomh Exp $
+ * $Id: s_conf.h,v 1.29 1999/07/21 21:54:28 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.29  1999/07/21 21:54:28  db
+ * - yet more h.h cleanups, the nightmare that never ends
+ *
  * Revision 1.28  1999/07/21 05:45:05  tomh
  * untabify headers
  *
@@ -300,6 +303,10 @@ extern void write_kline_or_dline_to_conf_and_notice_opers(
                                                           );
 extern const char *get_conf_name(KlineType);
 extern int safe_write(struct Client *, const char *, int ,char *);
+extern void add_temp_kline(struct ConfItem *);
+extern  void    flush_temp_klines(void);
+extern  void    report_temp_klines(struct Client *);
+extern  int     is_address(char *,unsigned long *,unsigned long *); 
 
 typedef struct
 {
