@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_stats.c,v 1.5 2000/10/21 06:36:14 lusky Exp $
+ *  $Id: m_stats.c,v 1.6 2000/10/24 05:20:35 lusky Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "class.h"       /* report_classes */
@@ -134,6 +134,7 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
   int             i;
   int             doall = 0;
   int             wilds = 0;
+  int             ignore_request = 0;
   int             valid_stats = 0;
   char*           name;
   static time_t   last_used = 0;
@@ -479,23 +480,27 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       if ( (stat == 'L') || (stat == 'l') )
         {
           sendto_realops_flags(FLAGS_SPY,
-                               "STATS %c requested by %s (%s@%s) [%s] on %s",
-                               stat,
-                               sptr->name,
-                               sptr->username,
-                               sptr->host,
-                               sptr->user->server,
-                               parc > 2 ? parv[2] : "\0" );
+                "STATS %c requested by %s (%s@%s) [%s] on %s%s",
+                stat,
+                sptr->name,
+                sptr->username,
+                sptr->host,
+                sptr->user->server,
+                parc > 2 ? parv[2] : "<no recipient>",
+                ignore_request > 0 ? " [request ignored]" : "\0"
+                );
         }
       else
         {
           sendto_realops_flags(FLAGS_SPY,
-                               "STATS %c requested by %s (%s@%s) [%s]",
-                               stat,
-                               sptr->name,
-                               sptr->username,
-                               sptr->host,
-                               sptr->user->server );
+                "STATS %c requested by %s (%s@%s) [%s]%s",
+                stat,
+                sptr->name,
+                sptr->username,
+                sptr->host,
+                sptr->user->server,
+                ignore_request > 0 ? " [request ignored]" : "\0"
+                );
         }
     }
 #endif
