@@ -1,5 +1,5 @@
 /*
- * setup.c: $Id: setup.c,v 1.6 2001/12/19 03:25:51 androsyn Exp $
+ * setup.c: $Id: setup.c,v 1.7 2002/01/06 03:59:06 db Exp $
  *  
  */
 /*
@@ -53,7 +53,7 @@ static void addserver(adns_state ads, struct in_addr addr) {
   struct server *ss;
   
   if(addr.s_addr == 0)
-  	addr.s_addr = INADDR_LOOPBACK;	
+  	addr.s_addr = htonl(INADDR_LOOPBACK);	
   
   for (i=0; i<ads->nservers; i++) {
     if (ads->servers[i].addr.s_addr == addr.s_addr) {
