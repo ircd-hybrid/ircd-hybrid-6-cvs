@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.111 1999/07/27 03:01:49 tomh Exp $
+ * $Id: ircd.c,v 1.112 1999/07/27 11:20:22 db Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -1211,7 +1211,7 @@ static void initialize_global_set_options(void)
 }
 
 /*
- * initalialize_message_files
+ * initialize_message_files
  *
  * inputs       - none
  * output       - none

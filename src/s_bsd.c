@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.99 1999/07/27 03:01:49 tomh Exp $
+ *  $Id: s_bsd.c,v 1.100 1999/07/27 11:20:23 db Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -72,10 +72,8 @@
 fd_set*  read_set;
 fd_set*  write_set;
 
-#ifndef HAVE_FD_ALLOC
 fd_set  readset;
 fd_set  writeset;
-#endif
 
 #endif /* USE_POLL_ */
 
@@ -324,9 +322,7 @@ void init_sys()
             "recompile with -DFD_SETSIZE=%d\n", MAXCONNECTIONS);
           exit(-1);
         }
-#ifndef HAVE_FD_ALLOC
       printf("Value of FD_SETSIZE is %d\n", FD_SETSIZE);
-#endif
 #endif /* USE_POLL */
       printf("Value of NOFILE is %d\n", NOFILE);
     }
