@@ -1,3 +1,15 @@
+ievil       2003/06/24 00:19:31 EDT	(20030624_3)
+
+  Modified files:
+    src                  version.c.SH 
+  Log:
+  cosmetic chanages on version.c.SH taken from hyb7
+  
+  Revision  Changes    Path
+  1.26      +2 -1      ircd-hybrid-6/src/version.c.SH
+
+
+
 ievil       2003/06/24 00:09:43 EDT	(20030624_2)
 
   Modified files:
