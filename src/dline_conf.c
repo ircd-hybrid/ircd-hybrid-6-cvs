@@ -1,7 +1,7 @@
 /*
  * dline_conf.c
  *
- * $Id: dline_conf.c,v 1.30 1999/07/30 06:40:12 tomh Exp $
+ * $Id: dline_conf.c,v 1.31 1999/07/31 23:45:50 db Exp $
  */
 #include "dline_conf.h"
 #include "class.h"
@@ -592,6 +592,9 @@ void add_ip_Eline(aConfItem *conf_ptr)
 }
 
 
+#if 0
+/* lets add this later, when sure its fully debugged etc. */
+
 /*
  * add_ip_Iline  - modified form of add_Dline
  * -good
@@ -640,6 +643,7 @@ void add_ip_Iline(aConfItem *conf_ptr)
   node->conf=conf_ptr;
   return;
 }
+#endif
 
 
 /*

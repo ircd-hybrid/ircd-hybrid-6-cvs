@@ -1,4 +1,4 @@
-/* $Id: mtrie_conf.h,v 1.5 1999/07/21 05:45:04 tomh Exp $ */
+/* $Id: mtrie_conf.h,v 1.6 1999/07/31 23:45:48 db Exp $ */
 #ifndef INCLUDED_mtrie_conf_h
 #define INCLUDED_mtrie_conf_h
 
@@ -10,7 +10,8 @@
 struct ConfItem;
 struct Client;
 
-extern void       add_mtrie_conf_entry(struct ConfItem *,int);
+extern void   add_mtrie_conf_entry(struct ConfItem *,int);
+extern void   add_ip_Iline( struct ConfItem * );
 extern struct ConfItem* find_matching_mtrie_conf(const char* host,
                                            const char* user, 
                                            unsigned long ip);

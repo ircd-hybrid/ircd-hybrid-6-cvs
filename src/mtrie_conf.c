@@ -43,7 +43,7 @@
  *
  * Diane Bruce -db (db@db.net)
  *
- * $Id: mtrie_conf.c,v 1.58 1999/07/30 06:40:16 tomh Exp $
+ * $Id: mtrie_conf.c,v 1.59 1999/07/31 23:45:50 db Exp $
  */
 #include "mtrie_conf.h"
 #include "class.h"
@@ -123,17 +123,6 @@ void add_mtrie_conf_entry(aConfItem *aconf,int flags)
   if(!aconf->host || !aconf->user)
     {
       free_conf(aconf);
-      return;
-    }
-
-  if( (aconf->user[0] == 'x') && aconf->host && 
-      is_address(aconf->host,&ip_host,&ip_mask) )
-    {
-      aconf->ip = ip_host & ip_mask;
-      aconf->ip_mask = ip_mask;
-      
-      aconf->next = ip_i_lines;
-      ip_i_lines = aconf;
       return;
     }
 
@@ -217,6 +206,22 @@ void add_mtrie_conf_entry(aConfItem *aconf,int flags)
 
   create_sub_mtrie(trie_list,aconf,flags,aconf->host);
 }
+
+/*
+ * add_ip_Iline()
+ *
+ * tiny function to keep the interface clean...
+ *
+ * inputs       -
+ * output       - NONE
+ * side effects -
+ */
+void add_ip_Iline( struct ConfItem *aconf )
+{
+  aconf->next = ip_i_lines;
+  ip_i_lines = aconf;
+}
+
 
 /*
  * create_sub_mtrie
