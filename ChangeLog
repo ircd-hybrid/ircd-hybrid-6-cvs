@@ -1,3 +1,16 @@
+ievil       2003/06/12 18:17:21 EDT	(20030612_2)
+
+  Modified files:
+    include              config.h config.h.dist 
+  Log:
+  Fixed config.h to not default to RESTRICT_LOCOP.
+  
+  Revision  Changes    Path
+  1.160     +3 -4      ircd-hybrid-6/include/config.h
+  1.136     +14 -0     ircd-hybrid-6/include/config.h.dist
+
+
+
 ievil       2003/06/12 18:09:54 EDT	(20030612_1)
 
   Modified files:
