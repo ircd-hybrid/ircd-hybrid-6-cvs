@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_debug.h,v 1.5 1999/07/24 21:10:45 tomh Exp $
+ * $Id: s_debug.h,v 1.6 1999/07/31 02:58:57 tomh Exp $
  *
  * $Log: s_debug.h,v $
+ * Revision 1.6  1999/07/31 02:58:57  tomh
+ * move sbrk code to ircd.c
+ *
  * Revision 1.5  1999/07/24 21:10:45  tomh
  * attempt to fix memory usage reporting for sbrk calls, still needs work??
  *
@@ -53,8 +56,6 @@ struct Client;
 
 extern void send_usage(struct Client*, char *);
 extern void count_memory (struct Client *, char *);
-extern size_t get_maxrss(void);
-extern size_t get_vm_top(void);
 
 extern	void	debug(int, char *, ...);
 

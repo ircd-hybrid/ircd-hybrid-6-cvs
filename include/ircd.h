@@ -19,7 +19,7 @@
  *
  * "ircd.h". - Headers file.
  *
- * $Id: ircd.h,v 1.13 1999/07/30 06:48:10 tomh Exp $
+ * $Id: ircd.h,v 1.14 1999/07/31 02:58:57 tomh Exp $
  *
  */
 #ifndef INCLUDED_ircd_h
@@ -124,7 +124,6 @@ extern int            dline_in_progress;
 extern int            dorehash;
 extern int            rehashed;
 extern float          currlife;
-extern size_t         InitialVMTop;
 extern struct Client  me;
 extern struct Client* GlobalClientList;
 extern struct Client* local[];
@@ -144,5 +143,6 @@ extern int reject_held_fds;
 #endif
 
 extern void     report_error_on_tty(const char* message);
+extern size_t   get_maxrss(void);
 
 #endif
