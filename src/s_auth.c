@@ -19,25 +19,19 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)s_auth.c	1.17 17 Oct 1993 (C) 1992 Darren Reed";
-static char *rcs_version = "$Id: s_auth.c,v 1.5 1999/06/25 11:59:57 db Exp $";
+static char *rcs_version = "$Id: s_auth.c,v 1.6 1999/06/26 07:52:12 tomh Exp $";
 #endif
 
 #include "struct.h"
 #include "common.h"
 #include "sys.h"
-#include "res.h"
 #include "numeric.h"
 #include "patchlevel.h"
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/file.h>
 #include <sys/ioctl.h>
-#if defined(__hpux)
-# include "inet.h"
-#endif
 #include <fcntl.h>
-#include "sock.h"	/* If FD_ZERO isn't define up to this point,  */
-			/* define it (BSD4.2 needs this) */
 #include "h.h"
 
 static void authsenderr(aClient *);	/* locally defined */

@@ -22,7 +22,7 @@
  */
 
 #ifndef lint
-static char *rcs_version = "$Id: m_kline.c,v 1.5 1999/06/26 01:46:03 tomh Exp $";
+static char *rcs_version = "$Id: m_kline.c,v 1.6 1999/06/26 07:52:08 tomh Exp $";
 #endif
 
 #include "struct.h"
@@ -39,8 +39,6 @@ static char *rcs_version = "$Id: m_kline.c,v 1.5 1999/06/26 01:46:03 tomh Exp $"
 #if defined(AIX) || defined(DYNIXPTX) || defined(SVR3)
 #include <time.h>
 #endif
-#include <sys/stat.h>
-#include <sys/socket.h>
 #include <fcntl.h>
 #include "h.h"
 #if defined( HAVE_STRING_H )

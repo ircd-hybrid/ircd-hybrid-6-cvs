@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.71 1999/06/26 01:46:04 tomh Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.72 1999/06/26 07:52:13 tomh Exp $";
 #endif
 
 #include "struct.h"
@@ -30,21 +30,17 @@ static char *rcs_version = "$Id: s_conf.c,v 1.71 1999/06/26 01:46:04 tomh Exp $"
 #include "dline_conf.h"
 #include "sys.h"
 #include "numeric.h"
-#include <sys/socket.h>
-#include <fcntl.h>
-#include <sys/wait.h>
 #if defined(AIX) || defined(DYNIXPTX) || defined(SVR3)
 #include <time.h>
 #endif
-#ifdef	R_LINES
-#include <signal.h>
-#endif
-
+#include <netdb.h>
 #include <signal.h>
 #include "h.h"
 extern int rehashed;
 #include "mtrie_conf.h"
 #include "s_conf.h"
+
+#include "res.h"    /* gethost_byname, gethost_byaddr */
 
 struct sockaddr_in vserv;
 char	specific_virtual_host;
