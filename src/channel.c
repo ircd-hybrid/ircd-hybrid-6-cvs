@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.228 2001/12/09 20:01:04 lusky Exp $
+ * $Id: channel.c,v 1.229 2001/12/09 20:10:59 lusky Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -2375,11 +2375,8 @@ int     m_join(struct Client *cptr,
                                   me.name, parv[0], name);
                        continue;
                      }
-                   else
-                     {
-                       flags = CHFL_CHANOP;
-                     }
                  }
+               flags = CHFL_CHANOP;
 #else
                flags = CHFL_CHANOP;
 #endif /* NO_CREATE_ON_SPLIT */
