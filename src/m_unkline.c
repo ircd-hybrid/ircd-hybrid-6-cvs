@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_unkline.c,v 1.51 2003/06/06 09:30:15 ievil Exp $
+ *   $Id: m_unkline.c,v 1.52 2003/06/06 10:08:03 ievil Exp $
  */
 #include "m_commands.h"
 #include "channel.h"
@@ -36,6 +36,7 @@
 #include "s_conf.h"
 #include "s_log.h"
 #include "s_misc.h"
+#include "s_serv.h"
 #include "send.h"
 #include "struct.h"
 
@@ -82,6 +83,14 @@ int m_unkline (aClient *cptr,aClient *sptr,int parc,char *parv[])
   ircsprintf(temppath, "%s%s.tmp", ConfigFileEntry.dpath,
 	     ConfigFileEntry.klinefile);
   
+  if (IsServer(cptr))
+    {
+      if (parc == 4)
+         sendto_match_cap_servs(NULL, cptr, CAP_UNKLN,":%s UNKLINE %s %s %s",
+                                parv[0], parv[1], parv[2], parv[3]);
+      return 0;
+    }
+
   if (check_registered(sptr))
     {
       return -1;

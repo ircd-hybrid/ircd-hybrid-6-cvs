@@ -13,7 +13,8 @@ channel.o: channel.c ../include/channel.h ../include/config.h \
   ../include/flud.h ../include/hash.h ../include/irc_string.h \
   ../include/ircd.h ../include/list.h ../include/numeric.h \
   ../include/s_serv.h ../include/s_user.h ../include/send.h \
-  ../include/struct.h ../include/whowas.h
+  ../include/struct.h ../include/whowas.h ../include/s_conf.h \
+  ../include/fileio.h ../include/motd.h
 class.o: class.c ../include/class.h ../include/client.h \
   ../include/config.h ../include/setup.h ../include/ircd_defs.h \
   ../include/dbuf.h ../include/common.h ../include/ircd.h \
@@ -163,7 +164,8 @@ m_kline.o: m_kline.c ../include/m_commands.h ../include/config.h \
   ../include/irc_string.h ../include/ircd.h ../include/mtrie_conf.h \
   ../include/numeric.h ../include/s_conf.h ../include/fileio.h \
   ../include/motd.h ../include/s_log.h ../include/s_misc.h \
-  ../include/send.h ../include/struct.h ../include/hash.h
+  ../include/s_serv.h ../include/send.h ../include/struct.h \
+  ../include/hash.h
 m_links.o: m_links.c ../include/m_commands.h ../include/config.h \
   ../include/setup.h ../include/client.h ../include/ircd_defs.h \
   ../include/dbuf.h ../include/irc_string.h ../include/ircd.h \
@@ -287,6 +289,21 @@ m_trace.o: m_trace.c ../include/m_commands.h ../include/config.h \
   ../include/fileio.h ../adns/adns.h ../include/s_serv.h \
   ../include/send.h
 m_unkline.o: m_unkline.c ../include/m_commands.h ../include/config.h \
+  ../include/setup.h ../include/channel.h ../include/ircd_defs.h \
+  ../include/client.h ../include/dbuf.h ../include/common.h \
+  ../include/dline_conf.h ../include/fileio.h ../include/irc_string.h \
+  ../include/ircd.h ../include/mtrie_conf.h ../include/numeric.h \
+  ../include/s_conf.h ../include/motd.h ../include/s_log.h \
+  ../include/s_misc.h ../include/s_serv.h ../include/send.h \
+  ../include/struct.h
+m_ungline.o: m_ungline.c ../include/m_commands.h ../include/config.h \
+  ../include/setup.h ../include/channel.h ../include/ircd_defs.h \
+  ../include/client.h ../include/dbuf.h ../include/common.h \
+  ../include/dline_conf.h ../include/fileio.h ../include/irc_string.h \
+  ../include/ircd.h ../include/mtrie_conf.h ../include/numeric.h \
+  ../include/s_conf.h ../include/motd.h ../include/s_log.h \
+  ../include/s_misc.h ../include/send.h ../include/struct.h
+m_undline.o: m_undline.c ../include/m_commands.h ../include/config.h \
   ../include/setup.h ../include/channel.h ../include/ircd_defs.h \
   ../include/client.h ../include/dbuf.h ../include/common.h \
   ../include/dline_conf.h ../include/fileio.h ../include/irc_string.h \

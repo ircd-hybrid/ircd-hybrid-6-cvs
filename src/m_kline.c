@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.77 2003/05/05 02:39:07 db Exp $
+ *   $Id: m_kline.c,v 1.78 2003/06/06 10:08:03 ievil Exp $
  */
 #include "m_commands.h"
 #include "m_kline.h"
@@ -36,6 +36,7 @@
 #include "s_conf.h"
 #include "s_log.h"
 #include "s_misc.h"
+#include "s_serv.h"
 #include "send.h"
 #include "struct.h"
 #include "hash.h"
@@ -490,28 +491,38 @@ m_kline(struct Client *cptr,
   else
 #endif
     {
-      if (!MyClient(sptr) || !IsAnOper(sptr))
+      if (IsServer(cptr))
         {
-          sendto_one(sptr, form_str(ERR_NOPRIVILEGES), me.name, parv[0]);
+          if(parc == 6)
+             sendto_match_cap_servs(NULL, sptr, CAP_KLN,":%s KLINE %s %s %s %s :%s",
+                                    parv[0], parv[1], parv[2], parv[3],parv[4], parv[5]);
           return 0;
         }
+      else
+        {
+          if (!MyClient(sptr) || !IsAnOper(sptr))
+            {
+              sendto_one(sptr, form_str(ERR_NOPRIVILEGES), me.name, parv[0]);
+              return 0;
+            }
 
-      if(!IsSetOperK(sptr))
-        {
-          sendto_one(sptr,":%s NOTICE %s :You have no K flag",me.name,parv[0]);
-          return 0;
-        }
+          if (!IsSetOperK(sptr))
+            {
+              sendto_one(sptr,":%s NOTICE %s :You have no K flag",me.name,parv[0]);
+              return 0;
+            }
 
-      if ( parc < 2 )
-        {
-          sendto_one(sptr, form_str(ERR_NEEDMOREPARAMS),
-                     me.name, parv[0], "KLINE");
-          return 0;
-        }
+          if ( parc < 2 )
+            {
+              sendto_one(sptr, form_str(ERR_NEEDMOREPARAMS),
+                         me.name, parv[0], "KLINE");
+              return 0;
+            }
 
 #ifdef SLAVE_SERVERS
-      sendto_slaves(NULL,"KLINE",sptr->name,parc,parv);
+            sendto_slaves(NULL,"KLINE",sptr->name,parc,parv);
 #endif
+        }
     }
 
   argv = parv[1];
