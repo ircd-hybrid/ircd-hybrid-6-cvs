@@ -1,3 +1,33 @@
+ievil       2003/06/12 19:05:58 EDT	(20030612_3)
+
+  Modified files:
+    include              m_commands.h msg.h parse.h s_serv.h 
+                         send.h 
+    src                  Makefile.in parse.c s_serv.c send.c 
+  Added files:
+    src                  m_encap.c 
+  Log:
+  Added CAP ENCAP.
+  
+  Submitted by:   ievil
+  Reviewed by:    ievil
+  Approved by:    ievil
+  Obtained from:  billy-jon
+  
+  Revision  Changes    Path
+  1.8       +2 -1      ircd-hybrid-6/include/m_commands.h
+  1.23      +4 -2      ircd-hybrid-6/include/msg.h
+  1.4       +4 -3      ircd-hybrid-6/include/parse.h
+  1.17      +1 -1      ircd-hybrid-6/include/s_serv.h
+  1.18      +3 -0      ircd-hybrid-6/include/send.h
+  1.72      +1 -0      ircd-hybrid-6/src/Makefile.in
+  1.1       +95 -0     ircd-hybrid-6/src/m_encap.c (new)
+  1.50      +2 -2      ircd-hybrid-6/src/parse.c
+  1.232     +3 -2      ircd-hybrid-6/src/s_serv.c
+  1.116     +70 -0     ircd-hybrid-6/src/send.c
+
+
+
 ievil       2003/06/12 18:17:21 EDT	(20030612_2)
 
   Modified files:
