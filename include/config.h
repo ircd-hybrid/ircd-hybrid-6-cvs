@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.112 2001/06/25 00:56:05 db Exp $
+ * $Id: config.h,v 1.113 2001/06/25 02:29:02 greg Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -1046,7 +1046,7 @@ void    free_fludees();
 #define MIN_IDLETIME 1800
 #endif
 
-#define CONFIG_H_LEVEL_6_1_1
+#define CONFIG_H_LEVEL_6_1
 
 #ifdef CRYPT_LINKS
 #  ifndef HAVE_LIBCRYPTO
