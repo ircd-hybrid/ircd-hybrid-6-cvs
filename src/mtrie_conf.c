@@ -43,7 +43,7 @@
  *
  * Diane Bruce -db (db@db.net)
  *
- * $Id: mtrie_conf.c,v 1.61 1999/08/01 13:09:03 db Exp $
+ * $Id: mtrie_conf.c,v 1.62 1999/08/02 23:58:32 lusky Exp $
  */
 #include "mtrie_conf.h"
 #include "class.h"
@@ -825,13 +825,6 @@ aConfItem* find_matching_mtrie_conf(const char* host, const char* user,
    * found also had an E line, I've already returned it
    * and not bothering with the K line search - Dianora
    */
-
-  /* if iline returned says no ident needed then get rid
-   * of ~ if found in user
-   */
-
-  if(!IsConfDoIdentd(iline_aconf) && (*user == '~'))
-    user++;
 
   /* ok, if there is a trie to use...
    * and if a possible branch was found the first time

@@ -19,7 +19,7 @@
  *
  *      I kind of modernized this code a bit. -Dianora
  *
- *   $Id: messages.tab,v 1.3 1999/07/31 00:22:24 db Exp $
+ *   $Id: messages.tab,v 1.4 1999/08/02 23:58:31 lusky Exp $
  */
 
 static  char *  replies[] = {
@@ -239,7 +239,7 @@ static  char *  replies[] = {
 /* 213 RPL_STATSCLINE, */       ":%s 213 %s %c %s * %s %d %d",
 /* 214 RPL_STATSNLINE, */       ":%s 214 %s %c %s * %s %d %d",
 /* 215 RPL_STATSILINE, */       ":%s 215 %s %c %s * %s@%s %d %d",
-/* 216 RPL_STATSKLINE, */       ":%s 216 %s %c %s %s %s",
+/* 216 RPL_STATSKLINE, */       ":%s 216 %s %c %s * %s %s",
 /* 217 RPL_STATSQLINE, */       ":%s 217 %s %c %s %s@%s",
 /* 218 RPL_STATSYLINE, */       ":%s 218 %s %c %d %d %d %d %lu",
 /* 219 RPL_ENDOFSTATS, */       ":%s 219 %s %c :End of /STATS report",
