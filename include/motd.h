@@ -1,7 +1,7 @@
 /*
  * motd.h
  *
- * $Id: motd.h,v 1.6 1999/07/25 06:59:15 tomh Exp $
+ * $Id: motd.h,v 1.7 1999/07/25 18:05:06 tomh Exp $
  */
 #ifndef INCLUDED_motd_h
 #define INCLUDED_motd_h
@@ -19,27 +19,30 @@ typedef enum {
   USER_MOTD,
   OPER_MOTD,
   HELP_MOTD
-}MotdType;
+} MotdType;
 
-typedef struct MessageFileLineStruct
+struct MessageFileLine
 {
-  char  line[MESSAGELINELEN + 1];
-  struct MessageFileLineStruct *next;
-}MessageFileLine;
+  char                    line[MESSAGELINELEN + 1];
+  struct MessageFileLine* next;
+};
 
-typedef struct
+typedef struct MessageFileLine MessageFileLine;
+
+struct MessageFile
 {
-  char fileName[PATH_MAX + 1];
-  MotdType motdType;
-  MessageFileLine *contentsOfFile;
-  char lastChangedDate[MAX_DATE_STRING + 1];
-}MessageFile;
+  char             fileName[PATH_MAX + 1];
+  MotdType         motdType;
+  MessageFileLine* contentsOfFile;
+  char             lastChangedDate[MAX_DATE_STRING + 1];
+};
 
+typedef struct MessageFile MessageFile;
 
 struct Client;
 
-void InitMessageFile(MotdType, char *, MessageFile *);
-int SendMessageFile(struct Client *, MessageFile *);
+void InitMessageFile(MotdType, char *, struct MessageFile *);
+int SendMessageFile(struct Client *, struct MessageFile *);
 int ReadMessageFile(MessageFile *);
 
 #endif /* INCLUDED_motd_h */

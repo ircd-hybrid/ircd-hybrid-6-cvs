@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: irc_string.c,v 1.6 1999/07/23 13:24:20 db Exp $
+ *  $Id: irc_string.c,v 1.7 1999/07/25 18:01:46 tomh Exp $
  */
 #include "irc_string.h"
 #include "list.h"
@@ -86,6 +86,38 @@ void* MyRealloc(void* x, size_t y)
   if (!ret)
     outofmemory();
   return ret;
+}
+
+/*
+ * clean_string - clean up a string possibly containing garbage
+ *
+ * *sigh* Before the kiddies find this new and exciting way of 
+ * annoying opers, lets clean up what is sent to all opers
+ * -Dianora
+ */
+char* clean_string(char* dest, const char* src, size_t len)
+{
+  char* d    = dest; 
+  char* endp = dest + len - 1;
+  assert(0 != dest);
+  assert(0 != src);
+
+  while (d < endp && *src)
+    {
+      if (*src < ' ')             /* Is it a control character? */
+        {
+          *d++ = '^';
+          if (d < endp)
+            *d++ = 0x40 + *src;   /* turn it into a printable */
+        }
+      else if (*src > '~')
+        *d++ = '.';
+      else
+        *d++ = *src;
+      ++src;
+    }
+  *d = '\0';
+  return dest;
 }
 
 #if !defined( HAVE_STRTOKEN )

@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.75 1999/07/25 17:27:40 db Exp $
+ * $Id: struct.h,v 1.76 1999/07/25 18:05:07 tomh Exp $
  */
 #ifndef INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -190,8 +190,10 @@ struct SLink
 
 /* misc variable externs */
 
-extern  char    *version, *serno, *infotext[];
-extern  char    *generation, *creation;
+/* misc defines */
+
+#define UTMP            "/etc/utmp"
+#define COMMA           ","
 
 #ifdef ORATIMING
 /* Timing stuff (for performance measurements): compile with -DORATIMING

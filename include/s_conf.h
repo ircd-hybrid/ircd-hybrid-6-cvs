@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.36 1999/07/25 17:27:40 db Exp $
+ * $Id: s_conf.h,v 1.37 1999/07/25 18:05:06 tomh Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.37  1999/07/25 18:05:06  tomh
+ * untangle m_commands
+ *
  * Revision 1.36  1999/07/25 17:27:40  db
  * - moved aConfItem defs from struct.h to s_conf.h
  *
@@ -172,7 +175,7 @@
 #include "ircd_defs.h"
 #endif
 #ifndef INCLUDED_motd_h
-#include "motd.h"
+#include "motd.h"               /* MessageFile */
 #endif
 
 struct Client;
@@ -351,6 +354,7 @@ extern  char    *show_iline_prefix(struct Client *,struct ConfItem *,char *);
 extern void   GetPrintableaConfItem(struct ConfItem *,
                                     char **, char **, char **,
                                     char **, int *);
+extern void report_qlines(struct Client* cptr);
 
 typedef enum {
   CONF_TYPE,
@@ -391,7 +395,7 @@ typedef struct
   MessageFile helpfile;
   MessageFile motd;
   MessageFile opermotd;
-}ConfigFileEntryType;
+} ConfigFileEntryType;
 
 /* aConfItems */
 /* conf uline link list root */

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.37 1999/07/24 21:09:00 tomh Exp $
+ *   $Id: s_debug.c,v 1.38 1999/07/25 18:01:47 tomh Exp $
  */
 #include "struct.h"
 #include "s_conf.h"
@@ -50,85 +50,85 @@ extern  int     maxdbufblocks;                    /* defined in dbuf.c */
 /*
  * Option string.  Must be before #ifdef DEBUGMODE.
  */
-char    serveropts[] = {
+const char serveropts[] = {
 #ifdef  SENDQ_ALWAYS
-'A',
+  'A',
 #endif
 #ifdef  CHROOTDIR
-'c',
+  'c',
 #endif
 #ifdef  CMDLINE_CONFIG
-'C',
+  'C',
 #endif
 #ifdef        DO_ID
-'d',
+  'd',
 #endif
 #ifdef  DEBUGMODE
-'D',
+  'D',
 #endif
 #ifdef  LOCOP_REHASH
-'e',
+  'e',
 #endif
 #ifdef  OPER_REHASH
-'E',
+  'E',
 #endif
 #ifdef  HUB
-'H',
+  'H',
 #endif
 #ifdef  SHOW_INVISIBLE_LUSERS
-'i',
+  'i',
 #endif
 #ifndef NO_DEFAULT_INVISIBLE
-'I',
+  'I',
 #endif
 #ifdef  OPER_KILL
 # ifdef  LOCAL_KILL_ONLY
-'k',
+  'k',
 # else
-'K',
+  'K',
 # endif
 #endif
 #ifdef  IDLE_FROM_MSG
-'M',
+  'M',
 #endif
 #ifdef  CRYPT_OPER_PASSWORD
-'p',
+  'p',
 #endif
 #ifdef  CRYPT_LINK_PASSWORD
-'P',
+  'P',
 #endif
 #ifdef  LOCOP_RESTART
-'r',
+  'r',
 #endif
 #ifdef  OPER_RESTART
-'R',
+  'R',
 #endif
 #ifdef  OPER_REMOTE
-'t',
+  't',
 #endif
 #ifdef  VALLOC
-'V',
+  'V',
 #endif
 #ifdef  USE_SYSLOG
-'Y',
+  'Y',
 #endif
 #ifdef ZIP_LINKS
-'Z',
+  'Z',
 #endif
-' ',
-'T',
-'S',
+  ' ',
+  'T',
+  'S',
 #ifdef TS_CURRENT
-'0' + TS_CURRENT,
+  '0' + TS_CURRENT,
 #endif
 /* th+hybrid servers ONLY do TS */
 /* th+hybrid servers ALWAYS do TS_WARNINGS */
-'o',
-'w',
-'\0'};
+  'o',
+  'w',
+  '\0'
+};
 
 void debug(int level, char *format, ...)
-
 {
   static char debugbuf[1024];
   va_list args;
