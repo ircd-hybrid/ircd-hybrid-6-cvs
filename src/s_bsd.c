@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.148 2003/06/24 03:57:17 ievil Exp $
+ *  $Id: s_bsd.c,v 1.149 2003/10/13 10:11:52 ievil Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -565,7 +565,7 @@ int connect_server(struct ConfItem* aconf,
   if (!connect_inet(aconf, cptr)) {
     if (by && IsPerson(by) && !MyClient(by))
       sendto_one(by, ":%s NOTICE %s :Connect to host %s failed.",
-                 me.name, by->name, cptr);
+                 me.name, by->name, cptr->name);
     free_client(cptr);
     return 0;
   }
@@ -583,7 +583,7 @@ int connect_server(struct ConfItem* aconf,
                  aconf->name);
       if (by && IsPerson(by) && !MyClient(by))
         sendto_one(by, ":%s NOTICE %s :Connect to host %s failed.",
-                   me.name, by->name, cptr);
+                   me.name, by->name, cptr->name);
       det_confs_butmask(cptr, 0);
 
       free_client(cptr);
