@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: irc_string.c,v 1.3 1999/07/20 01:20:42 db Exp $
+ *  $Id: irc_string.c,v 1.4 1999/07/20 03:56:30 tomh Exp $
  */
 #include "irc_string.h"
 #include "h.h"
@@ -58,10 +58,10 @@ const char* myctime(time_t value)
 char* strncpy_irc(char* s1, const char* s2, size_t n)
 {
   register char* endp = s1 + n;
-  char* s = s1;
-  while (s1 < endp && (*s1++ = *s2++))
+  register char* s = s1;
+  while (s < endp && (*s++ = *s2++))
     ;
-  return s;
+  return s1;
 }
 
 /*
