@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.21 1999/01/20 05:56:03 db Exp $
+ * $Id: config.h,v 1.22 1999/01/22 19:49:20 db Exp $
  */
 
 #ifndef	__config_include__
@@ -260,7 +260,7 @@
  * define this if you wish to reject usernames like: FuckYou which
  * don't have all one case
  */
-#define NO_MIXED_CASE
+#undef NO_MIXED_CASE
 
 /* IGNORE_FIRST_CHAR -
  * define this for NO_MIXED_CASE if you wish to ignore the first character
@@ -395,7 +395,7 @@
  */
 #define CLIENT_COUNT
 #ifdef CLIENT_COUNT
-#define HIGHEST_CONNECTION
+#undef HIGHEST_CONNECTION
 #endif
 
 /* X_LINES_OPER_ONLY - Allow only local opers to see these stats
@@ -529,8 +529,8 @@
 /*
  * OPER_UMODES LOCAOP_UMODES - set these to be the initial umodes when OPER'ing
  */
-#define OPER_UMODES   (FLAGS_OPER|FLAGS_WALLOP|FLAGS_SERVNOTICE|FLAGS_OPERWALL|FLAGS_CCONN)
-#define LOCOP_UMODES   (FLAGS_LOCOP|FLAGS_WALLOP|FLAGS_SERVNOTICE|FLAGS_CCONN)
+#define OPER_UMODES   (FLAGS_OPER|FLAGS_WALLOP|FLAGS_SERVNOTICE|FLAGS_OPERWALL)
+#define LOCOP_UMODES   (FLAGS_LOCOP|FLAGS_WALLOP|FLAGS_SERVNOTICE)
 
 /* MAXIMUM LINKS - max links for class 0 if no Y: line configured
  *
@@ -1031,7 +1031,7 @@
  * -Dianora
  */
 #define ANTI_SPAMBOT_EXTRA
-#define PRIVMSG_POSSIBLE_SPAMBOT_COUNT	3
+#define PRIVMSG_POSSIBLE_SPAMBOT_COUNT	50
 
 #ifdef HUB
 #undef FLUD
