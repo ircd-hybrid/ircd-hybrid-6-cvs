@@ -23,7 +23,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.17 1999/05/19 05:30:58 db Exp $
+ * $Id: h.h,v 1.18 1999/06/12 15:42:56 db Exp $
  *
  */
 
@@ -269,11 +269,11 @@ extern	void	send_umode (aClient *, aClient *, int, int, char *);
 extern	void	send_umode_out (aClient*, aClient *, int);
 
 
-extern	void	free_client (aClient *);
-extern	void	free_link (Link *);
+extern	void	_free_client (aClient *);
+extern	void	_free_link (Link *);
 extern	void	free_conf (aConfItem *);
 extern	void	free_class (aClass *);
-extern	void	free_user (anUser *, aClient *);
+extern	void	_free_user (anUser *, aClient *);
 extern	Link	*make_link (void);
 extern	anUser	*make_user (aClient *);
 extern	aConfItem *make_conf (void);

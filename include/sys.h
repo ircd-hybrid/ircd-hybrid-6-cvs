@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: sys.h,v 1.7 1999/06/03 02:59:12 lusky Exp $
+ * $Id: sys.h,v 1.8 1999/06/12 15:42:57 db Exp $
  */
 
 #ifndef	__sys_include__
@@ -78,6 +78,40 @@ extern	char	*rindex (char *, char);
 #endif
 
 #define MyFree(x)       if ((x) != NULL) free(x)
+
+#define DEBUG_BLOCK_ALLOCATOR
+#ifdef DEBUG_BLOCK_ALLOCATOR
+extern char *currentfile;
+extern int  currentline;
+
+#define free_client(x)  { currentfile = __FILE__; \
+                          currentline=__LINE__;\
+			  _free_client(x); }
+
+#define free_link(x)    { currentfile = __FILE__; \
+                          currentline=__LINE__;\
+			  _free_link(x); }
+
+#define free_user(x,y)  { currentfile = __FILE__; \
+                          currentline=__LINE__;\
+			  _free_user(x,y); }
+
+#ifdef FLUD
+#define free_fludbot(x) { currentfile = __FILE__;\
+                          currentline=__LINE__;\
+                          BlockHeapFree(free_fludbots,x); }
+#endif
+
+#else
+#define free_client(x) _free_client(x)
+#define free_link(x)   _free_link(x)
+#define free_user(x,y) _free_user(x,y)
+
+#ifdef FLUD
+#define free_fludbot(x) BlockHeapFree(free_fludbots,x)
+#endif
+
+#endif
 
 #ifdef NEXT
 #define VOIDSIG int	/* whether signal() returns int of void */
