@@ -20,10 +20,11 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_who.c,v 1.5 2003/05/04 17:52:45 db Exp $
+ *   $Id: m_who.c,v 1.6 2003/06/14 23:23:42 ievil Exp $
  */
 
 #include "m_commands.h"
+#include "m_operspylog.h"
 #include "client.h"
 #include "channel.h"
 #include "hash.h"
@@ -158,6 +159,14 @@ int     m_who(struct Client *cptr,
   int   oper = parc > 2 ? (*parv[2] == 'o' ): 0; /* Show OPERS only */
   int   member;
   int   maxmatches = 500;
+#ifdef OPERSPY
+  int OperSpyWho = 0;
+
+  if ((mask != NULL) && (*mask==WHO_PREFIX) && (IsSetOperOSpy(cptr))) {
+    OperSpyWho = 1;
+    mask++;
+  }
+#endif
 
   mychannel = NullChn;
   if (sptr->user)
@@ -199,7 +208,11 @@ int     m_who(struct Client *cptr,
       chptr = hash_find_channel(channame, NULL);
       if (chptr)
         {
-          member = IsMember(sptr, chptr);
+          member = IsMember(sptr, chptr)
+#ifdef OPERSPY
+                   || OperSpyWho
+#endif
+                   ;
           if (member || !SecretChannel(chptr))
             for (lp = chptr->members; lp; lp = lp->next)
               {
@@ -217,8 +230,11 @@ int     m_who(struct Client *cptr,
     {
       int isinvis = 0;
       struct Channel *ch2ptr = NULL;
-
+#ifdef OPERSPY
+      if (!OperSpyWho)
+#endif
       isinvis = IsInvisible(acptr);
+
       for (lp = acptr->user->channel; lp; lp = lp->next)
         {
           chptr = lp->value.chptr;
@@ -270,6 +286,12 @@ int     m_who(struct Client *cptr,
         }
       if (!acptr->user->channel && !isinvis)
         showperson = 1;
+
+#ifdef OPERSPY
+      if (OperSpyWho)
+       showperson=1;
+#endif
+
       if (showperson &&
           (!mask ||
            match(mask, acptr->name) ||
@@ -283,11 +305,18 @@ int     m_who(struct Client *cptr,
             {
               sendto_one(sptr, form_str(RPL_ENDOFWHO), me.name, parv[0],
                          EmptyString(mask) ?  "*" : mask);
+#ifdef OPERSPY
+              if (OperSpyWho)
+                  operspy_log(cptr, "WHO", mask);
+#endif		 
               return 0;
             }
         }
     }
-
+#ifdef OPERSPY
+   if (OperSpyWho)
+      operspy_log(cptr, "WHO", mask);
+#endif
   sendto_one(sptr, form_str(RPL_ENDOFWHO), me.name, parv[0],
              EmptyString(mask) ?  "*" : mask);
   return 0;

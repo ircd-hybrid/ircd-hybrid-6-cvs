@@ -20,9 +20,10 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_whois.c,v 1.11 2003/06/12 23:53:06 ievil Exp $
+ *   $Id: m_whois.c,v 1.12 2003/06/14 23:23:42 ievil Exp $
  */
 
+#include "m_operspylog.h"
 #include "m_commands.h"
 #include "client.h"
 #include "channel.h"
@@ -127,6 +128,12 @@ int     m_whois(struct Client *cptr,
   int   found, len, mlen;
   static time_t last_used=0L;
   int found_mode;
+  int whois_len = 4;
+
+#ifdef OPERSPY
+  int OperSpyWhois = 0;
+#endif
+
 
   if (parc < 2)
     {
@@ -175,6 +182,15 @@ int     m_whois(struct Client *cptr,
     {
       int       invis, showperson, member, wilds;
       found = 0;
+
+#ifdef OPERSPY
+      if ((nick[0] == WHOIS_PREFIX) && (IsSetOperOSpy(cptr))) {
+       OperSpyWhois = 1;
+       whois_len = 5;
+       nick++;
+      }
+#endif
+
       (void)collapse(nick);
       wilds = (strchr(nick, '?') || strchr(nick, '*'));
       /*
@@ -229,10 +245,14 @@ int     m_whois(struct Client *cptr,
                lp = lp->next)
             {
               chptr = lp->value.chptr;
-              if (ShowChannel(sptr, chptr))
+              if (ShowChannel(sptr, chptr)
+#ifdef OPERSPY
+                 || OperSpyWhois
+#endif
+                  )
                 {
                   if (len + strlen(chptr->chname)
-                      > (size_t) BUFSIZE - 4 - mlen)
+                      > (size_t) BUFSIZE - whois_len - mlen)
                     {
                       sendto_one(sptr,
                                  ":%s %d %s %s :%s",
@@ -244,6 +264,12 @@ int     m_whois(struct Client *cptr,
                     }
 
 		  found_mode = user_channel_mode(acptr, chptr);
+#ifdef OPERSPY
+                  if (OperSpyWhois && !ShowChannel(sptr, chptr)) {
+                    *(buf + len++) = WHOIS_PREFIX;
+                  }
+#endif
+
 #ifdef HIDE_OPS
 		  if(is_chan_op(sptr,chptr))
 #endif
@@ -313,6 +339,11 @@ int     m_whois(struct Client *cptr,
                        CurrentTime - user->last,
                        acptr->firsttime);
           sendto_one(sptr, form_str(RPL_ENDOFWHOIS), me.name, parv[0], parv[1]);
+#ifdef OPERSPY
+
+          if (OperSpyWhois)
+             operspy_log(cptr, "WHOIS", nick);
+#endif
           return 0;
           /*      continue; */
         }
@@ -472,7 +503,13 @@ int     m_whois(struct Client *cptr,
         p[-1] = ',';
         */
     }
+
   sendto_one(sptr, form_str(RPL_ENDOFWHOIS), me.name, parv[0], parv[1]);
+  
+#ifdef OPERSPY
+  if ((OperSpyWhois) && (found))
+     operspy_log(cptr, "WHOIS", parv[1]);  
+#endif
   
   return 0;
 }

@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.240 2003/06/11 13:20:13 ievil Exp $
+ * $Id: channel.c,v 1.241 2003/06/14 23:23:41 ievil Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -654,7 +654,12 @@ int     user_channel_mode(struct Client *cptr, struct Channel *chptr)
  * write the "simple" list of channel modes for channel chptr onto buffer mbuf
  * with the parameters in pbuf.
  */
-void channel_modes(struct Client *cptr, char *mbuf, char *pbuf, struct Channel *chptr)
+void channel_modes(struct Client *cptr, char *mbuf, char *pbuf, struct Channel *chptr
+#ifdef OPERSPY
+                  , int ModeCheat
+#endif
+)
+
 {
   *mbuf++ = '+';
   if (chptr->mode.mode & MODE_SECRET)
@@ -674,13 +679,21 @@ void channel_modes(struct Client *cptr, char *mbuf, char *pbuf, struct Channel *
   if (chptr->mode.limit)
     {
       *mbuf++ = 'l';
-      if (IsMember(cptr, chptr) || IsServer(cptr))
+      if (IsMember(cptr, chptr) || IsServer(cptr)
+#ifdef OPERSPY
+         || ModeCheat
+#endif
+          )
         ircsprintf(pbuf, "%d ", chptr->mode.limit);
     }
   if (*chptr->mode.key)
     {
       *mbuf++ = 'k';
-      if (IsMember(cptr, chptr) || IsServer(cptr))
+      if (IsMember(cptr, chptr) || IsServer(cptr)
+#ifdef OPERSPY
+         || ModeCheat
+#endif
+          )
         (void)strcat(pbuf, chptr->mode.key);
     }
   *mbuf++ = '\0';
@@ -755,7 +768,11 @@ void send_channel_modes(struct Client *cptr, struct Channel *chptr)
     return;
 
   *modebuf = *parabuf = '\0';
-  channel_modes(cptr, modebuf, parabuf, chptr);
+  channel_modes(cptr, modebuf, parabuf, chptr
+#ifdef OPERSPY
+               , 0
+#endif
+                );
 
   if (*parabuf)
     strcat(parabuf, " ");
@@ -4030,7 +4047,11 @@ int     m_sjoin(struct Client *cptr,
 
   *modebuf = *parabuf = '\0';
   if (parv[3][0] != '0' && keep_new_modes)
-    channel_modes(sptr, modebuf, parabuf, chptr);
+    channel_modes(sptr, modebuf, parabuf, chptr
+#ifdef OPERSPY
+                 ,0
+#endif
+                  );
   else
     {
       modebuf[0] = '0';

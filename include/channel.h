@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: channel.h,v 1.37 2001/12/06 20:56:08 leeh Exp $
+ * $Id: channel.h,v 1.38 2003/06/14 23:23:39 ievil Exp $
  */
 
 #ifndef INCLUDED_channel_h
@@ -110,7 +110,12 @@ extern int     m_names(struct Client *, struct Client *,int, char **);
 extern void    send_channel_modes (struct Client *, struct Channel *);
 extern void    del_invite (struct Client *, struct Channel *);
 extern int     check_channel_name(const char* name);
-extern void    channel_modes(struct Client *, char *, char *, struct Channel*);
+extern void    channel_modes(struct Client *, char *, char *, struct Channel*
+#ifdef OPERSPY
+                                  , int
+#endif
+);
+
 extern void    set_channel_mode(struct Client *, struct Client *, 
                                 struct Channel *, int, char **);
 #ifdef JUPE_CHANNEL

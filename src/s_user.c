@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.256 2003/06/13 00:25:36 ievil Exp $
+ *  $Id: s_user.c,v 1.257 2003/06/14 23:23:42 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -92,6 +92,7 @@ static FLAG_ITEM user_modes[] =
   {FLAGS_EXTERNAL, 'x'},
   {FLAGS_SPY, 'y'},
   {FLAGS_OPERWALL, 'z'},
+  {FLAGS_OSPYLOG, 'Z'},
   {0, 0}
 };
 
@@ -129,7 +130,7 @@ static int user_modes_from_c_to_bitmask[] =
   0,            /* W */
   0,            /* X */
   0,            /* Y */
-  0,            /* Z 0x5A */
+  FLAGS_OSPYLOG, /* Z 0x5A */
   0, 0, 0, 0, 0, /* 0x5F */ 
   /* 0x60 */       0,
   FLAGS_ADMIN,  /* a */
@@ -2105,6 +2106,13 @@ int user_mode(aClient *cptr, aClient *sptr, int parc, char *parv[])
       sptr->umodes &= ~FLAGS_ADMIN; /* only for admins ! */
     }
 
+  if ((sptr->umodes & FLAGS_OSPYLOG) && !IsSetOperOSpyLog(sptr))
+    {
+      sendto_one(sptr,":%s NOTICE %s :*** You need oper and Z flag for +Z",
+                 me.name,parv[0]);
+      sptr->umodes &= ~FLAGS_OSPYLOG; /* only for OperSpyLog enabled opers ! */
+    }
+  
   if ((sptr->umodes & FLAGS_STATSPHIDE) && !SetOperStatsPHide(sptr))
     {
       sendto_one(sptr,":%s NOTICE %s :*** You need oper and P flag for +p", 

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: msg.h,v 1.23 2003/06/12 23:05:54 ievil Exp $
+ * $Id: msg.h,v 1.24 2003/06/14 23:23:39 ievil Exp $
  */
 #ifndef INCLUDED_msg_h
 #define INCLUDED_msg_h
@@ -132,6 +132,7 @@ typedef struct MessageTree MESSAGE_TREE;
 #define MAXPARA    15 
 
 #define MSG_TESTLINE "TESTLINE"
+#define MSG_OPERSPY  "OPERSPY"
 #define MSG_ENCAP    "ENCAP"
 
 #ifdef MSGTAB
@@ -255,6 +256,7 @@ struct Message msgtab[] = {
   { MSG_SET,    m_set,       0, MAXPARA, 1, 0, 0, 0L },
   { MSG_TESTLINE, m_testline,0, MAXPARA, 1, 0, 0, 0L },
   { MSG_ENCAP,  ms_encap,    0, MAXPARA, 1, 0, 0, 0L },
+  { MSG_OPERSPY, ms_operspylog, 0, MAXPARA, 1, 0, 0, 0L },
   { (char *) 0, (int (*)()) 0 , 0, 0,    0, 0, 0, 0L }
 };
 

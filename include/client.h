@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.67 2003/06/14 19:48:17 ievil Exp $
+ * $Id: client.h,v 1.68 2003/06/14 23:23:39 ievil Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -339,7 +339,7 @@ struct Client
 #define FLAGS_LOCOP        0x08000 /* Local operator -- SRB */
 #define FLAGS_STATSPHIDE   0x10000 /* Oper hides from stats P */
 #define FLAGS_ADMIN        0x20000 /* Oper is admin */
-
+#define FLAGS_OSPYLOG      0x40000 /* show Oper Spy being used */
 
 /* *sigh* overflow flags */
 #define FLAGS2_RESTRICTED   0x0001      /* restricted client */
@@ -360,7 +360,8 @@ struct Client
 #define FLAGS2_OPER_REHASH      0x01000  /* oper can rehash */
 #define FLAGS2_OPER_STATSPHIDE  0x0800000  /* oper can hide from stats p */
 #define FLAGS2_OPER_ADMIN       0x1000000  /* oper is admin */
-
+#define FLAGS2_OPER_OSPY        0x2000000  /* oper can use operspy */
+#define FLAGS2_OPER_OSPYLOG     0x4000000  /* oper can see operspy usage */
 
 #define FLAGS2_OPER_FLAGS       (FLAGS2_OPER_GLOBAL_KILL | \
                                  FLAGS2_OPER_REMOTE | \
@@ -371,7 +372,9 @@ struct Client
                                  FLAGS2_OPER_DIE | \
                                  FLAGS2_OPER_REHASH | \
                                  FLAGS2_OPER_STATSPHIDE | \
-                                 FLAGS2_OPER_ADMIN )
+                                 FLAGS2_OPER_ADMIN | \
+                                 FLAGS2_OPER_OSPY | \
+                                 FLAGS2_OPER_OSPYLOG )
 /* ZIP_LINKS */
 
 #define FLAGS2_ZIP           0x4000  /* (server) link is zipped */
@@ -394,12 +397,14 @@ struct Client
                       FLAGS_REJ | FLAGS_SKILL | FLAGS_FULL | FLAGS_SPY | \
                       FLAGS_NCHANGE | FLAGS_OPERWALL | FLAGS_DEBUG | \
                       FLAGS_BOTS | FLAGS_EXTERNAL | FLAGS_LOCOP | \
-                      FLAGS_STATSPHIDE | FLAGS_ADMIN)
+                      FLAGS_STATSPHIDE | FLAGS_ADMIN | FLAGS2_OPER_OSPY | \
+                      FLAGS2_OPER_OSPYLOG)
 
 
 #ifndef ADMIN_UMODES
 #define ADMIN_UMODES  (FLAGS_OPER | FLAGS_WALLOP | FLAGS_SERVNOTICE | \
-                      FLAGS_SPY | FLAGS_OPERWALL | FLAGS_DEBUG | FLAGS_BOTS | FLAGS_ADMIN )
+                      FLAGS_SPY | FLAGS_OPERWALL | FLAGS_DEBUG | FLAGS_BOTS | \
+                      FLAGS_ADMIN )
 #endif /* ADMIN_UMODES */
 
 #ifndef OPER_UMODES
@@ -453,6 +458,8 @@ struct Client
 #define SendSpyNotice(x)        ((x)->umodes & FLAGS_SPY)
 #define SendDebugNotice(x)      ((x)->umodes & FLAGS_DEBUG)
 #define SendNickChange(x)       ((x)->umodes & FLAGS_NCHANGE)
+#define SendOSpyNotice(x)       ((x)->umodes & FLAGS_OSPYLOG)
+
 #define SetWallops(x)           ((x)->umodes |= FLAGS_WALLOP)
 
 
@@ -520,6 +527,10 @@ struct Client
 #define IsOperStatsPHide(x)     ((x)->flags2 & FLAGS2_OPER_STATSPHIDE)
 #define IsSetOperAdmin(x)       ((x)->flags2 & FLAGS2_OPER_ADMIN)
 #define SetOperAdmin(x)         ((x)->flags2 |= FLAGS2_OPER_ADMIN)
+#define IsSetOperOSpy(x)        ((x)->flags2 & FLAGS2_OPER_OSPY)
+#define SetOperOSpy(x)          ((x)->flags2 |= FLAGS2_OPER_OSPY)
+#define IsSetOperOSpyLog(x)     ((x)->flags2 & FLAGS2_OPER_OSPYLOG)
+#define SetOperOSpyLog(x)       ((x)->flags2 |= FLAGS2_OPER_OSPYLOG)
 
 #define CBurst(x)               ((x)->flags2 & FLAGS2_CBURST)
 

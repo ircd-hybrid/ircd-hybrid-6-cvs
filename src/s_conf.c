@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.244 2003/06/12 23:53:06 ievil Exp $
+ *  $Id: s_conf.c,v 1.245 2003/06/14 23:23:42 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -3026,8 +3026,20 @@ oper_privs_from_string(int int_privs,char *privs)
         int_privs |= CONF_OPER_ADMIN;         /* admin */
       else if(*privs == 'a')
         int_privs &= ~CONF_OPER_ADMIN;        /* not admin */
-
+#ifdef OPERSPY
+      else if(*privs == 'S')
+        int_privs |= CONF_OPER_OSPY;        /* allow operspy */
+      else if(*privs == 's')
+        int_privs &= ~CONF_OPER_OSPY;       /* disallow operspy */
+#endif                            
+#ifdef OPERSPYLOG
+      else if(*privs == 'Z')
+        int_privs |= CONF_OPER_OSPYLOG;     /* allow operspy log */
+      else if(*privs == 'z')
+        int_privs &= ~CONF_OPER_OSPYLOG;       /* disallow operspy log */
+#endif
       privs++;
+
     }
   return(int_privs);
 }
@@ -3140,7 +3152,27 @@ char *oper_privs_as_string(aClient *cptr,int port)
   else
     *privs_ptr++ = 'd';
 
+#ifdef OPERSPY
+  if(port & CONF_OPER_OSPY)
+    {
+      if(cptr)
+        SetOperOSpy(cptr);
+      *privs_ptr++ = 'S';
+    }
+  else
+    *privs_ptr++ = 's';
+#endif /* OPERSPY */
 
+#ifdef OPERSPYLOG
+  if(port & CONF_OPER_OSPYLOG)
+    {
+      if(cptr)
+        SetOperOSpyLog(cptr);
+      *privs_ptr++ = 'Z';
+    }
+  else
+    *privs_ptr++ = 'z';
+#endif /* OPERSPYLOG */
 
   *privs_ptr = '\0';
 
@@ -3193,6 +3225,10 @@ oper_flags_from_string(char *flags)
         int_flags |= FLAGS_EXTERNAL;
       else if(*flags == 'z')
         int_flags |= FLAGS_OPERWALL;
+#ifdef OPERSPYLOG
+      else if(*flags == 'Z')
+        int_flags |= FLAGS_OSPYLOG;
+#endif /* OPERSPYLOG */        
       flags++;
     }
 
@@ -3246,6 +3282,10 @@ char *oper_flags_as_string(int flags)
     *flags_ptr++ = 'x';
   if(flags & FLAGS_OPERWALL)
     *flags_ptr++ = 'z';
+#ifdef OPERSPYLOG
+  if(flags & FLAGS_OSPYLOG)
+    *flags_ptr++ = 'Z';
+#endif /* OPERSPYLOG */    
   *flags_ptr = '\0';
 
   return(flags_out);

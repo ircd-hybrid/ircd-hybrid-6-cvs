@@ -20,9 +20,11 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_mode.c,v 1.1 1999/07/31 02:42:56 tomh Exp $
+ *   $Id: m_mode.c,v 1.2 2003/06/14 23:23:42 ievil Exp $
  */
+
 #include "m_commands.h"
+#include "m_operspylog.h"
 #include "channel.h"
 #include "client.h"
 #include "hash.h"
@@ -99,6 +101,14 @@ int m_mode(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
   struct Channel* chptr;
   static char     modebuf[MODEBUFLEN];
   static char     parabuf[MODEBUFLEN];
+#ifdef OPERSPY
+  int OperSpyMode = 0;
+  if ((parc > 1) && (parv[1][0] == MODE_PREFIX) && (IsChanPrefix(parv[1][1])) && (IsSetOperOSpy(cptr))) {
+    OperSpyMode = 1;
+    parv[1]++;
+  }
+#endif
+  
 
   /* Now, try to find the channel in question */
   if (parc > 1)
@@ -137,11 +147,20 @@ int m_mode(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
     {
       *modebuf = *parabuf = '\0';
       modebuf[1] = '\0';
-      channel_modes(sptr, modebuf, parabuf, chptr);
+      channel_modes(sptr, modebuf, parabuf, chptr
+#ifdef OPERSPY
+                   , OperSpyMode
+#endif
+                    );
+
       sendto_one(sptr, form_str(RPL_CHANNELMODEIS), me.name, parv[0],
                  chptr->chname, modebuf, parabuf);
       sendto_one(sptr, form_str(RPL_CREATIONTIME), me.name, parv[0],
                  chptr->chname, chptr->channelts);
+#ifdef OPERSPY
+      if (OperSpyMode)
+         operspy_log(cptr, "MODE", chptr->chname);
+#endif
       return 0;
     }
 
