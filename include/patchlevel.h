@@ -15,9 +15,9 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: patchlevel.h,v 1.158 2003/08/18 06:31:31 ievil Exp $
+ * $Id: patchlevel.h,v 1.159 2003/08/22 00:01:52 ievil Exp $
  */
 
 #ifndef PATCHLEVEL
-#define PATCHLEVEL    "2.8/hybrid-6.4.1rc1"
+#define PATCHLEVEL    "2.8/hybrid-6.4.1rc2"
 #endif
