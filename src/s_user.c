@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.47 1998/12/24 06:29:42 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.48 1998/12/24 07:50:53 db Exp $";
 
 #endif
 
@@ -2533,7 +2533,7 @@ int	m_whois(aClient *cptr,
 
   if(!IsAnOper(sptr) && !MyConnect(sptr)) /* pace non local requests */
     {
-      if((last_used + PACE_WAIT) > NOW)
+      if((last_used + WHOIS_WAIT) > NOW)
         {
 	  /* Unfortunately, returning anything to a non local
 	   * request =might= increase sendq to be usable in a split hack

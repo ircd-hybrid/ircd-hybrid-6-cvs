@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.17 1998/12/24 03:50:19 db Exp $
+ * $Id: config.h,v 1.18 1998/12/24 07:50:51 db Exp $
  */
 
 #ifndef	__config_include__
@@ -401,6 +401,11 @@
 /* LINKS_NOTICE - See a notice when a user does a /links
  * its always defined now
  */
+
+/* WHOIS_WAIT - minimum seconds between remote use of WHOIS before
+ * max use count is reset
+ */
+#define WHOIS_WAIT 1
 
 /* PACE_WAIT - minimum seconds between use of MOTD, INFO, HELP, LINKS, TRACE
  * -Dianora
