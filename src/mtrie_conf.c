@@ -43,7 +43,7 @@
  *
  * Diane Bruce -db (db@db.net)
  *
- * $Id: mtrie_conf.c,v 1.92 2003/05/22 12:22:10 db Exp $
+ * $Id: mtrie_conf.c,v 1.93 2003/06/15 01:49:44 ievil Exp $
  */
 #include "mtrie_conf.h"
 #include "class.h"
@@ -195,9 +195,12 @@ add_mtrie_conf_entry(struct ConfItem *aconf,int flags)
           aconf2 = find_wild_card_iline(aconf->user);
           if (aconf2 != NULL)
             {
-              report_dup('I', aconf2);
-              free(aconf);
-              return;
+              if (!irccmp(aconf->user, aconf2->user))
+                {
+                  report_dup('I', aconf2);
+                  free(aconf);
+                  return;
+                }
             }
           if(wild_card_ilines)
             {
