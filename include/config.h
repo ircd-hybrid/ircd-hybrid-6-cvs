@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.168 2003/10/13 11:11:49 ievil Exp $
+ * $Id: config.h,v 1.169 2004/05/23 15:27:20 ievil Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -350,6 +350,10 @@
  * HIDE_SPOOF_IPS.
  */
 #define SPOOF_NOTICE
+
+/* SPOOF_NOTICE_ADMIN_ONLY - make only admins see spoofed hosts
+ */
+#define SPOOF_NOTICE_ADMIN_ONLY
 
 /* STATS_NOTICE - See a notice when a user does a /stats
  *

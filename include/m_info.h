@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.30 2003/08/16 19:58:33 ievil Exp $
+ * $Id: m_info.h,v 1.31 2004/05/23 15:27:20 ievil Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -674,6 +674,12 @@ Info MyInformation[] = {
 #else
   { "SPOOF_NOTICE", "OFF", 0, "Show Operators when a Client connects with a spoofed I" },
 #endif /* SPOOF_NOTICE */
+
+#ifdef SPOOF_NOTICE_ADMIN_ONLY
+  { "SPOOF_NOTICE_ADMIN_ONLY", "ON", 0, "Show only Admins when a Client connects with a spoofed I" },
+#else
+  { "SPOOF_NOTICE_ADMIN_ONLY", "OFF", 0, "Show only Admins when a Client connects with a spoofed I" },
+#endif /* SPOOF_NOTICE_ADMIN_ONLY */
 
 #ifdef STATS_NOTICE
   { "STATS_NOTICE", "ON", 0, "Show Operators when a Client uses STATS" },

@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.250 2003/10/13 14:51:35 ievil Exp $
+ *  $Id: s_conf.c,v 1.251 2004/05/23 15:27:21 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -493,8 +493,13 @@ verify_access(struct Client *cptr, const char* username, char **preason)
           if(IsConfDoSpoofIp(aconf))
             {
 #ifdef SPOOF_NOTICE
+#ifdef SPOOF_NOTICE_ADMIN_ONLY
+              sendto_realops_flags(FLAGS_ADMIN, "%s spoofing: %s(%s) as %s", cptr->name,
+                                   cptr->host, inetntoa((char*) &cptr->ip), aconf->name);
+#else
               sendto_realops("%s spoofing: %s(%s) as %s", cptr->name,
                              cptr->host, inetntoa((char*) &cptr->ip), aconf->name);
+#endif /* SPOOF_NOTICE_ADMIN_ONLY */
 #endif /* SPOOF_NOTICE */
               strncpy_irc(cptr->host, aconf->name, HOSTLEN);
               SetIPSpoof(cptr);
