@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.15 1999/07/08 00:53:29 db Exp $
+ *   $Id: s_auth.c,v 1.16 1999/07/08 01:22:32 db Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -567,8 +567,8 @@ void send_auth_query(struct AuthRequest* auth)
 
 void read_auth_reply(struct AuthRequest* auth)
 {
-  char* s;
-  char* t;
+  char* s=(char *)NULL;
+  char* t=(char *)NULL;
   int   len;
   int   count;
   char  buf[AUTH_BUFSIZ + 1]; /* buffer to read auth reply into */
