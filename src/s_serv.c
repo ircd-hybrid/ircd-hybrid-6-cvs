@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.86 1999/04/18 01:47:27 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.87 1999/04/19 05:12:40 lusky Exp $";
 #endif
 
 
@@ -6226,8 +6226,12 @@ int	m_ltrace(aClient *cptr,
 	aClient	*ac2ptr;
 	
 	ac2ptr = next_client(client, tname);
+	if (ac2ptr)
 	  sendto_one(sptr, rpl_str(RPL_TRACELINK), me.name, parv[0],
 		     version, debugmode, tname, ac2ptr->from->name);
+        else
+	  sendto_one(sptr, rpl_str(RPL_TRACELINK), me.name, parv[0],
+		     version, debugmode, tname, "ac2ptr_is_NULL!!");
 	return 0;
       }
     case HUNTED_ISME:
