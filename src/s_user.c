@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.121 1999/07/10 20:25:00 tomh Exp $
+ *  $Id: s_user.c,v 1.122 1999/07/10 20:35:21 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -2668,11 +2668,11 @@ static int do_user(char *nick, aClient *cptr, aClient *sptr,
 
   if (!MyConnect(sptr))
     {
-      user->server = find_or_add(server);
-      /* 
-       * don't take the client's word for it ever
-       * strncpyzt(user->host, host, sizeof(user->host)); 
+      /*
+       * coming from another server, take the servers word for it
        */
+      user->server = find_or_add(server);
+      strncpyzt(user->host, host, sizeof(user->host)); 
     }
   else
     {
@@ -2688,7 +2688,10 @@ static int do_user(char *nick, aClient *cptr, aClient *sptr,
       sptr->flags |= (UFLAGS & atoi(host));
       if (!(oflags & FLAGS_INVISIBLE) && IsInvisible(sptr))
 	Count.invisi++;
-      /* strncpyzt(user->host, host, sizeof(user->host)); */
+      /*
+       * don't take the clients word for it, ever
+       *  strncpyzt(user->host, host, sizeof(user->host)); 
+       */
       user->server = me.name;
     }
   strncpyzt(sptr->info, realname, sizeof(sptr->info));
