@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.35 1998/11/26 07:14:51 lusky Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.36 1998/11/27 07:33:24 db Exp $";
 #endif
 
 
@@ -5137,10 +5137,13 @@ int     place_dline(aClient *sptr,
 
   if((ip_mask & 0xFFFFFF00) ^ 0xFFFFFF00)
     {
-      sendto_one(sptr, ":%s NOTICE %s :Can't use a mask less than 24 with dline",
-		 me.name,
-		 parv0);
-      return 0;
+      if(ip_mask != 0xFFFFFFFF)
+	{
+	  sendto_one(sptr, ":%s NOTICE %s :Can't use a mask less than 24 with dline",
+		     me.name,
+		     parv0);
+	  return 0;
+	}
     }
 
 #ifdef NON_REDUNDANT_KLINES
