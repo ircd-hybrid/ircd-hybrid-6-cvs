@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.62 1999/07/16 04:53:14 tomh Exp $
+ *  $Id: s_bsd.c,v 1.63 1999/07/17 02:41:19 tomh Exp $
  */
 #include "s_bsd.h"
 #include "listener.h"
@@ -815,8 +815,7 @@ void close_connection(aClient *cptr)
        */
       if (cptr->listener) {
         assert(0 < cptr->listener->ref_count);
-        if (0 == --cptr->listener->ref_count && 
-            IsIllegal(cptr->listener->conf)) 
+        if (0 == --cptr->listener->ref_count && !cptr->listener->active) 
           close_listener(cptr->listener);
         cptr->listener = 0;
       }
