@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.104 1999/07/11 22:04:36 tomh Exp $
+ *  $Id: s_conf.c,v 1.105 1999/07/11 22:25:40 db Exp $
  */
 #include "s_conf.h"
 #include "class.h"
@@ -1614,15 +1614,6 @@ int rehash(aClient *cptr,aClient *sptr,int sig)
   assert(0 != ClassList);
   for (cltmp = ClassList->next; cltmp; cltmp = cltmp->next)
     MaxLinks(cltmp) = -1;
-
-  /* do we really want to flush the DNS entirely on a SIGHUP?
-   * why not let that be controlled by oper /rehash, and use SIGHUP
-   * only to change conf file, if one doesn't have a valid O yet? :-)
-   * -Dianora
-   */
-
-  if (sig != SIGINT)
-    flush_cache();                /* Flush DNS cache */
 
   clear_mtrie_conf_links();
 
