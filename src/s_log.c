@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_log.c,v 1.7 1999/10/14 02:48:26 lusky Exp $
+ *   $Id: s_log.c,v 1.8 1999/11/16 05:04:38 lusky Exp $
  */
 #include "s_log.h"
 #include "irc_string.h"
@@ -35,6 +35,7 @@
 #include <string.h>
 #include <syslog.h>
 #include <unistd.h>
+
 
 #define LOG_BUFSIZE 2048 
 
@@ -65,6 +66,7 @@ static const char *logLevelToString[] =
  * open_log - open ircd logging file
  * returns true (1) if successful, false (0) otherwise
  */
+#if defined(USE_LOGFILE) 
 static int open_log(const char* filename)
 {
   logFile = open(filename, 
@@ -76,24 +78,29 @@ static int open_log(const char* filename)
   }
   return 1;
 }
+#endif
 
 void close_log(void)
 {
+#if defined(USE_LOGFILE) 
   if (-1 < logFile) {
     close(logFile);
     logFile = -1;
   }
+#endif
 #ifdef USE_SYSLOG  
   closelog();
 #endif
 }
 
+#if defined(USE_LOGFILE) 
 static void write_log(const char* message)
 {
   char buf[LOG_BUFSIZE];
   sprintf(buf, "[%s] %s\n", smalldate(CurrentTime), message);
   write(logFile, buf, strlen(buf));
 }
+#endif
    
 void log(int priority, const char* fmt, ...)
 {
@@ -110,15 +117,19 @@ void log(int priority, const char* fmt, ...)
   va_end(args);
 
 #ifdef USE_SYSLOG  
-  if (priority < L_DEBUG)
+  if (priority <= L_DEBUG)
     syslog(sysLogLevel[priority], buf);
 #endif
+#if defined(USE_LOGFILE) 
   write_log(buf);
+#endif
 }
   
 void init_log(const char* filename)
 {
+#if defined(USE_LOGFILE) 
   open_log(filename);
+#endif
 #ifdef USE_SYSLOG
   openlog("ircd", LOG_PID | LOG_NDELAY, LOG_FACILITY);
 #endif
