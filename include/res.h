@@ -1,7 +1,7 @@
 /*
  * irc2.7.2/ircd/res.h (C)opyright 1992 Darren Reed.
  *
- * $Id: res.h,v 1.7 1999/07/03 17:23:33 tomh Exp $
+ * $Id: res.h,v 1.8 1999/07/03 17:51:49 tomh Exp $
  */
 #ifndef	INCLUDED_res_h
 #define INCLUDED_res_h
@@ -9,11 +9,6 @@
 #ifndef INCLUDED_sys_types_h
 #include <sys/types.h>       /* time_t */
 #define INCLUDED_sys_types_h
-#endif
-
-#ifndef INCLUDED_netdb_h
-#include <netdb.h>           /* struct hostent under bsd */
-#define INCLUDED_netdb_h
 #endif
 
 struct Client;
