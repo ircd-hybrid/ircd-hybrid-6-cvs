@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.209 2001/07/29 19:58:25 db Exp $
+ * $Id: channel.c,v 1.210 2001/08/04 21:24:32 leeh Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -3680,39 +3680,34 @@ int     m_sjoin(struct Client *cptr,
     tstosend = oldts;
   else if (newts < oldts)
   {
-    if(sptr->serv->tsversion > 3)
-    {
+    keep_our_modes = NO;
+    chptr->channelts = tstosend = newts;
+    
+#if 0 /* OLD BEHAVIOUR */
+    if (doesop)
       keep_our_modes = NO;
-      chptr->channelts = tstosend = newts;
-    }
+    if (haveops && !doesop)
+        tstosend = oldts;
     else
-    {
-      if (doesop)
-        keep_our_modes = NO;
-      if (haveops && !doesop)
-          tstosend = oldts;
-      else
-        chptr->channelts = tstosend = newts;
-    }
+      chptr->channelts = tstosend = newts;
+#endif
+
   }
   else
   {
-    if(sptr->serv->tsversion > 3)
-    {
+    keep_new_modes = NO;
+    tstosend = oldts;
+#if 0 /* OLD BEHAVIOUR */
+    if (haveops)
       keep_new_modes = NO;
-      tstosend = oldts;
-    }
+    if (doesop && !haveops)
+      {
+        chptr->channelts = tstosend = newts;
+      }
     else
-    {
-      if (haveops)
-        keep_new_modes = NO;
-      if (doesop && !haveops)
-        {
-          chptr->channelts = tstosend = newts;
-        }
-      else
-        tstosend = oldts;
-    }
+      tstosend = oldts;
+#endif
+
   }
 
   if (!keep_new_modes)

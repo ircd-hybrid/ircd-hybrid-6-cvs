@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.53 2001/07/18 01:37:17 lusky Exp $
+ *   $Id: s_debug.c,v 1.54 2001/08/04 21:24:32 leeh Exp $
  */
 #include "s_debug.h"
 #include "channel.h"
@@ -63,6 +63,12 @@ const char serveropts[] = {
 #ifdef  DEBUGMODE
   'D',
 #endif
+#ifdef CHANMODE_E
+  'e',
+#endif
+#ifdef NO_FAKE_GLINES
+  'g',
+#endif
 #ifdef GLINES
   'G',
 #endif
@@ -72,8 +78,13 @@ const char serveropts[] = {
 #ifdef  SHOW_INVISIBLE_LUSERS
   'i',
 #endif
+#if 0 /* make this chanmode +I in future versions */
 #ifndef NO_DEFAULT_INVISIBLE
   'I',
+#endif
+#endif
+#ifdef USE_KNOCK
+  'K',
 #endif
 #ifdef  IDLE_FROM_MSG
   'M',
