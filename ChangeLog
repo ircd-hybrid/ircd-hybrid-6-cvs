@@ -1,3 +1,19 @@
+ievil       2004/10/12 23:09:48 EDT	(20041013_2)
+
+  Modified files:
+    include              config.h config.h.dist 
+    src                  s_auth.c 
+  Log:
+  Makes IDENTD timeout configurable by a seperate define in config.h
+  Next version might allow this to be runtime changeable ;)
+  
+  Revision  Changes    Path
+  1.175     +5 -0      ircd-hybrid-6/include/config.h
+  1.143     +6 -0      ircd-hybrid-6/include/config.h.dist
+  1.58      +1 -1      ircd-hybrid-6/src/s_auth.c
+
+
+
 ievil       2004/10/12 21:09:39 EDT	(20041013_1)
 
   Modified files:
