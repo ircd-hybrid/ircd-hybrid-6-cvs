@@ -1,0 +1,40 @@
+
+Files description of 
+doc/ircd.conf/
+
+
+I still remember setting up my first ircd-hybrid irc server and remeber
+the feeling when I opened the example.conf and was overwhelmed by all the
+info there. Over the years I've had several versions of this file and when
+Nick Parrin and I set up our test net for this release of ircd-hybrid-6 (6.4) 
+I gave him my current setup files to make it go faster. He suggested I'd
+make them available for the rest of the world so here we are.
+
+I'll try to make this a brief introduction to the configuration files that
+is used for an actual efnet server (altho these are heavily modded), but
+any in depth info regarding parameters and settings will be found in
+example.conf still. This file is not a tutorial, nor the ultimate correct
+thing. It's just a help to get started.
+
+
+Files:
+
+ircd.conf      -   The main ircd.conf which trough .include statements 
+                   load the rest of the configuration file.
+ilines.conf    -   This file controls the I-lines or access lines.
+ispoof.conf    -   Spoofed i-lines
+olines.conf    -   IrcOperator o-lines.
+ports.conf     -   Listener-ports for the ircd to listen too
+qlines.conf    -   Q-lines or quarantine lines (aka jupes)
+servers.conf   -   Contains other servers and hubs.
+xlines.conf    -   IRCNAME Geco's bans.
+ylines.conf    -   Y-lines or connection block lines.
+
+
+I hope that by including these files that someone might benefit from them.
+Take care and enjoy ircd-hybrid-6.
+
+
+Arnvid Karstad - ievil@isd.no
+
+$Id: README,v 1.1 2003/06/18 01:49:01 ievil Exp $
