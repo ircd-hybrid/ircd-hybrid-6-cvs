@@ -34,7 +34,7 @@
  *                mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.162 1999/08/01 06:47:17 tomh Exp $
+ * $Id: channel.c,v 1.163 1999/08/01 07:18:23 tomh Exp $
  */
 #include "channel.h"
 #include "client.h"
@@ -90,12 +90,6 @@ static void collapse_signs(char *);
 static int errsent(int,int *);
 static void change_chan_flag(struct Channel *, struct Client *, int );
 static void set_deopped(struct Client *,struct Channel *,int);
-
-#ifdef ORATIMING
-struct timeval tsdnow, tsdthen; 
-unsigned long tsdms;
-#endif
-
 
 static  char    *PartFmt = ":%s PART %s";
 /*
