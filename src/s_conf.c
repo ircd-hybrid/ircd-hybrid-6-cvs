@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.211 2001/10/09 02:18:00 lusky Exp $
+ *  $Id: s_conf.c,v 1.212 2001/10/25 02:57:06 db Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -1985,23 +1985,11 @@ static void initconf(FBFILE* file, int use_include)
           aconf->status = CONF_HUB;
           break;
 
-#ifdef LITTLE_I_LINES
-        case 'i': /* Just plain normal irc client trying  */
-                  /* to connect to me */
-          aconf->status = CONF_CLIENT;
-          aconf->flags |= CONF_FLAGS_LITTLE_I_LINE;
-          break;
-
-        case 'I': /* Just plain normal irc client trying  */
-                  /* to connect to me */
-          aconf->status = CONF_CLIENT;
-          break;
-#else
         case 'i': /* Just plain normal irc client trying  */
         case 'I': /* to connect to me */
           aconf->status = CONF_CLIENT;
           break;
-#endif
+
         case 'K': /* Kill user line on irc.conf           */
         case 'k':
           aconf->status = CONF_KILL;

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h.dist,v 1.116 2001/10/17 15:13:30 db Exp $
+ * $Id: config.h.dist,v 1.117 2001/10/25 02:57:05 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -722,12 +722,6 @@
  * if you are an efnet admin, some of these are not officially supported, so
  * you may want to undef some -- fl_
  */
-
-/* LITTLE_I_LINE support
- * clients with a little i instead of an I in their I line
- * can be chanopped, but cannot chanop anyone else.
- */
-#undef LITTLE_I_LINES
 
 /* Ignore bogus timestamps from other servers. Yes this will desync
  * the network, but it will allow chanops to resync with a valid non TS 0
