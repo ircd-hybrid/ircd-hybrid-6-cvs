@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: hash.c,v 1.22 1999/07/17 22:12:45 db Exp $
+ *  $Id: hash.c,v 1.23 1999/07/18 07:16:49 tomh Exp $
  */
 #include "hash.h"
 #include "struct.h"
@@ -335,7 +335,7 @@ static struct Client* hash_find_masked_server(const char* name,
   /*
    * copy the damn thing and be done with it
    */
-  strncpy(buf, name, HOSTLEN);
+  strncpy_irc(buf, name, HOSTLEN);
   buf[HOSTLEN] = '\0';
 
   while ((s = strchr(p, '.')) != 0)

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: motd.c,v 1.9 1999/07/18 07:00:29 tomh Exp $
+ *   $Id: motd.c,v 1.10 1999/07/18 07:16:51 tomh Exp $
  */
 
 #include "channel.h"
@@ -84,7 +84,7 @@ int	m_motd(aClient *cptr,
 */
 void InitMessageFile(MotdType motdType, char *fileName, MessageFile *motd)
   {
-    strncpy(motd->fileName,fileName,PATH_MAX);
+    strncpy_irc(motd->fileName,fileName,PATH_MAX);
     motd->motdType = motdType;
     motd->contentsOfFile = NULL;
     motd->lastChangedDate[0] = '\0';
@@ -223,7 +223,7 @@ int ReadMessageFile(MessageFile *MessageFileptr)
 	*p = '\0';
       newMessageLine = (MessageFileLine*) MyMalloc(sizeof(MessageFileLine));
 
-      strncpy(newMessageLine->line, buffer, MESSAGELINELEN);
+      strncpy_irc(newMessageLine->line, buffer, MESSAGELINELEN);
       newMessageLine->line[MESSAGELINELEN] = '\0';
       newMessageLine->next = (MessageFileLine *)NULL;
 

@@ -16,7 +16,7 @@
 *   along with this program; if not, write to the Free Software
 *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 *
-*   $Id: whowas.c,v 1.17 1999/07/18 00:17:51 tomh Exp $
+*   $Id: whowas.c,v 1.18 1999/07/18 07:16:54 tomh Exp $
 */
 #include "struct.h"
 #include "common.h"
@@ -91,7 +91,7 @@ void add_history(aClient* cptr, int online)
   /* Its not string copied, a pointer to the scache hash is copied
      -Dianora
    */
-  /*  strncpy(who->servername, cptr->user->server,HOSTLEN); */
+  /*  strncpy_irc(who->servername, cptr->user->server,HOSTLEN); */
   who->servername = cptr->user->server;
 
   if (online)

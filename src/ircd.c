@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.88 1999/07/18 02:08:13 db Exp $
+ * $Id: ircd.c,v 1.89 1999/07/18 07:16:49 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -849,7 +849,7 @@ int main(int argc, char *argv[])
 
 #endif
 	case 'h':
-	  strncpy(me.name, p, HOSTLEN);
+	  strncpy_irc(me.name, p, HOSTLEN);
 	  break;
 	case 's':
 	  bootopt |= BOOT_STDERR;
@@ -985,8 +985,8 @@ int main(int argc, char *argv[])
   read_conf_files(YES);		/* cold start init conf files */
 
   aconf = find_me();
-  strncpy(me.name, aconf->host, HOSTLEN);
-  strncpy(me.host, aconf->host, HOSTLEN);
+  strncpy_irc(me.name, aconf->host, HOSTLEN);
+  strncpy_irc(me.host, aconf->host, HOSTLEN);
 
   me.fd = -1;
   me.hopcount = 0;

@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.32 1999/07/17 22:12:47 db Exp $
+ * $Id: res.c,v 1.33 1999/07/18 07:16:51 tomh Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
@@ -615,7 +615,7 @@ static void do_query_name(const struct DNSQuery* query,
   char  hname[HOSTLEN + 1];
   assert(0 != name);
 
-  strncpy(hname, name, HOSTLEN);
+  strncpy_irc(hname, name, HOSTLEN);
   hname[HOSTLEN] = '\0';
   add_local_domain(hname, HOSTLEN);
 
@@ -867,7 +867,7 @@ static int proc_answer(ResRQ* request, HEADER* header,
         address += sizeof(struct in_addr);
 
         if (!hp->h_name) {
-          strncpy(name, hostbuf, endp - name);
+          strncpy_irc(name, hostbuf, endp - name);
           hp->h_name = name;
           name += strlen(name) + 1;
         }
@@ -898,7 +898,7 @@ static int proc_answer(ResRQ* request, HEADER* header,
        * ignore duplicate ptr records
        */
       if (!hp->h_name) {
-        strncpy(name, hostbuf, endp - name);
+        strncpy_irc(name, hostbuf, endp - name);
         hp->h_name = name;
         name += strlen(name) + 1;
       }
@@ -907,7 +907,7 @@ static int proc_answer(ResRQ* request, HEADER* header,
     case T_CNAME:
       Debug((DEBUG_INFO,"got cname %s", hostbuf));
       if (++alias_count < RES_MAXALIASES) {
-        strncpy(name, hostbuf, endp - name);
+        strncpy_irc(name, hostbuf, endp - name);
         *alias++ = name;
         *alias   = 0;
         name += strlen(name) + 1;

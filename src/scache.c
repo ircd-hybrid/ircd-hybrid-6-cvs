@@ -1,7 +1,7 @@
 /*
  * scache.c
  *
- * $Id: scache.c,v 1.8 1999/07/18 00:17:51 tomh Exp $
+ * $Id: scache.c,v 1.9 1999/07/18 07:16:54 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -79,7 +79,7 @@ const char* find_or_add(const char* name)
   ptr = (SCACHE*) MyMalloc(sizeof(SCACHE));
   assert(0 != ptr);
 
-  strncpy(ptr->name, name, HOSTLEN);
+  strncpy_irc(ptr->name, name, HOSTLEN);
   ptr->name[HOSTLEN] = '\0';
 
   ptr->next = scache_hash[hash_index];

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: listener.c,v 1.7 1999/07/18 07:00:27 tomh Exp $
+ *  $Id: listener.c,v 1.8 1999/07/18 07:16:50 tomh Exp $
  */
 #include "listener.h"
 #include "s_bsd.h"
@@ -142,7 +142,7 @@ static int inetport(struct Listener* listener)
      */
     if ((hp = gethostbyaddr((char*) &listener->addr, 
                             sizeof(struct sockaddr_in), AF_INET))) {
-      strncpy(listener->vhost, hp->h_name, HOSTLEN);
+      strncpy_irc(listener->vhost, hp->h_name, HOSTLEN);
       listener->name = listener->vhost;
     }
   }

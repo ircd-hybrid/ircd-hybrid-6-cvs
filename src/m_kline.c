@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.26 1999/07/18 07:00:27 tomh Exp $
+ *   $Id: m_kline.c,v 1.27 1999/07/18 07:16:50 tomh Exp $
  */
 
 #include "struct.h"
@@ -486,9 +486,9 @@ m_kline(aClient *cptr,
 
       if (!*host)		/* duh. no host found, assume its '*' host */
 	host = "*";
-      strncpy(tempuser, user, USERLEN + 1); /* allow for '*' in front */
+      strncpy_irc(tempuser, user, USERLEN + 1); /* allow for '*' in front */
       tempuser[USERLEN + 1] = '\0';
-      strncpy(temphost, host, HOSTLEN);
+      strncpy_irc(temphost, host, HOSTLEN);
       temphost[HOSTLEN] = '\0';
       user = tempuser;
       host = temphost;
@@ -616,7 +616,7 @@ m_kline(aClient *cptr,
 
   if(!temporary_kline_time && (ip_kline = is_address(host,&ip,&ip_mask)))
      {
-       strncpy(cidr_form_host,host,32);
+       strncpy_irc(cidr_form_host,host,32);
        p = strchr(cidr_form_host,'*');
        if(p)
 	 {
@@ -845,12 +845,12 @@ static char *cluster(char *hostname)
 
   if(strchr(hostname,'@'))	
     {
-      strncpy(result, hostname, HOSTLEN);      
+      strncpy_irc(result, hostname, HOSTLEN);      
       result[HOSTLEN] = '\0';
       return(result);
     }
 
-  strncpy(temphost, hostname, HOSTLEN);
+  strncpy_irc(temphost, hostname, HOSTLEN);
   temphost[HOSTLEN] = '\0';
 
   is_ip_number = YES;	/* assume its an IP# */
@@ -880,7 +880,7 @@ static char *cluster(char *hostname)
       zap_point++;
       *zap_point++ = '*';		/* turn 111.222.333.444 into */
       *zap_point = '\0';		/*      111.222.333.*	     */
-      strncpy(result, temphost, HOSTLEN);
+      strncpy_irc(result, temphost, HOSTLEN);
       return(result);
     }
   else
@@ -908,17 +908,17 @@ static char *cluster(char *hostname)
 	      if(number_of_dots == 0)
 		{
 		  result[0] = '*';
-		  strncpy(result+1,host_mask,HOSTLEN-1);
+		  strncpy_irc(result+1,host_mask,HOSTLEN-1);
 		  return(result);
 		}
 	      host_mask--;
 	    }
 	  result[0] = '*';			/* foo.com => *foo.com */
-	  strncpy(result+1,temphost,HOSTLEN);
+	  strncpy_irc(result+1,temphost,HOSTLEN);
 	}
       else	/* no tld found oops. just return it as is */
 	{
-	  strncpy(result, temphost, HOSTLEN);
+	  strncpy_irc(result, temphost, HOSTLEN);
 	  return(result);
 	}
     }
@@ -976,7 +976,7 @@ m_dline(aClient *cptr, aClient *sptr, int parc, char *parv[])
     }
 
   host = parv[1];
-  strncpy(cidr_form_host,host,32);
+  strncpy_irc(cidr_form_host,host,32);
 
   if((p = strchr(cidr_form_host,'*')))
     {
@@ -1020,7 +1020,7 @@ m_dline(aClient *cptr, aClient *sptr, int parc, char *parv[])
 	  return 0;
 	}
 
-      strncpy(cidr_form_host,inetntoa((char *)&acptr->ip),32);
+      strncpy_irc(cidr_form_host,inetntoa((char *)&acptr->ip),32);
       
       p = strchr(cidr_form_host,'.');
       if(!p)

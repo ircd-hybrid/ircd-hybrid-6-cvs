@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.52 1999/07/18 07:00:30 tomh Exp $
+ *  $Id: s_misc.c,v 1.53 1999/07/18 07:16:53 tomh Exp $
  */
 #include "s_conf.h"
 #include "struct.h"
@@ -162,7 +162,7 @@ const char* my_name_for_link(const char* name, aConfItem* aconf)
     return start;
 
   namebuf[0] = '*';
-  strncpy(&namebuf[1], name, HOSTLEN - 1);
+  strncpy_irc(&namebuf[1], name, HOSTLEN - 1);
   namebuf[HOSTLEN - 1] = '\0';
   return namebuf;
 }
