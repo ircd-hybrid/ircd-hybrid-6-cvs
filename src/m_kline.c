@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.64 2001/12/04 15:28:23 androsyn Exp $
+ *   $Id: m_kline.c,v 1.65 2001/12/04 16:27:34 db Exp $
  */
 #include "m_commands.h"
 #include "m_kline.h"
@@ -111,10 +111,10 @@ DelPending(aPendingLine *pendptr)
   if (!pendptr)
     return;
 
-  if (pendptr->user)
-    MyFree(pendptr->user);
+  MyFree(pendptr->user);
   MyFree(pendptr->host);
   MyFree(pendptr->reason);
+  MyFree(pendptr->oper_reason);
   MyFree(pendptr->when);
   MyFree(pendptr);
 } /* DelPending() */
@@ -305,8 +305,8 @@ WriteKline(const char *filename, struct Client *sptr, struct Client *rcptr,
       ircsprintf(buffer, "K:%s:%s (%s) |%s:%s\n",
 		 host,
 		 reason,
-		 oper_reason,
 		 when,
+		 oper_reason,
 		 user);
     }
   else
@@ -786,7 +786,7 @@ m_kline(struct Client *cptr,
       ircsprintf(buffer, "%s (%s)", reason, current_date);
       DupString(aconf->passwd, buffer);
       if (oper_reason != NULL)
-	DupString(aconf->oper_reason, p);
+	DupString(aconf->oper_reason, oper_reason);
     }
   ClassPtr(aconf) = find_class(0);
 

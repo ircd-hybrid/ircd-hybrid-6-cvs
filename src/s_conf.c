@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.225 2001/12/04 08:26:51 db Exp $
+ *  $Id: s_conf.c,v 1.226 2001/12/04 16:27:35 db Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -201,7 +201,8 @@ struct ConfItem* make_conf()
 /*
  * delist_conf - remove conf item from ConfigItemList
  */
-static void delist_conf(struct ConfItem* aconf)
+static void 
+delist_conf(struct ConfItem* aconf)
 {
   if (aconf == ConfigItemList)
     ConfigItemList = ConfigItemList->next;
@@ -216,9 +217,10 @@ static void delist_conf(struct ConfItem* aconf)
   aconf->next = NULL;
 }
 
-void free_conf(struct ConfItem* aconf)
+void 
+free_conf(struct ConfItem* aconf)
 {
-  assert(0 != aconf);
+  assert(aconf != NULL);
 
   if (aconf->dns_pending)
     delete_adns_queries(aconf->dns_query);
@@ -226,6 +228,7 @@ void free_conf(struct ConfItem* aconf)
   if (aconf->passwd)
     memset(aconf->passwd, 0, strlen(aconf->passwd));
   MyFree(aconf->passwd);
+  MyFree(aconf->oper_reason);
   MyFree(aconf->user);
   MyFree(aconf->name);
   MyFree((char*) aconf);
