@@ -1,3 +1,24 @@
+ievil       2004/05/23 12:22:17 EDT	(20040523_9)
+
+  Modified files:
+    doc                  example.conf 
+    doc/ircd.conf        README ilines.conf 
+    include              s_conf.h 
+    src                  mtrie_conf.c s_conf.c 
+  Log:
+  Added bill's old patch "ip must resolve". It has been requested
+  by several users aswell..
+  
+  Revision  Changes    Path
+  1.41      +2 -1      ircd-hybrid-6/doc/example.conf
+  1.3       +0 -3      ircd-hybrid-6/doc/ircd.conf/README
+  1.2       +3 -0      ircd-hybrid-6/doc/ircd.conf/ilines.conf
+  1.70      +17 -16    ircd-hybrid-6/include/s_conf.h
+  1.95      +3 -0      ircd-hybrid-6/src/mtrie_conf.c
+  1.253     +9 -0      ircd-hybrid-6/src/s_conf.c
+
+
+
 ievil       2004/05/23 12:16:58 EDT	(20040523_8)
 
   Modified files:
