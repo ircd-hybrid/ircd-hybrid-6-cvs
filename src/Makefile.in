@@ -1,7 +1,7 @@
 #
 # Makefile.in for ircd/src
 #
-# $Id: Makefile.in,v 1.41 1999/07/30 03:25:50 db Exp $
+# $Id: Makefile.in,v 1.42 1999/07/30 03:47:16 db Exp $
 #
 CC = @CC@
 RM = @RM@
@@ -55,6 +55,7 @@ SRCS = \
 	m_users.c \
 	m_version.c \
 	m_wallops.c \
+	m_who.c \
 	match.c \
 	motd.c \
 	mtrie_conf.c \
