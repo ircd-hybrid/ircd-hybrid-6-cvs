@@ -1,3 +1,21 @@
+ievil       2003/06/20 22:40:07 EDT	(20030621_0)
+
+  Modified files:
+    adns                 event.c 
+    src                  m_kline.c m_unkline.c s_serv.c 
+  Log:
+  made CAP_KL and CAP_UNKL valid for HUB configs.. for now. planned to
+  fix slave servers to use this cap for later usage. Fixed an adns bug
+  give to me from Aaron Sethman
+  
+  Revision  Changes    Path
+  1.7       +8 -0      ircd-hybrid-6/adns/event.c
+  1.80      +2 -0      ircd-hybrid-6/src/m_kline.c
+  1.53      +2 -0      ircd-hybrid-6/src/m_unkline.c
+  1.233     +2 -0      ircd-hybrid-6/src/s_serv.c
+
+
+
 ievil       2003/06/20 09:49:48 EDT	(20030620_0)
 
   Modified files:
