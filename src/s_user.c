@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.193 1999/07/30 06:40:20 tomh Exp $
+ *  $Id: s_user.c,v 1.194 1999/07/30 11:53:29 db Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -2271,30 +2271,6 @@ static int do_user(char* nick, aClient* cptr, aClient* sptr,
         }
     }
   return 0;
-}
-
-/*
-** m_quit
-**      parv[0] = sender prefix
-**      parv[1] = comment
-*/
-int     m_quit(aClient *cptr,
-               aClient *sptr,
-               int parc,
-               char *parv[])
-{
-  char *comment = (parc > 1 && parv[1]) ? parv[1] : cptr->name;
-
-  sptr->flags |= FLAGS_NORMALEX;
-  if (strlen(comment) > (size_t) TOPICLEN)
-    comment[TOPICLEN] = '\0';
-
-#ifdef ANTI_SPAM_EXIT_MESSAGE
-  if( !IsServer(sptr) && MyConnect(sptr) &&
-     (sptr->firsttime + ANTI_SPAM_EXIT_MESSAGE_TIME) > CurrentTime)
-    comment = "Client Quit";
-#endif
-  return IsServer(sptr) ? 0 : exit_client(cptr, sptr, sptr, comment);
 }
 
 /*
