@@ -4,7 +4,11 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.27 1999/07/09 06:55:48 tomh Exp $
+ * $Id: res.c,v 1.28 1999/07/09 23:27:05 tomh Exp $
+ *
+ * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
+ *     added callbacks and reference counting of returned hostents.
+ *     --Bleep (Thomas Helvey <tomh@inxpress.net>)
  */
 #include "res.h"
 #include "sys.h"
@@ -1514,8 +1518,10 @@ static void rem_cache(aCache* ocp)
   struct hostent* hp;
   assert(0 != ocp);
 
-  if (0 < ocp->reply.ref_count)
+  if (0 < ocp->reply.ref_count) {
+    ocp->expireat = timeofday + AR_TTL;
     return;
+  }
   hp = &ocp->he.h;
 
 #ifdef  DEBUG
