@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.170 1999/08/18 04:04:53 lusky Exp $
+ *  $Id: s_conf.c,v 1.171 1999/08/20 00:54:10 lusky Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -370,7 +370,7 @@ void report_specials(struct Client* sptr, int flags, int numeric)
         sendto_one(sptr, form_str(numeric),
                    me.name,
                    sptr->name,
-                   user,
+                   name,
                    pass);
       }
 }
@@ -2380,7 +2380,7 @@ static void initconf(FBFILE* file, int use_include)
         {
           dontadd = 1;
           MyFree(aconf->user);
-          aconf->user = aconf->host;
+          aconf->name = aconf->host;
           aconf->host = (char *)NULL;
           aconf->next = x_conf;
           x_conf = aconf;
@@ -2389,7 +2389,7 @@ static void initconf(FBFILE* file, int use_include)
         {
           dontadd = 1;
           MyFree(aconf->user);
-          aconf->user = aconf->host;
+          aconf->name = aconf->host;
           aconf->host = (char *)NULL;
           aconf->next = u_conf;
           u_conf = aconf;

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.207 1999/08/01 23:33:55 lusky Exp $
+ *   $Id: s_serv.c,v 1.208 1999/08/20 00:54:10 lusky Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -633,6 +633,7 @@ int server_estab(struct Client *cptr)
   sendto_one(cptr,"SVINFO %d %d 0 :%lu", TS_CURRENT, TS_MIN, CurrentTime);
   
   det_confs_butmask(cptr, CONF_LEAF|CONF_HUB|CONF_NOCONNECT_SERVER);
+  release_client_dns_reply(cptr);
   /*
   ** *WARNING*
   **    In the following code in place of plain server's
