@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.216 2001/06/06 05:17:21 db Exp $
+ *   $Id: s_serv.c,v 1.217 2001/06/10 01:08:52 db Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -71,9 +71,10 @@ struct Capability captab[] = {
   { "ZIP",      CAP_ZIP },
 #endif
   { "QS",       CAP_QS },
+#ifdef CHANMODE_E
   { "EX",       CAP_EX },
+#endif
   { "CHW",      CAP_CHW },
-  { "DE",       CAP_DE },
   { 0,   0 }
 };
 

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.104 2001/06/08 20:57:58 kreator Exp $
+ * $Id: config.h,v 1.105 2001/06/10 01:08:47 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -973,6 +973,27 @@
  * the network, but it will allow chanops to resync with a valid non TS 0
  */
 #undef IGNORE_BOGUS_TS
+
+/* CHANMODE_E
+ * /mode #channel +e allows you to add exceptions to bans.
+ * very useful if a friend has to use an aol.com account for a few days.
+ * e.g. You can continue to ban *.aol.com but allow an exception for them.
+ *
+ * Note, +e will NEVER be sent to a server that does not understand it.
+ *
+ * Moreover, it will also be automatically removed if it is abused. 
+ * The server understanding a +e will remove the +e exemption if an user
+ * who is banned is then kicked. 
+ *
+ * +e is supported by dalnet, ircnet, undernet but not EFNet atm. (june 9 2001)
+ */
+#undef CHANMODE_E
+
+/* USE_KNOCK
+ * KNOCK allows users to send a "knock" to a +i channel.
+ * It is not approved on EFNet at the moment.
+ */
+#undef USE_KNOCK
 
 /* ------------------------- END CONFIGURATION SECTION -------------------- */
 #define MAX_CLIENTS INIT_MAXCLIENTS
