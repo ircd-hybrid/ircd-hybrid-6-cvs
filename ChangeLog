@@ -1,3 +1,20 @@
+ievil       2003/06/06 04:45:17 EDT	(20030606_0)
+
+  Modified files:
+    .                    README.FIRST 
+  Log:
+  Repeat after me.... slowly.. AIX is nice... AIX is nice...xlc is evil..
+  ;) Just fixed the readme to reflect the fact that AIX actually does run
+  and compile hybrid-6 smoothly.
+  
+  Submitted by:   ievil
+  Reviewed by:    ievil
+  
+  Revision  Changes    Path
+  1.16      +3 -3      ircd-hybrid-6/README.FIRST
+
+
+
 db          2003/05/22 08:27:30 EDT	(20030522_1)
 
   Modified files:
