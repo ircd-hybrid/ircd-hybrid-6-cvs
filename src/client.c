@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.46 1999/08/18 07:04:54 db Exp $
+ *  $Id: client.c,v 1.47 1999/08/18 09:31:04 khuon Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -610,8 +610,10 @@ time_t check_pings(time_t currenttime)
       else
 #if defined(SEND_FAKE_KILL_TO_CLIENT) && defined(IDLE_CHECK)
         {
+	  char *killer;
+	  killer = "AutoKILL";
           if (fakekill)
-            sendto_prefix_one(cptr, cptr, ":AutoKILL KILL %s :(%s)",
+            sendto_prefix_one(cptr, cptr, ":%s KILL %s :(%s)", killer,
             cptr->name, dying_clients_reason[die_index]);
           /* ugh. this is horrible.
            * but I can get away with this hack because of the
