@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.47 2000/11/02 03:37:16 lusky Exp $
+ *   $Id: s_debug.c,v 1.48 2000/11/24 18:51:18 lusky Exp $
  */
 #include "s_debug.h"
 #include "channel.h"
@@ -89,11 +89,7 @@ const char serveropts[] = {
   'I',
 #endif
 #ifdef  OPER_KILL
-# ifdef  LOCAL_KILL_ONLY
-  'k',
-# else
   'K',
-# endif
 #endif
 #ifdef  IDLE_FROM_MSG
   'M',

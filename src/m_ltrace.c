@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_ltrace.c,v 1.4 2000/11/21 06:49:30 lusky Exp $
+ *   $Id: m_ltrace.c,v 1.5 2000/11/24 18:51:17 lusky Exp $
  */
 #include "m_commands.h"
 #include "class.h"
@@ -304,8 +304,11 @@ int     m_ltrace(struct Client *cptr,
       sendto_one(sptr, form_str(RPL_TRACESERVER),
                  me.name, parv[0], 0, link_s[me.fd],
                  link_u[me.fd], me.name, "*", "*", me.name);
+      sendto_one(sptr, form_str(RPL_ENDOFTRACE),me.name,
+                 parv[0],tname);
       return 0;
     }
+  sendto_one(sptr, form_str(RPL_ENDOFTRACE),me.name, parv[0],tname);
   return 0;
 }
 #endif /* LTRACE */

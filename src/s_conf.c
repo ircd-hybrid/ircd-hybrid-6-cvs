@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.190 2000/11/21 06:49:31 lusky Exp $
+ *  $Id: s_conf.c,v 1.191 2000/11/24 18:51:17 lusky Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -3004,6 +3004,7 @@ char *oper_privs_as_string(aClient *cptr,int port)
     {
       if(cptr)
         SetOperK(cptr);
+      *privs_ptr++ = 'K';
     }
   else
     *privs_ptr++ = 'k';
