@@ -19,7 +19,7 @@
  *
  *	I kind of modernized this code a bit. -Dianora
  *
- *   $Id: s_err.c,v 1.26 1999/07/18 03:22:59 db Exp $
+ *   $Id: s_err.c,v 1.27 1999/07/18 03:34:39 db Exp $
  */
 #include "struct.h"
 #include "numeric.h"
@@ -252,7 +252,7 @@ static	char *	replies[] = {
 /* 217 RPL_STATSQLINE, */	":%s 217 %s %c %s %s@%s",
 /* 218 RPL_STATSYLINE, */	":%s 218 %s %c %d %d %d %d %lu",
 /* 219 RPL_ENDOFSTATS, */	":%s 219 %s %c :End of /STATS report",
-/* 220 RPL_STATSPLINE, */	":%s 220 %s %c %d %d %d %d",
+/* 220 RPL_STATSPLINE, */	":%s 220 %s %c %d %s %d %d %d",
 /* 221 RPL_UMODEIS, */		":%s 221 %s %s",
 /* 222 */	(char *)NULL,
 /* 223 */	(char *)NULL,

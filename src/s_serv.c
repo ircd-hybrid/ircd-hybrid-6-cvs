@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.151 1999/07/18 03:23:00 db Exp $
+ *   $Id: s_serv.c,v 1.152 1999/07/18 03:34:39 db Exp $
  */
 
 #define CAPTAB
@@ -3957,6 +3957,7 @@ static void show_ports(aClient *sptr)
 		 sptr->name,
 		 'P',
 		 listener->port,
+		 listener->name,
 		 listener->ref_count,
 		 listener->active);
     }
