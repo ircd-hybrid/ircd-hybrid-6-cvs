@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.75 2000/02/01 03:25:02 lusky Exp $
+ * $Id: config.h,v 1.76 2000/04/11 02:22:39 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -59,6 +59,16 @@
  * Remember, MAX_BUFFER + MAX_CLIENTS can't exceed HARD_FDLIMIT :)
  */
 #define MAX_BUFFER      60
+
+/* NICKNAMEHISTORYLENGTH - size of WHOWAS array
+ * this defines the length of the nickname history.  each time a user changes
+ * nickname or signs off, their old nickname is added to the top of the list.
+ * NOTE: this is directly related to the amount of memory ircd will use whilst
+ *       resident and running - it hardly ever gets swapped to disk!  Memory
+ *       will be preallocated for the entire whowas array when ircd is started.
+ *       You will want to crank this down if you are on a small net.
+ */
+#define NICKNAMEHISTORYLENGTH 15000
 
 /* Don't change this... */
 #define HARD_FDLIMIT    (HARD_FDLIMIT_ - 10)
@@ -678,15 +688,6 @@
  */
 /* change the HARD_FDLIMIT_ instead */
 #define MAXCONNECTIONS  HARD_FDLIMIT
-
-/* NICKNAMEHISTORYLENGTH - size of WHOWAS array
- * this defines the length of the nickname history.  each time a user changes
- * nickname or signs off, their old nickname is added to the top of the list.
- * NOTE: this is directly related to the amount of memory ircd will use whilst
- *       resident and running - it hardly ever gets swapped to disk!  Memory
- *       will be preallocated for the entire whowas array when ircd is started.
- */
-#define NICKNAMEHISTORYLENGTH 15000
 
 /* TIMESEC - Time interval to wait and if no messages have been received,
  * then check for PINGFREQUENCY and CONNECTFREQUENCY 
