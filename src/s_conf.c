@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.59 1999/06/03 02:59:15 lusky Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.60 1999/06/12 05:11:16 db Exp $";
 #endif
 
 #include "struct.h"
@@ -240,11 +240,11 @@ int	attach_Iline(aClient *cptr,
 	  if(IsConfDoSpoofIp(aconf))
 	    {
 	      /* abuse it, lose it. */
-	      /*
+#ifdef SPOOF_FREEFORM
 	      sendto_realops("%s spoofing: %s as %s",
 			     cptr->name,host,aconf->mask);
 	      strncpyzt(cptr->sockhost,aconf->mask,sizeof(cptr->sockhost));
-	      */
+#else
 	      /* default to oper.server.name.tld */
 	      sendto_realops("%s spoofing: %s(%s) as oper.%s",
 			     cptr->name,host,
@@ -252,6 +252,7 @@ int	attach_Iline(aClient *cptr,
 			     me.name);
 	      strncpyzt(cptr->sockhost,"oper.",sizeof(cptr->sockhost));
 	      strcat(cptr->sockhost,me.name);
+#endif
 	      SetIPSpoof(cptr);
 	      SetIPHidden(cptr);
 	    }
