@@ -34,7 +34,7 @@
  *                mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.152 1999/07/26 18:43:59 sean Exp $
+ * $Id: channel.c,v 1.153 1999/07/26 19:10:09 sean Exp $
  */
 #include "channel.h"
 #include "struct.h"
@@ -590,6 +590,14 @@ static  int is_banned(aClient *cptr,aChannel *chptr)
         match(BANSTR(tmp), s2))
       break;
 
+  if (!tmp) {  /* check +d list */
+    for (tmp = chptr->denylist; tmp; tmp = tmp->next)
+      {
+        if (match(BANSTR(tmp), cptr->info))
+          break;
+      }
+  }
+
   if (tmp)
     {
       for (t2 = chptr->exceptlist; t2; t2 = t2->next)
@@ -608,15 +616,6 @@ static  int is_banned(aClient *cptr,aChannel *chptr)
             return CHFL_EXCEPTION;
           }
     }
-
-
-  if (!tmp) {  /* check +d list */
-    for (tmp = chptr->denylist; tmp; tmp = tmp->next)
-      {
-        if (match(BANSTR(tmp), cptr->info))
-          break;
-      }
-  }
 
   /* return CHFL_BAN for +b or +d match, we really dont need to be more
      specific */
