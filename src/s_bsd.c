@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.32 1999/02/20 02:10:44 db Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.33 1999/02/20 02:27:36 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1991,6 +1991,13 @@ int	read_message(time_t delay, fdlist *listp)
   register	int i,j;
   static aClient	*authclnts[MAXCONNECTIONS];
   char		errmsg[255];
+
+  /* if it is called with NULL we check all active fd's */
+  if (!listp)
+    {
+      listp = &default_fdlist;
+      listp->last_entry = highest_fd+1; /* remember the 0th entry isnt used */
+    }
 
   for (res = 0;;)
     {
