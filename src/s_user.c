@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.145 1999/07/18 18:03:54 db Exp $
+ *  $Id: s_user.c,v 1.146 1999/07/18 21:47:13 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -1876,7 +1876,7 @@ static	int	m_message(aClient *cptr,
 		{
 		  if(acptr->drone_noticed == 0) /* tiny FSM */
 		    {
-		      sendto_ops_lev(REJ_LEV,
+		      sendto_ops_flags(FLAGS_REJ,
 			     "Possible Drone Flooder %s [%s@%s] on %s target: %s",
 				     sptr->name, sptr->username,
 				     sptr->host,
@@ -1894,7 +1894,7 @@ static	int	m_message(aClient *cptr,
 		    {
 		      if(acptr->drone_noticed == 1) /* tiny FSM */
 			{
-			  sendto_ops_lev(REJ_LEV,
+			  sendto_ops_flags(FLAGS_REJ,
 			 "ANTI_DRONE_FLOOD SendQ protection activated for %s",
 					 acptr->name);
 
@@ -2863,8 +2863,9 @@ int m_kill(aClient *cptr, aClient *sptr, int parc, char *parv[])
     sendto_ops("Received KILL message for %s. From %s Path: %s!%s",
 	       acptr->name, parv[0], inpath, path);
   else
-    sendto_ops_lev(SKILL_LEV,"Received KILL message for %s. From %s Path: %s!%s",
-		   acptr->name, parv[0], inpath, path);
+    sendto_ops_flags(FLAGS_SKILL,
+		     "Received KILL message for %s. From %s Path: %s!%s",
+		     acptr->name, parv[0], inpath, path);
 
 #if defined(USE_SYSLOG) && defined(SYSLOG_KILL)
   if (IsOper(sptr))
@@ -3840,7 +3841,7 @@ static void announce_fluder(
   else
     fludee = chptr->chname;
 
-  sendto_ops_lev(REJ_LEV, "Flooder %s [%s@%s] on %s target: %s",
+  sendto_ops_flags(FLAGS_REJ, "Flooder %s [%s@%s] on %s target: %s",
 		 fluder->name, fluder->username, fluder->host,
 		 fluder->user->server, fludee);
 }
