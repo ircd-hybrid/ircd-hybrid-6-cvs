@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.28 1999/07/09 23:27:05 tomh Exp $
+ * $Id: res.c,v 1.29 1999/07/11 22:28:58 tomh Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
@@ -311,7 +311,7 @@ int init_resolver(void)
  */
 void restart_resolver(void)
 {
-  flush_cache();  /* flush the dns cache */
+  /* flush_cache();  flush the dns cache */
   start_resolver();
 }
 
@@ -1585,17 +1585,6 @@ static void rem_cache(aCache* ocp)
   MyFree(ocp);
   --cachedCount;
   ++cainfo.ca_dels;
-}
-
-/*
- * flush_cache - remove all dns cache entries.
- */
-void  flush_cache()
-{
-  aCache* cp;
-
-  while ((cp = cacheTop))
-    rem_cache(cp);
 }
 
 /*
