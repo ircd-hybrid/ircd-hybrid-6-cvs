@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_bsd.h,v 1.15 2001/12/04 04:47:44 androsyn Exp $
+ *   $Id: s_bsd.h,v 1.16 2001/12/04 06:40:30 db Exp $
  *
  */
 #ifndef INCLUDED_s_bsd_h
@@ -29,19 +29,21 @@
 
 #include "res.h"
 
+/* dummies */
 struct Client;
 struct ConfItem;
 struct hostent;
 struct DNSReply;
 struct Listener;
 
+/* variables */
 extern int   highest_fd;
 extern int   readcalls;
 extern const char* const NONB_ERROR_MSG; 
 extern const char* const SETBUF_ERROR_MSG;
 
+/* functions */
 extern void  add_connection(struct Listener*, int);
-extern int   check_client(struct Client*, char *,char **);
 extern void  close_connection(struct Client*);
 extern void  close_all_connections(void);
 extern int   connect_server(struct ConfItem*, struct Client*, struct DNSQuery *);

@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.59 2001/12/04 04:47:43 androsyn Exp $
+ * $Id: client.h,v 1.60 2001/12/04 06:40:30 db Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -448,7 +448,7 @@ struct Client
 #define SetRejectHold(x)        ((x)->flags |= FLAGS_REJECT_HOLD)
 #endif
 
-#define SetIpHash               ((x)->flags |= FLAGS_IPHASH)
+#define SetIpHash(x)            ((x)->flags |= FLAGS_IPHASH)
 #define ClearIpHash             ((x)->flags &= ~FLAGS_IPHASH)
 #define IsIpHash                ((x)->flags & FLAGS_IPHASH)
 

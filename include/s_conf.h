@@ -18,7 +18,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *   $Id: s_conf.h,v 1.57 2001/12/04 04:47:44 androsyn Exp $
+ *   $Id: s_conf.h,v 1.58 2001/12/04 06:40:30 db Exp $
  */
 
 #ifndef INCLUDED_config_h
@@ -201,6 +201,7 @@ void remove_one_ip(struct Client *);
 void remove_one_ip(unsigned long);
 #endif
 
+extern int   check_client(struct Client*, char *,char **);
 extern struct ConfItem* make_conf(void);
 extern void             free_conf(struct ConfItem*);
 
@@ -213,8 +214,6 @@ extern int              attach_confs(struct Client* client,
 extern int              attach_cn_lines(struct Client* client, 
                                         const char *name,
 					const char *host);
-extern int              attach_Iline(struct Client *client, 
-                                     const char* username, char** reason);
 extern struct ConfItem* find_me(void);
 extern struct ConfItem* find_admin(void);
 extern struct ConfItem* find_first_nline(struct SLink* lp);
