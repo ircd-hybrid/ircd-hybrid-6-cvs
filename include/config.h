@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.101 2001/06/06 18:55:04 db Exp $
+ * $Id: config.h,v 1.102 2001/06/06 22:11:06 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -424,6 +424,7 @@
  *
  * Note that you may have to increase your sendQ size between server
  * if you have problems during particularly heavy bursts
+ */
 #define ZIP_LINKS
 
 /* NO_DEFAULT_INVISIBLE - clients not +i by default
@@ -967,14 +968,14 @@
 #define MAX_CLIENTS INIT_MAXCLIENTS
 
 #if defined(CLIENT_FLOOD) && ((CLIENT_FLOOD > 8000) || (CLIENT_FLOOD < 512))
-error CLIENT_FLOOD needs redefining.
+#error CLIENT_FLOOD needs redefining.
 #endif
 
 #if !defined(CLIENT_FLOOD)
-error CLIENT_FLOOD undefined.
+#error CLIENT_FLOOD undefined.
 #endif
 
-#if defined(DEBUGMODE) || defined(DNS_DEBUG)
+#if defined(DEBUGMODE)
 #  define Debug(x) debug x
 #  define LOGFILE LPATH
 #else

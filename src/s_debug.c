@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.49 2001/06/04 05:07:18 db Exp $
+ *   $Id: s_debug.c,v 1.50 2001/06/06 22:11:09 db Exp $
  */
 #include "s_debug.h"
 #include "channel.h"
@@ -61,23 +61,11 @@ const char serveropts[] = {
 #ifdef  CRYPT_LINKS
   'b',
 #endif
-#ifdef  CHROOTDIR
-  'c',
-#endif
 #ifdef  CMDLINE_CONFIG
   'C',
 #endif
-#ifdef        DO_ID
-  'd',
-#endif
 #ifdef  DEBUGMODE
   'D',
-#endif
-#ifdef  LOCOP_REHASH
-  'e',
-#endif
-#ifdef  OPER_REHASH
-  'E',
 #endif
 #ifdef GLINES
   'G',
@@ -91,9 +79,6 @@ const char serveropts[] = {
 #ifndef NO_DEFAULT_INVISIBLE
   'I',
 #endif
-#ifdef  OPER_KILL
-  'K',
-#endif
 #ifdef  IDLE_FROM_MSG
   'M',
 #endif
@@ -102,18 +87,6 @@ const char serveropts[] = {
 #endif
 #ifdef  CRYPT_LINK_PASSWORD
   'P',
-#endif
-#ifdef  LOCOP_RESTART
-  'r',
-#endif
-#ifdef  OPER_RESTART
-  'R',
-#endif
-#ifdef  OPER_REMOTE
-  't',
-#endif
-#ifdef  VALLOC
-  'V',
 #endif
 #ifdef  USE_SYSLOG
   'Y',
