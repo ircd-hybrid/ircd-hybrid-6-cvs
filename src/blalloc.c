@@ -4,7 +4,7 @@
  * Owner:  Wohali (Joan Touzet)
  *
  *
- * $Id: blalloc.c,v 1.12 1999/07/17 07:55:53 tomh Exp $
+ * $Id: blalloc.c,v 1.13 1999/07/17 14:08:33 db Exp $
  */
 #include "blalloc.h"
 #include "struct.h"
@@ -394,3 +394,31 @@ int BlockHeapDestroy(BlockHeap *bh)
    return 0;
 }
 
+/*
+ *
+ * Function added to count memory usage 
+ */
+
+void BlockHeapCountMemory(BlockHeap *bh,int *TotalUsed,int *TotalAllocated)
+{
+  Block *walker;
+
+  *TotalUsed = 0;
+  *TotalAllocated = 0;
+
+  if (bh == NULL)
+    return;
+
+  *TotalUsed = sizeof(BlockHeap);
+  *TotalAllocated = sizeof(BlockHeap);
+
+  for (walker = bh->base; walker != NULL; walker = walker->next)
+    {
+      *TotalUsed += sizeof(Block);
+      *TotalUsed += ((bh->elemSize * bh->elemsPerBlock) + bh->numlongs);
+
+      *TotalAllocated = sizeof(Block);      
+      *TotalAllocated = ((bh->elemsPerBlock - walker->freeElems)
+			 * bh->elemSize);
+    }
+}

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.18 1999/07/17 05:13:20 db Exp $
+ *   $Id: s_debug.c,v 1.19 1999/07/17 14:08:34 db Exp $
  */
 #include "struct.h"
 #include "s_conf.h"
@@ -31,8 +31,7 @@ extern	void	count_whowas_memory(int *, u_long *);
 extern  void    count_ip_hash(int *,u_long *);	  /* defined in s_conf.c */
 extern  int	maxdbufblocks;			  /* defined in dbuf.c */
 
-extern struct  rusage startup_usage;
-extern struct  rusage current_usage;
+extern  void   *edata;
 
 /*
  * Option string.  Must be before #ifdef DEBUGMODE.
@@ -446,11 +445,9 @@ void count_memory(aClient *cptr,char *nick)
   sendto_one(cptr, ":%s %d %s :Total: ww %d ch %d cl %d co %d db %d",
 	     me.name, RPL_STATSDEBUG, nick, totww, totch, totcl, com, db);
 
-  (void)getrusage(RUSAGE_SELF,&current_usage);
-
-  sendto_one(cptr, ":%s %d %s :TOTAL: %d memory: %u",
+  sendto_one(cptr, ":%s %d %s :TOTAL: %d Available Memory: %u Current sbrk(0) %u",
 	     me.name, RPL_STATSDEBUG, nick, tot,
-	     current_usage.ru_idrss, startup_usage.ru_idrss);
+	     (unsigned long)edata, sbrk(0) );
 
   return;
 }

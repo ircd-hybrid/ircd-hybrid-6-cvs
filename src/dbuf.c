@@ -21,7 +21,7 @@
  * see the header file (dbuf.h).
  *
  *
- * $Id: dbuf.c,v 1.7 1999/07/13 23:46:31 db Exp $
+ * $Id: dbuf.c,v 1.8 1999/07/17 14:08:33 db Exp $
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -51,7 +51,7 @@ static	dbufbuf	*freelist = NULL;
    
    mika@cs.caltech.edu 6/24/95
  */
-#ifdef INITIAL_DBUFS
+
 void dbuf_init()
 {
   int i=0;
@@ -68,7 +68,7 @@ void dbuf_init()
   dbufblocks++;
   maxdbufblocks = dbufblocks;
 }
-#endif
+
 /*
 ** dbuf_alloc - allocates a dbufbuf structure either from freelist or
 ** creates a new one.
