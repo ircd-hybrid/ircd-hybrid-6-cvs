@@ -18,7 +18,7 @@
  */
 
 #ifndef lint
-static  char rcsid[] = "@(#)$Id: s_zip.c,v 1.8 1999/05/09 06:23:31 db Exp $";
+static  char rcsid[] = "@(#)$Id: s_zip.c,v 1.9 1999/06/25 12:00:01 db Exp $";
 #endif
 
 #include "struct.h"
@@ -134,7 +134,7 @@ void	zip_free(aClient *cptr)
 */
 char *unzip_packet(aClient *cptr, char *buffer, int *length)
 {
-  Reg	z_stream *zin = cptr->zip->in;
+  z_stream *zin = cptr->zip->in;
   int	r;
   char  *p;
 
@@ -300,7 +300,7 @@ char *unzip_packet(aClient *cptr, char *buffer, int *length)
 */
 char *zip_buffer(aClient *cptr, char *buffer, int *length, int flush)
 {
-  Reg	z_stream *zout = cptr->zip->out;
+  z_stream *zout = cptr->zip->out;
   int	r;
 
   if (buffer)

@@ -19,7 +19,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)s_auth.c	1.17 17 Oct 1993 (C) 1992 Darren Reed";
-static char *rcs_version = "$Id: s_auth.c,v 1.4 1999/02/01 05:46:01 db Exp $";
+static char *rcs_version = "$Id: s_auth.c,v 1.5 1999/06/25 11:59:57 db Exp $";
 #endif
 
 #include "struct.h"
@@ -228,8 +228,8 @@ static void authsenderr(aClient *cptr)
  */
 void	read_authports(aClient *cptr)
 {
-  Reg	char	*s, *t;
-  Reg	int	len;
+  char	*s, *t;
+  int	len;
   char	ruser[USERLEN+1], tuser[USERLEN+1];
   u_short	remp = 0, locp = 0;
 

@@ -19,7 +19,7 @@
 
 #ifndef	lint
 static char sccsid[] = "@(#)class.c	1.4 28 Jun 1993 (C) 1990 Darren Reed";
-static char *rcs_version = "$Id: class.c,v 1.2 1999/06/22 01:01:41 db Exp $";
+static char *rcs_version = "$Id: class.c,v 1.3 1999/06/25 11:59:51 db Exp $";
 #endif
 
 #include "struct.h"
@@ -58,8 +58,8 @@ static	int	get_conf_ping(aConfItem *aconf)
 
 int	get_client_class(aClient *acptr)
 {
-  Reg	Link	*tmp;
-  Reg	aClass	*cl;
+  Link	*tmp;
+  aClass	*cl;
   int	retc = BAD_CLIENT_CLASS;
 
   if (acptr && !IsMe(acptr)  && (acptr->confs))
@@ -166,7 +166,7 @@ aClass	*find_class(int cclass)
 
 void	check_class()
 {
-  Reg aClass *cltmp, *cltmp2;
+  aClass *cltmp, *cltmp2;
 
   Debug((DEBUG_DEBUG, "Class check:"));
 
@@ -202,7 +202,7 @@ void	initclass()
 
 void	report_classes(aClient *sptr)
 {
-  Reg aClass *cltmp;
+  aClass *cltmp;
 
   for (cltmp = FirstClass(); cltmp; cltmp = NextClass(cltmp))
     sendto_one(sptr, form_str(RPL_STATSYLINE), me.name, sptr->name,
@@ -212,9 +212,9 @@ void	report_classes(aClient *sptr)
 
 long	get_sendq(aClient *cptr)
 {
-  Reg	int	sendq = MAXSENDQLENGTH, retc = BAD_CLIENT_CLASS;
-  Reg	Link	*tmp;
-  Reg	aClass	*cl;
+  int	sendq = MAXSENDQLENGTH, retc = BAD_CLIENT_CLASS;
+  Link	*tmp;
+  aClass	*cl;
 
   if (cptr && !IsMe(cptr)  && (cptr->confs))
     for (tmp = cptr->confs; tmp; tmp = tmp->next)

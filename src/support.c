@@ -20,7 +20,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)support.c	2.21 4/13/94 1990, 1991 Armin Gruner;\
 1992, 1993 Darren Reed";
-static char *rcs_version = "$Id: support.c,v 1.3 1999/06/23 00:28:41 tomh Exp $";
+static char *rcs_version = "$Id: support.c,v 1.4 1999/06/25 12:00:02 db Exp $";
 #endif
 
 #include "struct.h"
@@ -38,7 +38,7 @@ extern	void	outofmemory();
 **			of separators
 **			argv 9/90
 **
-**	$Id: support.c,v 1.3 1999/06/23 00:28:41 tomh Exp $
+**	$Id: support.c,v 1.4 1999/06/25 12:00:02 db Exp $
 */
 
 char *strtoken(save, str, fs)
@@ -46,7 +46,7 @@ char **save;
 char *str, *fs;
 {
     char *pos = *save;	/* keep last position across calls */
-    Reg char *tmp;
+    char *tmp;
 
     if (str)
 	pos = str;		/* new string scan */
@@ -92,7 +92,7 @@ char *str, *fs;
 **	strerror - return an appropriate system error string to a given errno
 **
 **		   argv 11/90
-**	$Id: support.c,v 1.3 1999/06/23 00:28:41 tomh Exp $
+**	$Id: support.c,v 1.4 1999/06/25 12:00:02 db Exp $
 */
 
 char *strerror(int err_no)
@@ -194,7 +194,7 @@ char	*in;
 /*
 **	inet_netof --	return the net portion of an internet number
 **			argv 11/90
-**	$Id: support.c,v 1.3 1999/06/23 00:28:41 tomh Exp $
+**	$Id: support.c,v 1.4 1999/06/25 12:00:02 db Exp $
 **
 */
 

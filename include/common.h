@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: common.h,v 1.3 1999/06/24 07:43:22 tomh Exp $
+ * $Id: common.h,v 1.4 1999/06/25 11:59:46 db Exp $
  */
 
 #ifndef	__common_include__
@@ -118,4 +118,4 @@ extern char *strtoken (char **, char *, char *);
 extern void flush_connections();
 extern struct SLink *find_user_link(/* struct SLink *, struct Client * */);
 
-#endif /* __common_includ_e_ */
+#endif /* __common_include__ */

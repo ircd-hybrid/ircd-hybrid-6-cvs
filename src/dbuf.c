@@ -25,7 +25,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)dbuf.c	2.16 20 Oct 1993 (C) 1990 Markku Savela";
-static char *rcs_version = "$Id: dbuf.c,v 1.2 1998/10/18 05:12:44 lusky Exp $";
+static char *rcs_version = "$Id: dbuf.c,v 1.3 1999/06/25 11:59:52 db Exp $";
 #endif
 
 #include <stdio.h>
@@ -78,10 +78,10 @@ void dbuf_init()
 static dbufbuf *dbuf_alloc()
 {
 #if defined(VALLOC) && !defined(DEBUGMODE)
-  Reg	dbufbuf	*dbptr, *db2ptr;
-  Reg	int	num;
+  dbufbuf	*dbptr, *db2ptr;
+  int	num;
 #else
-  Reg	dbufbuf *dbptr;
+  dbufbuf *dbptr;
 #endif
 
   dbufalloc++;
@@ -165,9 +165,9 @@ static int dbuf_malloc_error(dbuf *dyn)
 
 int	dbuf_put(dbuf *dyn,char *buf,int length)
 {
-  Reg	dbufbuf	**h, *d;
-  Reg	int	 off;
-  Reg	int	chunk;
+  dbufbuf	**h, *d;
+  int	 off;
+  int	chunk;
 
   off = (dyn->offset + dyn->length) % DBUFSIZ;
   /*nbr = (dyn->offset + dyn->length) / DBUFSIZ;>*/

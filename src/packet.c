@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)packet.c	2.12 1/30/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: packet.c,v 1.6 1998/12/20 20:41:53 sean Exp $";
+static char *rcs_version = "$Id: packet.c,v 1.7 1999/06/25 11:59:55 db Exp $";
 
 #endif
  
@@ -51,8 +51,8 @@ static char *rcs_version = "$Id: packet.c,v 1.6 1998/12/20 20:41:53 sean Exp $";
 */
 int	dopacket(aClient *cptr, char *buffer, int length)
 {
-  Reg	char	*ch1;
-  Reg	char	*ch2;
+  char	*ch1;
+  char	*ch2;
   register char *cptrbuf;
   aClient	*acpt = cptr->acpt;
 #ifdef ZIP_LINKS

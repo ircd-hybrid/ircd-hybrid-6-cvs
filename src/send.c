@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)send.c	2.32 2/28/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: send.c,v 1.35 1999/06/25 05:23:38 tomh Exp $";
+static char *rcs_version = "$Id: send.c,v 1.36 1999/06/25 12:00:01 db Exp $";
 #endif
 
 #include "struct.h"
@@ -95,8 +95,8 @@ static	int	dead_link(aClient *to, char *notice)
 void	flush_connections(int fd)
 {
 #ifdef SENDQ_ALWAYS
-  Reg	int	i;
-  Reg	aClient *cptr;
+  int	i;
+  aClient *cptr;
 
   if (fd == me.fd)
     {
@@ -806,7 +806,7 @@ va_dcl
 {
   va_list	vl;
 # endif
-  Reg	aClient *cptr;
+  aClient *cptr;
 
 # ifdef	USE_VARARGS
   va_start(vl);
