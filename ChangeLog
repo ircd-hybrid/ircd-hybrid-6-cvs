@@ -1,3 +1,21 @@
+ievil       2003/06/17 17:46:42 EDT	(20030617_0)
+
+  Modified files:
+    include              config.h 
+    src                  m_operspylog.c m_whois.c parse.c s_user.c 
+  Log:
+  Fixed operspy broadcast, h6 servers nagging when h7 sends out umode +a's.
+  And now operspy sends n!u@h s for whois cmd's
+  
+  Revision  Changes    Path
+  1.163     +1 -1      ircd-hybrid-6/include/config.h
+  1.3       +2 -2      ircd-hybrid-6/src/m_operspylog.c
+  1.13      +13 -2     ircd-hybrid-6/src/m_whois.c
+  1.51      +5 -0      ircd-hybrid-6/src/parse.c
+  1.259     +2 -2      ircd-hybrid-6/src/s_user.c
+
+
+
 ievil       2003/06/16 18:52:40 EDT	(20030616_0)
 
   Modified files:
