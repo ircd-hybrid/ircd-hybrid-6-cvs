@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.222 2000/06/26 23:07:32 lusky Exp $
+ *  $Id: s_user.c,v 1.223 2000/08/24 23:28:07 lusky Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -757,18 +757,7 @@ static int register_user(aClient *cptr, aClient *sptr,
                                    reason,
                                    get_client_name(cptr, FALSE));
             }
-
-          if((find_q_line(nick, sptr->username, sptr->host)))
-            {
-              sendto_realops_flags(FLAGS_REJ,
-                                 "Quarantined nick [%s], dumping user %s",
-                                 nick,get_client_name(cptr, FALSE));
-      
-              ServerStats->is_ref++;      
-              return exit_client(cptr, sptr, &me, "quarantined nick");
-            }
-        }
-
+         }
 
       sendto_realops_flags(FLAGS_CCONN,
                          "Client connecting: %s (%s@%s) [%s] {%d}",
@@ -1409,15 +1398,15 @@ int m_nick(aClient *cptr, aClient *sptr, int parc, char *parv[])
       return 0;
     }
 
-  if(MyConnect(sptr) && !IsServer(sptr) &&
-     !IsAnOper(sptr) && sptr->user &&
+  if(MyConnect(sptr) && !IsServer(sptr) && !IsAnOper(sptr) &&
      find_q_line(nick, sptr->username, sptr->host)) 
     {
       sendto_realops_flags(FLAGS_REJ,
-                         "Quarantined nick [%s], dumping user %s",
+                         "Quarantined nick [%s] from user %s",
                          nick,get_client_name(cptr, FALSE));
-
-      return exit_client(cptr, sptr, &me, "quarantined nick");
+      sendto_one(sptr, form_str(ERR_ERRONEUSNICKNAME),
+                 me.name, parv[0], parv[1]);
+      return 0;
     }
 
   /*
