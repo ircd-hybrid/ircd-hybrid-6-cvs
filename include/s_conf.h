@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.21 1999/07/18 17:27:02 db Exp $
+ * $Id: s_conf.h,v 1.22 1999/07/18 17:50:52 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.22  1999/07/18 17:50:52  db
+ * - more header cleanups
+ *
  * Revision 1.21  1999/07/18 17:27:02  db
  * - a few more header cleanups
  * - motd.c included channel.h, no need
@@ -240,6 +243,9 @@ extern int rehash_dump(struct Client *);
 extern int find_q_line(char*, char*, char *);
 extern struct ConfItem* find_special_conf(char *,int );
 extern struct ConfItem* find_is_klined(char*, char *,unsigned long);
+extern void   GetPrintableaConfItem(struct ConfItem *,
+				    char **, char **, char **,
+				    char **, int *);
 
 typedef enum {
   CONF_TYPE,

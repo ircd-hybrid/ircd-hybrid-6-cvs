@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.47 1999/07/18 17:36:24 db Exp $
+ * $Id: h.h,v 1.48 1999/07/18 17:50:51 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -152,17 +152,10 @@ extern	void	initlists (void);
 extern  void	block_garbage_collect(void);	/* list.c */
 extern  void	block_destroy(void);		/* list.c */
 
-extern  void    GetPrintableaConfItem(aConfItem *, char **, char **, char **,
-				      char **, int *);
-
 extern int     zip_init (aClient *);
 extern void    zip_free (aClient *);
 extern char    *unzip_packet (aClient *, char *, int *);
 extern char    *zip_buffer (aClient *, char *, int *, int);
-
-extern void	add_history (aClient *, int);
-extern aClient	*get_history (char *, time_t);
-extern void	initwhowas (void);
 
 extern	int	dopacket (aClient *, char *, int);
 
