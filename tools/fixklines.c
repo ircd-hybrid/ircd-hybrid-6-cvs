@@ -1,6 +1,6 @@
 /*
 fixklines - scan an ircd.conf or kline.conf file
-$Id: fixklines.c,v 1.4 1999/08/10 23:07:25 lusky Exp $
+$Id: fixklines.c,v 1.5 2001/12/08 07:06:18 lusky Exp $
 
   D lines of form
   D:192.168.0.* are converted to D:192.168.0.0/24
@@ -32,6 +32,7 @@ Typical usage:
 #include <sys/types.h>
 #include <sys/time.h>
 #include <ctype.h>
+#include <stdlib.h>
 
 #define MAXLINE 1024
 #define YES 1

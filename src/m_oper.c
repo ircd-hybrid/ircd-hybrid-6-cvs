@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_oper.c,v 1.15 2001/10/27 17:39:54 bill Exp $
+ *   $Id: m_oper.c,v 1.16 2001/12/08 07:06:13 lusky Exp $
  */
 
 #include "m_commands.h"
@@ -37,6 +37,7 @@
 
 #include <fcntl.h>
 #include <unistd.h>
+#include <string.h>
 
 #if defined(CRYPT_OPER_PASSWORD) && defined(HAVE_CRYPT_H)
 #include <crypt.h>

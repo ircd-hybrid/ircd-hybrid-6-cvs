@@ -1,5 +1,5 @@
 /*
- * internal.h: $Id: internal.h,v 1.4 2001/12/04 16:12:11 androsyn Exp $
+ * internal.h: $Id: internal.h,v 1.5 2001/12/08 07:06:09 lusky Exp $
  *  
  */
 /*
@@ -38,6 +38,7 @@
 typedef unsigned char byte;
 
 #include <stdarg.h>
+#include <stdlib.h>
 #include <assert.h>
 #include <unistd.h>
 #include <signal.h>

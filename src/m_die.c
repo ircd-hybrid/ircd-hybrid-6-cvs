@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_die.c,v 1.4 2001/11/29 23:01:51 wcampbel Exp $
+ *   $Id: m_die.c,v 1.5 2001/12/08 07:06:13 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -30,6 +30,7 @@
 #include "s_bsd.h"
 #include "s_log.h"
 #include "send.h"
+#include <stdlib.h>
 
 /*
  * m_functions execute protocol messages on this server:

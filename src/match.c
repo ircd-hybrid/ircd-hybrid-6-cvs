@@ -22,12 +22,13 @@
  * Cleanup of collapse and match
  * Moved static calls variable to match
  * Added asserts for null pointers
- * $Id: match.c,v 1.27 2001/12/07 05:35:55 db Exp $
+ * $Id: match.c,v 1.28 2001/12/08 07:06:14 lusky Exp $
  *
  */
 #include "irc_string.h"
 #include "config.h"      /* RFC1035_ANAL */
 #include <assert.h>
+#include <string.h>
 
 /*
 **  Compare if a given string (name) matches the given
