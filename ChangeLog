@@ -1,3 +1,20 @@
+ievil       2005/03/25 06:21:34 EST	(20050325_1)
+
+  Modified files:
+    include              dline_conf.h 
+    src                  dline_conf.c m_stats.c 
+  Log:
+  Changed the behaviour of stats d. It confused OOMON since it returns perm
+  dlines on both stats D and stats d.  Altho the char used in the dline's
+  itself are D not d. This still makes OOMON go boom.
+  
+  Revision  Changes    Path
+  1.7       +3 -1      ircd-hybrid-6/include/dline_conf.h
+  1.43      +8 -0      ircd-hybrid-6/src/dline_conf.c
+  1.23      +11 -1     ircd-hybrid-6/src/m_stats.c
+
+
+
 ievil       2005/03/25 06:19:12 EST	(20050325_0)
 
   Modified files:
