@@ -1,3 +1,18 @@
+ievil       2003/06/06 04:53:24 EDT	(20030606_2)
+
+  Modified files:
+    src                  m_server.c 
+  Log:
+  Added some extra log code for possible fake servers trying to link in. Will
+  now even log the server does allready exist. We've seen several fake servers
+  connecting and which has gotten to this stage but never did get logged so
+  one couldn't d-line them.. now you can.
+  
+  Revision  Changes    Path
+  1.15      +4 -1      ircd-hybrid-6/src/m_server.c
+
+
+
 ievil       2003/06/06 04:49:25 EDT	(20030606_1)
 
   Modified files:
