@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.60 1999/03/11 19:51:39 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.61 1999/03/16 04:56:11 db Exp $";
 
 #endif
 
@@ -483,8 +483,8 @@ static	int	register_user(aClient *cptr,
   parv[1] = parv[2] = NULL;
 
   /* pointed out by Mortiis, never be too careful */
-  if(strlen(username) > USERLEN-1)
-    username[USERLEN-1] = '\0';
+  if(strlen(username) > USERLEN)
+    username[USERLEN] = '\0';
 
   reason = (char *)NULL;
 
