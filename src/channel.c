@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.86 1999/06/11 03:34:35 lusky Exp $";
+static char *rcs_version="$Id: channel.c,v 1.87 1999/06/12 04:52:38 db Exp $";
 #endif
 
 #include "struct.h"
@@ -4314,7 +4314,15 @@ int	m_sjoin(aClient *cptr,
       clear_bans_exceptions(sptr,chptr);
 
       if (haveops && !doesop)
-	tstosend = oldts;
+	{
+	  tstosend = oldts;
+	  /* Only warn of Hacked ops if the ops are hacked
+	   * on a channel from this side of the join
+	   */
+
+	  sendto_realops("Hacked ops locally on opless channel: %s",
+			 chptr->chname);
+	}
       else
 	chptr->channelts = tstosend = newts;
     }
@@ -4327,18 +4335,6 @@ int	m_sjoin(aClient *cptr,
       if (doesop && !haveops)
 	{
 	  chptr->channelts = tstosend = newts;
-
-	  /* Only warn of Hacked ops if the channel already
-	   * existed on this side.
-	   * This should drop the number of warnings down dramatically
-	   */
-
-	  if (MyConnect(sptr) && !isnew)
-	    {
-	      sendto_realops("Hacked ops from %s on opless channel: %s",
-			     sptr->name,
-			     chptr->chname);
-	    }
 	}
       else
 	tstosend = oldts;

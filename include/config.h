@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.42 1999/06/08 04:18:06 lusky Exp $
+ * $Id: config.h,v 1.43 1999/06/12 04:52:36 db Exp $
  */
 
 #ifndef	__config_include__
@@ -415,6 +415,12 @@
 /* KNOCK_DELAY 5 minutes per each KNOCK should be enough
  */
 #define KNOCK_DELAY 300
+
+/* If you are an admin that does not think operwall/wallops
+ * should be used instead of a channel, define this.
+ */
+#define PACE_WALLOPS
+#define WALLOPS_WAIT 10	
 
 /* EXTRA_BOT_NOTICES - Have the server send extra bot notices?
  */
