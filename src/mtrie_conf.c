@@ -43,7 +43,7 @@
  *
  * Diane Bruce -db (db@db.net)
  *
- * $Id: mtrie_conf.c,v 1.91 2003/05/15 04:14:19 db Exp $
+ * $Id: mtrie_conf.c,v 1.92 2003/05/22 12:22:10 db Exp $
  */
 #include "mtrie_conf.h"
 #include "class.h"
@@ -1492,12 +1492,6 @@ char *show_iline_prefix(struct Client *sptr,struct ConfItem *aconf,char *name)
     *prefix_ptr++ = '%';
   if (IsConfDoSpoofIp(aconf))
     *prefix_ptr++ = '=';
-  if (IsMustResolve(aconf))
-    *prefix_ptr++ = '/';
-#ifdef CHECK_CLONE
-  if (IsConfCloneExempt(aconf))
-    *prefix_ptr++ = '{';
-#endif
 
 #ifdef E_LINES_OPER_ONLY
   if(IsAnOper(sptr))

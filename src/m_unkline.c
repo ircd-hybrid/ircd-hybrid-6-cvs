@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_unkline.c,v 1.49 2003/05/05 02:39:08 db Exp $
+ *   $Id: m_unkline.c,v 1.50 2003/05/22 12:22:10 db Exp $
  */
 #include "m_commands.h"
 #include "channel.h"
@@ -231,7 +231,7 @@ K:bar:No reason (1997/08/30 14.56):foo
           if (irccmp(host,found_host) || irccmp(user,found_user))
             {
 	      if (flush_write(sptr, in, out, buf, temppath) < 0)
-		return;
+		return 0;
 	      continue;
             }
           else
