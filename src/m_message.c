@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_message.c,v 1.6 2000/04/21 23:39:25 lusky Exp $
+ *   $Id: m_message.c,v 1.7 2000/06/07 03:01:06 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -505,8 +505,10 @@ static  int     m_message(struct Client *cptr,
                        me.name, parv[0], nick, MAX_MULTI_MESSAGES);
         }
       if (acptr)
+	{
 	  msgs++;
 	  continue;
+	}
     }
   sendto_one(sptr, form_str(ERR_NOSUCHNICK), me.name,
              parv[0], nick);
