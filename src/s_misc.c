@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.10 1998/10/26 07:35:48 db Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.11 1998/12/23 19:05:15 db Exp $";
 #endif
 
 #include <sys/time.h>
@@ -58,7 +58,7 @@ extern aClient *serv_cptr_list;
 static void exit_one_client (aClient *,aClient *,aClient *,char *);
 static void recurse_send_quits(aClient *, aClient *, aClient *, char *, char *);
 static void remove_dependents (aClient *, aClient *, aClient *, char *, char *);
-static char *show_capabilities(aClient *);
+char *show_capabilities(aClient *);
 
 static	char	*months[] = {
 	"January",	"February",	"March",	"April",
@@ -1058,7 +1058,7 @@ void serv_info(aClient *cptr,char *name)
 	     (float)((float)me.receiveK / (float)uptime));
 }
 
-static char *show_capabilities(aClient *acptr)
+char *show_capabilities(aClient *acptr)
 {
   static char	msgbuf[BUFSIZE];
   register	struct Capability *cap;
