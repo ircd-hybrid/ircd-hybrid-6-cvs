@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h.dist,v 1.72 2000/06/26 22:38:40 lusky Exp $
+ * $Id: config.h.dist,v 1.73 2000/08/24 06:15:51 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -300,6 +300,11 @@
  * max use count is reset
  */
 #define WHOIS_WAIT 1
+
+/* NO_WHOIS_WILDCARDS - disable the use of wildcards in WHOIS.
+ * this will probably be permanently enabled in the next release.
+ */
+#define NO_WHOIS_WILDCARDS
 
 /* PACE_WAIT - minimum seconds between use of MOTD, INFO, HELP, LINKS, TRACE
  * -Dianora
