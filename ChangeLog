@@ -1,3 +1,28 @@
+ievil       2004/05/23 12:25:23 EDT	(20040523_10)
+
+  Modified files:
+    include              m_commands.h msg.h numeric.h 
+    src                  Makefile.in messages.tab 
+                         messages_cust.tab 
+  Added files:
+    doc                  ETRACE.txt 
+    src                  m_etrace.c 
+  Log:
+  Implemented Sarisa/Hwy's ETRACE command for hybrid-6
+  Based the trace partly on ratbox-1.4 outputs.
+  
+  Revision  Changes    Path
+  1.1       +19 -0     ircd-hybrid-6/doc/ETRACE.txt (new)
+  1.11      +1 -0      ircd-hybrid-6/include/m_commands.h
+  1.26      +2 -0      ircd-hybrid-6/include/msg.h
+  1.27      +3 -0      ircd-hybrid-6/include/numeric.h
+  1.75      +2 -0      ircd-hybrid-6/src/Makefile.in
+  1.1       +96 -0     ircd-hybrid-6/src/m_etrace.c (new)
+  1.33      +1 -1      ircd-hybrid-6/src/messages.tab
+  1.32      +1 -1      ircd-hybrid-6/src/messages_cust.tab
+
+
+
 ievil       2004/05/23 12:22:17 EDT	(20040523_9)
 
   Modified files:
