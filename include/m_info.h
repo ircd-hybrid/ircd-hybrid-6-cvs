@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.31 2004/05/23 15:27:20 ievil Exp $
+ * $Id: m_info.h,v 1.32 2004/05/23 16:16:54 ievil Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -636,12 +636,6 @@ Info MyInformation[] = {
 #else
   { "SHOW_REMOTE_WHOIS", "OFF", 0, "Allow opers to see remote whois" },
 #endif /* SHOW_REMOTE_WHOIS */
-
-#ifdef SLAVE_SERVERS
-  { "SLAVE_SERVERS", "ON", 0, "Send LOCOPS and K-lines to U: lined Servers" },
-#else
-  { "SLAVE_SERVERS", "OFF", 0, "Send LOCOPS and K-lines to U: lined Servers" },
-#endif /* SLAVE_SERVERS */
 
 #ifdef SPATH
   { "SPATH", SPATH, 0, "Path to Server Executable" },

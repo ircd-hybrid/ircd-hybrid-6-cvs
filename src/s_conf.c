@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.251 2004/05/23 15:27:21 ievil Exp $
+ *  $Id: s_conf.c,v 1.252 2004/05/23 16:16:56 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -3833,10 +3833,6 @@ void write_kline_or_dline_to_conf_and_notice_opers(
 
   filename = get_conf_name(type);
 
-#ifdef SLAVE_SERVERS
-  if(!IsServer(sptr))
-#endif
-    {
       if(type == DLINE_TYPE)
         {
           sendto_realops("%s added D-Line for [%s] [%s]",
@@ -3851,8 +3847,6 @@ void write_kline_or_dline_to_conf_and_notice_opers(
           sendto_one(sptr, ":%s NOTICE %s :Added K-Line [%s@%s] to %s",
                      me.name, sptr->name, user, host, filename);
         }
-    }
-
   if ((out = open(filename, O_RDWR|O_APPEND|O_CREAT,0644))==-1)
     {
       sendto_realops("Problem opening %s ", filename);
@@ -3861,18 +3855,6 @@ void write_kline_or_dline_to_conf_and_notice_opers(
 
   fchmod(out, 0660);
 
-#ifdef SLAVE_SERVERS
-  if(IsServer(sptr))
-    {
-      if((type==KLINE_TYPE) && rcptr)
-        ircsprintf(buffer, "#%s!%s@%s from %s K'd: %s@%s:%s\n",
-                   rcptr->name, rcptr->username, rcptr->host,
-                   sptr->name,
-                   user, host, reason);
-    }
-  else
-#endif
-    {
       if(type==KLINE_TYPE)
         ircsprintf(buffer, "#%s!%s@%s K'd: %s@%s:%s\n",
                    sptr->name, sptr->username, sptr->host,
@@ -3881,7 +3863,6 @@ void write_kline_or_dline_to_conf_and_notice_opers(
         ircsprintf(buffer, "#%s!%s@%s D'd: %s:%s\n",
                    sptr->name, sptr->username, sptr->host,
                    host, reason);
-    }
   
   if (safe_write(sptr,filename,out,buffer))
     return;

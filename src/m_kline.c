@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.82 2003/10/13 11:11:51 ievil Exp $
+ *   $Id: m_kline.c,v 1.83 2004/05/23 16:16:56 ievil Exp $
  */
 #include "m_commands.h"
 #include "m_kline.h"
@@ -59,10 +59,6 @@ static char *cluster(char *);
  * the conf
  */
 aPendingLine *PendingLines = NULL;
-
-#ifdef SLAVE_SERVERS
-extern aConfItem *find_special_conf(char *,int); /* defined in s_conf.c */
-#endif
 
 /*
  * LockFile routines
@@ -265,38 +261,6 @@ WriteKline(const char *filename, struct Client *sptr, struct Client *rcptr,
 
   fchmod(out, 0660);
 
-#ifdef SLAVE_SERVERS
-  if (IsServer(sptr))
-  {
-    if (rcptr != NULL)
-      if (oper_reason)
-      {
-        ircsprintf(buffer,
-		   "#%s!%s@%s from %s K'd: %s@%s:%s|%s\n",
-		   rcptr->name,
-		   rcptr->username,
-		   rcptr->host,
-		   sptr->name,
-		   user,
-		   host,
-		   reason,
-                   oper_reason);
-      }
-      else
-      {
-        ircsprintf(buffer,
-                   "#%s!%s@%s from %s K'd: %s@%s:%s\n",
-                   rcptr->name,
-                   rcptr->username,
-                   rcptr->host,
-                   sptr->name,
-                   user,
-                   host,
-                   reason);
-      }
-  }
-  else
-#endif /* SLAVE_SERVERS */
   {
     if (oper_reason != NULL)
       {
@@ -448,48 +412,6 @@ m_kline(struct Client *cptr,
   char tmpch;
   int nonwild;
 
-#ifdef SLAVE_SERVERS
-  char *slave_oper;
-  struct Client *rcptr=NULL;
-
-  if(IsServer(sptr))
-    {
-      if(parc < 2)      /* pick up actual oper who placed kline */
-        return 0;
-
-      slave_oper = parv[1];     /* make it look like normal local kline */
-
-      parc--;
-      parv++;
-
-      if ( parc < 2 )
-        return 0;
-
-      if ((rcptr = hash_find_client(slave_oper,NULL)))
-        {
-          if(!IsPerson(rcptr))
-            return 0;
-        }
-      else
-        return 0;
-
-      if(!find_special_conf(sptr->name,CONF_ULINE))
-        {
-          sendto_realops("Received unauthorized K-line from %s",sptr->name);
-          return 0;
-        }
-      else
-        {
-          sendto_realops("Received K-line from %s", sptr->name);
-        }
-
-#ifdef HUB
-      sendto_slaves(sptr,"KLINE",slave_oper,parc,parv);
-#endif
-
-    }
-  else
-#endif
     {
       if (IsServer(cptr))
         {
@@ -521,9 +443,6 @@ m_kline(struct Client *cptr,
               return 0;
             }
 
-#ifdef SLAVE_SERVERS
-            sendto_slaves(NULL,"KLINE",sptr->name,parc,parv);
-#endif
         }
     }
 
@@ -533,9 +452,6 @@ m_kline(struct Client *cptr,
     {
       if(parc < 3)
         {
-#ifdef SLAVE_SERVERS
-          if(!IsServer(sptr))
-#endif    
              sendto_one(sptr, form_str(ERR_NEEDMOREPARAMS),
                         me.name, parv[0], "KLINE");
           return 0;
@@ -586,9 +502,6 @@ m_kline(struct Client *cptr,
 
       if (IsServer(acptr))
         {
-#ifdef SLAVE_SERVERS
-          if(!IsServer(sptr))
-#endif
             sendto_one(sptr,
               ":%s NOTICE %s :Can't KLINE a server, use @'s where appropriate",
                        me.name, parv[0]);
@@ -597,9 +510,6 @@ m_kline(struct Client *cptr,
 
       if(IsElined(acptr))
         {
-#ifdef SLAVE_SERVERS
-          if(!IsServer(sptr))
-#endif
             sendto_one(sptr,
                        ":%s NOTICE %s :%s is E-lined",me.name,parv[0],
                        acptr->name);
@@ -627,9 +537,6 @@ m_kline(struct Client *cptr,
     {
       if(strchr(argv, ':'))
         {
-#ifdef SLAVE_SERVERS
-          if(!IsServer(sptr))
-#endif
             sendto_one(sptr,
                        ":%s NOTICE %s :Invalid character ':' in comment",
                        me.name, parv[0]);
@@ -638,9 +545,6 @@ m_kline(struct Client *cptr,
 
       if(strchr(argv, '#'))
         {
-#ifdef SLAVE_SERVERS
-          if(!IsServer(sptr))
-#endif
             sendto_one(sptr,
                        ":%s NOTICE %s :Invalid character '#' in comment",
                        me.name, parv[0]);
@@ -657,18 +561,12 @@ m_kline(struct Client *cptr,
 
   if(strchr(host, '#'))
     {
-#ifdef SLAVE_SERVERS
-      if(!IsServer(sptr))
-#endif
         sendto_one(sptr, ":%s NOTICE %s :Invalid character '#' in hostname",
                    me.name, parv[0]);
       return 0;
     }
   if(strchr(user, '#'))
     { 
-#ifdef SLAVE_SERVERS
-      if(!IsServer(sptr))
-#endif  
         sendto_one(sptr, ":%s NOTICE %s :Invalid character '#' in username",
                    me.name, parv[0]);
       return 0;
@@ -722,9 +620,6 @@ m_kline(struct Client *cptr,
      * Not enough non-wild characters were found, assume
      * they are trying to kline *@*.
      */
-#ifdef SLAVE_SERVERS
-    if (!IsServer(sptr))
-#endif
       sendto_one(sptr,
         ":%s NOTICE %s :Please include at least %d non-wildcard characters with the user@host",
         me.name,
@@ -775,9 +670,6 @@ m_kline(struct Client *cptr,
        if( aconf->status & CONF_KILL )
          {
            nrkreason = aconf->passwd ? aconf->passwd : "<No Reason>";
-#ifdef SLAVE_SERVERS
-           if(!IsServer(sptr))
-#endif
              sendto_one(sptr,
                         ":%s NOTICE %s :[%s@%s] already K-lined by [%s@%s] - %s",
                         me.name,
@@ -889,11 +781,7 @@ m_kline(struct Client *cptr,
     else
       pptr->oper_reason = NULL;  /* Yes this is needed */
 
-#ifdef SLAVE_SERVERS
-    pptr->rcptr = rcptr;
-#else
     pptr->rcptr = NULL;
-#endif
 
     sendto_one(sptr,
       ":%s NOTICE %s :Added K-Line [%s@%s] (config file write delayed)",
@@ -918,16 +806,6 @@ m_kline(struct Client *cptr,
   /*
    * Write kline to configuration file
    */
-#ifdef SLAVE_SERVERS
-  WriteKline(kconf,
-	     sptr,
-	     rcptr,
-	     user,
-	     host,
-	     reason,
-	     oper_reason,
-	     current_date);
-#else
   WriteKline(kconf,
 	     sptr,
 	     NULL,
@@ -936,7 +814,6 @@ m_kline(struct Client *cptr,
 	     reason,
 	     oper_reason,
 	     current_date);
-#endif
 
   rehashed = YES;
   dline_in_progress = NO;

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.120 2004/03/18 02:53:41 ievil Exp $
+ *   $Id: send.c,v 1.121 2004/05/23 16:16:56 ievil Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -1643,52 +1643,3 @@ flush_server_connections()
       (void)send_queued(cptr);
 } /* flush_server_connections() */
 
-#ifdef SLAVE_SERVERS
-
-extern aConfItem *u_conf;
-
-int
-sendto_slaves(aClient *one, char *message, char *nick, int parc, char *parv[])
-
-{
-  aClient *acptr;
-  aConfItem *aconf;
-
-  for(acptr = serv_cptr_list; acptr; acptr = acptr->next_server_client)
-    {
-      if (one == acptr)
-        continue;
-      
-      for (aconf = u_conf; aconf; aconf = aconf->next)
-        {
-          if (match(acptr->name,aconf->name))
-            { 
-              if(parc > 3)
-                sendto_one(acptr,":%s %s %s %s %s :%s",
-                           me.name,
-                           message,
-                           nick,
-                           parv[1],
-                           parv[2],
-                           parv[3]);
-              else if(parc > 2)
-                sendto_one(acptr,":%s %s %s %s :%s",
-                           me.name,
-                           message,
-                           nick,
-                           parv[1],
-                           parv[2]);
-              else if(parc > 1)
-                sendto_one(acptr,":%s %s %s :%s",
-                           me.name,
-                           message,
-                           nick,
-                           parv[1]);
-            } /* if (match(acptr->name,aconf->name)) */
-        } /* for (aconf = u_conf; aconf; aconf = aconf->next) */
-    } /* for(acptr = serv_cptr_list; acptr; acptr = acptr->next_server_client) */
-
-  return 0;
-} /* sendto_slaves() */
-
-#endif /* SLAVE_SERVERS */

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_locops.c,v 1.5 2003/10/13 11:38:38 ievil Exp $
+ *   $Id: m_locops.c,v 1.6 2004/05/23 16:16:56 ievil Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -98,57 +98,10 @@
 int m_locops(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 {
   char *message = NULL;
-#ifdef SLAVE_SERVERS
-  char *slave_oper;
-  struct Client *acptr;
-#endif
 
-#ifdef SLAVE_SERVERS
-  if(IsServer(sptr))
-    {
-      if(!find_special_conf(sptr->name,CONF_ULINE))
-        {
-          sendto_realops("received Unauthorized locops from %s",sptr->name);
-          return 0;
-        }
-
-      if(parc > 2)
-        {
-          slave_oper = parv[1];
-
-          parc--;
-          parv++;
-
-          if ((acptr = hash_find_client(slave_oper,(struct Client *)NULL)))
-            {
-              if(!IsPerson(acptr))
-                return 0;
-            }
-          else
-            return 0;
-
-          if(parv[1])
-            {
-              message = parv[1];
-              send_locops(acptr, "SLOCOPS", message);
-            }
-          else
-            return 0;
-#ifdef HUB
-          sendto_slaves(sptr,"LOCOPS",slave_oper,parc,parv);
-#endif
-          return 0;
-        }
-    }
-  else
-    {
-      message = parc > 1 ? parv[1] : NULL;
-    }
-#else
   if(IsServer(sptr))
     return 0;
   message = parc > 1 ? parv[1] : NULL;
-#endif
 
   if (EmptyString(message))
     {
@@ -159,10 +112,6 @@ int m_locops(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 
   if(MyConnect(sptr) && IsAnOper(sptr))
     {
-
-#ifdef SLAVE_SERVERS
-      sendto_slaves(NULL,"LOCOPS",sptr->name,parc,parv);
-#endif
       send_locops(sptr, "LOCOPS", message);
     }
   else
