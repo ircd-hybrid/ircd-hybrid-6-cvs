@@ -1,3 +1,62 @@
+gregp       2003/01/05 14:47:51 EST	(20030105_0)
+
+  Modified files:
+    doc                  example.conf 
+    include              client.h config.h ircd.h s_conf.h send.h 
+    src                  channel.c ircd.c m_error.c m_kline.c 
+                         m_list.c m_locops.c m_set.c m_who.c 
+                         m_whois.c messages.tab messages_cust.tab 
+                         mtrie_conf.c parse.c s_conf.c s_user.c 
+                         send.c 
+  Log:
+  - applied all my patches
+    - allow | iline flag to give opers no_oper_flood before they /oper up
+    - umode +l -- #define ALLOW_UNIDLE, idle time faking (possibly for tcm?)
+    - umode +p -- #define ALLOW_OPERHIDE, hide in /stats p from users
+    - #define REMOTE_WHOIS_NOTICE
+  - added eleet opers crap
+    - #define ELEET_OPERS is akin to bill's m_operspy in hybrid-7/contrib/
+    - controlled by oper flag and umode
+  - added jupe bypass flag for opers
+  - adding U:line flags to control sending/receiving of various slave things
+    - and appropriate docu. .. slave servers now don't suck (as much)
+  - reworked some client.h stuff so as to be more extensible
+    - nothing really important here
+  - always log() error messages (even though they could contain ips)
+    - send ERROR's to syslog/ircd.log if it's turned on, regardless if we're
+      hiding them from opers.
+  - removed stuct User -> id.  it was a nice idea, but not for -6, diane
+  
+  With some of these features, it would be nice to have branching.  If anyone
+  has a dire reason why these whould not be available in HEAD, please feel free
+  to back out my commit.
+  
+  Revision  Changes    Path
+  1.36      +22 -0     ircd-hybrid-6/doc/example.conf
+  1.62      +90 -14    ircd-hybrid-6/include/client.h
+  1.154     +44 -2     ircd-hybrid-6/include/config.h
+  1.23      +4 -1      ircd-hybrid-6/include/ircd.h
+  1.63      +17 -0     ircd-hybrid-6/include/s_conf.h
+  1.16      +3 -1      ircd-hybrid-6/include/send.h
+  1.235     +34 -15    ircd-hybrid-6/src/channel.c
+  1.166     +3 -0      ircd-hybrid-6/src/ircd.c
+  1.6       +37 -12    ircd-hybrid-6/src/m_error.c
+  1.75      +42 -24    ircd-hybrid-6/src/m_kline.c
+  1.4       +62 -32    ircd-hybrid-6/src/m_list.c
+  1.3       +39 -45    ircd-hybrid-6/src/m_locops.c
+  1.8       +19 -3     ircd-hybrid-6/src/m_set.c
+  1.4       +21 -4     ircd-hybrid-6/src/m_who.c
+  1.8       +52 -16    ircd-hybrid-6/src/m_whois.c
+  1.25      +1 -1      ircd-hybrid-6/src/messages.tab
+  1.24      +1 -1      ircd-hybrid-6/src/messages_cust.tab
+  1.89      +2 -0      ircd-hybrid-6/src/mtrie_conf.c
+  1.48      +12 -9     ircd-hybrid-6/src/parse.c
+  1.238     +119 -1    ircd-hybrid-6/src/s_conf.c
+  1.249     +80 -26    ircd-hybrid-6/src/s_user.c
+  1.113     +2 -2      ircd-hybrid-6/src/send.c
+
+
+
 ievil       2003/01/01 10:20:41 EST	(20030101_0)
 
   Modified files:
