@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.126 1999/08/01 17:12:12 tomh Exp $
+ * $Id: ircd.c,v 1.127 1999/08/01 17:24:03 tomh Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -60,7 +60,6 @@
 #include <pwd.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <getopt.h>
 #include <sys/file.h>
 #include <sys/stat.h>
 #include <sys/socket.h>
@@ -71,13 +70,13 @@
 #endif /* SETUID_ROOT */
 
 /*
- * DELETE when verified
  * for getopt
  * ZZZ this is going to need confirmation on other OS's
  *
+ * #include <getopt.h>
  * Solaris has getopt.h, you should too... hopefully
+ * BSD declares them in stdlib.h
  * extern char *optarg;
- * 
  * 
  * for FreeBSD the following are defined:
  *
