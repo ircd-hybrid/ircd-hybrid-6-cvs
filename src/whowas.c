@@ -24,7 +24,7 @@
 #include "h.h"
 
 #ifndef lint
-static char *rcs_version = "$Id: whowas.c,v 1.9 1999/06/25 03:29:53 db Exp $";
+static char *rcs_version = "$Id: whowas.c,v 1.10 1999/06/26 01:07:00 db Exp $";
 #endif
 
 /* externally defined functions */
@@ -159,8 +159,6 @@ int     m_whowas(aClient *cptr,
   if (parc > 3)
     if (hunt_server(cptr,sptr,":%s WHOWAS %s %s :%s", 3,parc,parv))
       return 0;
-
-  /*  parv[1] = canonize(parv[1]); */
 
   if(!IsAnOper(sptr) && !MyConnect(sptr)) /* pace non local requests */
     {
