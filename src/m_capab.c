@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_capab.c,v 1.4 2001/07/10 12:40:32 jdc Exp $
+ *   $Id: m_capab.c,v 1.5 2001/07/18 01:37:12 lusky Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -98,7 +98,6 @@ int m_capab(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
   struct Capability *cap;
   char* p;
   char* s;
-  struct CipherDef *cdef = NULL;
 
   if ((!IsUnknown(cptr) && !IsHandshake(cptr)) || parc < 2)
     return 0;

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_oper.c,v 1.8 2000/12/01 06:28:49 lusky Exp $
+ *   $Id: m_oper.c,v 1.9 2001/07/18 01:37:14 lusky Exp $
  */
 
 #include "m_commands.h"
@@ -222,9 +222,9 @@ int m_oper(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 
       if(cptr->confs)
         {
-          struct ConfItem *aconf;
-          aconf = cptr->confs->value.aconf;
-          operprivs = oper_privs_as_string(cptr,aconf->port);
+          struct ConfItem *paconf;
+          paconf = cptr->confs->value.aconf;
+          operprivs = oper_privs_as_string(cptr,paconf->port);
         }
       else
         operprivs = "";

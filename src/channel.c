@@ -22,9 +22,10 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.203 2001/07/05 04:44:58 db Exp $
+ * $Id: channel.c,v 1.204 2001/07/18 01:37:10 lusky Exp $
  */
 #include "channel.h"
+#include "m_commands.h"
 #include "client.h"
 #include "common.h"
 #include "hash.h"
@@ -987,16 +988,16 @@ void set_channel_mode(struct Client *cptr,
   int   isok;
   int   isdeop;
   int   chan_op;
-  int   user_mode;
+  int   user_mode_chan;
 
-  user_mode = user_channel_mode(sptr, chptr);
-  chan_op = (user_mode & CHFL_CHANOP);
+  user_mode_chan = user_channel_mode(sptr, chptr);
+  chan_op = (user_mode_chan & CHFL_CHANOP);
 
   /* has ops or is a server */
   ischop = IsServer(sptr) || chan_op;
 
   /* is client marked as deopped */
-  isdeop = !ischop && !IsServer(sptr) && (user_mode & CHFL_DEOPPED);
+  isdeop = !ischop && !IsServer(sptr) && (user_mode_chan & CHFL_DEOPPED);
 
   /* is an op or server or remote user on a TS channel */
   isok = ischop || (!isdeop && IsServer(cptr) && chptr->channelts);

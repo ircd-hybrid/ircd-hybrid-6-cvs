@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.71 2001/06/25 00:56:11 db Exp $
+ *  $Id: s_misc.c,v 1.72 2001/07/18 01:37:17 lusky Exp $
  */
 #include "s_misc.h"
 #include "client.h"
@@ -55,19 +55,19 @@ static char* weekdays[] = {
   "Thursday", "Friday", "Saturday"
 };
 
-char* date(time_t clock) 
+char* date(time_t clockval) 
 {
   static        char        buf[80], plus;
   struct        tm *lt, *gm;
   struct        tm        gmbuf;
   int        minswest;
 
-  if (!clock) 
-    time(&clock);
-  gm = gmtime(&clock);
+  if (!clockval) 
+    time(&clockval);
+  gm = gmtime(&clockval);
   memcpy((void *)&gmbuf, (void *)gm, sizeof(gmbuf));
   gm = &gmbuf;
-  lt = localtime(&clock);
+  lt = localtime(&clockval);
 
   if (lt->tm_yday == gm->tm_yday)
     minswest = (gm->tm_hour - lt->tm_hour) * 60 +
@@ -89,18 +89,18 @@ char* date(time_t clock)
   return buf;
 }
 
-const char* smalldate(time_t clock)
+const char* smalldate(time_t clockval)
 {
   static  char    buf[MAX_DATE_STRING];
   struct  tm *lt, *gm;
   struct  tm      gmbuf;
 
-  if (!clock)
-    time(&clock);
-  gm = gmtime(&clock);
+  if (!clockval)
+    time(&clockval);
+  gm = gmtime(&clockval);
   memcpy((void *)&gmbuf, (void *)gm, sizeof(gmbuf));
   gm = &gmbuf; 
-  lt = localtime(&clock);
+  lt = localtime(&clockval);
   
   ircsprintf(buf, "%d/%t/%t %t.%t",
              lt->tm_year + 1900, lt->tm_mon + 1, lt->tm_mday,
@@ -116,14 +116,14 @@ const char* smalldate(time_t clock)
  * Make a small YYYYMMDD formatted string suitable for a
  * dated file stamp. 
  */
-char* small_file_date(time_t clock)
+char* small_file_date(time_t clockval)
 {
   static  char    timebuffer[MAX_DATE_STRING];
   struct tm *tmptr;
 
-  if (!clock)
-    time(&clock);
-  tmptr = localtime(&clock);
+  if (!clockval)
+    time(&clockval);
+  tmptr = localtime(&clockval);
   strftime(timebuffer, MAX_DATE_STRING, "%Y%m%d", tmptr);
   return timebuffer;
 }

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.138 2001/07/10 12:40:33 jdc Exp $
+ *  $Id: s_bsd.c,v 1.139 2001/07/18 01:37:16 lusky Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -395,7 +395,7 @@ static int completed_connection(struct Client* cptr)
  */
 static int connect_inet(struct ConfItem *aconf, struct Client *cptr)
 {
-  static struct sockaddr_in sin;
+  static struct sockaddr_in con_sin;
   assert(0 != aconf);
   assert(0 != cptr);
   /*
@@ -419,8 +419,8 @@ static int connect_inet(struct ConfItem *aconf, struct Client *cptr)
   mysk.sin_port   = 0;
   mysk.sin_family = AF_INET;
 
-  memset(&sin, 0, sizeof(sin));
-  sin.sin_family  = AF_INET;
+  memset(&con_sin, 0, sizeof(con_sin));
+  con_sin.sin_family  = AF_INET;
 
   /*
    * Bind to a local IP# (with unknown port - let unix decide) so
@@ -447,8 +447,8 @@ static int connect_inet(struct ConfItem *aconf, struct Client *cptr)
           return 0;
         }
     }
-  sin.sin_addr.s_addr = aconf->ipnum.s_addr;
-  sin.sin_port        = htons(aconf->port);
+  con_sin.sin_addr.s_addr = aconf->ipnum.s_addr;
+  con_sin.sin_port        = htons(aconf->port);
   /*
    * save connect info in client
    */
@@ -473,7 +473,7 @@ static int connect_inet(struct ConfItem *aconf, struct Client *cptr)
     report_error(SETBUF_ERROR_MSG, get_client_name(cptr, TRUE), errno);
 #endif    
 
-  if (connect(cptr->fd, (struct sockaddr*) &sin, sizeof(sin)) && 
+  if (connect(cptr->fd, (struct sockaddr*) &con_sin, sizeof(con_sin)) && 
       errno != EINPROGRESS)
     {
       int errtmp = errno; /* other system calls may eat errno */

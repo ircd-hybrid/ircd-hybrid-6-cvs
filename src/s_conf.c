@@ -19,8 +19,9 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.206 2001/07/10 12:40:34 jdc Exp $
+ *  $Id: s_conf.c,v 1.207 2001/07/18 01:37:16 lusky Exp $
  */
+#include "m_commands.h"
 #include "s_conf.h"
 #include "channel.h"
 #include "class.h"
@@ -239,14 +240,14 @@ void free_conf(struct ConfItem* aconf)
  */
 void det_confs_butmask(struct Client* cptr, int mask)
 {
-  struct SLink* link;
-  struct SLink* link_next;
+  struct SLink* conf_link;
+  struct SLink* conf_link_next;
 
-  for (link = cptr->confs; link; link = link_next)
+  for (conf_link = cptr->confs; conf_link; conf_link = conf_link_next)
     {
-      link_next = link->next;
-      if ((link->value.aconf->status & mask) == 0)
-        detach_conf(cptr, link->value.aconf);
+      conf_link_next = conf_link->next;
+      if ((conf_link->value.aconf->status & mask) == 0)
+        detach_conf(cptr, conf_link->value.aconf);
     }
 }
 
@@ -2326,7 +2327,7 @@ static void initconf(FBFILE* file, int use_include)
         {
           char *p;
           unsigned long ip_host;
-          unsigned long ip_mask;
+          unsigned long ip_lmask;
           dontadd = 1;
           
           if(!aconf->host)
@@ -2367,10 +2368,10 @@ static void initconf(FBFILE* file, int use_include)
               aconf->host = x;
             }
 
-           if( is_address(aconf->host,&ip_host,&ip_mask) )
+           if( is_address(aconf->host,&ip_host,&ip_lmask) )
 	     {
-               aconf->ip = ip_host & ip_mask;
-               aconf->ip_mask = ip_mask;
+               aconf->ip = ip_host & ip_lmask;
+               aconf->ip_mask = ip_lmask;
                add_ip_Iline( aconf );
              }
            else

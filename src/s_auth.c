@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.48 2001/06/17 23:51:22 greg Exp $
+ *   $Id: s_auth.c,v 1.49 2001/07/18 01:37:16 lusky Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -27,6 +27,7 @@
  *     any messages from it.
  *     --Bleep  Thomas Helvey <tomh@inxpress.net>
  */
+#include "m_commands.h"
 #include "s_auth.h"
 #include "client.h"
 #include "common.h"

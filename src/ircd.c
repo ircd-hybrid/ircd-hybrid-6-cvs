@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.144 2001/07/10 12:40:32 jdc Exp $
+ * $Id: ircd.c,v 1.145 2001/07/18 01:37:12 lusky Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -501,16 +501,16 @@ static time_t io_loop(time_t delay)
    *    -Taner
    */
   {
-    static time_t lasttime=0;
+    static time_t lslasttime=0;
 #ifdef CLIENT_SERVER
-    if (!LIFESUX || (lasttime + LIFESUX) < CurrentTime)
+    if (!LIFESUX || (lslasttime + LIFESUX) < CurrentTime)
       {
 #else
-    if ((lasttime + (LIFESUX + 1)) < CurrentTime)
+    if ((lslasttime + (LIFESUX + 1)) < CurrentTime)
       {
 #endif
         read_message(delay, FDL_ALL); /*  check everything! */
-        lasttime = CurrentTime;
+        lslasttime = CurrentTime;
       }
    }
 #else

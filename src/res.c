@@ -4,12 +4,13 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.54 2000/11/24 18:24:37 lusky Exp $
+ * $Id: res.c,v 1.55 2001/07/18 01:37:15 lusky Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
  *     --Bleep (Thomas Helvey <tomh@inxpress.net>)
  */
+#include "m_commands.h"
 #include "res.h"
 #include "client.h"
 #include "common.h"
@@ -999,10 +1000,10 @@ void get_res(void)
   int                rc;
   int                answer_count;
   int                len = sizeof(struct sockaddr_in);
-  struct sockaddr_in sin;
+  struct sockaddr_in res_sin;
 
   rc = recvfrom(ResolverFileDescriptor, buf, sizeof(buf), 0, 
-                (struct sockaddr*) &sin, &len);
+                (struct sockaddr*) &res_sin, &len);
   if (rc <= sizeof(HEADER))
     return;
   /*
@@ -1028,7 +1029,7 @@ void get_res(void)
   /*
    * check against possibly fake replies
    */
-  if (!res_ourserver(&_res, &sin)) {
+  if (!res_ourserver(&_res, &res_sin)) {
     ++reinfo.re_unkrep;
     return;
   }

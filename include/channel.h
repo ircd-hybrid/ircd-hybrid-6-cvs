@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: channel.h,v 1.32 2001/07/02 10:50:58 leeh Exp $
+ * $Id: channel.h,v 1.33 2001/07/18 01:37:05 lusky Exp $
  */
 
 #ifndef INCLUDED_channel_h
@@ -100,6 +100,7 @@ extern void    del_invite (struct Client *, struct Channel *);
 extern void    send_user_joins (struct Client *, struct Client *);
 extern int     can_send (struct Client *, struct Channel *);
 extern int     is_chan_op (struct Client *, struct Channel *);
+extern int     is_deopped (struct Client *, struct Channel *);
 extern int     has_voice (struct Client *, struct Channel *);
 extern int     user_channel_mode(struct Client *, struct Channel *);
 extern int     count_channels (struct Client *);
