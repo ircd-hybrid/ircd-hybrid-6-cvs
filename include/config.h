@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.6 1998/10/12 06:18:12 db Exp $
+ * $Id: config.h,v 1.7 1998/10/15 04:17:50 db Exp $
  */
 
 #ifndef	__config_include__
@@ -680,6 +680,13 @@
  * was +i before this server split, it remains +i during the split
  */
 #define PRESERVE_CHANNEL_ON_SPLIT
+
+/*
+ * SPLIT_SMALLNET_SIZE defines what constitutes a split from 
+ * the net. for a leaf, 2 is fine. If the number of servers seen
+ * on the net gets less than 2, a split is deemed to have happened.
+ */
+#define SPLIT_SMALLNET_SIZE 2
 
 /* LIMIT_UH
  * If this is defined, Y line limit is made against the actual

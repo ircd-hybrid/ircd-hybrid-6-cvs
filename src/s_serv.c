@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.13 1998/10/14 16:18:37 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.14 1998/10/15 04:17:56 db Exp $";
 #endif
 
 
@@ -70,6 +70,12 @@ extern aClient *local_cptr_list;
 extern aClient *oper_cptr_list;
 extern aClient *serv_cptr_list;
 
+#if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
+	defined(NO_JOIN_ON_SPLIT)
+extern int server_was_split;
+extern time_t server_split_time;
+extern int server_split_recovery_time;
+#endif
 
 extern int lifesux;		/* defined in ircd.c */
 extern int rehashed;		/* defined in ircd.c */
@@ -785,6 +791,15 @@ int	m_server(aClient *cptr,
       SetServer(acptr);
 
       Count.server++;
+#if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
+      defined(NO_JOIN_ON_SPLIT)
+
+	if(server_was_split && (Count.server >= SPLIT_SMALLNET_SIZE))
+	  {
+	    if((server_split_time + server_split_recovery_time) < NOW)
+	      server_was_split = NO;
+	  }
+#endif
 
       add_client_to_list(acptr);
       (void)add_to_client_hash_table(acptr->name, acptr);
@@ -1020,6 +1035,15 @@ int	m_server_estab(aClient *cptr)
   add_client_to_llist(&(me.serv->servers), cptr);
 
   Count.server++;
+#if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
+      defined(NO_JOIN_ON_SPLIT)
+
+	if(server_was_split && (Count.server >= SPLIT_SMALLNET_SIZE))
+	  {
+	    if((server_split_time + server_split_recovery_time) < NOW)
+	      server_was_split = NO;
+	  }
+#endif
   Count.myserver++;
 
 #ifdef MAXBUFFERS
@@ -3031,10 +3055,6 @@ extern int spam_num;
 extern int spam_time;
 #endif
 
-#if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
-	defined(NO_JOIN_ON_SPLIT)
-extern int server_split_recovery_time;
-#endif
 
 /*
  * m_set - set options while running

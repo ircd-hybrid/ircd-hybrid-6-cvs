@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.7 1998/10/14 05:51:57 db Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.8 1998/10/15 04:17:55 db Exp $";
 #endif
 
 #include <sys/time.h>
@@ -54,12 +54,6 @@ static char *rcs_version = "$Id: s_misc.c,v 1.7 1998/10/14 05:51:57 db Exp $";
 extern aClient *local_cptr_list;
 extern aClient *oper_cptr_list;
 extern aClient *serv_cptr_list;
-
-#if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
-	defined(NO_JOIN_ON_SPLIT)
-extern int server_was_split;
-extern time_t server_split_time;
-#endif
 
 static void exit_one_client (aClient *,aClient *,aClient *,char *);
 static void recurse_send_quits(aClient *, aClient *, aClient *, char *, char *);
@@ -492,15 +486,6 @@ char	*comment	/* Reason for the exit */
                 cur_cptr = cur_cptr->next_server_client;
 	      }
           }
-
-#if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
-	defined(NO_JOIN_ON_SPLIT)
-	  if(Count.myserver < NO_CHANOPS_SMALLNET_SIZE)
-	    {
-	      server_was_split = YES;
-	      server_split_time = NOW;
-	    }
-#endif
 	}
       sptr->flags |= FLAGS_CLOSING;
       if (IsPerson(sptr))
