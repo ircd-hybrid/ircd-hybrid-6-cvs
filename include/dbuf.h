@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-/* $Id: dbuf.h,v 1.3 1999/07/21 05:45:02 tomh Exp $ */
+/* $Id: dbuf.h,v 1.4 1999/07/21 21:41:48 db Exp $ */
 
 #ifndef __dbuf_include__
 #define __dbuf_include__
@@ -162,5 +162,10 @@ int dbuf_delete (dbuf *, int);
 
 extern  int     dbuf_getmsg (dbuf *, char *, int);
 extern  void     dbuf_init(void);
+
+extern  int     dbufalloc;
+extern  int     dbufblocks;
+extern  int     maxdbufalloc;
+extern  int     maxdbufblocks;
 
 #endif /* __dbuf_include__ */
