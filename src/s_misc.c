@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.23 1999/05/15 14:40:31 db Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.24 1999/05/29 14:06:49 db Exp $";
 #endif
 
 #include <sys/time.h>
@@ -712,7 +712,10 @@ static	void recurse_remove_clients(aClient *sptr, char *comment)
   if (IsMe(sptr))
     return;
 
-  while (sptr->serv && (acptr = sptr->serv->servers))
+  if (!sptr->serv)	/* oooops. uh this is actually a major bug */
+    return;
+
+  while (acptr = sptr->serv->servers)
     {
       recurse_remove_clients(acptr, comment);
       /*
@@ -722,7 +725,8 @@ static	void recurse_remove_clients(aClient *sptr, char *comment)
       acptr->flags |= FLAGS_KILLED;
       exit_one_client(NULL, acptr, &me, me.name);
     }
-  while (sptr->serv && (acptr = sptr->serv->users))
+
+  while (acptr = sptr->serv->users)
     {
       acptr->flags |= FLAGS_KILLED;
       exit_one_client(NULL, acptr, &me, comment);
@@ -825,7 +829,8 @@ static	void	exit_one_client(aClient *cptr,
       if (acptr && IsServer(acptr) && acptr != cptr && !IsMe(acptr) &&
 	  (sptr->flags & FLAGS_KILLED) == 0)
 	sendto_one(acptr, ":%s SQUIT %s :%s", from->name, sptr->name, comment);
-    } else if (!(IsPerson(sptr)))
+    }
+  else if (!(IsPerson(sptr)))
       /* ...this test is *dubious*, would need
       ** some thought.. but for now it plugs a
       ** nasty hole in the server... --msa

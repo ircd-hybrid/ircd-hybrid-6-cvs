@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.97 1999/05/28 01:10:32 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.98 1999/05/29 14:06:50 db Exp $";
 #endif
 
 
@@ -3956,17 +3956,20 @@ int     m_kline(aClient *cptr,
      {
        char *reason;
 
-       reason = aconf->passwd ? aconf->passwd : "<No Reason>";
+       if( aconf->status & CONF_KILL )
+	 {
+	   reason = aconf->passwd ? aconf->passwd : "<No Reason>";
 #ifdef SLAVE_SERVERS
-       if(!IsServer(sptr))
+	   if(!IsServer(sptr))
 #endif
-	 sendto_one(sptr,
-		    ":%s NOTICE %s :[%s@%s] already K-lined by [%s@%s] - %s",
-		    me.name,
-		    parv[0],
-		    user,host,
-		    aconf->name,aconf->host,reason);
-       return 0;
+	     sendto_one(sptr,
+			":%s NOTICE %s :[%s@%s] already K-lined by [%s@%s] - %s",
+			me.name,
+			parv[0],
+			user,host,
+			aconf->name,aconf->host,reason);
+	   return 0;
+	 }
      }
 #endif
 
