@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.41 1998/12/05 07:37:23 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.42 1998/12/07 03:17:36 db Exp $";
 #endif
 
 #include "struct.h"
@@ -3255,6 +3255,11 @@ int	m_invite(aClient *cptr,
    * to channel, i.e. channel is not +i. If it goes +i after the invite
    * tough. -Dianora
    */
+
+  /* Do not send local channel invites to users if they are not on the *
+   * same server as the person sending the INVITE message.  -- David-R */
+  if (!MyConnect(acptr) && (*chptr->chname == '&'))
+    return 0;
 
   if (MyConnect(acptr))
     if (chptr && sptr->user && is_chan_op(sptr, chptr) && need_invite)
