@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.235 2001/12/30 03:36:47 db Exp $
+ *  $Id: s_conf.c,v 1.236 2002/02/17 05:58:13 lusky Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -1520,6 +1520,7 @@ void report_qlines(aClient *sptr)
     }
 }
 
+#ifdef JUPE_CHANNEL
 /* clear_juped_channels()
  *
  * inputs       -
@@ -1548,7 +1549,8 @@ void clear_juped_channels()
     }
   }
 }
-       
+#endif /* JUPE_CHANNEL */
+
 /*
  * add_q_line
  *
@@ -3539,7 +3541,9 @@ void read_conf_files(int cold)
 
   if(!cold)
   {
+#ifdef JUPE_CHANNEL
     clear_juped_channels();
+#endif /* JUPE_CHANNEL */
     clear_out_old_conf();
   }
 

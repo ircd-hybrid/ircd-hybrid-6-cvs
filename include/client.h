@@ -17,14 +17,14 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.60 2001/12/04 06:40:30 db Exp $
+ * $Id: client.h,v 1.61 2002/02/17 05:58:09 lusky Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
 #ifndef INCLUDED_config_h
 #include "config.h"
 #endif
-#if !defined(CONFIG_H_LEVEL_6_1)
+#if !defined(CONFIG_H_LEVEL_6_3)
 #error Incorrect config.h for this revision of ircd.
 #endif
 #ifndef INCLUDED_sys_types_h

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h.dist,v 1.131 2002/01/04 04:00:59 lusky Exp $
+ * $Id: config.h.dist,v 1.132 2002/02/17 05:58:09 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -1022,6 +1022,6 @@
 #define MIN_IDLETIME 1800
 #endif
 
-#define CONFIG_H_LEVEL_6_1
+#define CONFIG_H_LEVEL_6_3
 
 #endif /* INCLUDED_config_h */

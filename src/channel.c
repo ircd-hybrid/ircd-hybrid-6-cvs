@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.232 2002/02/02 20:58:29 db Exp $
+ * $Id: channel.c,v 1.233 2002/02/17 05:58:12 lusky Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -2904,8 +2904,8 @@ int     m_knock(struct Client *cptr,
     }
 
   /* don't allow a knock if the user is banned, or the channel is secret */
-  if (knock_local && (chptr->mode.mode & MODE_SECRET) || 
-      (is_banned(sptr, chptr) == CHFL_BAN) )
+  if (knock_local && ((chptr->mode.mode & MODE_SECRET) || 
+      (is_banned(sptr, chptr) == CHFL_BAN)) )
     {
       sendto_one(sptr, form_str(ERR_CANNOTSENDTOCHAN), me.name, parv[0],
                  name);
