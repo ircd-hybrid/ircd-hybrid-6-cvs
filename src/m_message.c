@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_message.c,v 1.15 2001/12/07 05:35:55 db Exp $
+ *   $Id: m_message.c,v 1.16 2001/12/11 13:30:52 leeh Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -230,7 +230,7 @@ static  int     m_message(struct Client *cptr,
 		  check_for_flud(sptr, NULL, chptr, 1);
 #endif /* FLUD */
 
-	      if (!is_chan_op(sptr,chptr))
+	      if (!is_chan_op(sptr,chptr) && !has_voice(sptr,chptr))
 		{
 		  if (!notice)
 		      sendto_one(sptr, form_str(ERR_CANNOTSENDTOCHAN),
