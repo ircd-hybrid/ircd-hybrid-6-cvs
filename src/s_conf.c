@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.3 1998/09/21 03:26:23 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.4 1998/09/21 04:19:35 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1649,8 +1649,9 @@ int 	initconf(int opt, int fd)
       /*
       ** If conf line is a class definition, create a class entry
       ** for it and make the conf_line illegal and delete it.
+	** Negative class numbers are not accepted.
       */
-      if (aconf->status & CONF_CLASS)
+      if (aconf->status & CONF_CLASS && atoi(aconf->host) > -1)
 	{
 	  add_class(atoi(aconf->host), atoi(aconf->passwd),
 		    atoi(aconf->name), aconf->port,
@@ -1712,9 +1713,9 @@ int 	initconf(int opt, int fd)
 	    
 	    len = strlen(aconf->host) + 3; /* *@\0 = 3 */
 	    newhost = (char *)MyMalloc(len);
-	    *newhost++ = '*';
-	    *newhost++ = '@';
-	    strcpy(newhost,aconf->host);
+	    newhost[0] = '*';
+	    newhost[1] = '@';
+	    strcpy(newhost+2,aconf->host);
 	    MyFree(aconf->host);
 	    aconf->host = newhost;
 	  }

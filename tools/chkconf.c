@@ -19,7 +19,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)chkconf.c	1.7 27 Oct 1993 (C) 1993 Darren Reed";
-static char *rcs_version = "$Id: chkconf.c,v 1.1 1998/09/17 14:25:05 db Exp $";
+static char *rcs_version = "$Id: chkconf.c,v 1.2 1998/09/21 04:19:38 db Exp $";
 #endif
 
 #define FOREVER for(;;)
@@ -374,6 +374,7 @@ static int 	ckinitconf(int opt)
       /*
       ** If conf line is a class definition, create a class entry
       ** for it and make the conf_line illegal and delete it.
+	** This should not accept negative class numbers.
       */
       if (aconf->status & CONF_CLASS)
 	{
@@ -389,6 +390,11 @@ static int 	ckinitconf(int opt)
 	      (void)fprintf(stderr, "\t\t default: %d\n",
 			    MAXSENDQLENGTH);
 	      (void)sprintf(maxsendq, "%d", MAXSENDQLENGTH);
+	    }
+	  if (atoi(aconf->host) < 0)
+	    {
+		(void)fprintf(stderr,"\tERROR: negative class #\n");
+		continue;
 	    }
 	  else
 	      (void)sprintf(maxsendq, "%d", atoi(tmp));
