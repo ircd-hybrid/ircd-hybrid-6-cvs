@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.52 1998/12/24 00:03:50 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.53 1998/12/24 03:50:22 db Exp $";
 #endif
 
 #include "struct.h"
@@ -3348,6 +3348,10 @@ int	m_list(aClient *cptr,
   aChannel *chptr;
   char	*name, *p = NULL;
 
+  /* throw away non local list requests that do get here -Dianora */
+  if(!MyConnect(sptr))
+    return 0;
+
   sendto_one(sptr, rpl_str(RPL_LISTSTART), me.name, parv[0]);
 
   if (parc < 2 || BadPtr(parv[1]))
@@ -3368,11 +3372,11 @@ int	m_list(aClient *cptr,
       return 0;
     }
 
-  /* anti flooding code */
-
-  if(IsAnOper(sptr))
+  /* Don't route list, no need for it - Dianora */
+  /*
     if (hunt_server(cptr, sptr, ":%s LIST %s %s", 2, parc, parv))
       return 0;
+      */
 
   p = strchr(parv[1],',');
   if(p)

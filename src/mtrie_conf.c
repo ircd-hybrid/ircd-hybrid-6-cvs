@@ -56,7 +56,7 @@
 #endif
 
 #ifndef lint
-static char *version="$Id: mtrie_conf.c,v 1.16 1998/12/23 21:12:09 db Exp $";
+static char *version="$Id: mtrie_conf.c,v 1.17 1998/12/24 03:50:23 db Exp $";
 #endif /* lint */
 
 #define MAXPREFIX (HOSTLEN+USERLEN+15)
@@ -122,6 +122,13 @@ aConfItem *ip_i_lines=(aConfItem *)NULL;
 void add_mtrie_conf_entry(aConfItem *aconf,int flags)
 {
   char tokenized_host[HOSTLEN+1];
+
+  /* Sanity tests are always good */
+  if(!aconf->host || !aconf->name)
+    {
+      free_conf(aconf);
+      return;
+    }
 
   if( (aconf->host[0] == 'x') && aconf->mask && host_is_legal_ip(aconf->mask) )
     {
@@ -600,6 +607,7 @@ aConfItem *find_matching_mtrie_conf(char *host,char *user,
 				    unsigned long ip)
 {
   aConfItem *iline_aconf_unsortable=(aConfItem *)NULL;
+  aConfItem *ip_iline_aconf=(aConfItem *)NULL;
   aConfItem *iline_aconf=(aConfItem *)NULL;
   aConfItem *kline_aconf=(aConfItem *)NULL;
   char tokenized_host[HOSTLEN+1];
@@ -625,8 +633,23 @@ aConfItem *find_matching_mtrie_conf(char *host,char *user,
    * in the mtrie tree.
    */
 
+#ifdef USE_IP_I_LINE_FIRST
+  /* 
+   * See if there is a matching IP CIDR first and use it.
+   */
+
+  if(ip)
+    {
+      ip_iline_aconf = find_matching_ip_i_line(ip);
+    }
+
+  if(!ip_iline_aconf && trie_list)
+    {
+#else
+
   if(trie_list)
     {
+#endif
       stack_pointer = 0;
       tokenize_and_stack(tokenized_host,host);
       top_of_stack = stack_pointer;
@@ -679,6 +702,10 @@ aConfItem *find_matching_mtrie_conf(char *host,char *user,
   if(iline_aconf_unsortable)
     iline_aconf = iline_aconf_unsortable;
 
+#ifdef USE_IP_I_LINE_FIRST
+  if(ip_iline_aconf)
+    iline_aconf = ip_iline_aconf;
+#else
   /* 
    * If there is no match found yet, and there is a legal IP to look at
    * see if there is a matching IP CIDR, and use it.
@@ -688,6 +715,7 @@ aConfItem *find_matching_mtrie_conf(char *host,char *user,
     {
       iline_aconf = find_matching_ip_i_line(ip);
     }
+#endif
 
   /* If there is no I line, there is no point checking for a K line now
    * is there? -Dianora
