@@ -1,3 +1,18 @@
+ievil       2003/01/01 10:20:41 EST	(20030101_0)
+
+  Modified files:
+    src                  m_ltrace.c 
+  Log:
+  - Fixed an issue of ip leakage in m_ltrace.c and added an +y notice for when
+  LTRACE is done frome remote (patches from Hwy/Sarisa). This should fix some
+  of the more recent problems with oper ip leakage. The file is being audited
+  in full.
+  
+  Revision  Changes    Path
+  1.10      +21 -4     ircd-hybrid-6/src/m_ltrace.c
+
+
+
 db          2002/11/27 23:18:02 EST	(20021128_0)
 
   Modified files:
