@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.17 1999/01/30 18:07:34 db Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.18 1999/01/30 18:35:24 db Exp $";
 #endif
 
 #include <sys/time.h>
@@ -250,18 +250,11 @@ char	*get_client_name(aClient *sptr,int showip)
   t_port[0]='\0';
   t_user[0]='\0';
   t_host[0]='\0';
-  t_id[0]='\0';
+  /*  t_id[0]='\0'; */
 
   if (MyConnect(sptr))
     {
       /* Check for ident */
-
-      /* For consistency everywhere else no? -db */
-      if (!IsGotId(sptr))
-	{
-	  t_id[0] = '~';
-	  t_id[1] = '\0';
-	}
 
       /* original -db */
       /* (void)strcpy(t_id, "(+)"); */
@@ -293,9 +286,10 @@ char	*get_client_name(aClient *sptr,int showip)
         }
 
       /* Now we add everything together */
-      (void)ircsprintf(nbuf, "%s[%s%s%s%s]", sptr->name, t_id,
+      /*      (void)ircsprintf(nbuf, "%s[%s%s%s%s]", sptr->name, t_id,
+        t_user, t_host, t_port); */
+      (void)ircsprintf(nbuf, "%s[%s%s%s]", sptr->name,
         t_user, t_host, t_port);
-
     }
 
   if (mycmp(sptr->name,sptr->sockhost) || t_port[0])
