@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_stats.c,v 1.22 2002/11/28 04:18:01 db Exp $
+ *  $Id: m_stats.c,v 1.23 2005/03/25 11:21:33 ievil Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "class.h"       /* report_classes */
@@ -286,13 +286,23 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       valid_stats++;
       break;
 
-    case 'D': case 'd':
+    case 'D':
       if (!IsAnOper(sptr))
         {
           sendto_one(sptr, form_str(ERR_NOPRIVILEGES), me.name, parv[0]);
           break;
         }
       report_dlines(sptr);
+      valid_stats++;
+      break;
+
+    case 'd':
+      if (!IsAnOper(sptr))
+        {
+          sendto_one(sptr, form_str(ERR_NOPRIVILEGES), me.name, parv[0]);
+          break;
+        }
+      report_temp_dlines(sptr);
       valid_stats++;
       break;
 

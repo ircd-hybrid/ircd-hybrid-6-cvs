@@ -1,7 +1,7 @@
 /*
  * dline_conf.c
  *
- * $Id: dline_conf.c,v 1.42 2001/12/14 16:56:36 db Exp $
+ * $Id: dline_conf.c,v 1.43 2005/03/25 11:21:33 ievil Exp $
  */
 #include "dline_conf.h"
 #include "class.h"
@@ -845,6 +845,14 @@ void report_dlines(aClient *sptr)
   for (i=0;i<256;i++) walk_the_dlines(sptr, Dline[i]);
 }
 
+void report_temp_dlines(aClient *sptr)
+{
+/* this is added for the upcoming temp dlines patch. But for no
+ * we need to fix so that it dont break OOMON's dline tracking
+ *   int i;
+ *  for (i=0;i<256;i++) walk_the_dlines(sptr, Dline[i]);
+ */
+}
 
 /*
  * walk_the_ip_Klines - inorder traversal of a Dline tree, printing K/I/Elines
