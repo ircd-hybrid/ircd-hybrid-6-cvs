@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.173 1999/09/01 03:25:45 lusky Exp $
+ *  $Id: s_conf.c,v 1.174 1999/09/28 00:00:10 lusky Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -2138,7 +2138,7 @@ static void initconf(FBFILE* file, int use_include)
 	      if(ps || pt)
 		{
 		  sendto_realops("H: or L: line trailing whitespace [%s]",
-				 aconf->name);
+				 aconf->user);
 		  if(ps)*ps = '\0';
 		  if(pt)*pt = '\0';
 		}
@@ -2754,7 +2754,7 @@ void report_temp_klines(aClient *sptr)
   struct ConfItem *last_list_ptr;
   struct ConfItem *tmp_list_ptr;
   char *host;
-  char *name;
+  char *user;
   char *reason;
   char *p;
 
@@ -2791,10 +2791,10 @@ void report_temp_klines(aClient *sptr)
               else
                 host = "*";
 
-              if(kill_list_ptr->name)
-                name = kill_list_ptr->name;
+              if(kill_list_ptr->user)
+                user = kill_list_ptr->user;
               else
-                name = "*";
+                user = "*";
 
               if(kill_list_ptr->passwd)
                 reason = kill_list_ptr->passwd;
@@ -2807,13 +2807,13 @@ void report_temp_klines(aClient *sptr)
                     *p = '\0';
 
                   sendto_one(sptr,form_str(RPL_STATSKLINE), me.name,
-                             sptr->name, 'k' , host, name, reason);
+                             sptr->name, 'k' , host, user, reason);
                   if(p)
                     *p = '|';
                 }
               else
                 sendto_one(sptr,form_str(RPL_STATSKLINE), me.name,
-                           sptr->name, 'k' , host, name, reason);
+                           sptr->name, 'k' , host, user, reason);
 
               last_list_ptr = kill_list_ptr;
               kill_list_ptr = kill_list_ptr->next;
