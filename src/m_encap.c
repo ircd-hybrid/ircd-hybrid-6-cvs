@@ -19,8 +19,11 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_encap.c,v 1.2 2003/06/24 03:14:32 ievil Exp $
+ *   $Id: m_encap.c,v 1.3 2004/05/23 16:33:56 ievil Exp $
  */
+
+#include "m_encap.h"
+#include "common.h"
 #include "m_commands.h"
 #include "client.h"
 #include "ircd.h"
@@ -43,9 +46,10 @@ int ms_encap(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 {
   char buffer[BUFSIZE], *ptr = buffer;
   unsigned int cur_len = 0, len, i;
-/*  int paramcount, mpara = 0;
- */
   struct Message *mptr;
+  acl_encap *aclptr;
+  int acl_action = 0;
+
 
   if (!IsServer(cptr))
     return 0;
@@ -75,23 +79,28 @@ int ms_encap(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
   sendto_match_cap_servs_butone(sptr, cptr, parv[1], CAP_ENCAP, "ENCAP %s",
                                 buffer);
 
+  for (aclptr = encap_acl; TRUE; aclptr++)
+  {
+    if (!aclptr->cmd || (!irccmp(parv[2], aclptr->cmd)))
+      {
+        acl_action = aclptr->acl;
+        break;
+      }
+  }
+  if (acl_action == E_ACCEPT)
+  {
   if (!match(parv[1], me.name))
     return 0;
 
   mptr = tree_parse(parv[2]);
   if ((mptr == NULL) || (mptr->cmd == NULL))
     return 0;
-
   mptr->bytes += strlen(buffer);
-
-  /*
-   * this is a nasty hack, but it is better than re-copying the entire array
-   */
   ptr = parv[0];
   parv+=2;
   parc-=2;
   parv[0] = ptr;
-
   return (*mptr->func)(cptr, sptr, parc, parv);
+  }
+  return 0;
 }
-
