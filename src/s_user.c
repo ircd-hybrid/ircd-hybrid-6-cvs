@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.170 1999/07/22 03:16:36 tomh Exp $
+ *  $Id: s_user.c,v 1.171 1999/07/22 05:56:13 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -2473,6 +2473,9 @@ int     m_whois(aClient *cptr,
                       *buf = '\0';
                       len = 0;
                     }
+		  /*
+		  found_mode = user_channel_mode(acptr, chptr);
+		  if(found_mode &  */
                   if (is_chan_op(acptr, chptr))
                     *(buf + len++) = '@';
                   else if (has_voice(acptr, chptr))
