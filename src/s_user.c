@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.252 2003/05/22 12:27:28 db Exp $
+ *  $Id: s_user.c,v 1.253 2003/06/06 08:49:24 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -2022,12 +2022,8 @@ int user_mode(aClient *cptr, aClient *sptr, int parc, char *parv[])
 
                   fdlist_delete(sptr->fd, FDL_OPER | FDL_BUSY);
                   detach_conf(sptr,sptr->confs->value.aconf);
-                  sptr->flags2 &= ~(FLAGS2_OPER_GLOBAL_KILL|
-                                    FLAGS2_OPER_REMOTE|
-                                    FLAGS2_OPER_UNKLINE|
-                                    FLAGS2_OPER_GLINE|
-                                    FLAGS2_OPER_N|
-                                    FLAGS2_OPER_K);
+                  sptr->flags2 &= ~(FLAGS2_OPER_FLAGS);
+
                   while(cur_cptr)
                     {
                       if(sptr == cur_cptr) 
