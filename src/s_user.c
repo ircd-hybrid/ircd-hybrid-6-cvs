@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.186 1999/07/28 05:04:36 db Exp $
+ *  $Id: s_user.c,v 1.187 1999/07/28 06:20:31 tomh Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -213,55 +213,6 @@ void free_fludees(aClient *);
 **              note:   it is guaranteed that parv[0]..parv[parc-1] are all
 **                      non-NULL pointers.
 */
-
-/*
-** next_client
-**      Local function to find the next matching client. The search
-**      can be continued from the specified client entry. Normal
-**      usage loop is:
-**
-**      for (x = client; x = next_client(x,mask); x = x->next)
-**              HandleMatchingClient;
-**            
-*/
-aClient *next_client(aClient *next,     /* First client to check */
-                     char *ch)          /* search string (may include wilds) */
-{
-  aClient       *tmp = next;
-
-  next = find_client(ch, tmp);
-  if (tmp && tmp->prev == next)
-    return ((aClient *) NULL);
-
-  if (next != tmp)
-    return next;
-  for ( ; next; next = next->next)
-    {
-      if (match(ch,next->name)) break;
-    }
-  return next;
-}
-
-
-/* this slow version needs to be used for hostmasks *sigh * */
-
-aClient *next_client_double(aClient *next,      /* First client to check */
-                            char *ch)   /* search string (may include wilds) */
-{
-  aClient       *tmp = next;
-
-  next = find_client(ch, tmp);
-  if (tmp && tmp->prev == next)
-    return NULL;
-  if (next != tmp)
-    return next;
-  for ( ; next; next = next->next)
-    {
-      if (match(ch,next->name) || match(next->name,ch))
-        break;
-    }
-  return next;
-}
 
 /*
  * clean_nick_name - ensures that the given parameter (nick) is

@@ -1,7 +1,7 @@
 #
 # Makefile.in for ircd/src
 #
-# $Id: Makefile.in,v 1.36 1999/07/28 05:36:10 tomh Exp $
+# $Id: Makefile.in,v 1.37 1999/07/28 06:20:29 tomh Exp $
 #
 CC = @CC@
 RM = @RM@
@@ -38,6 +38,7 @@ SRCS = \
 	m_kline.c \
 	m_pass.c \
 	m_server.c \
+	m_squit.c \
 	m_unkline.c \
 	m_version.c \
 	match.c \
@@ -87,6 +88,7 @@ SRCS = \
 #	m_kline.o \
 #	m_pass.o \
 #	m_server.o \
+#	m_squit.o \
 #	m_unkline.o \
 #	m_version.o \
 #	match.o \
