@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.96 1999/07/21 05:28:46 tomh Exp $
+ * $Id: ircd.c,v 1.97 1999/07/21 23:12:14 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -28,6 +28,8 @@
 #include "class.h"
 #include "s_auth.h"
 #include "channel.h"
+#include "list.h"
+#include "parse.h"
 #include "h.h"
 #include "mtrie_conf.h"
 #include "s_conf.h"
