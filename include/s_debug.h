@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_debug.h,v 1.2 1999/07/21 05:20:52 db Exp $
+ * $Id: s_debug.h,v 1.3 1999/07/23 02:38:30 db Exp $
  *
  * $Log: s_debug.h,v $
+ * Revision 1.3  1999/07/23 02:38:30  db
+ * - more include file fixes
+ *
  * Revision 1.2  1999/07/21 05:20:52  db
  * - you guessed it, more cleanups. removed undefined function that had
  *   a prototype in h.h cool
@@ -39,9 +42,7 @@
 struct Client;
 
 extern void send_usage(struct Client*, char *);
-#ifdef DEBUGMODE
 extern	void	count_memory (struct Client *, char *);
-#endif
 
 extern	void	debug(int, char *, ...);
 

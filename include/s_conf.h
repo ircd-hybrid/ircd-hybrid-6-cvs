@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.32 1999/07/22 03:19:11 tomh Exp $
+ * $Id: s_conf.h,v 1.33 1999/07/23 02:38:30 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.33  1999/07/23 02:38:30  db
+ * - more include file fixes
+ *
  * Revision 1.32  1999/07/22 03:19:11  tomh
  * work on socket code
  *
@@ -336,6 +339,13 @@ typedef struct
   MessageFile opermotd;
 }ConfigFileEntryType;
 
+/* aConfItems */
+/* conf uline link list root */
+extern aConfItem *u_conf;
+/* conf xline link list root */
+extern aConfItem *x_conf;
+/* conf qline link list root */
+extern aConfItem *q_conf;
 
 #endif /* INCLUDED_s_conf_h */
 

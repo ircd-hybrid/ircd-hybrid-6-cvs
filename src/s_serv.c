@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.179 1999/07/22 06:03:36 tomh Exp $
+ *   $Id: s_serv.c,v 1.180 1999/07/23 02:38:32 db Exp $
  */
 
 #define CAPTAB
@@ -63,15 +63,6 @@
 #include <errno.h>
 #include <time.h>
 
-/* external variables */
-
-/* aConfItems */
-/* conf uline link list root */
-extern aConfItem *u_conf;
-/* conf xline link list root */
-extern aConfItem *x_conf;
-/* conf qline link list root */
-extern aConfItem *q_conf;
 
 #ifdef NEED_SPLITCODE
 extern int server_was_split;            /* defined in channel.c */
@@ -91,12 +82,11 @@ extern fdlist serv_fdlist;
 extern int rehashed;            /* defined in ircd.c */
 extern int dline_in_progress;   /* defined in ircd.c */
 
-int     max_connection_count = 1, max_client_count = 1;
+int     max_connection_count = 1;
+int     max_client_count = 1;
 
 extern ConfigFileEntryType ConfigFileEntry; /* defined in ircd.c */
 
-extern void s_die(void);                /* defined in ircd.c as VOIDSIG */
-extern void count_memory(aClient *,char *); /* defined in s_debug.c */
 
 /* Local function prototypes */
 static void show_servers(aClient *);
