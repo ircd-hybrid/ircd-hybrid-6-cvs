@@ -1,3 +1,16 @@
+ievil       2003/06/20 09:49:48 EDT	(20030620_0)
+
+  Modified files:
+    src                  m_whois.c 
+  Log:
+  Forgot to add 1 () in the commit'd version. my test version had it..
+  Source should now be insync ;)
+  
+  Revision  Changes    Path
+  1.14      +1 -1      ircd-hybrid-6/src/m_whois.c
+
+
+
 ievil       2003/06/17 22:29:28 EDT	(20030618_3)
 
   Modified files:
