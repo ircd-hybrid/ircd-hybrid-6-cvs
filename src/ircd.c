@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.134 2000/08/13 00:12:11 lusky Exp $
+ * $Id: ircd.c,v 1.135 2000/11/18 19:11:11 lusky Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -406,7 +406,7 @@ static time_t io_loop(time_t delay)
                   sprintf(to_send, 
                         "Entering high-traffic mode - (%.1fk/s > %dk/s)",
                                 (float)currlife, LRV);
-                  sendto_ops(to_send);
+                  sendto_ops("%s", to_send);
                 }
             }
           else
@@ -420,7 +420,7 @@ static time_t io_loop(time_t delay)
                                 LIFESUX,
                                 (LIFESUX & 0x04) ?  " (TURBO)" : "",
                                 (int)LCF, (float)currlife);
-                  sendto_ops(to_send);
+                  sendto_ops("%s", to_send);
                 }
             }
         }

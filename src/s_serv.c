@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.212 2000/10/17 06:20:51 lusky Exp $
+ *   $Id: s_serv.c,v 1.213 2000/11/18 19:11:14 lusky Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -297,15 +297,15 @@ time_t try_connections(time_t currenttime)
         }
       if (!(con_conf->flags & CONF_FLAGS_ALLOW_AUTO_CONN))
         {
-          sendto_ops("Connection to %s[%s] not activated, autoconn is off.",
+          sendto_realops("Connection to %s[%s] not activated, autoconn is off.",
                      con_conf->name, con_conf->host);
-          sendto_ops("WARNING AUTOCONN on %s[%s] is disabled",
+          sendto_realops("WARNING AUTOCONN on %s[%s] is disabled",
                      con_conf->name, con_conf->host);
         }
       else
         {
           if (connect_server(con_conf, 0, 0))
-            sendto_ops("Connection to %s[%s] activated.",
+            sendto_realops("Connection to %s[%s] activated.",
                        con_conf->name, con_conf->host);
         }
     }
@@ -539,7 +539,7 @@ int server_estab(struct Client *cptr)
     {
       ServerStats->is_ref++;
       sendto_one(cptr, "ERROR :Only N (no C) field for server %s", inpath);
-      sendto_ops("Only N (no C) field for server %s",inpath);
+      sendto_realops("Only N (no C) field for server %s",inpath);
       log(L_NOTICE, "Only N (no C) field for server %s",inpath_ip);
       return exit_client(cptr, cptr, cptr, "No C line for server");
     }
@@ -563,7 +563,7 @@ int server_estab(struct Client *cptr)
       ServerStats->is_ref++;
       sendto_one(cptr, "ERROR :No Access (passwd mismatch) %s",
                  inpath);
-      sendto_ops("Access denied (passwd mismatch) %s", inpath);
+      sendto_realops("Access denied (passwd mismatch) %s", inpath);
       log(L_NOTICE, "Access denied (passwd mismatch) %s", inpath_ip);
       return exit_client(cptr, cptr, cptr, "Bad Password");
     }
@@ -870,7 +870,7 @@ void set_autoconn(struct Client *sptr,char *parv0,char *name,int newval)
       else
         aconf->flags &= ~CONF_FLAGS_ALLOW_AUTO_CONN;
 
-      sendto_ops(
+      sendto_realops(
                  "%s has changed AUTOCONN for %s to %i",
                  parv0, name, newval);
       sendto_one(sptr,

@@ -21,7 +21,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_unkline.c,v 1.38 2000/08/24 06:15:56 lusky Exp $
+ *   $Id: m_unkline.c,v 1.39 2000/11/18 19:11:12 lusky Exp $
  */
 #include "m_commands.h"
 #include "channel.h"
@@ -328,7 +328,7 @@ Then just ignore the line
     }
   sendto_one(sptr, ":%s NOTICE %s :K-Line for [%s@%s] is removed", 
              me.name, parv[0], user,host);
-  sendto_ops("%s has removed the K-Line for: [%s@%s]",
+  sendto_realops("%s has removed the K-Line for: [%s@%s]",
              parv[0], user, host);
 
   log(L_NOTICE, "%s removed K-Line for [%s@%s]", parv[0], user, host);
