@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.23 1999/07/19 04:53:02 db Exp $
+ * $Id: client.h,v 1.24 1999/07/19 07:47:33 db Exp $
  */
 #ifndef	INCLUDED_client_h
 #define INCLUDED_client_h
@@ -315,6 +315,7 @@ struct Client
 #define	FLAGS_WALLOP       0x0100 /* send wallops to them */
 #define FLAGS_OPERWALL     0x0200 /* Operwalls */
 #define	FLAGS_INVISIBLE    0x0400 /* makes user invisible */
+/* 0x2000 and 0x4000 reserved, replicated from flags for umode *sigh* */
 
 /* *sigh* overflow flags */
 #define FLAGS2_RESTRICTED   0x0001      /* restricted client */
