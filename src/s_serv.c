@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.177 1999/07/22 03:26:20 tomh Exp $
+ *   $Id: s_serv.c,v 1.178 1999/07/22 04:17:32 db Exp $
  */
 
 #define CAPTAB
@@ -64,11 +64,6 @@
 #include <time.h>
 
 /* external variables */
-
-/* LINKLIST */
-extern aClient *local_cptr_list;
-extern aClient *oper_cptr_list;
-extern aClient *serv_cptr_list;
 
 /* aConfItems */
 /* conf uline link list root */

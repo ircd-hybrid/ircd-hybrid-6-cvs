@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.65 1999/07/22 03:26:20 tomh Exp $
+ *   $Id: send.c,v 1.66 1999/07/22 04:17:33 db Exp $
  */
 #include "send.h"
 #include "struct.h"
@@ -35,11 +35,6 @@
 #include <string.h>
 #include <stdarg.h>
 #include <time.h>
-
-/* LINKLIST */
-extern aClient *local_cptr_list;
-extern aClient *oper_cptr_list;
-extern aClient *serv_cptr_list;
 
 #define NEWLINE "\r\n"
 

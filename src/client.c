@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.27 1999/07/22 02:06:14 db Exp $
+ *  $Id: client.c,v 1.28 1999/07/22 04:17:31 db Exp $
  */
 #include "client.h"
 #include "s_conf.h"
@@ -57,20 +57,6 @@
  * rather than 30k times -Dianora
  */
 #define CLIENTS_PREALLOCATE 1024
-
-/* LINKLIST */
-extern struct Client* local_cptr_list;
-extern struct Client* oper_cptr_list;
-extern struct Client* serv_cptr_list;
-
-#if 0
-static void exit_one_client(struct Client*, struct Client*, 
-                            struct Client*, char *);
-static void recurse_send_quits(struct Client*, struct Client*, 
-                               struct Client*, char*, char*);
-static void remove_dependents(struct Client*, struct Client*, 
-                              struct Client*, char*, char*);
-#endif
 
 #ifdef NEED_SPLITCODE
 extern int server_was_split;

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.85 1999/07/22 03:26:19 tomh Exp $
+ *  $Id: s_bsd.c,v 1.86 1999/07/22 04:17:32 db Exp $
  */
 #include "s_bsd.h"
 #include "s_serv.h"
@@ -98,9 +98,6 @@ extern fdlist busycli_fdlist;
 extern fdlist default_fdlist;
 
 extern struct sockaddr_in vserv;               /* defined in s_conf.c */
-extern aClient*           serv_cptr_list;      /* defined in ircd.c */
-extern aClient*           local_cptr_list;     /* defined in ircd.c */
-extern aClient*           oper_cptr_list;      /* defined in ircd.c */
 
 const char* const NONB_ERROR_MSG   = "set_non_blocking failed for %s:%s"; 
 const char* const OPT_ERROR_MSG    = "disable_sock_options failed for %s:%s";
