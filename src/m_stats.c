@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_stats.c,v 1.8 2000/11/21 06:49:30 lusky Exp $
+ *  $Id: m_stats.c,v 1.9 2000/12/31 00:12:00 lusky Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "class.h"       /* report_classes */
@@ -447,7 +447,8 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
         sendto_one(sptr, form_str(RPL_STATSUPTIME), me.name, parv[0],
                    now/86400, (now/3600)%24, (now/60)%60, now%60);
         sendto_one(sptr, form_str(RPL_STATSCONN), me.name, parv[0],
-                   MaxConnectionCount, MaxClientCount);
+                   MaxConnectionCount, MaxClientCount,
+                   Count.totalrestartcount);
         valid_stats++;
         break;
       }

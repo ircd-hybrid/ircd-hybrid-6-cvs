@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.128 2000/12/22 01:05:03 lusky Exp $
+ *  $Id: s_bsd.c,v 1.129 2000/12/31 00:12:01 lusky Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -918,7 +918,7 @@ static void error_exit_client(struct Client* cptr, int error)
       
       if (0 == error)
         sendto_ops("Server %s closed the connection",
-                   get_client_name(cptr, FALSE));
+                   get_client_name(cptr, MASK_IP));
       else
         report_error("Lost connection to %s:%s", 
                      get_client_name(cptr, TRUE), current_error);

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.97 2000/11/24 18:24:38 lusky Exp $
+ *   $Id: send.c,v 1.98 2000/12/31 00:12:03 lusky Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -86,9 +86,9 @@ dead_link(aClient *to, char *notice)
   DBufClear(&to->recvQ);
   DBufClear(&to->sendQ);
   if (!IsPerson(to) && !IsUnknown(to) && !(to->flags & FLAGS_CLOSING))
-    sendto_realops(notice, get_client_name(to, FALSE));
+    sendto_realops(notice, get_client_name(to, MASK_IP));
   
-  Debug((DEBUG_ERROR, notice, get_client_name(to, FALSE)));
+  Debug((DEBUG_ERROR, notice, get_client_name(to, MASK_IP)));
 
   return (-1);
 } /* dead_link() */

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.229 2000/12/22 02:28:12 lusky Exp $
+ *  $Id: s_user.c,v 1.230 2000/12/31 00:12:02 lusky Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -387,7 +387,8 @@ int show_lusers(struct Client *cptr, struct Client *sptr,
              Count.total, Count.max_tot);
 
   sendto_one(sptr, form_str(RPL_STATSCONN), me.name, parv[0],
-             MaxConnectionCount, MaxClientCount);
+             MaxConnectionCount, MaxClientCount,
+             Count.totalrestartcount);
   if (m_client > MaxClientCount)
     MaxClientCount = m_client;
   if ((m_client + m_server) > MaxConnectionCount)
@@ -825,6 +826,8 @@ static int register_user(aClient *cptr, aClient *sptr,
       sendto_one(sptr, form_str(RPL_CREATED),me.name,nick,creation);
       sendto_one(sptr, form_str(RPL_MYINFO), me.name, parv[0],
                  me.name, version);
+      /* Increment the total number of clients since (re)start */
+      Count.totalrestartcount++;
       show_lusers(sptr, sptr, 1, parv);
 
 #ifdef SHORT_MOTD

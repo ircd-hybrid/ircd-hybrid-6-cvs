@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.57 2000/12/01 06:28:47 lusky Exp $
+ *  $Id: client.c,v 1.58 2000/12/31 00:11:59 lusky Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -519,7 +519,7 @@ time_t check_pings(time_t currenttime)
                   IsHandshake(cptr))
                 {
                   sendto_ops("No response from %s, closing link",
-                             get_client_name(cptr, FALSE));
+                             get_client_name(cptr, MASK_IP));
                 }
               /*
                * this is used for KILL lines with time restrictions
@@ -1556,11 +1556,11 @@ const char* comment        /* Reason for the exit */
           if (sptr->fd >= 0)
             {
               if (cptr != NULL && sptr != cptr)
-                sendto_one(sptr, "ERROR :Closing Link: %s %s (%s)",
-                           sptr->host, sptr->name, comment);
+                sendto_one(sptr, "ERROR :Closing Link: %s (%s)",
+                           get_client_name(sptr, MASK_IP), comment);
               else
                 sendto_one(sptr, "ERROR :Closing Link: %s (%s)",
-                           sptr->host, comment);
+                           get_client_name(sptr, MASK_IP), comment);
             }
           /*
           ** Currently only server connections can have
