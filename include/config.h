@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.58 1999/07/08 04:15:49 db Exp $
+ * $Id: config.h,v 1.59 1999/07/08 21:31:28 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -956,18 +956,6 @@
  * NOTE: On some systems, valloc() causes many problems.
  */
 #undef  VALLOC                  /* Define this if you have valloc(3) */
- 
-/*
- * If your host supports varargs and has vsprintf(), vprintf() and vscanf()
- * C calls in its library, then you can define USE_VARARGS to use varargs
- * instead of imitation variable arg passing.
-#undef USE_VARARGS
- 
- * NOTE: with current server code, varargs doesn't survive because it can't
- *       be used in a chain of 3 or more funtions which all have a variable
- *       number of params.  If anyone has a solution to this, please notify
- *       the maintainer.
- */
 
 
 /* ------------------------- END CONFIGURATION SECTION -------------------- */

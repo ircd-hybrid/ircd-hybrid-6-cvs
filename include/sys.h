@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: sys.h,v 1.11 1999/07/03 05:06:39 tomh Exp $
+ * $Id: sys.h,v 1.12 1999/07/08 21:31:29 db Exp $
  */
 
 #ifndef	__sys_include__
@@ -140,10 +140,6 @@ typedef	unsigned char	u_char;
 typedef	unsigned short	u_short;
 typedef	unsigned long	u_long;
 typedef	unsigned int	u_int;
-#endif
-
-#ifdef	USE_VARARGS
-#include <varargs.h>
 #endif
 
 #endif /* __sys_include__ */
