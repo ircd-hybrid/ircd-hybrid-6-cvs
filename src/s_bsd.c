@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.101 1999/07/28 05:10:25 tomh Exp $
+ *  $Id: s_bsd.c,v 1.102 1999/07/28 05:36:11 tomh Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -278,6 +278,67 @@ int set_non_blocking(int fd)
     return 0;
 #endif /* !NBLOCK_SYSV */
   return 1;
+}
+
+/*
+ * deliver_it
+ *      Attempt to send a sequence of bytes to the connection.
+ *      Returns
+ *
+ *      < 0     Some fatal error occurred, (but not EWOULDBLOCK).
+ *              This return is a request to close the socket and
+ *              clean up the link.
+ *      
+ *      >= 0    No real error occurred, returns the number of
+ *              bytes actually transferred. EWOULDBLOCK and other
+ *              possibly similar conditions should be mapped to
+ *              zero return. Upper level routine will have to
+ *              decide what to do with those unwritten bytes...
+ *
+ *      *NOTE*  alarm calls have been preserved, so this should
+ *              work equally well whether blocking or non-blocking
+ *              mode is used...
+ */
+int deliver_it(aClient *cptr, char *str, int len)
+{
+  int   retval;
+
+  retval = send(cptr->fd, str, len, 0);
+  /*
+  ** Convert WOULDBLOCK to a return of "0 bytes moved". This
+  ** should occur only if socket was non-blocking. Note, that
+  ** all is Ok, if the 'write' just returns '0' instead of an
+  ** error and errno=EWOULDBLOCK.
+  **
+  */
+  if (retval < 0 && (errno == EWOULDBLOCK || errno == EAGAIN ||
+                     errno == ENOBUFS))
+    {
+      retval = 0;
+      cptr->flags |= FLAGS_BLOCKED;
+      return(retval);  /* Just get out now... */
+    }
+  else if (retval > 0)
+    {
+      cptr->flags &= ~FLAGS_BLOCKED;
+    }
+
+  if (retval > 0)
+    {
+      cptr->sendB += retval;
+      me.sendB += retval;
+      if (cptr->sendB > 1023)
+        {
+          cptr->sendK += (cptr->sendB >> 10);
+          cptr->sendB &= 0x03ff;        /* 2^10 = 1024, 3ff = 1023 */
+        }
+      else if (me.sendB > 1023)
+        {
+          me.sendK += (me.sendB >> 10);
+          me.sendB &= 0x03ff;
+        }
+    }
+  return(retval);
 }
 
 

@@ -1,7 +1,7 @@
 #
 # Makefile.in for ircd/src
 #
-# $Id: Makefile.in,v 1.35 1999/07/26 05:34:42 tomh Exp $
+# $Id: Makefile.in,v 1.36 1999/07/28 05:36:10 tomh Exp $
 #
 CC = @CC@
 RM = @RM@
@@ -19,7 +19,6 @@ CPPFLAGS = ${INCLUDES} @CPPFLAGS@
 
 SRCS = \
 	blalloc.c \
-	bsd.c \
 	channel.c \
 	class.c \
 	client.c \
@@ -69,7 +68,6 @@ SRCS = \
 # 
 #OBJS = \
 #	blalloc.o \
-#	bsd.o \
 #	channel.o \
 #	class.o \
 #	client.o \
