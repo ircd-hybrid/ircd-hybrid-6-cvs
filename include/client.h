@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.37 1999/07/26 05:46:34 tomh Exp $
+ * $Id: client.h,v 1.38 1999/07/28 06:23:11 tomh Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -534,6 +534,9 @@ extern struct Client* find_server_by_name(const char* name);
 extern struct Client* find_person (char *, struct Client *);
 extern struct Client* find_server(const char* name);
 extern struct Client* find_userhost (char *, char *, struct Client *, int *);
+extern struct Client* next_client(struct Client* next, const char* name);
+extern struct Client* next_client_double(struct Client* next, 
+                                         const char* name);
 
 
 #endif /* INCLUDED_client_h */

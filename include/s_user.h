@@ -19,7 +19,7 @@
  *
  * "s_user.h". - Headers file.
  *
- * $Id: s_user.h,v 1.6 1999/07/25 06:59:15 tomh Exp $
+ * $Id: s_user.h,v 1.7 1999/07/28 06:23:12 tomh Exp $
  *
  */
 #ifndef INCLUDED_s_user_h
@@ -32,7 +32,5 @@ extern  void    send_umode (struct Client *, struct Client *,
 extern  void    send_umode_out (struct Client*, struct Client *, int);
 extern  int     m_umode(struct Client *, struct Client *, int, char **);
 extern  int     show_lusers(struct Client *, struct Client *, int, char **);
-extern  struct Client   *next_client (struct Client *, char *);
-extern  struct Client   *next_client_double (struct Client *, char *);
 
 #endif
