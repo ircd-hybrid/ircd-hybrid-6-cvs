@@ -1,3 +1,15 @@
+ievil       2003/10/13 07:21:41 EDT	(20031013_6)
+
+  Modified files:
+    src                  m_whois.c 
+  Log:
+  Enhancements to whois notifications...
+  
+  Revision  Changes    Path
+  1.16      +25 -1     ircd-hybrid-6/src/m_whois.c
+
+
+
 ievil       2003/10/13 07:20:01 EDT	(20031013_5)
 
   Modified files:
