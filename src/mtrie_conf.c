@@ -56,7 +56,7 @@
 #endif
 
 #ifndef lint
-static char *version="$Id: mtrie_conf.c,v 1.12 1998/11/28 03:28:45 db Exp $";
+static char *version="$Id: mtrie_conf.c,v 1.13 1998/12/21 06:57:22 db Exp $";
 #endif /* lint */
 
 #define MAXPREFIX (HOSTLEN+USERLEN+15)
@@ -122,7 +122,7 @@ void add_mtrie_conf_entry(aConfItem *aconf,int flags)
 {
   char tokenized_host[HOSTLEN+1];
 
-  if( (aconf->name[0] == 'x') && aconf->mask && host_is_legal_ip(aconf->mask) )
+  if( (aconf->host[0] == 'x') && aconf->mask && host_is_legal_ip(aconf->mask) )
     {
       add_to_ip_ilines(aconf);
       return;
