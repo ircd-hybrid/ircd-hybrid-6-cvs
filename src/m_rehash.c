@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_rehash.c,v 1.8 2001/06/17 23:51:21 greg Exp $
+ *   $Id: m_rehash.c,v 1.9 2001/12/07 04:51:34 wcampbel Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -197,13 +197,13 @@ int m_rehash(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
           ReadMessageFile( &ConfigFileEntry.helpfile );
           found = YES;
         }
-      else if(irccmp(parv[1],"dump") == 0)
+      else if(irccmp(parv[1],"DUMP") == 0)
         {
           sendto_ops("%s is dumping conf file",parv[0]);
           rehash_dump(sptr);
           found = YES;
         }
-      else if(irccmp(parv[1],"dlines") == 0)
+      else if(irccmp(parv[1],"DLINES") == 0)
         {
           sendto_one(sptr, form_str(RPL_REHASHING), me.name, parv[0],
                      ConfigFileEntry.configfile);
@@ -227,10 +227,10 @@ int m_rehash(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       else
         {
 #ifdef GLINES
-          sendto_one(sptr, ":%s NOTICE %s :Rehash one of: DNS, TKLINES, GLINES, GC, HELP, MOTD, OMOTD, DUMP",
+          sendto_one(sptr, ":%s NOTICE %s :Rehash one of: DNS, TKLINES, GLINES, GC, HELP, MOTD, OMOTD, DUMP, DLINES",
 	                 me.name, sptr->name);
 #else
-          sendto_one(sptr, ":%s NOTICE %s :Rehash one of: DNS, TKLINES, GC, HELP, MOTD, OMOTD, DUMP", 
+          sendto_one(sptr, ":%s NOTICE %s :Rehash one of: DNS, TKLINES, GC, HELP, MOTD, OMOTD, DUMP, DLINES", 
 	                 me.name, sptr->name);
 #endif
           return(0);
