@@ -7,7 +7,7 @@
 #include "fdlist.h"
 
 #ifndef lint
-static char *rcs_version = "$Id: fdlist.c,v 1.1 1999/02/16 06:04:39 db Exp $";
+static char *rcs_version = "$Id: fdlist.c,v 1.2 1999/03/27 18:21:39 db Exp $";
 #endif /* lint */
 
 void addto_fdlist(int fd,fdlist *listp)
@@ -56,7 +56,7 @@ void delfrom_fdlist(int fd,fdlist *listp)
 void init_fdlist(fdlist *listp)
 {
   listp->last_entry=0;
-  bzero((char *)listp->entry,sizeof(listp->entry));
+  memset((void *)listp->entry,0,sizeof(listp->entry));
   return;
 }
   
