@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.31 1999/07/21 02:33:26 db Exp $
+ *   $Id: m_kline.c,v 1.32 1999/07/21 04:23:26 db Exp $
  */
 
 #include "struct.h"
@@ -375,7 +375,6 @@ m_kline(aClient *cptr,
   char temphost[HOSTLEN + 1];
   aConfItem *aconf;
   int temporary_kline_time=0;	/* -Dianora */
-  int wild_user;		/* does user part match everything? */
   time_t temporary_kline_time_seconds=0;
   char *argv;
   unsigned long ip;

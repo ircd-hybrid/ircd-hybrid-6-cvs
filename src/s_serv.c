@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.167 1999/07/21 03:08:20 db Exp $
+ *   $Id: s_serv.c,v 1.168 1999/07/21 04:23:27 db Exp $
  */
 
 #define CAPTAB
@@ -46,6 +46,7 @@
 #include "s_debug.h"
 #include "listener.h"
 #include "restart.h"
+#include "s_user.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -110,8 +111,9 @@ static void show_opers(aClient *);
 static void show_ports(aClient *); 
 static void set_autoconn(aClient *,char *,char *,int);
 static void report_specials(aClient *,int,int);
-extern void report_qlines(aClient *);
+static int m_server_estab(aClient *cptr);
 static int m_set_parser(char *);
+extern void report_qlines(aClient *);
 
 #ifdef PACE_WALLOPS
 time_t last_used_wallops = 0L;
@@ -826,7 +828,7 @@ static void	sendnick_TS( aClient *cptr, aClient *acptr)
     }
 }
 
-int m_server_estab(aClient *cptr)
+static int m_server_estab(aClient *cptr)
 {
   aChannel*   chptr;
   aClient*    acptr;

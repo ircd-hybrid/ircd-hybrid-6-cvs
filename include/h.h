@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.57 1999/07/20 09:11:21 db Exp $
+ * $Id: h.h,v 1.58 1999/07/21 04:23:23 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -143,9 +143,6 @@ extern	struct Client	*next_client (struct Client *, char *);
 extern	struct Client	*next_client_double (struct Client *, char *);
 
 /* s_user.c */
-extern	int	m_umode (struct Client *, struct Client *, int, char **);
-extern	int	m_names (struct Client *, struct Client *, int, char **);
-extern	int	m_server_estab (struct Client *);
 extern	void	send_umode (struct Client *, struct Client *, int, int, char *);
 extern	void	send_umode_out (struct Client*, struct Client *, int);
 

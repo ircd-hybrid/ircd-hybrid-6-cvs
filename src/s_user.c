@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.162 1999/07/21 03:08:20 db Exp $
+ *  $Id: s_user.c,v 1.163 1999/07/21 04:23:27 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -36,6 +36,7 @@
 #include "hash.h"
 #include "whowas.h"
 #include "listener.h"
+#include "s_user.h"
 #ifdef FLUD
 #include "blalloc.h"
 #endif /* FLUD */
