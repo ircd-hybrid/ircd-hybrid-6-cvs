@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_oper.c,v 1.2 1999/07/30 06:40:15 tomh Exp $
+ *   $Id: m_oper.c,v 1.3 1999/07/31 08:22:59 tomh Exp $
  */
 
 #include "m_commands.h"
@@ -30,6 +30,7 @@
 #include "ircd.h"
 #include "numeric.h"
 #include "s_conf.h"
+#include "s_log.h"
 #include "s_user.h"
 #include "send.h"
 #include "struct.h"
@@ -249,15 +250,11 @@ int m_oper(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 
       SendMessageFile(sptr, &ConfigFileEntry.opermotd);
 
-#if !defined(CRYPT_OPER_PASSWORD) && (defined(FNAME_OPERLOG) ||\
-    (defined(USE_SYSLOG) && defined(SYSLOG_OPER)))
+#if !defined(CRYPT_OPER_PASSWORD) && (defined(FNAME_OPERLOG) || defined(SYSLOG_OPER))
         encr = "";
 #endif
-#if defined(USE_SYSLOG) && defined(SYSLOG_OPER)
-        syslog(LOG_INFO, "OPER (%s) (%s) by (%s!%s@%s)",
-               name, encr,
-               parv[0], sptr->username, sptr->host);
-#endif
+        log(L_TRACE, "OPER (%s) (%s) by (%s!%s@%s)",
+            name, encr, parv[0], sptr->username, sptr->host);
 #ifdef FNAME_OPERLOG
         {
           int     logfile;

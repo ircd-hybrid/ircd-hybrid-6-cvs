@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.41 1999/07/31 04:13:54 tomh Exp $
+ *   $Id: s_debug.c,v 1.42 1999/07/31 08:23:02 tomh Exp $
  */
 #include "s_debug.h"
 #include "channel.h"
@@ -30,6 +30,7 @@
 #include "numeric.h"
 #include "res.h"
 #include "s_conf.h"
+#include "s_log.h"
 #include "scache.h"
 #include "send.h"
 #include "struct.h"
@@ -135,25 +136,17 @@ void debug(int level, char *format, ...)
   va_list args;
   int err = errno;
 
-  va_start(args, format);
+  if ((debuglevel >= 0) && (level <= debuglevel)) {
+    va_start(args, format);
 
-  vsprintf(debugbuf, format, args);
+    vsprintf(debugbuf, format, args);
+    va_end(args);
 
-#ifdef USE_SYSLOG
-  if (level == DEBUG_ERROR)
-    syslog(LOG_ERR, debugbuf);
-#endif
-
-  if ((debuglevel >= 0) && (level <= debuglevel))
-  {
-    fprintf(stderr, "%s", debugbuf);
-    fputc('\n', stderr);
+    log(L_DEBUG, debugbuf);
   }
-
-  va_end(args);
-
   errno = err;
 } /* debug() */
+
 /*
  * This is part of the STATS replies. There is no offical numeric for this
  * since this isnt an official command, in much the same way as HASH isnt.

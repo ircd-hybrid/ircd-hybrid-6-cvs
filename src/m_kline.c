@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.47 1999/07/30 22:28:49 wnder Exp $
+ *   $Id: m_kline.c,v 1.48 1999/07/31 08:22:59 tomh Exp $
  */
 #include "m_kline.h"
 #include "channel.h"
@@ -32,6 +32,7 @@
 #include "mtrie_conf.h"
 #include "numeric.h"
 #include "s_conf.h"
+#include "s_log.h"
 #include "s_misc.h"
 #include "send.h"
 #include "struct.h"
@@ -67,9 +68,10 @@ static void DelPending(aPendingLine *);
 static int LockedFile(const char *);
 static void WritePendingLines(const char *);
 static void WriteKline(const char *, aClient *, aClient *,
-                       char *, char *, char *, char *);
+                       const char *, const char *, const char *, 
+                       const char *);
 static void WriteDline(const char *, aClient *,
-                       char *, char *, char *);
+                       const char *, const char *, const char *);
 
 /*
 AddPending()
@@ -227,7 +229,8 @@ WriteKline()
 
 static void
 WriteKline(const char *filename, aClient *sptr, aClient *rcptr,
-           char *user, char *host, char *reason, char *when)
+           const char *user, const char *host, const char *reason, 
+           const char *when)
 
 {
   char buffer[1024];
@@ -297,7 +300,7 @@ WriteDline()
 
 static void
 WriteDline(const char *filename, aClient *sptr,
-           char *host, char *reason, char *when)
+           const char *host, const char *reason, const char *when)
 
 {
   char buffer[1024];
@@ -360,7 +363,7 @@ m_kline(aClient *cptr,
   char cidr_form_host[HOSTLEN + 1];
   char *user, *host;
   char *reason = NULL;
-  char *current_date;
+  const char* current_date;
   int  ip_kline = NO;
   aClient *acptr;
   char tempuser[USERLEN + 2];
@@ -738,16 +741,8 @@ m_kline(aClient *cptr,
     host,
     reason ? reason : "No reason");
 
-#ifdef USE_SYSLOG
-
-  syslog(LOG_NOTICE,
-    "%s added K-Line for [%s@%s] [%s]",
-    sptr->name,
-    user,
-    host,
-    reason ? reason : "No reason");
-
-#endif /* USE_SYSLOG */
+  log(L_TRACE, "%s added K-Line for [%s@%s] [%s]",
+      sptr->name, user, host, reason ? reason : "No reason");
 
   kconf = get_conf_name(KLINE_TYPE);
 
@@ -998,7 +993,7 @@ m_dline(aClient *cptr, aClient *sptr, int parc, char *parv[])
   unsigned long ip_mask;
   aConfItem *aconf;
   char buffer[1024];
-  char *current_date;
+  const char* current_date;
   const char *dconf;
 
   if (!MyClient(sptr) || !IsAnOper(sptr))
@@ -1184,15 +1179,8 @@ m_dline(aClient *cptr, aClient *sptr, int parc, char *parv[])
                 host,
                 reason);
 
-#ifdef USE_SYSLOG
-
-        syslog(LOG_NOTICE,
-                "%s added D-Line for [%s] [%s]",
-                sptr->name,
-                host,
-                reason);
-
-#endif /* USE_SYSLOG */
+        log(L_TRACE, "%s added D-Line for [%s] [%s]", 
+            sptr->name, host, reason);
 
         dconf = get_conf_name(DLINE_TYPE);
 

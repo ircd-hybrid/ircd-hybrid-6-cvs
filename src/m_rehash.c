@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_rehash.c,v 1.1 1999/07/30 06:40:15 tomh Exp $
+ *   $Id: m_rehash.c,v 1.2 1999/07/31 08:22:59 tomh Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -32,8 +32,8 @@
 #include "numeric.h"
 #include "res.h"
 #include "s_conf.h"
+#include "s_log.h"
 #include "send.h"
-#include "struct.h" /* XXXXX - bleah syslog */
 
 /*
  * m_functions execute protocol messages on this server:
@@ -200,19 +200,14 @@ int m_rehash(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
           sendto_ops("%s is rehashing dlines from server config file",
 #endif
                      parv[0]);
-#ifdef USE_SYSLOG
-          syslog(LOG_NOTICE, "REHASH From %s\n", get_client_name(sptr, FALSE));
-#endif
+          log(L_NOTICE, "REHASH From %s\n", get_client_name(sptr, SHOW_IP));
           dline_in_progress = 1;
           return rehash(cptr, sptr, 0);
         }
       if(found)
         {
-#ifdef USE_SYSLOG
-          syslog(LOG_NOTICE, "REHASH %s From %s\n",
-                 parv[1],
-                 get_client_name(sptr, FALSE));
-#endif
+          log(L_NOTICE, "REHASH %s From %s\n", parv[1], 
+              get_client_name(sptr, SHOW_IP));
           return 0;
         }
       else
@@ -238,9 +233,7 @@ int m_rehash(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       sendto_ops("%s is rehashing server config file",
 #endif
                  parv[0]);
-#ifdef USE_SYSLOG
-      syslog(LOG_NOTICE, "REHASH From %s\n", get_client_name(sptr, FALSE));
-#endif
+      log(L_NOTICE, "REHASH From %s\n", get_client_name(sptr, SHOW_IP));
       return rehash(cptr, sptr, 0);
     }
   return 0; /* shouldn't ever get here */

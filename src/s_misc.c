@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.66 1999/07/30 20:10:54 tomh Exp $
+ *  $Id: s_misc.c,v 1.67 1999/07/31 08:23:03 tomh Exp $
  */
 #include "s_misc.h"
 #include "common.h"
@@ -88,7 +88,7 @@ char* date(time_t clock)
   return buf;
 }
 
-char *smalldate(time_t clock)
+const char* smalldate(time_t clock)
 {
   static  char    buf[MAX_DATE_STRING];
   struct  tm *lt, *gm;

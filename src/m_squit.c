@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_squit.c,v 1.2 1999/07/28 07:49:37 tomh Exp $
+ *   $Id: m_squit.c,v 1.3 1999/07/31 08:23:00 tomh Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -29,6 +29,7 @@
 #include "ircd.h"
 #include "numeric.h"
 #include "s_conf.h"
+#include "s_log.h"
 #include "s_serv.h"
 #include "send.h"
 
@@ -223,10 +224,7 @@ int m_squit(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       sendto_ops_butone(NULL, &me,
                         ":%s WALLOPS :Received SQUIT %s from %s (%s)",
                         me.name, server, get_client_name(sptr,FALSE), comment);
-#if defined(USE_SYSLOG) && defined(SYSLOG_SQUIT)
-      syslog(LOG_DEBUG,"SQUIT From %s : %s (%s)",
-             parv[0], server, comment);
-#endif
+      log(L_TRACE, "SQUIT From %s : %s (%s)", parv[0], server, comment);
     }
   else if (MyConnect(acptr))
     sendto_ops("Received SQUIT %s from %s (%s)",

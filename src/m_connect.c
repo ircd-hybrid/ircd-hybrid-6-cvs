@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_connect.c,v 1.3 1999/07/28 07:49:35 tomh Exp $
+ *   $Id: m_connect.c,v 1.4 1999/07/31 08:22:58 tomh Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -30,6 +30,7 @@
 #include "numeric.h"
 #include "s_bsd.h"
 #include "s_conf.h"
+#include "s_log.h"
 #include "s_serv.h"
 #include "send.h"
 
@@ -192,10 +193,8 @@ int m_connect(struct Client* cptr, struct Client* sptr, int parc, char* parv[])
                         me.name, parv[1], parv[2] ? parv[2] : "",
                         get_client_name(sptr, FALSE));
 
-#if defined(USE_SYSLOG) && defined(SYSLOG_CONNECT)
-      syslog(LOG_DEBUG, "CONNECT From %s : %s %s", 
-             parv[0], parv[1], parv[2] ? parv[2] : "");
-#endif
+      log(L_TRACE, "CONNECT From %s : %s %s", 
+          parv[0], parv[1], parv[2] ? parv[2] : "");
     }
 
   aconf->port = port;

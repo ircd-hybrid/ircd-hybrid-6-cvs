@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_restart.c,v 1.1 1999/07/30 06:40:15 tomh Exp $
+ *   $Id: m_restart.c,v 1.2 1999/07/31 08:22:59 tomh Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -29,8 +29,8 @@
 #include "ircd.h"
 #include "numeric.h"
 #include "restart.h"
+#include "s_log.h"
 #include "send.h"
-#include "struct.h" /* XXX - syslog */
 
 /*
  * m_functions execute protocol messages on this server:
@@ -111,11 +111,8 @@ int     m_restart(struct Client *cptr,
       return 0;
     }
 
-#ifdef USE_SYSLOG
-  syslog(LOG_WARNING, "Server RESTART by %s\n",
-         get_client_name(sptr,FALSE));
-#endif
-  ircsprintf(buf, "Server RESTART by %s", get_client_name(sptr, TRUE));
+  log(L_WARN, "Server RESTART by %s\n", get_client_name(sptr, SHOW_IP));
+  ircsprintf(buf, "Server RESTART by %s", get_client_name(sptr, SHOW_IP));
   restart(buf);
   return 0; /*NOT REACHED*/
 }
