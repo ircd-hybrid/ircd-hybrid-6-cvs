@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: msg.h,v 1.11 1999/07/25 05:42:02 tomh Exp $
+ * $Id: msg.h,v 1.12 1999/07/30 03:25:47 db Exp $
  */
 #ifndef INCLUDED_msg_h
 #define INCLUDED_msg_h
@@ -206,7 +206,6 @@ struct Message msgtab[] = {
    */
   { MSG_ISON,    m_ison,     0, 1,       1, 0, 1, 0L },
 #endif /* !IDLE_FROM_MSG */
-  { MSG_USRIP,   m_usrip,    0, 1,       1, 0, 0, 0L },
   { MSG_SERVER,  m_server,   0, MAXPARA, 1, 1, 0, 0L },
   { MSG_SQUIT,   m_squit,    0, MAXPARA, 1, 0, 0, 0L },
   { MSG_WHOIS,   m_whois,    0, MAXPARA, 1, 0, 0, 0L },
