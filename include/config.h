@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.5 1998/10/09 22:36:18 db Exp $
+ * $Id: config.h,v 1.6 1998/10/12 06:18:12 db Exp $
  */
 
 #ifndef	__config_include__
@@ -987,6 +987,12 @@
  * debugging ircd. -Dianora
  */
 #undef DEBUG_NO_FORK
+
+/*
+ * viconf option, if USE_RCS is defined, viconf will use rcs "ci"
+ * to keep the conf file  under RCS control.
+ */
+#define USE_RCS
 
 /* ----------------- not approved on EFnet section -------------------- */
 /* GLINES - global Kline-like bans
