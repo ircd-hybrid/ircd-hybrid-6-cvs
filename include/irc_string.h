@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: irc_string.h,v 1.7 1999/07/22 07:58:16 tomh Exp $
+ *   $Id: irc_string.h,v 1.8 1999/07/25 01:44:53 db Exp $
  */
 #ifndef INCLUDED_irc_string_h
 #define INCLUDED_irc_string_h
@@ -98,6 +98,7 @@ extern const unsigned int CharAttrs[];
 #define CHANPFX_C 0x200
 #define USER_C    0x400
 #define HOST_C    0x800
+#define NONSPACE_C 0x1000
 
 #define IsHostChar(c)   (CharAttrs[(unsigned char)(c)] & HOST_C)
 #define IsUserChar(c)   (CharAttrs[(unsigned char)(c)] & USER_C)
@@ -120,5 +121,6 @@ extern const unsigned int CharAttrs[];
 #define IsPunct(c) (!(CharAttrs[(unsigned char)(c)] & \
                                            (CNTRL_C | ALPHA_C | DIGIT_C)))
 
+#define IsNonSpace(c) (CharAttrs[(unsigned char)(c)] & NONSPACE_C)
 
 #endif /* INCLUDED_irc_string_h */

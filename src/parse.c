@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.27 1999/07/24 07:58:59 tomh Exp $
+ *   $Id: parse.c,v 1.28 1999/07/25 01:44:56 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -199,13 +199,17 @@ int parse(aClient *cptr, char *buffer, char *bufend)
   para[0] = from->name;
   if (*ch == ':')
     {
+      ch++;
+
       /*
       ** Copy the prefix to 'sender' assuming it terminates
       ** with SPACE (or NULL, which is an error, though).
       */
-      for (++ch, i = 0; *ch && *ch != ' '; ++ch )
-        if (s < (sender + sizeof(sender)-1))
-          *s++ = *ch; /* leave room for NULL */
+      for (i = 0; *ch && *ch != ' '; i++ )
+	{
+	  if (i < (sizeof(sender)-1))
+	    *s++ = *ch++; /* leave room for NULL */
+	}
       *s = '\0';
 
       /*
