@@ -1,3 +1,15 @@
+ievil       2003/06/06 04:59:47 EDT	(20030606_4)
+
+  Modified files:
+    src                  channel.c 
+  Log:
+  stats q output now diffrentiates on "oper juped" and "conf juped".
+  
+  Revision  Changes    Path
+  1.237     +12 -2     ircd-hybrid-6/src/channel.c
+
+
+
 ievil       2003/06/06 04:56:37 EDT	(20030606_3)
 
   Modified files:
