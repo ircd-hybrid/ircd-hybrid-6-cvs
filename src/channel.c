@@ -34,7 +34,7 @@
  *                mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.153 1999/07/26 19:10:09 sean Exp $
+ * $Id: channel.c,v 1.154 1999/07/27 11:33:32 db Exp $
  */
 #include "channel.h"
 #include "struct.h"
@@ -421,6 +421,11 @@ static  int     del_banid(aChannel *chptr, char *banid)
           MyFree(tmp->value.cp);
 #endif
           free_link(tmp);
+	  /* num_bed should never be < 0 */
+	  if(chptr->num_bed > 0)
+	    chptr->num_bed--;
+	  else
+	    chptr->num_bed = 0;
           break;
         }
   return 0;
@@ -451,6 +456,11 @@ static  int     del_exceptid(aChannel *chptr, char *eid)
         MyFree(tmp->value.cp);
 #endif
         free_link(tmp);
+	/* num_bed should never be < 0 */
+	if(chptr->num_bed > 0)
+	  chptr->num_bed--;
+	else
+	  chptr->num_bed = 0;
         break;
       }
   return 0;
@@ -487,6 +497,12 @@ static  int     del_denyid(aChannel *chptr, char *banid)
           MyFree(tmp->value.cp);
 #endif
           free_link(tmp);
+
+	  /* num_bed should never be < 0 */
+	  if(chptr->num_bed > 0)
+	    chptr->num_bed--;
+	  else
+	    chptr->num_bed = 0;
           break;
         }
   return 0;
