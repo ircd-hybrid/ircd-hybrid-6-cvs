@@ -1,3 +1,15 @@
+db          2003/05/15 00:12:55 EDT	(20030515_0)
+
+  Modified files:
+    .                    Makefile.in 
+  Log:
+  - Makefile cleanups submitted by Hwy
+  
+  Revision  Changes    Path
+  1.23      +3 -44     ircd-hybrid-6/Makefile.in
+
+
+
 db          2003/05/08 22:20:57 EDT	(20030509_0)
 
   Modified files:
