@@ -1,14 +1,13 @@
 /*
  * m_info.c 
  *
- * $Id: m_info.c,v 1.31 1999/07/24 07:58:58 tomh Exp $
+ * $Id: m_info.c,v 1.32 1999/07/25 05:32:58 tomh Exp $
  */
 #define DEFINE_M_INFO_DATA
 #include "m_info.h"
 #include "struct.h"
 #include "common.h"
 #include "numeric.h"
-#include "msg.h"
 #include "channel.h"
 #include "send.h"
 #include "ircd.h"

@@ -20,14 +20,13 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.31 1999/07/24 07:58:58 tomh Exp $
+ *  $Id: m_gline.c,v 1.32 1999/07/25 05:32:57 tomh Exp $
  */
 
 #include "config.h"
 #include "struct.h"
 #include "common.h"
 #include "numeric.h"
-#include "msg.h"
 #include "channel.h"
 #include "s_conf.h"
 #include "s_misc.h"

@@ -21,13 +21,12 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: m_unkline.c,v 1.29 1999/07/24 06:28:09 tomh Exp $
+ *   $Id: m_unkline.c,v 1.30 1999/07/25 05:32:58 tomh Exp $
  */
 #include "struct.h"
 
 #include "common.h"
 #include "numeric.h"
-#include "msg.h"
 #include "channel.h"
 #include "s_conf.h"
 #include "send.h"

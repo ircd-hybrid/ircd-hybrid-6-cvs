@@ -17,28 +17,28 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.95 1999/07/24 07:59:00 tomh Exp $
+ *  $Id: s_bsd.c,v 1.96 1999/07/25 05:32:59 tomh Exp $
  */
 #include "s_bsd.h"
-#include "s_serv.h"
-#include "listener.h"
-#include "config.h"
-#include "struct.h"
-#include "common.h"
-#include "res.h"
-#include "s_conf.h"
-#include "s_auth.h"
 #include "class.h"
+#include "common.h"
+#include "config.h"
+#include "fdlist.h"
+#include "ircd.h"
+#include "list.h"
+#include "listener.h"
 #include "numeric.h"
 #include "packet.h"
 #include "parse.h"
-#include "fdlist.h"
-#include "send.h"
+#include "res.h"
 #include "restart.h"
-#include "s_zip.h"
-#include "ircd.h"
+#include "s_auth.h"
+#include "s_conf.h"
 #include "s_misc.h"
-#include "list.h"
+#include "s_serv.h"
+#include "s_zip.h"
+#include "send.h"
+#include "struct.h"
 
 #include <assert.h>
 #include <stdio.h>
