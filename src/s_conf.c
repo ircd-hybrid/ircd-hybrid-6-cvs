@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.66 1999/06/23 02:07:25 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.67 1999/06/23 02:11:25 db Exp $";
 #endif
 
 #include "struct.h"
@@ -934,7 +934,7 @@ aConfItem *attach_confs(aClient *cptr,char *name,int statmask)
 	}
       else if ((tmp->status & statmask) && !IsIllegal(tmp) &&
 	       (tmp->status & (CONF_SERVER_MASK|CONF_HUB)) &&
-	       tmp->name && !match(tmp->name, name))
+	       tmp->name && !irccmp(tmp->name, name))
 	{
 	  if (!attach_conf(cptr, tmp) && !first)
 	    first = tmp;
