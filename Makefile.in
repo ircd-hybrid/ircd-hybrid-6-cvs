@@ -16,13 +16,15 @@
 #*   along with this program; if not, write to the Free Software
 #*   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #*
-#*   $Id: Makefile.in,v 1.22 2001/12/07 04:13:18 jdc Exp $
+#*   $Id: Makefile.in,v 1.23 2003/05/15 04:12:54 db Exp $
 #*/
 
 RM=@RM@
 
 # Default CFLAGS
-CFLAGS = -g -O2 -DNDEBUG
+CFLAGS = @CFLAGS@ -DNDEBUG
+
+LDFLAGS = @LDFLAGS@
 
 # Default make flags - you may want to uncomment this on a multicpu machine
 #MFLAGS = -j 4
@@ -34,49 +36,6 @@ CFLAGS = -g -O2 -DNDEBUG
 # You may need to define the FD_SETSIZE in order to overrule
 # the system one.
 #CFLAGS= -DNDEBUG -g -O2 -D"FD_SETSIZE=1024"
-#
-# NOTE: The rest of these definitions may or may not work, I haven't tested them --JRL
-#
-# use the following on MIPS:
-#CFLAGS= -DNDEBUG -systype bsd43 -DSYSTYPE_BSD43
-# For Irix 4.x (SGI), use the following:
-#CFLAGS= -DNDEBUG -g -cckr
-#
-# on NEXT use:
-#CFLAGS= -DNDEBUG -bsd
-#on NeXT other than 2.0:
-#IRCDLIBS= -lsys_s
-#
-# AIX 370 flags
-#CFLAGS= -DNDEBUG -D_BSD -Hxa
-#IRCDLIBS= -lbsd
-#
-# Dynix/ptx V2.0.x
-#CFLAGS= -DNDEBUG  -O -Xo
-#IRCDLIBS= -lsocket -linet -lnsl -lseq
-# 
-# Dynix/ptx V1.x.x
-#IRCDLIBS= -lsocket -linet -lnsl -lseq
-#
-#use the following on SUN OS without nameserver libraries inside libc
-#IRCDLIBS=-lresolv
-#
-# ESIX
-#CFLAGS= -DNDEBUG -O -I/usr/ucbinclude
-#IRCDLIBS=-L/usr/ucblib -L/usr/lib -lsocket -lucb -lns -lnsl
-#
-# LDFLAGS - flags to send the loader (ld). SunOS users may want to add
-# -Bstatic here.
-#
-#LDFLAGS=-Bstatic
-#
-#Dell SVR4
-#CC=gcc
-#CFLAGS= -DNDEBUG -O2
-#IRCDLIBS=-lsocket -lnsl -lucb
-#IRCLIBS=-lcurses -lresolv -lsocket -lnsl -lucb
-
-
 
 SHELL=/bin/sh
 SUBDIRS=adns src tools
