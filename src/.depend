@@ -212,7 +212,7 @@ m_operspylog.o: m_operspylog.c ../include/m_operspylog.h \
   ../include/m_commands.h ../include/config.h ../include/setup.h \
   ../include/client.h ../include/ircd_defs.h ../include/dbuf.h \
   ../include/ircd.h ../include/s_serv.h ../include/irc_string.h \
-  ../include/fileio.h ../include/s_misc.h
+  ../include/fileio.h ../include/s_misc.h ../include/send.h
 m_operwall.o: m_operwall.c ../include/m_commands.h ../include/config.h \
   ../include/setup.h ../include/client.h ../include/ircd_defs.h \
   ../include/dbuf.h ../include/ircd.h ../include/irc_string.h \

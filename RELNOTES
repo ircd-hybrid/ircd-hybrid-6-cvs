@@ -1,4 +1,4 @@
-$Id: RELNOTES,v 1.17 2003/06/17 22:45:29 ievil Exp $
+$Id: RELNOTES,v 1.18 2003/06/24 04:09:41 ievil Exp $
 
 This is the current release version of ircd-hybrid-6.
 
@@ -15,6 +15,69 @@ DISCUSSION: There is a mailing list for discussion of hybrid issues,
  done than ranting on #TZ.
 
 Questions/comments directed to ircd-hybrid@the-project.org
+
+ircd-hybrid-6.4 Release Notes
+----------------------------
+There have been a number of changes done since 6.3. Please review
+this before upgrading your production server.
+
+o Added CAP ENCAP - Command encapsulation.
+o Added CAP KLN   - Remote Kline
+o Added CAP UNKLN - Remote unkline
+o Added a simplistic configuration for a server in doc/ircd.conf/
+o Added the concept of server admins to ircd-hybrid-6, oper flag A
+  and umode +a. Added HIDDEN_ADMIN to remove the 308 reply on whois etc.
+o Added new oper flag P to allow tcm bots to hide from stats p. Modified
+  the behavior so that server admins can see if opers with the P flags
+  abuses it. Also adds umode +p for opers
+o Added SIGUSR1 handling to reload motd from cmd line
+o RESTRICT_LOCOP restricts local operators access to information like
+  OPERWALL/WALLOPS
+o SHOW_REMOTE_WHOIS added to allow showing remote whois notice to opers
+o OPER_JUPE_BYPASS was added to allow opers joining through quarantined
+  or temporary juped channels.
+o SPOOF_IP was added to allow spoofed i-lines to spoof ip addresses
+o GLINE_REASON_FIRST was added to mimic hyb7's way of handling triggering
+  gline reason.
+o OPERSPYLOG and OPERSPY gives EFnets voted loging and operspy abilities
+  and adds umode +Z and oper flags +Z and +S
+  /whois !nick   - show all channels a user is in
+  /who   !#chan  - show who's in a channel
+  /mode  !#chan  - shows channel modes
+o Fixed configuration issue that blocked the usage of idented and non
+  idented i-lines i.e:
+  I:NOMATCH::+*@*::104
+  I:NOMATCH::~*@*::102
+o Fixed a potential core regarding flags.
+o Fixed stats q/Q output to show oper juped when temp juped by opers with
+  mode #channel +j or conf juped if it's a permanent channel jupe.
+o Fixed TESTLINE output to be more sane.
+o Fixed FLAGS2_OPER_FLAGS usage. It was defined but never used.
+o Fixed logging code when fake servers tried to link in.
+o Fixed several issues in adns. Including, but not limited to: adns
+  fixes backported from hyb7 to prevent core, detects and loads
+  ranlib for adns, fixed a potential NULL derefrence.
+o Fixed sprintf_irc to return 0 for 0 not 000000000
+o Fixed undline core bug.
+o Fixed LTRACE ip leakage and added a notice to the umode +y when
+  LTRACE command is done from remote server.
+o Fixed an issue with kline and shared servers.
+o Fixed an issue where some compilers might complain about log()
+o Split m_unkline into 3 files m_unkline/_undline/_ungline.
+o Updated the Quit message to reflect hybrid-7's Quit: infront of
+  the reason. No more fake netsplits.
+o Updated refrence to aix systems as ircd-hybrid-6 actually does
+  compile on AIX 5.2 with gcc installed
+o Updated changed refrenced to Darwin
+o Updated viconf/mkpasswd/vi* files in tools dir
+o Updated KNOCK default behaviour and added CAP KNOCK.
+o Updated zlib errors to return error strings
+o Updated Makefile
+o Updated mtrie_conf.c to prevent duplicate K-lines and I-lines from
+  being included in the unsortable I-line list, unsortable K-line list,
+  and the wildcard I-line lits.
+o Removed LOCAL_NICK_COLLIDE
+o Removed struct User->id.
 
 
 ircd-hybrid-6.3.1 Release Notes
