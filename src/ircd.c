@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.151 2001/12/07 03:22:19 jdc Exp $
+ * $Id: ircd.c,v 1.152 2001/12/07 04:01:55 jdc Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -786,7 +786,6 @@ int main(int argc, char *argv[])
   myargv = argv;
   umask(077);                /* better safe than sorry --SRB */
 
-  setuid(uid);
   parse_command_line(argc, argv); 
 
   if (chdir(ConfigFileEntry.dpath))
