@@ -27,7 +27,7 @@
 
 #ifndef lint
 static  char sccsid[] = "@(#)s_err.c	1.11 5/17/93 (C) 1992 Darren Reed";
-static char *rcs_version = "$Id: s_err.c,v 1.21 1999/06/22 01:01:45 db Exp $";
+static char *rcs_version = "$Id: s_err.c,v 1.22 1999/06/26 16:18:20 db Exp $";
 #endif
 
 static	char	numbuff[512];
@@ -287,12 +287,8 @@ static	char *	replies[] = {
 
 /* 248 RPL_STATSULINE, */	":%s 248 %s %s %s",
 /* 249 */	(char *)NULL,
-#ifdef HIGHEST_CONNECTION
 /* 250 RPL_STATSCONN, */
                     ":%s 250 %s :Highest connection count: %d (%d clients)",
-#else
-/* 250 */	(char *)NULL,
-#endif
 /* 251 RPL_LUSERCLIENT, */
 		":%s 251 %s :There are %d users and %d invisible on %d servers",
 /* 252 RPL_LUSEROP, */		":%s 252 %s %d :IRC Operators online",

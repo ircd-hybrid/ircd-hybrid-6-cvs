@@ -16,14 +16,10 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: numeric.h,v 1.10 1999/06/11 03:34:34 lusky Exp $
+ * $Id: numeric.h,v 1.11 1999/06/26 16:18:18 db Exp $
  */
 #ifdef TOPIC_INFO
 # define RPL_TOPICWHOTIME 333
-#endif
-
-#ifdef HIGHEST_CONNECTION
-# define RPL_STATSCONN 250
 #endif
 
 /*
@@ -173,7 +169,7 @@
 #define RPL_STATSXLINE	     247
 #define	RPL_STATSULINE       248
 #define	RPL_STATSDEBUG	     249
-
+#define RPL_STATSCONN        250
 #define	RPL_LUSERCLIENT      251
 #define RPL_LUSEROP          252
 #define	RPL_LUSERUNKNOWN     253

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: s_err.h,v 1.22 1999/06/22 01:01:38 db Exp $
+ * $Id: s_err.h,v 1.23 1999/06/26 16:18:18 db Exp $
  *
  */
 
@@ -275,12 +275,8 @@ static	char *	replies[] = {
 
 /* 248 RPL_STATSULINE, */	":%s 248 %s %s %s",
 /* 249 */	(char *)NULL,
-#ifdef HIGHEST_CONNECTION
 /* 250 RPL_STATSCONN, */
                     ":%s 250 %s :Highest connection count: %d (%d clients)",
-#else
-/* 250 */	(char *)NULL,
-#endif
 /* 251 RPL_LUSERCLIENT, */
 		":%s 251 %s :There are %d users and %d invisible on %d servers",
 /* 252 RPL_LUSEROP, */		":%s 252 %s %d :Smurf Targets (IRC Operators) online",
