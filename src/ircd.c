@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.19 1998/12/10 00:55:21 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.20 1998/12/10 02:13:44 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1019,8 +1019,22 @@ normal user.\n");
       (void)fprintf(stderr,"WARNING: running ircd with uid = %d\n",
 		    IRC_UID);
       (void)fprintf(stderr,"         changing to gid %d.\n",IRC_GID);
-      (void)setuid(IRC_UID);
-      (void)setgid(IRC_GID);
+
+      /* setgid/setuid changes suggested by ficus@neptho.net
+       */
+
+      if(setgid(IRC_GID) < 0)
+	{
+	  (void)fprintf(stderr,"ERROR: can't setgid(%d)\n", IRC_GID);
+	  exit(-1);
+	}
+
+      if(setuid(IRC_UID) < 0)
+	{
+	  (void)fprintf(stderr,"ERROR: can't setuid(%d)\n", IRC_UID);
+	  exit(-1);
+	}
+
 #else
 #  ifndef __EMX__
       /* check for setuid root as usual */
