@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.119 1999/09/08 06:00:33 lusky Exp $
+ *  $Id: s_bsd.c,v 1.120 1999/09/11 03:04:35 lusky Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -64,7 +64,7 @@
  * Stuff for poll()
  */
 #ifdef USE_POLL
-#include <poll.h>
+#include <sys/poll.h>
 #endif
 
 #ifndef IN_LOOPBACKNET
