@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: sys.h,v 1.2 1998/10/06 04:42:21 db Exp $
+ * $Id: sys.h,v 1.3 1998/10/18 00:14:02 lusky Exp $
  */
 
 #ifndef	__sys_include__
@@ -86,6 +86,12 @@ extern	VOIDSIG	dummy();
 #ifdef	DYNIXPTX
 #define	NO_U_TYPES
 #endif
+
+#ifdef	OS_SOLARIS2
+extern	int	gethostname(char *, int);
+extern	long	random();
+extern	int	srandom(unsigned int);
+#endif /* OS_SOLARIS2 */
 
 #ifdef	NO_U_TYPES
 typedef	unsigned char	u_char;

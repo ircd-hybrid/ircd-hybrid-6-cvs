@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.10 1998/10/17 21:06:58 lusky Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.11 1998/10/18 00:14:04 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -2153,7 +2153,7 @@ int	read_message(time_t delay)
   u_long	usec = 0;
   int		res, length, fd, newfd;
   int		auth, rr, rw;
-  register	int i,j;
+  register	int i;
   static aClient	*authclnts[MAXCONNECTIONS];
   char		errmsg[255];
   

@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.17 1998/10/17 21:07:01 lusky Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.18 1998/10/18 00:14:05 lusky Exp $";
 #endif
 
 
@@ -39,7 +39,8 @@ static char *rcs_version = "$Id: s_serv.c,v 1.17 1998/10/17 21:07:01 lusky Exp $
 #include "numeric.h"
 #include "msg.h"
 #include "channel.h"
-#include "nameser.h"
+#include <utmp.h> /* old slackware utmp.h defines BYTE_ORDER */
+#include "nameser.h" /* and nameser.h checks to see if its defined */
 #include "resolv.h"
 
 #if defined(AIX) || defined(DYNIXPTX) || defined(SVR3)
@@ -47,7 +48,6 @@ static char *rcs_version = "$Id: s_serv.c,v 1.17 1998/10/17 21:07:01 lusky Exp $
 #endif
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <utmp.h>
 #include "h.h"
 #if defined( HAVE_STRING_H )
 #include <string.h>
@@ -5442,8 +5442,8 @@ int	m_trace(aClient *cptr,
 	  /* Only opers see users if there is a wildcard
 	   * but anyone can see all the opers.
 	   */
-	  if (IsAnOper(sptr) &&
-	      (MyClient(sptr) || !(dow && IsInvisible(acptr)))
+	  if ((IsAnOper(sptr) &&
+	      (MyClient(sptr) || !(dow && IsInvisible(acptr))))
 	      || !dow || IsAnOper(acptr))
 	    {
 	      if (IsAnOper(acptr))
