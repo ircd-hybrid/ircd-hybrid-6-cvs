@@ -1,3 +1,22 @@
+ievil       2003/08/21 19:59:28 EDT	(20030821_0)
+
+  Modified files:
+    .                    RELNOTES 
+    src                  .depend channel.c m_version.c s_misc.c 
+                         s_user.c 
+  Log:
+  Minor cleanup in missed #include files. And unused variables. Ready to go?
+  
+  Revision  Changes    Path
+  1.19      +15 -0     ircd-hybrid-6/RELNOTES
+  1.54      +3 -3      ircd-hybrid-6/src/.depend
+  1.243     +13 -18    ircd-hybrid-6/src/channel.c
+  1.13      +1 -0      ircd-hybrid-6/src/m_version.c
+  1.79      +0 -1      ircd-hybrid-6/src/s_misc.c
+  1.266     +1 -0      ircd-hybrid-6/src/s_user.c
+
+
+
 ievil       2003/08/20 12:19:42 EDT	(20030820_0)
 
   Modified files:
