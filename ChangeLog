@@ -1,3 +1,28 @@
+ievil       2003/06/17 21:49:02 EDT	(20030618_2)
+
+  Added files:
+    doc/ircd.conf        README ilines.conf ircd.conf ispoof.conf 
+                         olines.conf ports.conf qlines.conf 
+                         servers.conf xlines.conf ylines.conf 
+  Log:
+  Added a "real" servers configuration files to ease up the first time
+  usage of hybrid. Thanks to Nick Parrin for suggesting that I should
+  give away these files.
+  
+  Revision  Changes    Path
+  1.1       +40 -0     ircd-hybrid-6/doc/ircd.conf/README (new)
+  1.1       +30 -0     ircd-hybrid-6/doc/ircd.conf/ilines.conf (new)
+  1.1       +25 -0     ircd-hybrid-6/doc/ircd.conf/ircd.conf (new)
+  1.1       +13 -0     ircd-hybrid-6/doc/ircd.conf/ispoof.conf (new)
+  1.1       +28 -0     ircd-hybrid-6/doc/ircd.conf/olines.conf (new)
+  1.1       +7 -0      ircd-hybrid-6/doc/ircd.conf/ports.conf (new)
+  1.1       +19 -0     ircd-hybrid-6/doc/ircd.conf/qlines.conf (new)
+  1.1       +20 -0     ircd-hybrid-6/doc/ircd.conf/servers.conf (new)
+  1.1       +88 -0     ircd-hybrid-6/doc/ircd.conf/xlines.conf (new)
+  1.1       +28 -0     ircd-hybrid-6/doc/ircd.conf/ylines.conf (new)
+
+
+
 ievil       2003/06/17 21:43:57 EDT	(20030618_1)
 
   ircd-hybrid-6/doc/ircd.conf - New directory
