@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.82 1999/05/19 05:30:59 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.83 1999/05/27 01:30:57 db Exp $";
 #endif
 
 #include "struct.h"
@@ -3034,11 +3034,11 @@ int spam_num = MAX_JOIN_LEAVE_COUNT;
 
 	      sendto_channel_butserv(chptr, sptr,
 				 ":%s MODE %s +nt",
-				 sptr->name, chptr->chname);
+				 me.name, chptr->chname);
 
 	      sendto_match_servs(chptr, sptr, 
 				 ":%s MODE %s +nt",
-				 sptr->name, chptr->chname);
+				 me.name, chptr->chname);
 	    }
 
 	  del_invite(sptr, chptr);
@@ -3458,7 +3458,7 @@ int	m_knock(aClient *cptr,
    */
 
   {
-    char message[350];
+    char message[NICKLEN*2+CHANNELLEN+USERLEN+HOSTLEN+30];
 
     /* bit of paranoid, be a shame if it cored for this -Dianora */
     if(sptr->user)
@@ -3709,7 +3709,7 @@ int	m_invite(aClient *cptr,
 
 	  if (chptr && (chptr->mode.mode & MODE_PRIVATE))
 	    { 
-	      char message[300];
+	      char message[NICKLEN*2+CHANNELLEN+USERLEN+HOSTLEN+30];
 
 	      /*
 		sprintf(message, "INVITE: %s (%s invited %s)", chptr->chname, sptr->name, acptr->name);

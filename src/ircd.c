@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.43 1999/05/19 05:31:00 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.44 1999/05/27 01:30:58 db Exp $";
 #endif
 
 #include "struct.h"
@@ -163,8 +163,8 @@ char	*debugmode = "";		/*  -"-    -"-   -"-  */
 char	*sbrk0;				/* initial sbrk(0) */
 static	int	dorehash = 0;
 static	char	*dpath = DPATH;
-int     rehashed = 1;
-int     dline_in_progress = 0;	/* killing off matching D lines ? */
+int     rehashed = YES;
+int     dline_in_progress = NO;	/* killing off matching D lines ? */
 int     noisy_htm=NOISY_HTM;	/* Is high traffic mode noisy or not? */
 time_t	nextconnect = 1;	/* time for next try_connections call */
 time_t	nextping = 1;		/* same as above for check_pings() */

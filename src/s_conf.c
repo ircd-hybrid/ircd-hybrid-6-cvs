@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.56 1999/05/22 18:49:24 lusky Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.57 1999/05/27 01:30:59 db Exp $";
 #endif
 
 #include "struct.h"
@@ -3469,6 +3469,8 @@ int	is_address(char *host,
 	      *ip_mask_ptr = 0xFFFFFF00L;
 	      return( 1 );
 	    }
+	  else
+	    return( 0 );
 	}
       else
 	return( 0 );

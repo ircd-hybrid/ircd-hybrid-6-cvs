@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)list.c	2.22 15 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: list.c,v 1.9 1999/05/09 08:19:27 lusky Exp $";
+static char *rcs_version = "$Id: list.c,v 1.10 1999/05/27 01:30:58 db Exp $";
 #endif
 
 #include "struct.h"
@@ -477,11 +477,11 @@ Link *make_link()
 
 void free_link(Link *lp)
 {
-      if(BlockHeapFree(free_Links,lp))
-	{
-	  sendto_ops("list.c couldn't BlockHeapFree(free_Links,lp) lp = %lX", lp );
- 	  sendto_ops("Please report to the hybrid team!");
-	}
+  if(BlockHeapFree(free_Links,lp))
+    {
+      sendto_ops("list.c couldn't BlockHeapFree(free_Links,lp) lp = %lX", lp );
+      sendto_ops("Please report to the hybrid team!");
+    }
 }
 
 aClass *make_class()
