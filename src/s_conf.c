@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.38 1999/01/22 04:24:21 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.39 1999/02/03 02:46:27 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1770,6 +1770,28 @@ int 	initconf(int opt, int fd,int use_include)
 	  break;
           /* NOTREACHED */
 	}
+
+      /* For Gersh
+       * make sure H: lines don't have trailing spaces!
+       * BUG: This code will fail if there is leading whitespace.
+       */
+
+      if( aconf->status & (CONF_HUB|CONF_LEAF) )
+	{
+	  char *p;
+
+	  p = strchr(aconf->name,' ');
+	  if(!p)
+	    p = strchr(aconf->name,'\t');
+
+	  if(p)
+	    {
+	      sendto_realops("H: or L: line trailing whitespace [%s]",
+			     aconf->name);
+	      *p = '\0';
+	    }
+	}
+
       /*
       ** If conf line is a class definition, create a class entry
       ** for it and make the conf_line illegal and delete it.
