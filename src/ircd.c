@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.3 1998/09/26 01:11:25 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.4 1998/10/02 12:49:19 db Exp $";
 #endif
 
 #include "struct.h"
@@ -98,8 +98,9 @@ static  time_t	io_loop(time_t);
 /* externally needed functions */
 
 extern	void dbuf_init();		/* defined in dbuf.c */
-extern  void   read_motd();		/* defined in s_serv.c */
-extern  void   read_help();		/* defined in s_serv.c */
+extern  void read_motd();		/* defined in s_serv.c */
+extern  void read_help();		/* defined in s_serv.c */
+extern  void sync_channels(time_t);	/* defined in channel.c */
 
 char	**myargv;
 int	portnum = -1;		    /* Server port number, listening this */
@@ -1212,7 +1213,7 @@ time_t io_loop(time_t delay)
 		       "System clock was reset into the future - (%d+60 > %d)",
 		       timeofday, lasttimeofday);
       report_error(to_send, &me);
-      sync_channels();
+      sync_channels(timeofday - lasttimeofday);
     }
 
   NOW = timeofday;
