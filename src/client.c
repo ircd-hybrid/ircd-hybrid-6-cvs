@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.43 1999/08/17 05:44:56 lusky Exp $
+ *  $Id: client.c,v 1.44 1999/08/18 04:04:52 lusky Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -457,9 +457,9 @@ time_t check_pings(time_t currenttime)
 
               aconf = make_conf();
               aconf->status = CONF_KILL;
-              DupString(aconf->host, cptr->user->host);
+              DupString(aconf->host, cptr->host);
               DupString(aconf->passwd, "idle exceeder" );
-              DupString(aconf->name, cptr->user->username);
+              DupString(aconf->name, cptr->username);
               aconf->port = 0;
               aconf->hold = CurrentTime + 60;
               add_temp_kline(aconf);
