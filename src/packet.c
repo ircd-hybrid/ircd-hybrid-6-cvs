@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)packet.c	2.12 1/30/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: packet.c,v 1.4 1998/12/18 22:51:37 db Exp $";
+static char *rcs_version = "$Id: packet.c,v 1.5 1998/12/20 20:36:41 sean Exp $";
 
 #endif
  
@@ -171,7 +171,9 @@ int	dopacket(aClient *cptr, char *buffer, int length)
 	      */
 	      if (cptr->flags & FLAGS_DEADSOCKET)
 		return exit_client(cptr, cptr, &me, (cptr->flags & FLAGS_SENDQEX) ?
-				   "SendQ exceeded" : "Dead socket");
+				   ((IsDoingList(cptr)) ?
+				    "SendQ exceeded while doing /list" :
+				   "SendQ exceeded") : "Dead socket");
 
 #ifdef ZIP_LINKS
 	      if ((cptr->flags2 & FLAGS2_ZIP) && (zipped == 0) &&
