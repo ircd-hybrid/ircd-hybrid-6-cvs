@@ -1,3 +1,15 @@
+ievil       2004/10/12 21:09:39 EDT	(20041013_1)
+
+  Modified files:
+    include              patchlevel.h 
+  Log:
+  Vamped up patchlevel. Gonna do it a bit diffrent in the future.
+  
+  Revision  Changes    Path
+  1.164     +1 -1      ircd-hybrid-6/include/patchlevel.h
+
+
+
 ievil       2004/10/12 20:53:37 EDT	(20041013_0)
 
   Modified files:
