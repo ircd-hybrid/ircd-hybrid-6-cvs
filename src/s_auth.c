@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.18 1999/07/08 07:33:50 tomh Exp $
+ *   $Id: s_auth.c,v 1.19 1999/07/08 08:36:18 tomh Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -37,11 +37,12 @@
 #include "res.h"
 #include "h.h"
 
+#include <netdb.h>               /* struct hostent */
+#include <fcntl.h>
+#include <assert.h>
 #include <sys/socket.h>
 #include <sys/file.h>
 #include <sys/ioctl.h>
-#include <fcntl.h>
-#include <assert.h>
 
 /*
  * a bit different approach
@@ -51,14 +52,16 @@ static struct {
   const char* message;
   size_t      length;
 } HeaderMessages [] = {
-  /* 12345678901234567890123456789012345678901234567890123456 */
+  /* 123456789012345678901234567890123456789012345678901234567890 */
   { "NOTICE AUTH :*** Looking up your hostname...\r\n",    46 },
   { "NOTICE AUTH :*** Found your hostname\r\n",            38 },
   { "NOTICE AUTH :*** Found your hostname, cached\r\n",    46 },
   { "NOTICE AUTH :*** Couldn't look up your hostname\r\n", 49 },
   { "NOTICE AUTH :*** Checking Ident\r\n",                 33 },
   { "NOTICE AUTH :*** Got Ident response\r\n",             37 },
-  { "NOTICE AUTH :*** No Ident response\r\n",              36 }
+  { "NOTICE AUTH :*** No Ident response\r\n",              36 },
+  { "NOTICE AUTH :*** Your forward and reverse DNS do not match, " \
+    "ignoring hostname.\r\n",                              80 }
 };
 
 typedef enum {
@@ -68,7 +71,8 @@ typedef enum {
   REPORT_FAIL_DNS,
   REPORT_DO_ID,
   REPORT_FIN_ID,
-  REPORT_FAIL_ID
+  REPORT_FAIL_ID,
+  REPORT_IP_MISMATCH
 } ReportType;
 
 #define sendheader(c, r) \
@@ -164,14 +168,22 @@ static void auth_dns_callback(void* vptr, struct hostent* hp)
 
   ClearDNSPending(auth);
   if (hp) {
+    int i;
     /*
-     * XXX - we should copy info to the client here instead of saving
-     * the pointer, holding the hp could be dangerous if the dns entries
-     * are invalidated and not wiped here too, this also means that we
-     * need to restart the dns query.
+     * Verify that the host to ip mapping is correct both ways and that
+     * the ip#(s) for the socket is listed for the host.
      */
-    auth->client->hostp = hp;
-    sendheader(auth->client, REPORT_FIN_DNS);
+    for (i = 0; hp->h_addr_list[i]; ++i) {
+      if (0 == memcmp(hp->h_addr_list[i], (char*) &auth->client->ip,
+                      sizeof(struct in_addr)))
+         break;
+    }
+    if (!hp->h_addr_list[i])
+      sendheader(auth->client, REPORT_IP_MISMATCH);
+    else {
+      auth->client->hostp = hp;
+      sendheader(auth->client, REPORT_FIN_DNS);
+    }
   }
   else
     sendheader(auth->client, REPORT_FAIL_DNS);
