@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.79 2003/08/21 23:59:26 ievil Exp $
+ *  $Id: s_misc.c,v 1.80 2003/10/13 10:01:33 ievil Exp $
  */
 #include "s_misc.h"
 #include "channel.h"
@@ -223,7 +223,7 @@ void show_isupport(aClient *cptr, char *name)
   u_knock = 1;
 #endif
 
-  ircsprintf(features, "WALLCHOPS%s%s%s MODES=%d MAXCHANNELS=%d MAXBANS(b%s%s)=%d "
+  ircsprintf(features, "WALLCHOPS%s%s%s MODES=%d MAXCHANNELS=%d MAXBANS=b%s%s:%d "
                        "MAXTARGETS=4 NICKLEN=%d TOPICLEN=%d KICKLEN=%d",
                         u_knock  ? " KNOCK"    : "",
                         mode_e   ? " EXCEPTS" : "",

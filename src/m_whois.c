@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_whois.c,v 1.14 2003/06/20 13:49:47 ievil Exp $
+ *   $Id: m_whois.c,v 1.15 2003/10/13 10:01:33 ievil Exp $
  */
 
 #include "m_operspylog.h"
@@ -131,7 +131,7 @@ int     m_whois(struct Client *cptr,
   int whois_len = 4;
 
 #ifdef OPERSPY
-  char osnuh[NICKLEN + 1 + USERLEN + 1 + HOSTLEN + 1];
+  char osnuh[NICKLEN + 1 + USERLEN + 1 + HOSTLEN + 1 + HOSTLEN + 1];
   int OperSpyWhois = 0;
 #endif
 

@@ -1,7 +1,7 @@
 /*
  * m_info.c 
  *
- * $Id: m_info.c,v 1.41 2001/07/18 01:37:13 lusky Exp $
+ * $Id: m_info.c,v 1.42 2003/10/13 10:01:33 ievil Exp $
  */
 #define DEFINE_M_INFO_DATA
 #include "m_commands.h"
@@ -94,12 +94,15 @@ m_info(aClient *cptr, aClient *sptr, int parc, char *parv[])
       sendto_one(sptr, form_str(RPL_INFO), me.name, parv[0], "");
 
 #ifndef SERVERHIDE
+      if (IsSetOperAdmin(cptr))
+        {
       sendto_one(sptr,
         ":%s %d %s :Compiled on [%s]",
         me.name,
         RPL_INFO,
         parv[0],
         platform);
+        } /* if (IsSetOperAdmin(cptr)) - No need to tell the real hostsnames to the world */
 #endif
       sendto_one(sptr, form_str(RPL_INFO), me.name, parv[0], "");
 
