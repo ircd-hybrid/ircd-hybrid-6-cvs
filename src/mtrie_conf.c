@@ -43,7 +43,7 @@
  *
  * Diane Bruce -db (db@db.net)
  *
- * $Id: mtrie_conf.c,v 1.71 2000/12/01 06:28:49 lusky Exp $
+ * $Id: mtrie_conf.c,v 1.72 2001/06/04 01:09:34 db Exp $
  */
 #include "mtrie_conf.h"
 #include "class.h"
@@ -1279,10 +1279,14 @@ void report_mtrie_conf_links(aClient *sptr, int flags)
           /* Non local opers do not need to know about
            * I lines that do spoofing 
            */
+#ifdef SPOOF_NOTICE
           if(!(MyConnect(sptr) && IsAnOper(sptr)) &&
              IsConfDoSpoofIp(found_conf))
             continue;
-
+#else
+	  if(IsConfDoSpoofIp(found_conf))
+	    continue;
+#endif
           get_printable_conf(found_conf, &name, &host, &pass, &user, &port );
 
           c = 'I';
