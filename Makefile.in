@@ -16,7 +16,7 @@
 #*   along with this program; if not, write to the Free Software
 #*   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #*
-#*   $Id: Makefile.in,v 1.18 2000/10/06 03:00:46 lusky Exp $
+#*   $Id: Makefile.in,v 1.19 2001/06/04 16:20:08 jdc Exp $
 #*/
 
 RM=@RM@
@@ -29,7 +29,7 @@ CFLAGS = -g -O2 -DNDEBUG
 
 #
 # For developers
-# CFLAGS= -g -O2 -Wall
+# CFLAGS= -g -ggdb -Wall -Wunused -Wshadow -Wmissing-declarations
 #
 # You may need to define the FD_SETSIZE in order to overrule
 # the system one.
