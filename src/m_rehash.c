@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_rehash.c,v 1.10 2003/06/24 03:57:16 ievil Exp $
+ *   $Id: m_rehash.c,v 1.11 2004/03/18 02:53:41 ievil Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -130,7 +130,7 @@ int m_rehash(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       else if(irccmp(parv[1],"TKLINES") == 0)
         {
 		  /* see the note for glines and such .. -gnp */
-		  if (!SetOperK(sptr))
+		  if (!IsSetOperK(sptr))
 		    {
 			  sendto_one(sptr,":%s NOTICE %s :You have no K flag",me.name,parv[0]);
 			  return 0;

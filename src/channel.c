@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.246 2003/10/13 09:53:04 ievil Exp $
+ * $Id: channel.c,v 1.247 2004/03/18 02:53:41 ievil Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -2887,7 +2887,7 @@ int     m_kick(struct Client *cptr,
   char  *p = (char *)NULL;
   char  *user;
 
-  if (parc < 3 || *parv[1] == '\0')
+  if (parc < 3 || *parv[2] == '\0')
     {
       sendto_one(sptr, form_str(ERR_NEEDMOREPARAMS),
                  me.name, parv[0], "KICK");
@@ -3076,7 +3076,7 @@ int     m_knock(struct Client *cptr,
   }
 #endif
 
-  if (parc < 2)
+  if (parc < 2 || *parv[1] == '\0')
     {
       sendto_one(sptr, form_str(ERR_NEEDMOREPARAMS), me.name, parv[0],
                  "KNOCK");
@@ -3340,7 +3340,7 @@ int     m_invite(struct Client *cptr,
   struct Channel *chptr;
   int need_invite=NO;
 
-  if (parc < 3 || *parv[1] == '\0')
+  if (parc < 3 || *parv[2] == '\0')
     {
       sendto_one(sptr, form_str(ERR_NEEDMOREPARAMS),
                  me.name, parv[0], "INVITE");

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.119 2003/10/13 11:38:39 ievil Exp $
+ *   $Id: send.c,v 1.120 2004/03/18 02:53:41 ievil Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -1443,13 +1443,13 @@ vsendto_prefix_one(aClient *to, aClient *from,
 
       to->flags |= FLAGS_KILLED;
 
-      exit_client(NULL, to, &me, "Ghosted client");
-
       if (IsPerson(from))
         sendto_one(from, form_str(ERR_GHOSTEDCLIENT),
                    me.name, from->name, to->name, to->username,
                    to->host, to->from);
       
+      exit_client(NULL, to, &me, "Ghosted client");
+            
       return;
     } /* if (!MyClient(from) && IsPerson(to) && (to->from == from->from)) */
   
