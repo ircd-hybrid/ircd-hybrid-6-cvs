@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Id: mkconf,v 1.1 1999/07/08 02:22:10 db Exp $
+# $Id: mkconf,v 1.2 2001/06/19 17:09:31 wcampbel Exp $
 # Copyright (C) 1999 Patrick Alken
 #
 # Usage: ./mkconf [options]
@@ -442,3 +442,4 @@ esac
 echo ""
 echo "Configuration of $ConfFile is now complete"
 echo ""
+
