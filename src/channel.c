@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.208 2001/07/28 00:49:51 leeh Exp $
+ * $Id: channel.c,v 1.209 2001/07/29 19:58:25 db Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -1118,11 +1118,11 @@ void set_channel_mode(struct Client *cptr,
                 break;
 	    }
 
-          /* ignore server-generated MODE +-ovh */
-          if (IsServer(sptr))
+          /* ignore server-generated MODE +ovh */
+          if (IsServer(sptr) && (whatt == MODE_ADD))
             {
-              ts_warn( "MODE %c%c on %s for %s from server %s (ignored)", 
-                       (whatt == MODE_ADD ? '+' : '-'), c, chptr->chname, 
+              ts_warn( "MODE +%c on %s for %s from server %s (ignored)", 
+                       c, chptr->chname, 
                        who->name,sptr->name);
               break;
             }
