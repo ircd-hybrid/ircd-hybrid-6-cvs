@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.61 1999/07/21 19:32:17 sean Exp $
+ *   $Id: send.c,v 1.62 1999/07/21 19:48:33 sean Exp $
  */
 #include "send.h"
 #include "struct.h"
@@ -162,8 +162,8 @@ send_message(aClient *to, char *msg, int len)
 
 		if (IsDoingList(to)) {
       /* Pop the sendq for this message */
-      if (!IsAnOper(to))
-        sendto_ops("LIST blocked for %s", get_client_name(to, FALSE));
+      /*if (!IsAnOper(to))
+        sendto_ops("LIST blocked for %s", get_client_name(to, FALSE)); */
       SetSendqPop(to);
       return 0;
     }
@@ -378,8 +378,8 @@ send_queued(aClient *to)
     if (IsSendqPopped(to) && (DBufLength(&to->sendQ) == 0)) {
       char **parv;
       ClearSendqPop(to);
-      sendto_ops("LIST restarted at %d, %d for %s", to->listprogress,
-                 to->listprogress2, to->name);
+      /*sendto_ops("LIST restarted at %d, %d for %s", to->listprogress,
+        to->listprogress2, to->name);*/
       parv=(char**)malloc(sizeof(char**));
       parv[0]=(char*)malloc(strlen(to->name)+1);
       strcpy(parv[0], to->name);
