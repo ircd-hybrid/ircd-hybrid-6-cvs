@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.157 1999/07/18 22:27:29 db Exp $
+ *   $Id: s_serv.c,v 1.158 1999/07/18 23:27:21 tomh Exp $
  */
 
 #define CAPTAB
@@ -44,6 +44,7 @@
 #include "hash.h"
 #include "s_debug.h"
 #include "listener.h"
+#include "restart.h"
 
 #include <string.h>
 #include <stdlib.h>
