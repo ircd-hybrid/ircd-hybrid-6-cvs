@@ -22,7 +22,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.7 1998/09/23 01:48:54 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.8 1998/09/25 14:10:41 db Exp $";
 #endif
 
 #include "struct.h"
@@ -2166,8 +2166,13 @@ int	m_knock(aClient *cptr,
 		 me.name,
 		 sptr->name);
 
-  sendto_channel_type(cptr, &me, chptr, MODE_CHANOP,
-	      ":%s NOTICE %s :%s has knocked on the channel door.", me.name,
+  /* using &me and me.name won't deliver to clients not on this server
+   * so, the notice will have to appear from the "knocker" ick.
+   */
+
+  sendto_channel_type(cptr, sptr, chptr, MODE_CHANOP,
+		      ":%s NOTICE %s :%s has knocked on the channel door.",
+		      sptr->name,
 		      chptr->chname, parv[0]);
 }
 
