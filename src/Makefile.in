@@ -1,7 +1,7 @@
 #
 # Makefile.in for ircd/src
 #
-# $Id: Makefile.in,v 1.70 2001/12/07 04:13:29 jdc Exp $
+# $Id: Makefile.in,v 1.71 2003/06/06 09:30:15 ievil Exp $
 CC = @CC@
 RM = @RM@
 MKDEP = ${CC} -MM
@@ -69,6 +69,8 @@ SRCS = \
 	m_time.c \
 	m_trace.c \
 	m_unkline.c \
+	m_ungline.c \
+	m_undline.c \
 	m_userhost.c \
 	m_users.c \
 	m_version.c \
