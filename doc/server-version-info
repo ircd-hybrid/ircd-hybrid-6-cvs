@@ -1,4 +1,4 @@
-$Id: server-version-info,v 1.8 2001/12/07 04:51:30 wcampbel Exp $
+$Id: server-version-info,v 1.9 2001/12/16 05:49:16 wcampbel Exp $
 Updated for Hybrid 6 (2000/11/26)
 
 When you type /version you will often see something like this:
@@ -19,6 +19,7 @@ here they are:
 'M'	IDLE_FROM_MSG
 'p'	CRYPT_OPER_PASSWORD
 'P'	CRYPT_LINK_PASSWORD
+'r'     LITTLE_I_LINES (restricted mode)
 'T'     IGNORE_BOGUS_TS
 'Y'	USE_SYSLOG
 'Z'	ZIP_LINKS
