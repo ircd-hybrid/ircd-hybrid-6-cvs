@@ -1,3 +1,29 @@
+lusky       2004/12/05 23:03:24 EST	(20041206_0)
+
+  Modified files:
+    .                    Hybrid-team INSTALL README.FIRST RELNOTES 
+    doc                  ircd.8 
+    include              patchlevel.h 
+    src                  blalloc.c client.c list.c s_conf.c 
+  Log:
+  - bumped patchlevel to 6.4.3
+  - changed bugreport email address and list subscription info
+  - updated missing entries in RELNOTES
+  
+  Revision  Changes    Path
+  1.36      +1 -1      ircd-hybrid-6/Hybrid-team
+  1.13      +4 -5      ircd-hybrid-6/INSTALL
+  1.17      +3 -3      ircd-hybrid-6/README.FIRST
+  1.25      +12 -10    ircd-hybrid-6/RELNOTES
+  1.5       +2 -1      ircd-hybrid-6/doc/ircd.8
+  1.165     +1 -1      ircd-hybrid-6/include/patchlevel.h
+  1.26      +1 -1      ircd-hybrid-6/src/blalloc.c
+  1.80      +1 -1      ircd-hybrid-6/src/client.c
+  1.44      +1 -1      ircd-hybrid-6/src/list.c
+  1.254     +3 -3      ircd-hybrid-6/src/s_conf.c
+
+
+
 ievil       2004/10/12 23:12:39 EDT	(20041013_3)
 
   Modified files:
