@@ -1,3 +1,19 @@
+ievil       2003/08/17 02:01:58 EDT	(20030817_0)
+
+  Modified files:
+    doc                  example.conf 
+    doc/ircd.conf        olines.conf 
+    src                  s_misc.c 
+  Log:
+  fixed a few minor cosmetic issues with ISUPPORT, and added I to example files.
+  
+  Revision  Changes    Path
+  1.40      +1 -0      ircd-hybrid-6/doc/example.conf
+  1.2       +1 -0      ircd-hybrid-6/doc/ircd.conf/olines.conf
+  1.78      +3 -3      ircd-hybrid-6/src/s_misc.c
+
+
+
 ievil       2003/08/16 15:58:38 EDT	(20030816_4)
 
   Modified files:
