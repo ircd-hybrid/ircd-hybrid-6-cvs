@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.147 2001/10/25 02:57:06 db Exp $
+ * $Id: ircd.c,v 1.148 2001/11/29 06:44:29 db Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -364,12 +364,6 @@ static time_t io_loop(time_t delay)
   time_t        lasttimeofday;
 
   lasttimeofday = CurrentTime;
-  if ((CurrentTime = time(NULL)) == -1)
-    {
-      log(L_ERROR, "Clock Failure (%d)", errno);
-      sendto_ops("Clock Failure (%d), TS can be corrupted", errno);
-      restart("Clock Failure");
-    }
 
   if (CurrentTime < lasttimeofday)
     {

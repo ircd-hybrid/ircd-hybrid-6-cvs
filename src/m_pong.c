@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_pong.c,v 1.2 2000/06/10 02:45:36 lusky Exp $
+ *   $Id: m_pong.c,v 1.3 2001/11/29 06:44:29 db Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -102,7 +102,7 @@ int     m_pong(struct Client *cptr,
                int parc,
                char *parv[])
 {
-  struct Client *acptr;
+  struct Client *acptr = NULL;
   char  *origin, *destination;
 
   if (parc < 2 || *parv[1] == '\0')
@@ -113,15 +113,6 @@ int     m_pong(struct Client *cptr,
 
   origin = parv[1];
   destination = parv[2];
-  cptr->flags &= ~FLAGS_PINGSENT;
-  sptr->flags &= ~FLAGS_PINGSENT;
-
-#ifdef NEED_SPLITCODE
-#ifdef SPLIT_PONG
-  if (IsServer(cptr))
-    got_server_pong = 1;
-#endif
-#endif
 
   /* Now attempt to route the PONG, comstud pointed out routable PING
    * is used for SPING.  routable PING should also probably be left in
@@ -143,11 +134,22 @@ int     m_pong(struct Client *cptr,
           return 0;
         }
     }
-
-#ifdef  DEBUGMODE
   else
-    Debug((DEBUG_NOTICE, "PONG: %s %s", origin,
+    {
+      if (MyConnect(sptr))
+      {
+        sptr->flags &= ~FLAGS_PINGSENT;
+#ifdef NEED_SPLITCODE
+#ifdef SPLIT_PONG
+        if (IsServer(sptr))
+          got_server_pong = 1;
+#endif
+#endif
+      }
+#ifdef  DEBUGMODE
+      Debug((DEBUG_NOTICE, "PONG: %s %s", origin,
            destination ? destination : "*"));
 #endif
+    }
   return 0;
 }
