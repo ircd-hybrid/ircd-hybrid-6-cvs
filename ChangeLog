@@ -1,3 +1,16 @@
+ievil       2003/08/25 18:53:22 EDT	(20030825_1)
+
+  Modified files:
+    .                    RELNOTES 
+  Log:
+  Changed the RELNOTES to reflect changes after rc1 aswell. Updated depend.
+  Lock and Load?
+  
+  Revision  Changes    Path
+  1.20      +4 -2      ircd-hybrid-6/RELNOTES
+
+
+
 ievil       2003/08/25 17:21:55 EDT	(20030825_0)
 
   Modified files:
