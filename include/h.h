@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.59 1999/07/21 04:28:02 db Exp $
+ * $Id: h.h,v 1.60 1999/07/21 04:35:38 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -127,9 +127,8 @@ extern	int	nickkilldone(struct Client*, struct Client*, int, char**, time_t, cha
 
 extern	int	deliver_it (struct Client *, char *, int);
 
-extern	int	check_registered (struct Client *);
-extern	int	check_registered_user (struct Client *);
-extern const char* my_name_for_link(const char* name, struct ConfItem* conf);
+extern  const    char* my_name_for_link(const char* name,
+                   struct ConfItem* conf);
 extern  char*   date(time_t);
 extern	void	initstats (void), tstats (struct Client *, char *);
 extern	void	serv_info (struct Client *, char *);

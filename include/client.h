@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.31 1999/07/20 20:30:25 sean Exp $
+ * $Id: client.h,v 1.32 1999/07/21 04:35:38 db Exp $
  */
 #ifndef	INCLUDED_client_h
 #define INCLUDED_client_h
@@ -510,7 +510,9 @@ extern void	      del_client_from_llist(struct Client** list,
 extern int	      exit_client(struct Client*, struct Client*, 
                                   struct Client*, const char* comment);
 
-extern void count_local_client_memory(int *, int *);
-extern void count_remote_client_memory(int *, int *);
+extern void     count_local_client_memory(int *, int *);
+extern void     count_remote_client_memory(int *, int *);
+extern	int	check_registered (struct Client *);
+extern	int	check_registered_user (struct Client *);
 
 #endif /* INCLUDED_client_h */
