@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.140 1999/07/22 02:06:22 db Exp $
+ *  $Id: s_conf.c,v 1.141 1999/07/23 02:45:41 db Exp $
  */
 #include "s_conf.h"
 #include "listener.h"
@@ -132,11 +132,6 @@ aConfItem* ConfigItemList = NULL;
 /* conf xline link list root */
 aConfItem        *x_conf = ((aConfItem *)NULL);
 
-typedef struct QlineItem {
-  char      *name;
-  aConfItem *confList;
-  struct    QlineItem *next;
-}aQlineItem;
 
 static void makeQlineEntry(aQlineItem *, aConfItem *, char *);
 

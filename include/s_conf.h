@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.33 1999/07/23 02:38:30 db Exp $
+ * $Id: s_conf.h,v 1.34 1999/07/23 02:45:39 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.34  1999/07/23 02:45:39  db
+ * - include file fixes
+ *
  * Revision 1.33  1999/07/23 02:38:30  db
  * - more include file fixes
  *
@@ -190,6 +193,11 @@ struct ConfItem
   int              dns_pending; /* 1 if dns query pending, 0 otherwise */
 };
 
+typedef struct QlineItem {
+  char      *name;
+  struct    ConfItem *confList;
+  struct    QlineItem *next;
+}aQlineItem;
 
 #define CONF_ILLEGAL            0x80000000
 #define CONF_MATCH              0x40000000
@@ -341,11 +349,11 @@ typedef struct
 
 /* aConfItems */
 /* conf uline link list root */
-extern aConfItem *u_conf;
+extern struct ConfItem *u_conf;
 /* conf xline link list root */
-extern aConfItem *x_conf;
+extern struct ConfItem *x_conf;
 /* conf qline link list root */
-extern aConfItem *q_conf;
+extern struct QlineItem *q_conf;
 
 #endif /* INCLUDED_s_conf_h */
 
