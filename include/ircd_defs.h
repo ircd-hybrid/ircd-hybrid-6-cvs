@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: ircd_defs.h,v 1.12 2003/06/25 01:34:19 ievil Exp $
+ * $Id: ircd_defs.h,v 1.13 2003/10/13 11:11:50 ievil Exp $
  *
  * ircd_defs.h - Global size definitions for record entries used
  * througout ircd. Please think 3 times before adding anything to this
@@ -48,7 +48,6 @@
 #define KEYLEN          23
 #define BUFSIZE         512     /* WARNING: *DONT* CHANGE THIS!!!! */
 #define MAXRECIPIENTS   20
-#define MAXBANS         25      /* bans + exceptions together */
 #define MAXBANLENGTH    1024
 
 #define OPERWALL_LEN    400     /* can be truncated on other servers */

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.167 2003/08/20 16:19:41 ievil Exp $
+ * $Id: config.h,v 1.168 2003/10/13 11:11:49 ievil Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -743,6 +743,11 @@
  */
 #define CHANMODE_I
 
+/* DEFAULT_MAXTKLINE - Set the initial Max tklines here.
+ * It's changeable with /quote SET MAXTKLINE newtime 
+ */
+
+#define DEFAULT_MAXTKLINE (60*48)
 
 /* ----------------- not approved on EFnet section --------------------
  *
@@ -913,6 +918,12 @@
  * Max number of channels a user is allowed to join.
  */
 #define MAXCHANNELSPERUSER  20  /* Recommended value: 20 */
+
+/* DEFAULTMAXBANS -
+ * Max number of bans/exempts per channel - EFNet wants this to be 100 per
+ * august 2003. Recommended value is 45-50!!
+ */
+#define DEFAULTMAXBANS  100 /* bans + exceptions together */
 
 /* SENDQ_ALWAYS - should always be defined.
  * SendQ-Always causes the server to put all outbound data into the sendq and

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.170 2003/08/18 06:31:33 ievil Exp $
+ * $Id: ircd.c,v 1.171 2003/10/13 11:11:51 ievil Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -600,6 +600,9 @@ static void initialize_global_set_options(void)
  SPLITUSERS = SPLIT_SMALLNET_USER_SIZE;
  server_split_time = CurrentTime;
 #endif
+
+ MAXTKLINE = DEFAULT_MAXTKLINE;
+ MAXBANS = DEFAULTMAXBANS;
 
  /* End of global set options */
 

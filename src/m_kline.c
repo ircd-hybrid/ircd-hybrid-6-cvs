@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.81 2003/06/24 03:57:16 ievil Exp $
+ *   $Id: m_kline.c,v 1.82 2003/10/13 11:11:51 ievil Exp $
  */
 #include "m_commands.h"
 #include "m_kline.h"
@@ -540,8 +540,8 @@ m_kline(struct Client *cptr,
                         me.name, parv[0], "KLINE");
           return 0;
         }
-      if(temporary_kline_time > (24*60))
-        temporary_kline_time = (24*60); /* Max it at 24 hours */
+      if(temporary_kline_time > (MAXTKLINE))
+        temporary_kline_time = (MAXTKLINE); /* Max it at the current MAXTKLINE */
       temporary_kline_time_seconds = (time_t)temporary_kline_time * (time_t)60;
         /* turn it into minutes */
       argv = parv[2];

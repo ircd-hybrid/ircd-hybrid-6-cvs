@@ -1,5 +1,5 @@
 This file outlines the features that ircd-hybrid has for IRC Operators.
-$Id: opers.txt,v 1.24 2003/06/25 01:34:17 ievil Exp $
+$Id: opers.txt,v 1.25 2003/10/13 11:11:48 ievil Exp $
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -232,6 +232,11 @@ COMMAND         - USAGE and DESCRIPTION
                     MAX       - Sets the number of max connections
                                 to <value>.  (This number cannot exceed
                                 HARD_FDLIMIT in config.h)
+                    MAXBANS   - Sets the maximum bans and exceptions
+                                that a channel can have.
+
+                    MAXTKLINE - Sets the current max kline time. Dont set
+                                it too high.
 
                     -- The following three are if compiled with FLUD --
                      FLUDNUM   - Sets the number of flud messages to 

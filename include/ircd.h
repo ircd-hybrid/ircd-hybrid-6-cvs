@@ -19,7 +19,7 @@
  *
  * "ircd.h". - Headers file.
  *
- * $Id: ircd.h,v 1.25 2003/08/16 19:58:33 ievil Exp $
+ * $Id: ircd.h,v 1.26 2003/10/13 11:11:49 ievil Exp $
  *
  */
 #ifndef INCLUDED_ircd_h
@@ -40,6 +40,8 @@ struct SetOptions
   int autoconn;         /* autoconn enabled for all servers? */
   int noisy_htm;        /* noisy htm or not ? */
   int lifesux;
+  int maxtkline;	/* set max temp kline time */
+  int maxbans;          /* make maxbans setable run time */
 
 #ifdef IDLE_CHECK
   int idletime;
@@ -101,13 +103,14 @@ extern struct SetOptions GlobalSetOptions;  /* defined in ircd.c */
 #define IDLETIME   GlobalSetOptions.idletime
 #define LIFESUX    GlobalSetOptions.lifesux
 #define MAXCLIENTS GlobalSetOptions.maxclients
+#define MAXBANS    GlobalSetOptions.maxbans
+#define MAXTKLINE  GlobalSetOptions.maxtkline
 #define NOISYHTM   GlobalSetOptions.noisy_htm
 #define SPAMNUM    GlobalSetOptions.spam_num
 #define SPAMTIME   GlobalSetOptions.spam_time
 #define SPLITDELAY GlobalSetOptions.server_split_recovery_time
 #define SPLITNUM   GlobalSetOptions.split_smallnet_size
 #define SPLITUSERS GlobalSetOptions.split_smallnet_users
-
 
 extern char*          debugmode;
 extern int            debuglevel;

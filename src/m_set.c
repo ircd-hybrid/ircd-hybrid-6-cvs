@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_set.c,v 1.9 2003/05/04 17:52:45 db Exp $
+ *   $Id: m_set.c,v 1.10 2003/10/13 11:11:52 ievil Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -110,12 +110,13 @@
  *      11 - SPAMNUM
  *      12 - SPAMTIME
  *      13 - LOG
- * - rjp
+ *      14 - MAXTKLINE
+ *      15 - MAXBANS
  *
- * Currently, the end of the table is TOKEN_BAD, 14.  If you add anything
+ * Currently, the end of the table is TOKEN_BAD, 16.  If you add anything
  * to the set table, you must increase TOKEN_BAD so that it is directly
  * after the last valid entry.
- * -Hwy
+ * -Hwy (updated by ievil)
  */
 
 #define TOKEN_MAX 0
@@ -132,7 +133,9 @@
 #define TOKEN_SPAMNUM 11
 #define TOKEN_SPAMTIME 12
 #define TOKEN_LOG 13
-#define TOKEN_BAD 14
+#define TOKEN_MAXTKLINE 14
+#define TOKEN_MAXBANS 15
+#define TOKEN_BAD 16
 
 static char *set_token_table[] = {
   "MAX",
@@ -149,6 +152,8 @@ static char *set_token_table[] = {
   "SPAMNUM",
   "SPAMTIME",
   "LOG",
+  "MAXTKLINE",
+  "MAXBANS",
   NULL
 };
 
@@ -579,12 +584,56 @@ int m_set(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
           return 0;
           break;
 
+        case TOKEN_MAXTKLINE:
+          if(parc > 2)
+            {
+              int newval = atoi(parv[2]);
+              if(newval <= 0)
+                {
+                  sendto_one(sptr, ":%s NOTICE %s :MAXTKLINE must be > 0",
+                             me.name, parv[0]);
+                  return 0;
+                }
+              MAXTKLINE  = newval;
+              sendto_realops("%s has changed MAXTKLINE to %i",
+                             parv[0], MAXTKLINE);
+            }
+          else
+            {
+             sendto_one(sptr, ":%s NOTICE %s : MAXTKLINE is currently %i",
+                         me.name, parv[0], MAXTKLINE);
+            }
+          return 0;
+          break;
+
+        case TOKEN_MAXBANS:
+          if(parc > 2)
+            {
+              int newval = atoi(parv[2]);
+              if(newval <= 0)
+                {
+                  sendto_one(sptr, ":%s NOTICE %s :MAXBANS must be > 0",
+                             me.name, parv[0]);
+                  return 0;
+                }
+              MAXBANS = newval;
+              sendto_realops("%s has changed MAXBANS to %i",
+                             parv[0], MAXBANS);
+            }
+          else
+            {
+              sendto_one(sptr, ":%s NOTICE %s : MAXBANS is currently %i",
+                         me.name, parv[0], MAXBANS);
+            }
+          return 0;
+          break;
+
         default:
         case TOKEN_BAD:
           break;
         }
     }
-  sendto_one(sptr, ":%s NOTICE %s :Options: MAX AUTOCONN",
+  sendto_one(sptr, ":%s NOTICE %s :Options: MAX MAXTKLINE AUTOCONN",
              me.name, parv[0]);
 #ifdef FLUD
   sendto_one(sptr, ":%s NOTICE %s :Options: FLUDNUM, FLUDTIME, FLUDBLOCK",
