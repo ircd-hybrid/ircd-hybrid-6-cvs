@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)list.c	2.22 15 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: list.c,v 1.15 1999/07/01 16:54:12 db Exp $";
+static char *rcs_version = "$Id: list.c,v 1.16 1999/07/03 05:06:41 tomh Exp $";
 #endif
 
 #include "struct.h"
@@ -30,6 +30,11 @@ static char *rcs_version = "$Id: list.c,v 1.15 1999/07/01 16:54:12 db Exp $";
 #include "h.h"
 #include "numeric.h"
 #include "blalloc.h"
+#include "res.h"
+
+#ifndef INADDR_NONE
+#define INADDR_NONE ((unsigned int) 0xffffffff)
+#endif
 
 extern int BlockHeapGarbageCollect(BlockHeap *);
 extern SetOptionsType GlobalSetOptions;
@@ -509,6 +514,7 @@ aConfItem *make_conf()
   /* aconf->clients = 0; */
   /* aconf->port = 0; */
   /* aconf->hold = 0; */
+  aconf->ipnum.s_addr = INADDR_NONE;
   Class(aconf) = 0;
   return (aconf);
 }

@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.120 1999/07/02 02:08:41 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.121 1999/07/03 05:06:47 tomh Exp $";
 #endif
 
 
@@ -59,9 +59,8 @@ static char *rcs_version = "$Id: s_serv.c,v 1.120 1999/07/02 02:08:41 db Exp $";
 #include "mtrie_conf.h"
 #include "fdlist.h"
 #include "fileio.h"
+#include "res.h"
 
-/* internal variables */
-static	char	buf[BUFSIZE]; 
 
 /* external variables */
 
@@ -3283,6 +3282,7 @@ int	m_restart(aClient *cptr,
 		  int parc,
 		  char *parv[])
 {
+  char buf[BUFSIZE]; 
 #ifndef	LOCOP_RESTART
   if (!MyClient(sptr) || !IsOper(sptr))
 #else

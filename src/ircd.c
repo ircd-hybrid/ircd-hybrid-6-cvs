@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.58 1999/07/03 02:01:45 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.59 1999/07/03 05:06:41 tomh Exp $";
 #endif
 
 #include "struct.h"
@@ -30,12 +30,14 @@ static char *rcs_version="$Id: ircd.c,v 1.58 1999/07/03 02:01:45 db Exp $";
 #include "sys.h"
 #include "numeric.h"
 #include "msg.h"
+#include "res.h"
 #include <sys/file.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <pwd.h>
 #include <signal.h>
 #include <fcntl.h>
+#include <sys/socket.h>
 
 #undef RUSAGE_SELF 0
 #undef RUSAGE_CHILDREN /* hack for old slackware */

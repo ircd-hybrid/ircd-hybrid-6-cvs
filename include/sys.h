@@ -16,17 +16,21 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: sys.h,v 1.10 1999/06/27 19:25:03 tomh Exp $
+ * $Id: sys.h,v 1.11 1999/07/03 05:06:39 tomh Exp $
  */
 
 #ifndef	__sys_include__
 #define __sys_include__
+#if 0
 #ifdef ISC202
 #include <net/errno.h>
 #else
 #include <sys/errno.h>
 #endif
+#endif /* 0 */
+
 #include "setup.h"
+#include <errno.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/param.h>

@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_debug.c	2.28 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_debug.c,v 1.8 1999/06/25 11:59:58 db Exp $";
+static char *rcs_version = "$Id: s_debug.c,v 1.9 1999/07/03 05:06:46 tomh Exp $";
 #endif
 
 #include "struct.h"
@@ -304,7 +304,7 @@ void	send_usage(aClient *cptr, char *nick)
 }
 #endif
 
-void	count_memory(aClient *cptr,char *nick)
+void count_memory(aClient *cptr,char *nick)
 {
   extern	aChannel	*channel;
   extern	aClass	*classes;
