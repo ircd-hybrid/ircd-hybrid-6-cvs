@@ -1,7 +1,7 @@
 #
 # Makefile.in for ircd/src
 #
-# $Id: Makefile.in,v 1.76 2004/05/23 16:52:51 ievil Exp $
+# $Id: Makefile.in,v 1.77 2004/05/23 21:07:01 ievil Exp $
 CC = @CC@
 RM = @RM@
 MKDEP = ${CC} -MM
@@ -65,6 +65,7 @@ SRCS = \
 	m_quit.c \
 	m_rehash.c \
 	m_restart.c \
+	m_resv.c \
 	m_server.c \
 	m_set.c \
 	m_sinfo.c \
@@ -76,12 +77,15 @@ SRCS = \
 	m_unkline.c \
 	m_ungline.c \
 	m_undline.c \
+	m_unresv.c \
+	m_unxline.c \
 	m_userhost.c \
 	m_users.c \
 	m_version.c \
 	m_wallops.c \
 	m_who.c \
 	m_whois.c \
+	m_xline.c \
 	match.c \
 	motd.c \
 	mtrie_conf.c \
@@ -153,6 +157,7 @@ SRCS = \
 #	m_quit.o \
 #	m_rehash.o \
 #	m_restart.o \
+#	m_resv.o \
 #	m_server.o \
 #	m_set.o \
 #       m_sinfo.o \
@@ -162,11 +167,16 @@ SRCS = \
 #	m_time.o \
 #	m_trace.o \
 #	m_unkline.o \
+#	m_undline.o \
+#	m_ungline.o \
+#	m_unresv.o \
+#	m_unxline.o \
 #	m_users.o \
 #	m_version.o \
 #	m_wallops.o \
 #	m_who.o \
 #	m_whois.o \
+#	m_xline.o \
 #	match.o \
 #	motd.o \
 #	mtrie_conf.o \

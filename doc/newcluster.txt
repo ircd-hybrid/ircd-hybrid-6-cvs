@@ -1,0 +1,25 @@
+$Id: newcluster.txt,v 1.1 2004/05/23 21:06:57 ievil Exp $
+
+New cluster commands...
+
+CAP_KLN:
+:<source> KLINE <target> 60 user user.com :test
+:<source> ENCAP <target> KLINE <time> <user> <host> :<reason>
+
+CAP_UNKLN:
+:<source> UNKLINE <target> user user.com
+:<source> ENCAP <target> UNKLINE <user> <host>
+
+CAP_CLUSTER:
+:<source> XLINE <target> fooble 2 :telnet
+:<source> ENCAP <target> XLINE <time> <gecos> <type> :<reason>
+
+:<source> RESV <target> #foo :test
+:<source> ENCAP <target> RESV <time> <name> 0 :<reason>
+
+:<source> UNXLINE <target> <gecos>
+:<source> ENCAP <target> UNXLINE <gecos>
+
+:<source> UNRESV <target> <name>
+:<source> ENCAP <target> UNRESV <name>
+

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: msg.h,v 1.27 2004/05/23 16:52:50 ievil Exp $
+ * $Id: msg.h,v 1.28 2004/05/23 21:06:59 ievil Exp $
  */
 #ifndef INCLUDED_msg_h
 #define INCLUDED_msg_h
@@ -137,6 +137,12 @@ typedef struct MessageTree MESSAGE_TREE;
 #define MSG_TESTLINE "TESTLINE"
 #define MSG_OPERSPY  "OPERSPY"
 #define MSG_ENCAP    "ENCAP"
+
+#define MSG_XLINE    "XLINE"    /* XLINE */
+#define MSG_UNXLINE  "UNXLINE"  /* UNXLINE */
+#define MSG_RESV     "RESV"     /* RESV */
+#define MSG_UNRESV   "UNRESV"   /* UNRESV */
+
 
 #ifdef MSGTAB
 #ifndef INCLUDED_m_commands_h
@@ -263,6 +269,10 @@ struct Message msgtab[] = {
   { MSG_MAP,     m_map,      0, MAXPARA, 1, 0, 0, 0L },
   { MSG_ETRACE, m_etrace,    0, MAXPARA, 1, 0, 0, 0L },
   { MSG_SINFO,  m_sinfo,     0, MAXPARA, 1, 0, 0, 0L },
+  { MSG_XLINE,   m_xline,    0, MAXPARA, 1, 0, 0, 0L },
+  { MSG_UNXLINE, m_unxline,  0, MAXPARA, 1, 0, 0, 0L },
+  { MSG_RESV,    m_resv,     0, MAXPARA, 1, 0, 0, 0L },
+  { MSG_UNRESV,  m_unresv,   0, MAXPARA, 1, 0, 0, 0L },
   { (char *) 0, (int (*)()) 0 , 0, 0,    0, 0, 0, 0L }
 };
 
