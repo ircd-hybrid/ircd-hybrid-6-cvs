@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.119 1999/08/01 04:59:55 tomh Exp $
+ * $Id: ircd.c,v 1.120 1999/08/01 05:03:20 tomh Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -380,7 +380,6 @@ int main(int argc, char *argv[])
     exit(-1); /* blah.. this should be done better */
 #endif
 
-  dbuf_init();  /* set up some dbuf stuff to control paging */
 
   uid = getuid();
   euid = geteuid();
@@ -503,6 +502,7 @@ int main(int argc, char *argv[])
 
   initialize_message_files();
 
+  dbuf_init();  /* set up some dbuf stuff to control paging */
   clear_client_hash_table();
   clear_channel_hash_table();
   clear_scache_hash_table();    /* server cache name table */
