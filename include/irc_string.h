@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: irc_string.h,v 1.6 1999/07/21 05:45:02 tomh Exp $
+ *   $Id: irc_string.h,v 1.7 1999/07/22 07:58:16 tomh Exp $
  */
 #ifndef INCLUDED_irc_string_h
 #define INCLUDED_irc_string_h
@@ -96,7 +96,11 @@ extern const unsigned int CharAttrs[];
 #define CHAN_C    0x080
 #define KWILD_C   0x100
 #define CHANPFX_C 0x200
+#define USER_C    0x400
+#define HOST_C    0x800
 
+#define IsHostChar(c)   (CharAttrs[(unsigned char)(c)] & HOST_C)
+#define IsUserChar(c)   (CharAttrs[(unsigned char)(c)] & USER_C)
 #define IsChanPrefix(c) (CharAttrs[(unsigned char)(c)] & CHANPFX_C)
 #define IsChanChar(c)   (CharAttrs[(unsigned char)(c)] & CHAN_C)
 #define IsKWildChar(c)  (CharAttrs[(unsigned char)(c)] & KWILD_C)
