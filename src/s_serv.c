@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.81 1999/03/24 00:13:38 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.82 1999/03/27 21:32:31 lusky Exp $";
 #endif
 
 
@@ -354,7 +354,7 @@ int	m_squit(aClient *cptr,
       **
       ** Closing the client's connection probably wouldn't do much
       ** good.. any oper out there should know that the proper way
-      ** to disconnect is /QUIT :)  -- David-R
+      ** to disconnect is /QUIT :)
       **
       ** its still valid if its not a local client, its then
       ** a protocol error for sure -Dianora
