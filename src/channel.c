@@ -34,7 +34,7 @@
  *                mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.177 2000/04/21 23:39:25 lusky Exp $
+ * $Id: channel.c,v 1.178 2000/08/25 00:29:11 lusky Exp $
  */
 #include "channel.h"
 #include "client.h"
@@ -1903,14 +1903,14 @@ void set_channel_mode(struct Client *cptr,
               if (whatt == MODE_ADD)
                 {
                   chptr->mode.mode |= MODE_JUPED;
-                  sendto_realops("%s!%s@%s juping locally Channel %s)",
+                  sendto_realops("%s!%s@%s juping locally Channel %s",
                                  sptr->name, sptr->username,
                                  sptr->host, chptr->chname);
                 }
               else if(whatt == MODE_DEL)
                 {
                   chptr->mode.mode &= ~MODE_JUPED;
-                  sendto_realops("%s!%s@%s unjuping locally Channel %s)",
+                  sendto_realops("%s!%s@%s unjuping locally Channel %s",
                                  sptr->name, sptr->username,
                                  sptr->host, chptr->chname);
                 }
