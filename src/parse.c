@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.18 1999/07/19 09:11:48 tomh Exp $
+ *   $Id: parse.c,v 1.19 1999/07/20 09:11:23 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -569,34 +569,6 @@ static struct Message *tree_parse(char *cmd)
 	  return mtree->msg;
     }
   return ((struct Message *)NULL);
-}
-
-
-/*
- * field breakup for ircd.conf file.
- */
-char	*getfield(char *newline)
-{
-  static char *line = (char *)NULL;
-  char	*end, *field;
-	
-  if (newline)
-    line = newline;
-
-  if (line == (char *)NULL)
-    return((char *)NULL);
-
-  field = line;
-  if ((end = strchr(line,':')) == NULL)
-    {
-      line = (char *)NULL;
-      if ((end = strchr(field,'\n')) == (char *)NULL)
-	end = field + strlen(field);
-    }
-  else
-    line = end + 1;
-  *end = '\0';
-  return(field);
 }
 
 static	int	cancel_clients(aClient *cptr,

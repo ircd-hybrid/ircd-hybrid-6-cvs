@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.56 1999/07/20 08:57:23 db Exp $
+ * $Id: h.h,v 1.57 1999/07/20 09:11:21 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -107,7 +107,6 @@ extern void        list_scache(struct Client *, struct Client *,int, char **);
 
 extern void     dummy(int signo);
 
-extern	char*   getfield(char *);
 extern  char    *form_str (int);
 extern	void	get_my_name (struct Client *, char *, int);
 extern	int	setup_ping (void);
@@ -121,10 +120,9 @@ extern	int	send_queued(struct Client*);
 /*VARARGS*/
 extern  void    send_capabilities(struct Client *,int);
 extern  int	is_address(char *,unsigned long *,unsigned long *); 
-extern	struct ConfItem	*match_Dline(unsigned long);
 extern	int	show_lusers(struct Client *, struct Client *, int, char **);
 extern	int	nickkilldone(struct Client*, struct Client*, int, char**, time_t, char*);
-extern	char	*show_iline_prefix(struct Client *,struct ConfItem *,char *);
+
 /* END Missing definitions */
 
 extern	int	deliver_it (struct Client *, char *, int);

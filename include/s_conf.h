@@ -21,9 +21,14 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.26 1999/07/20 08:28:03 db Exp $
+ * $Id: s_conf.h,v 1.27 1999/07/20 09:11:21 db Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.27  1999/07/20 09:11:21  db
+ * - moved getfield from parse.c to s_conf.c which is the only place its used
+ * - removed duplicate prototype from h.h , it was in dline_conf.h already
+ * - send.c needs s_zip.h included to know about ziplinks
+ *
  * Revision 1.26  1999/07/20 08:28:03  db
  * - more removal of stuff from h.h
  *
@@ -270,6 +275,7 @@ extern struct ConfItem* find_special_conf(char *,int );
 extern struct ConfItem* find_is_klined(const char* host, 
                                        const char* name,
                                        unsigned long ip);
+extern	char	*show_iline_prefix(struct Client *,struct ConfItem *,char *);
 extern void   GetPrintableaConfItem(struct ConfItem *,
 				    char **, char **, char **,
 				    char **, int *);
