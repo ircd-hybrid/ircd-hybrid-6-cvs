@@ -53,6 +53,7 @@
 #include "common.h"
 #include "struct.h"
 #include "s_conf.h"
+#include "class.h"
 #include "h.h"
 
 #include "mtrie_conf.h"
@@ -63,7 +64,7 @@
 #endif
 
 #ifndef lint
-static char *rcs_version="$Id: mtrie_conf.c,v 1.42 1999/07/03 08:07:06 tomh Exp $";
+static char *rcs_version="$Id: mtrie_conf.c,v 1.43 1999/07/03 20:28:11 tomh Exp $";
 #endif /* lint */
 
 #define MAXPREFIX (HOSTLEN+USERLEN+15)

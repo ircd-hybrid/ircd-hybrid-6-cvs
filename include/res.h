@@ -1,7 +1,7 @@
 /*
  * irc2.7.2/ircd/res.h (C)opyright 1992 Darren Reed.
  *
- * $Id: res.h,v 1.8 1999/07/03 17:51:49 tomh Exp $
+ * $Id: res.h,v 1.9 1999/07/03 20:24:19 tomh Exp $
  */
 #ifndef	INCLUDED_res_h
 #define INCLUDED_res_h
@@ -43,3 +43,4 @@ extern unsigned long   cres_mem(struct Client* cptr);
 extern void add_local_domain(char* name, int len);
 
 #endif /* INCLUDED_res_h */
+

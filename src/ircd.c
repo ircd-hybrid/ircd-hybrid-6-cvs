@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.60 1999/07/03 08:07:04 tomh Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.61 1999/07/03 20:28:10 tomh Exp $";
 #endif
 
 #include "struct.h"
@@ -31,6 +31,7 @@ static char *rcs_version="$Id: ircd.c,v 1.60 1999/07/03 08:07:04 tomh Exp $";
 #include "numeric.h"
 #include "msg.h"
 #include "res.h"
+#include "class.h"
 #include <sys/file.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -308,7 +309,7 @@ static	time_t	try_connections(time_t currenttime)
       /* Also when already connecting! (update holdtimes) --SRB */
       if (!(aconf->status & CONF_CONNECT_SERVER) || aconf->port <= 0)
 	continue;
-      cltmp = Class(aconf);
+      cltmp = ClassPtr(aconf);
       /*
       ** Skip this entry if the use of it is still on hold until
       ** future. Otherwise handle this entry (and set it on hold
@@ -333,9 +334,9 @@ static	time_t	try_connections(time_t currenttime)
       cptr = find_name(aconf->name, (aClient *)NULL);
       
       if (!cptr && (Links(cltmp) < MaxLinks(cltmp)) &&
-	  (!connecting || (Class(cltmp) > con_class)))
+	  (!connecting || (ClassType(cltmp) > con_class)))
 	{
-	  con_class = Class(cltmp);
+	  con_class = ClassType(cltmp);
 	  con_conf = aconf;
 	  /* We connect only one at time... */
 	  connecting = TRUE;

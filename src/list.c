@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu, Computing Center and Jarkko Oikarinen
  *
- * $Id: list.c,v 1.17 1999/07/03 08:07:05 tomh Exp $
+ * $Id: list.c,v 1.18 1999/07/03 20:28:10 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -28,6 +28,7 @@
 #include "numeric.h"
 #include "blalloc.h"
 #include "res.h"
+#include "class.h"
 #include "s_conf.h"
 
 #ifndef INADDR_NONE
@@ -513,7 +514,7 @@ aConfItem *make_conf()
   /* aconf->port = 0; */
   /* aconf->hold = 0; */
   aconf->ipnum.s_addr = INADDR_NONE;
-  Class(aconf) = 0;
+  ClassPtr(aconf) = 0;
   return (aconf);
 }
 

@@ -21,11 +21,12 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_debug.c	2.28 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_debug.c,v 1.10 1999/07/03 08:07:08 tomh Exp $";
+static char *rcs_version = "$Id: s_debug.c,v 1.11 1999/07/03 20:28:12 tomh Exp $";
 #endif
 
 #include "struct.h"
 #include "s_conf.h"
+#include "class.h"
 #include "res.h"
 extern	void	count_whowas_memory(int *, u_long *);
 extern  void    count_ip_hash(int *,u_long *);	  /* defined in s_conf.c */
@@ -412,7 +413,7 @@ void count_memory(aClient *cptr,char *nick)
       com += sizeof(aConfItem);
     }
 
-  for (cltmp = classes; cltmp; cltmp = cltmp->next)
+  for (cltmp = ClassList; cltmp; cltmp = cltmp->next)
     cl++;
 
   sendto_one(cptr, ":%s %d %s :Client Local %d(%d) Remote %d(%d)",

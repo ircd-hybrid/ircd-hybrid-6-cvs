@@ -26,7 +26,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.107 1999/07/03 15:39:31 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.108 1999/07/03 20:28:13 tomh Exp $";
 
 #endif
 
@@ -37,6 +37,7 @@ static char *rcs_version="$Id: s_user.c,v 1.107 1999/07/03 15:39:31 db Exp $";
 #include "msg.h"
 #include "channel.h"
 #include "s_conf.h"
+#include "class.h"
 #include <sys/stat.h>
 #ifndef __EMX__
 #include <utmp.h>

@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.46 1999/07/03 08:13:09 tomh Exp $
+ * $Id: struct.h,v 1.47 1999/07/03 20:24:20 tomh Exp $
  */
 #ifndef	INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -94,7 +94,6 @@ typedef struct  Zdata   aZdata;
 
 typedef struct	MessageFileItem aMessageFile;
 
-#include "class.h"
 #include "dbuf.h"	/* THIS REALLY SHOULDN'T BE HERE!!! --msa */
 
 #define	HOSTLEN		63	/* Length of hostname.  Updated to         */

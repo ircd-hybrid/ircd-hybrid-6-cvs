@@ -22,13 +22,14 @@
 static  char sccsid[] = "@(#)send.c	2.32 2/28/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: send.c,v 1.36 1999/06/25 12:00:01 db Exp $";
+static char *rcs_version = "$Id: send.c,v 1.37 1999/07/03 20:28:13 tomh Exp $";
 #endif
 
 #include "struct.h"
 #include "common.h"
 #include "sys.h"
 #include "h.h"
+#include "class.h"
 #include <stdio.h>
 #include "numeric.h"
 
