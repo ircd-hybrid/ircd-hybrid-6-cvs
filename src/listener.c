@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: listener.c,v 1.21 2001/12/04 04:47:45 androsyn Exp $
+ *  $Id: listener.c,v 1.22 2001/12/12 00:29:13 leeh Exp $
  */
 #include "listener.h"
 #include "client.h"
@@ -82,7 +82,7 @@ const char* get_listener_name(const struct Listener* listener)
   static char buf[HOSTLEN + HOSTLEN + PORTNAMELEN + 4];
   assert(0 != listener);
   ircsprintf(buf, "%s[%s/%u]", 
-             listener->name, listener->name, listener->port);
+             me.name, listener->name, listener->port);
   return buf;
 }
 
