@@ -19,7 +19,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_operspylog.c,v 1.4 2003/06/24 03:14:32 ievil Exp $
+ *   $Id: m_operspylog.c,v 1.5 2003/08/18 06:31:33 ievil Exp $
  */
 
 #include "m_operspylog.h"
@@ -79,9 +79,6 @@ void operspy_log(struct Client *cptr, const char *command, const char *target)
                cptr->name, cptr->username, cptr->host);
                
     sendto_match_cap_servs_butone(cptr, 0, "*", CAP_ENCAP, "ENCAP * OPERSPY %s :%s",command, target);
-/*    sendto_match_servs(cptr, "*", CAP_ENCAP, "ENCAP * OPERSPY %s :%s",
- *                      command, target);
- */
 #ifdef FNAME_OPERSPYLOG
     if ((logfile = open(FNAME_OPERSPYLOG, O_WRONLY|O_APPEND)) != -1)
       {
