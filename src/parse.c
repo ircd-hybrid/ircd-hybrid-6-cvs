@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.54 2003/10/13 14:51:35 ievil Exp $
+ *   $Id: parse.c,v 1.55 2003/10/13 19:11:29 ievil Exp $
  */
 #include "parse.h"
 #include "channel.h"
@@ -241,7 +241,7 @@ int parse(aClient *cptr, char *pbuffer, char *bufend)
             cptr->since += (cptr->receiveM % 5) ? 1 : 0;
           else
 #else
-          if (!IsAnOper(cptr) || !CanFlood(cptr))
+          if (!IsAnOper(cptr) && !CanFlood(cptr))
 #endif
 #endif
             cptr->since += (2 + i / 120);
