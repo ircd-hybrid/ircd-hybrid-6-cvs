@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.24 1999/07/24 03:40:15 db Exp $
+ *   $Id: parse.c,v 1.25 1999/07/24 03:45:18 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -180,7 +180,7 @@ int     parse(aClient *cptr, char *buffer, char *bufend)
   char  *ch;
   char  *s;
   int   i;
-  char  numeric[4];
+  char  *numeric;
   int   paramcount;
   struct Message *mptr;
 
@@ -278,10 +278,7 @@ int     parse(aClient *cptr, char *buffer, char *bufend)
       IsDigit(*ch) && IsDigit(*(ch + 1)) && IsDigit(*(ch + 2)) )
     {
       mptr = (struct Message *)NULL;
-      numeric[0] = ch[0];
-      numeric[1] = ch[1];
-      numeric[2] = ch[2];
-      numeric[3] = '\0';
+      numeric = ch;
       paramcount = MAXPARA;
       ircstp->is_num++;
       s = ch + 3;       /* I know this is ' ' from above if */
