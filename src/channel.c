@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.98 1999/07/01 16:54:11 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.99 1999/07/02 02:24:50 db Exp $";
 #endif
 
 #include "struct.h"
@@ -4245,7 +4245,7 @@ int	m_sjoin(aClient *cptr,
    * -Dianora
    */
 
-  if(!newts && oldts)
+  if(!isnew && !newts && oldts)
     {
       sendto_channel_butserv(chptr, &me,
 	     ":%s NOTICE %s :*** Notice -- TS for %s changed from %ld to 0",
