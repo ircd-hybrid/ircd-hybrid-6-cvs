@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.54 2001/08/04 21:24:32 leeh Exp $
+ *   $Id: s_debug.c,v 1.55 2001/08/10 11:34:04 leeh Exp $
  */
 #include "s_debug.h"
 #include "channel.h"
@@ -114,6 +114,9 @@ const char serveropts[] = {
 /* th+hybrid servers ALWAYS do TS_WARNINGS */
   'o',
   'w',
+#ifdef TS5_ONLY
+  'c',
+#endif  
   '\0'
 };
 
