@@ -24,7 +24,7 @@
 #include "h.h"
 
 #ifndef lint
-static char *rcs_version = "$Id: whowas.c,v 1.7 1999/05/08 20:40:51 lusky Exp $";
+static char *rcs_version = "$Id: whowas.c,v 1.8 1999/06/03 02:59:17 lusky Exp $";
 #endif
 
 /* externally defined functions */
@@ -101,7 +101,7 @@ aClient *get_history(char *nick,time_t timelimit)
   temp = WHOWASHASH[blah];
   for(;temp;temp=temp->next)
     {
-      if (mycmp(nick, temp->name))
+      if (irccmp(nick, temp->name))
 	continue;
       if (temp->logoff < timelimit)
 	continue;
@@ -186,7 +186,7 @@ int     m_whowas(aClient *cptr,
   found = 0;
   for(;temp;temp=temp->next)
     {
-      if (!mycmp(nick, temp->name))
+      if (!irccmp(nick, temp->name))
 	{
 	  sendto_one(sptr, rpl_str(RPL_WHOWASUSER),
 		     me.name, parv[0], temp->name,

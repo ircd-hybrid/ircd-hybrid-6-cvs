@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.27 1999/06/03 02:40:57 lusky Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.28 1999/06/03 02:59:15 lusky Exp $";
 #endif
 
 #include <sys/time.h>
@@ -301,7 +301,7 @@ char	*get_client_name(aClient *sptr,int showip)
       return sptr->name;
     }
 
-  if (mycmp(sptr->name,sptr->sockhost) || t_port[0])
+  if (irccmp(sptr->name,sptr->sockhost) || t_port[0])
     return nbuf;
   return sptr->name;
 }

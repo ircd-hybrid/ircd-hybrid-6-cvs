@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: sys.h,v 1.6 1999/05/09 08:19:25 lusky Exp $
+ * $Id: sys.h,v 1.7 1999/06/03 02:59:12 lusky Exp $
  */
 
 #ifndef	__sys_include__
@@ -50,8 +50,8 @@
 # include <string.h>
 # endif
 #endif
-#define	strcasecmp	mycmp
-#define	strncasecmp	myncmp
+#define	strcasecmp	irccmp
+#define	strncasecmp	ircncmp
 #if !defined( HAVE_INDEX )
 #define   index   strchr
 #define   rindex  strrchr

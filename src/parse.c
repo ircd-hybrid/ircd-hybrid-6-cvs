@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)parse.c	2.30 17 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: parse.c,v 1.4 1999/03/24 00:13:38 db Exp $";
+static char *rcs_version = "$Id: parse.c,v 1.5 1999/06/03 02:59:14 lusky Exp $";
 
 #endif
 #include "struct.h"
@@ -104,7 +104,7 @@ aClient *find_userhost(char *user,
 	if (!MyClient(c2ptr)) /* implies mine and a user */
 	  continue;
 	if ((!host || !matches(host, c2ptr->user->host)) &&
-	    mycmp(user, c2ptr->user->username) == 0)
+	    irccmp(user, c2ptr->user->username) == 0)
 	  {
 	    (*count)++;
 	    res = c2ptr;
@@ -515,7 +515,7 @@ static struct Message *do_msg_tree(MESSAGE_TREE *mtree, char *prefix,
       else
 	{
 	  /* ambigous -> make new entries for each of the letters that match */
-	  if (!mycmp(mptr->cmd, prefix))
+	  if (!irccmp(mptr->cmd, prefix))
 	    {
 	      /* fucking OPERWALL blows me */
 	      mtree->final = (void *)1;
@@ -588,7 +588,7 @@ static struct Message *tree_parse(char *cmd)
 	    return mtree->msg;
 	}
       else
-	if (mtree->final && !mycmp(mtree->final, cmd))
+	if (mtree->final && !irccmp(mtree->final, cmd))
 	  return mtree->msg;
     }
   return ((struct Message *)NULL);

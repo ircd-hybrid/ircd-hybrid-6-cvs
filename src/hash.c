@@ -20,7 +20,7 @@
 #ifndef lint
 static char sccsid[] = "@(#)hash.c	2.10 03 Jul 1993 (C) 1991 Darren Reed";
 
-static char *rcs_version = "$Id: hash.c,v 1.5 1999/05/09 08:19:26 lusky Exp $";
+static char *rcs_version = "$Id: hash.c,v 1.6 1999/06/03 02:59:13 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -298,7 +298,7 @@ aClient	*hash_find_client(char *name, aClient *cptr)
    * Got the bucket, now search the chain.
    */
   for (tmp = (aClient *)tmp3->list; tmp; prv = tmp, tmp = tmp->hnext)
-    if (mycmp(name, tmp->name) == 0)
+    if (irccmp(name, tmp->name) == 0)
       {
 #ifdef	DEBUGMODE
 	clhits++;
@@ -344,8 +344,8 @@ aClient	*hash_find_nickserver(char *name, aClient *cptr)
    * Got the bucket, now search the chain.
    */
   for (tmp = (aClient *)tmp3->list; tmp; prv = tmp, tmp = tmp->hnext)
-    if (mycmp(name, tmp->name) == 0 && tmp->user &&
-	mycmp(serv, tmp->user->server) == 0)
+    if (irccmp(name, tmp->name) == 0 && tmp->user &&
+	irccmp(serv, tmp->user->server) == 0)
       {
 #ifdef DEBUGMODE
 	clmiss++;
@@ -380,7 +380,7 @@ aClient	*hash_find_server(char *server,aClient *cptr)
     {
       if (!IsServer(tmp) && !IsMe(tmp))
 	continue;
-      if (mycmp(server, tmp->name) == 0)
+      if (irccmp(server, tmp->name) == 0)
 	{
 #ifdef	DEBUGMODE
 	  clhits++;
@@ -435,7 +435,7 @@ aChannel	*hash_find_channel(char *name,aChannel *chptr)
   tmp3 = &channelTable[hashv];
 
   for (tmp = (aChannel *)tmp3->list; tmp; prv = tmp, tmp = tmp->hnextch)
-    if (mycmp(name, tmp->chname) == 0)
+    if (irccmp(name, tmp->chname) == 0)
       {
 #ifdef	DEBUGMODE
 	chhits++;

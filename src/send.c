@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)send.c	2.32 2/28/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: send.c,v 1.32 1999/05/19 05:31:02 db Exp $";
+static char *rcs_version = "$Id: send.c,v 1.33 1999/06/03 02:59:17 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -1543,7 +1543,7 @@ va_dcl
 		       to->user->host, to->from);
 	  return;
 	}
-      if (MyClient(to) && IsPerson(from) && !mycmp(par, from->name))
+      if (MyClient(to) && IsPerson(from) && !irccmp(par, from->name))
 	{
 	  user = from->user;
 	  (void)strcpy(sender, from->name);

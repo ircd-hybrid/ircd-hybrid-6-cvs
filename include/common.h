@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: common.h,v 1.1 1998/09/17 14:25:03 db Exp $
+ * $Id: common.h,v 1.2 1999/06/03 02:59:12 lusky Exp $
  */
 
 #ifndef	__common_include__
@@ -72,8 +72,8 @@ void	free();
 #endif
 #endif
 extern	int	matches (char *, char *);
-extern	int	mycmp (char *, char *);
-extern	int	myncmp (char *, char *, int);
+extern	int	irccmp (char *, char *);
+extern	int	ircncmp (char *, char *, int);
 #if !defined( HAVE_STRTOK )
 extern	char	*strtok (char *, char *); 
 #endif
