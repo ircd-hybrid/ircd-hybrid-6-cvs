@@ -1,3 +1,24 @@
+ievil       2004/05/23 12:16:58 EDT	(20040523_8)
+
+  Modified files:
+    include              config.h config.h.dist m_info.h 
+    src                  m_kline.c m_locops.c s_conf.c send.c 
+  Log:
+  Removed slave servers ... it's no longer a useful option. And is to be
+  replaced by a much more useful option that will appear shortly.. ;)
+  To be continued....
+  
+  Revision  Changes    Path
+  1.171     +0 -8      ircd-hybrid-6/include/config.h
+  1.141     +0 -8      ircd-hybrid-6/include/config.h.dist
+  1.32      +0 -6      ircd-hybrid-6/include/m_info.h
+  1.83      +0 -123    ircd-hybrid-6/src/m_kline.c
+  1.6       +0 -51     ircd-hybrid-6/src/m_locops.c
+  1.252     +0 -19     ircd-hybrid-6/src/s_conf.c
+  1.121     +0 -49     ircd-hybrid-6/src/send.c
+
+
+
 ievil       2004/05/23 12:10:06 EDT	(20040523_7)
 
   Modified files:
