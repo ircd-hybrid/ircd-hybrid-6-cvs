@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.77 1999/05/08 20:40:44 lusky Exp $";
+static char *rcs_version="$Id: channel.c,v 1.78 1999/05/09 03:26:35 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1607,7 +1607,7 @@ static  void     set_mode(aClient *cptr,
 	  /* Un documented for now , I have no idea how this got here ;-) */
 #ifdef JUPE_CHANNEL
 	case 'j':
-	  if(IsAnOper(sptr))
+	  if(MyConnect(sptr) && IsAnOper(sptr))
 	    {
 	      if (whatt == MODE_ADD)
 		{

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: msg.h,v 1.5 1999/01/21 05:48:33 db Exp $
+ * $Id: msg.h,v 1.6 1999/05/09 03:26:33 db Exp $
  */
 
 #ifndef	__msg_include__
@@ -93,6 +93,9 @@
 #define MSG_KNOCK	   "KNOCK"  /* KNOCK */
 
 #define MAXPARA    15 
+
+#define MSG_TESTLINE "TESTLINE"
+extern int m_testline(aClient *,aClient *,int,char **);
 
 extern int m_admin(aClient *,aClient *,int,char **);
 extern int m_kline(aClient *,aClient *,int,char **);
@@ -303,6 +306,7 @@ struct Message msgtab[] = {
 #endif
   { MSG_HTM,	m_htm,	     0, MAXPARA, 1, 0, 0, 0L },
   { MSG_SET,	m_set,	     0, MAXPARA, 1, 0, 0, 0L },
+  { MSG_TESTLINE,	m_testline,	     0, MAXPARA, 1, 0, 0, 0L },
   { (char *) 0, (int (*)()) 0 , 0, 0,    0, 0, 0, 0L }
 };
 
