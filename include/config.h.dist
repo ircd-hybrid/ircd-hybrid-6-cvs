@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h.dist,v 1.40 1999/06/22 01:01:37 db Exp $
+ * $Id: config.h.dist,v 1.41 1999/06/22 02:27:11 db Exp $
  */
 
 #ifndef	__config_include__
@@ -474,7 +474,7 @@
  */
 #define ZIP_LEVEL       2
 
-/* OPER_KILL OPER_REHASH OPER_RESTART OPER_DIE
+/* OPER_REHASH OPER_RESTART OPER_DIE
  *      restrict what local global-Opers can do
  *
  * OPER_REHASH and OPER_RESTART allow operators to
@@ -828,8 +828,6 @@
  * keeps clients at 8K and only raises servers to 64K
  */
 #define MAXBUFFERS
-
-#ifdef	OPER_KILL
 
 /* PORTNUM - default port where ircd resides
  * Port where ircd resides. NOTE: This *MUST* be greater than 1024 if you

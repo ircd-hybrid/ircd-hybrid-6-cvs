@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.46 1999/06/22 01:01:37 db Exp $
+ * $Id: config.h,v 1.47 1999/06/22 02:27:10 db Exp $
  */
 
 #ifndef	__config_include__
@@ -822,8 +822,6 @@
  * keeps clients at 8K and only raises servers to 64K
  */
 #define MAXBUFFERS
-
-#ifdef	OPER_KILL
 
 /* PORTNUM - default port where ircd resides
  * Port where ircd resides. NOTE: This *MUST* be greater than 1024 if you
