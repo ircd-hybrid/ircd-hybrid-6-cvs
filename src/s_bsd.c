@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.107 1999/07/31 23:07:16 db Exp $
+ *  $Id: s_bsd.c,v 1.108 1999/07/31 23:39:45 tomh Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -586,10 +586,7 @@ static int connect_inet(struct ConfItem *aconf, struct Client *cptr)
  *
  * XXX - if this comes from an m_connect message and a dns query needs to
  * be done, we loose the information about who started the connection and
- * it's considered an auto connect. This should only happen if the server
- * was started with the quick boot option, which is rarely if ever used.
- *
- * ZZZ - There is no more BOOT_QUICK option, so the above comment is moot. -db
+ * it's considered an auto connect.
  */
 int connect_server(struct ConfItem* aconf, 
                    struct Client* by, struct DNSReply* reply)
@@ -1131,8 +1128,8 @@ int read_message(time_t delay, unsigned char mask)        /* mika */
 
       if ((CurrentTime = time(NULL)) == -1)
         {
-          log(L_CRIT, "Clock Failure (%d), TS can be corrupted", errno);
-          exit(0);
+          log(L_CRIT, "Clock Failure");
+          restart("Clock failure");
         }   
 
       if (nfds == -1 && errno == EINTR)
@@ -1389,10 +1386,10 @@ int read_message(time_t delay, unsigned char mask)
     wait.tv_usec = usec;
     nfds = poll(poll_fdarray, nbr_pfds,
                 wait.tv_sec * 1000 + wait.tv_usec / 1000);
-    if ((CurrentTime = time(NULL)) == -1)
+    if ((CurrentTime = time(0)) == -1)
       {
-        log(L_CRIT, "Clock Failure (%d)", errno);
-        exit(0);
+        log(L_CRIT, "Clock Failure");
+        restart("Clock failed");
       }   
     if (nfds == -1 && ((errno == EINTR) || (errno == EAGAIN)))
       return -1;
