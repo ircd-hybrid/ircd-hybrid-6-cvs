@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: sprintf_irc.c,v 1.9 1999/07/31 01:53:32 tomh Exp $
+ *   $Id: sprintf_irc.c,v 1.10 2001/12/08 08:34:50 jdc Exp $
  */
 #include "sprintf_irc.h"
 
@@ -449,9 +449,14 @@ vsprintf_irc(register char *str, register const char *format,
 
 int
 ircsprintf(register char *str, const char *format, ...)
-
 {
+        /*
+         * commented out due to weird warning on rh7.1/gcc 2.96
+         */
+        /*
         register va_list args;
+        */
+        va_list args;
         register int bytes;
 
         va_start(args, format);
