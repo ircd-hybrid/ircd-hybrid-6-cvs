@@ -1,3 +1,19 @@
+ievil       2003/10/13 07:30:18 EDT	(20031013_8)
+
+  Modified files:
+    include              client.h 
+    src                  s_bsd.c s_serv.c 
+  Log:
+  Enhancements to STATS v which gives a tad more sane info ;)
+  - some ideas from Hwy aswell
+  
+  Revision  Changes    Path
+  1.72      +2 -1      ircd-hybrid-6/include/client.h
+  1.150     +1 -0      ircd-hybrid-6/src/s_bsd.c
+  1.236     +19 -15    ircd-hybrid-6/src/s_serv.c
+
+
+
 ievil       2003/10/13 07:26:44 EDT	(20031013_7)
 
   Modified files:
