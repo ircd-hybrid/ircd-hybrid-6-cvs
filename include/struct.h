@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.56 1999/07/11 21:09:36 tomh Exp $
+ * $Id: struct.h,v 1.57 1999/07/12 06:34:06 tomh Exp $
  */
 #ifndef	INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -69,9 +69,6 @@
 # define INCLUDED_zlib_h
 #endif
 
-#ifndef INCLUDED_hash_h
-# include "hash.h"
-#endif
 #ifndef INCLUDED_client_h
 # include "client.h"
 #endif

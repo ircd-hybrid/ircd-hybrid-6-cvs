@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.130 1999/07/12 00:47:12 db Exp $
+ *  $Id: s_user.c,v 1.131 1999/07/12 06:30:35 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -34,6 +34,7 @@
 #include "s_bsd.h"
 #include "h.h"
 #include "send.h"
+#include "hash.h"
 
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -1639,7 +1640,7 @@ int nickkilldone(aClient *cptr, aClient *sptr, int parc,
   **  Finally set new nick name.
   */
   if (sptr->name[0])
-    (void)del_from_client_hash_table(sptr->name, sptr);
+    del_from_client_hash_table(sptr->name, sptr);
   strcpy(sptr->name, nick);
   add_to_client_hash_table(nick, sptr);
 

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: hash.h,v 1.3 1999/07/12 05:39:02 tomh Exp $
+ *   $Id: hash.h,v 1.4 1999/07/12 06:34:05 tomh Exp $
  */
 #ifndef	INCLUDED_hash_h
 #define INCLUDED_hash_h
@@ -39,13 +39,6 @@
  */
 #define CH_MAX 16384
 
-/* 
- * Whowas hash table size
- *
- * used in whowas.c 
- */
-#define WW_MAX 65536
-
 struct Client;
 struct Channel;
 
@@ -55,11 +48,11 @@ extern void   clear_channel_hash_table(void);
 extern void   clear_client_hash_table(void);
 extern void   add_to_client_hash_table(const char* name, 
                                        struct Client* client);
-extern int    del_from_client_hash_table(const char* name, 
+extern void   del_from_client_hash_table(const char* name, 
                                          struct Client* client);
 extern void   add_to_channel_hash_table(const char* name, 
                                         struct Channel* chan);
-extern int    del_from_channel_hash_table(const char* name, 
+extern void   del_from_channel_hash_table(const char* name, 
                                           struct Channel* chan);
 extern struct Channel* hash_find_channel(const char* name, 
                                          struct Channel* chan);

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.4 1999/07/11 23:06:32 tomh Exp $
+ *  $Id: client.c,v 1.5 1999/07/12 06:30:34 tomh Exp $
  */
 #include "client.h"
 #include "struct.h"
@@ -32,6 +32,7 @@
 #include "fdlist.h"
 #include "s_bsd.h"
 #include "send.h"
+#include "hash.h"
 
 #include <assert.h>
 #include <sys/stat.h>
@@ -707,27 +708,10 @@ static        void        exit_one_client(aClient *cptr,
         }
     }
   
-  /* Remove sptr from the client list */
-  if (del_from_client_hash_table(sptr->name, sptr) != 1)
-    {
-/*
- * This is really odd - oh well, it just generates noise... -Taner
- *
- *      sendto_realops("%#x !in tab %s[%s]", sptr, sptr->name,
- *             sptr->from ? sptr->from->host : "??host");
- *      sendto_realops("from = %#x", sptr->from);
- *      sendto_realops("next = %#x", sptr->next);
- *      sendto_realops("prev = %#x", sptr->prev);
- *      sendto_realops("fd = %d  status = %d", sptr->fd, sptr->status);
- *      sendto_realops("user = %#x", sptr->user);
- */
-
-      Debug((DEBUG_ERROR, "%#x !in tab %s[%s] %#x %#x %#x %d %d %#x",
-             sptr, sptr->name,
-             sptr->from ? sptr->from->host : "??host",
-             sptr->from, sptr->next, sptr->prev, sptr->fd,
-             sptr->status, sptr->user));
-    }
+  /* 
+   * Remove sptr from the client lists
+   */
+  del_from_client_hash_table(sptr->name, sptr);
   remove_client_from_list(sptr);
 }
 
