@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h.dist,v 1.34 1999/05/09 06:03:37 db Exp $
+ * $Id: config.h.dist,v 1.35 1999/06/04 01:08:01 lusky Exp $
  */
 
 #ifndef	__config_include__
@@ -93,8 +93,11 @@
  * (unless "." is in your exec path). -Rodder
  * Leave KPATH undefined if you want klines in main conf file.
  * HPATH is the opers help file, seen by opers on /quote help.
- *
  * -Dianora
+ *
+ * DPATH must have a trailing /
+ * Do not use ~'s in any of these pathes
+ *
  */
 
 #define DPATH   "/usr/local/ircd/"
