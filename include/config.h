@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.159 2003/06/12 22:09:51 ievil Exp $
+ * $Id: config.h,v 1.160 2003/06/12 22:17:20 ievil Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -772,9 +772,6 @@
  *   - ievil
  */
 #undef OPER_JUPE_BYPASS
-   
-
-/* -------------- END NOT APPROVED ON EFNET SECTION --------------------- */
 
 /* RESTRICT_LOCOP
  * Add restrictions to LOCOPS to easier allow them to being added when
@@ -787,7 +784,9 @@
  *   bad friends. No more....
  *
  */
-#define RESTRICT_LOCOP
+#undef RESTRICT_LOCOP
+
+/* -------------- END NOT APPROVED ON EFNET SECTION --------------------- */
 
 /*   STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP  */
 
