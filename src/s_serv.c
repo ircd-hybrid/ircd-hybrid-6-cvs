@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.51 1998/12/24 06:29:40 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.52 1998/12/25 05:17:20 db Exp $";
 #endif
 
 
@@ -5488,9 +5488,9 @@ int	m_rehash(aClient *cptr,
 #undef OUT
 
 #ifdef GLINES
-#define OUT "rehash one of :DNS TKLINES GLINES GC MOTD DUMP"
+#define OUT "rehash one of :DNS TKLINES GLINES GC MOTD OMOTD DUMP"
 #else
-#define OUT "rehash one of :DNS TKLINES GC MOTD DUMP"
+#define OUT "rehash one of :DNS TKLINES GC MOTD OMOTD DUMP"
 #endif
 	  sendto_one(sptr,":%s NOTICE %s : " OUT,me.name,sptr->name);
 	  return(0);
