@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.34 1999/07/22 04:48:12 tomh Exp $
+ * $Id: client.h,v 1.35 1999/07/22 05:41:15 tomh Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -386,7 +386,7 @@ struct Client
 /*
  * flags macros.
  */
-#define IsPerson(x)             ((x)->user && IsClient(x))
+#define IsPerson(x)             (IsClient(x) && (x)->user)
 #define IsInvisible(x)          ((x)->flags & FLAGS_INVISIBLE)
 
 #define DoAccess(x)             ((x)->flags & FLAGS_CHKACCESS)

@@ -1,5 +1,5 @@
 /*
- * $Id: acconfig.h,v 1.2 1999/07/15 03:09:53 db Exp $
+ * $Id: acconfig.h,v 1.3 1999/07/22 05:41:13 tomh Exp $
  */
 
 /* Define only one of POSIX, BSD, or SYSV signals.  */
@@ -17,6 +17,9 @@
 #undef MALLOCH
 #endif
 
+/* Define if you have the poll() system call.  */
+#undef USE_POLL
+
 /* Chose only one of NBLOCK_POSIX, NBLOCK_BSD, and NBLOCK_SYSV */
 /* Define if you have posix non-blocking sockets (O_NONBLOCK) */
 #undef NBLOCK_POSIX
@@ -30,20 +33,11 @@
 /* Define if you have the mmap() function.  */
 #undef USE_MMAP
 
-/* Define if you are running AIX.  */
-#undef OS_AIX
-
 /* Define if you are running DYNIXPTX.  */
 #undef OS_DYNIXPTX
 
 /* Define if you are running HPUX.  */
 #undef OS_HPUX
-
-/* Define if you are running MIPS.  */
-#undef OS_MIPS
-
-/* Define if you are running NeXT.  */
-#undef OS_NEXT
 
 /* Define if you are running SOLARIS2.  */
 #undef OS_SOLARIS2
