@@ -24,7 +24,7 @@
 #include "h.h"
 
 #ifndef lint
-static char *rcs_version = "$Id: whowas.c,v 1.2 1998/10/14 05:52:03 db Exp $";
+static char *rcs_version = "$Id: whowas.c,v 1.3 1998/12/05 00:10:33 db Exp $";
 #endif
 
 /* externally defined functions */
@@ -158,10 +158,15 @@ int     m_whowas(aClient *cptr,
     if (hunt_server(cptr,sptr,":%s WHOWAS %s %s :%s", 3,parc,parv))
       return 0;
 
-  parv[1] = canonize(parv[1]);
+  /*  parv[1] = canonize(parv[1]); */
+
   if (!MyConnect(sptr) && (max > 20))
     max = 20;
-  for (s = parv[1]; (nick = strtoken(&p, s, ",")); s = NULL)
+  /*  for (s = parv[1]; (nick = strtoken(&p, s, ",")); s = NULL) */
+  p = strchr(parv[1],',');
+  if(p)
+    *p = '\0';
+  s = parv[1];
     {
       temp = WHOWASHASH[hash_whowas_name(nick)];
       found = 0;
