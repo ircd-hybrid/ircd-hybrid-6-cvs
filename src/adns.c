@@ -1,5 +1,5 @@
 /*
- * $Id: adns.c,v 1.8 2002/02/06 03:21:26 lusky Exp $
+ * $Id: adns.c,v 1.9 2002/02/06 04:56:12 androsyn Exp $
  * adns.c  functions to enter libadns 
  *
  * Written by Aaron Sethman <androsyn@ratbox.org>
@@ -162,6 +162,7 @@ void do_adns_io(void)
 #endif
 	adns_processany(dns_state);
 	dns_do_callbacks();
+	timeout_adns();
 }
 /* void adns_gethost(const char *name, struct DNSQuery *req);
  * Input: A name, an address family, a DNSQuery structure.

@@ -1,5 +1,5 @@
 /*
- * transmit.c: $Id: transmit.c,v 1.4 2001/12/04 16:12:11 androsyn Exp $
+ * transmit.c: $Id: transmit.c,v 1.5 2002/02/06 04:56:09 androsyn Exp $
  *  
  */
 /*
@@ -229,11 +229,12 @@ void adns__query_send(adns_query qu, struct timeval now) {
   adns_state ads;
 
   assert(qu->state == query_tosend);
+#if 0
   if ((qu->flags & adns_qf_usevc) || (qu->query_dglen > DNS_MAXUDP)) {
     query_usetcp(qu,now);
     return;
   }
-
+#endif
   if (qu->retries >= UDPMAXRETRIES) {
     adns__query_fail(qu,adns_s_timeout);
     return;

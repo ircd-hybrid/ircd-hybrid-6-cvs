@@ -1,5 +1,5 @@
 /*
- * internal.h: $Id: internal.h,v 1.7 2001/12/08 09:13:43 lusky Exp $
+ * internal.h: $Id: internal.h,v 1.8 2002/02/06 04:56:09 androsyn Exp $
  *  
  */
 /*
@@ -59,7 +59,7 @@ typedef unsigned char byte;
 #define MAXSERVERS 5
 #define MAXSORTLIST 15
 #define UDPMAXRETRIES 15
-#define UDPRETRYMS 2000
+#define UDPRETRYMS 1500
 #define TCPWAITMS 30000
 #define TCPCONNMS 14000
 #define TCPIDLEMS 30000
