@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.26 1999/02/15 03:05:13 db Exp $
+ * $Id: config.h,v 1.27 1999/02/16 15:49:52 db Exp $
  */
 
 #ifndef	__config_include__
@@ -813,6 +813,19 @@
  * Define this to enable WintrHawk "styling"
  */
 #define WINTRHAWK
+
+/*
+ * comstud and I have both noted that solaris 2.5 at least, takes a hissy
+ * fit if you don't read a fd that becomes ready right away. Unfortunately
+ * the dog3 priority code relies upon not having to read a ready fd right away.
+ * If you have HTM mode set low as it is normally, the server will
+ * eventually grind to a halt.
+ * Don't complain if Solaris lags if you don't define this. I warned you.
+ *
+ * -Dianora
+ */
+
+#define NO_PRIORITY
 
 /*   STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP  */
 

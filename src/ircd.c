@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.36 1999/02/16 07:06:36 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.37 1999/02/16 15:49:54 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1566,6 +1566,7 @@ time_t io_loop(time_t delay)
    }
 #else
   (void)read_message(delay, NULL); /*  check everything! */
+  flush_server_connections();
 #endif
 
   /*
