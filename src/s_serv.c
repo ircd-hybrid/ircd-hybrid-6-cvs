@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.45 1998/12/17 07:01:37 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.46 1998/12/18 22:51:39 db Exp $";
 #endif
 
 
@@ -1236,6 +1236,8 @@ int	m_info(aClient *cptr,
             return 0;
           if((last_used + PACE_WAIT) > NOW)
             {
+	      /* safe enough to give this on a local connect only */
+	      sendto_one(sptr,rpl_str(RPL_LOAD2HI),me.name,parv[0]);
               return 0;
             }
           else
@@ -1841,6 +1843,8 @@ int	m_links(aClient *cptr,
 
       if((last_used + PACE_WAIT) > NOW)
         {
+	  /* safe enough to give this on a local connect only */
+	  sendto_one(sptr,rpl_str(RPL_LOAD2HI),me.name,parv[0]);
           return 0;
         }
       else
@@ -2074,20 +2078,13 @@ int	m_stats(aClient *cptr,
   char	*name;
   static time_t last_used=0L;
 
-  if (hunt_server(cptr,sptr,":%s STATS %s :%s",2,parc,parv)!=HUNTED_ISME)
-    return 0;
-
   if(!IsAnOper(sptr))
     {
-      /* reject non local requests
-       * but in this case allow stats p
-       */
-      if( !((stat == 'p') || (stat == 'P')) &&
-	  !MyConnect(sptr))
-	return 0;
-
       if((last_used + PACE_WAIT) > NOW)
         {
+	  /* safe enough to give this on a local connect only */
+	  if(MyClient(sptr))
+	    sendto_one(sptr,rpl_str(RPL_LOAD2HI),me.name,parv[0]);
 	  return 0;
         }
       else
@@ -2477,6 +2474,8 @@ int	m_help(aClient *cptr,
       /* HELP is always local */
       if((last_used + PACE_WAIT) > NOW)
         {
+	  /* safe enough to give this on a local connect only */
+	  sendto_one(sptr,rpl_str(RPL_LOAD2HI),me.name,parv[0]);
 	  return 0;
         }
       else
@@ -2518,19 +2517,13 @@ int	 m_lusers(aClient *cptr,
 {
   static time_t last_used=0L;
 
-  if (parc > 2)
-    {
-      if(hunt_server(cptr, sptr, ":%s LUSERS %s :%s", 2, parc, parv)
-       != HUNTED_ISME)
-        {
-          return 0;
-        }
-    }
-
   if(!IsAnOper(sptr))
     {
       if((last_used + PACE_WAIT) > NOW)
         {
+	  /* safe enough to give this on a local connect only */
+	  if(MyClient(sptr))
+	    sendto_one(sptr,rpl_str(RPL_LOAD2HI),me.name,parv[0]);
 	  return 0;
         }
       else
@@ -2539,6 +2532,14 @@ int	 m_lusers(aClient *cptr,
         }
     }
 
+  if (parc > 2)
+    {
+      if(hunt_server(cptr, sptr, ":%s LUSERS %s :%s", 2, parc, parv)
+       != HUNTED_ISME)
+        {
+          return 0;
+        }
+    }
   return(show_lusers(cptr,sptr,parc,parv));
 }
 
@@ -3082,16 +3083,21 @@ int	m_admin(aClient *cptr,
   aConfItem *aconf;
   static time_t last_used=0L;
 
-  if (hunt_server(cptr,sptr,":%s ADMIN :%s",1,parc,parv) != HUNTED_ISME)
-    return 0;
-
   if(!IsAnOper(sptr))
     {
       if((last_used + PACE_WAIT) > NOW)
-	return 0;
+	{
+	  /* safe enough to give this on a local connect only */
+	  if(MyClient(sptr))
+	    sendto_one(sptr,rpl_str(RPL_LOAD2HI),me.name,parv[0]);
+	  return 0;
+	}
       else
 	last_used = NOW;
     }
+
+  if (hunt_server(cptr,sptr,":%s ADMIN :%s",1,parc,parv) != HUNTED_ISME)
+    return 0;
 
   if (IsPerson(sptr))
     sendto_realops_lev(SPY_LEV, "ADMIN requested by %s (%s@%s) [%s]", sptr->name,
@@ -5594,6 +5600,9 @@ int	m_trace(aClient *cptr,
 #if 0
       if((last_used + PACE_WAIT) > NOW)
         {
+	  /* safe enough to give this on a local connect only */
+	  if(MyClient(sptr))
+	    sendto_one(sptr,rpl_str(RPL_LOAD2HI),me.name,parv[0]);
           return 0;
         }
       else
@@ -5817,16 +5826,21 @@ int	m_motd(aClient *cptr,
   aMessageFile *motd_ptr=motd;
   static time_t last_used=0L;
 
-  if (hunt_server(cptr, sptr, ":%s MOTD :%s", 1,parc,parv)!=HUNTED_ISME)
-    return 0;
-
   if(!IsAnOper(sptr))
     {
       if((last_used + PACE_WAIT) > NOW)
-	return 0;
+	{
+	  /* safe enough to give this on a local connect only */
+	  if(MyClient(sptr))
+	    sendto_one(sptr,rpl_str(RPL_LOAD2HI),me.name,parv[0]);
+	  return 0;
+	}
       else
 	last_used = NOW;
     }
+
+  if (hunt_server(cptr, sptr, ":%s MOTD :%s", 1,parc,parv)!=HUNTED_ISME)
+    return 0;
 
   /* Yes, its a kludge, but it works -Dianora */
 #ifdef AMOTD
