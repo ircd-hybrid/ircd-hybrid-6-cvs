@@ -1,11 +1,10 @@
 /*
  * dline_conf.c
  *
- * $Id: dline_conf.c,v 1.22 1999/07/17 07:55:54 tomh Exp $
+ * $Id: dline_conf.c,v 1.23 1999/07/17 23:14:55 db Exp $
  */
 #include "struct.h"
 #include "common.h"
-#include "sys.h"
 #include "numeric.h"
 #include "class.h"
 #include "h.h"
