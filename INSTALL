@@ -1,6 +1,6 @@
 ircd-hybrid-6 INSTALL
 ---------------------
-$Id: INSTALL,v 1.11 2001/12/08 01:59:13 wcampbel Exp $
+$Id: INSTALL,v 1.12 2001/12/08 04:12:39 wcampbel Exp $
 
 hybrid-6 relies upon GNU autoconf.  The following is a transcript of
 recommended procedures that users/administrators of hybrid-6 should
@@ -10,8 +10,7 @@ follow when building and tuning the daemon:
     an idea of what bugs were fixed, features were added, or variables
     were changed.  Changes to ircd.conf are documented in doc/example.conf.
 
-    If you are upgrading from Hybrid6.0 or earlier, you MUST read
-    README.HYBRID6.2-CHANGES
+    If you are upgrading from Hybrid6.0 or earlier, you MUST read RELNOTES.
 
 2.  Run the "configure" script.  It will create "include/setup.h" and the
     Makefiles to match your system:
