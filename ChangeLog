@@ -1,3 +1,17 @@
+ievil       2004/04/10 00:42:43 EDT	(20040410_0)
+
+  Modified files:
+    .                    RELNOTES 
+  Log:
+  Changed a few entries in the 6.4.2 release notes.. it's been running safely
+  as b1 for 5 months and rc1 as really a long time since my server was running
+  b1 + patches long before they got commited.. time to wrap it up?
+  
+  Revision  Changes    Path
+  1.22      +10 -5     ircd-hybrid-6/RELNOTES
+
+
+
 ievil       2004/04/08 21:13:34 EDT	(20040409_2)
 
   Added files:
