@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.38 1999/07/24 02:03:33 tomh Exp $
+ *   $Id: s_auth.c,v 1.39 1999/07/24 06:28:09 tomh Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -37,7 +37,7 @@
 #include "ircd.h"
 #include "s_misc.h"
 #include "struct.h"
-#include "fdlist.h"              /* default_fdlist */
+#include "fdlist.h"              /* fdlist_add */
 
 #include <netdb.h>               /* struct hostent */
 #include <string.h>
@@ -155,7 +155,7 @@ static void release_auth_client(struct Client* client)
     highest_fd = client->fd;
   local[client->fd] = client;
 
-  addto_fdlist(client->fd, &default_fdlist);
+  fdlist_add(client->fd, FDL_DEFAULT);
   add_client_to_list(client);
   
   SetAccess(client);

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.180 1999/07/23 13:24:28 db Exp $
+ *  $Id: s_user.c,v 1.181 1999/07/24 06:28:11 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -3258,7 +3258,7 @@ int     m_oper(aClient *cptr,
       else
         operprivs = "";
 
-      addto_fdlist(sptr->fd, &oper_fdlist);
+      fdlist_add(sptr->fd, FDL_OPER | FDL_BUSY);
 #ifdef CUSTOM_ERR
       sendto_ops("%s (%s@%s) has just acquired the personality of a petty megalomaniacal tyrant [IRC(%c)p]", parv[0],
 #else
@@ -3644,7 +3644,7 @@ int     m_umode(aClient *cptr,
                   aClient *prev_cptr = (aClient *)NULL;
                   aClient *cur_cptr = oper_cptr_list;
 
-                  delfrom_fdlist(sptr->fd, &oper_fdlist);
+                  fdlist_delete(sptr->fd, FDL_OPER | FDL_BUSY);
                   
                   sptr->flags2 &= ~(FLAGS2_OPER_GLOBAL_KILL|
                                     FLAGS2_OPER_REMOTE|

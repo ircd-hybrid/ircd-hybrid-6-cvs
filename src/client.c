@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.32 1999/07/23 13:24:19 db Exp $
+ *  $Id: client.c,v 1.33 1999/07/24 06:28:08 tomh Exp $
  */
 #include "client.h"
 #include "s_conf.h"
@@ -771,7 +771,7 @@ const char* comment        /* Reason for the exit */
 #endif
       if (IsAnOper(sptr))
         {
-          delfrom_fdlist(sptr->fd, &oper_fdlist);
+          fdlist_delete(sptr->fd, FDL_OPER | FDL_BUSY);
           /* LINKLIST */
           /* oh for in-line functions... */
           {
@@ -824,7 +824,7 @@ const char* comment        /* Reason for the exit */
       if (IsServer(sptr))
         {
           Count.myserver--;
-          delfrom_fdlist(sptr->fd, &serv_fdlist);
+          fdlist_delete(sptr->fd, FDL_SERVER | FDL_BUSY);
 
           /* LINKLIST */
           /* oh for in-line functions... */

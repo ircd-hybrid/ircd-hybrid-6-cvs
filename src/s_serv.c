@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.185 1999/07/23 13:24:27 db Exp $
+ *   $Id: s_serv.c,v 1.186 1999/07/24 06:28:10 tomh Exp $
  */
 
 #define CAPTAB
@@ -62,8 +62,6 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <time.h>
-
-extern fdlist serv_fdlist;
 
 int     max_connection_count = 1;
 int     max_client_count = 1;
@@ -940,14 +938,8 @@ static int m_server_estab(aClient *cptr)
   cptr->next_server_client = serv_cptr_list;
   serv_cptr_list = cptr;
 
-  /* adds to fdlist */
-  addto_fdlist(cptr->fd,&serv_fdlist);
+  fdlist_add(cptr->fd, FDL_SERVER | FDL_BUSY);
 
-#ifndef NO_PRIORITY
-  /* this causes the server to be marked as "busy" */
-  check_fdlists(timeofday);
-#endif
- 
   nextping = timeofday;
   /* ircd-hybrid-6 can do TS links, and  zipped links*/
   sendto_ops("Link with %s established: (%s) link",
