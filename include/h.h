@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.31 1999/07/08 00:36:25 db Exp $
+ * $Id: h.h,v 1.32 1999/07/08 05:44:14 tomh Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -154,7 +154,7 @@ extern  void	do_include_conf();
 extern  void	del_client_from_llist(aClient **, aClient *);
 extern	aConfItem	*match_Dline(unsigned long);
 extern	int	show_lusers(aClient *, aClient *, int, char **);
-extern	int	nickkilldone(aClient *, aClient *, int, char **,ts_val,char *);
+extern	int	nickkilldone(aClient*, aClient*, int, char**, time_t, char*);
 extern	char	*show_iline_prefix(aClient *,aConfItem *,char *);
 /* END Missing definitions */
 
