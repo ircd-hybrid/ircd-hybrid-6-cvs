@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.62 2001/12/04 08:26:50 db Exp $
+ *   $Id: m_kline.c,v 1.63 2001/12/04 12:24:16 db Exp $
  */
 #include "m_commands.h"
 #include "m_kline.h"
@@ -302,7 +302,7 @@ WriteKline(const char *filename, struct Client *sptr, struct Client *rcptr,
 
   if (oper_reason != NULL)
     {
-      ircsprintf(buffer, "K:%s:%s|%s (%s):%s\n",
+      ircsprintf(buffer, "K:%s:%s (%s) |%s:%s\n",
 		 host,
 		 reason,
 		 oper_reason,
