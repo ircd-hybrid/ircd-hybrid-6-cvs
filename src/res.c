@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.65 2001/11/21 08:58:53 db Exp $
+ * $Id: res.c,v 1.66 2001/11/28 05:28:45 lusky Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
@@ -60,8 +60,8 @@
 #endif
 
 #define MAXPACKET       1024  /* rfc sez 512 but we expand names so ... */
-#define RES_MAXALIASES  35    /* maximum aliases allowed */
-#define RES_MAXADDRS    35    /* maximum addresses allowed */
+#define RES_MAXALIASES  1	/* 35    /* maximum aliases allowed */
+#define RES_MAXADDRS    1	/* 35    /* maximum addresses allowed */
 
 /*
  * macros used to calulate offsets into fixed query buffer
