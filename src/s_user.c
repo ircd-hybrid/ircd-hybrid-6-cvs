@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.228 2000/12/01 06:28:50 lusky Exp $
+ *  $Id: s_user.c,v 1.229 2000/12/22 02:28:12 lusky Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -558,8 +558,10 @@ static int register_user(aClient *cptr, aClient *sptr,
 
         case I_LINE_FULL:
         case I_LINE_FULL2:
-          sendto_realops_flags(FLAGS_FULL, "%s for %s.",
-                               "I-line is full", get_client_host(sptr));
+          sendto_realops_flags(FLAGS_FULL, "%s for %s (%s).",
+                               "I-line is full",
+                               get_client_host(sptr),
+                               inetntoa((char*) &sptr->ip));
           log(L_INFO,"Too many connections from %s.", get_client_host(sptr));
           ServerStats->is_ref++;
           return exit_client(cptr, sptr, &me, 
