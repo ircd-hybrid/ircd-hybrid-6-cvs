@@ -1,3 +1,19 @@
+ievil       2004/05/23 11:41:43 EDT	(20040523_6)
+
+  Modified files:
+    src                  m_whois.c 
+  Log:
+  Cleaned up m_whois, removed wildcards whois. We do have operspy instead
+  now and it actually didn't work either. Might consider adding h7 whois
+  wildcard stuff later. But ratbox dont use it anymore so who knows..
+  
+  tada..
+  
+  Revision  Changes    Path
+  1.19      +70 -341   ircd-hybrid-6/src/m_whois.c
+
+
+
 ievil       2004/05/23 11:27:23 EDT	(20040523_5)
 
   Modified files:
