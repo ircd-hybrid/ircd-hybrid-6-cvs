@@ -1,3 +1,21 @@
+ievil       2004/05/23 10:22:47 EDT	(20040523_0)
+
+  Modified files:
+    .                    Hybrid-team 
+    include              numeric.h 
+    src                  messages.tab messages_cust.tab 
+  Log:
+  updated the hybrid-team per Wohali/Dianora.
+  expanded numerics to do up to 999
+  
+  Revision  Changes    Path
+  1.35      +6 -1      ircd-hybrid-6/Hybrid-team
+  1.25      +1 -1      ircd-hybrid-6/include/numeric.h
+  1.31      +496 -2    ircd-hybrid-6/src/messages.tab
+  1.30      +496 -2    ircd-hybrid-6/src/messages_cust.tab
+
+
+
 bill        2004/04/23 00:12:08 EDT	(20040423_0)
 
   Modified files:
