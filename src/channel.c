@@ -22,12 +22,13 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.204 2001/07/18 01:37:10 lusky Exp $
+ * $Id: channel.c,v 1.205 2001/07/18 02:15:24 lusky Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
 #include "client.h"
 #include "common.h"
+#include "flud.h"
 #include "hash.h"
 #include "irc_string.h"
 #include "ircd.h"

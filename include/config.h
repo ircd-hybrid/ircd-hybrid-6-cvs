@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.122 2001/07/10 12:40:26 jdc Exp $
+ * $Id: config.h,v 1.123 2001/07/18 02:15:18 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -1020,11 +1020,6 @@
 #if defined(NO_CHANOPS_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT)
 #define NEED_SPLITCODE
 #endif
-
-#ifdef FLUD
-void    free_fluders();
-void    free_fludees();
-#endif /* FLUD */
 
 #ifdef ANTI_SPAMBOT
 #define MIN_SPAM_NUM 5

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd_signal.c,v 1.2 1999/07/31 08:22:58 tomh Exp $
+ * $Id: ircd_signal.c,v 1.3 2001/07/18 02:15:26 lusky Exp $
  */
 #include "ircd_signal.h"
 #include "ircd.h"         /* dorehash */
@@ -71,7 +71,7 @@ static void sigint_handler(int sig)
 /*
  * setup_signals - initialize signal handlers for server
  */
-void setup_signals()
+void setup_signals(void)
 {
   struct sigaction act;
 

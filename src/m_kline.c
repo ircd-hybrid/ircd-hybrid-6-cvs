@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.58 2001/07/18 01:37:13 lusky Exp $
+ *   $Id: m_kline.c,v 1.59 2001/07/18 02:15:27 lusky Exp $
  */
 #include "m_commands.h"
 #include "m_kline.h"
@@ -66,7 +66,7 @@ extern aConfItem *find_special_conf(char *,int); /* defined in s_conf.c */
 /*
  * LockFile routines
  */
-static aPendingLine *AddPending();
+static aPendingLine *AddPending(void);
 static void DelPending(aPendingLine *);
 static int LockedFile(const char *);
 static void WritePendingLines(const char *);
@@ -82,7 +82,7 @@ AddPending()
 */
 
 static aPendingLine *
-AddPending()
+AddPending(void)
 
 {
   aPendingLine *temp;

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.145 2001/07/18 01:37:12 lusky Exp $
+ * $Id: ircd.c,v 1.146 2001/07/18 02:15:26 lusky Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -275,7 +275,7 @@ static void init_sys(int boot_daemon)
  *      This is called when the commandline is not acceptable.
  *      Give error message and exit without starting anything.
  */
-static void bad_command()
+static void bad_command(void)
 {
   fprintf(stderr, 
           "Usage: ircd [-d dlinefile] [-f configfile] [-h servername] "

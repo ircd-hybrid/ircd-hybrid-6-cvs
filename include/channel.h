@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: channel.h,v 1.33 2001/07/18 01:37:05 lusky Exp $
+ * $Id: channel.h,v 1.34 2001/07/18 02:15:18 lusky Exp $
  */
 
 #ifndef INCLUDED_channel_h
@@ -92,7 +92,6 @@ extern  struct  Channel *channel;
 /* Maximum mode changes allowed per client, per server is different */
 #define MAXMODEPARAMS   4
 
-extern void sync_channels();
 extern struct Channel* find_channel (char *, struct Channel *);
 extern struct SLink*   find_channel_link(struct SLink *, struct Channel *);
 extern void    remove_user_from_channel(struct Client *,struct Channel *,int);

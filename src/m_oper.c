@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_oper.c,v 1.9 2001/07/18 01:37:14 lusky Exp $
+ *   $Id: m_oper.c,v 1.10 2001/07/18 02:15:27 lusky Exp $
  */
 
 #include "m_commands.h"
@@ -37,6 +37,9 @@
 
 #include <fcntl.h>
 #include <unistd.h>
+#ifdef CRYPT_OPER_PASSWORD
+#include <crypt.h>
+#endif /* CRYPT_OPER_PASSWORD */
 
 
 /*
@@ -106,9 +109,6 @@ int m_oper(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 {
   struct ConfItem *aconf;
   char  *name, *password, *encr;
-#ifdef CRYPT_OPER_PASSWORD
-  extern        char *crypt();
-#endif /* CRYPT_OPER_PASSWORD */
   char *operprivs;
   static char buf[BUFSIZE];
 

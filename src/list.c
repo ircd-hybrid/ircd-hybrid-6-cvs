@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu, Computing Center and Jarkko Oikarinen
  *
- * $Id: list.c,v 1.41 2000/11/18 19:11:11 lusky Exp $
+ * $Id: list.c,v 1.42 2001/07/18 02:15:27 lusky Exp $
  */
 #include "struct.h"
 #include "blalloc.h"
@@ -66,7 +66,7 @@
 
 #define USERS_PREALLOCATE 1024
 
-void    outofmemory();
+void    outofmemory(void);
 
 /* for Wohali's block allocator */
 BlockHeap *free_Links;

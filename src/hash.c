@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: hash.c,v 1.38 2001/07/18 01:37:12 lusky Exp $
+ *  $Id: hash.c,v 1.39 2001/07/18 02:15:26 lusky Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -149,7 +149,7 @@ unsigned int hash_channel_name(const char* name)
  *
  * Nullify the hashtable and its contents so it is completely empty.
  */
-static void clear_client_hash_table()
+static void clear_client_hash_table(void)
 {
 #ifdef        DEBUGMODE
   clhits = 0;
@@ -161,7 +161,7 @@ static void clear_client_hash_table()
   memset(clientTable, 0, sizeof(struct HashEntry) * U_MAX);
 }
 
-static void clear_channel_hash_table()
+static void clear_channel_hash_table(void)
 {
 #ifdef        DEBUGMODE
   chmiss = 0;
