@@ -19,7 +19,7 @@
  *
  *      I kind of modernized this code a bit. -Dianora
  *
- *   $Id: numeric.c,v 1.3 1999/07/28 22:27:46 tomh Exp $
+ *   $Id: numeric.c,v 1.4 2001/11/22 01:19:21 db Exp $
  */
 #include "numeric.h"
 #include "irc_string.h"
@@ -27,52 +27,38 @@
 
 #include <assert.h>
 
-#ifdef CUSTOM_ERR            /* ZZZZ ick */
+#ifdef CUSTOM_ERR            /* XXX ick */
 #include "messages_cust.tab"
 #else
 #include "messages.tab"
 #endif
 
-
-/*
- * The observant will note that err_str and rpl_str
- * could be replaced by one function now. 
- * -Dianora
- * ok. ;-)
- */
-
-#if 0
-static char numbuff[512];  /* ZZZ There is no reason this has to
-                            * be so large
-                            */
-#endif
+char numbuff[512];
 
 const char* form_str(int numeric)
 {
 
   assert(-1 < numeric);
   assert(numeric < ERR_LAST_ERR_MSG);
-  assert(0 != replies[numeric]);
+  assert(replies[numeric] != NULL);
   
-  return replies[numeric];
-#if 0
-  char *nptr;
+  /* XXX eek these were meant to be dummy entries in message.tab for now... */
+
   if ((numeric < 0) || (numeric > ERR_LAST_ERR_MSG))
-    {
+  {
       ircsprintf(numbuff, ":%%s %d %%s :INTERNAL ERROR: BAD NUMERIC! %d",
                  numeric, numeric);
       return numbuff;
-    }
+  }
 
-  if (!(nptr = replies[numeric]))
-    {
-      ircsprintf(numbuff, ":%%s %d %%s :NO ERROR FOR NUMERIC ERROR %d",
-                 numeric, numeric);
-      return numbuff;
-    }
-  else
-    return nptr;
-#endif
+  if (replies[numeric] == NULL)
+  {
+    ircsprintf(numbuff, ":%%s %d %%s :NO ERROR FOR NUMERIC ERROR %d",
+	       numeric, numeric);
+    return numbuff;
+  }
+
+  return replies[numeric];
 }
 
 
