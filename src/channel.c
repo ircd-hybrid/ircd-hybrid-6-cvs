@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.238 2003/06/06 09:06:38 ievil Exp $
+ * $Id: channel.c,v 1.239 2003/06/06 09:18:44 ievil Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -39,6 +39,7 @@
 #include "send.h"
 #include "struct.h"
 #include "whowas.h"
+#include "s_conf.h"       
 
 #include <assert.h>
 #include <string.h>
@@ -4179,7 +4180,7 @@ void report_juped_channels(struct Client *sptr)
         mj = 0;
         for (qp = q_conf; qp; qp = qp->next)
         {
-          if (!qp->name || irccmp(qp->name, chptr->name)) continue;
+          if (!qp->name || irccmp(qp->name, chptr->chname)) continue;
           // qp->name and aconf->name is set to the same variable.
           mj = 1;
           break;
