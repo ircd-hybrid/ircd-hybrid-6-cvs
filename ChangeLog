@@ -1,3 +1,15 @@
+ievil       2003/06/17 20:58:19 EDT	(20030618_0)
+
+  Modified files:
+    doc                  example.conf 
+  Log:
+  updated the example config to include S and Z flags.
+  
+  Revision  Changes    Path
+  1.39      +4 -0      ircd-hybrid-6/doc/example.conf
+
+
+
 ievil       2003/06/17 18:45:30 EDT	(20030617_1)
 
   Modified files:
