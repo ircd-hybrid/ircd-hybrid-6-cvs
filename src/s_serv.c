@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.140 1999/07/15 08:47:41 tomh Exp $
+ *   $Id: s_serv.c,v 1.141 1999/07/16 02:40:37 db Exp $
  */
 
 #define CAPTAB
@@ -43,6 +43,7 @@
 #include "class.h"
 #include "send.h"
 #include "hash.h"
+#include "s_debug.h"
 
 #ifndef __EMX__
 #include <utmp.h> /* old slackware utmp.h defines BYTE_ORDER */
@@ -1675,9 +1676,7 @@ int	m_stats(aClient *cptr,
       break;
 
     case 'R' : case 'r' :
-#ifdef DEBUGMODE
       send_usage(sptr,parv[0]);
-#endif
       valid_stats++;
       break;
 

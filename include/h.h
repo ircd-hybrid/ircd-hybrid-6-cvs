@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.37 1999/07/15 08:47:29 tomh Exp $
+ * $Id: h.h,v 1.38 1999/07/16 02:40:34 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -205,9 +205,8 @@ extern void	off_history (aClient *);
 extern	int	dopacket (aClient *, char *, int);
 
 /*VARARGS2*/
-extern	void	debug();
+extern	void	debug(int, char *, ...);
 #ifdef DEBUGMODE
-extern	void	send_usage (aClient *, char *);
 extern	void	send_listinfo (aClient *, char *);
 extern	void	count_memory (aClient *, char *);
 #endif

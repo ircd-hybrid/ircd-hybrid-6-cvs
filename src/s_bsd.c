@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.60 1999/07/15 08:47:39 tomh Exp $
+ *  $Id: s_bsd.c,v 1.61 1999/07/16 02:40:37 db Exp $
  */
 #include "s_bsd.h"
 #include "listener.h"
@@ -1408,9 +1408,6 @@ int read_message(time_t delay, fdlist *listp)        /* mika */
     rr = FD_ISSET(i, read_set);
     if (!NoNewLine(cptr) || rr)
       length = read_packet(cptr, rr);
-#ifdef DEBUGMODE
-    readcalls++;
-#endif
 
     if ((length != FLUSH_BUFFER) && IsDead(cptr)) {
       if (FD_ISSET(i, read_set)) {
@@ -1719,9 +1716,7 @@ int read_message(time_t delay, fdlist *listp)
       length = 1;     /* for fall through case */
       if (!NoNewLine(cptr) || rr)
         length = read_packet(cptr, rr);
-#ifdef DEBUGMODE
-          readcalls++;
-#endif
+
       if (length == FLUSH_BUFFER)
         continue;
       if (IsDead(cptr))
