@@ -1,3 +1,16 @@
+ievil       2003/08/20 12:19:42 EDT	(20030820_0)
+
+  Modified files:
+    include              config.h 
+  Log:
+  Cleanup of config.h,.. moved CHANMODE_E and CHANMODE_I away from "not
+  approved for EFNET section" since it's now improved.
+  
+  Revision  Changes    Path
+  1.167     +24 -24    ircd-hybrid-6/include/config.h
+
+
+
 ievil       2003/08/18 02:31:34 EDT	(20030818_0)
 
   Modified files:
