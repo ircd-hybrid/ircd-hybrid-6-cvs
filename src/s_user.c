@@ -25,7 +25,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.15 1998/10/28 02:06:21 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.16 1998/11/06 22:35:25 db Exp $";
 
 #endif
 
@@ -552,7 +552,7 @@ static	int	register_user(aClient *cptr,
               sendto_realops_lev(CCONN_LEV, "%s from %s [%s].",
 				 "Unauthorized client connection",
 				 get_client_host(sptr),
-				 inetntoa((char *)&sptr->ip));
+				 sptr->hostip);
 #if 0
 #ifdef USE_SYSLOG
 	    syslog(LOG_INFO,"%s from %s.",i == -3 ? "Too many connections" :
