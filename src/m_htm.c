@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_htm.c,v 1.1 1999/07/30 06:40:14 tomh Exp $
+ *   $Id: m_htm.c,v 1.2 2001/11/18 05:52:32 greg Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -118,7 +118,7 @@ int m_htm(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
               int new_value = atoi(parv[2]);
               if (new_value < 10)
                 {
-                  sendto_one(sptr, ":%s NOTICE %s :\002Cannot set LRV < 10!\002",
+                  sendto_one(sptr, ":%s NOTICE %s :Cannot set LRV < 10!\002",
                              me.name, parv[0]);
                 }
               else
