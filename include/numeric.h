@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: numeric.h,v 1.26 2004/05/23 16:10:02 ievil Exp $
+ * $Id: numeric.h,v 1.27 2004/05/23 16:25:20 ievil Exp $
  */
 #ifndef INCLUDED_numeric_h
 #define INCLUDED_numeric_h
@@ -360,6 +360,9 @@ extern const char* form_str(int);
 #define ERR_USERSDONTMATCH   502
 
 #define ERR_GHOSTEDCLIENT    503
+
+#define RPL_ETRACE           709
+
 #define ERR_LAST_ERR_MSG     999
 
 #endif /* INCLUDED_numeric_h */

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: messages_cust.tab,v 1.31 2004/05/23 16:10:05 ievil Exp $
+ * $Id: messages_cust.tab,v 1.32 2004/05/23 16:25:22 ievil Exp $
  *
  */
 /* 
@@ -761,7 +761,7 @@ static  char *  replies[] = {
 /* 706 */       NULL,
 /* 707 */       NULL,
 /* 708 */       NULL,
-/* 709 */       NULL,
+/* 709 RPL_ETRACE, */           ":%s 709 %s %s %d %s %s %s %s :%s",
 /* 710 */       NULL,
 /* 711 */       NULL,
 /* 712 */       NULL,

@@ -19,7 +19,7 @@
  *
  *      I kind of modernized this code a bit. -Dianora
  *
- *   $Id: messages.tab,v 1.32 2004/05/23 16:10:05 ievil Exp $
+ *   $Id: messages.tab,v 1.33 2004/05/23 16:25:22 ievil Exp $
  */
 
 static  char *  replies[] = {
@@ -759,7 +759,7 @@ static  char *  replies[] = {
 /* 706 */       NULL,
 /* 707 */       NULL,
 /* 708 */       NULL,
-/* 709 */       NULL,
+/* 709 RPL_ETRACE, */           ":%s 709 %s %s %d %s %s %s %s :%s",
 /* 710 */       NULL,
 /* 711 */       NULL,
 /* 712 */       NULL,

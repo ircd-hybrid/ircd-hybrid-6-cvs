@@ -1,0 +1,19 @@
+$Id: ETRACE.txt,v 1.1 2004/05/23 16:25:19 ievil Exp $
+
+ETRACE Protocol (by W. Campbell)
+
+ETRACE is used to provide monitor bots with all of the information they
+should need, including GECOS data (which is absent from a standard TRACE).
+
+The ETRACE command is only available to local opered connections.  The
+command takes no parameters.
+
+ETRACE will retun the following numerics:
+
+:<source> 709 <dest> <status> <class> <nick> <username> <host> <ip> :<gecos>
+
+Where the <status> field is "Oper" or "User"
+and the <ip> field is "255.255.255.255" for a spoofed connection.
+
+:<source> 262 <dest> <source> :End of TRACE
+
