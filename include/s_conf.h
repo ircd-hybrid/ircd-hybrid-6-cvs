@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.3 1999/07/03 20:24:20 tomh Exp $
+ * $Id: s_conf.h,v 1.4 1999/07/04 09:00:48 tomh Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.4  1999/07/04 09:00:48  tomh
+ * more cleanup, only call delete_resolver_queries when there are outstanding requests
+ *
  * Revision 1.3  1999/07/03 20:24:20  tomh
  * clean up class macros, includes
  *
@@ -126,27 +129,29 @@ struct ConfItem
 extern struct ConfItem* ConfigItemList;   /* GLOBAL - conf list head */
 
 
-extern FBFILE* openconf(char* filename);
-extern void initconf(int, FBFILE*, int);
+extern struct ConfItem* make_conf(void);
+extern void             free_conf(struct ConfItem*);
 
-extern struct hostent* conf_dns_lookup(struct ConfItem* aconf);
-extern  int       attach_conf (struct Client*, struct ConfItem *);
-extern  struct ConfItem *attach_confs (struct Client*, char *, int);
-extern  struct ConfItem *attach_confs_host (struct Client*, char *, int);
-extern  int       attach_Iline (struct Client *, struct hostent *,char *,
-                                char *,char **);
-extern  struct ConfItem *find_me (void);
-extern  struct ConfItem *find_admin (void);
-extern  struct ConfItem *count_cnlines (struct SLink *);
-extern  void      det_confs_butmask (struct Client *, int);
-extern  int       detach_conf (struct Client *, struct ConfItem *);
-extern  struct ConfItem *det_confs_butone (struct Client *, struct ConfItem *);
-extern  struct ConfItem *find_conf (struct SLink *, char*, int);
-extern  struct ConfItem *find_conf_exact (char *, char *, char *, int);
-extern  struct ConfItem *find_conf_host (struct SLink *, char *, int);
-extern  struct ConfItem *find_conf_ip (struct SLink *, char *, char *, int);
-extern  struct ConfItem *find_conf_name (char *, int);
-extern  struct ConfItem *find_kill (struct Client *);
+extern FBFILE*          openconf(char* filename);
+extern void             initconf(int, FBFILE*, int);
+extern struct hostent*  conf_dns_lookup(struct ConfItem* aconf);
+extern int              attach_conf(struct Client*, struct ConfItem *);
+extern struct ConfItem* attach_confs(struct Client*, char *, int);
+extern struct ConfItem* attach_confs_host(struct Client*, char *, int);
+extern int              attach_Iline(struct Client *, struct hostent *,
+                                     char *, char *,char **);
+extern struct ConfItem* find_me (void);
+extern struct ConfItem* find_admin (void);
+extern struct ConfItem* count_cnlines (struct SLink *);
+extern void             det_confs_butmask (struct Client *, int);
+extern int              detach_conf (struct Client *, struct ConfItem *);
+extern struct ConfItem* det_confs_butone (struct Client *, struct ConfItem *);
+extern struct ConfItem* find_conf (struct SLink *, char*, int);
+extern struct ConfItem* find_conf_exact (char *, char *, char *, int);
+extern struct ConfItem* find_conf_host (struct SLink *, char *, int);
+extern struct ConfItem* find_conf_ip (struct SLink *, char *, char *, int);
+extern struct ConfItem* find_conf_name (char *, int);
+extern struct ConfItem* find_kill (struct Client *);
 
 
 #endif /* INCLUDED_s_conf_h */
