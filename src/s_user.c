@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.58 1999/03/04 04:38:20 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.59 1999/03/08 02:33:30 db Exp $";
 
 #endif
 
@@ -2184,14 +2184,12 @@ static	int	m_message(aClient *cptr,
    * syntax could be used to flood without FLUD protection
    * its also a delightful way for non-opers to find users who
    * have changed nicks -Dianora
+   *
+   * Grrr it was pointed out to me that x@service is valid
+   * for non-opers too, and wouldn't allow for flooding/stalking
+   * -Dianora
    */
 
-  if(!IsAnOper(sptr))
-    {
-      sendto_one(sptr, err_str(ERR_NOSUCHNICK),
-		 me.name, parv[0], nick);
-      return -1;
-    }
 	
   /*
   ** the following two cases allow masks in NOTICEs
@@ -2201,6 +2199,14 @@ static	int	m_message(aClient *cptr,
   */
   if ((*nick == '$' || *nick == '#'))
     {
+
+      if(!IsAnOper(sptr))
+	{
+	  sendto_one(sptr, err_str(ERR_NOSUCHNICK),
+		     me.name, parv[0], nick);
+	  return -1;
+	}
+
       if (!(s = (char *)strrchr(nick, '.')))
 	{
 	  sendto_one(sptr, err_str(ERR_NOTOPLEVEL),
@@ -2232,6 +2238,17 @@ static	int	m_message(aClient *cptr,
       (acptr = find_server(server + 1, NULL)))
     {
       int count = 0;
+
+      /* Disable the user%host@server form for non-opers
+       * -Dianora
+       */
+
+      if( (char *)strchr(nick,'%') && !IsAnOper(sptr))
+	{
+	  sendto_one(sptr, err_str(ERR_NOSUCHNICK),
+		     me.name, parv[0], nick);
+	  return -1;
+	}
 	
       /*
       ** Not destined for a user on me :-(

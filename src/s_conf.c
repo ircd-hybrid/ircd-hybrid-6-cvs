@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.41 1999/03/04 04:38:17 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.42 1999/03/08 02:33:28 db Exp $";
 #endif
 
 #include "struct.h"
@@ -287,15 +287,36 @@ static int attach_iline(
 #ifdef LIMIT_UH
   if ((aconf->class->conFreq) && (ip_found->count_of_idented_users_on_this_ip
 				  > aconf->class->conFreq))
-    return -4; /* Already at maximum allowed idented users@host */
+    {
+      if(!IsConfFlined(aconf))
+	return -4; /* Already at maximum allowed ip#'s */
+      else
+	{
+	  sendto_one(cptr,
+       ":%s NOTICE %s :*** FLINE :I: line is full, but you have an >I: line!",
+		     me.name,cptr->name);
+	}
+    }
 #else
   /* only check it if its non zero */
   if ((aconf->class->conFreq) && (ip_found->count > aconf->class->conFreq))
-    return -4; /* Already at maximum allowed ip#'s */
+    {
+      if(!IsConfFlined(aconf))
+	return -4; /* Already at maximum allowed ip#'s */
+      else
+	{
+	  sendto_one(cptr,
+       ":%s NOTICE %s :*** FLINE :I: line is full, but you have an >I: line!",
+		     me.name,cptr->name);
+	}
+    }
 #endif
 
+#ifdef 0
+  /* What exactly is this crap? */
   if(IsLimitIp(aconf) && (ip_found->count > 1))
     return -4; /* Already at maximum allowed ip#'s */
+#endif
   
   return ( attach_conf(cptr, aconf) );
 }
@@ -800,6 +821,10 @@ int	attach_conf(aClient *cptr,aConfItem *aconf)
    * not total in Y
    * -Dianora
    */
+  /* blah this code is not used at the moment, needs to be rewritten
+   * look at attach_iline()
+   * -Dianora
+   */
 #ifdef OLD_Y_LIMIT
   if ((aconf->status & (CONF_LOCOP | CONF_OPERATOR | CONF_CLIENT)) &&
     aconf->clients >= ConfMaxLinks(aconf) && ConfMaxLinks(aconf) > 0)
@@ -817,7 +842,7 @@ int	attach_conf(aClient *cptr,aConfItem *aconf)
 	  else
 	    {
 	      send(cptr->fd,
-		   "NOTICE FLINE :I: line is full, but you have an F: line!\n",
+		   "NOTICE FLINE :I: line is full, but you have an >I: line!\n",
 		   56, 0);
 	      SetFlined(cptr);
 	    }
