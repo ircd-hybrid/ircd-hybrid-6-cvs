@@ -1,7 +1,7 @@
 /*
  * m_info.c 
  *
- * $Id: m_info.c,v 1.39 2001/06/06 13:38:47 leeh Exp $
+ * $Id: m_info.c,v 1.40 2001/07/01 20:46:30 greg Exp $
  */
 #define DEFINE_M_INFO_DATA
 #include "m_info.h"
@@ -60,14 +60,14 @@ m_info(aClient *cptr, aClient *sptr, int parc, char *parv[])
     while (*text)
       sendto_one(sptr, form_str(RPL_INFO), me.name, parv[0], *text++);
 
-    sendto_one(sptr, form_str(RPL_INFO), me.name, parv[0], "");
-
     /*
      * Now send them a list of all our configuration options
      * (mostly from config.h)
      */
     if (IsAnOper(sptr))
     {
+      sendto_one(sptr, form_str(RPL_INFO), me.name, parv[0], "Compile-time configuration options:");
+
       for (infoptr = MyInformation; infoptr->name; infoptr++)
       {
         if (infoptr->intvalue)
@@ -89,6 +89,9 @@ m_info(aClient *cptr, aClient *sptr, int parc, char *parv[])
             infoptr->strvalue,
             infoptr->desc);
       }
+
+      sendto_one(sptr, form_str(RPL_INFO), me.name, parv[0], "");
+
 #ifndef SERVERHIDE
       sendto_one(sptr,
         ":%s %d %s :Compiled on [%s]",
@@ -97,12 +100,12 @@ m_info(aClient *cptr, aClient *sptr, int parc, char *parv[])
         parv[0],
         platform);
 #endif
+      sendto_one(sptr, form_str(RPL_INFO), me.name, parv[0], "");
+
     } /* if (IsAnOper(sptr)) */
 
-    sendto_one(sptr, form_str(RPL_INFO), me.name, parv[0], "");
-
     sendto_one(sptr,
-      ":%s %d %s :Birth Date: %s, compile # %s",
+      ":%s %d %s :Birth Date: %s, compile #%s",
       me.name,
       RPL_INFO,
       parv[0],
