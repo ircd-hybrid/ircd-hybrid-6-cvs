@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.262 2003/07/01 13:05:09 ievil Exp $
+ *  $Id: s_user.c,v 1.263 2003/08/16 18:48:40 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -758,13 +758,14 @@ static int register_user(aClient *cptr, aClient *sptr,
 #endif
 
       sendto_realops_flags(FLAGS_CCONN,
-                         "Client connecting: %s (%s@%s) [%s] {%d}",
+                         "Client connecting: %s (%s@%s) [%s] {%d} [%s]",
                          nick, sptr->username, sptr->host,
 #ifdef HIDE_SPOOF_IPS
                          IsIPSpoof(sptr) ? "255.255.255.255" : 
 #endif /* HIDE_SPOOF_IPS */
                          inetntoa((char *)&sptr->ip),
-                         get_client_class(sptr));
+                         get_client_class(sptr),
+			 sptr->info );
 
       if(IsInvisible(sptr))
         Count.invisi++;
