@@ -25,7 +25,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.7 1998/10/09 22:36:29 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.8 1998/10/10 20:13:52 db Exp $";
 
 #endif
 
@@ -1226,8 +1226,17 @@ static	int	register_user(aClient *cptr,
 	 * local client
 	 * -Dianora
 	 */
+	/*
+	 * double link list only for clients, traversing
+	 * a small link list for opers/servers isn't a big deal
+	 * but it is for clients -Dianora
+	 */
+
 	if (MyConnect(sptr))
 	  {
+	    if(local_cptr_list)
+	      local_cptr_list->previous_local_client = sptr;
+	    sptr->previous_local_client = (aClient *)NULL;
 	    sptr->next_local_client = local_cptr_list;
 	    local_cptr_list = sptr;
 	  }
