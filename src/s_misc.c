@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.5 1998/10/10 20:13:51 db Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.6 1998/10/10 21:42:44 db Exp $";
 #endif
 
 #include <sys/time.h>
@@ -441,28 +441,27 @@ char	*comment	/* Reason for the exit */
 	}
       if (IsClient(sptr))
         {
-	  aClient *nxt_client;
-	  aClient *prv_client;
-
           Count.local--;
 
           /* LINKLIST */
           /* oh for in-line functions... */
           if(IsPerson(sptr))	/* a little extra paranoia */
             {
-	      nxt_client = sptr->next_local_client;
-	      prv_client = sptr->previous_local_client;
-
-	      if(prv_client)
-		prv_client->next_local_client = nxt_client;
-
-	      if(nxt_client)
-		nxt_client->previous_local_client = prv_client;
+	      if(sptr->previous_local_client)
+		sptr->previous_local_client->next_local_client =
+		  sptr->next_local_client;
 	      else
 		{
 		  if(local_cptr_list == sptr)
-		    local_cptr_list = (aClient *)NULL;
+		    {
+		      local_cptr_list = sptr->next_local_client;
+		    }
 		}
+
+	      if(sptr->next_local_client)
+		sptr->next_local_client->previous_local_client =
+		  sptr->previous_local_client;
+
 	      sptr->previous_local_client = sptr->next_local_client = 
 		(aClient *)NULL;
             }
