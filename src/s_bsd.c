@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.36 1999/05/19 05:31:01 db Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.37 1999/05/22 18:49:23 lusky Exp $";
 #endif
 
 #include "struct.h"
@@ -1316,7 +1316,6 @@ aClient	*add_connection(aClient *cptr, int fd)
   Link	lin;
   aClient *acptr;
   aConfItem *aconf = NULL;
-  aConfItem *found_conf = NULL;
   acptr = make_client(NULL);
 
   if (cptr != &me)
