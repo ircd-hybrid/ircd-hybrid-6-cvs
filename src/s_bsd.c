@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.121 1999/10/10 03:43:02 lusky Exp $
+ *  $Id: s_bsd.c,v 1.122 1999/10/14 06:14:43 lusky Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -64,6 +64,7 @@
  */
 #ifdef USE_POLL
 #include <sys/poll.h>
+#define CONNECTFAST
 #endif
 
 #ifndef IN_LOOPBACKNET
@@ -1171,10 +1172,6 @@ int read_message(time_t delay, unsigned char mask)        /* mika */
                 pfd->fd     = thisfd;           \
                 pfd->events = 0;                \
         }
-
-#if defined(SOL20)
-#define CONNECTFAST
-#endif
 
 int read_message(time_t delay, unsigned char mask)
 {
