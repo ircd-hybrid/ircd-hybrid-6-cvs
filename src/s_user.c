@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.55 1999/01/23 12:07:13 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.56 1999/02/15 03:05:20 db Exp $";
 
 #endif
 
@@ -1281,6 +1281,8 @@ static	int	register_user(aClient *cptr,
 		     nick, sptr->hopcount+1, sptr->tsinfo, ubuf,
 		     user->username, user->host, user->server,
 		     sptr->info);
+  if (ubuf[1])
+    send_umode_out(cptr, sptr, 0);
   return 0;
 }
 

@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.69 1999/02/10 00:17:16 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.70 1999/02/15 03:05:19 db Exp $";
 #endif
 
 
@@ -4730,7 +4730,8 @@ int m_unkline (aClient *cptr,aClient *sptr,int parc,char *parv[])
 {
   int   in, out;
   int	pairme = NO;
-  char	buf[256], buff[256];
+  char	buf[BUFSIZE];
+  char  buff[BUFSIZE];	/* matches line definition in s_conf.c */
   char	temppath[256];
 
 #ifdef SEPARATE_QUOTE_KLINES_BY_DATE
@@ -4884,7 +4885,7 @@ K:bar:No reason (1997/08/30 14.56):foo
 	  char *found_user;
 	  char *found_comment;
 
-	  strcpy(buff,buf);
+	  strncpy(buff,buf,BUFSIZ);	/* extra paranoia */
 
 	  p = strchr(buff,'\n');
 	  if(p)
