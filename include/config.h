@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.139 2001/10/25 16:28:14 leeh Exp $
+ * $Id: config.h,v 1.140 2001/11/30 08:00:18 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -323,10 +323,6 @@
  * However, the client will still see the real reason upon connect attempts.
  */
 #define KLINE_WITH_CONNECTION_CLOSED
-
-/* BOTCHECK - rudimentary bot checking
- */
-#define BOTCHECK
 
 /* x_LINES_OPER_ONLY - Allow only local opers to see these stats
  *

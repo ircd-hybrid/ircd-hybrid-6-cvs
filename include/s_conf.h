@@ -18,7 +18,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *   $Id: s_conf.h,v 1.55 2001/10/25 16:28:15 leeh Exp $
+ *   $Id: s_conf.h,v 1.56 2001/11/30 08:00:19 db Exp $
  */
 
 #ifndef INCLUDED_config_h
@@ -93,7 +93,6 @@ typedef struct QlineItem {
 #define CONF_HUB                0x2000
 #define CONF_ELINE              0x4000
 #define CONF_FLINE              0x8000
-#define CONF_BLINE              0x10000
 #define CONF_DLINE              0x20000
 #define CONF_XLINE              0x40000
 #define CONF_ULINE              0x80000
@@ -112,7 +111,6 @@ typedef struct QlineItem {
 #define CONF_FLAGS_PASS_IDENTD          0x0008
 #define CONF_FLAGS_NOMATCH_IP           0x0010
 #define CONF_FLAGS_E_LINED              0x0020
-#define CONF_FLAGS_B_LINED              0x0040
 #define CONF_FLAGS_F_LINED              0x0080
 #define CONF_FLAGS_EXEMPTGLINE          0x2000
 
@@ -138,7 +136,6 @@ typedef struct QlineItem {
 #define IsPassIdentd(x)         ((x)->flags & CONF_FLAGS_PASS_IDENTD)
 #define IsNoMatchIp(x)          ((x)->flags & CONF_FLAGS_NOMATCH_IP)
 #define IsConfElined(x)         ((x)->flags & CONF_FLAGS_E_LINED)
-#define IsConfBlined(x)         ((x)->flags & CONF_FLAGS_B_LINED)
 #define IsConfFlined(x)         ((x)->flags & CONF_FLAGS_F_LINED)
 #define IsConfExemptGline(x)    ((x)->flags & CONF_FLAGS_EXEMPTGLINE)
 

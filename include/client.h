@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.57 2001/08/10 08:02:28 leeh Exp $
+ * $Id: client.h,v 1.58 2001/11/30 08:00:18 db Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -185,9 +185,6 @@ struct Client
    * these fields, if (from != self).
    */
   int               count;       /* Amount of data in buffer */
-#ifdef BOTCHECK
-  unsigned char     isbot;      /* non 0 if its a type of bot */
-#endif
 #ifdef FLUD
   time_t            fludblock;
   struct fludbot*   fluders;

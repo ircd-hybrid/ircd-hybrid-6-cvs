@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.220 2001/11/30 04:36:19 wcampbel Exp $
+ *  $Id: s_conf.c,v 1.221 2001/11/30 08:00:22 db Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -1792,8 +1792,7 @@ static char *set_conf_flags(struct ConfItem *aconf,char *tmp)
         case '^':        /* is exempt from k/g lines */
           aconf->flags |= CONF_FLAGS_E_LINED;
           break;
-        case '&':        /* can run a bot */
-          aconf->flags |= CONF_FLAGS_B_LINED;
+        case '&':        /* obsolete flag was "can run a bot" */
           break;
         case '>':        /* can exceed max connects */
           aconf->flags |= CONF_FLAGS_F_LINED;
