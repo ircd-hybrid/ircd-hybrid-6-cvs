@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.207 2001/07/18 01:37:16 lusky Exp $
+ *  $Id: s_conf.c,v 1.208 2001/07/19 01:50:38 bill Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -2475,7 +2475,8 @@ static void initconf(FBFILE* file, int use_include)
                    * NOTE: strcpy ok since we already know the length
                    */
                   strcpy(chptr->chname, aconf->name);
-                  chptr->juped;
+/*                chptr->juped;   what the hell was that there for?*/
+                  chptr->juped = 1;  /* maybe this ? */
                   if (channel)
                     channel->prevch = chptr;
                   chptr->prevch = NULL;
