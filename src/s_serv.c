@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.78 1999/03/15 20:58:31 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.79 1999/03/17 19:20:39 db Exp $";
 #endif
 
 
@@ -3579,9 +3579,9 @@ int   m_set(aClient *cptr,
                          me.name, parv[0], spambot_privmsg_count);
               return 0;
             }
-        }
-      }
+	}
 #endif
+    }
   else
     {
       sendto_one(sptr, ":%s NOTICE %s :Options: MAX AUTOCONN",
@@ -3599,13 +3599,13 @@ int   m_set(aClient *cptr,
 		 me.name, parv[0]);
 #endif
 #if defined(NO_CHANOPS_WHEN_SPLIT) || defined(PRESERVE_CHANNEL_ON_SPLIT) || \
-	defined(NO_JOIN_ON_SPLIT)
+      defined(NO_JOIN_ON_SPLIT)
 	sendto_one(sptr, ":%s NOTICE %s :Options: SPLITNUM SPLITUSERS SPLITDELAY",
-		me.name, parv[0]);
+		   me.name, parv[0]);
 #endif
 #ifdef IDLE_CHECK
-	sendto_one(sptr, ":%s NOTICE %s :Options: IDLETIME",
-		   me.name, parv[0]);
+      sendto_one(sptr, ":%s NOTICE %s :Options: IDLETIME",
+		 me.name, parv[0]);
 #endif
     }
   return 0;

@@ -30,7 +30,7 @@
 static  char sccsid[] = "@(#)s_user.c	2.68 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: s_user.c,v 1.61 1999/03/16 04:56:11 db Exp $";
+static char *rcs_version="$Id: s_user.c,v 1.62 1999/03/17 19:20:40 db Exp $";
 
 #endif
 
@@ -2122,6 +2122,7 @@ static	int	m_message(aClient *cptr,
 	      sptr->person_privmsgs = 0;
 	      sptr->channel_privmsgs = 0;
 	    }
+#endif
 	}
       else
 	{
@@ -2129,7 +2130,6 @@ static	int	m_message(aClient *cptr,
 		     me.name, parv[0], nick);
 	  return -1;
 	}
-#endif
       return 0;
     }
 
