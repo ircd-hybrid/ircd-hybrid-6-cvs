@@ -21,13 +21,12 @@
  * see the header file (dbuf.h).
  *
  *
- * $Id: dbuf.c,v 1.10 1999/07/21 05:28:45 tomh Exp $
+ * $Id: dbuf.c,v 1.11 1999/07/23 13:24:19 db Exp $
  */
 #include <stdio.h>
 #include <stdlib.h>
 #include "struct.h"
 #include "common.h"
-#include "h.h"
 
 #if !defined(VALLOC) && !defined(valloc)
 #define valloc malloc

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.184 1999/07/23 05:41:23 db Exp $
+ *   $Id: s_serv.c,v 1.185 1999/07/23 13:24:27 db Exp $
  */
 
 #define CAPTAB
@@ -32,7 +32,6 @@
 #include "numeric.h"
 #include "msg.h"
 #include "channel.h"
-#include "h.h"
 #include "ircd.h"
 #include "scache.h"
 #include "list.h"
@@ -57,6 +56,7 @@
 #include "config.h"
 #include "m_gline.h"
 #include "channel.h"
+#include "s_err.h"
 
 #include <string.h>
 #include <stdlib.h>

@@ -1,7 +1,7 @@
 /*
  * m_info.c 
  *
- * $Id: m_info.c,v 1.28 1999/07/23 03:04:54 tomh Exp $
+ * $Id: m_info.c,v 1.29 1999/07/23 13:24:22 db Exp $
  */
 #define DEFINE_M_INFO_DATA
 #include "m_info.h"
@@ -12,9 +12,9 @@
 #include "channel.h"
 #include "send.h"
 #include "fdlist.h"
-#include "h.h"
 #include "ircd.h"
 #include "s_user.h"
+#include "s_err.h"
 
 #include <time.h>
 #include <string.h>

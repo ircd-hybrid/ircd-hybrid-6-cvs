@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.91 1999/07/23 04:58:17 tomh Exp $
+ *  $Id: s_bsd.c,v 1.92 1999/07/23 13:24:25 db Exp $
  */
 #include "s_bsd.h"
 #include "s_serv.h"
@@ -30,7 +30,6 @@
 #include "s_auth.h"
 #include "class.h"
 #include "numeric.h"
-#include "h.h"
 #include "packet.h"
 #include "parse.h"
 #include "fdlist.h"

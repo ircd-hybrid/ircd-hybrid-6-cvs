@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.58 1999/07/22 04:17:32 db Exp $
+ *  $Id: s_misc.c,v 1.59 1999/07/23 13:24:26 db Exp $
  */
 #include "s_misc.h"
 #include "s_conf.h"
@@ -28,7 +28,6 @@
 #include "res.h"
 #include "common.h"
 #include "numeric.h"
-#include "h.h"
 #include "ircd.h"
 #include "fdlist.h"
 #include "s_bsd.h"

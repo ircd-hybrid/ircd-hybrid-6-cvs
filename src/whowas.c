@@ -16,16 +16,16 @@
 *   along with this program; if not, write to the Free Software
 *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 *
-*   $Id: whowas.c,v 1.24 1999/07/23 05:28:12 db Exp $
+*   $Id: whowas.c,v 1.25 1999/07/23 13:24:29 db Exp $
 */
 #include "struct.h"
 #include "common.h"
 #include "numeric.h"
-#include "h.h"
 #include "ircd.h"
 #include "send.h"
 #include "hash.h"
 #include "s_user.h"
+#include "s_err.h"
 
 #include <assert.h>
 #include <string.h>

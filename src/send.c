@@ -17,19 +17,20 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.68 1999/07/23 04:58:18 tomh Exp $
+ *   $Id: send.c,v 1.69 1999/07/23 13:24:29 db Exp $
  */
 #include "send.h"
 #include "struct.h"
 #include "common.h"
 #include "s_zip.h"
-#include "h.h"
 #include "ircd.h"
 #include "s_bsd.h"
 #include "class.h"
 #include "numeric.h"
 #include "channel.h"
 #include "msg.h"
+#include "bsd.h"
+#include "s_err.h"
 
 #include <stdio.h>
 #include <string.h>

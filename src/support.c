@@ -16,11 +16,10 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: support.c,v 1.11 1999/07/21 05:28:57 tomh Exp $
+ *  $Id: support.c,v 1.12 1999/07/23 13:24:29 db Exp $
  */
 #include "struct.h"
 #include "common.h"
-#include "h.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -159,7 +158,7 @@ char    *in;
 /*
 **      inet_netof --   return the net portion of an internet number
 **                      argv 11/90
-**      $Id: support.c,v 1.11 1999/07/21 05:28:57 tomh Exp $
+**      $Id: support.c,v 1.12 1999/07/23 13:24:29 db Exp $
 **
 */
 

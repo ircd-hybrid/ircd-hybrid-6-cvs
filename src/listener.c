@@ -16,14 +16,13 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: listener.c,v 1.12 1999/07/22 02:06:15 db Exp $
+ *  $Id: listener.c,v 1.13 1999/07/23 13:24:21 db Exp $
  */
 #include "listener.h"
 #include "s_bsd.h"
 #include "s_conf.h"
 #include "ircd_defs.h"
 #include "client.h"
-#include "h.h"
 #include "s_misc.h"
 #include "ircd.h"
 #include "struct.h"
