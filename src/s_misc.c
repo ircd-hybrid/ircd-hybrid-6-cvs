@@ -20,18 +20,19 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.64 1999/07/29 07:11:49 tomh Exp $
+ *  $Id: s_misc.c,v 1.65 1999/07/30 06:40:19 tomh Exp $
  */
 #include "s_misc.h"
-#include "s_conf.h"
-#include "struct.h"
-#include "res.h"
 #include "common.h"
-#include "numeric.h"
+#include "irc_string.h"
 #include "ircd.h"
+#include "numeric.h"
+#include "res.h"
 #include "s_bsd.h"
+#include "s_conf.h"
 #include "s_serv.h"
 #include "send.h"
+#include "struct.h"
 
 #include <string.h>
 #include <fcntl.h>

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.40 1999/07/24 07:59:00 tomh Exp $
+ *   $Id: s_auth.c,v 1.41 1999/07/30 06:40:17 tomh Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -28,16 +28,17 @@
  *     --Bleep  Thomas Helvey <tomh@inxpress.net>
  */
 #include "s_auth.h"
-#include "send.h"
 #include "client.h"
 #include "common.h"
-#include "numeric.h"
-#include "s_bsd.h"
-#include "res.h"
-#include "ircd.h"
-#include "s_misc.h"
-#include "struct.h"
 #include "fdlist.h"              /* fdlist_add */
+#include "irc_string.h"
+#include "ircd.h"
+#include "numeric.h"
+#include "res.h"
+#include "s_bsd.h"
+#include "s_misc.h"
+#include "send.h"
+#include "struct.h"
 
 #include <netdb.h>               /* struct hostent */
 #include <string.h>

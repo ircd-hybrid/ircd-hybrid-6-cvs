@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.39 1999/07/30 04:01:31 tomh Exp $
+ *  $Id: client.c,v 1.40 1999/07/30 06:40:11 tomh Exp $
  */
 #include "client.h"
 #include "blalloc.h"
@@ -28,6 +28,7 @@
 #include "common.h"
 #include "fdlist.h"
 #include "hash.h"
+#include "irc_string.h"
 #include "ircd.h"
 #include "list.h"
 #include "numeric.h"

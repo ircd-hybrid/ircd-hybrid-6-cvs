@@ -17,19 +17,22 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.34 1999/07/29 01:03:01 db Exp $
+ *   $Id: parse.c,v 1.35 1999/07/30 06:40:17 tomh Exp $
  */
-#include "struct.h"
+#include "parse.h"
+#include "channel.h"
 #include "common.h"
+#include "hash.h"
+#include "irc_string.h"
+#include "ircd.h"
+#include "numeric.h"
+#include "s_misc.h"
+#include "send.h"
+#include "struct.h"
+
 #define MSGTAB
 #include "msg.h"
 #undef MSGTAB
-#include "numeric.h"
-#include "ircd.h"
-#include "s_misc.h"
-#include "send.h"
-#include "hash.h"
-#include "channel.h"
 
 #include <string.h>
 #include <stdlib.h>

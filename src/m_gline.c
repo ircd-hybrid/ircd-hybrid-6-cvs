@@ -20,24 +20,23 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.34 1999/07/29 01:03:00 db Exp $
+ *  $Id: m_gline.c,v 1.35 1999/07/30 06:40:13 tomh Exp $
  */
-
-#include "config.h"
-#include "struct.h"
-#include "common.h"
-#include "numeric.h"
+#include "m_gline.h"
 #include "channel.h"
+#include "common.h"
+#include "config.h"
+#include "dline_conf.h"
+#include "irc_string.h"
+#include "ircd.h"
+#include "m_kline.h"
+#include "mtrie_conf.h"
+#include "numeric.h"
 #include "s_conf.h"
 #include "s_misc.h"
-#include "send.h"
-#include "ircd.h"
 #include "scache.h"
-#include "dline_conf.h"
-#include "mtrie_conf.h"
-
-#include "m_kline.h"
-#include "m_gline.h"
+#include "send.h"
+#include "struct.h"
 
 #include <assert.h>
 #include <string.h>

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.192 1999/07/30 03:52:33 db Exp $
+ *  $Id: s_user.c,v 1.193 1999/07/30 06:40:20 tomh Exp $
  */
 #include "s_user.h"
 #include "channel.h"
@@ -28,6 +28,7 @@
 #include "common.h"
 #include "fdlist.h"
 #include "hash.h"
+#include "irc_string.h"
 #include "ircd.h"
 #include "list.h"
 #include "listener.h"

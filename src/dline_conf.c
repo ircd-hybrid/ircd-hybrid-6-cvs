@@ -1,16 +1,17 @@
 /*
  * dline_conf.c
  *
- * $Id: dline_conf.c,v 1.29 1999/07/28 07:49:34 tomh Exp $
+ * $Id: dline_conf.c,v 1.30 1999/07/30 06:40:12 tomh Exp $
  */
 #include "dline_conf.h"
-#include "struct.h"
-#include "common.h"
-#include "numeric.h"
 #include "class.h"
+#include "common.h"
+#include "irc_string.h"
 #include "ircd.h"
+#include "numeric.h"
 #include "s_conf.h"
 #include "send.h"
+#include "struct.h"
 
 #include <fcntl.h>
 #include <sys/wait.h>

@@ -17,13 +17,14 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.103 1999/07/29 01:03:01 db Exp $
+ *  $Id: s_bsd.c,v 1.104 1999/07/30 06:40:18 tomh Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
 #include "common.h"
 #include "config.h"
 #include "fdlist.h"
+#include "irc_string.h"
 #include "ircd.h"
 #include "list.h"
 #include "listener.h"

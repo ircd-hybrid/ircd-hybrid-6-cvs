@@ -4,20 +4,21 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.43 1999/07/24 07:58:59 tomh Exp $
+ * $Id: res.c,v 1.44 1999/07/30 06:40:17 tomh Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
  *     --Bleep (Thomas Helvey <tomh@inxpress.net>)
  */
 #include "res.h"
-#include "numeric.h"
-#include "s_bsd.h"
-#include "struct.h"
-#include "ircd.h"
 #include "common.h"
-#include "send.h"
+#include "irc_string.h"
+#include "ircd.h"
+#include "numeric.h"
 #include "restart.h"
+#include "s_bsd.h"
+#include "send.h"
+#include "struct.h"
 
 #include <assert.h>
 #include <string.h>

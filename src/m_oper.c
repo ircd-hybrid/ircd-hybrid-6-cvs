@@ -20,23 +20,23 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_oper.c,v 1.1 1999/07/30 03:25:51 db Exp $
+ *   $Id: m_oper.c,v 1.2 1999/07/30 06:40:15 tomh Exp $
  */
 
 #include "m_commands.h"
+#include "client.h"
+#include "fdlist.h"
+#include "irc_string.h"
 #include "ircd.h"
 #include "numeric.h"
-#include "s_serv.h"
-#include "send.h"
-#include "fdlist.h"
 #include "s_conf.h"
+#include "s_user.h"
+#include "send.h"
 #include "struct.h"
-#include "client.h"
-#include "irc_string.h"
 
 #include <fcntl.h>
+#include <unistd.h>
 
-static char buf[BUFSIZE];
 
 /*
  * m_functions execute protocol messages on this server:
@@ -101,10 +101,7 @@ static char buf[BUFSIZE];
 **      parv[1] = oper name
 **      parv[2] = oper password
 */
-int     m_oper(struct Client *cptr,
-               struct Client *sptr,
-               int parc,
-               char *parv[])
+int m_oper(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 {
   struct ConfItem *aconf;
   char  *name, *password, *encr;
@@ -112,6 +109,7 @@ int     m_oper(struct Client *cptr,
   extern        char *crypt();
 #endif /* CRYPT_OPER_PASSWORD */
   char *operprivs;
+  static char buf[BUFSIZE];
 
   name = parc > 1 ? parv[1] : (char *)NULL;
   password = parc > 2 ? parv[2] : (char *)NULL;

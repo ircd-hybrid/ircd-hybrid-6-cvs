@@ -20,21 +20,21 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.45 1999/07/29 01:03:00 db Exp $
+ *   $Id: m_kline.c,v 1.46 1999/07/30 06:40:14 tomh Exp $
  */
-
-#include "struct.h"
-#include "common.h"
-#include "numeric.h"
-#include "channel.h"
-#include "s_conf.h"
-#include "class.h"
-#include "send.h"
-#include "ircd.h"
-#include "s_misc.h"
 #include "m_kline.h"
+#include "channel.h"
+#include "class.h"
+#include "common.h"
 #include "dline_conf.h"
+#include "irc_string.h"
+#include "ircd.h"
 #include "mtrie_conf.h"
+#include "numeric.h"
+#include "s_conf.h"
+#include "s_misc.h"
+#include "send.h"
+#include "struct.h"
 
 #include <stdlib.h>
 #include <unistd.h>

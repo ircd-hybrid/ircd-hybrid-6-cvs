@@ -16,16 +16,17 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: hash.c,v 1.34 1999/07/28 07:49:34 tomh Exp $
+ *  $Id: hash.c,v 1.35 1999/07/30 06:40:12 tomh Exp $
  */
 #include "s_conf.h"
-#include "hash.h"
 #include "channel.h"
-#include "struct.h"
 #include "common.h"
-#include "numeric.h"
+#include "hash.h"
+#include "irc_string.h"
 #include "ircd.h"
+#include "numeric.h"
 #include "send.h"
+#include "struct.h"
 
 #include <assert.h>
 #include <fcntl.h>     /* O_RDWR ... */
