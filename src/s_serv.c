@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.204 1999/07/30 06:40:19 tomh Exp $
+ *   $Id: s_serv.c,v 1.205 1999/07/30 07:46:07 tomh Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -48,6 +48,7 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <time.h>
+#include <netdb.h>
 
 #define MIN_CONN_FREQ 300
 
@@ -338,7 +339,7 @@ int check_server(struct Client* cptr)
       Debug((DEBUG_DNS,"No C/N lines for %s", cptr->name));
       return 0;
     }
-#if 0
+  lp = cptr->confs;
   if (cptr->dns_reply)
     {
       int             i;
@@ -370,8 +371,6 @@ int check_server(struct Client* cptr)
                                   cptr->username, CONF_NOCONNECT_SERVER);
         }
     }
-#endif
-  lp = cptr->confs;
   /*
    * Check for C and N lines with the hostname portion the ip number
    * of the host the server runs on. This also checks the case where
