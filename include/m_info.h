@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.27 2003/06/11 13:20:12 ievil Exp $
+ * $Id: m_info.h,v 1.28 2003/06/12 22:09:51 ievil Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -559,6 +559,12 @@ Info MyInformation[] = {
   { "REPORT_DLINE_TO_USER", "OFF", 0, "Inform Clients They are D-lined" },
 #endif /* REPORT_DLINE_TO_USER */
 
+#ifdef RESTRICT_LOCOP
+  { "RESTRICT_LOCOP", "ON", 0, "Restrict info to local operators" },
+#else
+  { "RESTRICT_LOCOP", "OFF", 0, "Restrict info to local operators" },
+#endif /* RESTRICT_LOCOP */
+    
 #ifdef RFC1035_ANAL
   { "RFC1035_ANAL", "ON", 0, "Reject / and _ in hostnames" },
 #else

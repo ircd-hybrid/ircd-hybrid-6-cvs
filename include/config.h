@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.158 2003/06/11 13:20:11 ievil Exp $
+ * $Id: config.h,v 1.159 2003/06/12 22:09:51 ievil Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -776,6 +776,18 @@
 
 /* -------------- END NOT APPROVED ON EFNET SECTION --------------------- */
 
+/* RESTRICT_LOCOP
+ * Add restrictions to LOCOPS to easier allow them to being added when
+ * other opers/servers are feeling unsure about their addition.
+ *
+ * Current restrictions:
+ * - Dont allow non-global operators to see WALLOPS/OPERWALLs. This 
+ *   removes EFNETs biggest fear when adding new opers. That they 
+ *   possibly could see WALLOPS/OPERWALL and relay them to their 
+ *   bad friends. No more....
+ *
+ */
+#define RESTRICT_LOCOP
 
 /*   STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP  */
 

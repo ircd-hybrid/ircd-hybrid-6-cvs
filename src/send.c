@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.114 2003/05/04 17:52:46 db Exp $
+ *   $Id: send.c,v 1.115 2003/06/12 22:09:53 ievil Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -1245,7 +1245,12 @@ send_operwall(aClient *from, char *type_message, char *message)
 
   for (acptr = oper_cptr_list; acptr; acptr = acptr->next_oper_client)
     {
+
+#ifdef RESTRICT_LOCOP
+      if (!SendOperwall(acptr) || (IsLocOp(acptr) && (!irccmp(type_message, "WALLOPS") || !irccmp(type_message, "OPERWALL"))))
+#else
       if (!SendOperwall(acptr))
+#endif
         continue; /* has to be oper if in this linklist */
 
       sendto_one(acptr, ":%s WALLOPS :%s - %s", sender, type_message, message);
