@@ -1,3 +1,18 @@
+ievil       2005/03/25 06:27:22 EST	(20050325_4)
+
+  Modified files:
+    src                  channel.c 
+  Log:
+  Fixed a possible desync and ban duplication error that could be triggered
+  by servers running an older version of certain ircd. Bug reported by
+  Paal Christian Birkeland. Thanks to Erik/einride for helping track down
+  this annoying bug.
+  
+  Revision  Changes    Path
+  1.252     +13 -7     ircd-hybrid-6/src/channel.c
+
+
+
 ievil       2005/03/25 06:25:26 EST	(20050325_3)
 
   Modified files:
