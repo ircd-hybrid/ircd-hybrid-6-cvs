@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_whois.c,v 1.13 2003/06/17 21:46:41 ievil Exp $
+ *   $Id: m_whois.c,v 1.14 2003/06/20 13:49:47 ievil Exp $
  */
 
 #include "m_operspylog.h"
@@ -344,7 +344,7 @@ int     m_whois(struct Client *cptr,
 #ifdef OPERSPY
           if (OperSpyWhois)
 	    { 
-	      if !MyConnect(acptr)
+	      if (!MyConnect(acptr))
 	        {
                    ircsprintf(osnuh,"%s!%s@%s %s", acptr->name, acptr->username, 
 	                             acptr->host, acptr->user->server);
