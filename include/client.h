@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.17 1999/07/17 14:38:31 db Exp $
+ * $Id: client.h,v 1.18 1999/07/18 00:17:43 tomh Exp $
  */
 #ifndef	INCLUDED_client_h
 #define INCLUDED_client_h
@@ -90,7 +90,7 @@ struct User
   int	         refcnt;	/* Number of times this block is referenced */
   int	         joined;	/* number of channels joined */
   char	         id[IDLEN + 1];	/* for future use *hint* */
-  char*          server;	/* pointer to scached server name */
+  const char*    server;	/* pointer to scached server name */
   /*
   ** In a perfect world the 'server' name
   ** should not be needed, a pointer to the
@@ -107,7 +107,7 @@ struct User
 struct Server
 {
   struct User*     user;	/* who activated this connection */
-  char*            up;		/* Pointer to scache name */
+  const char*      up;		/* Pointer to scache name */
   char	           by[NICKLEN + 1];
   struct ConfItem* nline;	/* N-line pointer for this server */
   struct Client*   servers;	/* Servers on this server */

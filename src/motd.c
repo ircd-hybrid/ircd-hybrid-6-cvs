@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: motd.c,v 1.7 1999/07/17 22:12:46 db Exp $
+ *   $Id: motd.c,v 1.8 1999/07/18 00:17:49 tomh Exp $
  */
 
 #include "channel.h"
@@ -222,7 +222,8 @@ int ReadMessageFile(MessageFile *MessageFileptr)
 	*p = '\0';
       newMessageLine = (MessageFileLine*) MyMalloc(sizeof(MessageFileLine));
 
-      strncpyzt(newMessageLine->line, buffer, MESSAGELINELEN);
+      strncpy(newMessageLine->line, buffer, MESSAGELINELEN);
+      newMessageLine->line[MESSAGELINELEN] = '\0';
       newMessageLine->next = (MessageFileLine *)NULL;
 
       if (MessageFileptr->contentsOfFile)

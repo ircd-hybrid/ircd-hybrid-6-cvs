@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.15 1999/07/17 22:12:47 db Exp $
+ *   $Id: parse.c,v 1.16 1999/07/18 00:17:49 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -110,7 +110,7 @@ aClient *find_userhost(char *user,
 **	string.
 */
 
-aClient *find_server(char *name, aClient *cptr)
+aClient* find_server(const char* name, aClient *cptr)
 {
   if (name)
     cptr = hash_find_server(name, cptr);

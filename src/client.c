@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.13 1999/07/17 22:12:44 db Exp $
+ *  $Id: client.c,v 1.14 1999/07/18 00:17:47 tomh Exp $
  */
 #include "client.h"
 #include "struct.h"
@@ -725,9 +725,9 @@ static void remove_dependents(aClient *cptr,
 
 #endif
       if ((aconf = to->serv->nline))
-        strncpyzt(myname, my_name_for_link(me.name, aconf), HOSTLEN+1);
+        strncpy(myname, my_name_for_link(me.name, aconf), HOSTLEN);
       else
-        strncpyzt(myname, me.name, HOSTLEN+1);
+        strncpy(myname, me.name, HOSTLEN);
       recurse_send_quits(cptr, sptr, to, comment1, myname);
     }
 

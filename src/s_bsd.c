@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.66 1999/07/17 22:12:48 db Exp $
+ *  $Id: s_bsd.c,v 1.67 1999/07/18 00:17:49 tomh Exp $
  */
 #include "s_bsd.h"
 #include "listener.h"
@@ -35,6 +35,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <signal.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -367,7 +368,7 @@ static int check_init(aClient* cptr, char* sockn)
         --cptr->dns_reply->ref_count;
         cptr->dns_reply = NULL;
       }
-      strncpyzt(sockn, me.name, HOSTLEN);
+      strncpy(sockn, me.name, HOSTLEN);
     }
   memcpy(&cptr->ip, &sk.sin_addr, sizeof(struct in_addr));
   cptr->port = ntohs(sk.sin_port);
@@ -845,7 +846,7 @@ static void set_sock_opts(int fd, aClient *cptr)
         rcvbufmax += 1024;
       getsockopt(fd, SOL_SOCKET, SO_RCVBUF, (char*) &rcvbufmax, &optlen);
 #endif
-      readbuf = (char *)malloc(rcvbufmax * sizeof(char));
+      readbuf = (char*) MyMalloc(rcvbufmax);
     }
   if (IsServer(cptr))
     opt = rcvbufmax;
