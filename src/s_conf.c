@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.34 1998/12/31 05:45:18 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.35 1999/01/05 05:26:32 db Exp $";
 #endif
 
 #include "struct.h"
@@ -248,7 +248,7 @@ int	attach_Iline(aClient *cptr,
   /* Slow down the reconnectors who are rejected */
 
 #ifdef REJECT_HOLD
-  setRejectHold(cptr);
+  SetRejectHold(cptr);
 #endif
 
   return -1;	/* -1 on no match *bleh* */
@@ -323,11 +323,11 @@ void clear_ip_hash_table()
   int n_left_to_allocate = MAXCONNECTIONS;
 
   /* ok. if the sizeof the struct isn't aligned with that of the
-     smallest guaranteed valid pointer (void *), then align it
-     ya. you could just turn 'size' into a #define. do it. :-)
-
-     -Dianora
-     */
+   * smallest guaranteed valid pointer (void *), then align it
+   * ya. you could just turn 'size' into a #define. do it. :-)
+   *
+   * -Dianora
+   */
 
   size = sizeof(IP_ENTRY) + (sizeof(IP_ENTRY) & (sizeof(void*) - 1) );
 
