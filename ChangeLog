@@ -1,3 +1,19 @@
+ievil       2003/06/23 23:14:34 EDT	(20030624_0)
+
+  Modified files:
+    adns                 event.c 
+    src                  m_encap.c m_operspylog.c send.c 
+  Log:
+  Fixes warnings when compiling with -Wall
+  
+  Revision  Changes    Path
+  1.8       +1 -1      ircd-hybrid-6/adns/event.c
+  1.2       +5 -3      ircd-hybrid-6/src/m_encap.c
+  1.4       +1 -0      ircd-hybrid-6/src/m_operspylog.c
+  1.117     +2 -2      ircd-hybrid-6/src/send.c
+
+
+
 ievil       2003/06/20 22:40:07 EDT	(20030621_0)
 
   Modified files:
