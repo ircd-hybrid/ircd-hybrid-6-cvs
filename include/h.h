@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.71 1999/07/22 02:44:21 db Exp $
+ * $Id: h.h,v 1.72 1999/07/22 02:53:14 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -64,8 +64,6 @@ extern  int     deliver_it (struct Client *, char *, int);
 /* s_numeric.c */
 extern  int     do_numeric (int, struct Client *, struct Client *, int, char **);
 
-/* packet.c */
-extern  int     dopacket (struct Client *, char *, int);
 
 #endif /* INCLUDED_h_h */
 

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.81 1999/07/22 02:06:21 db Exp $
+ *  $Id: s_bsd.c,v 1.82 1999/07/22 02:53:16 db Exp $
  */
 #include "s_bsd.h"
 #include "listener.h"
@@ -30,6 +30,7 @@
 #include "class.h"
 #include "numeric.h"
 #include "h.h"
+#include "packet.h"
 #include "parse.h"
 #include "fdlist.h"
 #include "send.h"
