@@ -1,5 +1,5 @@
 /*
- * adns.h: $Id: adns.h,v 1.3 2001/12/04 16:12:10 androsyn Exp $
+ * adns.h: $Id: adns.h,v 1.4 2001/12/09 17:37:18 lusky Exp $
  *  
  */
 /*
@@ -55,7 +55,7 @@
  *  Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
  *
- *  $Id: adns.h,v 1.3 2001/12/04 16:12:10 androsyn Exp $
+ *  $Id: adns.h,v 1.4 2001/12/09 17:37:18 lusky Exp $
  */
 
 #ifndef ADNS_H_INCLUDED
@@ -66,7 +66,9 @@
 #include "irc_string.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
+#ifdef HAVE_SYS_SELECT_H
 #include <sys/select.h>
+#endif /* HAVE_SYS_SELECT_H */
 #include <sys/types.h>
 #include <sys/time.h>
 #include <unistd.h>
