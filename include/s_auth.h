@@ -15,7 +15,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.h,v 1.1 1999/07/06 05:38:58 tomh Exp $
+ *   $Id: s_auth.h,v 1.2 1999/07/11 22:39:57 tomh Exp $
  */
 #ifndef INCLUDED_s_auth_h
 #define INCLUDED_s_auth_h
@@ -23,10 +23,8 @@
 #include <sys/types.h>
 #define INCLUDED_sys_types_h
 #endif
-#if 0
 #ifndef INCLUDED_config_h
 #include "config.h"
-#endif
 #endif
 
 struct Client;
