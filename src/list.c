@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu, Computing Center and Jarkko Oikarinen
  *
- * $Id: list.c,v 1.28 1999/07/17 15:05:32 db Exp $
+ * $Id: list.c,v 1.29 1999/07/17 15:14:38 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -298,6 +298,7 @@ void count_links_memory(int *links_memory_used,
 			links_memory_allocated);
 }
 
+#ifdef FLUD
 /*
  */
 void count_flud_memory(int *flud_memory_used,
@@ -307,5 +308,5 @@ void count_flud_memory(int *flud_memory_used,
 			flud_memory_used,
 			flud_memory_allocated);
 }
-
+#endif
 
