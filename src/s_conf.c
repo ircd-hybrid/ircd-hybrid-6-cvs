@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.82 1999/06/28 01:12:33 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.83 1999/06/29 08:50:26 tomh Exp $";
 #endif
 
 #include "struct.h"
@@ -170,34 +170,25 @@ int	attach_Iline(aClient *cptr,
   aConfItem *aconf;
   aConfItem *gkill_conf;
   aConfItem *tkline_conf;
-  char *hname;
-  char	host[HOSTLEN+3];
-  char	fullname[HOSTLEN+1];
-  char	non_ident[USERLEN+1];
+  char	host[HOSTLEN + 3];
+  char	non_ident[USERLEN + 1];
 
-  *host = '\0';
+  host[HOSTLEN] = '\0';
 
   /* who cares about aliases? sheeeshhh -db */
 
-  if (hp)
+  if (hp && hp->h_name)
     {
-      hname = hp->h_name;
-      (void)strncpy(fullname, hname,
-		    sizeof(fullname)-1);
-
-      add_local_domain(fullname,
-		       HOSTLEN - strlen(fullname));
-      Debug((DEBUG_DNS, "a_il: %s->%s",
-	     sockhost, fullname));
-
-      (void)strncat(host, fullname,
-		    sizeof(host) - strlen(host));
+      strncpy(host, hp->h_name, HOSTLEN);
+      /*
+       * XXX - this probably isn't needed, but ...
+       */
+      add_local_domain(host, HOSTLEN - strlen(host));
+      Debug((DEBUG_DNS, "a_il: %s->%s", sockhost, host));
     }
-
-  if(*host == '\0')
+  else
     {
-      (void)strncat(host,sockhost,sizeof(host));
-      /*      (void)strncpy(user, cptr->username,sizeof(user)-1); */
+      strncpy(host, sockhost, HOSTLEN);
     }
 
   if(cptr->flags & FLAGS_GOTID)
