@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: msg.h,v 1.20 2001/12/04 04:47:44 androsyn Exp $
+ * $Id: msg.h,v 1.21 2001/12/06 20:56:09 leeh Exp $
  */
 #ifndef INCLUDED_msg_h
 #define INCLUDED_msg_h
@@ -127,9 +127,7 @@ typedef struct MessageTree MESSAGE_TREE;
 #define MSG_LWALLOPS "LWALLOPS" /* Same as LOCOPS */
 #endif /* LWALLOPS */
 
-#ifdef USE_KNOCK
 #define MSG_KNOCK          "KNOCK"  /* KNOCK */
-#endif
 
 #define MAXPARA    15 
 
@@ -169,9 +167,7 @@ struct Message msgtab[] = {
   { MSG_MODE,    m_mode,     0, MAXPARA, 1, 0, 0, 0L },
   { MSG_QUIT,    m_quit,     0, MAXPARA, 1, 1, 0, 0L },
   { MSG_PART,    m_part,     0, MAXPARA, 1, 0, 0, 0L },
-#ifdef USE_KNOCK
   { MSG_KNOCK,   m_knock,    0, MAXPARA, 1, 0, 0, 0L },
-#endif
   { MSG_TOPIC,   m_topic,    0, MAXPARA, 1, 0, 0, 0L },
   { MSG_INVITE,  m_invite,   0, MAXPARA, 1, 0, 0, 0L },
   { MSG_KICK,    m_kick,     0, MAXPARA, 1, 0, 0, 0L },

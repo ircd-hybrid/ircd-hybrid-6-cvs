@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: channel.h,v 1.36 2001/11/29 07:47:17 db Exp $
+ * $Id: channel.h,v 1.37 2001/12/06 20:56:08 leeh Exp $
  */
 
 #ifndef INCLUDED_channel_h
@@ -69,6 +69,9 @@ struct Channel
   int		  juped;
 #endif  
   time_t          channelts;
+#ifdef USE_KNOCK
+  time_t          last_knock;
+#endif
 #ifdef FLUD
   time_t          fludblock;
   struct fludbot* fluders;

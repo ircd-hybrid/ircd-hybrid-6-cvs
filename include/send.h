@@ -2,7 +2,7 @@
  * send.h
  * Copyright (C) 1999 Patrick Alken
  *
- * $Id: send.h,v 1.13 2000/11/24 17:36:25 lusky Exp $
+ * $Id: send.h,v 1.14 2001/12/06 20:56:09 leeh Exp $
  */
 
 #ifndef INCLUDED_send_h
@@ -22,6 +22,8 @@ struct Channel;
 extern  void send_operwall(struct Client *,char *,char *);
 extern  void sendto_channel_type_notice(struct Client *, 
                                         struct Channel *, int, char *);
+extern  void send_knock(struct Client *, struct Channel *, int, char *);
+
 extern  int sendto_slaves(struct Client *, char *, char *, int, char **);
 
 extern  void sendto_one(struct Client *, const char *, ...);

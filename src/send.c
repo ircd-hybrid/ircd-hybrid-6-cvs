@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.106 2001/10/25 16:28:15 leeh Exp $
+ *   $Id: send.c,v 1.107 2001/12/06 20:56:12 leeh Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -669,6 +669,31 @@ sendto_channel_type_notice(aClient *from, aChannel *chptr, int type, char *messa
         }
 } /* sendto_channel_type_notice() */
 
+/* send_knock()
+ * 
+ * send the knock to local clients in the channel
+ */
+void
+send_knock(aClient *from, aChannel *chptr, int type, char *message)
+{
+  register Link *lp;
+  register aClient *acptr;
+  register int i;
+
+  for(lp = chptr->members; lp; lp = lp->next)
+  {
+    if(!(lp->flags& type))
+      continue;
+
+    acptr = lp->value.cptr;
+
+    if(!MyClient(acptr))
+      continue;
+
+    sendto_prefix_one(acptr, from, ":%s NOTICE %s :%s",
+                      from->name, acptr->name, message);
+  }
+}
 
 /*
  * sendto_serv_butone

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.21 2001/11/30 08:00:19 db Exp $
+ * $Id: m_info.h,v 1.22 2001/12/06 20:56:09 leeh Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -335,6 +335,7 @@ Info MyInformation[] = {
 #endif /* KLINE_WITH_REASON */
 
   { "KNOCK_DELAY", "", KNOCK_DELAY, "Delay between KNOCK Attempts" },
+  { "KNOCK_DELAY_CHANNEL", "", KNOCK_DELAY_CHANNEL, "Delay between KNOCK Attempts on channel" },
 
 #ifdef KPATH
   { "KPATH", KPATH, 0, "Path to K-line File" },
