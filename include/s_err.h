@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: s_err.h,v 1.12 1999/01/22 03:46:02 db Exp $
+ * $Id: s_err.h,v 1.13 1999/01/25 05:17:26 db Exp $
  *
  */
 
@@ -228,12 +228,7 @@ static	char *	replies[] = {
 /* 203 RPL_TRACEUNKNOWN, */	":%s 203 %s ???? %d %s %d",
 /* 204 RPL_TRACEOPERATOR, */	":%s 204 %s Oper %d %s %ld %ld",
 /* 205 RPL_TRACEUSER, */	":%s 205 %s User %d %s %ld %ld",
-#ifdef WINTRHAWK
 /* 206 RPL_TRACESERVER, */	":%s 206 %s Serv %d %dS %dC %s %s!%s@%s %ld",
-
-#else
-/* 206 RPL_TRACESERVER, */	":%s 206 %s Serv %d %dS %dC %s %s!%s@%s",
-#endif /* WINTRHAWK */
 /* 207 */	(char *)NULL,
 /* 208 RPL_TRACENEWTYPE, */	":%s 208 %s <newtype> 0 %s",
 /* 209 RPL_TRACECLASS, */	":%s 209 %s Class %d %d",

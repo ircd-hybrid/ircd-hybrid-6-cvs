@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.24 1999/01/23 03:11:32 db Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.25 1999/01/25 05:17:29 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1824,7 +1824,23 @@ void read_clients()
 #endif
 	  continue;
 	}
-      
+  
+#ifdef DEBUGMODE
+      if(cptr->fd == 2)
+	{
+	  Debug((DEBUG_NOTICE,"trying to read stderr"));
+#ifdef USE_FAST_FD_ISSET
+	  fd_mask <<= 1;
+	  if(!fd_mask)
+	    {
+	      fd_offset++;
+	      fd_mask = 1;
+	    }
+#endif
+	  continue;
+	}
+#endif
+    
       /*
        * Check the auth fd's first...
        */

@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.67 1999/01/24 05:25:49 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.68 1999/01/25 05:17:30 db Exp $";
 #endif
 
 
@@ -2340,12 +2340,10 @@ int	m_stats(aClient *cptr,
       valid_stats++;
       break;
 
-#ifndef LTRACE
     case 'p' : case 'P' :
       show_opers(sptr, parv[0]);
       valid_stats++;
       break;
-#endif /* !LTRACE */
 
     case 'Q' : case 'q' :
       if(!IsAnOper(sptr))
@@ -5899,21 +5897,13 @@ int	m_trace(aClient *cptr,
 		       me.name, parv[0], class, link_s[i],
 		       link_u[i], name, acptr->serv->by,
 		       acptr->serv->user->username,
-#ifdef WINTRHAWK
 		       acptr->serv->user->host, now - acptr->lasttime);
-#else
-		       acptr->serv->user->host);
-#endif /* WINTRHAWK */
 	  else
 	    sendto_one(sptr, rpl_str(RPL_TRACESERVER),
 		       me.name, parv[0], class, link_s[i],
 		       link_u[i], name, *(acptr->serv->by) ?
 		       acptr->serv->by : "*", "*",
-#ifdef WINTRHAWK
 		       me.name, now - acptr->lasttime);
-#else
-		       me.name);
-#endif /* WINTRHAWK */
 	  cnt++;
 	  break;
 	case STAT_LOG:
@@ -6088,21 +6078,13 @@ int	m_ltrace(aClient *cptr,
 		       me.name, parv[0], class, link_s[i],
 		       link_u[i], name, acptr->serv->by,
 		       acptr->serv->user->username,
-#ifdef WINTRHAWK
 		       acptr->serv->user->host, now - acptr->lasttime);
-#else
-		       acptr->serv->user->host);
-#endif /* WINTRHAWK */
 	  else
 	    sendto_one(sptr, rpl_str(RPL_TRACESERVER),
 		       me.name, parv[0], class, link_s[i],
 		       link_u[i], name, *(acptr->serv->by) ?
 		       acptr->serv->by : "*", "*",
-#ifdef WINTRHAWK
 		       me.name, now - acptr->lasttime);
-#else
-		       me.name);
-#endif /* WINTRHAWK */
 	  cnt++;
 	  break;
 	case STAT_LOG:
