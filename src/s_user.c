@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.263 2003/08/16 18:48:40 ievil Exp $
+ *  $Id: s_user.c,v 1.264 2003/08/16 19:10:46 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -88,6 +88,7 @@ static FLAG_ITEM user_modes[] =
   {FLAGS_STATSPHIDE, 'p'},
   {FLAGS_REJ, 'r'},
   {FLAGS_SERVNOTICE, 's'},
+  {FLAGS_UNIDLE, 'u'},
   {FLAGS_WALLOP, 'w'},
   {FLAGS_EXTERNAL, 'x'},
   {FLAGS_SPY, 'y'},
@@ -153,7 +154,7 @@ static int user_modes_from_c_to_bitmask[] =
   FLAGS_REJ,    /* r */
   FLAGS_SERVNOTICE, /* s */
   0,            /* t */
-  0,            /* u */
+  FLAGS_UNIDLE, /* u */
   0,            /* v */
   FLAGS_WALLOP, /* w */
   FLAGS_EXTERNAL, /* x */
@@ -194,16 +195,18 @@ void show_opers(struct Client *cptr)
           ++j;
           if (MyClient(cptr) && IsAnOper(cptr))
             {
-              if (IsSetOperAdmin(cptr) && (cptr2->umodes & FLAGS_STATSPHIDE)) 
+              if (IsSetOperAdmin(cptr)) 
                 {
-                  sendto_one(cptr, ":%s %d %s :[%c][%s] %s (%s@%s) Idle: %d (hidden)",
+                  sendto_one(cptr, ":%s %d %s :[%c][%s] %s (%s@%s) Idle: %d %s%s",
                              me.name, RPL_STATSDEBUG, cptr->name,
                              IsOper(cptr2) ? 'O' : 'o',
                              oper_privs_as_string(cptr2,
                                                   cptr2->confs->value.aconf->port),
                              cptr2->name,
                              cptr2->username, cptr2->host,
-                             CurrentTime - cptr2->user->last);
+                             CurrentTime - cptr2->user->last,
+                             (cptr2->umodes & FLAGS_STATSPHIDE) ? "(hidden)" : "",
+                             (cptr2->umodes & FLAGS_UNIDLE) ? "(unidle)" : "");
                 } 
               else 
                 {
@@ -2024,7 +2027,7 @@ int user_mode(aClient *cptr, aClient *sptr, int parc, char *parv[])
               if(!IsAnOper(sptr))
                 break;
 
-              sptr->umodes &= ~(FLAGS_OPER|FLAGS_LOCOP|FLAGS_STATSPHIDE|FLAGS_OSPYLOG|FLAGS_ADMIN);
+              sptr->umodes &= ~(FLAGS_OPER|FLAGS_LOCOP|FLAGS_STATSPHIDE|FLAGS_OSPYLOG|FLAGS_UNIDLE|FLAGS_ADMIN);
 
               Count.oper--;
 
@@ -2105,12 +2108,20 @@ int user_mode(aClient *cptr, aClient *sptr, int parc, char *parv[])
       sptr->umodes &= ~FLAGS_OSPYLOG; /* only for OperSpyLog enabled opers ! */
     }
   
-  if ((sptr->umodes & FLAGS_STATSPHIDE) && !SetOperStatsPHide(sptr))
+  if ((sptr->umodes & FLAGS_STATSPHIDE) && !IsOperStatsPHide(sptr) && MyConnect(sptr))
     {
       sendto_one(sptr,":%s NOTICE %s :*** You need oper and P flag for +p", 
                  me.name,parv[0]);
       sptr->umodes &= ~FLAGS_STATSPHIDE; /* only tcm's or bopm's really need this */
     }
+
+  if ((sptr->umodes & FLAGS_UNIDLE) && !IsSetOperUnIdle(sptr) && MyConnect(sptr))
+    {
+      sendto_one(sptr,":%s NOTICE %s :*** You need oper and I flag for +u",
+                 me.name,parv[0]);
+      sptr->umodes &= ~FLAGS_UNIDLE;
+    }
+
 
   if (!(setflags & FLAGS_INVISIBLE) && IsInvisible(sptr))
     ++Count.invisi;

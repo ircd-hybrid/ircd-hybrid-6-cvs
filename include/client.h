@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.70 2003/06/25 01:34:18 ievil Exp $
+ * $Id: client.h,v 1.71 2003/08/16 19:10:44 ievil Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -340,6 +340,7 @@ struct Client
 #define FLAGS_STATSPHIDE   0x10000 /* Oper hides from stats P */
 #define FLAGS_ADMIN        0x20000 /* Oper is admin */
 #define FLAGS_OSPYLOG      0x40000 /* show Oper Spy being used */
+#define FLAGS_UNIDLE       0x80000 /* Hide idle time with umode +u */
 
 /* *sigh* overflow flags */
 #define FLAGS2_RESTRICTED   0x0001      /* restricted client */
@@ -362,6 +363,7 @@ struct Client
 #define FLAGS2_OPER_ADMIN       0x1000000  /* oper is admin */
 #define FLAGS2_OPER_OSPY        0x2000000  /* oper can use operspy */
 #define FLAGS2_OPER_OSPYLOG     0x4000000  /* oper can see operspy usage */
+#define FLAGS2_OPER_UNIDLE      0x8000000  /* oper can hide idletime */
 
 #define FLAGS2_OPER_FLAGS       (FLAGS2_OPER_GLOBAL_KILL | \
                                  FLAGS2_OPER_REMOTE | \
@@ -374,7 +376,8 @@ struct Client
                                  FLAGS2_OPER_STATSPHIDE | \
                                  FLAGS2_OPER_ADMIN | \
                                  FLAGS2_OPER_OSPY | \
-                                 FLAGS2_OPER_OSPYLOG )
+                                 FLAGS2_OPER_OSPYLOG | \
+                                 FLAGS2_OPER_UNIDLE )
 /* ZIP_LINKS */
 
 #define FLAGS2_ZIP           0x4000  /* (server) link is zipped */
@@ -397,7 +400,8 @@ struct Client
                       FLAGS_REJ | FLAGS_SKILL | FLAGS_FULL | FLAGS_SPY | \
                       FLAGS_NCHANGE | FLAGS_OPERWALL | FLAGS_DEBUG | \
                       FLAGS_BOTS | FLAGS_EXTERNAL | FLAGS_LOCOP | \
-                      FLAGS_STATSPHIDE | FLAGS_ADMIN | FLAGS_OSPYLOG )
+                      FLAGS_STATSPHIDE | FLAGS_ADMIN | FLAGS_OSPYLOG | \
+                      FLAGS_UNIDLE)
 
 #ifndef ADMIN_UMODES
 #define ADMIN_UMODES  (FLAGS_OPER | FLAGS_WALLOP | FLAGS_SERVNOTICE | \
@@ -529,6 +533,8 @@ struct Client
 #define SetOperOSpy(x)          ((x)->flags2 |= FLAGS2_OPER_OSPY)
 #define IsSetOperOSpyLog(x)     ((x)->flags2 & FLAGS2_OPER_OSPYLOG)
 #define SetOperOSpyLog(x)       ((x)->flags2 |= FLAGS2_OPER_OSPYLOG)
+#define IsSetOperUnIdle(x)      ((x)->flags2 & FLAGS2_OPER_UNIDLE)
+#define SetOperUnIdle(x)        ((x)->flags2 |= FLAGS2_OPER_UNIDLE)
 
 #define CBurst(x)               ((x)->flags2 & FLAGS2_CBURST)
 

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: parse.c,v 1.52 2003/06/24 03:57:16 ievil Exp $
+ *   $Id: parse.c,v 1.53 2003/08/16 19:10:45 ievil Exp $
  */
 #include "parse.h"
 #include "channel.h"
@@ -336,10 +336,10 @@ int parse(aClient *cptr, char *pbuffer, char *bufend)
    */
 
 #ifdef IDLE_FROM_MSG
-  if (IsRegisteredUser(cptr) && mptr->reset_idle)
+  if (IsRegisteredUser(cptr) && mptr->reset_idle && !(cptr->umodes & FLAGS_UNIDLE))
     from->user->last = CurrentTime;
 #else
-  if (IsRegisteredUser(cptr) && !mptr->reset_idle)
+  if (IsRegisteredUser(cptr) && !mptr->reset_idle && !(cptr->umodes & FLAGS_UNIDLE))
     from->user->last = CurrentTime;
 #endif
   

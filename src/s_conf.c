@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.246 2003/06/24 03:57:17 ievil Exp $
+ *  $Id: s_conf.c,v 1.247 2003/08/16 19:10:46 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -3022,6 +3022,10 @@ oper_privs_from_string(int int_privs,char *privs)
         int_privs |= CONF_OPER_STATSPHIDE;  /* allow stats P hide */
       else if(*privs == 'p')
         int_privs &= ~CONF_OPER_STATSPHIDE; /* disallow stats P hide */
+      else if(*privs == 'I')
+         int_privs |= CONF_OPER_UNIDLE;  /* allow stats +u idle hide */
+      else if(*privs == 'i')
+         int_privs &= ~CONF_OPER_UNIDLE; /* disallow stats +u idle hide */
       else if(*privs == 'A')
         int_privs |= CONF_OPER_ADMIN;         /* admin */
       else if(*privs == 'a')
@@ -3143,6 +3147,13 @@ char *oper_privs_as_string(aClient *cptr,int port)
   else
     *privs_ptr++ = 'p';
 
+  if(port & CONF_OPER_UNIDLE)
+    {
+      if(cptr)
+        SetOperUnIdle(cptr);
+    }
+  
+
   if(port & CONF_OPER_DIE)
     {
       if(cptr)
@@ -3221,6 +3232,8 @@ oper_flags_from_string(char *flags)
         int_flags |= FLAGS_STATSPHIDE;
       else if(*flags == 'b')
         int_flags |= FLAGS_BOTS;
+      else if(*flags == 'u')
+        int_flags |= FLAGS_UNIDLE;
       else if(*flags == 'x')
         int_flags |= FLAGS_EXTERNAL;
       else if(*flags == 'z')
@@ -3278,6 +3291,8 @@ char *oper_flags_as_string(int flags)
     *flags_ptr++ = 'p';
   if(flags & FLAGS_BOTS)
     *flags_ptr++ = 'b';
+  if(flags & FLAGS_UNIDLE)
+    *flags_ptr++ = 'u';  
   if(flags & FLAGS_EXTERNAL)
     *flags_ptr++ = 'x';
   if(flags & FLAGS_OPERWALL)
