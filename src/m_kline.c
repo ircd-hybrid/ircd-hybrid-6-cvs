@@ -22,7 +22,7 @@
  */
 
 #ifndef lint
-static char *rcs_version = "$Id: m_kline.c,v 1.8 1999/06/26 15:05:47 db Exp $";
+static char *rcs_version = "$Id: m_kline.c,v 1.9 1999/06/30 03:20:52 db Exp $";
 #endif
 
 #include "struct.h"
@@ -51,7 +51,6 @@ static char *rcs_version = "$Id: m_kline.c,v 1.8 1999/06/26 15:05:47 db Exp $";
 #endif
 #include "dline_conf.h"
 #include "mtrie_conf.h"
-#include "fdlist.h"
 
 extern int rehashed;
 extern int dline_in_progress;	/* defined in ircd.c */

@@ -22,7 +22,7 @@
  */
 
 #ifndef lint
-static char *rcs_version = "$Id: m_gline.c,v 1.7 1999/06/28 01:12:33 db Exp $";
+static char *rcs_version = "$Id: m_gline.c,v 1.8 1999/06/30 03:20:51 db Exp $";
 #endif
 
 #include "struct.h"
@@ -51,7 +51,6 @@ static char *rcs_version = "$Id: m_gline.c,v 1.7 1999/06/28 01:12:33 db Exp $";
 #endif
 #include "dline_conf.h"
 #include "mtrie_conf.h"
-#include "fdlist.h"
 
 #ifdef GLINES
 char	*glinefile = GLINEFILE;
