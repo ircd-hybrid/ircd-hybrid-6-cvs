@@ -1,5 +1,5 @@
 This file outlines the features that ircd-hybrid has for IRC Operators.
-$Id: opers.txt,v 1.23 2003/06/12 23:53:01 ievil Exp $
+$Id: opers.txt,v 1.24 2003/06/25 01:34:17 ievil Exp $
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -27,6 +27,7 @@ Usermodes: (* designates that the umode is oper only)
                   messages.
        * +p     - Can hide from stats p (oper flag P - for tcm's)
        * +a     - User is admin
+       * +Z     - Can see OperSpy Log events
 
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

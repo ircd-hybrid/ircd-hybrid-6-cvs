@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h.dist,v 1.138 2003/06/14 23:23:39 ievil Exp $
+ * $Id: config.h.dist,v 1.139 2003/06/25 01:34:19 ievil Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -35,7 +35,7 @@
  * can do much damage with stats flooding, so why show it?
  * whois notice is just an invasion of privacy. Who cares?
  * I personally hope you agree with me, and leave these undef'ed
- * but at least you have been warned. - Dianora
+ * but at least you have been warned.
  *
  */
 
@@ -216,6 +216,7 @@
 #define FNAME_OPERSPYLOG   "/usr/local/ircd/operspy.local.log"
 #define FNAME_OPERSPYRLOG  "/usr/local/ircd/operspy.remote.log"
 
+
 /* RFC1035_ANAL
  * Defining this causes ircd to reject hostnames with non-compliant chars.
  * undef'ing it will allow hostnames with _ or / to connect
@@ -373,11 +374,11 @@
  */
 #undef  WHOIS_NOTICE
 
-/* SHOW_REMOTE_WHOIS - Shows a notice to an oper when a client
+/* SHOW_REMOTE_WHOIS - Shows a notice to an oper when a client 
  * does a /whois on them, even when  the client is not on the
  * same server as the oper (eg. a /whois nick nick ).
  * Why do opers need this at all? Its an invasion of privacy. bah.
- * you don't need this. -Dianora
+ * you don't need this. -Dianora 
  */
 #undef SHOW_REMOTE_WHOIS
 
@@ -450,8 +451,8 @@
 #define ZIP_LEVEL 2
 
 /*
- * ADMIN_UMODES OPER_UMODES LOCOP_UMODES - set these to be the initial umodes 
- * when OPER'in These can be over-ridden in ircd.conf file, with flags in 
+ * ADMIN_UMODES OPER_UMODES LOCOP_UMODES - set these to be the initial umode
+ * when OPER'in These can be over-ridden in ircd.conf file, with flags in
  * last O field
  */
 #define ADMIN_UMODES (FLAGS_OPER|FLAGS_WALLOP|FLAGS_SERVNOTICE|FLAGS_OPERWALL|FLAGS_ADMIN)
@@ -462,7 +463,7 @@
  * HIDDEN_ADMIN - On EFnet this *must* be defined!!!
  */
 #define HIDDEN_ADMIN
-
+      
 /* MAXIMUM LINKS - max links for class 0 if no Y: line configured
  *
  * This value is only used if you don't have server classes defined, and
@@ -718,6 +719,7 @@
  */
 #define OPERSPYLOG
 
+
 /* ----------------- not approved on EFnet section --------------------
  *
  * if you are not an efnet admin - we recommend you enable most of these.. 
@@ -760,10 +762,10 @@
 
 /* GLINE_REASON_FIRST (default)
  * Adopted the hybrid 7 behaviour of placing a gline based on the first reason
- * instead of the last as hybrid6 now does. 
- */  
+ * instead of the last as hybrid6 now does.
+ */
 #define GLINE_REASON_FIRST
-
+   
 /* CHANMODE_E
  * /mode #channel +e allows you to add exceptions to bans.
  * very useful if a friend has to use an aol.com account for a few days.
@@ -790,10 +792,10 @@
  */
 #undef USE_KNOCK
 
-/* SPOOF_IP
- *  - Allows spoofs to be ip's instead just hostnames.     
- */     
-#undef SPOOF_IP  
+/* SPOOF_IP 
+ *  - Allows spoofs to be ip's instead just hostnames.
+ */   
+#undef SPOOF_IP
 
 /* OPER_JUPE_BYPASS
  * - in cases with drone channels one could want to join juped channels.
@@ -806,32 +808,15 @@
  * other opers/servers are feeling unsure about their addition.
  *
  * Current restrictions:
- * - Dont allow non-global operators to see WALLOPS/OPERWALLs. This
- *   removes EFNETs biggest fear when adding new opers. That they
- *   possibly could see WALLOPS/OPERWALL and relay them to their
+ * - Dont allow non-global operators to see WALLOPS/OPERWALLs. This 
+ *   removes EFNETs biggest fear when adding new opers. That they 
+ *   possibly could see WALLOPS/OPERWALL and relay them to their 
  *   bad friends. No more....
  *
  */
 #undef RESTRICT_LOCOP
 
-/* OPERSPY
- * This was voted in as an EFnet feature. Gives opers with the correct
- * conf flag (S) access to use OPERSPY features that allows them to
- * see :
- * - See all +i clients in /who
- * - See all clients on +s/+p chans
- * - See all +s/+ channels in /whois
- * - See channel keys/modes
- */
-#undef OPERSPY
-
-/* OPERSPYLOG *mandatory on efnet*
- * Logs OPERSPY usage.
- */
-#define OPERSPYLOG
-
 /* -------------- END NOT APPROVED ON EFNET SECTION --------------------- */
-
 
 /*   STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP STOP  */
 
@@ -1115,6 +1100,7 @@
 #define MODE_PREFIX      '!'
 #endif
 
-#define CONFIG_H_LEVEL_6_3
+
+#define CONFIG_H_LEVEL_6_4
 
 #endif /* INCLUDED_config_h */
