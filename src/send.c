@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.39 1999/07/08 00:36:28 db Exp $
+ *   $Id: send.c,v 1.40 1999/07/08 00:53:32 db Exp $
  */
 
 #include "struct.h"

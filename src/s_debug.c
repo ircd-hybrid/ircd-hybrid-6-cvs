@@ -21,13 +21,15 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_debug.c	2.28 07 Nov 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_debug.c,v 1.12 1999/07/04 08:51:41 tomh Exp $";
+static char *rcs_version = "$Id: s_debug.c,v 1.13 1999/07/08 00:53:30 db Exp $";
 #endif
 
 #include "struct.h"
 #include "s_conf.h"
 #include "class.h"
 #include "res.h"
+#include "send.h"
+
 extern	void	count_whowas_memory(int *, u_long *);
 extern  void    count_ip_hash(int *,u_long *);	  /* defined in s_conf.c */
 extern  int	maxdbufblocks;			  /* defined in dbuf.c */

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.39 1999/07/07 03:27:43 db Exp $
+ *  $Id: s_misc.c,v 1.40 1999/07/08 00:53:30 db Exp $
  */
 #include "s_conf.h"
 #include "struct.h"
@@ -30,6 +30,8 @@
 #include "h.h"
 #include "fdlist.h"
 #include "s_bsd.h"
+#include "send.h"
+
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <fcntl.h>

@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.96 1999/07/07 05:40:06 tomh Exp $
+ *  $Id: s_conf.c,v 1.97 1999/07/08 00:53:30 db Exp $
  */
 #include "s_conf.h"
 #include "class.h"
@@ -31,6 +31,7 @@
 #include "h.h"
 #include "mtrie_conf.h"
 #include "s_bsd.h"
+#include "send.h"
 
 #if defined(AIX) || defined(DYNIXPTX) || defined(SVR3)
 #include <time.h>

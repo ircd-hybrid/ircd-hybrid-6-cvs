@@ -8,7 +8,7 @@
 /* ************************************************************************ */
 
 #ifndef lint
-static char *rcs_version = "$Id: blalloc.c,v 1.7 1999/06/12 15:42:58 db Exp $";
+static char *rcs_version = "$Id: blalloc.c,v 1.8 1999/07/08 00:53:24 db Exp $";
 #endif
 
 /* ------------------------------------------------------------------------ */
@@ -20,6 +20,7 @@ static char *rcs_version = "$Id: blalloc.c,v 1.7 1999/06/12 15:42:58 db Exp $";
 #include "h.h"
 #include "numeric.h"
 #include "blalloc.h"
+#include "send.h"
 
 /* ------------------------------------------------------------------------ */
 /* DEFINES                                                                  */

@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.25 1999/07/07 23:31:46 db Exp $
+ * $Id: res.c,v 1.26 1999/07/08 00:53:29 db Exp $
  */
 #include "res.h"
 #include "sys.h"
@@ -13,6 +13,7 @@
 #include "struct.h"
 #include "h.h"
 #include "common.h"
+#include "send.h"
 
 #include <assert.h>
 #include <sys/time.h>

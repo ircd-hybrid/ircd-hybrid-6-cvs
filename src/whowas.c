@@ -22,9 +22,10 @@
 #include "sys.h"
 #include "numeric.h"
 #include "h.h"
+#include "send.h"
 
 #ifndef lint
-static char *rcs_version = "$Id: whowas.c,v 1.10 1999/06/26 01:07:00 db Exp $";
+static char *rcs_version = "$Id: whowas.c,v 1.11 1999/07/08 00:53:33 db Exp $";
 #endif
 
 /* externally defined functions */

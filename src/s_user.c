@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.115 1999/07/08 00:36:27 db Exp $
+ *  $Id: s_user.c,v 1.116 1999/07/08 00:53:31 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -32,6 +32,8 @@
 #include "class.h"
 #include "s_bsd.h"
 #include "h.h"
+#include "send.h"
+
 #include <sys/stat.h>
 #include <fcntl.h>
 #ifdef FLUD
@@ -567,6 +569,7 @@ static	int	register_user(aClient *cptr,
 		}
 	    }
 	}
+
 #ifndef FOLLOW_IDENT_RFC
       else if (IsGotId(sptr) && *sptr->username != '-')
 	strncpyzt(user->username, sptr->username, USERLEN + 1);

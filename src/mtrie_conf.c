@@ -55,12 +55,13 @@
 #include "s_conf.h"
 #include "class.h"
 #include "h.h"
+#include "send.h"
 
 #include "mtrie_conf.h"
 #include "dline_conf.h"
 
 #ifndef lint
-static char *rcs_version="$Id: mtrie_conf.c,v 1.44 1999/07/05 21:53:04 db Exp $";
+static char *rcs_version="$Id: mtrie_conf.c,v 1.45 1999/07/08 00:53:28 db Exp $";
 #endif /* lint */
 
 #define MAXPREFIX (HOSTLEN+USERLEN+15)

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.127 1999/07/07 05:40:06 tomh Exp $
+ *   $Id: s_serv.c,v 1.128 1999/07/08 00:53:31 db Exp $
  */
 
 #define CAPTAB
@@ -41,6 +41,7 @@
 #include "res.h"
 #include "s_conf.h"
 #include "class.h"
+#include "send.h"
 
 #ifndef __EMX__
 #include <utmp.h> /* old slackware utmp.h defines BYTE_ORDER */

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.14 1999/07/07 05:40:06 tomh Exp $
+ *   $Id: s_auth.c,v 1.15 1999/07/08 00:53:29 db Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -35,6 +35,8 @@
 #include "s_bsd.h"
 #include "h.h"
 #include "res.h"
+#include "send.h"
+
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/file.h>

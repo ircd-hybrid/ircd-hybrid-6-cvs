@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.102 1999/07/05 01:21:45 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.103 1999/07/08 00:53:25 db Exp $";
 #endif
 
 #include "struct.h"
@@ -48,6 +48,7 @@ static char *rcs_version="$Id: channel.c,v 1.102 1999/07/05 01:21:45 db Exp $";
 #include "numeric.h"
 #include "channel.h"
 #include "h.h"
+#include "send.h"
 
 #ifdef NEED_SPLITCODE
 int server_was_split=YES;
