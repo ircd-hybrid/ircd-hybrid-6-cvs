@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.70 2001/12/10 08:03:49 db Exp $
+ *   $Id: m_kline.c,v 1.71 2001/12/14 16:56:36 db Exp $
  */
 #include "m_commands.h"
 #include "m_kline.h"
@@ -789,20 +789,12 @@ m_kline(struct Client *cptr,
       rehashed = YES;
       dline_in_progress = NO;
       nextping = CurrentTime;
-      if (oper_reason != NULL)
-	sendto_realops("%s added temporary %d min. K-Line for [%s@%s] [%s|%s]",
-		       parv[0],
-		       temporary_kline_time,
-		       user,
-		       host,
-		       reason, oper_reason);
-      else
-	sendto_realops("%s added temporary %d min. K-Line for [%s@%s] [%s]",
-		       parv[0],
-		       temporary_kline_time,
-		       user,
-		       host,
-		       reason);
+      sendto_realops("%s added temporary %d min. K-Line for [%s@%s] [%s]",
+		     parv[0],
+		     temporary_kline_time,
+		     user,
+		     host,
+		     reason);
       return 0;
     }
   else
@@ -823,18 +815,11 @@ m_kline(struct Client *cptr,
   else
     add_mtrie_conf_entry(aconf,CONF_KILL);
 
-  if (oper_reason != NULL)
-    sendto_realops("%s added K-Line for [%s@%s] [%s|%s]",
-		   sptr->name,
-		   user,
-		   host,
-		   reason, oper_reason);
-  else
-    sendto_realops("%s added K-Line for [%s@%s] [%s]",
-		   sptr->name,
-		   user,
-		   host,
-		   reason);
+  sendto_realops("%s added K-Line for [%s@%s] [%s]",
+		 sptr->name,
+		 user,
+		 host,
+		 reason);
 
 
   log(L_TRACE, "%s added K-Line for [%s@%s] [%s|%s]",
@@ -1278,16 +1263,10 @@ m_dline(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
 
   add_Dline(aconf);
 
-  if (oper_reason != NULL)
-    sendto_realops("%s added D-Line for [%s] [%s|%s]",
-		   sptr->name,
-		   host,
-		   reason, oper_reason);
-  else
-    sendto_realops("%s added D-Line for [%s] [%s]",
-		   sptr->name,
-		   host,
-		   reason);
+  sendto_realops("%s added D-Line for [%s] [%s]",
+		 sptr->name,
+		 host,
+		 reason);
 
   log(L_TRACE, "%s added D-Line for [%s] [%s|%s]", 
       sptr->name, host, reason,

@@ -18,7 +18,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *   $Id: s_conf.h,v 1.60 2001/12/12 23:04:03 leeh Exp $
+ *   $Id: s_conf.h,v 1.61 2001/12/14 16:56:33 db Exp $
  */
 
 #ifndef INCLUDED_config_h
@@ -247,8 +247,7 @@ extern struct ConfItem* find_is_klined(const char* host,
                                        unsigned long ip);
 extern char* show_iline_prefix(struct Client *,struct ConfItem *,char *);
 extern void get_printable_conf(struct ConfItem *,
-			       char **, char **, char **, char **,
-			       char **, int *);
+			       char **, char **, char **, char **, int *);
 extern void report_configured_links(struct Client* cptr, int mask);
 extern void report_specials(struct Client* sptr, int flags, int numeric);
 extern void report_qlines(struct Client* cptr);
