@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.200 1999/07/29 13:26:24 sean Exp $
+ *   $Id: s_serv.c,v 1.201 1999/07/29 14:04:13 sean Exp $
  */
 #include "s_serv.h"
 #include "channel.h"
@@ -2106,14 +2106,14 @@ int     m_trace(struct Client *cptr,
                            form_str(RPL_TRACEOPERATOR),
                            me.name,
                            parv[0], c_class,
-                           name, IsAnOper(sptr)?ip:"127.0.0.1",
+                           name, IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"127.0.0.1":ip),
                            now - acptr->lasttime,
                            (acptr->user)?(now - acptr->user->last):0);
               else
                 sendto_one(sptr,form_str(RPL_TRACEUSER),
                            me.name, parv[0], c_class,
                            name,
-                           IsIPHidden(acptr)?"127.0.0.1":ip,
+                           IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"127.0.0.1":ip),
                            now - acptr->lasttime,
                            (acptr->user)?(now - acptr->user->last):0);
               cnt++;
@@ -2298,7 +2298,7 @@ int     m_ltrace(struct Client *cptr,
                            form_str(RPL_TRACEOPERATOR),
                            me.name, parv[0], c_class,
                            name, 
-                           IsAnOper(sptr)?ip:"127.0.0.1", 
+                           IsAnOper(sptr)?ip:(IsIPHidden(acptr)?"127.0.0.1":ip), 
                            now - acptr->lasttime,
                            (acptr->user)?(now - acptr->user->last):0);
               cnt++;
