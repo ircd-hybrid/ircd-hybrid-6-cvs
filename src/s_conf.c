@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.24 1998/12/05 00:10:31 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.25 1998/12/07 06:15:18 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1900,6 +1900,7 @@ int 	initconf(int opt, int fd,int use_include)
 	  dontadd = 1;
 	  MyFree(aconf->name);
 	  aconf->name = aconf->host;
+	  aconf->host = (char *)NULL;
 	  aconf->next = x_conf;
 	  x_conf = aconf;
 	}
@@ -1909,6 +1910,7 @@ int 	initconf(int opt, int fd,int use_include)
 	  dontadd = 1;
 	  MyFree(aconf->name);
 	  aconf->name = aconf->host;
+	  aconf->host = (char *)NULL;
 	  aconf->next = u_conf;
 	  u_conf = aconf;
 	}
@@ -1918,6 +1920,7 @@ int 	initconf(int opt, int fd,int use_include)
 	  dontadd = 1;
 	  MyFree(aconf->name);
 	  aconf->name = aconf->host;
+	  aconf->host = (char *)NULL;
 	  aconf->next = q_conf;
 	  q_conf = aconf;
 	}

@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.42 1998/12/07 03:17:36 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.43 1998/12/07 06:15:17 db Exp $";
 #endif
 
 #include "struct.h"
@@ -3093,12 +3093,19 @@ int	m_topic(aClient *cptr,
   if (name && IsChannelName(name))
     {
       chptr = find_channel(name, NullChn);
-      if (!chptr || !IsMember(sptr, chptr))
-	{
-	  sendto_one(sptr, err_str(ERR_NOTONCHANNEL),
-		     me.name, parv[0], name);
-	  return 0;
-	}
+      if (!chptr)
+        {
+          sendto_one(sptr, err_str(ERR_NOSUCHCHANNEL), me.name, parv[0],
+              name);
+          return 0;
+        }
+
+      if (!IsMember(sptr, chptr))
+        {
+          sendto_one(sptr, err_str(ERR_NOTONCHANNEL), me.name, parv[0],
+              name);
+          return 0;
+        }
 
       if (parc > 2) /* setting topic */
 	topic = parv[2];
