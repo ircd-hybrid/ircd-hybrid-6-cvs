@@ -21,7 +21,7 @@
 #ifndef lint
 static	char sccsid[] = "@(#)ircd.c	2.48 3/9/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version="$Id: ircd.c,v 1.5 1998/10/06 04:42:28 db Exp $";
+static char *rcs_version="$Id: ircd.c,v 1.6 1998/10/09 22:36:23 db Exp $";
 #endif
 
 #include "struct.h"
@@ -849,6 +849,23 @@ int	main(int argc, char *argv[])
     }
 #endif /*CHROOTDIR*/
 
+#ifdef  ZIP_LINKS
+  if (zlib_version[0] == '0')
+    {
+      fprintf(stderr, "zlib version 1.0 or higher required\n");
+      exit(1);
+    }
+  if (zlib_version[0] != ZLIB_VERSION[0])
+    {
+      fprintf(stderr, "incompatible zlib version\n");
+      exit(1);
+    }
+  if (strcmp(zlib_version, ZLIB_VERSION) != 0)
+    {
+      fprintf(stderr, "warning: different zlib version\n");
+    }
+#endif
+
   myargv = argv;
   (void)umask(077);                /* better safe than sorry --SRB */
   bzero((char *)&me, sizeof(me));
@@ -926,7 +943,13 @@ int	main(int argc, char *argv[])
 	  bootopt |= BOOT_TTY;
 	  break;
 	case 'v':
-	  (void)printf("ircd %s\n", version);
+	  (void)printf("ircd %s\n\tzlib %s\n\tircd_dir: %s\n", version,
+#ifndef ZIP_LINKS
+		       "not used",
+#else
+		       zlib_version,
+#endif
+		       dpath);
 	  exit(0);
 	case 'x':
 #ifdef	DEBUGMODE
@@ -1139,6 +1162,7 @@ normal user.\n");
   me.next = NULL;
   me.user = NULL;
   me.from = &me;
+  me.servptr = &me;
   SetMe(&me);
   make_server(&me);
   me.serv->up = me.name;
