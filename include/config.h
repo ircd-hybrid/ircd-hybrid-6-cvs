@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.51 1999/06/28 23:26:15 db Exp $
+ * $Id: config.h,v 1.52 1999/06/29 01:45:27 db Exp $
  */
 
 #ifndef	__config_include__
@@ -331,18 +331,6 @@
  */
 #define PACE_WALLOPS
 #define WALLOPS_WAIT 10	
-
-/* EXTRA_BOT_NOTICES - Have the server send extra bot notices?
- */
-#define EXTRA_BOT_NOTICES
-
-/* BOT_GCOS_WARN - Check connecting clients gcos for possible bot ID's?
- */
-#define BOT_GCOS_WARN
-
-#if defined(BOT_GCOS_WARN) && !defined(EXTRA_BOT_NOTICES)
-#define EXTRA_BOT_NOTICES
-#endif
 
 /* SHOW_HEADERS - Shows messages like "looking up hostname" 
  */
