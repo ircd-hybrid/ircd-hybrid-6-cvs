@@ -1,3 +1,17 @@
+ievil       2004/06/12 19:59:45 EDT	(20040612_1)
+
+  Modified files:
+    src                  m_whois.c messages_cust.tab 
+  Log:
+  Fixed a bug with CUSTOM_ERR that made ircd core. Found by josh@irc.banetele.no
+  Fixed a missing define in m_whois.c and removed 2 more unused variables.
+  
+  Revision  Changes    Path
+  1.21      +2 -1      ircd-hybrid-6/src/m_whois.c
+  1.33      +1 -2      ircd-hybrid-6/src/messages_cust.tab
+
+
+
 ievil       2004/06/11 20:23:28 EDT	(20040612_0)
 
   Modified files:
