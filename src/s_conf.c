@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.2 1998/09/19 21:12:39 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.3 1998/09/21 03:26:23 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1708,11 +1708,13 @@ int 	initconf(int opt, int fd)
 	if (!index(aconf->host, '@') && *aconf->host != '/')
 	  {
 	    char	*newhost;
-	    int	len = 3;	/* *@\0 = 3 */
+	    int	len;		
 	    
-	    len += strlen(aconf->host);
+	    len = strlen(aconf->host) + 3; /* *@\0 = 3 */
 	    newhost = (char *)MyMalloc(len);
-	    (void)ircsprintf(newhost, "*@%s", aconf->host);
+	    *newhost++ = '*';
+	    *newhost++ = '@';
+	    strcpy(newhost,aconf->host);
 	    MyFree(aconf->host);
 	    aconf->host = newhost;
 	  }

@@ -55,7 +55,7 @@
 #endif
 
 #ifndef lint
-static char *version="$Id: mtrie_conf.c,v 1.2 1998/09/19 21:12:38 db Exp $";
+static char *version="$Id: mtrie_conf.c,v 1.3 1998/09/21 03:26:23 db Exp $";
 #endif /* lint */
 
 #define MAXPREFIX (HOSTLEN+USERLEN+10)
@@ -1543,7 +1543,10 @@ void clear_mtrie_conf_links()
       found_conf;found_conf=found_conf_next)
     {
       found_conf_next = found_conf->next;
-      free_conf(found_conf);
+      if (found_conf->clients)
+	found_conf->status |= CONF_ILLEGAL;
+      else
+	free_conf(found_conf);
     }
   wild_card_ilines = (aConfItem *)NULL;
 
