@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.123 1999/07/17 03:02:45 db Exp $
+ *  $Id: s_conf.c,v 1.124 1999/07/17 03:17:33 db Exp $
  */
 #include "s_conf.h"
 #include "listener.h"
@@ -2024,7 +2024,7 @@ static void initconf(FBFILE* file, int use_include)
       if ( aconf->status & CONF_LISTEN_PORT)
 	{
 	  dontadd = 1;
-	  if(aconf->passwd[0] == '*')
+	  if((aconf->passwd[0] == '\0') || (aconf->password[0] == '*'))
 	    add_listener(aconf->port, NULL );
 	  else
 	    add_listener(aconf->port, (const char *)aconf->passwd);
