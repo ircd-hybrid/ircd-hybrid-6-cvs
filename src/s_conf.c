@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.233 2001/12/15 16:24:09 leeh Exp $
+ *  $Id: s_conf.c,v 1.234 2001/12/20 07:49:29 greg Exp $
  */
 #include "m_commands.h"
 #include "s_conf.h"
@@ -2208,6 +2208,12 @@ static void initconf(FBFILE* file, int use_include)
               if ((tmp = getfield(NULL)) == NULL)
                 break;
               aconf->hold = oper_flags_from_string(tmp);
+            }
+          else if(aconf->status & CONF_CONNECT_SERVER)
+            {
+              if ((tmp = getfield(NULL)) == NULL)
+                break;
+              (void)is_address(tmp, &aconf->ip, &aconf->ip_mask);
             }
 
           break;
