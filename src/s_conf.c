@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)s_conf.c	2.56 02 Apr 1994 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: s_conf.c,v 1.37 1999/01/20 05:56:10 db Exp $";
+static char *rcs_version = "$Id: s_conf.c,v 1.38 1999/01/22 04:24:21 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1436,9 +1436,11 @@ static char *set_conf_flags(aConfItem *aconf,char *tmp)
 	case '>':	/* can exceed max connects */
 	  aconf->flags |= CONF_FLAGS_F_LINED;
 	  break;
+#ifdef IDLE_CHECK
 	case '<':	/* can idle */
 	  aconf->flags |= CONF_FLAGS_IDLE_LINED;
 	  break;
+#endif
 	default:
 	  return tmp;
 	}

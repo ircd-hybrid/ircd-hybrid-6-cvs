@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.63 1999/01/21 22:38:35 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.64 1999/01/22 04:24:22 db Exp $";
 #endif
 
 
@@ -87,6 +87,8 @@ extern int server_was_split;		/* defined in channel.c */
 extern time_t server_split_time;	/* defined in channel.c */
 extern int server_split_recovery_time;	/* defined in channel.c */
 extern int split_smallnet_size;		/* defined in channel.c */
+#endif
+#if defined(PRESERVE_CHANNEL_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT)
 extern void remove_empty_channels();	/* defined in channel.c */
 #endif
 
@@ -3366,7 +3368,9 @@ int   m_set(aClient *cptr,
 		{
 		  cold_start = NO;
 		  server_was_split = NO;
+#if defined(PRESERVE_CHANNEL_ON_SPLIT) || defined(NO_JOIN_ON_SPLIT)
 		  remove_empty_channels();
+#endif
 		}
               return 0;
             }
