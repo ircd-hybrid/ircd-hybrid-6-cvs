@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.38 1998/11/30 13:17:01 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.39 1998/12/08 04:08:40 db Exp $";
 #endif
 
 
@@ -6075,13 +6075,21 @@ int	m_die(aClient *cptr,
       if (!(acptr = local[i]))
 	continue;
       if (IsClient(acptr))
-	sendto_one(acptr,
-		   ":%s NOTICE %s :Server Terminating. %s",
-		   me.name, acptr->name,
-		   get_client_name(sptr, TRUE));
+	{
+	  if(IsAnOper(acptr))
+	    sendto_one(acptr,
+		       ":%s NOTICE %s :Server Terminating. %s",
+		       me.name, acptr->name,
+		       get_client_name(sptr, TRUE));
+	  else
+	    sendto_one(acptr,
+		       ":%s NOTICE %s :Server Terminating. %s",
+		       me.name, acptr->name,
+		       get_client_name(sptr, HIDEME));
+	}
       else if (IsServer(acptr))
 	sendto_one(acptr, ":%s ERROR :Terminated by %s",
-		   me.name, get_client_name(sptr, TRUE));
+		   me.name, get_client_name(sptr, HIDEME));
     }
   (void)s_die();
   return 0;

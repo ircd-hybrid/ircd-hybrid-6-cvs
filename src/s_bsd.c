@@ -21,7 +21,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_bsd.c	2.78 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_bsd.c,v 1.16 1998/11/25 23:44:54 db Exp $";
+static char *rcs_version = "$Id: s_bsd.c,v 1.17 1998/12/08 04:08:39 db Exp $";
 #endif
 
 #include "struct.h"
@@ -1255,7 +1255,7 @@ void	set_non_blocking(int fd,aClient *cptr)
  * Creates a client which has just connected to us on the given fd.
  * The sockhost field is initialized with the ip# of the host.
  * The client is added to the linked list of clients but isnt added to any
- * hash tables yuet since it doesnt have a name.
+ * hash tables yet since it doesnt have a name.
  */
 aClient	*add_connection(aClient *cptr, int fd)
 {
@@ -1323,8 +1323,15 @@ aClient	*add_connection(aClient *cptr, int fd)
 	  (void)close(fd);
 	  return NULL;
 	}
+
+      /* can't use sendheader in this section since acptr->fd hasn't
+       * been set yet, must use fd -Dianora/JailBird
+       */
+
 #ifdef SHOW_HEADERS
-      sendheader(acptr, REPORT_DO_DNS, R_do_dns);
+      /* sendheader(acptr, REPORT_DO_DNS, R_do_dns); */
+      if(IsUnknown(acptr))
+	send(fd, REPORT_DO_DNS, R_do_dns, 0);
 #endif
       lin.flags = ASYNC_CLIENT;
       lin.value.cptr = acptr;
@@ -1335,7 +1342,9 @@ aClient	*add_connection(aClient *cptr, int fd)
 	SetDNS(acptr);
 #ifdef SHOW_HEADERS
       else
-	sendheader(acptr, REPORT_FIN_DNSC, R_fin_dnsc);
+	/*	sendheader(acptr, REPORT_FIN_DNSC, R_fin_dnsc); */
+	if(IsUnknown(acptr))
+	  send(fd, REPORT_FIN_DNSC, R_fin_dnsc, 0);
 #endif
       nextdnscheck = 1;
     }
