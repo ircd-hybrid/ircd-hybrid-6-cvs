@@ -1,3 +1,15 @@
+gregp       2003/01/05 23:52:11 EST	(20030106_0)
+
+  Modified files:
+    src                  s_user.c 
+  Log:
+  - oops, must have got cut in the patch
+  
+  Revision  Changes    Path
+  1.250     +1 -1      ircd-hybrid-6/src/s_user.c
+
+
+
 gregp       2003/01/05 14:47:51 EST	(20030105_0)
 
   Modified files:
