@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.92 1999/06/22 01:44:22 db Exp $";
+static char *rcs_version="$Id: channel.c,v 1.93 1999/06/24 07:38:14 tomh Exp $";
 #endif
 
 #include "struct.h"
@@ -4090,7 +4090,7 @@ void	send_user_joins(aClient *cptr, aClient *user)
       if (*chptr->chname == '&')
 	continue;
       if ((mask = strchr(chptr->chname, ':')))
-	if (matches(++mask, cptr->name))
+	if (match(++mask, cptr->name))
 	  continue;
       clen = strlen(chptr->chname);
       if (clen > (size_t) BUFSIZE - 7 - len)

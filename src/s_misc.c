@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.28 1999/06/03 02:59:15 lusky Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.29 1999/06/24 07:38:17 tomh Exp $";
 #endif
 
 #include <sys/time.h>
@@ -682,7 +682,7 @@ static	void recurse_send_quits(aClient *cptr,
 
   if (IsCapable(to,CAP_QS))
     {
-      if (matches(myname, sptr->name) == 0)
+      if (match(myname, sptr->name) == 0)
 	{
 	  for (acptr = sptr->serv->users; acptr; acptr = acptr->lnext)
 	    sendto_one(to, ":%s QUIT :%s", acptr->name, comment);
@@ -698,7 +698,7 @@ static	void recurse_send_quits(aClient *cptr,
 	sendto_one(to, ":%s QUIT :%s", acptr->name, comment);
       for (acptr = sptr->serv->servers; acptr; acptr = acptr->lnext)
 	recurse_send_quits(cptr, acptr, to, comment, myname);
-      if (matches(myname, sptr->name) != 0)
+      if (match(myname, sptr->name) != 0)
 	sendto_one(to, "SQUIT %s :%s", sptr->name, me.name);
     }
 }

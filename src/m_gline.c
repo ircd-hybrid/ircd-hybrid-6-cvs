@@ -22,7 +22,7 @@
  */
 
 #ifndef lint
-static char *rcs_version = "$Id: m_gline.c,v 1.2 1999/06/22 04:00:18 lusky Exp $";
+static char *rcs_version = "$Id: m_gline.c,v 1.3 1999/06/24 07:38:15 tomh Exp $";
 #endif
 
 #include "struct.h"
@@ -181,8 +181,8 @@ int     m_gline(aClient *cptr,
 
       reason = parv[2];
 
-      if (!matches(user, "akjhfkahfasfjd") &&
-                !matches(host, "ldksjfl.kss...kdjfd.jfklsjf"))
+      if (!match(user, "akjhfkahfasfjd") &&
+                !match(host, "ldksjfl.kss...kdjfd.jfklsjf"))
 	{
 	  if(MyClient(sptr))
 	    sendto_one(sptr, ":%s NOTICE %s :Can't G-Line *@*", me.name,

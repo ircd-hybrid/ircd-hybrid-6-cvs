@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)send.c	2.32 2/28/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: send.c,v 1.33 1999/06/03 02:59:17 lusky Exp $";
+static char *rcs_version = "$Id: send.c,v 1.34 1999/06/24 07:38:18 tomh Exp $";
 #endif
 
 #include "struct.h"
@@ -951,9 +951,9 @@ va_dcl
 static	int	match_it(aClient *one, char *mask,int what)
 {
   if(what == MATCH_HOST)
-    return (matches(mask, one->user->host)==0);
+    return (match(mask, one->user->host)==0);
   else
-    return (matches(mask, one->user->server)==0);
+    return (match(mask, one->user->server)==0);
 }
 
 /*
@@ -1904,7 +1904,7 @@ int sendto_slaves(aClient *one,
 
 	for(aconf = u_conf; aconf; aconf= aconf->next)
 	  {
-	    if (!matches(acptr->name,aconf->name))
+	    if (!match(acptr->name,aconf->name))
 	      {
 		if(parc > 3)
 		  sendto_one(acptr,":%s %s %s %s %s :%s",

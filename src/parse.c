@@ -22,7 +22,7 @@
 static  char sccsid[] = "@(#)parse.c	2.30 17 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
-static char *rcs_version = "$Id: parse.c,v 1.5 1999/06/03 02:59:14 lusky Exp $";
+static char *rcs_version = "$Id: parse.c,v 1.6 1999/06/24 07:38:16 tomh Exp $";
 
 #endif
 #include "struct.h"
@@ -40,7 +40,6 @@ static char *rcs_version = "$Id: parse.c,v 1.5 1999/06/03 02:59:14 lusky Exp $";
 #include <strings.h>
 #endif
 
-#define match matches
 /*
  * NOTE: parse() should not be called recursively by other functions!
  */
@@ -103,7 +102,7 @@ aClient *find_userhost(char *user,
       {
 	if (!MyClient(c2ptr)) /* implies mine and a user */
 	  continue;
-	if ((!host || !matches(host, c2ptr->user->host)) &&
+	if ((!host || !match(host, c2ptr->user->host)) &&
 	    irccmp(user, c2ptr->user->username) == 0)
 	  {
 	    (*count)++;
@@ -230,7 +229,7 @@ int	parse(aClient *cptr, char *buffer, char *bufend)
       if (*sender && IsServer(cptr))
 	{
 	  from = find_client(sender, (aClient *) NULL);
-	  if (!from || matches(from->name, sender))
+	  if (!from || match(from->name, sender))
 	    from = find_server(sender, (aClient *)NULL);
 
 	  else if (!from && strchr(sender, '@'))
