@@ -39,7 +39,7 @@
 static	char sccsid[] = "@(#)channel.c	2.58 2/18/94 (C) 1990 University of Oulu, Computing\
  Center and Jarkko Oikarinen";
 
-static char *rcs_version="$Id: channel.c,v 1.105 1999/07/10 20:24:56 tomh Exp $";
+static char *rcs_version="$Id: channel.c,v 1.106 1999/07/11 21:09:38 tomh Exp $";
 #endif
 
 #include "struct.h"
@@ -1694,14 +1694,14 @@ static  void     set_mode(aClient *cptr,
 		  chptr->mode.mode |= MODE_JUPED;
 		  sendto_realops("%s!%s@%s juping locally Channel %s)",
 				 sptr->name, sptr->username,
-				 sptr->sockhost, chptr->chname);
+				 sptr->host, chptr->chname);
 		}
 	      else if(whatt == MODE_DEL)
 		{
 		  chptr->mode.mode &= ~MODE_JUPED;
 		  sendto_realops("%s!%s@%s unjuping locally Channel %s)",
 				 sptr->name, sptr->username,
-				 sptr->sockhost, chptr->chname);
+				 sptr->host, chptr->chname);
 		}
 	    }
 	  break;

@@ -21,9 +21,12 @@
  */
 
 /*
- * $Id: s_conf.h,v 1.8 1999/07/11 02:44:17 db Exp $
+ * $Id: s_conf.h,v 1.9 1999/07/11 21:09:35 tomh Exp $
  *
  * $Log: s_conf.h,v $
+ * Revision 1.9  1999/07/11 21:09:35  tomh
+ * sockhost cleanup and a lot of other stuff
+ *
  * Revision 1.8  1999/07/11 02:44:17  db
  * - redid motd handling completely. most of the motd handling is now
  *   done in motd.c
@@ -164,11 +167,13 @@ extern struct DNSReply* conf_dns_lookup(struct ConfItem* aconf);
 extern int              attach_conf(struct Client*, struct ConfItem *);
 extern struct ConfItem* attach_confs(struct Client*, char *, int);
 extern struct ConfItem* attach_confs_host(struct Client*, char *, int);
-extern int              attach_Iline(struct Client *, struct hostent *,
-                                     char *, char *,char **);
-extern struct ConfItem* find_me (void);
-extern struct ConfItem* find_admin (void);
-extern struct ConfItem* count_cnlines (struct SLink *);
+extern int              attach_Iline(struct Client* client, 
+                                     struct hostent* hp,
+                                     const char* sockname, 
+                                     const char* username, char** reason);
+extern struct ConfItem* find_me(void);
+extern struct ConfItem* find_admin(void);
+extern struct ConfItem* count_cnlines(struct SLink *);
 extern void             det_confs_butmask (struct Client *, int);
 extern int              detach_conf (struct Client *, struct ConfItem *);
 extern struct ConfItem* det_confs_butone (struct Client *, struct ConfItem *);

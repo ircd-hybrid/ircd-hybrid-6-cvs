@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_misc.c,v 1.43 1999/07/10 20:24:59 tomh Exp $
+ *  $Id: s_misc.c,v 1.44 1999/07/11 21:09:42 tomh Exp $
  */
 #include "s_conf.h"
 #include "struct.h"
@@ -186,11 +186,11 @@ char        *myctime(time_t value)
  * Return wildcard name of my server name according to given config entry
  * --Jto
  */
-char        *my_name_for_link(char *name,aConfItem *aconf)
+const char* my_name_for_link(const char* name, aConfItem* aconf)
 {
-  static   char        namebuf[HOSTLEN];
-  register int        count = aconf->port;
-  register char        *start = name;
+  static char          namebuf[HOSTLEN];
+  register int         count = aconf->port;
+  register const char* start = name;
 
   if (count <= 0 || count > 5)
     return start;
@@ -198,13 +198,13 @@ char        *my_name_for_link(char *name,aConfItem *aconf)
   while (count-- && name)
     {
       name++;
-      name = (char *)strchr(name, '.');
+      name = strchr(name, '.');
     }
   if (!name)
     return start;
 
   namebuf[0] = '*';
-  (void)strncpy(&namebuf[1], name, HOSTLEN - 1);
+  strncpy(&namebuf[1], name, HOSTLEN - 1);
   namebuf[HOSTLEN - 1] = '\0';
   return namebuf;
 }

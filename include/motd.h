@@ -1,6 +1,15 @@
-#include "limits.h"
+/*
+ * motd.h
+ *
+ * $Id: motd.h,v 1.3 1999/07/11 21:09:35 tomh Exp $
+ */
 #ifndef INCLUDED_motd_h
 #define INCLUDED_motd_h
+
+#ifndef INCLUDED_limits_h
+#include <limits.h>       /* PATH_MAX */
+#define INCLUDED_limits_h
+#endif
 
 #define MESSAGELINELEN	90
 

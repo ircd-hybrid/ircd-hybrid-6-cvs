@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.55 1999/07/08 22:46:22 db Exp $
+ * $Id: struct.h,v 1.56 1999/07/11 21:09:36 tomh Exp $
  */
 #ifndef	INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -489,8 +489,8 @@ extern struct Capability captab[];
 
 /* strncopynt --> strncpyzt to avoid confusion, sematics changed
    N must be now the number of bytes in the array --msa */
-#define	strncpyzt(x, y, N) do{(void)strncpy(x,y,N);x[N-1]='\0';}while(0)
-#define	StrEq(x,y)	(!strcmp((x),(y)))
+#define	strncpyzt(x, y, N) \
+  do { strncpy((x),(y),(N)); x[(N) - 1]='\0'; } while(0)
 
 /* used in SetMode() in channel.c and m_umode() in s_msg.c */
 
