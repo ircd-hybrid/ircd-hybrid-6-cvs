@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_kline.h,v 1.4 1999/07/30 06:48:11 tomh Exp $
+ * $Id: m_kline.h,v 1.5 2001/12/04 08:26:49 db Exp $
  */
 #ifndef INCLUDED_m_kline_h
 #define INCLUDED_m_kline_h
@@ -31,6 +31,7 @@ struct PKDlines
   char*            user; /* username of K/D lined user */
   char*            host; /* hostname of K/D lined user */
   char*            reason; /* reason they are K/D lined */
+  char*		   oper_reason; /* oper comment on kline */
   char*            when; /* when the K/D line was set */
   int              type;
 };
