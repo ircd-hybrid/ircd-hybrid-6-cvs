@@ -1,5 +1,5 @@
 /*
- * setup.c: $Id: setup.c,v 1.9 2002/02/04 14:49:24 androsyn Exp $
+ * setup.c: $Id: setup.c,v 1.10 2002/02/04 16:25:02 androsyn Exp $
  *  
  */
 /*
@@ -669,4 +669,5 @@ int adns__rereadconfig(adns_state ads)
   adns__consistency(ads,0,cc_entex);
   return 0;
 }
-                                    
+
+
