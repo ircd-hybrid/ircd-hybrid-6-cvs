@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.203 2001/07/08 06:02:47 a1kmm Exp $
+ *  $Id: s_conf.c,v 1.204 2001/07/08 09:56:45 a1kmm Exp $
  */
 #include "s_conf.h"
 #include "channel.h"
@@ -2292,7 +2292,7 @@ static void initconf(FBFILE* file, int use_include)
               continue;
             }
 
-#ifdef CRYPT_LINKS
+#if defined(CRYPT_LINKS) || defined(USE_KSERVER)
           if (crypt_parse_conf(aconf) < 0)
           {
             log(L_ERROR, "Bad C/N line information for %s", aconf->host);

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.101 2001/07/04 12:02:49 jdc Exp $
+ *   $Id: send.c,v 1.102 2001/07/08 09:56:46 a1kmm Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -191,7 +191,7 @@ send_message(aClient *to, char *msg, int len)
                         msg = zip_buffer(to, msg, &len, 0);
 
           #ifdef CRYPT_LINKS
-		if (len && to->crypt)
+		if (len && to->crypt && to->crypt->OutCipher)
 		  if (crypt_encrypt(to, msg, len) == CRYPT_ERROR)
 		    return dead_link(to, "Encryption failure for %s");
 
@@ -200,7 +200,7 @@ send_message(aClient *to, char *msg, int len)
 
         #else /* ZIP_LINKS */
           #ifdef CRYPT_LINKS
-	        if (len && to->crypt)
+	        if (len && to->crypt && to->crypt->OutCipher)
 	          if (crypt_encrypt(to, msg, len) == CRYPT_ERROR)
 		    return dead_link(to, "Encryption failure for %s");
           #endif /* CRYPT_LINKS */

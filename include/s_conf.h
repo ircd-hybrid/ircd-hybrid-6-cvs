@@ -18,321 +18,9 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *   $Id: s_conf.h,v 1.48 2001/07/08 09:56:40 a1kmm Exp $
  */
 
-/*
- * $Id: s_conf.h,v 1.47 2001/07/04 12:02:42 jdc Exp $
- *
- * $Log: s_conf.h,v $
- * Revision 1.47  2001/07/04 12:02:42  jdc
- * The Monster Update(tm) for hybrid-6 and cryptlinks.
- *
- * NOTE:  This apparently should work with hybrid-7, but it has one minor
- * bug which I have yet to be able to figure out.  Other than that, the
- * actual authentication seems to be working fine; there's got to be a
- * missing line of code somewhere, or something not being initialised right;
- * something like that.  An example of this problem (pentarou.parodius.com
- * is hybrid-6 with this code):
- *
- * *** Connecting to 255.255.255.255[hybrid.best.net].9000
- * *** Notice -- Link with hybrid.best.net[unknown@255.255.255.255] established: (TS ZIP QS EX CHW ENC:CAST/128,CAST/128) link
- * *** Notice -- inflate() error(-3): unknown compression method
- * *** Notice -- hybrid.best.net was connected for 1 seconds.  0/1 sendK/recvK.
- * *** Notice -- Server hybrid.best.net split from pentarou.parodius.com
- *
- * It looks to me as if the connection is being terminated immediately after
- * zlib kicks in.  The other end of the link (hybrid.best.net) shows one
- * obvious error which should be the key to fixing this bug:
- *
- * *** Notice -- Unauthorized server connection attempt from pentarou.parodius.com: Invalid cipher
- *
- * Please note despite the zlib-style error, I ***STRONGLY*** doubt it has
- * anything to do with zlib.  Either way, I'm submitting this because it's a
- * _MUCH_ further along than before, and it actually does work except for the
- * one small bug.  :-)  I believe the bug might be in s_serv.c somewhere
- * (particularly with the "ENC:" stuff), but someone will have to go over all
- * of this alongside me to figure out where the real bug is.  Once it's
- * squashed, we're practically ready to go!
- *
- * - doc/cryptlink.txt
- *     * Updated with the latest protocol information (same as hybrid-7s).
- *
- * - doc/example.conf
- *     * Properly document how to use the new "," cipher pre-requisite in
- *       the passwd field.
- *
- * - include/client.h
- *     * Changed "ciphers" definition from char * to struct CipherDef *.
- *
- * - include/m_commands.h
- *     * Removed definitons for m_cryptauth and m_cryptserv.
- *     * Added definition for m_cryptlink.
- *
- * - include/msg.h
- *     * Removed references to MSG_CRYPTAUTH and MSG_CRYPTSERV.
- *     * Added reference to MSG_CRYPTLINK.
- *
- * - include/s_conf.h
- *     * Added to ConfItem: rsa_public_keyfile definition (filename of keyfile).
- *     * Added to ConfItem: struct CipherDef *cipher (pointer into Cipher[] for
- *                          the per-conf definition of a cipher).
- *
- * - include/s_crypt.h
- *     * Removed CRYPT_CIPHERNAMELENGTH.  Silly.
- *     * Changed definition of CipherDef structure.  Moved from a typedef to
- *       an actual struct.
- *     * Changed extern definition for Ciphers[] table to be struct.  Goes
- *       hand in hand with the above entry.
- *     * Changed return type for crypt_selectcipher().  Now returns a pointer
- *       to a CipherDef structure.
- *     * Added function crypt_parse_conf().
- *     * Cosmetical changes.
- *
- * - src/Makefile.in
- *     * Removal of src/cryptauth.c and src/cryptserv.c.
- *
- * - src/channel.c
- *     * --UNRELATED TO CRYPTLINKS--: Moved definition of register t2 to
- *       ensure it only got used when it needed (due to -Wunused).
- *
- * - src/m_capab.c
- *     * Removed "," delimited support across the wire for cipher autoneg.
- *     * Changed methodology alongside "ENC:" comprehension during CAPAB.
- *
- * - src/m_cryptauth.c
- *   src/m_cryptserv.c
- *     * Both removed.  NOTE: I DO HAVE THESE LAYING AROUND IN A BACKUP
- *                      SOURCE TREE!  For debugging the above bug, I figured
- *                      we might need them!
- *
- * - src/m_cryptlink.c
- *     * Added.
- *     * Very simple to understand too; the functions are all practically
- *       identical, so if you wrote this code, it should still make sense to
- *       you.
- *     * Like in -7, we now use a table for SERV and AUTH lookup.  Great for
- *       expansion.
- *
- * - src/s_bsd.c
- *     * Moved from "CRYPTSERV %s %s :%s" to "CRYPTLINK SERV ...".
- *     * Cosmetical changes.
- *
- * - src/s_conf.c
- *     * Initialised the new rsa_public_keyfile and cipher ConfItem entries.
- *       Both default to NULL (as they should).
- *     * Added MyFree() entry for rsa_public_keyfile.
- *     * Added support for crypt_parse_conf() call during processing of C/N
- *       line phase.
- *     * Added log()s for bad C/N-line entries.
- *     * Cosmetical changes and comments.
- *
- * - src/s_crypt.c
- *     * Moved cipher names from things like "3DES" to "3DES/128".  This way,
- *       code all over the place in other portions does not have to permutate
- *       the actual keysize and the string using ircsprintf().  This was silly
- *       in the first place, IMHO, since we already stored the keysize and the
- *       strings both.
- *     * crypt_selectcipher() re-written to go through the Ciphers[] table
- *       a lot more effectively; goes alongside with the above entry too.
- *     * Removed unnecessary free() of cptr->ciphers.  No need for this any
- *       longer, since we just point right into the Ciphers[] table now.
- *       Ain't this what pointers are for?  ;-)
- *     * crypt_initserver() MAJORLY rehauled.  Tons of log() calls and new
- *       error messages in the case there's a problem.  Re-written due to the
- *       change from "char *ciphers" to "struct CipherDef *cipher".
- *     * Changed errorhandling slightly, so that things would be more proper
- *       ("if ... == NULL" vs. "if (!...)" in some cases).
- *     * Added crypt_parse_conf().  This is the magic function which actually
- *       parses the passwd entries in the C/N lines themselves and appropriate
- *       splits up the fields, assigning them to rsa_public_keyfile and
- *       cipher for ConfItem entries respectively.  I'm kind-of proud of this,
- *       even though it may not look like much.  :-)  The reason is that we
- *       were previously doing all of the parsing in crypt_initserver() -- a
- *       silly idea!
- *     * Cosmetical changes.
- *
- * - src/s_serv.c
- *     * Moved away from printing all of the available ciphers we had during
- *       the "ENC:" phase to simply printing the name of the one supported in
- *       cptr.  This was a major bug anyways -- it printed ALL THE CIPHERS IN
- *       THE TABLE, regardless if we actually supported them or not.  Ugh.
- *     * No more "%s/%i,%s/%i" garbage (see first change entry above for
- *       s_crypt.c).
- *     * Cosmetical changes.
- *
- * - src/send.c
- *     * --UNRELATED TO CRYPTLINKS--: Renamed "index" variable to "lindex,"
- *       to keep from conflicting with system-wide function index() and
- *       global variables.
- *     * Cosmetical changes.
- *
- * Revision 1.46  2001/06/16 15:47:02  db
- * - ok fixed a "dropped c line" bug. the problem was, both the hostname
- *   and servername have to match in attach_cn_lines, thats because
- *   you could have two servers on the same ip with different server names
- * - also fixed a minor typo here and there
- *
- * Revision 1.45  2000/12/01 06:28:47  lusky
- * added Gline Exemption flag ('_') to Ilines
- *
- * Revision 1.44  2000/08/22 05:03:55  lusky
- * added support for CIDR IP tklines, just like normal klines
- *
- * Revision 1.43  1999/08/10 03:32:14  lusky
- * remove <sys/syslog.h> check from configure, assume <syslog.h> exists (sw)
- * cleaned up attach_Iline some more (db)
- *
- * Revision 1.41  1999/07/29 07:06:48  tomh
- * new m_commands
- *
- * Revision 1.40  1999/07/28 05:00:41  tomh
- * Finish net cleanup of connects (mostly).
- * NOTE: Please check this carefully to make sure it still works right.
- * The original code was entirely too twisted to be sure I got everything right.
- *
- * Revision 1.39  1999/07/27 00:51:53  tomh
- * more connect cleanups
- *
- * Revision 1.38  1999/07/26 05:46:35  tomh
- * new functions for s_conf cleaning up connect
- *
- * Revision 1.37  1999/07/25 18:05:06  tomh
- * untangle m_commands
- *
- * Revision 1.36  1999/07/25 17:27:40  db
- * - moved aConfItem defs from struct.h to s_conf.h
- *
- * Revision 1.35  1999/07/24 02:55:45  wnder
- * removed #ifdef for obsolete R_LINES (CONF_RESTRICT as well).
- *
- * Revision 1.34  1999/07/23 02:45:39  db
- * - include file fixes
- *
- * Revision 1.33  1999/07/23 02:38:30  db
- * - more include file fixes
- *
- * Revision 1.32  1999/07/22 03:19:11  tomh
- * work on socket code
- *
- * Revision 1.31  1999/07/22 02:44:22  db
- * - built m_gline.h, scache.h , moved more stuff from h.h
- *
- * Revision 1.30  1999/07/21 23:12:10  db
- * - more h.h pruning
- *
- * Revision 1.29  1999/07/21 21:54:28  db
- * - yet more h.h cleanups, the nightmare that never ends
- *
- * Revision 1.28  1999/07/21 05:45:05  tomh
- * untabify headers
- *
- * Revision 1.27  1999/07/20 09:11:21  db
- * - moved getfield from parse.c to s_conf.c which is the only place its used
- * - removed duplicate prototype from h.h , it was in dline_conf.h already
- * - send.c needs s_zip.h included to know about ziplinks
- *
- * Revision 1.26  1999/07/20 08:28:03  db
- * - more removal of stuff from h.h
- *
- * Revision 1.25  1999/07/20 08:20:33  db
- * - more cleanups from h.h
- *
- * Revision 1.24  1999/07/20 04:37:11  tomh
- * more cleanups
- *
- * Revision 1.23  1999/07/19 09:05:14  tomh
- * Work on char attributes for nick names, changed isvalid macro
- * Const correctness changes
- * Fixed file close bug on successful read
- * Header cleanups
- * Checked all strncpy_irc usage added terminations where needed
- *
- * Revision 1.22  1999/07/18 17:50:52  db
- * - more header cleanups
- *
- * Revision 1.21  1999/07/18 17:27:02  db
- * - a few more header cleanups
- * - motd.c included channel.h, no need
- *
- * Revision 1.20  1999/07/18 07:00:24  tomh
- * add new file
- *
- * Revision 1.19  1999/07/17 03:23:15  db
- * - my bad.
- * - fixed prototype in s_conf.h
- * - fixed typo of password for passwd in s_conf.c
- *
- * Revision 1.18  1999/07/17 03:13:03  db
- * - corrected type casting problems, mainly const char *
- * - moved prototype for safe_write into s_conf.h
- *
- * Revision 1.17  1999/07/16 11:57:31  db
- * - more cleanups
- * - removed unused function in FLUD code
- *
- * Revision 1.16  1999/07/16 09:57:54  db
- * - even more cleanups. moved prototype from h.h to s_conf.h
- *
- * Revision 1.15  1999/07/16 09:36:00  db
- * - rename some function names to make function clearer
- * - moved prototypes into headers
- * - made some functions static
- * - added some needed comments
- *
- * Revision 1.14  1999/07/16 04:16:59  db
- * - optimized get_conf_name
- * - replaced char * with const char * for filename
- *
- * Revision 1.13  1999/07/15 22:26:43  db
- * - fixed core bug in m_kline.c, probably should add extra sanity test there
- *   REDUNDANT_KLINES was using aconf->name instead of aconf->user
- * - cleaning up conf file generation etc.
- *
- * Revision 1.12  1999/07/15 02:45:07  db
- * - added conf_connect_allowed()
- *
- * Revision 1.11  1999/07/15 02:34:18  db
- * - redid m_kline, moved conf file writing from m_kline into s_conf.c
- *   thus "hiding" the details of where the kline gets written..
- *   Temporarily removed Shadowfax's LOCKFILE code until this settles down.
- *
- * Revision 1.10  1999/07/13 01:42:58  db
- * - cleaned up conf file handling, handled by read_conf_files()
- *
- * Revision 1.9  1999/07/11 21:09:35  tomh
- * sockhost cleanup and a lot of other stuff
- *
- * Revision 1.8  1999/07/11 02:44:17  db
- * - redid motd handling completely. most of the motd handling is now
- *   done in motd.c
- *   motd handling includes, motd, oper motd, help file
- *
- * Revision 1.7  1999/07/09 06:55:45  tomh
- * Changed resolver code to use reference counting instead of blind hostent
- * removal. This will ensure that if a client resolved we will always get
- * it's hostent. Currently we are saving the hostent for the life of the client,
- * but it can be released once the access checks are finished so the resolver
- * cache stays reasonably sized.
- *
- * Revision 1.6  1999/07/08 23:04:06  db
- * - fixed goof in s_conf.h
- *
- * Revision 1.5  1999/07/08 22:46:22  db
- * - changes to centralize config.h ircd config files to one struct
- *
- * Revision 1.4  1999/07/04 09:00:48  tomh
- * more cleanup, only call delete_resolver_queries when there are outstanding requests
- *
- * Revision 1.3  1999/07/03 20:24:20  tomh
- * clean up class macros, includes
- *
- * Revision 1.2  1999/07/03 08:13:09  tomh
- * cleanup dependencies
- *
- * Revision 1.1  1999/06/23 00:28:37  tomh
- * added fileio module, changed file read/write code to use fileio, removed dgets, new header s_conf.h, new module files fileio.h fileio.c
- *
- */
 #ifndef INCLUDED_config_h
 #include "config.h"             /* defines */
 #endif
@@ -372,9 +60,11 @@ struct ConfItem
   time_t           hold;     /* Hold action until this time (calendar time) */
   struct Class*    c_class;     /* Class of connection */
   int              dns_pending; /* 1 if dns query pending, 0 otherwise */
-#ifdef CRYPT_LINKS
+#if defined(CRYPT_LINKS) || defined(USE_KSERVER)
   char *           rsa_public_keyfile; /* RSA public key filename */
+#ifdef CRYPT_LINKS
   struct CipherDef *cipher;            /* Cipher selection; ptr to Cipher[] */
+#endif
 #endif
 };
 
@@ -444,7 +134,8 @@ typedef struct QlineItem {
 #ifdef LITTLE_I_LINES
 #define CONF_FLAGS_LITTLE_I_LINE        0x8000
 #endif
-
+#define CONF_FLAGS_ENCRYPTED            0x10000
+#define CONF_FLAGS_KSERVER              0x20000
 
 
 /* Macros for aConfItem */
@@ -458,6 +149,8 @@ typedef struct QlineItem {
 #define IsConfBlined(x)         ((x)->flags & CONF_FLAGS_B_LINED)
 #define IsConfFlined(x)         ((x)->flags & CONF_FLAGS_F_LINED)
 #define IsConfExemptGline(x)    ((x)->flags & CONF_FLAGS_EXEMPTGLINE)
+#define IsConfEncrypted(x)      ((x)->flags & CONF_FLAGS_ENCRYPTED)
+#define IsConfKserver(x)        ((x)->flags & CONF_FLAGS_KSERVER)
 
 #ifdef IDLE_CHECK
 #define IsConfIdlelined(x)      ((x)->flags & CONF_FLAGS_IDLE_LINED)

@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.135 2001/07/04 12:02:46 jdc Exp $
+ *  $Id: s_bsd.c,v 1.136 2001/07/08 09:56:44 a1kmm Exp $
  */
 #include "s_bsd.h"
 #include "class.h"
@@ -766,7 +766,7 @@ void close_connection(struct Client *cptr)
   if (IsServer(cptr))
     zip_free(cptr);
 #endif
-#ifdef CRYPT_LINKS
+#if defined(CRYPT_LINKS) || defined(USE_KSERVER)
   crypt_free(cptr);
 #endif
   DBufClear(&cptr->sendQ);
