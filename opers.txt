@@ -1,5 +1,5 @@
 This file outlines the features that ircd-hybrid has for IRC Operators.
-$Id: opers.txt,v 1.15 2001/11/07 05:31:10 wcampbel Exp $
+$Id: opers.txt,v 1.16 2001/11/07 05:32:20 wcampbel Exp $
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -168,7 +168,7 @@ COMMAND         - USAGE and DESCRIPTION
                   is banned with reason [reason]
 
                   The reason can contain a '|' character.  Anything before
-                  the '|' will be shown to the victim, anything after is
+                  the '|' will be shown to the victim, anything after will
                   not.
 
                   KLINE user@ip.ip.ip.ip :[reason]
