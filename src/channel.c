@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.195 2001/06/11 21:40:46 leeh Exp $
+ * $Id: channel.c,v 1.196 2001/06/16 05:11:12 db Exp $
  */
 #include "channel.h"
 #include "client.h"
@@ -3911,6 +3911,7 @@ int     m_sjoin(struct Client *cptr,
 		     (unsigned long) newts,
 		     chptr->chname,
 		     cptr->name);
+      newts = oldts;
     }
 #endif
 
