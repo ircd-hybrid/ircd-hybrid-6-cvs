@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.34 1999/07/11 21:09:35 tomh Exp $
+ * $Id: h.h,v 1.35 1999/07/12 05:39:01 tomh Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -204,16 +204,6 @@ extern int     zip_init (aClient *);
 extern void    zip_free (aClient *);
 extern char    *unzip_packet (aClient *, char *, int *);
 extern char    *zip_buffer (aClient *, char *, int *, int);
-
-extern void	clear_channel_hash_table(void);
-extern void	clear_client_hash_table(void);
-extern void	add_to_client_hash_table(const char* name, aClient* client);
-extern int	del_from_client_hash_table(const char* name, aClient* client);
-extern void	add_to_channel_hash_table(const char* name, aChannel* chan);
-extern int	del_from_channel_hash_table(const char* name, aChannel* chan);
-extern aChannel* hash_find_channel(const char* name, aChannel* chan);
-extern aClient* hash_find_client(const char* name, aClient* client);
-extern aClient* hash_find_server(const char* name, aClient* client);
 
 extern void	add_history (aClient *, int);
 extern aClient	*get_history (char *, time_t);
