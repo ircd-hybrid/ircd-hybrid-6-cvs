@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_gline.c,v 1.13 1999/07/11 21:09:40 tomh Exp $
+ *  $Id: m_gline.c,v 1.14 1999/07/13 23:46:32 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -333,7 +333,7 @@ static void log_gline_request(
   struct tm *tmptr;
   int out;
 
-  (void)sprintf(filenamebuf, "%s.%s", 
+  (void)ircsprintf(filenamebuf, "%s.%s", 
 		ConfigFileEntry.glinefile, small_file_date((time_t)0));
   if ((out = open(filenamebuf, O_RDWR|O_APPEND|O_CREAT,0644))==-1)
     {
@@ -381,7 +381,7 @@ static void log_gline(
   struct tm *tmptr;
   int out;
 
-  (void)sprintf(filenamebuf, "%s.%s", 
+  (void)ircsprintf(filenamebuf, "%s.%s", 
 		ConfigFileEntry.glinefile, small_file_date((time_t) 0));
   if ((out = open(filenamebuf, O_RDWR|O_APPEND|O_CREAT,0644))==-1)
     {

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: motd.c,v 1.4 1999/07/11 12:41:33 db Exp $
+ *   $Id: motd.c,v 1.5 1999/07/13 23:46:32 db Exp $
  */
 
 #include "sys.h"
@@ -200,13 +200,13 @@ int ReadMessageFile(MessageFile *MessageFileptr)
   local_tm = localtime(&sb.st_mtime);
 
   if (local_tm)
-    (void)sprintf(MessageFileptr->lastChangedDate,
-		  "%d/%d/%d %02d:%02d",
-		  local_tm->tm_mday,
-		  local_tm->tm_mon + 1,
-		  1900 + local_tm->tm_year,
-		  local_tm->tm_hour,
-		  local_tm->tm_min);
+    ircsprintf(MessageFileptr->lastChangedDate,
+	       "%d/%d/%d %t:%t",
+	       local_tm->tm_mday,
+	       local_tm->tm_mon + 1,
+	       1900 + local_tm->tm_year,
+	       local_tm->tm_hour,
+	       local_tm->tm_min);
 
   /*
    * Clear out the old MOTD

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.136 1999/07/12 23:37:05 tomh Exp $
+ *   $Id: s_serv.c,v 1.137 1999/07/13 23:46:32 db Exp $
  */
 
 #define CAPTAB
@@ -3264,7 +3264,7 @@ int	m_restart(aClient *cptr,
   syslog(LOG_WARNING, "Server RESTART by %s\n",
 	 get_client_name(sptr,FALSE));
 #endif
-  sprintf(buf, "Server RESTART by %s", get_client_name(sptr, TRUE));
+  ircsprintf(buf, "Server RESTART by %s", get_client_name(sptr, TRUE));
   restart(buf);
   return 0; /*NOT REACHED*/
 }

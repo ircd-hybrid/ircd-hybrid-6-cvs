@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: support.c,v 1.5 1999/07/12 23:37:06 tomh Exp $
+ *  $Id: support.c,v 1.6 1999/07/13 23:46:34 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -33,7 +33,7 @@ extern	void	outofmemory();
 **			of separators
 **			argv 9/90
 **
-**	$Id: support.c,v 1.5 1999/07/12 23:37:06 tomh Exp $
+**	$Id: support.c,v 1.6 1999/07/13 23:46:34 db Exp $
 */
 
 char *strtoken(save, str, fs)
@@ -87,7 +87,7 @@ char *str, *fs;
 **	strerror - return an appropriate system error string to a given errno
 **
 **		   argv 11/90
-**	$Id: support.c,v 1.5 1999/07/12 23:37:06 tomh Exp $
+**	$Id: support.c,v 1.6 1999/07/13 23:46:34 db Exp $
 */
 
 char *strerror(int err_no)
@@ -104,7 +104,7 @@ char *strerror(int err_no)
 	if (errp == (char *)NULL)
 	    {
 		errp = buff;
-		(void) sprintf(errp, "Unknown Error %d", err_no);
+		ircsprintf(errp, "Unknown Error %d", err_no);
 	    }
 	return errp;
 }
@@ -189,7 +189,7 @@ char	*in;
 /*
 **	inet_netof --	return the net portion of an internet number
 **			argv 11/90
-**	$Id: support.c,v 1.5 1999/07/12 23:37:06 tomh Exp $
+**	$Id: support.c,v 1.6 1999/07/13 23:46:34 db Exp $
 **
 */
 
