@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.78 1999/07/15 08:47:35 tomh Exp $
+ * $Id: ircd.c,v 1.79 1999/07/16 04:53:13 tomh Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -188,7 +188,7 @@ void restart(char *mesg)
   was_here = YES;
 
 #ifdef	USE_SYSLOG
-  (void)syslog(LOG_WARNING, "Restarting Server because: %s, sbrk(0)-etext: %ld",
+  syslog(LOG_WARNING, "Restarting Server because: %s, sbrk(0)-etext: %ld",
      mesg,(u_long)sbrk((size_t)0)-(u_long)sbrk0);
 #endif
   if (bootopt & BOOT_STDERR)
@@ -230,7 +230,7 @@ void	server_reboot()
   ** been passed to us before restarting.
   */
 #ifdef USE_SYSLOG
-  (void)closelog();
+  closelog();
 #endif
   for (i = 3; i < MAXCONNECTIONS; i++)
     close(i);
@@ -1520,7 +1520,7 @@ time_t now;
       busycli_fdlist.entry[i] = 0;
 
       if (!(cptr=local[i])) continue;
-      if (IsServer(cptr) || IsListening(cptr) || IsAnOper(cptr))
+      if (IsServer(cptr) || IsAnOper(cptr))
 	{
 	  busycli_fdlist.entry[i] = 1;
 	  continue;

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: listener.c,v 1.2 1999/07/15 09:00:17 tomh Exp $
+ *  $Id: listener.c,v 1.3 1999/07/16 04:53:14 tomh Exp $
  */
 #include "listener.h"
 #include "s_bsd.h"
@@ -203,10 +203,7 @@ static int inetport(struct Listener* listener)
 
   
 /*
- * add_listener
- *
- * Create a new client
- * for a socket that is passive (listen'ing for connections to be accepted).
+ * add_listener- create a new listener 
  */
 void add_listener(struct ConfItem* conf)
 {

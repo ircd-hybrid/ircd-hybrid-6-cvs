@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.116 1999/07/16 04:17:02 db Exp $
+ *  $Id: s_conf.c,v 1.117 1999/07/16 04:53:14 tomh Exp $
  */
 #include "s_conf.h"
 #include "listener.h"
@@ -1992,10 +1992,21 @@ static void initconf(FBFILE* file, int use_include)
       ** to the correct class record. -avalon
       */
 
-      /*  Unless its a Y line itself, associate this with a class */
+      /*
+       * P: line - listener port
+       */
       if ( aconf->status & CONF_LISTEN_PORT)
 	{
-	  if (aconf->host)
+          aConfItem *bconf;
+          
+          if ((bconf = find_conf_entry(aconf, aconf->status)))
+            {
+              delist_conf(bconf);
+              bconf->status &= ~CONF_ILLEGAL;
+              free_conf(aconf);
+              aconf = bconf;
+            }
+          else
             add_listener(aconf);
 	}
       else if(aconf->status & CONF_CLIENT_MASK)
@@ -3452,3 +3463,4 @@ get_conf_name(KlineType type)
 
   return(ConfigFileEntry.dlinefile);
 }
+

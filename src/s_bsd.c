@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_bsd.c,v 1.61 1999/07/16 02:40:37 db Exp $
+ *  $Id: s_bsd.c,v 1.62 1999/07/16 04:53:14 tomh Exp $
  */
 #include "s_bsd.h"
 #include "listener.h"
@@ -1230,20 +1230,20 @@ int read_message(time_t delay, fdlist *listp)        /* mika */
         else in the code.--msa
       */
 {
-  aClient*       cptr;
-  int            nfds;
-  struct timeval wait;
-  time_t         delay2 = delay;
-  time_t         now;
-  u_long         usec = 0;
-  int            res;
-  int            length;
+  aClient*            cptr;
+  int                 nfds;
+  struct timeval      wait;
+  time_t              delay2 = delay;
+  time_t              now;
+  u_long              usec = 0;
+  int                 res;
+  int                 length;
   struct AuthRequest* auth = 0;
   struct AuthRequest* auth_next = 0;
   struct Listener*    listener = 0;
-  int            i;
-  int            rr;
-  int            current_error = 0;
+  int                 i;
+  int                 rr;
+  int                 current_error = 0;
 
   now = timeofday;
 
@@ -1276,11 +1276,7 @@ int read_message(time_t delay, fdlist *listp)        /* mika */
           if (!(cptr = local[i]))
             continue;
 
-          if (IsListening(cptr))
-            {
-              FD_SET(i, read_set);
-            }
-          else if (!IsMe(cptr))
+          if (!IsMe(cptr))
             {
               if (DBufLength(&cptr->recvQ) && delay2 > 2)
                 delay2 = 1;
@@ -1345,7 +1341,7 @@ int read_message(time_t delay, fdlist *listp)        /* mika */
     --nfds;
   }
   /*
-   * Check the auth fd's first...
+   * Check the auth fd's
    */
   for (auth = AuthPollList; auth; auth = auth_next) {
     auth_next = auth->next;
