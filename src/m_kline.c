@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.52 1999/12/14 02:41:48 lusky Exp $
+ *   $Id: m_kline.c,v 1.53 2000/04/21 23:39:25 lusky Exp $
  */
 #include "m_kline.h"
 #include "channel.h"
@@ -640,9 +640,9 @@ m_kline(aClient *cptr,
      * Not enough non-wild characters were found, assume
      * they are trying to kline *@*.
      */
-  #ifdef SLAVE_SERVERS
+#ifdef SLAVE_SERVERS
     if (!IsServer(sptr))
-  #endif
+#endif
       sendto_one(sptr,
         ":%s NOTICE %s :Please include at least %d non-wildcard characters with the user@host",
         me.name,
@@ -793,11 +793,11 @@ m_kline(aClient *cptr,
     DupString(pptr->reason, reason ? reason : "No reason");
     DupString(pptr->when, current_date);
 
-  #ifdef SLAVE_SERVERS
+#ifdef SLAVE_SERVERS
     pptr->rcptr = rcptr;
-  #else
+#else
     pptr->rcptr = (aClient *) NULL;
-  #endif
+#endif
 
     sendto_one(sptr,
       ":%s NOTICE %s :Added K-Line [%s@%s] (config file write delayed)",

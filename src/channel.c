@@ -34,7 +34,7 @@
  *                mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.176 2000/04/20 04:15:18 lusky Exp $
+ * $Id: channel.c,v 1.177 2000/04/21 23:39:25 lusky Exp $
  */
 #include "channel.h"
 #include "client.h"
@@ -4068,7 +4068,7 @@ int     m_names( struct Client *cptr,
                              para,
                              get_client_name(sptr,FALSE));
               sendto_one(sptr, form_str(ERR_TOOMANYTARGETS),
-                         me.name, sptr->name, "NAMES");
+                         me.name, sptr->name, "NAMES",1);
               return 0;
             }
         }

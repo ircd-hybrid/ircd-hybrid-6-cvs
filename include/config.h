@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.76 2000/04/11 02:22:39 lusky Exp $
+ * $Id: config.h,v 1.77 2000/04/21 23:39:23 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -161,6 +161,13 @@
  * undef'ing it will allow hostnames with _ or / to connect
  */
 #define RFC1035_ANAL
+
+/* MAX_MULTI_MESSAGES
+ * Maximum number of recipients to a PRIVMSG.  Any more than MAX_MULTI_MESSAGES
+ * will not be sent.  If MAX_MULTI_MESSAGES is 1, then any PRIVMSG with a ',' in
+ * the target will be rejected
+ */
+#define MAX_MULTI_MESSAGES 2
 
 /* WARN_NO_NLINE
  * Define this if you want ops to get noticed about "things" trying to

@@ -19,7 +19,7 @@
  *
  *      I kind of modernized this code a bit. -Dianora
  *
- *   $Id: messages.tab,v 1.9 1999/12/23 07:10:54 lusky Exp $
+ *   $Id: messages.tab,v 1.10 2000/04/21 23:39:25 lusky Exp $
  */
 
 static  char *  replies[] = {
@@ -447,7 +447,7 @@ static  char *  replies[] = {
 /* 405 ERR_TOOMANYCHANNELS, */  ":%s 405 %s %s :You have joined too many channels",
 /* 406 ERR_WASNOSUCHNICK, */    ":%s 406 %s %s :There was no such nickname",
 /* 407 ERR_TOOMANYTARGETS, */
-                ":%s 407 %s %s :Duplicate recipients. No message delivered",
+                ":%s 407 %s %s :Too many recipients. Only %d processed",
 /* 408 */       (char *)NULL,
 /* 409 ERR_NOORIGIN, */         ":%s 409 %s :No origin specified",
 /* 410 */       (char *)NULL,

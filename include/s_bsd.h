@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_bsd.h,v 1.13 1999/09/04 20:21:09 lusky Exp $
+ *   $Id: s_bsd.h,v 1.14 2000/04/21 23:39:23 lusky Exp $
  *
  */
 #ifndef INCLUDED_s_bsd_h
@@ -39,20 +39,19 @@ extern int   readcalls;
 extern const char* const NONB_ERROR_MSG; 
 extern const char* const SETBUF_ERROR_MSG;
 
-extern void  add_connection(struct Listener* listener, int fd);
-extern int   check_client(struct Client* client, char *,char **);
-extern void  close_connection(struct Client* client);
+extern void  add_connection(struct Listener*, int);
+extern int   check_client(struct Client*, char *,char **);
+extern void  close_connection(struct Client*);
 extern void  close_all_connections(void);
-extern int   connect_server(struct ConfItem* conf, struct Client* cptr, 
-                            struct DNSReply* dns_reply);
+extern int   connect_server(struct ConfItem*, struct Client*, struct DNSReply*);
 extern void  get_my_name(struct Client *, char *, int);
 extern void  init_netio(void);
-extern int   read_message (time_t timeout, unsigned char mask);
-extern void  report_error(const char* message, const char* who, int error);
-extern int   set_non_blocking(int fd);
-extern int   set_sock_buffers(int fd, int size);
-extern int   send_queued(struct Client* client);
-extern int   deliver_it(struct Client* client, const char* buf, int len);
+extern int   read_message (time_t, unsigned char);
+extern void  report_error(const char*, const char*, int);
+extern int   set_non_blocking(int);
+extern int   set_sock_buffers(int, int);
+extern int   send_queued(struct Client*);
+extern int   deliver_it(struct Client*, const char*, int);
 
 #endif /* INCLUDED_s_bsd_h */
 
