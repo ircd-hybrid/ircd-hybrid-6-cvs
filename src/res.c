@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.66 2001/11/28 05:28:45 lusky Exp $
+ * $Id: res.c,v 1.67 2001/11/29 06:01:38 db Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
@@ -912,8 +912,9 @@ proc_answer(struct reslist *request, HEADER* header,
         if (rd_length != sizeof(struct in_addr))
           return answer_count;
 
-        if (++addr_count < RES_MAXADDRS)
+        if (addr_count < RES_MAXADDRS)
         {
+	  addr_count++;
           if (answer_count == 1)
             hp->h_addrtype = (query_class == C_IN) ?  AF_INET : AF_UNSPEC;
 
