@@ -1,3 +1,20 @@
+ievil       2004/05/23 11:27:23 EDT	(20040523_5)
+
+  Modified files:
+    include              config.h m_info.h 
+    src                  s_conf.c 
+  Log:
+  SPOOF_NOTICE_ADMIN_ONLY - makes only admins see the notices for spoofed hosts.
+  
+  This feature was requested by jb@EFnet.
+  
+  Revision  Changes    Path
+  1.169     +4 -0      ircd-hybrid-6/include/config.h
+  1.31      +6 -0      ircd-hybrid-6/include/m_info.h
+  1.251     +5 -0      ircd-hybrid-6/src/s_conf.c
+
+
+
 ievil       2004/05/23 11:23:31 EDT	(20040523_4)
 
   Modified files:
