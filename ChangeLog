@@ -1,3 +1,15 @@
+ievil       2003/06/14 13:39:07 EDT	(20030614_0)
+
+  Modified files:
+    src                  m_quit.c 
+  Log:
+  Fixed a slight possible buffer overflow in the previous m_quit.c commit.
+  
+  Revision  Changes    Path
+  1.5       +1 -0      ircd-hybrid-6/src/m_quit.c
+
+
+
 ievil       2003/06/12 20:25:37 EDT	(20030613_0)
 
   Modified files:
