@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: irc_string.c,v 1.9 2000/08/09 22:50:25 lusky Exp $
+ *  $Id: irc_string.c,v 1.10 2001/12/10 02:56:28 jdc Exp $
  */
 #include "irc_string.h"
 #include "list.h"
@@ -57,8 +57,8 @@ const char* myctime(time_t value)
  */
 char* strncpy_irc(char* s1, const char* s2, size_t n)
 {
-  register char* endp = s1 + n;
-  register char* s = s1;
+  char* endp = s1 + n;
+  char* s = s1;
   while (s < endp && (*s++ = *s2++))
     ;
   return s1;
@@ -207,9 +207,9 @@ static const char *IpQuadTab[] =
 const char* inetntoa(const char* in)
 {
   static char                    buf[16];
-  register char*                bufptr = buf;
-  register const unsigned char* a = (const unsigned char*)in;
-  register const char*          n;
+  char*                bufptr = buf;
+  const unsigned char* a = (const unsigned char*)in;
+  const char*          n;
 
   n = IpQuadTab[ *a++ ];
   while (*n)

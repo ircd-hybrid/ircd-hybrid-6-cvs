@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.241 2001/12/08 05:10:22 jdc Exp $
+ *  $Id: s_user.c,v 1.242 2001/12/10 02:56:29 jdc Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -181,8 +181,8 @@ unsigned long my_rand(void);    /* provided by orabidoo */
  */
 void show_opers(struct Client *cptr)
 {
-  register struct Client        *cptr2;
-  register int j=0;
+  struct Client        *cptr2;
+  int j=0;
 
   for(cptr2 = oper_cptr_list; cptr2; cptr2 = cptr2->next_oper_client)
     {

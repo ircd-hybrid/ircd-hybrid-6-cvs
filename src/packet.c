@@ -18,7 +18,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: packet.c,v 1.24 2001/12/08 07:06:14 lusky Exp $
+ *   $Id: packet.c,v 1.25 2001/12/10 02:56:29 jdc Exp $
  */ 
 #include "packet.h"
 #include "client.h"
@@ -55,7 +55,7 @@ int dopacket(aClient *cptr, char *buffer, size_t length)
 {
   char  *ch1;
   char  *ch2;
-  register char *cptrbuf;
+  char *cptrbuf;
 #ifdef ZIP_LINKS
   int  zipped = NO;
   int  done_unzip = NO;
@@ -120,7 +120,7 @@ int dopacket(aClient *cptr, char *buffer, size_t length)
        */
       while (length-- > 0)
         {
-          register char g;
+          char g;
           g = (*ch1 = *ch2++);
           /*
            * Yuck.  Stuck.  To make sure we stay backward compatible,

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: irc_string.h,v 1.16 2001/12/07 04:26:16 db Exp $
+ *   $Id: irc_string.h,v 1.17 2001/12/10 02:56:25 jdc Exp $
  */
 #ifndef INCLUDED_irc_string_h
 #define INCLUDED_irc_string_h
@@ -55,7 +55,7 @@ extern char* canonize(char *);
 /*
  * ircsprintf - optimized sprintf
  */
-extern int ircsprintf(register char *str, register const char *format, ...);
+extern int ircsprintf(char *str, const char *format, ...);
 /*
  * inetntoa - optimized inet_ntoa
  */
