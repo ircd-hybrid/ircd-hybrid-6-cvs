@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.156 2003/05/04 22:10:46 ievil Exp $
+ * $Id: config.h,v 1.157 2003/06/06 09:06:36 ievil Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -758,6 +758,12 @@
  */   
 #undef SPOOF_IP
 
+/* OPER_JUPE_BYPASS
+ * - in cases with drone channels one could want to join juped channels.
+ *   - ievil
+ */
+#undef OPER_JUPE_BYPASS
+   
 
 /* -------------- END NOT APPROVED ON EFNET SECTION --------------------- */
 
