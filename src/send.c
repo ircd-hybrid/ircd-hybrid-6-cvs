@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.109 2001/12/10 02:56:30 jdc Exp $
+ *   $Id: send.c,v 1.110 2001/12/14 07:44:08 leeh Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -1313,7 +1313,7 @@ vsendto_prefix_one(aClient *to, aClient *from,
     } /* if (!MyClient(from) && IsPerson(to) && (to->from == from->from)) */
   
   par = va_arg(args, char *);
-  if (MyClient(to) && IsPerson(from) && !irccmp(par, from->name))
+  if(!irccmp(par, from->name))
     {
       int l = 0;
       char *cp;
@@ -1323,17 +1323,20 @@ vsendto_prefix_one(aClient *to, aClient *from,
       l = ircsprintf(cp, "%s", from->name);
       cp += l;
 
-      if (*from->username)
-	{
-	  l = ircsprintf(cp,"!%s",from->username);
+      if(MyClient(to) && IsPerson(from))
+      {
+        if (*from->username)
+  	{
+ 	  l = ircsprintf(cp,"!%s",from->username);
 	  cp += l;
 	}
       
-      if (*from->host)
+        if (*from->host)
         {
           l = ircsprintf(cp,"@%s",from->host);
           cp += l;
         }
+      }
 
       par = sender;
     } /* if (user) */
