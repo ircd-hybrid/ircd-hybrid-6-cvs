@@ -18,7 +18,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- *   $Id: packet.c,v 1.20 1999/08/01 06:47:21 tomh Exp $
+ *   $Id: packet.c,v 1.21 1999/08/15 04:29:14 lusky Exp $
  */ 
 #include "packet.h"
 #include "client.h"
@@ -69,7 +69,7 @@ int     dopacket(aClient *cptr, char *buffer, int length)
       cptr->receiveB &= 0x03ff; /* 2^10 = 1024, 3ff = 1023 */
     }
 
-  else if (me.receiveB > 1023)
+  if (me.receiveB > 1023)
     {
       me.receiveK += (me.receiveB >> 10);
       me.receiveB &= 0x03ff;
