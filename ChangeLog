@@ -1,3 +1,25 @@
+ievil       2003/10/13 07:11:53 EDT	(20031013_4)
+
+  Modified files:
+    .                    opers.txt 
+    include              config.h ircd.h ircd_defs.h 
+    src                  ircd.c m_kline.c m_set.c 
+  Log:
+  - made MAXBANS and MAXTKLINE time setable through quote SET
+  - it's now set to a default start up value in config.h
+  - enjoy - ideas gotten from Hwy and comstud
+  
+  Revision  Changes    Path
+  1.168     +11 -0     ircd-hybrid-6/include/config.h
+  1.26      +4 -1      ircd-hybrid-6/include/ircd.h
+  1.13      +0 -1      ircd-hybrid-6/include/ircd_defs.h
+  1.25      +5 -0      ircd-hybrid-6/opers.txt
+  1.171     +3 -0      ircd-hybrid-6/src/ircd.c
+  1.82      +2 -2      ircd-hybrid-6/src/m_kline.c
+  1.10      +54 -5     ircd-hybrid-6/src/m_set.c
+
+
+
 ievil       2003/10/13 06:11:53 EDT	(20031013_3)
 
   Modified files:
