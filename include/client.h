@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.33 1999/07/21 05:45:00 tomh Exp $
+ * $Id: client.h,v 1.34 1999/07/22 04:48:12 tomh Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -54,16 +54,6 @@
 #define IDLEN           12      /* this is the maximum length, not the actual
                                    generated length; DO NOT CHANGE! */
 #define CLIENT_BUFSIZE 512      /* must be at least 512 bytes */
-
-/*
- * status macros.
- */
-#define STAT_CONNECTING -4
-#define STAT_HANDSHAKE  -3
-#define STAT_ME         -2
-#define STAT_UNKNOWN    -1
-#define STAT_SERVER     0
-#define STAT_CLIENT     1
 
 /*
  * pre declare structs
@@ -153,7 +143,7 @@ struct Client
   unsigned int      flags2;     /* ugh. overflow */
   int               fd;         /* >= 0, for local clients */
   int               hopcount;   /* number of servers to this 0 = local */
-  short             status;     /* Client type */
+  unsigned short    status;     /* Client type */
   char              nicksent;
   unsigned char     local_flag; /* if this is 1 this client is local */
   short    listprogress; /* where were we when the /list blocked? */
@@ -266,9 +256,19 @@ struct Client
   int               caps;       /* capabilities bit-field */
 };
 
+/*
+ * status macros.
+ */
+#define STAT_CONNECTING 0x01   /* -4 */
+#define STAT_HANDSHAKE  0x02   /* -3 */
+#define STAT_ME         0x04   /* -2 */
+#define STAT_UNKNOWN    0x08   /* -1 */
+#define STAT_SERVER     0x10   /* 0  */
+#define STAT_CLIENT     0x20   /* 1  */
+
 
 #define IsRegisteredUser(x)     ((x)->status == STAT_CLIENT)
-#define IsRegistered(x)         ((x)->status >= STAT_SERVER)
+#define IsRegistered(x)         ((x)->status  > STAT_UNKNOWN)
 #define IsConnecting(x)         ((x)->status == STAT_CONNECTING)
 #define IsHandshake(x)          ((x)->status == STAT_HANDSHAKE)
 #define IsMe(x)                 ((x)->status == STAT_ME)
@@ -283,6 +283,11 @@ struct Client
 #define SetServer(x)            ((x)->status = STAT_SERVER)
 #define SetClient(x)            ((x)->status = STAT_CLIENT)
 
+#define STAT_CLIENT_PARSE (STAT_UNKNOWN | STAT_CLIENT)
+#define STAT_SERVER_PARSE (STAT_CONNECTING | STAT_HANDSHAKE | STAT_SERVER)
+
+#define PARSE_AS_CLIENT(x)      ((x)->status & STAT_CLIENT_PARSE)
+#define PARSE_AS_SERVER(x)      ((x)->status & STAT_SERVER_PARSE)
 
 
 /* housekeeping flags */
