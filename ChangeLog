@@ -1,3 +1,22 @@
+ievil       2003/08/16 15:10:47 EDT	(20030816_2)
+
+  Modified files:
+    include              client.h s_conf.h 
+    src                  parse.c s_conf.c s_user.c 
+  Log:
+  Added oper_unidle. Operflag I, and umode +u. Some servers have been
+  running this for allmost a year now. Yet another feature that's
+  intended for tcm/bopm/opered "bots" usage.
+  
+  Revision  Changes    Path
+  1.71      +8 -2      ircd-hybrid-6/include/client.h
+  1.68      +1 -0      ircd-hybrid-6/include/s_conf.h
+  1.53      +2 -2      ircd-hybrid-6/src/parse.c
+  1.247     +15 -0     ircd-hybrid-6/src/s_conf.c
+  1.264     +17 -6     ircd-hybrid-6/src/s_user.c
+
+
+
 ievil       2003/08/16 14:48:41 EDT	(20030816_1)
 
   Modified files:
