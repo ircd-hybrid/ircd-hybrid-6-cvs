@@ -1,3 +1,15 @@
+lusky       2003/06/29 16:49:01 EDT	(20030629_0)
+
+  Modified files:
+    include              patchlevel.h 
+  Log:
+  - revved patchlevel to 6.4
+  
+  Revision  Changes    Path
+  1.157     +1 -1      ircd-hybrid-6/include/patchlevel.h
+
+
+
 ievil       2003/06/28 00:37:21 EDT	(20030628_0)
 
   Modified files:
