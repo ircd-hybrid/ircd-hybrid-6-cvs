@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_auth.c,v 1.33 1999/07/20 07:51:01 tomh Exp $
+ *   $Id: s_auth.c,v 1.34 1999/07/21 05:28:52 tomh Exp $
  *
  * Changes:
  *   July 6, 1999 - Rewrote most of the code here. When a client connects
@@ -524,9 +524,9 @@ void read_auth_reply(struct AuthRequest* auth)
     if( (s = GetValidIdent(buf)) ) {
       t = auth->client->username;
       for (count = USERLEN; *s && count; s++) {
-	if(*s == '@') {
-	    break;
-	  }
+        if(*s == '@') {
+            break;
+          }
         if ( !IsSpace(*s) && *s != ':' ) {
           *t++ = *s;
           count--;
