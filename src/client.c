@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.15 1999/07/18 07:16:49 tomh Exp $
+ *  $Id: client.c,v 1.16 1999/07/18 16:53:10 db Exp $
  */
 #include "client.h"
 #include "struct.h"
@@ -33,6 +33,7 @@
 #include "s_bsd.h"
 #include "send.h"
 #include "hash.h"
+#include "whowas.h"
 
 #include <assert.h>
 #include <fcntl.h>

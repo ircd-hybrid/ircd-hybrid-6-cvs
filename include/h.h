@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.44 1999/07/18 16:36:45 db Exp $
+ * $Id: h.h,v 1.45 1999/07/18 16:53:08 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -76,8 +76,8 @@ extern  void    report_temp_klines(aClient *);
 #ifdef  GLINES
 extern aConfItem* find_gkill(aClient* client);
 extern aConfItem* find_is_glined(const char* host, const char* name);
-extern  void	flush_glines(void);		/* defined in m_gline.c */
-extern  void	report_glines(aClient *);	/* defined in m_gline.c */
+extern  void	flush_glines(void);		
+extern  void	report_glines(aClient *);	
 #endif
 
 extern	int	rehash (aClient *, aClient *, int);
@@ -169,7 +169,6 @@ extern char    *zip_buffer (aClient *, char *, int *, int);
 extern void	add_history (aClient *, int);
 extern aClient	*get_history (char *, time_t);
 extern void	initwhowas (void);
-extern void	off_history (aClient *);
 
 extern	int	dopacket (aClient *, char *, int);
 
