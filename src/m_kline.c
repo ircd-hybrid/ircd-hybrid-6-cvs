@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kline.c,v 1.20 1999/07/17 03:13:04 db Exp $
+ *   $Id: m_kline.c,v 1.21 1999/07/17 04:36:00 db Exp $
  */
 
 #include <signal.h>
@@ -154,15 +154,15 @@ LockedFile(const char *filename)
 {
 	char lockpath[PATH_MAX + 1];
 	char buffer[1024];
-	FILE *fileptr;
+	FBFILE *fileptr;
 	int killret;
 
 	if (!filename)
 		return (0);
 
-	sprintf(lockpath, "%s.lock", filename);
+	ircsprintf(lockpath, "%s.lock", filename);
 
-	if ((fileptr = fopen(lockpath, "r")) == (FILE *) NULL)
+	if ((fileptr = fbopen(lockpath, "r")) == (FILE *) NULL)
 	{
 		/*
 		 * lockfile does not exist
@@ -170,7 +170,7 @@ LockedFile(const char *filename)
 		return (0);
 	}
 
-	if (fgets(buffer, sizeof(buffer) - 1, fileptr))
+	if (fbgets(buffer, sizeof(buffer) - 1, fileptr))
 	{
 		/*
 		 * If it is a valid lockfile, 'buffer' should now
@@ -183,7 +183,7 @@ LockedFile(const char *filename)
 		killret = kill(atoi(buffer), SIGCHLD);
 		if (killret == 0)
 		{
-			fclose(fileptr);
+			fbclose(fileptr);
 			return (1);
 		}
 
@@ -194,7 +194,7 @@ LockedFile(const char *filename)
 		 */
 	}
 
-	fclose(fileptr);
+	fbclose(fileptr);
 
 	 /*
 	  * Delete the outdated lock file
