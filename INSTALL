@@ -1,6 +1,6 @@
 ircd-hybrid-6 INSTALL
 ---------------------
-$Id: INSTALL,v 1.7 2001/06/16 06:15:35 jdc Exp $
+$Id: INSTALL,v 1.8 2001/07/10 12:40:15 jdc Exp $
 
 hybrid-6 relies upon GNU autoconf.  The following is a transcript of
 recommended procedures that users/administrators of hybrid-6 should
@@ -14,16 +14,6 @@ follow when building and tuning the daemon:
     Makefiles to match your system:
 
       ./configure
-
-    If you wish to enable support for encrypted server-to-server links,
-    you will need to have OpenSSL 0.9.6 (or newer) installed on the
-    system.  For the impatient, simply try running "configure" as follows:
-
-      ./configure --enable-openssl
-
-    It is recommended that all administrators wishing to use encrypted
-    links read "doc/README.openssl" prior to mindlessly enabling this
-    function.
 
 3.  Edit the "include/config.h" file.  This allows you to change
     various options of how the ircd will operate.  Please make note of

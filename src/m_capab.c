@@ -20,17 +20,13 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_capab.c,v 1.3 2001/07/04 12:02:44 jdc Exp $
+ *   $Id: m_capab.c,v 1.4 2001/07/10 12:40:32 jdc Exp $
  */
 #include "m_commands.h"
 #include "client.h"
 #include "irc_string.h"
 #include "s_serv.h"
 #include "send.h"
-
-#ifdef CRYPT_LINKS
-#include "s_crypt.h"
-#endif
 
 #include <string.h>
 #include <assert.h>
@@ -122,21 +118,6 @@ int m_capab(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
           break;
         }
     }
-#ifdef CRYPT_LINKS
-    if (!strncmp(s, "ENC:", 4))
-    {
-      cdef = crypt_selectcipher(s+4);
-      if (cdef == NULL)
-      {
-        cptr->cipher = NULL;
-        sendto_realops("Unsupported cipher listed in CAPAB");
-        return exit_client(cptr, cptr, cptr,
-                           "Unsupported cipher listed in CAPAB");
-        break;
-      }
-      cptr->cipher = cdef;
-    }
-#endif
   }
   return(0);
 }

@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.64 2001/06/25 02:30:49 greg Exp $
+ *  $Id: client.c,v 1.65 2001/07/10 12:40:31 jdc Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -133,9 +133,6 @@ struct Client* make_client(struct Client* from)
 #endif
 #ifdef ZIP_LINKS
       cptr->zip       = NULL;
-#endif
-#ifdef CRYPT_LINKS
-      cptr->crypt     = NULL;
 #endif
       cptr->listener  = NULL;
       cptr->confs     = NULL;

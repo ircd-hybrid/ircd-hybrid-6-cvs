@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: m_info.h,v 1.14 2001/07/05 03:24:47 greg Exp $
+ * $Id: m_info.h,v 1.15 2001/07/10 12:40:28 jdc Exp $
  */
 #ifndef INCLUDED_m_info_h
 #define INCLUDED_m_info_h
@@ -124,20 +124,6 @@ Info MyInformation[] = {
 #else
   { "CPATH", "NONE", 0, "Path to Main Configuration File" },
 #endif /* CPATH */
-
-#ifdef CRYPT_LINKS
-  { "CRYPT_LINKS", "ON", 0, "Encrypt Server to Server Links" },
-#else
-  { "CRYPT_LINKS", "OFF", 0, "Encrypt Server to Server Links" },
-#endif /* CRYPT_LINKS */
-
-#ifdef CRYPT_LINKS
-#ifdef CRYPT_LINKS_PRIVATEKEYFILE
-  { "CRYPT_LINKS_PRIVATEKEYFILE", CRYPT_LINKS_PRIVATEKEYFILE, 0, "Path to the private key File" },
-#else /* CRYPT_LINKS_PRIVATEKEYFILE */
-  { "CRYPT_LINKS_PRIVATEKEYFILE", "NONE", 0, "Path to the private key file" },
-#endif /* CRYPT_LINKS_PRIVATEKEYFILE */
-#endif /* CRYPT_LINKS */
 
 #ifdef CRYPT_OPER_PASSWORD
   { "CRYPT_OPER_PASSWORD", "ON", 0, "Encrypt Operator Passwords" },

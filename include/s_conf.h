@@ -18,7 +18,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *   $Id: s_conf.h,v 1.49 2001/07/08 12:46:36 db Exp $
+ *   $Id: s_conf.h,v 1.50 2001/07/10 12:40:29 jdc Exp $
  */
 
 #ifndef INCLUDED_config_h
@@ -60,12 +60,6 @@ struct ConfItem
   time_t           hold;     /* Hold action until this time (calendar time) */
   struct Class*    c_class;     /* Class of connection */
   int              dns_pending; /* 1 if dns query pending, 0 otherwise */
-#if defined(CRYPT_LINKS)
-  char *           rsa_public_keyfile; /* RSA public key filename */
-#ifdef CRYPT_LINKS
-  struct CipherDef *cipher;            /* Cipher selection; ptr to Cipher[] */
-#endif
-#endif
 };
 
 typedef struct QlineItem {

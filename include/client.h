@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: client.h,v 1.52 2001/07/08 12:46:35 db Exp $
+ * $Id: client.h,v 1.53 2001/07/10 12:40:26 jdc Exp $
  */
 #ifndef INCLUDED_client_h
 #define INCLUDED_client_h
@@ -46,10 +46,6 @@
 #endif
 #ifndef INCLUDED_dbuf_h
 #include "dbuf.h"
-#endif
-
-#ifdef CRYPT_LINKS
-#include "s_crypt.h"
 #endif
 
 #define HOSTIPLEN       16      /* Length of dotted quad form of IP        */
@@ -213,12 +209,6 @@ struct Client
   char  buffer[CLIENT_BUFSIZE]; /* Incoming message buffer */
 #ifdef ZIP_LINKS
   struct Zdata*     zip;        /* zip data */
-#endif
-#if defined(CRYPT_LINKS)
-  struct CryptData *crypt;      /* Encrypted link info */
-#endif
-#ifdef CRYPT_LINKS
-  struct CipherDef *cipher;     /* Supported cipher */
 #endif
   short             lastsq;     /* # of 2k blocks when sendqueued called last*/
   struct DBuf       sendQ;      /* Outgoing message queue--if socket full */

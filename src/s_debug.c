@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_debug.c,v 1.51 2001/06/10 00:28:29 db Exp $
+ *   $Id: s_debug.c,v 1.52 2001/07/10 12:40:36 jdc Exp $
  */
 #include "s_debug.h"
 #include "channel.h"
@@ -57,9 +57,6 @@ extern  int     maxdbufblocks;                    /* defined in dbuf.c */
 const char serveropts[] = {
 #ifdef  SENDQ_ALWAYS
   'A',
-#endif
-#ifdef  CRYPT_LINKS
-  'b',
 #endif
 #ifdef  CMDLINE_CONFIG
   'C',

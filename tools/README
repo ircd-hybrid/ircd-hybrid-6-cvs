@@ -1,13 +1,11 @@
-$Id: README,v 1.4 2001/06/06 05:03:19 db Exp $
+$Id: README,v 1.5 2001/07/10 12:40:38 jdc Exp $
 
 A directory of support programs for ircd.
 
-encspeed     - tests the speed of the encryption for cryptlinks
 install_ircd - internal script used for make install
 ircd_start.c - start program for solaris
 klineParse.c - cleans out redundant klines
 mkconf       - a simple but effective script to edit ircd.conf lines
-mkkeypair    - generates public and private keys for encrypted server links
 mkpasswd     - makes password for O lines
 start_ircd.c - start program for fbsd and bsd/os systems
 untabify     - a script used by the developers

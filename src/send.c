@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.102 2001/07/08 09:56:46 a1kmm Exp $
+ *   $Id: send.c,v 1.103 2001/07/10 12:40:37 jdc Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -190,20 +190,9 @@ send_message(aClient *to, char *msg, int len)
                 if (to->flags2 & FLAGS2_ZIP)
                         msg = zip_buffer(to, msg, &len, 0);
 
-          #ifdef CRYPT_LINKS
-		if (len && to->crypt && to->crypt->OutCipher)
-		  if (crypt_encrypt(to, msg, len) == CRYPT_ERROR)
-		    return dead_link(to, "Encryption failure for %s");
-
-          #endif /* CRYPT_LINKS */
                 if (len && !dbuf_put(&to->sendQ, msg, len))
 
         #else /* ZIP_LINKS */
-          #ifdef CRYPT_LINKS
-	        if (len && to->crypt && to->crypt->OutCipher)
-	          if (crypt_encrypt(to, msg, len) == CRYPT_ERROR)
-		    return dead_link(to, "Encryption failure for %s");
-          #endif /* CRYPT_LINKS */
 		if (!dbuf_put(&to->sendQ, msg, len))
 
         #endif /* ZIP_LINKS */
@@ -302,20 +291,9 @@ send_message(aClient *to, char *msg, int len)
                         */
                         if (to->flags2 & FLAGS2_ZIP)
                                 msg = zip_buffer(to, msg, &len, 0);
-		  #ifdef CRYPT_LINKS
-                        if (len && to->crypt) 
-			  if (crypt_encrypt(to, msg, len) == CRYPT_ERROR)
-			    return dead_link(to, "Encryption failure for %s");
-                  #endif /* CRYPT_LINKS */
                         if (len && !dbuf_put(&to->sendQ, msg + rlen, len - rlen))
 
                 #else /* ZIP_LINKS */
-		  #ifdef CRYPT_LINKS
-                        if (len && to->crypt) 
-			  if (crypt_encrypt(to, msg, len) == CRYPT_ERROR)
-			    return dead_link(to, "Encryption failure for %s");
-                  #endif /* CRYPT_LINKS */
-
                         if (!dbuf_put(&to->sendQ,msg+rlen,len-rlen))
 
                 #endif /* ZIP_LINKS */
@@ -381,11 +359,6 @@ int send_queued(aClient *to)
 
       if (len == -1)
         return dead_link(to, "fatal error in zip_buffer()");
-#ifdef CRYPT_LINKS
-      if (len && to->crypt) 
-	if (crypt_encrypt(to, msg, len) == CRYPT_ERROR)
-	  return dead_link(to, "Encryption failure for %s");
-#endif /* CRYPT_LINKS */
 
       if (!dbuf_put(&to->sendQ, msg, len))
         return dead_link(to, "Buffer allocation error for %s");
@@ -431,11 +404,6 @@ int send_queued(aClient *to)
 
       if (len == -1)
         return dead_link(to, "fatal error in zip_buffer()");
-#ifdef CRYPT_LINKS
-      if (len && to->crypt) 
-	if(crypt_encrypt(to, msg, len) == CRYPT_ERROR)
-	  return dead_link(to, "Encryption failure for %s");
-#endif /* CRYPT_LINKS */
 
       if (!dbuf_put(&to->sendQ, msg, len))
         return dead_link(to, "Buffer allocation error for %s");
