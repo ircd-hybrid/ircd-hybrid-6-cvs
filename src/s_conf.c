@@ -19,7 +19,7 @@
  *
  *  (C) 1988 University of Oulu,Computing Center and Jarkko Oikarinen"
  *
- *  $Id: s_conf.c,v 1.97 1999/07/08 00:53:30 db Exp $
+ *  $Id: s_conf.c,v 1.98 1999/07/08 04:15:51 db Exp $
  */
 #include "s_conf.h"
 #include "class.h"
@@ -2939,7 +2939,8 @@ int get_oper_flags(char *flags)
   Debug((DEBUG_DEBUG,"about to return int_flags %x",int_flags));
   return(int_flags);
 }
-/* get_oper_flags
+
+/* oper_flags
  *
  * inputs	- flags as string
  * output	- flags

@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.57 1999/07/07 00:59:12 db Exp $
+ * $Id: config.h,v 1.58 1999/07/08 04:15:49 db Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -171,19 +171,6 @@
  */
 #define FNAME_USERLOG "/usr/local/ircd/users" /* */
 #define FNAME_OPERLOG "/usr/local/ircd/opers" /* */
-
-/* FOLLOW_IDENT_RFC
- * 
- * From RFC 1413, "The Identification Protocol is not intended as an
- * authorization or access control protocol ... The use of the information
- * returned by this protocol for other than auditing is strongly discouraged."
- * 
- * Defining this allows all users to set whatever username they wish, despite
- * what may be discovered by ident.  While we may get a valid ident response
- * with a different username than submitted by the client, this option will
- * cause the ident response to be discarded.
- */
-#undef FOLLOW_IDENT_RFC 
 
 /* RFC1035_ANAL
  * Defining this causes ircd to reject hostnames with non-compliant chars.

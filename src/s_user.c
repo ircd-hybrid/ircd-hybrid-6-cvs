@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.116 1999/07/08 00:53:31 db Exp $
+ *  $Id: s_user.c,v 1.117 1999/07/08 04:15:53 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -542,18 +542,12 @@ static	int	register_user(aClient *cptr,
 	}
 
       aconf = sptr->confs->value.aconf;
-      if (IsNeedId(sptr) && !IsGotId(sptr))
+      if(aconf)
 	{
-	  /* because username may point to user->username */
-	  char	temp[USERLEN + 1];
-	  
-	  strncpyzt(temp, username, USERLEN + 1);
-	  *user->username = '~';
-	  strncpy(&user->username[1], temp, USERLEN);
-	  user->username[USERLEN] = '\0';
-
-	  if(aconf)
+	  if (IsConfDoIdentd(aconf) && !IsGotId(sptr))
 	    {
+	      char	temp[USERLEN + 1];
+	  
 	      if(IsNeedIdentd(aconf))
 		{
 		  ircstp->is_ref++;
@@ -565,17 +559,22 @@ static	int	register_user(aClient *cptr,
 
 	      if(IsNoTilde(aconf))
 		{
-		  strncpyzt(user->username, username, USERLEN + 1);
+		  strncpyzt(user->username, sptr->username, USERLEN + 1);
+		}
+	      else
+		{
+		  strncpyzt(temp, username, USERLEN + 1);
+		  *user->username = '~';
+		  strncpy(&user->username[1], temp, USERLEN);
+		  user->username[USERLEN] = '\0';
 		}
 	    }
+	  else
+	    strncpyzt(user->username, username, USERLEN+1);
 	}
+      else /* HOW did it get this far???? */
+	return exit_client(cptr, sptr, &me, "*** Not Authorized");
 
-#ifndef FOLLOW_IDENT_RFC
-      else if (IsGotId(sptr) && *sptr->username != '-')
-	strncpyzt(user->username, sptr->username, USERLEN + 1);
-#endif
-      else
-	strncpyzt(user->username, username, USERLEN+1);
 
       /* password check */
       if (!BadPtr(aconf->passwd) &&
