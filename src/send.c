@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.82 1999/09/12 02:25:18 lusky Exp $
+ *   $Id: send.c,v 1.83 1999/10/11 23:08:32 lusky Exp $
  */
 #include "send.h"
 #include "channel.h"
@@ -719,7 +719,11 @@ sendto_common_channels(aClient *user, const char *pattern, ...)
         for(users = channels->value.chptr->members; users; users = users->next)
           {
             cptr = users->value.cptr;
-            if (!MyConnect(cptr) || (sentalong[cptr->fd] == current_serial))
+          /* "dead" clients i.e. ones with fd == -1 should not be
+           * looked at -db
+           */
+            if (!MyConnect(cptr) || (cptr->fd < 0) ||
+              (sentalong[cptr->fd] == current_serial))
               continue;
             
             sentalong[cptr->fd] = current_serial;
