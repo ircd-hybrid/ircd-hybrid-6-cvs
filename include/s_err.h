@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: s_err.h,v 1.3 1998/09/29 07:04:21 db Exp $
+ * $Id: s_err.h,v 1.4 1998/10/02 00:50:52 db Exp $
  *
  */
 
@@ -247,7 +247,7 @@ static	char *	replies[] = {
 /* 222 RPL_STATSXLINE, */	":%s 222 %s %s %s * * 0 0",
 /* 223 */       (char *)NULL,
 /* 224 */       (char *)NULL,
-/* 225 */       (char *)NULL,
+/* 225 RPL_STATSDLINE*/		":%s 225 %s %c %s %s",
 /* 226 */	(char *)NULL,
 /* 227 */	(char *)NULL,
 /* 228 */	(char *)NULL,
