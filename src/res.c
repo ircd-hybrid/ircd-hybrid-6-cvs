@@ -4,7 +4,7 @@
  * shape or form. The author takes no responsibility for any damage or loss
  * of property which results from the use of this software.
  *
- * $Id: res.c,v 1.63 2001/10/27 15:04:12 bill Exp $
+ * $Id: res.c,v 1.64 2001/10/29 00:14:37 db Exp $
  *
  * July 1999 - Rewrote a bunch of stuff here. Change hostent builder code,
  *     added callbacks and reference counting of returned hostents.
@@ -778,7 +778,7 @@ proc_answer(struct reslist *request, HEADER* header,
    * unless there is something to put in it.
    */
 
-  if (request->he.buf != NULL)
+  if (request->he.buf == NULL)
   {
     request->he.buf = (char*) MyMalloc(MAXGETHOSTLEN + 1);
     request->he.buf[MAXGETHOSTLEN] = '\0';
