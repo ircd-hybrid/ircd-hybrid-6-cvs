@@ -24,7 +24,7 @@
 #ifndef lint
 static  char sccsid[] = "@(#)s_misc.c	2.39 27 Oct 1993 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
-static char *rcs_version = "$Id: s_misc.c,v 1.14 1999/01/19 02:23:14 khuon Exp $";
+static char *rcs_version = "$Id: s_misc.c,v 1.15 1999/01/23 12:07:10 db Exp $";
 #endif
 
 #include <sys/time.h>
@@ -259,16 +259,14 @@ char	*get_client_name(aClient *sptr,int showip)
       if (IsGotId(sptr))
         (void)strcpy(t_id, "(+)");
 
-#ifdef USERNAMES_IN_TRACE
       /* Check for a username (listening ports don't have usernames) */
-      if (sptr->user)
+      if (sptr->user && sptr->user->username[0])
         (void)strcpy(t_user, sptr->user->username);
       else
         if (sptr->username[0])
           (void)strcpy(t_user, sptr->username);
       if (t_user[0])
         (void)strcat(t_user, "@");
-#endif
 
       /* Check for a port number, needed for listening ports */
       if (sptr->flags & FLAGS_LISTEN)

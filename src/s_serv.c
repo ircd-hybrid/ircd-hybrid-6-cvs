@@ -26,7 +26,7 @@ static  char sccsid[] = "@(#)s_serv.c	2.55 2/7/94 (C) 1988 University of Oulu, \
 Computing Center and Jarkko Oikarinen";
 
 
-static char *rcs_version = "$Id: s_serv.c,v 1.65 1999/01/23 03:11:33 db Exp $";
+static char *rcs_version = "$Id: s_serv.c,v 1.66 1999/01/23 12:07:11 db Exp $";
 #endif
 
 
@@ -1695,13 +1695,8 @@ int	m_info(aClient *cptr,
 #else
 #define OUT2 " UNKLINE=0"
 #endif
-#ifdef USERNAMES_IN_TRACE
-#define OUT3 " USERNAMES_IN_TRACE=1"
-#else
-#define OUT3 " USERNAMES_IN_TRACE=0"
-#endif
 	sendto_one(sptr, rpl_str(RPL_INFO),
-		me.name, parv[0], OUT1 OUT2 OUT3);
+		me.name, parv[0], OUT1 OUT2 );
 
 #undef OUT1
 #undef OUT2
