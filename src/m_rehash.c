@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_rehash.c,v 1.2 1999/07/31 08:22:59 tomh Exp $
+ *   $Id: m_rehash.c,v 1.3 1999/08/01 06:01:04 tomh Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -200,14 +200,14 @@ int m_rehash(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
           sendto_ops("%s is rehashing dlines from server config file",
 #endif
                      parv[0]);
-          log(L_NOTICE, "REHASH From %s\n", get_client_name(sptr, SHOW_IP));
+          log(L_NOTICE, "REHASH From %s\n", get_client_name(sptr, HIDE_IP));
           dline_in_progress = 1;
           return rehash(cptr, sptr, 0);
         }
       if(found)
         {
           log(L_NOTICE, "REHASH %s From %s\n", parv[1], 
-              get_client_name(sptr, SHOW_IP));
+              get_client_name(sptr, HIDE_IP));
           return 0;
         }
       else
