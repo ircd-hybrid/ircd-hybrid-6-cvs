@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_bsd.h,v 1.8 1999/07/22 02:44:21 db Exp $
+ *   $Id: s_bsd.h,v 1.9 1999/07/24 06:37:20 tomh Exp $
  *
  */
 #ifndef INCLUDED_s_bsd_h
@@ -31,7 +31,6 @@
 struct Client;
 struct ConfItem;
 struct hostent;
-struct FDList;
 struct DNSReply;
 struct Listener;
 
@@ -48,7 +47,7 @@ extern int   connect_server(struct ConfItem* conf, struct Client* cptr,
                             struct DNSReply* dns_reply);
 extern void  get_my_name(struct Client *, char *, int);
 extern void  init_sys();
-extern int   read_message (time_t, struct FDList*);
+extern int   read_message (time_t timeout, unsigned char mask);
 extern void  report_error(const char* message, const char* who, int error);
 extern int   set_non_blocking(int fd);
 extern int   set_sock_buffers(int fd, int size);

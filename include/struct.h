@@ -17,7 +17,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.69 1999/07/23 19:52:33 sean Exp $
+ * $Id: struct.h,v 1.70 1999/07/24 06:37:20 tomh Exp $
  */
 #ifndef INCLUDED_struct_h
 #define INCLUDED_struct_h
@@ -377,42 +377,6 @@ extern unsigned long tsdms;
 #endif /* DEFAULT_SERVER_SPLIT_RECOVERY_TIME */
 #endif
 
-struct SetOptions
-{
-  int maxclients;       /* max clients allowed */
-  int autoconn;         /* autoconn enabled for all servers? */
-  int noisy_htm;        /* noisy htm or not ? */
-  int lifesux;
-
-#ifdef IDLE_CHECK
-  int idletime;
-#endif
-
-#ifdef FLUD
-  int fludnum;
-  int fludtime;
-  int fludblock;
-#endif
-
-#ifdef ANTI_DRONE_FLOOD
-  int dronetime;
-  int dronecount;
-#endif
-
-#ifdef NEED_SPLITCODE
-  time_t server_split_recovery_time;
-  int split_smallnet_size;
-  int split_smallnet_users;
-#endif
-
-#ifdef ANTI_SPAMBOT
-  int spam_num;
-  int spam_time;
-#endif
-
-};
-
-extern struct SetOptions GlobalSetOptions;  /* defined in ircd.c */
 
 #ifdef FLUD
 struct fludbot {
