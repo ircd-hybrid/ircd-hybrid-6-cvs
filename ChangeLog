@@ -1,3 +1,20 @@
+ievil       2004/05/23 10:28:24 EDT	(20040523_1)
+
+  Modified files:
+    src                  m_whois.c 
+  Log:
+  m_whois.c - fixed to allow compililation when remote whois notification
+  is not defined.
+  
+  Fix from umn.edu admin - cbongo
+  
+  Obtained from
+  
+  Revision  Changes    Path
+  1.18      +1 -1      ircd-hybrid-6/src/m_whois.c
+
+
+
 ievil       2004/05/23 10:22:47 EDT	(20040523_0)
 
   Modified files:
