@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.2 1998/09/19 21:12:34 db Exp $
+ * $Id: config.h,v 1.3 1998/09/22 01:52:21 db Exp $
  */
 
 #ifndef	__config_include__
@@ -391,11 +391,9 @@
  */
 #define MOTD_WAIT 10
 
-/* MOTD_MAX
- * max use count before delay above comes into effect
+/* KNOCK_DELAY 5 minutes per each KNOCK should be enough
  */
-
-#define MOTD_MAX 3
+#define KNOCK_DELAY 300
 
 /* EXTRA_BOT_NOTICES - Have the server send extra bot notices?
  */

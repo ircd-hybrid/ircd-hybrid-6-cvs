@@ -18,7 +18,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *
- * $Id: struct.h,v 1.2 1998/09/21 20:32:15 db Exp $
+ * $Id: struct.h,v 1.3 1998/09/22 01:52:24 db Exp $
  */
 
 #ifndef	__struct_include__
@@ -596,6 +596,7 @@ struct Client
   time_t	last_nick_change;
   int		number_of_nick_changes;
 #endif
+  time_t	last_knock;	/* don't allow knock to flood */
 #ifdef ANTI_IP_SPOOF
   long		random_ping;	/* spoofers won't see this */
 #endif
