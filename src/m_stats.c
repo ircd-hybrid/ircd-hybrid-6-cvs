@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: m_stats.c,v 1.6 2000/10/24 05:20:35 lusky Exp $
+ *  $Id: m_stats.c,v 1.7 2000/10/29 20:55:25 lusky Exp $
  */
 #include "m_commands.h"  /* m_pass prototype */
 #include "class.h"       /* report_classes */
@@ -352,6 +352,14 @@ int m_stats(struct Client *cptr, struct Client *sptr, int parc, char *parv[])
       break;
 
     case 'o' : case 'O' :
+#ifdef O_LINES_OPER_ONLY
+      if (!IsAnOper(sptr))
+        {
+          ignore_request++;
+          valid_stats++;
+          break;
+        }
+#endif /* O_LINES_OPER_ONLY */
       report_configured_links(sptr, CONF_OPS);
       valid_stats++;
       break;

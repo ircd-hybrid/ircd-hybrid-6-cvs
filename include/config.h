@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: config.h,v 1.85 2000/10/21 06:36:07 lusky Exp $
+ * $Id: config.h,v 1.86 2000/10/29 20:55:21 lusky Exp $
  */
 #ifndef INCLUDED_config_h
 #define INCLUDED_config_h
@@ -294,6 +294,7 @@
 #define F_LINES_OPER_ONLY
 #undef  I_LINES_OPER_ONLY
 #undef  K_LINES_OPER_ONLY
+#undef  O_LINES_OPER_ONLY
 #undef  P_LINES_OPER_ONLY
 
 /* SPOOF_NOTICE - See a notice when a user connects with a
