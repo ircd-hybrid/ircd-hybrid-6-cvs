@@ -19,7 +19,7 @@
  *
  * "s_zip.h". - Headers file.
  *
- * $Id: s_zip.h,v 1.2 1999/07/23 07:02:43 tomh Exp $
+ * $Id: s_zip.h,v 1.3 2001/12/07 04:13:27 jdc Exp $
  *
  */
 #ifndef INCLUDED_s_zip_h
@@ -27,10 +27,7 @@
 #ifndef INCLUDED_config_h
 #include "config.h"       /* config settings */
 #endif
-#ifndef INCLUDED_zlib_h
-#include "zlib.h"         /* z_stream */
-#define INCLUDED_zlib_h
-#endif
+#include <zlib.h>         /* z_stream */
 
 struct Client;
 
