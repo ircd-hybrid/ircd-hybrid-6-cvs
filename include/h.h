@@ -22,7 +22,7 @@
  * Most of the externs and prototypes thrown in here to 'cleanup' things.
  * -avalon
  *
- * $Id: h.h,v 1.72 1999/07/22 02:53:14 db Exp $
+ * $Id: h.h,v 1.73 1999/07/22 03:00:13 db Exp $
  *
  */
 #ifndef INCLUDED_h_h
@@ -54,9 +54,6 @@ extern void     dummy(int signo);
 
 extern  char    *form_str (int);
 extern  void    get_my_name (struct Client *, char *, int);
-
-/* s_serv.c */
-extern  void    send_capabilities(struct Client *,int);
 
 /* bsd.c */
 extern  int     deliver_it (struct Client *, char *, int);

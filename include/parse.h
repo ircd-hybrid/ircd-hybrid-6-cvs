@@ -1,0 +1,39 @@
+/************************************************************************
+ *   IRC - Internet Relay Chat, include/parse.h
+ *   Copyright (C) 1992 Darren Reed
+ *
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 1, or (at your option)
+ *   any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ *
+ * "parse.h". - Headers file.
+ *
+ *
+ * $Id: parse.h,v 1.1 1999/07/22 03:00:14 db Exp $
+ *
+ */
+
+#ifndef INCLUDED_parse_h_h
+#define INCLUDED_parse_h_h
+
+extern  int     parse (struct Client *, char *, char *);
+extern  void    init_tree_parse (struct Message *);
+extern struct Client* find_chasing (struct Client *, char *, int *);
+extern struct Client* find_client(const char* name, struct Client* client);
+extern struct Client* find_name (char *, struct Client *);
+extern struct Client* find_person (char *, struct Client *);
+extern struct Client* find_server(const char* name, struct Client* dflt_client);
+extern struct Client* find_userhost (char *, char *, struct Client *, int *);
+
+#endif /* INCLUDED_parse_h_h */

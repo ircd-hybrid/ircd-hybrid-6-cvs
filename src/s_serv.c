@@ -20,13 +20,14 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: s_serv.c,v 1.174 1999/07/22 02:44:25 db Exp $
+ *   $Id: s_serv.c,v 1.175 1999/07/22 03:00:16 db Exp $
  */
 
 #define CAPTAB
 #include "struct.h"
 #undef CAPTAB
 
+#include "s_serv.h"
 #include "common.h"
 #include "numeric.h"
 #include "msg.h"
@@ -90,7 +91,6 @@ extern void remove_empty_channels();    /* defined in channel.c */
 
 #endif /* NEED_SPLITCODE */
 
-extern int cold_start;          /* defined in ircd.c */
 extern fdlist serv_fdlist;
 extern int rehashed;            /* defined in ircd.c */
 extern int dline_in_progress;   /* defined in ircd.c */
