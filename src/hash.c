@@ -16,7 +16,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: hash.c,v 1.18 1999/07/12 06:44:20 tomh Exp $
+ *  $Id: hash.c,v 1.19 1999/07/13 05:55:16 tomh Exp $
  */
 #include "hash.h"
 #include "struct.h"
@@ -375,12 +375,15 @@ struct Client* hash_find_server(const char* name, struct Client* cptr)
         }
     }
   
+#ifndef DEBUGMODE
+  return hash_find_masked_server(name, cptr);
+
+#else /* DEBUGMODE */
   tmp = hash_find_masked_server(name, cptr);
-#ifdef        DEBUGMODE
   if (tmp == cptr)
     ++clmiss;
-#endif
   return tmp;
+#endif
 }
 
 /*
