@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: send.c,v 1.46 1999/07/10 20:25:01 tomh Exp $
+ *   $Id: send.c,v 1.47 1999/07/11 03:50:46 db Exp $
  */
 
 #include "send.h"
@@ -419,10 +419,10 @@ va_dcl
 } /* sendto_one() */
 
 /*
-vsendto_one()
- Backend for sendto_one() - send string with variable
-arguements to client 'to'
--wnder
+ * vsendto_one()
+ * Backend for sendto_one() - send string with variable
+ * arguments to client 'to'
+ * -wnder
 */
 
 static void
@@ -1351,7 +1351,7 @@ va_dcl
 /*
  * vsendto_prefix_one()
  * Backend to sendto_prefix_one(). stdarg.h does not work
- * well when variadic functions pass their arguements to other
+ * well when variadic functions pass their arguments to other
  * variadic functions, so we can call this function in those
  * situations.
  *  This function must ALWAYS be passed a string of the form:

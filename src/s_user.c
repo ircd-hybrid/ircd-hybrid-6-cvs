@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.124 1999/07/11 03:15:18 tomh Exp $
+ *  $Id: s_user.c,v 1.125 1999/07/11 03:50:46 db Exp $
  */
 #include "struct.h"
 #include "common.h"
@@ -740,7 +740,30 @@ static int register_user(aClient *cptr, aClient *sptr,
       sendto_one(sptr, rpl_str(RPL_MYINFO), me.name, parv[0],
 		 me.name, version);
       show_lusers(sptr, sptr, 1, parv);
+
+#ifdef SHORT_MOTD
+      sendto_one(sptr,"NOTICE %s :*** Notice -- motd was last changed at %s",
+		 sptr->name,
+		 ConfigFileEntry.motd.lastChangedDate);
+
+      sendto_one(sptr,
+		 "NOTICE %s :*** Notice -- Please read the motd if you haven't read it",
+		 sptr->name);
+      
+      sendto_one(sptr, rpl_str(RPL_MOTDSTART),
+		 me.name, sptr->name, me.name);
+      
+      sendto_one(sptr,
+		 rpl_str(RPL_MOTD),
+		 me.name, sptr->name,
+		 "*** This is the short motd ***"
+		 );
+
+      sendto_one(sptr, rpl_str(RPL_ENDOFMOTD),
+		 me.name, sptr->name);
+#else
       SendMessageFile(sptr, &ConfigFileEntry.motd);
+#endif
       
 #ifdef LITTLE_I_LINES
       if(sptr->confs && sptr->confs->value.aconf &&

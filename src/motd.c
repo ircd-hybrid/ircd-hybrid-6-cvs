@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: motd.c,v 1.1 1999/07/11 02:44:19 db Exp $
+ *   $Id: motd.c,v 1.2 1999/07/11 03:50:46 db Exp $
  */
 
 #include "sys.h"
@@ -123,27 +123,6 @@ int SendMessageFile(aClient *sptr, MessageFile *motdToPrint)
 	  return 0;
 	}
 
-      sendto_one(sptr,"NOTICE %s :*** Notice -- motd was last changed at %s",
-		 sptr->name,
-		 motdToPrint->lastChangedDate);
-
-#ifdef SHORT_MOTD
-      sendto_one(sptr,
-		 "NOTICE %s :*** Notice -- Please read the motd if you haven't read it",
-		 sptr->name);
-      
-      sendto_one(sptr, rpl_str(RPL_MOTDSTART),
-		 me.name, sptr->name, me.name);
-      
-      sendto_one(sptr,
-		 rpl_str(RPL_MOTD),
-		 me.name, sptr->name,
-		 "*** This is the short motd ***"
-		 );
-
-      sendto_one(sptr, rpl_str(RPL_ENDOFMOTD),
-		 me.name, sptr->name);
-#else
       sendto_one(sptr, form_str(RPL_MOTDSTART), me.name, sptr->name, me.name);
 
       for(linePointer = motdToPrint->contentsOfFile;linePointer;
@@ -154,7 +133,6 @@ int SendMessageFile(aClient *sptr, MessageFile *motdToPrint)
 		     me.name, sptr->name, linePointer->line);
 	}
       sendto_one(sptr, form_str(RPL_ENDOFMOTD), me.name, sptr->name);
-#endif
       return 0;
       /* NOT REACHED */
       break;
