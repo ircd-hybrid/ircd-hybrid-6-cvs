@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.243 2001/12/13 23:16:38 leeh Exp $
+ *  $Id: s_user.c,v 1.244 2001/12/19 04:52:09 greg Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -736,6 +736,9 @@ static int register_user(aClient *cptr, aClient *sptr,
       sendto_realops_flags(FLAGS_CCONN,
                          "Client connecting: %s (%s@%s) [%s] {%d}",
                          nick, sptr->username, sptr->host,
+#ifndef SPOOF_NOTICE
+                         IsIPHidden(sptr) ? "255.255.255.255" : 
+#endif /* !SPOOF_NOTICE */
                          inetntoa((char *)&sptr->ip),
                          get_client_class(sptr));
 
