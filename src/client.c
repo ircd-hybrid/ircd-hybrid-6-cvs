@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: client.c,v 1.51 2000/05/17 02:45:26 lusky Exp $
+ *  $Id: client.c,v 1.52 2000/05/17 04:17:26 lusky Exp $
  */
 #include "client.h"
 #include "class.h"
@@ -734,10 +734,13 @@ void remove_client_from_list(struct Client* cptr)
 
   if (cptr->prev)
     cptr->prev->next = cptr->next;
+  else
+    {
+      GlobalClientList = cptr->next;
+      GlobalClientList->prev = NULL;
+    }
   if (cptr->next)
     cptr->next->prev = cptr->prev;
-  if (cptr == GlobalClientList)
-    GlobalClientList = cptr->next;
   cptr->next = cptr->prev = NULL;
 
   /*
@@ -1657,3 +1660,4 @@ void count_remote_client_memory(int *remote_client_memory_used,
                         remote_client_memory_used,
                         remote_client_memory_allocated);
 }
+
