@@ -34,7 +34,7 @@
  *                mode * -p etc. if flag was clear
  *
  *
- * $Id: channel.c,v 1.175 2000/04/11 02:16:34 lusky Exp $
+ * $Id: channel.c,v 1.176 2000/04/20 04:15:18 lusky Exp $
  */
 #include "channel.h"
 #include "client.h"
@@ -3199,9 +3199,8 @@ int     m_join(struct Client *cptr,
         }
       else
         {
-          sendto_one(sptr,
-                     ":%s %d %s %s :Sorry, cannot join channel.",
-                     me.name, i, parv[0], name);
+           sendto_one(sptr, form_str(ERR_UNAVAILRESOURCE),
+                      me.name, parv[0], name);
 #ifdef ANTI_SPAMBOT
           if(successful_join_count > 0)
             successful_join_count--;
