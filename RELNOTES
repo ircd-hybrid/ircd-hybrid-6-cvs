@@ -1,4 +1,4 @@
-$Id: RELNOTES,v 1.25 2004/12/06 04:03:17 lusky Exp $
+$Id: RELNOTES,v 1.26 2005/09/15 12:56:10 ievil Exp $
 
 This is the current release version of ircd-hybrid-6.
 
@@ -14,6 +14,15 @@ DISCUSSION: There is a mailing list for discussion of hybrid issues,
  is much more likely to get something done than ranting on #TZ.
 
 Questions/comments directed to bugs@ircd-hybrid.org
+
+ircd-hybrid-6.4.4 Release Notes
+-------------------------------
+o Changed the behaviour of STATS d (temp d-lines)
+o Updated 005 reply with ETRACE and SINFO
+o Updated SINFO error reply
+o Fixed SINFO compile bug if NEED_SPLIT_CODE is not defined
+o Fixed a bug which could cause channel mode duplication and 
+  desync. Generally caused by an older other ircd..
 
 
 ircd-hybrid-6.4.3 Release Notes
