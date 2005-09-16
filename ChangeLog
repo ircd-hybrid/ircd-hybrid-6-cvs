@@ -1,3 +1,15 @@
+lusky       2005/09/15 21:05:52 EDT	(20050916_0)
+
+  Modified files:
+    include              patchlevel.h 
+  Log:
+  bump version to 6.4.4
+  
+  Revision  Changes    Path
+  1.166     +1 -1      ircd-hybrid-6/include/patchlevel.h
+
+
+
 ievil       2005/09/15 08:56:10 EDT	(20050915_0)
 
   Modified files:
