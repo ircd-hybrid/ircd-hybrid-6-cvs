@@ -1,3 +1,15 @@
+ievil       2005/09/30 12:13:38 EDT	(20050930_3)
+
+  Modified files:
+    src                  .depend 
+  Log:
+  Adding an updated depend for the new filenames
+  
+  Revision  Changes    Path
+  1.56      +146 -86   ircd-hybrid-6/src/.depend
+
+
+
 ievil       2005/09/30 12:10:49 EDT	(20050930_2)
 
   Removed files:
