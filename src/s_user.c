@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  $Id: s_user.c,v 1.269 2003/10/13 14:51:35 ievil Exp $
+ *  $Id: s_user.c,v 1.270 2005/09/30 15:58:12 ievil Exp $
  */
 #include "m_commands.h"
 #include "s_user.h"
@@ -47,7 +47,7 @@
 #include "scache.h"
 #include "send.h"
 #include "struct.h"
-#include "whowas.h"
+#include "m_whowas.h"
 #include "flud.h"
 
 #ifdef ANTI_DRONE_FLOOD

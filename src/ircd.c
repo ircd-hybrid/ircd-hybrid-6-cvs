@@ -17,7 +17,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * $Id: ircd.c,v 1.171 2003/10/13 11:11:51 ievil Exp $
+ * $Id: ircd.c,v 1.172 2005/09/30 15:58:12 ievil Exp $
  */
 #include "ircd.h"
 #include "channel.h"
@@ -50,7 +50,7 @@
 #include "scache.h"
 #include "send.h"
 #include "struct.h"
-#include "whowas.h"
+#include "m_whowas.h"
 #include "blalloc.h"
 
 #include <stdlib.h>

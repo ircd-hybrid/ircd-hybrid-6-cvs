@@ -20,7 +20,7 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *   $Id: m_kill.c,v 1.9 2003/06/24 03:57:16 ievil Exp $
+ *   $Id: m_kill.c,v 1.10 2005/09/30 15:58:12 ievil Exp $
  */
 #include "m_commands.h"
 #include "client.h"
@@ -29,7 +29,7 @@
 #include "s_log.h"
 #include "s_serv.h"
 #include "send.h"
-#include "whowas.h"
+#include "m_whowas.h"
 #include "irc_string.h"
 
 #include <string.h>

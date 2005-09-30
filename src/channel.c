@@ -22,7 +22,7 @@
  * These flags can be set in a define if you wish.
  *
  *
- * $Id: channel.c,v 1.252 2005/03/25 11:27:20 ievil Exp $
+ * $Id: channel.c,v 1.253 2005/09/30 15:58:12 ievil Exp $
  */
 #include "channel.h"
 #include "m_commands.h"
@@ -38,7 +38,7 @@
 #include "s_user.h"
 #include "send.h"
 #include "struct.h"
-#include "whowas.h"
+#include "m_whowas.h"
 #include "s_conf.h"       
 
 #include <assert.h>
