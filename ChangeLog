@@ -1,3 +1,17 @@
+ievil       2005/09/30 12:08:20 EDT	(20050930_1)
+
+  Added files:
+    include              m_whowas.h 
+    src                  m_whowas.c 
+  Log:
+  Forgot to cvs add this this in the previous commit...
+  
+  Revision  Changes    Path
+  1.1       +114 -0    ircd-hybrid-6/include/m_whowas.h (new)
+  1.1       +288 -0    ircd-hybrid-6/src/m_whowas.c (new)
+
+
+
 ievil       2005/09/30 11:58:13 EDT	(20050930_0)
 
   Modified files:
